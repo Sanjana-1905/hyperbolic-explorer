@@ -1,0 +1,1 @@
+{"file":"views/src/db/render/api/tests/store.py","lang":"py","loc":53,"symbols":[{"kind":"function","name":"format_cache","startLine":6,"endLine":29,"signature":"def format_cache()","calls":["json.loads"]}],"imports":[],"calls":[]}

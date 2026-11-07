@@ -153,11 +153,43 @@ Interim in 3a: edges are still the CPU polylines from Phase 2 (faint additive bl
   of each other for a moment, so labels stay hidden for the first ~2.5 s (`WARMUP_FRAMES`) or until all tried labels are
   typeset. If it ever shows on the phone, tell me.
 
-## Phase 3 complete (3a, 3a-tweaks, theme, 3b, 3c). Next: Phase 4, VR Cardboard (waiting for "go")
+## Phase 3 complete (3a, 3a-tweaks, theme, 3b, 3c).
 
 ### Known limitations (3a)
 - Nodes use no depth test (pure additive glow), so nothing occludes anything: intended for this look.
 - Refocus-between-off-centre-nodes rotation (Phase 2 limitation) still applies; needed for VR later.
 
+## Plan change (Nov 2026)
+VR Cardboard (old Phase 4) moves to the very end together with the final visual theme pass: no headset yet.
+New order: **4** code expansion · **5** cross-file links · **6** search / info panel / git heat / second dataset ·
+**7** AR tabletop · **8** user study + report · **9** VR + final visual polish.
+Rule: camera/navigation code lives in ONE module so the Phase 9 Lorentz-matrix VR camera can replace it. Every new look
+constant goes into theme.js first.
+
+## Phase 4 — Code expansion  (in progress)
+Goal: clicking a file opens its own space (classes/functions bloom as a local galaxy); imports/calls drawn as glowing arcs.
+
+### 4a — Scanner v2 (symbols, imports, calls, git)  ✅ done (waiting for your check)
+- [x] `tools/scan_folder.py` rewritten, old tree fields unchanged. New per-file fields: `ext`, `loc`, `hasSymbols` + `id`,
+      git `commits` + `modified`; root gets `symbolsDir`. Run: `python3 tools/scan_folder.py REPO --out-dir public/data/NAME`
+      (writes `tree.json` + `symbols/<id>.json`; view with `/?tree=NAME/tree.json`). `--no-git`, `--no-symbols`, or plain `-o` = tree only
+- [x] Python: stdlib `ast`. JS/TS (`.js .jsx .mjs .cjs .ts .tsx .mts .cts`): `tools/parse_js.mjs` with `@babel/parser`
+      (new devDependency, free; one Node call for all files). Chosen because it parses modern JS, JSX and TypeScript in one parser
+- [x] Symbol file = nested symbols (`kind` class | function | method, `name`, `startLine`, `endLine`, `signature`, optional `calls`,
+      optional `children`), raw `imports` (`from` exactly as written, `names`), module-level `calls`. Format documented at the top of
+      `scan_folder.py`. Class also covers TS interface / enum / namespace
+- [x] Git: ONE `git log --name-only` pass for all files (not one per file); optional, skipped outside a git repo
+- [x] `make_sample_tree.py` extended: same tree structure as before (checked identical), fake symbols/imports/calls/git from a second
+      random generator. Imports point at real files of the sample, calls use names of the imported files' symbols
+- [x] `tests/scanner_test.py` (in `npm test`): Python + TS extraction, whole-folder scan, and on the sample data: line ranges nested
+      correctly, ids unique, every import resolves to a real file (40 k checks)
+- Numbers: three.js `dev` (blobless clone, scanned into the scratchpad, NOT committed): 6,449 nodes, git info for 6,072 files,
+  1,573 files / 16,296 symbols, 7.8 s total, tree.json 849 KB, symbols 4.0 MB raw. Sample (committed): tree 584 KB,
+  1,475 symbol files / 16,413 symbols, 2.5 MB raw (≈ 0.6 MB compressed in git; the web server gzips each file it sends)
+- Known approximations (matter for 4c): call names are only names (`foo`, `obj.foo`), `this.foo()` / `a.b.foo()` lose the receiver;
+  computed calls, IIFEs, `super()` are ignored; object-literal methods and anonymous callbacks are not symbols (their calls count for
+  the enclosing symbol); Python files that are not valid Python 3 are skipped; minified files (average line > 300 chars) and files
+  > 1 MB are not parsed; git does not follow renames and a shallow clone gives short history
+
 ## Later
-4 VR Cardboard · 5 AR tabletop · 6 Search/info/minimap/2nd dataset (plug real numbers into aHue/aEnergy/aFlag) · 7 User study + report
+5 Cross-file links (started in 4c) · 6 Search/info/git heat/2nd dataset · 7 AR tabletop · 8 User study + report · 9 VR Cardboard + final visual polish

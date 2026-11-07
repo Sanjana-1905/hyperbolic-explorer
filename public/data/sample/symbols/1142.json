@@ -1,0 +1,1 @@
+{"file":"views/cache/auth/parser.ts","lang":"ts","loc":58,"symbols":[{"kind":"function","name":"computeClient","startLine":6,"endLine":16,"signature":"function computeClient(value, a, options): void"}],"imports":[],"calls":[]}

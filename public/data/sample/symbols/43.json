@@ -1,0 +1,1 @@
+{"file":"api/events/utils/core/docs/api/tests/router.py","lang":"py","loc":60,"symbols":[{"kind":"function","name":"load_config","startLine":6,"endLine":43,"signature":"def load_config()"}],"imports":[],"calls":[]}

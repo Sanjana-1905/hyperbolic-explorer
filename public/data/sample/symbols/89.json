@@ -1,0 +1,1 @@
+{"file":"api/i18n/cache/scripts/ui/types.js","lang":"js","loc":63,"symbols":[{"kind":"function","name":"mergeBuffer","startLine":6,"endLine":25,"signature":"function mergeBuffer(value, ctx, key)"}],"imports":[],"calls":["mergeBuffer"]}

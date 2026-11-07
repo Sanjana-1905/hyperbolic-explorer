@@ -1,0 +1,1 @@
+{"file":"views/math/views/loader.py","lang":"py","loc":35,"symbols":[{"kind":"function","name":"reset_route","startLine":6,"endLine":32,"signature":"def reset_route()","calls":["print","os.path.join"]}],"imports":[],"calls":[]}

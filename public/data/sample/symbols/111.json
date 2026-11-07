@@ -1,0 +1,1 @@
+{"file":"api/i18n/math/scripts/db/store.js","lang":"js","loc":37,"symbols":[{"kind":"function","name":"renderRoute","startLine":6,"endLine":34,"signature":"function renderRoute()","calls":["JSON.parse","push"]}],"imports":[],"calls":[]}

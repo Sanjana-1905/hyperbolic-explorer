@@ -1,0 +1,1 @@
+{"file":"api/lib/i18n/core/api/plugins/helpers.py","lang":"py","loc":42,"symbols":[{"kind":"function","name":"create_cache","startLine":6,"endLine":39,"signature":"def create_cache()","calls":["SchemaToken"]}],"imports":[{"from":".loader","names":["apply_user"],"line":1},{"from":"..handler","names":["SchemaToken"],"line":2}],"calls":[]}

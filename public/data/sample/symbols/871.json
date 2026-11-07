@@ -1,0 +1,1 @@
+{"file":"cache/views/internal/api/components/io/ui/constants.py","lang":"py","loc":66,"symbols":[{"kind":"function","name":"create_mesh","startLine":6,"endLine":25,"signature":"def create_mesh(options)","calls":["validate_client"]}],"imports":[{"from":"..loader","names":["validate_client"],"line":1},{"from":"..store","names":["emit_user"],"line":2}],"calls":["create_mesh"]}

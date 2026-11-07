@@ -1,0 +1,1 @@
+{"file":"api/lib31/lib/core/core/router.ts","lang":"ts","loc":37,"symbols":[{"kind":"function","name":"getPath","startLine":6,"endLine":34,"signature":"function getPath(b, key, node): void","calls":["fetch"]}],"imports":[],"calls":[]}

@@ -1,0 +1,1 @@
+{"file":"views/logger.js","lang":"js","loc":42,"symbols":[{"kind":"function","name":"writeStream","startLine":6,"endLine":39,"signature":"function writeStream()","calls":["setTimeout","ClientTree"]}],"imports":[{"from":"../cache/internal/tests/format","names":["ClientTree"],"line":1},{"from":"./helpers","names":["setNode"],"line":2}],"calls":["writeStream"]}

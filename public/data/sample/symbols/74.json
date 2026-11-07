@@ -1,0 +1,1 @@
+{"file":"api/events/utils/events/lib/db/index.ts","lang":"ts","loc":73,"symbols":[{"kind":"function","name":"applyClient","startLine":6,"endLine":39,"signature":"function applyClient(a, node, ctx): void"}],"imports":[{"from":"../logger.ts","names":["updateState"],"line":1},{"from":"..","names":["applyStream"],"line":2}],"calls":[]}

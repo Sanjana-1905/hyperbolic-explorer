@@ -1,0 +1,1 @@
+{"file":"cache/net/io/docs/utils/internal/router.py","lang":"py","loc":21,"symbols":[{"kind":"function","name":"render_query","startLine":6,"endLine":16,"signature":"def render_query(b, a, value)","calls":["range","len"]}],"imports":[],"calls":[]}

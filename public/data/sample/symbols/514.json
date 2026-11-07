@@ -1,0 +1,1 @@
+{"file":"cache/internal/cache/services/auth/math/logger.ts","lang":"ts","loc":72,"symbols":[{"kind":"function","name":"renderQuery","startLine":6,"endLine":30,"signature":"function renderQuery(a): void","calls":["NodeEvent","initNode","map"]}],"imports":[{"from":"./schema.js","names":["initNode","NodeEvent"],"line":1}],"calls":[]}

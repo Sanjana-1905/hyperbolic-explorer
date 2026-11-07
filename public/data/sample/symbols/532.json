@@ -1,0 +1,1 @@
+{"file":"cache/internal/cache/ui/ui/lib/router.ts","lang":"ts","loc":45,"symbols":[{"kind":"function","name":"renderToken","startLine":6,"endLine":42,"signature":"function renderToken(): void","calls":["fetch"]}],"imports":[],"calls":[]}

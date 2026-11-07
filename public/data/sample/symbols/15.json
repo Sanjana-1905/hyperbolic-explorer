@@ -1,0 +1,1 @@
+{"file":"api/events/cache72/auth/io/views/logger_737.py","lang":"py","loc":39,"symbols":[{"kind":"function","name":"merge_route","startLine":6,"endLine":27,"signature":"def merge_route(a)","calls":["range","open"]}],"imports":[],"calls":[]}

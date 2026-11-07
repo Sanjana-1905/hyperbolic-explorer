@@ -1,0 +1,1 @@
+{"file":"cache/views/cache/ui/services/lib/components/index_111.ts","lang":"ts","loc":98,"symbols":[{"kind":"function","name":"loadToken","startLine":6,"endLine":41,"signature":"function loadToken(ctx): void","calls":["emitView"]},{"kind":"function","name":"emitView","startLine":43,"endLine":51,"signature":"function emitView(value, b): void"}],"imports":[],"calls":[]}

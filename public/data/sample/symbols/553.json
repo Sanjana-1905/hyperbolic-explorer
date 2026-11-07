@@ -1,0 +1,1 @@
+{"file":"cache/internal/models/db/auth/math/events/parser.js","lang":"js","loc":78,"symbols":[{"kind":"function","name":"formatBuffer","startLine":6,"endLine":24,"signature":"function formatBuffer()","calls":["map"]}],"imports":[{"from":"../client","names":["UserToken"],"line":1},{"from":"./schema.js","names":["RecordEvent"],"line":2}],"calls":[]}

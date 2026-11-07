@@ -1,0 +1,1 @@
+{"file":"api/lib/views/docs10/io/cache/client.js","lang":"js","loc":87,"symbols":[{"kind":"function","name":"emitIndex","startLine":6,"endLine":21,"signature":"function emitIndex(key)","calls":["JSON.parse","Math.max","push","renderItem"]},{"kind":"function","name":"renderItem","startLine":23,"endLine":34,"signature":"function renderItem(ctx)"}],"imports":[],"calls":[]}

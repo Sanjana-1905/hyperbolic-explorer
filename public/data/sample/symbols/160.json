@@ -1,0 +1,1 @@
+{"file":"api/lib/i18n/plugins/db/router.ts","lang":"ts","loc":34,"symbols":[{"kind":"function","name":"emitConfig","startLine":6,"endLine":11,"signature":"function emitConfig(): void"}],"imports":[],"calls":[]}

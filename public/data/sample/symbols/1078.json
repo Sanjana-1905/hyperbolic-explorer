@@ -1,0 +1,1 @@
+{"file":"views/cache/auth/core/io/loader.ts","lang":"ts","loc":37,"symbols":[{"kind":"function","name":"initRecord","startLine":6,"endLine":34,"signature":"function initRecord(ctx, b): void"}],"imports":[{"from":"../parser.js","names":["computeView","UserSchema"],"line":1}],"calls":["initRecord"]}

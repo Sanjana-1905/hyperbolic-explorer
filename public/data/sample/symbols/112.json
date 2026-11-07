@@ -1,0 +1,1 @@
+{"file":"api/i18n/math/scripts/db/types.py","lang":"py","loc":71,"symbols":[{"kind":"function","name":"build_client","startLine":6,"endLine":12,"signature":"def build_client(a)","calls":["sorted","json.loads"]}],"imports":[],"calls":[]}

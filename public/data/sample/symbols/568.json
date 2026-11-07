@@ -1,0 +1,1 @@
+{"file":"cache/internal/models/db/schema.py","lang":"py","loc":38,"symbols":[{"kind":"function","name":"merge_index","startLine":6,"endLine":35,"signature":"def merge_index(a, ctx)","calls":["isinstance","len","range"]}],"imports":[],"calls":[]}

@@ -1,0 +1,1 @@
+{"file":"views/utils/views/constants.js","lang":"js","loc":34,"symbols":[{"kind":"function","name":"readIndex","startLine":6,"endLine":31,"signature":"function readIndex(b)","calls":["computeToken","Math.max","Object.keys"]}],"imports":[{"from":"../../../api/lib/i18n/plugins/main.js","names":["computeToken"],"line":1}],"calls":[]}

@@ -1,0 +1,1 @@
+{"file":"views/cache/auth/core/plugins/router.py","lang":"py","loc":45,"symbols":[{"kind":"function","name":"format_config","startLine":6,"endLine":35,"signature":"def format_config(options)"}],"imports":[{"from":"...plugins.auth.server","names":["ItemLayer"],"line":1},{"from":".parser","names":["StateRoute"],"line":2}],"calls":[]}

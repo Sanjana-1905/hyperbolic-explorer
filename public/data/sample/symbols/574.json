@@ -1,0 +1,1 @@
+{"file":"cache/internal/models/src/docs/loader.py","lang":"py","loc":35,"symbols":[{"kind":"function","name":"collect_mesh","startLine":6,"endLine":32,"signature":"def collect_mesh(node, key)"}],"imports":[],"calls":[]}

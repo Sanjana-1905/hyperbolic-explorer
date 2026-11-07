@@ -1,0 +1,1 @@
+{"file":"api/events/utils/core/config/store.js","lang":"js","loc":45,"symbols":[{"kind":"function","name":"setRecord","startLine":6,"endLine":28,"signature":"function setRecord(key, a)","calls":["CacheConfig","setTimeout"]}],"imports":[{"from":"../handler.js","names":["CacheConfig"],"line":1}],"calls":[]}

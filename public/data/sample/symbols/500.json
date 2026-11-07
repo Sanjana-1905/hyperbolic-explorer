@@ -1,0 +1,1 @@
+{"file":"cache/internal/cache/core80/io/format.js","lang":"js","loc":52,"symbols":[{"kind":"function","name":"setUser","startLine":6,"endLine":18,"signature":"function setUser()","calls":["JSON.parse","console.log"]}],"imports":[],"calls":[]}

@@ -58,13 +58,19 @@ Solo student project for a Computer Graphics and AR/VR course. **Zero budget**: 
 - On-screen **fps counter** that can be toggled.
 
 ## Phases (one at a time, and only when the user says "go")
-1. Python scanner + 2D Poincaré disk viewer with click-to-refocus
-2. 3D Poincaré ball layout + geodesic animation
-3. Visual polish (impostor shaders, geodesic edge shader, fog, starfield, labels)
-4. VR Cardboard mode with gaze/dwell and free flight
-5. AR tabletop mode
-6. Search, info panel, minimap, second dataset
-7. User study support, polish, report
+1. Python scanner + 2D Poincaré disk viewer with click-to-refocus  ✅
+2. 3D Poincaré ball layout + geodesic animation  ✅
+3. Visual polish (impostor shaders, geodesic edge shader, fog, starfield, labels)  ✅
+4. **Code expansion**: files open into their own galaxy of classes/functions (4a scanner v2, 4b expansion + code panel, 4c links)
+5. Cross-file links (imports/calls as bundled geodesic arcs; the first part is already built in 4c)
+6. Search, info panel, git heat, second dataset
+7. AR tabletop mode
+8. User study support + report
+9. **VR Cardboard** (gaze/dwell, free flight, Lorentz camera) + final visual theme pass
+
+Plan change (Nov 2026): VR moved from Phase 4 to the very end, together with the final look pass, because there is no
+headset yet. **Keep ALL camera/navigation code in ONE module** so the VR camera (Lorentz matrix, which also fixes the
+Phase 2 rotation drift) can replace it later without touching the rest.
 
 ## How to work with the user
 - **Viva-ready:** the user must be able to defend every line. After finishing any file, explain in simple language what it does and why, and walk through each formula with a small numeric example.

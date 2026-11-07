@@ -1,0 +1,1 @@
+{"file":"cache/net/models/tests/render/ui/api/handler.js","lang":"js","loc":23,"symbols":[{"kind":"function","name":"readBuffer","startLine":6,"endLine":20,"signature":"function readBuffer(key)","calls":["createBuffer","map"]}],"imports":[{"from":"../../../../../../../views/math/views/views/server","names":["createBuffer"],"line":1}],"calls":[]}

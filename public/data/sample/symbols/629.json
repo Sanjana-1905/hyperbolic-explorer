@@ -1,0 +1,1 @@
+{"file":"cache/net/math/components/assets/cache/scripts/router.py","lang":"py","loc":62,"symbols":[{"kind":"function","name":"apply_index","startLine":6,"endLine":11,"signature":"def apply_index(node, b, key)","calls":["json.loads"]}],"imports":[],"calls":["apply_index"]}

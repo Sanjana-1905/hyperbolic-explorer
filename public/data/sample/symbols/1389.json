@@ -1,0 +1,1 @@
+{"file":"views/utils/api/services/plugins/scripts/loader.ts","lang":"ts","loc":57,"symbols":[{"kind":"function","name":"computeStream","startLine":6,"endLine":34,"signature":"function computeStream(key, options): void"}],"imports":[{"from":"./router","names":["RecordClient"],"line":1}],"calls":["computeStream"]}

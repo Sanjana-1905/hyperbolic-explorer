@@ -1,0 +1,1 @@
+{"file":"cache/net/math/components/assets/format.py","lang":"py","loc":34,"symbols":[{"kind":"function","name":"validate_index","startLine":6,"endLine":14,"signature":"def validate_index(options, a)","calls":["render_item"]}],"imports":[{"from":".constants","names":["render_item"],"line":1}],"calls":["validate_index"]}

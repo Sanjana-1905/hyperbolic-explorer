@@ -1,0 +1,1 @@
+{"file":"views/cache/docs/parser.ts","lang":"ts","loc":48,"symbols":[{"kind":"function","name":"writeUser","startLine":6,"endLine":19,"signature":"function writeUser(value): void"}],"imports":[],"calls":[]}

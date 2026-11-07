@@ -1,0 +1,1 @@
+{"file":"api/i18n/cache/tests/scripts/parser.py","lang":"py","loc":34,"symbols":[{"kind":"function","name":"handle_option","startLine":6,"endLine":31,"signature":"def handle_option(ctx, items, key)"}],"imports":[],"calls":[]}

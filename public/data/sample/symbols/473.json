@@ -1,0 +1,1 @@
+{"file":"cache/internal/cache/config/core/components/events/loader.ts","lang":"ts","loc":45,"symbols":[{"kind":"function","name":"writeTree","startLine":6,"endLine":42,"signature":"function writeTree(b): void","calls":["push"]}],"imports":[],"calls":[]}

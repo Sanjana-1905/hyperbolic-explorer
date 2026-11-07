@@ -1,0 +1,1 @@
+{"file":"cache/internal/cache/config/constants.py","lang":"py","loc":40,"symbols":[{"kind":"function","name":"compute_path","startLine":6,"endLine":37,"signature":"def compute_path(items)","calls":["open","isinstance"]}],"imports":[],"calls":[]}

@@ -1,0 +1,1 @@
+{"file":"api/events/utils/core/config/parser.js","lang":"js","loc":41,"symbols":[{"kind":"function","name":"loadPath","startLine":6,"endLine":38,"signature":"function loadPath(a)"}],"imports":[{"from":"./store","names":["setRecord"],"line":1},{"from":"../handler","names":["CacheConfig","writeNode","emitOption"],"line":2}],"calls":[]}

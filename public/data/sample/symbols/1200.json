@@ -1,0 +1,1 @@
+{"file":"views/db/components/cache/io/constants.ts","lang":"ts","loc":43,"symbols":[{"kind":"function","name":"setRecord","startLine":6,"endLine":13,"signature":"function setRecord(): void","calls":["SchemaMesh"]}],"imports":[{"from":"../../../../api/i18n/assets/math/main","names":["SchemaMesh"],"line":1}],"calls":["setRecord"]}

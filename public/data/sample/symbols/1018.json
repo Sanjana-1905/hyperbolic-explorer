@@ -1,0 +1,1 @@
+{"file":"views/api/components/ui/utils/main.ts","lang":"ts","loc":19,"symbols":[{"kind":"function","name":"collectRoute","startLine":6,"endLine":16,"signature":"function collectRoute(options): void","calls":["UserClient"]}],"imports":[{"from":"../../../../../cache/scripts/views/internal/models/scripts/logger","names":["UserClient"],"line":1}],"calls":[]}

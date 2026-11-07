@@ -1,0 +1,1 @@
+{"file":"views/api/models/api/services/schema.js","lang":"js","loc":79,"symbols":[{"kind":"function","name":"readEvent","startLine":6,"endLine":19,"signature":"function readEvent()"}],"imports":[{"from":"./format","names":["readOption"],"line":1},{"from":"./client.ts","names":["EventQuery"],"line":2},{"from":"../client.ts","names":["ItemRecord"],"line":3}],"calls":[]}

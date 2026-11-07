@@ -1,0 +1,1 @@
+{"file":"api/events/cache72/auth/io/plugins/models/client.ts","lang":"ts","loc":70,"symbols":[{"kind":"function","name":"renderStream","startLine":6,"endLine":11,"signature":"function renderStream(): void"}],"imports":[{"from":"../server.js","names":["CacheQuery"],"line":1},{"from":"../store","names":["buildNode","computeLayer","QueryTree"],"line":2}],"calls":["renderStream"]}

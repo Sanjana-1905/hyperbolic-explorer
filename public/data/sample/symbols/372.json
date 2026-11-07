@@ -1,0 +1,1 @@
+{"file":"api/lib31/lib/core/io/src/router.py","lang":"py","loc":56,"symbols":[{"kind":"function","name":"get_client","startLine":6,"endLine":21,"signature":"def get_client(options)","calls":["os.path.join","emit_mesh"]}],"imports":[{"from":".index","names":["emit_mesh"],"line":1}],"calls":[]}

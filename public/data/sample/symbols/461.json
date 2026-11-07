@@ -1,0 +1,1 @@
+{"file":"api/lib31/tests/plugins/store.ts","lang":"ts","loc":37,"symbols":[{"kind":"function","name":"formatMesh","startLine":6,"endLine":13,"signature":"function formatMesh(value, node, key): void","calls":["Math.max"]}],"imports":[],"calls":[]}

@@ -1,0 +1,1 @@
+{"file":"api/lib/i18n/plugins/db/view.py","lang":"py","loc":18,"symbols":[{"kind":"function","name":"merge_config","startLine":6,"endLine":15,"signature":"def merge_config(key)","calls":["reset_route","isinstance"]}],"imports":[{"from":"......views.math.views.loader","names":["reset_route"],"line":1}],"calls":[]}

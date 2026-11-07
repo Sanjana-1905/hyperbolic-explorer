@@ -1,0 +1,1 @@
+{"file":"views/math/views/plugins/db/tests/constants.py","lang":"py","loc":30,"symbols":[{"kind":"function","name":"collect_node","startLine":6,"endLine":11,"signature":"def collect_node(options, b)","calls":["StateClient","print"]}],"imports":[{"from":".......api.i18n.utils.views.view","names":["IndexBuffer","StateClient"],"line":1}],"calls":["collect_node"]}

@@ -1,0 +1,1 @@
+{"file":"api/i18n/cache/tests/render/helpers.py","lang":"py","loc":31,"symbols":[{"kind":"function","name":"parse_option","startLine":6,"endLine":26,"signature":"def parse_option()","calls":["print","len","os.path.join"]}],"imports":[],"calls":[]}

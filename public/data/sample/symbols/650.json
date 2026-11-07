@@ -1,0 +1,1 @@
+{"file":"cache/net/math/internal/auth/docs/constants.js","lang":"js","loc":39,"symbols":[{"kind":"function","name":"initNode","startLine":6,"endLine":36,"signature":"function initNode()","calls":["UserRoute"]}],"imports":[{"from":"../../../../../../views/cache/auth/src/schema.js","names":["UserRoute"],"line":1}],"calls":[]}

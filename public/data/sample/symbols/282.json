@@ -1,0 +1,1 @@
+{"file":"api/lib/views/i18n/format.ts","lang":"ts","loc":45,"symbols":[{"kind":"function","name":"writeEvent","startLine":6,"endLine":29,"signature":"function writeEvent(b, value, key): void","calls":["ViewTree","NodeOption"]}],"imports":[{"from":"../../../../cache/net/models/tests/render/server.ts","names":["NodeOption","ViewTree"],"line":1}],"calls":[]}

@@ -1,0 +1,1 @@
+{"file":"cache/internal/cache/config/core/helpers.js","lang":"js","loc":53,"symbols":[{"kind":"function","name":"collectCache","startLine":6,"endLine":36,"signature":"function collectCache(value, b, options)","calls":["Object.keys","JSON.parse"]}],"imports":[],"calls":[]}

@@ -1,0 +1,1 @@
+{"file":"views/src/scripts/constants.ts","lang":"ts","loc":46,"symbols":[{"kind":"function","name":"updateIndex","startLine":6,"endLine":43,"signature":"function updateIndex(node, b, value): void","calls":["Object.keys"]}],"imports":[],"calls":[]}

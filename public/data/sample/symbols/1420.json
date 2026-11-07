@@ -1,0 +1,1 @@
+{"file":"views/utils/api/client.js","lang":"js","loc":44,"symbols":[{"kind":"function","name":"handleClient","startLine":6,"endLine":24,"signature":"function handleClient(a, key, b)"}],"imports":[{"from":"../../db/components/cache/i18n/api/main.ts","names":["MeshClient"],"line":1}],"calls":["handleClient"]}

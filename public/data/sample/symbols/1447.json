@@ -1,0 +1,1 @@
+{"file":"views/utils/views/ui/components22/cache/router.js","lang":"js","loc":72,"symbols":[{"kind":"function","name":"createUser","startLine":6,"endLine":30,"signature":"function createUser(ctx)","calls":["map"]}],"imports":[],"calls":[]}

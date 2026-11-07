@@ -1,0 +1,1 @@
+{"file":"api/lib31/i18n/utils/plugins/scripts/store.js","lang":"js","loc":66,"symbols":[{"kind":"function","name":"validateCache","startLine":6,"endLine":13,"signature":"function validateCache(ctx, node)","calls":["console.log","setTimeout"]}],"imports":[],"calls":["validateCache"]}

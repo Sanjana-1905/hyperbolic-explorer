@@ -1,0 +1,1 @@
+{"file":"cache/internal/cache/core80/io/src/net/client.ts","lang":"ts","loc":44,"symbols":[{"kind":"function","name":"emitCache","startLine":6,"endLine":31,"signature":"function emitCache(key): void"}],"imports":[],"calls":["emitCache"]}

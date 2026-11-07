@@ -1,0 +1,1 @@
+{"file":"cache/views/internal/api/tests/scripts/handler.ts","lang":"ts","loc":45,"symbols":[{"kind":"function","name":"resetLayer","startLine":6,"endLine":42,"signature":"function resetLayer(b): void","calls":["Math.max"]}],"imports":[],"calls":["resetLayer"]}

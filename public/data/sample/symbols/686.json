@@ -1,0 +1,1 @@
+{"file":"cache/net/models/config/client.py","lang":"py","loc":15,"symbols":[{"kind":"function","name":"build_buffer","startLine":6,"endLine":12,"signature":"def build_buffer(items)","calls":["sorted"]}],"imports":[],"calls":["build_buffer"]}

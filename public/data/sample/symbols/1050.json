@@ -1,0 +1,1 @@
+{"file":"views/api/i18n/lib/api/schema.ts","lang":"ts","loc":46,"symbols":[{"kind":"function","name":"writeStream","startLine":6,"endLine":43,"signature":"function writeStream(items): void","calls":["Object.keys","map","collectNode"]}],"imports":[{"from":"../helpers","names":["parseCache","parseStream","collectNode"],"line":1}],"calls":[]}

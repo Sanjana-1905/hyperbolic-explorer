@@ -1,0 +1,1 @@
+{"file":"api/lib31/lib/core/io/src/index.py","lang":"py","loc":49,"symbols":[{"kind":"function","name":"emit_mesh","startLine":6,"endLine":11,"signature":"def emit_mesh()","calls":["read_state","open","len"]}],"imports":[{"from":".router","names":["get_client"],"line":1},{"from":"...core.constants","names":["read_state","TokenOption"],"line":2}],"calls":["emit_mesh"]}

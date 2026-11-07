@@ -1,0 +1,1 @@
+{"file":"api/i18n/math/scripts/db/client.ts","lang":"ts","loc":39,"symbols":[{"kind":"function","name":"setEvent","startLine":6,"endLine":32,"signature":"function setEvent(): void","children":[{"kind":"function","name":"resolveToken","startLine":8,"endLine":14,"signature":"function resolveToken(b): void","calls":["map","Object.keys"]}]}],"imports":[],"calls":[]}

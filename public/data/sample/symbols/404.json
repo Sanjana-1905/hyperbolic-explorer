@@ -1,0 +1,1 @@
+{"file":"api/lib31/lib/core57/services/i18n/logger.ts","lang":"ts","loc":42,"symbols":[{"kind":"function","name":"applyUser","startLine":6,"endLine":39,"signature":"function applyUser(b): void","calls":["JSON.parse","fetch"]}],"imports":[],"calls":[]}

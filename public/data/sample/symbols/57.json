@@ -1,0 +1,1 @@
+{"file":"api/events/utils/core/net/render/utils/view.py","lang":"py","loc":77,"symbols":[{"kind":"function","name":"create_node","startLine":6,"endLine":11,"signature":"def create_node(a, options, node)","calls":["apply_item","RouteView"]}],"imports":[{"from":"..types","names":["RouteView","apply_item"],"line":1}],"calls":[]}

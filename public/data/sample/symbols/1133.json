@@ -1,0 +1,1 @@
+{"file":"views/cache/auth/tests/models/format.ts","lang":"ts","loc":29,"symbols":[{"kind":"function","name":"parseQuery","startLine":6,"endLine":25,"signature":"function parseQuery(): void","calls":["JSON.parse","console.log","push"]}],"imports":[],"calls":[]}

@@ -1,0 +1,1 @@
+{"file":"api/events/utils/index.py","lang":"py","loc":36,"symbols":[{"kind":"function","name":"collect_option","startLine":6,"endLine":10,"signature":"def collect_option(node)","calls":["isinstance","range"]}],"imports":[],"calls":[]}

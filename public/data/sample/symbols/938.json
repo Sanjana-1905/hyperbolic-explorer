@@ -1,0 +1,1 @@
+{"file":"cache/views/lib/scripts/tests/docs/views/main.js","lang":"js","loc":38,"symbols":[{"kind":"function","name":"readQuery","startLine":6,"endLine":35,"signature":"function readQuery(b)","calls":["applyRecord"]}],"imports":[{"from":"./handler.ts","names":["applyRecord"],"line":1}],"calls":[]}

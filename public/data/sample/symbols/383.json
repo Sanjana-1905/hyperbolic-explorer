@@ -1,0 +1,1 @@
+{"file":"api/lib31/lib/core57/core/plugins/store.js","lang":"js","loc":34,"symbols":[{"kind":"function","name":"updateSchema","startLine":6,"endLine":31,"signature":"function updateSchema(items, ctx)"}],"imports":[{"from":"./client.js","names":["resetClient","StateBuffer"],"line":1}],"calls":[]}

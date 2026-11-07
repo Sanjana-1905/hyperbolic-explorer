@@ -1,0 +1,1 @@
+{"file":"views/api/models/api/services/format.ts","lang":"ts","loc":46,"symbols":[{"kind":"function","name":"readOption","startLine":6,"endLine":43,"signature":"function readOption(ctx): void","calls":["ItemRecord","map"]}],"imports":[{"from":"../client","names":["ItemRecord"],"line":1},{"from":"./schema.js","names":["readEvent"],"line":2}],"calls":[]}

@@ -1,0 +1,1 @@
+{"file":"cache/net/models/tests/config/format.ts","lang":"ts","loc":71,"symbols":[{"kind":"function","name":"renderLayer","startLine":6,"endLine":12,"signature":"function renderLayer(): void","calls":["getMesh","setTimeout","fetch"]}],"imports":[{"from":"../client","names":["getMesh"],"line":1}],"calls":[]}

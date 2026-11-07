@@ -1,0 +1,1 @@
+{"file":"cache/views/math/auth/docs/logger.py","lang":"py","loc":34,"symbols":[{"kind":"function","name":"update_view","startLine":6,"endLine":28,"signature":"def update_view()"}],"imports":[{"from":".helpers","names":["ViewLayer"],"line":1}],"calls":[]}

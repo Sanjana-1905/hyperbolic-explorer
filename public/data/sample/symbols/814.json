@@ -1,0 +1,1 @@
+{"file":"cache/scripts/views/io/parser.py","lang":"py","loc":60,"symbols":[{"kind":"function","name":"apply_node","startLine":6,"endLine":24,"signature":"def apply_node(items, node)"}],"imports":[],"calls":[]}

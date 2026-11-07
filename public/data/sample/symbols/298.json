@@ -1,0 +1,1 @@
+{"file":"api/lib31/assets/components/api/index.py","lang":"py","loc":41,"symbols":[{"kind":"function","name":"validate_user","startLine":6,"endLine":38,"signature":"def validate_user()","calls":["json.loads"]}],"imports":[],"calls":[]}

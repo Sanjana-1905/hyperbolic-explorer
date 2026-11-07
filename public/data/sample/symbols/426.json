@@ -1,0 +1,1 @@
+{"file":"api/lib31/lib/loader.ts","lang":"ts","loc":30,"symbols":[{"kind":"function","name":"initConfig","startLine":6,"endLine":27,"signature":"function initConfig(node, items, b): void","calls":["RouteItem"]}],"imports":[{"from":"./format.js","names":["RouteItem"],"line":1}],"calls":[]}

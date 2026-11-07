@@ -1,0 +1,1 @@
+{"file":"views/math/views/plugins/db/internal/store.py","lang":"py","loc":32,"symbols":[{"kind":"function","name":"handle_config","startLine":6,"endLine":29,"signature":"def handle_config(a, node, options)","calls":["os.path.join"]}],"imports":[],"calls":[]}

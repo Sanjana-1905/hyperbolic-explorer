@@ -1,0 +1,1 @@
+{"file":"api/lib/views/docs10/docs/cache/store.js","lang":"js","loc":33,"symbols":[{"kind":"function","name":"resolveStream","startLine":6,"endLine":30,"signature":"function resolveStream(options, b)","calls":["Object.keys"]}],"imports":[{"from":"./parser","names":["validateClient"],"line":1}],"calls":["resolveStream"]}

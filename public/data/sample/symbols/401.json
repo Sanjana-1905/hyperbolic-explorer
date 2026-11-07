@@ -1,0 +1,1 @@
+{"file":"api/lib31/lib/core57/services/i18n/core/parser.js","lang":"js","loc":36,"symbols":[{"kind":"function","name":"initClient","startLine":6,"endLine":33,"signature":"function initClient(node)","calls":["push","console.log"]}],"imports":[],"calls":[]}

@@ -1,0 +1,1 @@
+{"file":"cache/views/math/render/internal/math/client.py","lang":"py","loc":18,"symbols":[{"kind":"function","name":"set_user","startLine":6,"endLine":15,"signature":"def set_user(options, value)","calls":["build_query","find_node","sorted"]}],"imports":[{"from":".constants","names":["build_query","find_node"],"line":1}],"calls":[]}

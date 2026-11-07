@@ -1,0 +1,1 @@
+{"file":"cache/views/cache/ui/format.ts","lang":"ts","loc":20,"symbols":[{"kind":"function","name":"emitUser","startLine":6,"endLine":17,"signature":"function emitUser(items, node, key): void","calls":["setTimeout"]}],"imports":[{"from":"../main.ts","names":["QueryPath"],"line":1},{"from":"./constants","names":["TokenSchema"],"line":2}],"calls":["emitUser"]}
