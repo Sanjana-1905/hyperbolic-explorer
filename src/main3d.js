@@ -34,6 +34,7 @@ import {
   createLinkData, subjectOf, selectLinks, buildArcs, arcTarget, bundledControlPoints, linkLists, symbolName,
   confidenceDots, liftEnd, MAX_VISIBLE_LINKS, CONTROL_POINTS,
 } from './links.js';
+import { createToolbar } from './toolbar.js';
 import { createCodePanel } from './codepanel.js';
 import { createFpsCounter } from './fps.js';
 import {
@@ -76,14 +77,15 @@ const QUALITY = {
 // Link filters (Phase 4c): I toggles import arcs, K toggles call arcs. ?links=0 starts with both off.
 let showImports = new URLSearchParams(location.search).get('links') !== '0';
 let showCalls = showImports;
+// A whole folder's imports are a hairball for a newcomer, so they are OFF until asked for (D key / Dependencies chip).
+// Hovering a file still previews its own arcs.
+let showFolderDeps = false;
+// Short help line (the buttons and the "?" card explain the rest); keys for people who like them.
 function updateHelp() {
-  const on = (b) => (b ? 'on' : 'off');
   document.getElementById('help').textContent =
-    'Drag to look around · scroll to move in/out · click a node to focus it (click a file to open its code) · ' +
-    'click an arc to follow it · Backspace = back (Shift+Backspace = parent) · ' +
-    `I = imports ${on(showImports)} · K = calls ${on(showCalls)} · C = code panel · F = fps · R = slow spin (desktop)`;
+    'Drag to look · scroll to zoom · click a node to fly in · keys: Backspace back · I imports · K calls · D folder deps · C code · F fps';
+  if (typeof refreshToolbar === 'function') refreshToolbar();
 }
-updateHelp();
 const COLLAPSE_MIN_NODES = 4;   // folders with fewer nodes inside than this are never collapsed (a "+2" orb is pointless)
 const fps = createFpsCounter(() => `${labels ? labels.count : 0} labels · ${visibleCount} nodes · ${dynamicCount} symbols · ${linkArcs.length} links`);
 
@@ -663,6 +665,7 @@ function focusOn(node, animate = true) {
   updatePanelLinks();
   dirty = true;
   linksDirty = true;
+  refreshToolbar();
 }
 
 // Fill the code panel for the focus: a symbol shows its own lines, a file with source shows the file.
@@ -701,7 +704,7 @@ function updateLinks() {
   const g = linkMesh.geometry;
   if (!linkData) return;
   const selected = selectLinks(linkData, {
-    focus: subjectOf(focusNode),
+    focus: focusNode.type === 'folder' && !showFolderDeps ? null : subjectOf(focusNode),
     hover: hoverNode && hoverNode !== focusNode ? subjectOf(hoverNode) : null,
     showImports, showCalls, fileNode: (id) => fileById.get(id),
   });
@@ -813,21 +816,25 @@ function updatePanelLinks() {
   ], (e) => goToPlace({ fileId: e.fileId, sym: e.sym }, true));
 }
 
-// "‹ Back" button (touch screens have no Backspace): shown while the back stack is not empty. 44 px tap target.
-const backBtn = document.createElement('button');
-backBtn.id = 'back';
-Object.assign(backBtn.style, {
-  position: 'fixed', left: '12px', bottom: 'calc(64px + var(--sheet-h, 0px))', zIndex: 6, display: 'none',
-  height: '44px', minWidth: '44px', padding: '0 16px', borderRadius: '22px', cursor: 'pointer',
-  font: `600 ${THEME.CRUMB_FONT_PX}px system-ui, sans-serif`, color: cssRgb(THEME.CRUMB_COLOR),
-  background: cssRgb(THEME.CRUMB_BG, THEME.CRUMB_BG_ALPHA), border: `1px solid ${cssRgb(THEME.CRUMB_SEP_COLOR)}`,
+// On-screen navigation (toolbar.js): Home, Up, Back and the link chips. Touch screens have no Backspace/I/K keys.
+const toolbar = createToolbar({
+  onHome: () => { if (root && focusNode !== root) focusOn(root); },
+  onUp: () => { if (focusNode && focusNode.parent) focusOn(focusNode.parent); },
+  onBack: () => goBack(),
+  onImports: () => { showImports = !showImports; linksDirty = true; updateHelp(); },
+  onCalls: () => { showCalls = !showCalls; linksDirty = true; updateHelp(); },
+  onFolderDeps: () => { showFolderDeps = !showFolderDeps; linksDirty = true; updateHelp(); },
 });
-backBtn.addEventListener('click', goBack);
-document.body.appendChild(backBtn);
-function updateBackButton() {
-  backBtn.style.display = nav.backDepth > 0 ? 'block' : 'none';
-  backBtn.textContent = `‹ Back (${nav.backDepth})`;
+function refreshToolbar() {
+  if (!focusNode) return;
+  toolbar.update({
+    backDepth: nav.backDepth, isRoot: !focusNode.parent,
+    focusKind: focusNode.type === 'symbol' ? 'symbol' : focusNode.type === 'folder' ? 'folder' : 'file',
+    showImports, showCalls, showFolderDeps,
+  });
 }
+function updateBackButton() { refreshToolbar(); }
+updateHelp();
 
 // ---------------------------------------------------------------------------
 // Text overlay
@@ -846,7 +853,7 @@ function dynamicCountOf(file) {
 function updateInfo() {
   const n = focusNode;
   infoName.textContent = n.name + (n.type === 'folder' ? '/' : '');
-  if (n.type === 'folder') infoPath.textContent = `${n.children.length} items, ${n.weight - 1} nodes inside`;
+  if (n.type === 'folder') infoPath.textContent = `${n.children.length} items, ${n.weight - 1} nodes inside · click one to fly in`;
   else if (n.type === 'symbol') infoPath.textContent = `${n.kind} · ${n.signature} · lines ${n.startLine}–${n.endLine}`;
   else {
     // A file: size, git info (if the scanner had it) and how many symbols it holds once opened.
@@ -1060,6 +1067,8 @@ window.addEventListener('keydown', (e) => {
     showImports = !showImports; linksDirty = true; updateHelp();
   } else if ((e.key === 'k' || e.key === 'K') && !e.ctrlKey && !e.metaKey) {
     showCalls = !showCalls; linksDirty = true; updateHelp();
+  } else if ((e.key === 'd' || e.key === 'D') && !e.ctrlKey && !e.metaKey) {
+    showFolderDeps = !showFolderDeps; linksDirty = true; updateHelp();
   }
 });
 

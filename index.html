@@ -20,6 +20,7 @@
         position: fixed; bottom: 10px; left: 12px;
         font-size: 12px; opacity: 0.55; pointer-events: none;
       }
+      @media (pointer: coarse) { #help { display: none; } } /* touch screens: the keys line is useless, the toolbar replaces it */
       #fps {
         position: fixed; top: 12px; right: 12px;
         font: 12px ui-monospace, monospace; color: #9fe870;

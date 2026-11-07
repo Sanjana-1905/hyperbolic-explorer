@@ -238,6 +238,12 @@ export const THEME = {
   CODE_NUMBER: [1.0, 0.76, 0.46],      // numbers
   CODE_HEADER: [0.72, 0.80, 1.0],      // title bar text
 
+  // ---- Toolbar and intro card (on-screen navigation for first-time users) ------------------------
+  TOOLBAR_BTN_PX: 44,          // height / minimum width of toolbar buttons (44 px = comfortable thumb target)
+  UI_ACTIVE_BG: [0.10, 0.22, 0.50],   // background of a switched-on chip (Imports, Calls, Dependencies)
+  UI_ACTIVE_ALPHA: 0.92,       // ... and its opacity
+  INTRO_CARD_WIDTH_PX: 380,    // width of the "How to explore" card
+
   // ---- Breadcrumb (HTML line at the bottom of the screen) -------------------------------
   CRUMB_FONT_PX: 13,           // text size
   CRUMB_COLOR: [0.72, 0.80, 1.0],      // ancestors

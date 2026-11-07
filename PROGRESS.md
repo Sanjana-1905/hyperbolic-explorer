@@ -344,5 +344,16 @@ Known limitations / decisions to review
 - Strong bundling makes links to siblings in one folder share one line until near the end (that is the point of HEB, but
   in three.js the 25 calls of `initGLContext` look like one beam until they fan out at the `webgl/` folder)
 
+### 4d — Newcomer navigation  ✅ done (after your screenshot of the `api` folder: "intimidating")
+- [x] **Calmer default.** A focused *folder* no longer draws its import arcs (that was the hairball); the new **Dependencies** chip / **D** key
+      switches them on. Files and symbols still show their arcs, and hovering a file previews its arcs
+- [x] **On-screen toolbar** (`src/toolbar.js`, 44 px targets, works on the phone): ⌂ Home, ↑ Up (parent), ‹ Back (n) (only while the back stack is
+      not empty), and the link chips, which double as the colour legend (cyan dot = imports, pink = calls). Chips shown: folder → Dependencies;
+      file/symbol → Imports, Calls
+- [x] **"How to explore" card** on the first visit (remembered in localStorage; `?intro=0` never, `?intro=1` always; the **?** button reopens it).
+      Four plain-language steps: what the picture is, click to fly in / +N, Up/Home, arcs and Back
+- [x] Shorter key line (hidden on touch screens); folder info line says "click one to fly in"
+- Screenshot tests and my headless scripts must now pass `?intro=0`
+
 ## Later
 5 Cross-file links (done early, in 4c) · 6 Search/info/git heat/2nd dataset · 7 AR tabletop · 8 User study + report · 9 VR Cardboard + final visual polish
