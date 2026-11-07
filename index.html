@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hyperbolic Data Explorer</title>
+    <style>
+      html, body { margin: 0; height: 100%; background: #05060a; overflow: hidden; }
+      body { font-family: system-ui, sans-serif; color: #e8ecf5; }
+      canvas { display: block; }
+      /* Info overlay showing the focused node's name and path */
+      #info {
+        position: fixed; top: 12px; left: 12px; right: 12px;
+        pointer-events: none;
+        text-shadow: 0 0 4px #000;
+      }
+      #info .name { font-size: 20px; font-weight: 600; }
+      #info .path { font-size: 13px; opacity: 0.75; word-break: break-all; }
+      #help {
+        position: fixed; bottom: 10px; left: 12px;
+        font-size: 12px; opacity: 0.55; pointer-events: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="info"><div class="name">Loading…</div><div class="path"></div></div>
+    <div id="help">Click a node to focus it · Backspace = go to parent</div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
