@@ -2,7 +2,7 @@
 // Uses the committed sample data: opens EVERY file that has symbols and checks the geometry.
 // Run: node tests/symbols.test.js
 import { readFileSync } from 'node:fs';
-import { buildTree, computeLayout3d, layoutSymbols } from '../src/layout3d.js';
+import { buildTree, computeLayout3d, layoutSymbols, assignFitAll } from '../src/layout3d.js';
 import { buildSymbolNodes, extHue, KIND_CODE } from '../src/symbols.js';
 import { THEME } from '../src/theme.js';
 import { vNeg, vLength, vDot, mobiusAdd3Free, hyperbolicDistance3 } from '../src/mobius3d.js';
@@ -81,6 +81,32 @@ for (const group of byParent.values()) {
   }
 }
 check(minCross > 0.03, `symbols of two sibling files come within ${minCross.toFixed(4)}`);
+
+// ---- fit: a node's size limit is `fraction` x the distance to its nearest sibling ----
+{
+  assignFitAll(root, 0.4);
+  let checked = 0;
+  const visit = (node) => {
+    for (const c of node.children) {
+      if (node.children.length > 1) {
+        const nearest = Math.min(...node.children.filter((o) => o !== c).map((o) => hyperbolicDistance3(c.pos, o.pos)));
+        check(Math.abs(c.fit - 0.4 * nearest) < 1e-9, `${c.name}: fit ${c.fit} vs 0.4 x ${nearest}`);
+        checked++;
+      } else check(c.fit > 0, 'only child: fit from the parent distance');
+      visit(c);
+    }
+  };
+  visit(root);
+  // The three siblings of the comment example: distances 0.06 / 0.10 / 0.17 -> fits 0.024, 0.024, 0.04.
+  const mk = (r) => ({ pos: { x: r, y: 0, z: 0 }, children: [] });
+  const a = mk(0.0), b = mk(0.0), c = mk(0);   // positions set below with exact hyperbolic spacing
+  const at = (d) => ({ x: Math.tanh(d / 2), y: 0, z: 0 });   // point at hyperbolic distance d from the origin on the x axis
+  a.pos = at(0.5); b.pos = at(0.56); c.pos = at(0.66);          // gaps 0.06 and 0.10
+  const parent = { pos: { x: 0, y: 0, z: 0 }, children: [a, b, c] };
+  assignFitAll(parent, 0.4);
+  check(Math.abs(a.fit - 0.024) < 1e-6 && Math.abs(b.fit - 0.024) < 1e-6 && Math.abs(c.fit - 0.04) < 1e-6, `comment example: ${a.fit} ${b.fit} ${c.fit}`);
+  console.log(`  fit checked on ${checked} nodes of the sample`);
+}
 
 console.log(`symbols.js / layoutSymbols: ${files.length} files opened, ${totalSymbols} symbols`);
 console.log(`  smallest file territory     ${minTerritory.toFixed(4)} rad`);

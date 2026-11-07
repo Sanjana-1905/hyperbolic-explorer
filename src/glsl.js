@@ -107,6 +107,7 @@ uniform float uBloom;    // real-time clock for the bloom-in animation (not froz
 uniform float uMark;     // 0..1 strength of the search-result path highlight (fades out over a few seconds)
 uniform float uFocusScale; // 1 for a folder focus, SYMBOL_FOCUS_SCALE for a file/symbol focus (smaller sun)
 uniform float uHeatOn;     // 1 while git heat is shown: nodes WITHOUT git data are dimmed so the hot ones stand out
+uniform float uZoomSize;   // < 1 when the camera is closer than its default distance: cores shrink so crowds spread out
 
 attribute vec2 corner;   // quad corner: (-1,-1) (1,-1) (1,1) (-1,1)
 attribute vec3 aPos;
@@ -120,6 +121,7 @@ attribute float aState;
 attribute vec3 aOrigin;
 attribute float aBorn;
 attribute float aMark;   // 1 = this node is on the highlighted path (root -> search result)
+attribute float aFit;    // size limit from the node's neighbours: core radius never exceeds this (layout3d.js assignFitAll)
 
 varying vec2 vUv;        // where in the quad this pixel is: -1..1 in x and y
 varying vec3 vColor;
@@ -172,6 +174,8 @@ void main() {
   rho = mix(rho, symR * (1.0 + SYMBOL_SIZE_SPREAD * aEnergy), isSymbol);
   rho = mix(rho, FOCUS_R * uFocusScale, isFocus);   // the focus has one fixed, large size (smaller at code level)
   rho *= mix(1.0, COLLAPSED_SIZE, orb);             // a collapsed orb is drawn bigger
+  // Make room: never bigger than the neighbours allow (aFit), and smaller still when zoomed in (uZoomSize); the focus is exempt.
+  rho = mix(min(rho, aFit) * uZoomSize, rho, isFocus);
   // Then the Poincare size factor (1 - r^2)/2 shrinks things toward the surface.
   // Example: at |p| = 0.9 the factor is (1 - 0.81)/2 = 0.095, so a 0.08 folder is
   // drawn 0.0076 across, but never below MIN_R.

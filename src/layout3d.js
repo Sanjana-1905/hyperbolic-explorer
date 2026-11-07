@@ -26,7 +26,7 @@
 // This file has no drawing code, so it can be tested from the command line.
 
 import {
-  vec3, vScale, vAdd, vNeg, vLength, mobiusAdd3, mobiusAdd3Free, distanceToRadius,
+  vec3, vScale, vAdd, vNeg, vLength, mobiusAdd3, mobiusAdd3Free, distanceToRadius, hyperbolicDistance3,
   coneAngleForTerritory,
 } from './mobius3d.js';
 
@@ -231,4 +231,31 @@ export function layoutSymbols(file, options = {}) {
   };
   const cap = Math.min(opts.maxCap, coneAngleForTerritory(file.territory * SYMBOL_CAP_FIT, EDGE_LENGTH));
   placeChildren(file, file.away, cap, distanceToRadius(opts.edgeLength), opts);
+}
+
+// ---------------------------------------------------------------------------
+// Crowding-aware node size: "fit"
+// ---------------------------------------------------------------------------
+// Node sizes are fixed hyperbolic lengths, but siblings can sit very close together (a class with 80 methods on a
+// small cap). Zooming does not help: sizes and distances grow together, so crowded balls stay overlapped. Hyperbolic
+// space is meant to make room where you look, so every node gets a size LIMIT from its surroundings:
+//     fit = fraction × (hyperbolic distance to its nearest sibling)
+// and the shader draws its solid core with radius min(normal size, fit). With fraction 0.4 two neighbouring cores can
+// at most take 80 % of the gap between them, so they never overlap, at any zoom level and from any viewpoint (the
+// Poincaré shrink (1 − r²)/2 scales sizes and distances alike, so the comparison holds wherever the node is drawn).
+// A node with no sibling is limited by its distance to its parent instead.
+// Example: three siblings at distances 0.06, 0.10 and 0.17 from each other, fraction 0.4:
+//   the first two have nearest-sibling distance 0.06 -> fit 0.024; the third 0.10 -> fit 0.04.
+// Sets child.fit for every child below `node` (the node's own fit is left alone).
+export function assignFitAll(node, fraction) {
+  const kids = node.children;
+  for (const c of kids) {
+    let nearest = hyperbolicDistance3(c.pos, node.pos);          // alone: the parent is the neighbour
+    if (kids.length > 1) {
+      nearest = Infinity;
+      for (const o of kids) if (o !== c) nearest = Math.min(nearest, hyperbolicDistance3(c.pos, o.pos));
+    }
+    c.fit = fraction * nearest;
+  }
+  for (const c of kids) if (c.children.length) assignFitAll(c, fraction);
 }

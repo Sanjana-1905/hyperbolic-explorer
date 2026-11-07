@@ -282,6 +282,11 @@ export const THEME = {
   SEARCH_ICON_FUNCTION: [0.55, 0.90, 0.70],
   SEARCH_ICON_METHOD: [0.78, 0.62, 1.0],
 
+  // ---- Dynamic sizing: nodes make room for each other and for the zoom -------------------------------
+  NODE_FIT_FRACTION: 0.4,      // a node's solid core is at most this fraction of the distance to its nearest sibling (0.5 = touching)
+  ZOOM_SIZE_EXPONENT: 0.7,     // zoomed in, cores shrink as (camera distance / default distance)^this, so crowds spread out (0 = off, 1 = no relative growth)
+  ZOOM_SIZE_MIN: 0.25,         // ... but never below this fraction of their normal size
+
   // ---- Compact layout (phone held sideways: very little height) ----------------------------------
   COMPACT_HEIGHT_PX: 520,      // a window at most this tall uses the compact layout: icon-only toolbar down the left side,
                                // smaller title/breadcrumb/code, labels scaled by COMPACT_LABEL_SCALE

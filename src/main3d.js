@@ -27,7 +27,7 @@
 
 import * as THREE from 'three';
 import { vNeg, vLength, mobiusAdd3, conformalFactor3, hyperbolicDistance3, geodesicBezier3 } from './mobius3d.js';
-import { buildTree, computeLayout3d, layoutSymbols, nodePath } from './layout3d.js';
+import { buildTree, computeLayout3d, layoutSymbols, assignFitAll, nodePath } from './layout3d.js';
 import { createNavigation } from './navigation.js';
 import { createSymbolStore, buildSymbolNodes, hash01 } from './symbols.js';
 import {
@@ -124,6 +124,8 @@ const uMark = { value: 0 };
 const uFocusScale = { value: 1 };
 // 1 while git heat is on (nodes without git data are dimmed), else 0.
 const uHeatOn = { value: 0 };
+// Size factor for the current zoom (see updateZoomSize): 1 at the default camera distance, smaller when closer.
+const uZoomSize = { value: 1 };
 
 // Procedural nebula + stars: one big inward-facing sphere that follows the
 // camera (so it behaves like the sky: no parallax), drawn first, ignoring depth.
@@ -217,7 +219,7 @@ let sunMesh = null;             // the focus sun billboard (1 draw call)
 let dustMesh = null;            // faint background specks (1 draw call)
 
 // The two shader uniforms that change on refocus. _Focus is the whole GPU refocus.
-const focusUniforms = { _Focus: { value: new THREE.Vector3() }, uFocusId: { value: -1 }, uTime, uBloom, uMark, uFocusScale, uHeatOn };
+const focusUniforms = { _Focus: { value: new THREE.Vector3() }, uFocusId: { value: -1 }, uTime, uBloom, uMark, uFocusScale, uHeatOn, uZoomSize };
 const edgeUniforms = { _Focus: focusUniforms._Focus, uTime, uBloom, uMark, uResolution: { value: new THREE.Vector2(1, 1) }, uLineWidth: { value: 1.8 } };
 const sunUniforms = { _Focus: focusUniforms._Focus, uFocusPos: { value: new THREE.Vector3() }, uTime, uFocusScale };
 const linkUniforms = { _Focus: focusUniforms._Focus, uTime, uBloom, uResolution: { value: new THREE.Vector2(1, 1) }, uLineWidth: { value: 2.2 }, uGain: { value: 1 } };
@@ -279,7 +281,7 @@ function makeQuadGeometry(capacity, only = null) {
   g.arrays = {
     aPos: add('aPos', 3), aHue: add('aHue', 1), aEnergy: add('aEnergy', 1),
     aFlag: add('aFlag', 1), aKind: add('aKind', 1), aSeed: add('aSeed', 1), aId: add('aId', 1),
-    aState: add('aState', 1), aOrigin: add('aOrigin', 3), aBorn: add('aBorn', 1), aMark: add('aMark', 1),
+    aState: add('aState', 1), aOrigin: add('aOrigin', 3), aBorn: add('aBorn', 1), aMark: add('aMark', 1), aFit: add('aFit', 1),
   };
   g.instanceCount = capacity;
   return g;
@@ -297,6 +299,7 @@ function writeInstance(g, slot, node) {
   const from = node.parent ? node.parent.pos : node.pos;
   a.aOrigin[slot * 3] = from.x; a.aOrigin[slot * 3 + 1] = from.y; a.aOrigin[slot * 3 + 2] = from.z;
   a.aBorn[slot] = node.born ?? -100;
+  a.aFit[slot] = node.fit ?? 1;       // size limit from the neighbours (1 = no limit)
   a.aMark[slot] = node.mark ?? 0;     // 1 while on the highlighted search path
   a.aSeed[slot] = node.seed;
   a.aId[slot] = node.id;
@@ -472,6 +475,7 @@ function coreRadius(node, p) {
     rho = base * (1 + THEME.SYMBOL_SIZE_SPREAD * node.energy);
     if (node.state === 2) rho *= THEME.COLLAPSED_SIZE;
   } else rho = THEME.FILE_R;
+  if (node !== focusNode) rho = Math.min(rho, node.fit ?? 1) * uZoomSize.value;   // same limits as the shader (aFit, uZoomSize)
   return Math.max(rho * conformalFactor3(p), THEME.MIN_R);
 }
 
@@ -607,6 +611,7 @@ async function openFile(file) {
   if (dynamicCount + made.length > MAX_SYMBOL_NODES) { file.symState = undefined; return; } // out of spare slots
   file.children = made.filter((n) => n.parent === file);
   layoutSymbols(file);
+  assignFitAll(file, THEME.NODE_FIT_FRACTION);
   addSymbolNodes(file, made);
   // Symbol index -> node, so link ends (file id, symbol index) find their node (Phase 4c).
   file.symByIndex = new Map(made.filter((n) => n.symIndex >= 0).map((n) => [n.symIndex, n]));
@@ -666,7 +671,7 @@ function updateExpansion() {
 // ---------------------------------------------------------------------------
 
 // Start moving the view so that `node` ends up at the centre.
-function focusOn(node, animate = true) {
+function focusOn(node, animate = true, via = null) {
   if (!node) return;
   // A link glide waiting for a file to open is cancelled when the user focuses anything else.
   if (pendingSymbol && node !== fileById.get(pendingSymbol.fileId)) pendingSymbol = null;
@@ -674,7 +679,7 @@ function focusOn(node, animate = true) {
   focusUniforms.uFocusId.value = node.id;
   sunUniforms.uFocusPos.value.set(node.pos.x, node.pos.y, node.pos.z);
   uFocusScale.value = node.type === 'folder' ? 1 : THEME.SYMBOL_FOCUS_SCALE;
-  nav.flyTo(node.pos, animate);
+  nav.flyTo(node.pos, animate, via);
   updateInfo();
   showCode(node);
   updatePanelLinks();
@@ -768,7 +773,7 @@ function placeOf(node) {
 // A symbol of a CLOSED file: glide to the file; the file opens on the way (it is always first in line to open), and
 // as soon as its symbols exist openFile() continues the glide to the symbol (a second short glide starting from
 // wherever the first one is, so it reads as one movement).
-function goToPlace(place, remember) {
+function goToPlace(place, remember, viaArc = null) {
   let target;
   if (place.baseId !== undefined) target = nodeById[place.baseId];
   else {
@@ -779,7 +784,8 @@ function goToPlace(place, remember) {
   }
   if (!target || (target === focusNode && !pendingSymbol)) return;
   if (remember) nav.pushBack(placeOf(focusNode));
-  focusOn(target);
+  // Following an arc: glide ALONG the arc (its curve), not along the straight geodesic, when the arc really ends at this target.
+  focusOn(target, true, viaArc && target === viaArc.far ? arcRoute(viaArc) : null);
   updateBackButton();
 }
 
@@ -792,7 +798,18 @@ function goBack() {
 // Follow an arc: to the exact symbol/file at its far end (or the drawn node if it merges several targets).
 function followArc(arc) {
   const t = arc.target;
-  goToPlace(t.node ? placeOf(t.node) : { fileId: t.fileId, sym: t.sym }, true);
+  goToPlace(t.node ? placeOf(t.node) : { fileId: t.fileId, sym: t.sym }, true, arc);
+}
+
+// The ball points along an arc from its near end to its far end (what the camera flies through when you follow it).
+// The arc is a hyperbolic Bézier curve through its 5 bundled control points (links.js); sample it at 1/20 .. 19/20 of
+// the way. Control points run a -> b; if the far end is `a` the list is reversed so we travel toward the far end.
+const ARC_ROUTE_STEPS = 20;
+function arcRoute(arc) {
+  const ctrl = arc.far === arc.b ? arc.points : [...arc.points].reverse();
+  const route = [];
+  for (let k = 1; k < ARC_ROUTE_STEPS; k++) route.push(geodesicBezier3(ctrl, k / ARC_ROUTE_STEPS));
+  return route;
 }
 
 // The arc under the pointer (only used when no node is under it). CPU copy of the GPU curve: refocus the control
@@ -1283,11 +1300,21 @@ window.addEventListener('resize', resize);
 // ---------------------------------------------------------------------------
 // Main loop and startup
 // ---------------------------------------------------------------------------
+// Zoom-dependent size: zooming in magnifies sizes and distances equally, so crowds would stay crowded. Instead the cores shrink a
+// little as the camera comes closer than its default distance:  factor = (distance / default)^ZOOM_SIZE_EXPONENT, between ZOOM_SIZE_MIN and 1.
+// Example (exponent 0.7): camera at half the default distance -> 0.5^0.7 = 0.62: cores are 62 % as big while distances doubled on screen,
+// so the gaps between them open up by a factor 3.2. At a quarter of the distance: 0.38.
+function updateZoomSize() {
+  const f = Math.min(1, Math.max(THEME.ZOOM_SIZE_MIN, Math.pow(nav.zoomRatio, THEME.ZOOM_SIZE_EXPONENT)));
+  if (Math.abs(f - uZoomSize.value) > 1e-4) { uZoomSize.value = f; shownStale = true; }   // picking radii depend on it
+}
+
 function frame(now) {
   fps.tick(now);
   uTime.value = FROZEN_TIME ?? now / 1000; // ?time=12.5 freezes the shader clock (repeatable screenshots)
   uBloom.value = performance.now() / 1000;  // bloom clock: always real time
   stepMark(now);                            // fade of the search-path highlight
+  updateZoomSize();
   if (nav.update(now)) dirty = true;        // camera damping + the refocus glide (navigation.js)
   if (dirty) {
     const f = nav.focusPoint;
@@ -1326,6 +1353,7 @@ async function start() {
   root = tree.root;
   nodes = tree.nodes;
   computeLayout3d(root);
+  assignFitAll(root, THEME.NODE_FIT_FRACTION);   // sizes limited by the neighbours, so crowded nodes never overlap
   // Symbol and source files sit in folders named by the tree JSON, relative to the tree file's folder.
   const baseUrl = url.slice(0, url.lastIndexOf('/') + 1);
   store = createSymbolStore(baseUrl, json.symbolsDir, json.sourceDir);
@@ -1395,6 +1423,8 @@ window.__explorer = {
   get legendText() { return document.getElementById('legend').innerText; },
   heatOf: (id) => (heatMode === HEAT.COMMITS ? heatData.commits[id] : heatData.recency[id]),
   get focusScale() { return uFocusScale.value; },
+  get zoomSize() { return uZoomSize.value; },
+  arcRoute: (i) => arcRoute(linkArcs[i]),
   searchStats: () => ({ ...indexStats, entries: searchIndex.size, indexed: searchIndex.symbolFilesIndexed, lastSearchMs: searchUI.lastMs }),
   search: (text, n = 10) => { const t0 = performance.now(); const r = searchIndex.search(text, n); return { ms: performance.now() - t0, results: r }; },
   searchUI: () => searchUI,

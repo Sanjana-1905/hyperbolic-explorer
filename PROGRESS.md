@@ -411,5 +411,20 @@ Sub-steps 6a search · 6b info card + git heat · 6c minimap + second dataset ·
 - Tests: `heat.test.js` (formulas, neutral files, folder ranking, sample is flagged fake, link counts)
 - Numbers (headless, M4, 1000×800): 9 draw calls at the root (10 when link arcs are drawn), the same with heat on or off; 60 fps vsync in all three cases tried (root heat off, root heat on, file focused with recency heat). Uncapped fps not measured
 
+### Dynamic sizing and link glides (after your zoom screenshot)
+- [x] **Nodes make room for each other.** Overlap was not a zoom problem: sizes are fixed hyperbolic lengths, siblings can sit 0.04 apart, and zooming magnifies
+      sizes and distances equally. Now every node has a size LIMIT `fit = 0.4 × (hyperbolic distance to its nearest sibling)` (`assignFitAll` in layout3d.js,
+      new `aFit` attribute, `NODE_FIT_FRACTION`): the solid core is `min(normal size, fit)`, so neighbours can take at most 80 % of the gap, from any viewpoint
+      (the Poincaré shrink scales sizes and distances alike). Symbol galaxies get their fit when they open. Picking uses the same limits. A node alone uses its
+      distance to its parent
+- [x] **Sizes also adapt to the zoom.** Closer than the default camera distance the cores shrink: `factor = (distance / default)^0.7`, never below 0.25
+      (`ZOOM_SIZE_*`). Example: half the distance → 0.62, so on screen the gaps between nodes open up ×3.2; at a quarter → 0.38. The focus is exempt
+- [x] **Following a link flies THROUGH the link.** The glide now travels along the arc's own hyperbolic Bézier curve (20 samples) instead of the straight
+      geodesic: `nav.flyTo(to, animate, via)` joins [here, ...via, target] with geodesics and moves at even speed along the whole route (ease-in-out, still 0.5 s).
+      Used when you click an arc or its far end and the arc really ends at the target; panel-list entries, search and the breadcrumb still glide straight.
+      Checked headless: on the most curved arc of the sample the glide bends 0.23 ball units off the straight chord and lands on the target
+- Side effect: the base scene looks different from before (crowded siblings are smaller), so old byte-identical screenshot comparisons no longer apply
+- Tests: `symbols.test.js` checks fit on 20,679 sample nodes plus the worked example (gaps 0.06 / 0.10 → fits 0.024, 0.024, 0.04)
+
 ## Later
 5 Cross-file links (done early, in 4c) · 6 Search/info/git heat/2nd dataset · 7 AR tabletop · 8 User study + report · 9 VR Cardboard + final visual polish

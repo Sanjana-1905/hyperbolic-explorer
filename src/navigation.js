@@ -26,9 +26,10 @@
 
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-import { vec3, geodesicLerp3Free } from './mobius3d.js';
+import { vec3, geodesicLerp3Free, hyperbolicDistance3 } from './mobius3d.js';
 import { THEME } from './theme.js';
 
+const DEFAULT_CAMERA_DISTANCE = 1.8;   // camera distance at start; zoomRatio compares against it
 const ANIM_SECONDS = 0.5;       // refocus animation length (comfort rule: transitions under 0.6 s)
 const MAX_BACK = 50;            // the back stack forgets the oldest places beyond this many
 
@@ -97,11 +98,19 @@ export function createNavigation(renderer) {
     get spinning() { return controls.autoRotate; },
     setSpin,
 
-    // Glide (or jump) so that ball point `to` ends up at the centre.
-    flyTo(to, animate = true) {
+    // How far the camera is from the centre relative to its default distance (1 = default, 0.5 = twice as close).
+    get zoomRatio() { return camera.position.distanceTo(controls.target) / DEFAULT_CAMERA_DISTANCE; },
+
+    // Glide (or jump) so that ball point `to` ends up at the centre. `via` (optional) = ball points the glide must pass
+    // through on the way, in order: following a link glides ALONG the link's curve instead of the straight geodesic.
+    // The route is [where we are, ...via, to] joined by geodesics and travelled at even speed (see update).
+    flyTo(to, animate = true, via = null) {
       if (animate) {
         // If a previous animation is still running, start from where the view is now.
-        anim = { from: focusPoint, to, start: performance.now() };
+        const path = [focusPoint, ...(via || []), to];
+        const cum = [0];                                    // cum[k] = hyperbolic length of the route up to path[k]
+        for (let k = 1; k < path.length; k++) cum.push(cum[k - 1] + hyperbolicDistance3(path[k - 1], path[k]));
+        anim = { path, cum, start: performance.now() };
       } else {
         focusPoint = to;
         anim = null;
@@ -120,10 +129,19 @@ export function createNavigation(renderer) {
       }
       if (!anim) return false;
       const t = Math.min((now - anim.start) / (ANIM_SECONDS * 1000), 1);
-      // Slide the focus point along the geodesic between the old and new focus.
-      focusPoint = geodesicLerp3Free(anim.from, anim.to, easeInOut(t));
+      // Slide the focus point along the route. s = how much of the route's total length is done (ease-in-out);
+      // find the piece of the route s falls in, and move along its geodesic. With no `via` the route is one piece:
+      // exactly the old straight glide. Example: pieces of length 1 and 3 (total 4), t = 0.5 -> s = 2: the piece
+      // [1, 4] is 1/3 done, so we are a third of the way along the second geodesic.
+      const { path, cum } = anim;
+      const total = cum[cum.length - 1];
+      const s = easeInOut(t) * total;
+      let k = 1;
+      while (k < path.length - 1 && cum[k] < s) k++;
+      const piece = cum[k] - cum[k - 1];
+      focusPoint = piece > 1e-12 ? geodesicLerp3Free(path[k - 1], path[k], Math.min(1, (s - cum[k - 1]) / piece)) : path[k];
       if (t >= 1) {
-        focusPoint = anim.to; // land exactly on the target (no rounding drift)
+        focusPoint = path[path.length - 1]; // land exactly on the target (no rounding drift)
         anim = null;
       }
       return true;
