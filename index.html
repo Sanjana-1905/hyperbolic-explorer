@@ -20,11 +20,16 @@
         position: fixed; bottom: 10px; left: 12px;
         font-size: 12px; opacity: 0.55; pointer-events: none;
       }
+      #fps {
+        position: fixed; top: 12px; right: 12px;
+        font: 12px ui-monospace, monospace; color: #9fe870;
+        background: rgba(0, 0, 0, 0.5); padding: 2px 6px; pointer-events: none;
+      }
     </style>
   </head>
   <body>
     <div id="info"><div class="name">Loading…</div><div class="path"></div></div>
-    <div id="help">Click a node to focus it · Backspace = go to parent</div>
+    <div id="help"></div>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>
