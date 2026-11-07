@@ -1,42 +1,60 @@
-// main3d.js - 3D Poincaré ball viewer (Phase 2). The default mode.
+// main3d.js - 3D Poincaré ball viewer, "galaxy" look (Phase 3). The default mode.
 //
 // What happens here (the same plan as the 2D viewer, one dimension up):
 //   1. Load the tree JSON and lay it out once (layout3d.js). Each node keeps a
 //      FIXED home position `node.pos` inside the ball.
-//   2. To show the tree focused on some point f, we draw every node at
-//      (-f) ⊕ pos. That is the Möbius move that brings f to the centre.
+//   2. To show the tree focused on some point f, every node is drawn at
+//      (-f) ⊕ pos (the Möbius move that brings f to the centre). Since Phase 3a
+//      this happens on the GPU: f is the `_Focus` uniform and the vertex shader
+//      (glsl.js) does the move for all nodes at once. The CPU copy of the same
+//      maths (mobius3d.js) is still used for picking and the edges.
 //   3. Clicking a node animates f along the geodesic from the old focus to the
 //      new one (0.5 s, ease-in-out). Backspace focuses the parent.
-//   4. Nodes are drawn smaller the further they are from the centre, using the
-//      Poincaré size factor (1 − r²)/2.
-// The camera orbits the centre of the ball (where the focus node sits), so you
-// can look at the tree from every side. Plain spheres and lines for now; the
-// "data galaxy" look is Phase 3.
+//   4. Nodes are camera-facing quads ("impostors") drawn with additive blending:
+//      folders look like glowing stars, files like faint twinkling points. Each
+//      top-level folder is an "arm" with its own hue.
+// The camera orbits the centre of the ball (where the focus node sits).
 
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { vec3, vNeg, vLength, mobiusAdd3, geodesicLerp3, conformalFactor3 } from './mobius3d.js';
 import { buildTree, computeLayout3d, nodePath } from './layout3d.js';
 import { createFpsCounter } from './fps.js';
+import {
+  NODE_VERT, NODE_FRAG, NEBULA_VERT, NEBULA_FRAG, SHELL_VERT, SHELL_FRAG,
+} from './glsl.js';
+import { gpuCheck } from './gpucheck.js';
 
 // ---------------------------------------------------------------------------
 // Settings
 // ---------------------------------------------------------------------------
 const ANIM_SECONDS = 0.5;       // refocus animation length
-const FOLDER_RADIUS = 0.16;     // hyperbolic radius of a folder sphere
-const FILE_RADIUS = 0.06;       // hyperbolic radius of a file sphere
-const MIN_WORLD_RADIUS = 0.003; // never draw a sphere smaller than this (keeps far nodes visible)
-const CLICK_TOLERANCE_PX = 8;   // how far from a sphere a click still hits it
-const EDGE_SEGMENTS = 8;        // line pieces per curved edge
+const CLICK_TOLERANCE_PX = 8;   // how far from a node a click still hits it
+const EDGE_SEGMENTS = 8;        // line pieces per curved edge (edges move to the GPU in Phase 3b)
 const STRAIGHT_EDGE = 0.03;     // edges shorter than this are drawn straight (curve too small to see)
-const COLORS = {
-  folder: new THREE.Color('#4cc9f0'),
-  file: new THREE.Color('#8d99ae'),
-  focus: new THREE.Color('#ffb703'),
-  parent: new THREE.Color('#fb8500'),
-  edge: new THREE.Color('#3d5a80'),
-  shell: new THREE.Color('#1d2a44'),
+
+// Node sizes, in hyperbolic units (same meaning as in Phase 2). They are injected
+// into the shader as #defines, and the CPU picking code reads the same numbers.
+const SIZE = {
+  FOLDER_R: 0.075,    // folder core radius (before the energy factor 0.6..1.5)
+  FILE_R: 0.02,       // file core radius
+  FOCUS_BOOST: 1.7,   // the focus "sun" is this much bigger
+  MIN_R: 0.0025,      // never draw a core smaller than this (keeps far nodes visible)
+  GLOW_SCALE: 3.0,    // quad is this many times the core radius (room for the glow)
+  CHILD_HALO: 5.0,    // halo quad size for children of the focus (x core radius)
+  FOCUS_HALO: 9.0,    // halo quad size for the focus
 };
+
+// ?quality=low trades looks for speed on weak GPUs.
+const LOW = new URLSearchParams(location.search).get('quality') === 'low';
+const QUALITY = {
+  maxHalos: LOW ? 16 : 64,     // halo quads (focus + this many children - 1)
+  octaves: LOW ? 2 : 5,        // nebula noise layers
+  starLayers: LOW ? 1 : 2,     // starfield layers
+  pixelRatio: LOW ? 1 : 2,     // cap on render resolution (device pixels per CSS pixel)
+  dustCount: LOW ? 200 : 450,  // drifting dust particles (added in Phase 3b)
+};
+const EDGE_COLOR = 0x3a4a9a;
 
 document.getElementById('help').textContent =
   'Drag to look around · scroll to move in/out · click a node to focus it · Backspace = parent · F = fps';
@@ -45,16 +63,17 @@ const fps = createFpsCounter();
 // ---------------------------------------------------------------------------
 // three.js scene: a perspective camera orbiting the centre of the unit ball
 // ---------------------------------------------------------------------------
-const renderer = new THREE.WebGLRenderer({ antialias: true });
-renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-renderer.setClearColor(0x05060a);
+// No MSAA: nodes are soft additive glows (no hard edges to smooth), and MSAA is expensive on phones.
+const renderer = new THREE.WebGLRenderer({ antialias: false });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, QUALITY.pixelRatio));
+renderer.setClearColor(0x03040c); // deep navy-black
 document.body.appendChild(renderer.domElement);
 
 const scene = new THREE.Scene();
 
 // 70° vertical field of view. From 1.8 units away the whole ball (radius 1)
 // fits: it spans asin(1 / 1.8) ≈ 34° either side of the centre, under 35°.
-const camera = new THREE.PerspectiveCamera(70, 1, 0.01, 20);
+const camera = new THREE.PerspectiveCamera(70, 1, 0.01, 40);
 camera.position.set(0, 0.3, 1.8);
 scene.add(camera);
 
@@ -68,22 +87,36 @@ controls.enableDamping = true;   // smooth glide after letting go
 controls.minDistance = 0.15;     // can go inside the ball, close to the focus
 controls.maxDistance = 4;
 
-// Simple lighting so the spheres look round: a soft light everywhere plus a
-// light attached to the camera (so the side you look at is always lit).
-scene.add(new THREE.AmbientLight(0xffffff, 0.8));
-const headLight = new THREE.DirectionalLight(0xffffff, 1.8);
-headLight.position.set(0.5, 1, 1);
-camera.add(headLight);
+// Shared by every shader: the time in seconds (breathing, twinkling, drifting clouds).
+const uTime = { value: 0 };
 
-// The surface of the ball (the "edge of the universe"), drawn as a faint
-// transparent shell. BackSide means we see its inside, so it never hides nodes.
-scene.add(new THREE.Mesh(
-  new THREE.SphereGeometry(1, 48, 32),
-  new THREE.MeshBasicMaterial({
-    color: COLORS.shell, transparent: true, opacity: 0.35,
-    side: THREE.BackSide, depthWrite: false,
+// Procedural nebula + stars: one big inward-facing sphere that follows the
+// camera (so it behaves like the sky: no parallax), drawn first, ignoring depth.
+const nebula = new THREE.Mesh(
+  new THREE.SphereGeometry(20, 32, 16),
+  new THREE.ShaderMaterial({
+    uniforms: { uTime },
+    vertexShader: NEBULA_VERT,
+    fragmentShader: NEBULA_FRAG,
+    defines: { OCTAVES: QUALITY.octaves, STAR_LAYERS: QUALITY.starLayers },
+    side: THREE.BackSide, depthTest: false, depthWrite: false,
   }),
-));
+);
+nebula.renderOrder = -10;
+nebula.frustumCulled = false;
+scene.add(nebula);
+
+// The surface of the ball: only a faint rim glow (no solid disc).
+const shell = new THREE.Mesh(
+  new THREE.SphereGeometry(1, 64, 48),
+  new THREE.ShaderMaterial({
+    vertexShader: SHELL_VERT, fragmentShader: SHELL_FRAG,
+    transparent: true, blending: THREE.AdditiveBlending,
+    side: THREE.DoubleSide, depthTest: false, depthWrite: false,
+  }),
+);
+shell.renderOrder = -5;
+scene.add(shell);
 
 let pixelsPerUnitAt1 = 1; // screen pixels per world unit at distance 1 from the camera
 
@@ -104,89 +137,167 @@ let root = null;
 let focusNode = null;
 let focusPoint = vec3(0, 0, 0); // the ball point currently shown at the centre
 let anim = null;                // { from, to, start } while animating
-let dirty = true;               // recompute positions on the next frame?
+let dirty = true;               // recompute the CPU copy (picking, edges) on the next frame?
 
-let shown = [];                 // per node: transformed position {x, y, z}
-let shownRadius = null;         // per node: drawn sphere radius (world units)
+let shown = [];                 // per node: transformed position {x, y, z} (CPU copy, for picking/edges)
+let shownRadius = null;         // per node: drawn core radius (world units), for picking
 
-let nodeMesh = null;            // one InstancedMesh holding every sphere (1 draw call)
+let nodeMesh = null;            // ONE instanced quad mesh holding every node (1 draw call)
+let haloMesh = null;            // a few additive glow quads behind the focus and its children (1 draw call)
 let edgeLines = null;           // one LineSegments holding every edge (1 draw call)
 let edgePositions = null;
+
+// The two shader uniforms that change on refocus. _Focus is the whole GPU refocus.
+const focusUniforms = { _Focus: { value: new THREE.Vector3() }, uFocusId: { value: -1 }, uTime };
+
+// ---------------------------------------------------------------------------
+// Arm colours and energy (the "data hooks": Phase 6 only has to change these numbers)
+// ---------------------------------------------------------------------------
+// Every child of the root starts an "arm" with its own hue, spread evenly around
+// the colour wheel; everything inside the arm inherits that hue. Energy is
+// log(subtree size) / log(whole tree size): 0 for a lone file, 1 for the root.
+// Example with 5,000 nodes: a folder of 100 nodes -> ln100/ln5000 = 0.54.
+function assignVisuals() {
+  const logTotal = Math.log(root.weight);
+  const armCount = root.children.length;
+  const GOLD = 0.11;
+  root.hue = GOLD;
+  root.children.forEach((arm, i) => paintArm(arm, i / armCount));
+  for (const node of nodes) {
+    node.energy = node.type === 'folder' ? Math.log(node.weight) / logTotal : 0.05;
+    node.flag = 0; // reserved for status markers
+  }
+}
+function paintArm(node, hue) {
+  node.hue = hue;
+  for (const child of node.children) paintArm(child, hue);
+}
 
 // ---------------------------------------------------------------------------
 // Building the drawables
 // ---------------------------------------------------------------------------
+
+// The instanced geometry: one quad (4 corners) plus per-instance attributes.
+// `capacity` instances at most; the real number drawn is set with instanceCount.
+function makeQuadGeometry(capacity) {
+  const g = new THREE.InstancedBufferGeometry();
+  g.setAttribute('corner', new THREE.BufferAttribute(new Float32Array([-1, -1, 1, -1, 1, 1, -1, 1]), 2));
+  g.setAttribute('position', new THREE.BufferAttribute(new Float32Array(12), 3)); // unused, but three.js wants one
+  g.setIndex([0, 1, 2, 0, 2, 3]);
+  const add = (name, itemSize) => {
+    const attr = new THREE.InstancedBufferAttribute(new Float32Array(capacity * itemSize), itemSize);
+    g.setAttribute(name, attr);
+    return attr.array;
+  };
+  g.arrays = {
+    aPos: add('aPos', 3), aHue: add('aHue', 1), aEnergy: add('aEnergy', 1),
+    aFlag: add('aFlag', 1), aKind: add('aKind', 1), aSeed: add('aSeed', 1), aId: add('aId', 1),
+  };
+  g.instanceCount = capacity;
+  return g;
+}
+
+// Write node `node` into instance slot `slot` of a quad geometry.
+function writeInstance(g, slot, node) {
+  const a = g.arrays;
+  a.aPos[slot * 3] = node.pos.x; a.aPos[slot * 3 + 1] = node.pos.y; a.aPos[slot * 3 + 2] = node.pos.z;
+  a.aHue[slot] = node.hue;
+  a.aEnergy[slot] = node.energy;
+  a.aFlag[slot] = node.flag;
+  a.aKind[slot] = node.type === 'folder' ? 1 : 0;
+  a.aSeed[slot] = node.seed;
+  a.aId[slot] = node.id;
+}
+
+// GLSL is strict: "3" is an int but we need the float "3.0" (otherwise mix(5, 9, t) fails to compile).
+function floatDefines(obj) {
+  const out = {};
+  for (const [k, v] of Object.entries(obj)) out[k] = Number.isInteger(v) ? v.toFixed(1) : String(v);
+  return out;
+}
+
+function makeNodeMaterial(isHalo) {
+  return new THREE.ShaderMaterial({
+    uniforms: focusUniforms,
+    vertexShader: NODE_VERT,
+    fragmentShader: NODE_FRAG,
+    defines: { ...floatDefines(SIZE), CORE: (1 / SIZE.GLOW_SCALE).toFixed(5), ...(isHalo ? { HALO: 1 } : {}) },
+    transparent: true,
+    blending: THREE.AdditiveBlending, // overlapping glows ADD, they never cover each other
+    depthTest: false, depthWrite: false,
+  });
+}
+
 function buildDrawables() {
   const n = nodes.length;
   shownRadius = new Float32Array(n);
 
-  // A low-poly sphere (80 triangles) is plenty at these sizes.
-  nodeMesh = new THREE.InstancedMesh(
-    new THREE.IcosahedronGeometry(1, 1),
-    new THREE.MeshLambertMaterial(),
-    n,
-  );
-  nodeMesh.frustumCulled = false; // instances move every frame; skip the bounds check
+  // A fixed random number per node (the same every run, so screenshots are repeatable).
+  let seed = 2024;
+  const rand = () => ((seed = (seed * 1664525 + 1013904223) >>> 0) / 4294967296);
+  for (const node of nodes) node.seed = rand();
+
+  assignVisuals();
+
+  const geom = makeQuadGeometry(n);
+  for (const node of nodes) writeInstance(geom, node.id, node);
+  nodeMesh = new THREE.Mesh(geom, makeNodeMaterial(false));
+  nodeMesh.frustumCulled = false; // positions are computed in the shader, so CPU bounds are meaningless
+  nodeMesh.renderOrder = 1;
   scene.add(nodeMesh);
+
+  haloMesh = new THREE.Mesh(makeQuadGeometry(QUALITY.maxHalos), makeNodeMaterial(true));
+  haloMesh.frustumCulled = false;
+  haloMesh.renderOrder = 0;
+  scene.add(haloMesh);
 
   // Worst case every edge needs EDGE_SEGMENTS pieces, 2 vertices each, 3 floats each.
   edgePositions = new Float32Array((n - 1) * EDGE_SEGMENTS * 2 * 3);
-  const geom = new THREE.BufferGeometry();
-  geom.setAttribute('position', new THREE.BufferAttribute(edgePositions, 3).setUsage(THREE.DynamicDrawUsage));
-  edgeLines = new THREE.LineSegments(geom, new THREE.LineBasicMaterial({
-    color: COLORS.edge, transparent: true, opacity: 0.6,
+  const edgeGeom = new THREE.BufferGeometry();
+  edgeGeom.setAttribute('position', new THREE.BufferAttribute(edgePositions, 3).setUsage(THREE.DynamicDrawUsage));
+  edgeLines = new THREE.LineSegments(edgeGeom, new THREE.LineBasicMaterial({
+    color: EDGE_COLOR, transparent: true, opacity: 0.25, blending: THREE.AdditiveBlending, depthTest: false,
   }));
   edgeLines.frustumCulled = false;
+  edgeLines.renderOrder = 0;
   scene.add(edgeLines);
-
-  updateColors();
 }
 
-// Colours depend only on which node is focused, so refresh them on refocus.
-function updateColors() {
-  for (const node of nodes) {
-    let color = node.type === 'folder' ? COLORS.folder : COLORS.file;
-    if (node === focusNode) color = COLORS.focus;
-    else if (focusNode && node === focusNode.parent) color = COLORS.parent;
-    nodeMesh.setColorAt(node.id, color);
-  }
-  nodeMesh.instanceColor.needsUpdate = true;
+// Halos go behind the focus and its heaviest children (fake bloom, no post-processing).
+function updateHalos() {
+  const list = [focusNode, ...[...focusNode.children].sort((x, y) => y.weight - x.weight)]
+    .slice(0, QUALITY.maxHalos);
+  list.forEach((node, slot) => writeInstance(haloMesh.geometry, slot, node));
+  haloMesh.geometry.instanceCount = list.length;
+  for (const name of Object.keys(haloMesh.geometry.arrays)) haloMesh.geometry.attributes[name].needsUpdate = true;
+}
+
+// The core radius a node is drawn with: the same formula as the vertex shader
+// (without the tiny breathing wobble). Used to know how big a click target is.
+// Example: folder, energy 0.5, at |p| = 0 -> 0.075 * 1.05 * 0.5 = 0.039.
+function coreRadius(node, p) {
+  let rho = node.type === 'folder' ? SIZE.FOLDER_R * (0.6 + 0.9 * node.energy) : SIZE.FILE_R;
+  if (node === focusNode) rho *= SIZE.FOCUS_BOOST;
+  return Math.max(rho * conformalFactor3(p), SIZE.MIN_R);
 }
 
 // ---------------------------------------------------------------------------
-// Updating geometry for the current focus point (runs when `dirty`)
+// CPU copy of the transform (runs when `dirty`): positions for picking + edges.
+// The GPU already draws the nodes by itself; this is only what the CPU needs.
 // ---------------------------------------------------------------------------
 function updateGeometry() {
   // The Möbius move that puts the focus point at the centre is "add -f".
   const shift = vNeg(focusPoint);
 
-  // 1. Move every node and work out how big to draw it.
-  const m = nodeMesh.instanceMatrix.array;
   for (const node of nodes) {
     const p = mobiusAdd3(shift, node.pos);
     shown[node.id] = p;
-
-    // A hyperbolic ball of radius ρ drawn at point p looks like a Euclidean
-    // ball of radius about ρ · (1 − r²)/2  (conformalFactor3), so nodes shrink
-    // smoothly toward the surface. Example: a folder (ρ = 0.16) at r = 0.9 is
-    // drawn with radius 0.16 · 0.095 = 0.015, vs 0.08 at the centre.
-    const rho = node.type === 'folder' ? FOLDER_RADIUS : FILE_RADIUS;
-    const size = Math.max(rho * conformalFactor3(p), MIN_WORLD_RADIUS);
-    shownRadius[node.id] = size;
-
-    // Write the 4x4 matrix by hand: uniform scale `size`, then move to p.
-    // (three.js stores matrices column by column; the last column is the move.)
-    const o = node.id * 16;
-    m[o] = size; m[o + 1] = 0; m[o + 2] = 0; m[o + 3] = 0;
-    m[o + 4] = 0; m[o + 5] = size; m[o + 6] = 0; m[o + 7] = 0;
-    m[o + 8] = 0; m[o + 9] = 0; m[o + 10] = size; m[o + 11] = 0;
-    m[o + 12] = p.x; m[o + 13] = p.y; m[o + 14] = p.z; m[o + 15] = 1;
+    shownRadius[node.id] = coreRadius(node, p);
   }
-  nodeMesh.instanceMatrix.needsUpdate = true;
 
-  // 2. Edges: a geodesic arc from each parent to its child, as a short
+  // Edges: a geodesic arc from each parent to its child, as a short
   // polyline. A Möbius move sends geodesics to geodesics, so we can build the
-  // arc between the MOVED endpoints directly.
+  // arc between the MOVED endpoints directly. (Phase 3b moves this to the GPU.)
   let v = 0; // number of floats written
   for (const node of nodes) {
     if (!node.parent) continue;
@@ -228,7 +339,8 @@ function easeInOut(t) {
 function focusOn(node, animate = true) {
   if (!node) return;
   focusNode = node;
-  updateColors();
+  focusUniforms.uFocusId.value = node.id;
+  updateHalos();
   updateInfo();
   if (animate) {
     // If a previous animation is still running, start from where the view is now.
@@ -337,11 +449,14 @@ window.addEventListener('resize', resize);
 function frame(now) {
   fps.tick(now);
   controls.update(); // applies the damping glide
+  uTime.value = now / 1000;
   stepAnimation(now);
   if (dirty) {
-    updateGeometry();
+    focusUniforms._Focus.value.set(focusPoint.x, focusPoint.y, focusPoint.z); // the whole GPU refocus
+    updateGeometry();                                                          // CPU copy for picking + edges
     dirty = false;
   }
+  nebula.position.copy(camera.position); // the sky follows the camera, so it never shows parallax
   renderer.render(scene, camera);
   requestAnimationFrame(frame);
 }
@@ -378,6 +493,12 @@ window.__explorer = {
   get fps() { return fps.value; },
   get animating() { return anim !== null; },
   get drawCalls() { return renderer.info.render.calls; },
+  get triangles() { return renderer.info.render.triangles; },
+  quality: LOW ? 'low' : 'high',
+  // Compare the GPU's Möbius maths with the CPU's (see gpucheck.js).
+  gpuCheck: () => gpuCheck(renderer),
+  // Where the GPU says it drew a node, read back from the uniform + CPU formula.
+  get focusPoint() { return focusPoint; },
   // Shown radius of a node's position (0 = at the centre of the ball).
   shownR: (id) => vLength(shown[id]),
   // Screen (CSS pixel) position of a node's centre, or null if behind the camera.

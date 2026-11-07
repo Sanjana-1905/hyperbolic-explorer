@@ -47,7 +47,49 @@ min sibling distance 0.172, min distance between ANY two nodes 0.130 (was 0.005 
 - Deeper trees (depth > ~9) would start reaching the 0.995 clamp with edge length 0.7.
 - Not yet tested on the phone. Plain spheres/lines, no labels (Phase 3).
 
-## Next: Phase 3 — Visual polish (waiting for "go")
+## Phase 3 — Visual polish, "galaxy" theme  (in progress)
+
+### 3a — Nodes, GPU refocus, atmosphere  ✅ done (waiting for phone/laptop check)
+- [x] `src/glsl.js` — all shaders: GLSL `mobiusAdd3`, node vertex/fragment (impostor quads), nebula + starfield, shell rim
+- [x] Nodes: ONE instanced mesh of camera-facing quads (`InstancedBufferGeometry`, custom `ShaderMaterial`, additive
+      blending, no depth). Folders = star (bright core, soft halo, Fresnel rim, tiny specular); files = tiny twinkling
+      points (~7 % bright). Pixels outside the quad's circle are `discard`ed
+- [x] GPU refocus: `_Focus` uniform + `mobiusAdd3` in the vertex shader; size factor (1−r²)/2 and hyperbolic-distance
+      fog (brightness e^(−d/2), colour cools toward blue) also in the vertex shader. Animation is still 0.5 s ease-in-out
+      on the geodesic (the CPU still steps the focus point; the GPU applies it)
+- [x] CPU maths kept (picking, edges, tests). `await __explorer.gpuCheck()` renders 2,048 random point pairs through the
+      shader and compares with the CPU: max position error 7e-7, max distance error 3e-5 (float32 vs double) ✔
+- [x] Data hooks: per-instance `aHue`, `aEnergy`, `aFlag` (+ `aKind`, `aSeed`, `aId`). Phase 3 fills hue from the top-level
+      "arm", energy = ln(subtree size)/ln(tree size), flag = 0. `aFlag = 1` already draws a magenta ring, so Phase 6
+      only changes numbers
+- [x] Arms: each child of the root gets a hue evenly spaced on the colour wheel, inherited by its whole subtree;
+      far nodes rotate their hue toward blue and dim; the focus is a gold-white "sun"
+- [x] Fake bloom: one extra instanced mesh of big soft additive quads behind the focus + its heaviest children
+      (max 64, 16 in low quality). No post-processing
+- [x] Procedural nebula (2 fbm noise fields in violet/teal/indigo) + 2-layer starfield on a big sphere that follows the
+      camera; the ball's shell is now only a faint Fresnel rim (no solid disc)
+- [x] `?quality=low`: 16 halos, 2 noise octaves, 1 star layer, pixel ratio capped at 1 (dust count is in the config,
+      used in 3b)
+- [x] `?mode=2d` untouched
+
+Numbers (headless Chrome, M4 laptop GPU via ANGLE/Metal, 1000×800, 5,000 nodes):
+| | high | low |
+|---|---|---|
+| draw calls | 5 (nodes, halos, edges, nebula, shell) | 5 |
+| vsync fps (idle and animating) | 60 | 60 |
+| uncapped fps, idle | ≈ 550 (≈ 1.8 ms/frame) | ≈ 640 (≈ 1.6 ms/frame) |
+| uncapped fps, animating | ≈ 175–225 (≈ 5 ms/frame) | ≈ 190–210 |
+The M4 is far faster than the phone, so the low/high gap here is small; the phone is the real test.
+While animating, the extra ≈ 3 ms is the CPU rebuilding the edges, which moves to the GPU in 3b.
+
+Interim in 3a: edges are still the CPU polylines from Phase 2 (faint additive blue), so they are not yet tinted by arm.
+
+### 3b — Edges and ambience (next)
+### 3c — Labels, semantic zoom, breadcrumb
+
+### Known limitations (3a)
+- Nodes use no depth test (pure additive glow), so nothing occludes anything: intended for this look.
+- Refocus-between-off-centre-nodes rotation (Phase 2 limitation) still applies; needed for VR later.
 
 ## Later
-3 Visual polish · 4 VR Cardboard · 5 AR tabletop · 6 Search/info/minimap/2nd dataset · 7 User study + report
+4 VR Cardboard · 5 AR tabletop · 6 Search/info/minimap/2nd dataset (plug real numbers into aHue/aEnergy/aFlag) · 7 User study + report
