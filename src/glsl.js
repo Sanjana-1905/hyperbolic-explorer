@@ -31,6 +31,45 @@ vec3 mobiusAdd3(vec3 u, vec3 v) {
 }
 `;
 
+// Möbius scalar multiplication t (x) v and the geodesic from A to B, in GLSL.
+// "Keep v's direction, multiply its hyperbolic distance from the centre by t":
+//   new radius = tanh(t * artanh(|v|)).   Example: |v| = 0.5 (artanh = 0.549), t = 0.5:
+//   tanh(0.2747) = 0.268, so the point halfway along the way to 0.5 is at 0.268.
+// Geodesic from A to B at fraction t: move A to the centre (w = (-A) (+) B), go the
+// fraction t toward w, move back:  A (+) (t (x) w). Same recipe as geodesicLerp3 in mobius3d.js.
+export const GEODESIC_GLSL = /* glsl */ `
+vec3 mobiusScale3(float t, vec3 v) {
+  float r = length(v);
+  if (r < 1e-9) return vec3(0.0);
+  float newR = tanh(t * atanh(min(r, 0.995)));
+  return v * (newR / r);
+}
+vec3 geodesicLerp3(vec3 a, vec3 b, float t) {
+  vec3 w = mobiusAdd3(-a, b);
+  return mobiusAdd3(a, mobiusScale3(t, w));
+}
+`;
+
+// Colours of an "arm": hue (0..1 around the colour wheel) -> RGB, plus cooling.
+// SAT is a bit below 1 for a calmer, more cinematic palette.
+// hsl2rgb example: h = 0.5 (cyan) at s = 0.7, l = 0.55 -> about (0.2, 0.8, 0.9).
+// Cooling: rotate the hue an eighth of the way toward blue-indigo (0.62) as the
+// node gets further from the focus (fog goes 1 -> 0). Rotating the hue keeps colours
+// saturated; mixing RGB with blue would turn them grey. Example: magenta 0.87:
+// shortest way to 0.62 is backwards by 0.25, so at fog = 0 it becomes 0.87 - 0.25*0.12 = 0.84.
+export const COLOR_GLSL = /* glsl */ `
+vec3 hsl2rgb(float h, float s, float l) {
+  vec3 k = mod(vec3(0.0, 8.0, 4.0) + h * 12.0, 12.0);
+  float a = s * min(l, 1.0 - l);
+  return l - a * max(vec3(-1.0), min(min(k - 3.0, 9.0 - k), vec3(1.0)));
+}
+vec3 armColor(float hue0, float fog) {
+  float towardBlue = fract(0.62 - hue0 + 0.5) - 0.5;
+  float hue = hue0 + towardBlue * (1.0 - fog) * 0.12;
+  return hsl2rgb(hue, 0.78, 0.52);
+}
+`;
+
 // ---------------------------------------------------------------------------
 // 2. Nodes: camera-facing impostor quads (folders = stars, files = twinkling points)
 // ---------------------------------------------------------------------------
@@ -70,14 +109,7 @@ varying float vKind;
 varying float vFlag;
 
 ${MOBIUS_GLSL}
-
-// Hue (0..1 around the wheel) + saturation + lightness -> red/green/blue.
-// Example: h = 0 gives red, h = 0.33 green, h = 0.66 blue (at s = 1, l = 0.5).
-vec3 hsl2rgb(float h, float s, float l) {
-  vec3 k = mod(vec3(0.0, 8.0, 4.0) + h * 12.0, 12.0);
-  float a = s * min(l, 1.0 - l);
-  return l - a * max(vec3(-1.0), min(min(k - 3.0, 9.0 - k), vec3(1.0)));
-}
+${COLOR_GLSL}
 
 void main() {
   // --- 1. REFOCUS ON THE GPU: bring the focus point to the centre ----------
@@ -93,12 +125,16 @@ void main() {
   float isFocus = step(abs(aId - uFocusId), 0.5);
 
   // --- 2. SIZE: world radius of the solid core ------------------------------
-  // Folders vary with energy: radius factor 0.6 + 0.9*energy (0 -> 0.6, 1 -> 1.5).
+  // Folders: radius FOLDER_R * (1 + 2*energy). Energy is the log of the subtree size,
+  // rescaled to 0..1, so the biggest folder is 3x the smallest. Example, FOLDER_R = 0.04:
+  // energy 0 -> 0.04, energy 0.5 -> 0.08, energy 1 -> 0.12.
+  // ~10 % of folders (aSeed >= HERO_AT) are "heroes": 25 % bigger and about twice as bright.
+  float hero = step(HERO_AT, aSeed) * aKind;
+  float rho = mix(FILE_R, FOLDER_R * (1.0 + 2.0 * aEnergy) * (1.0 + (HERO_SIZE - 1.0) * hero), aKind);
+  rho = mix(rho, FOCUS_R, isFocus);                 // the focus has one fixed, large size
   // Then the Poincare size factor (1 - r^2)/2 shrinks things toward the surface.
-  // Example: folder energy 0.5 -> 0.075*1.05 = 0.079; at |p| = 0.9 the factor is
-  // (1 - 0.81)/2 = 0.095, so the core is 0.0075 across, but never below MIN_R.
-  float rho = mix(FILE_R, FOLDER_R * (0.6 + 0.9 * aEnergy), aKind);
-  rho *= mix(1.0, FOCUS_BOOST, isFocus);
+  // Example: at |p| = 0.9 the factor is (1 - 0.81)/2 = 0.095, so a 0.08 folder is
+  // drawn 0.0076 across, but never below MIN_R.
   // Slow breathing, +-6 % for folders only (aSeed makes each one out of step).
   float breathe = 1.0 + 0.06 * aKind * sin(uTime * 0.8 + aSeed * 6.2831);
   float size = max(rho * (1.0 - r2) * 0.5 * breathe, MIN_R);
@@ -112,22 +148,15 @@ void main() {
   float twinkle = 0.55 + 0.45 * sin(uTime * (1.0 + 3.0 * aSeed) + aSeed * 50.0);
   float fileBright = (0.35 + 1.6 * step(0.93, aSeed)) * twinkle;
   // Folders: a gentle pulse, scaled by energy (0.7 .. 1.3).
-  float folderBright = (0.85 + 0.15 * sin(uTime * 0.6 + aSeed * 20.0)) * (0.7 + 0.6 * aEnergy);
+  float folderBright = (0.85 + 0.15 * sin(uTime * 0.6 + aSeed * 20.0)) * (0.7 + 0.6 * aEnergy) * (1.0 + 0.9 * hero);
   vBright = distBright * mix(fileBright, folderBright, aKind);
 
-  // Cooling: rotate the hue a quarter of the way toward blue (0.62) as the node
-  // gets further away. Rotating the hue keeps colours saturated; mixing RGB with
-  // blue would turn a red arm into muddy grey. Example: red (0.0): shortest way
-  // to 0.62 is backwards by 0.38, so at fog = 0 it becomes 0 - 0.38*0.25 = -0.095
-  // = 0.905 (magenta). Yellow-green 0.2 moves forward to 0.3 (green).
-  float towardBlue = fract(0.62 - aHue + 0.5) - 0.5;
-  float hue = aHue + towardBlue * (1.0 - fog) * 0.25;
-  vec3 col = hsl2rgb(hue, 0.90, 0.55);
+  vec3 col = armColor(aHue, fog);
   vec3 warm = vec3(1.00, 0.85, 0.55);         // near the focus -> a little warm
-  col = mix(col, warm, exp(-d * 1.5) * 0.12);
-  col = mix(col, vec3(0.90, 0.93, 1.00), 0.6 * (1.0 - aKind)); // files: pale
+  col = mix(col, warm, exp(-d * 1.5) * 0.10);
+  col = mix(col, vec3(0.88, 0.92, 1.00), 0.6 * (1.0 - aKind)); // files: pale
   // The focus is a warm gold-white sun, always at full brightness.
-  col = mix(col, vec3(1.00, 0.84, 0.50), isFocus);
+  col = mix(col, vec3(1.00, 0.78, 0.38), isFocus);
   vBright = mix(vBright, 1.2, isFocus);
   vColor = col;
 
@@ -201,8 +230,9 @@ void main() {
     vec3 H = normalize(L + vec3(0.0, 0.0, 1.0));
     float spec = pow(max(dot(n, H), 0.0), 40.0);
 
-    // Bright core: the centre (z = 1) mixes 40 % toward white; z^3 keeps the edge coloured.
-    vec3 hot = mix(vColor, vec3(1.0), z * z * z * 0.4);
+    // Bright core: the centre (z = 1) mixes toward white, 40 % for folders and 95 % for
+    // the focus (a hot white core); z^3 keeps the edge coloured.
+    vec3 hot = mix(vColor, vec3(1.0), z * z * z * mix(0.4, 0.95, vFocus));
     vec3 sphere = hot * (0.40 + 0.45 * z) + vColor * diff * 0.2
                 + vColor * fresnel * 1.1 + vec3(spec * 0.35);
 
@@ -310,28 +340,197 @@ void main() {
 `;
 
 // ---------------------------------------------------------------------------
-// 4. The edge of the ball: only a faint rim glow, never a solid disc
+// 4. Haze instead of a shell: a faint glow that fades to nothing at the boundary
 // ---------------------------------------------------------------------------
-export const SHELL_VERT = /* glsl */ `
-varying vec3 vNormal;
-varying vec3 vView;
+// One quad at the centre of the ball, always facing the camera, HAZE_R wide.
+// q = 0 at the centre, 1 at the ball's boundary. brightness = (1 - q)^2 has value AND
+// slope 0 at q = 1, so there is no visible edge: q = 0.5 -> 0.25, q = 0.8 -> 0.04, q = 1 -> 0.
+export const HAZE_VERT = /* glsl */ `
+varying vec2 vUv;
 void main() {
-  vec4 mv = modelViewMatrix * vec4(position, 1.0);
-  vNormal = normalize(normalMatrix * normal);
-  vView = -mv.xyz;
+  vUv = position.xy;
+  vec4 mv = viewMatrix * vec4(0.0, 0.0, 0.0, 1.0);   // centre of the ball in camera space
+  mv.xy += position.xy * HAZE_R;
   gl_Position = projectionMatrix * mv;
 }
 `;
-
-// Fresnel again: surfaces seen edge-on (the ball's silhouette) glow, surfaces
-// seen face-on are invisible. 1 - |cos|: face-on 0, 60 degrees 0.5, edge-on 1;
-// to the 4th power it is 0, 0.06, 1.
-export const SHELL_FRAG = /* glsl */ `
-varying vec3 vNormal;
-varying vec3 vView;
+export const HAZE_FRAG = /* glsl */ `
+varying vec2 vUv;
 void main() {
-  float facing = abs(dot(normalize(vNormal), normalize(vView)));
-  float rim = pow(1.0 - facing, 4.0);
-  gl_FragColor = vec4(vec3(0.25, 0.32, 0.85) * rim * 0.12, 1.0);
+  float q = length(vUv);
+  if (q > 1.0) discard;
+  vec3 tint = mix(vec3(0.10, 0.14, 0.42), vec3(0.26, 0.12, 0.42), q);  // indigo inside, violet outside
+  gl_FragColor = vec4(tint * pow(1.0 - q, 2.0) * 0.45, 1.0);
+}
+`;
+
+// ---------------------------------------------------------------------------
+// 5. The sun: a billboard at the focus with core, gold glow, corona and rays
+// ---------------------------------------------------------------------------
+// The quad is SUN_SCALE core-radii wide. Everything is drawn in units of q (0 centre, 1 quad edge).
+// With SUN_SCALE = 14 the solid core is at q = 1/14 = 0.07.
+export const SUN_VERT = /* glsl */ `
+uniform vec3 _Focus;
+uniform vec3 uFocusPos;     // home position of the focused node
+uniform float uTime;
+varying vec2 vUv;
+${MOBIUS_GLSL}
+void main() {
+  vUv = position.xy;
+  vec3 p = mobiusAdd3(-_Focus, uFocusPos);          // same GPU refocus as every node
+  float size = max(FOCUS_R * (1.0 - dot(p, p)) * 0.5, MIN_R) * SUN_SCALE;
+  vec4 mv = viewMatrix * vec4(p, 1.0);
+  mv.xy += position.xy * size;
+  gl_Position = projectionMatrix * mv;
+}
+`;
+export const SUN_FRAG = /* glsl */ `
+uniform float uTime;
+varying vec2 vUv;
+void main() {
+  float q = length(vUv);
+  if (q > 1.0) discard;
+  float pulse = 1.0 + 0.08 * sin(uTime * 1.3);       // gentle pulsing, +-8 %
+
+  // Gaussians: exp(-(q/w)^2) is 1 at the centre, 0.37 at q = w, 0.02 at q = 2w.
+  float core   = exp(-pow(q / 0.055, 2.0));           // hot white core
+  float inner  = exp(-pow(q / 0.15, 2.0));            // warm gold inner glow
+  float corona = pow(1.0 - q, 4.0);                   // larger faint corona: q = 0.3 -> 0.24
+
+  // Star-shaped glow: cos(3a) has 3 positive and 3 negative lobes, abs() makes 6 spikes.
+  // pow(.., 30) squeezes each lobe to a thin ray (cos = 0.9 -> 0.04). A second, shorter set of
+  // 4 rays (cos(2a)) sits at another angle. Slow rotation: the angle offset grows with time.
+  float a = atan(vUv.y, vUv.x);
+  float rays = pow(abs(cos(3.0 * a + uTime * 0.05)), 30.0) * pow(1.0 - q, 2.0) * exp(-q * 3.0)
+             + 0.5 * pow(abs(cos(2.0 * a - uTime * 0.04 + 0.6)), 40.0) * pow(1.0 - q, 3.0) * exp(-q * 4.0);
+
+  vec3 gold = vec3(1.0, 0.72, 0.30);
+  vec3 col = vec3(1.0, 0.97, 0.9) * core * 1.2
+           + gold * inner * 0.9
+           + vec3(1.0, 0.6, 0.25) * corona * 0.30
+           + vec3(1.0, 0.85, 0.55) * rays * 0.9;
+  col *= pulse;
+  gl_FragColor = vec4(1.0 - exp(-col * 1.5), 1.0);
+}
+`;
+
+// ---------------------------------------------------------------------------
+// 6. Edges: thick glowing filaments, geodesics computed in the vertex shader
+// ---------------------------------------------------------------------------
+// Each edge is ONE instance (its two end points aA, aB in home coordinates). The
+// base geometry is a strip of (EDGE_SEGMENTS + 1) pairs of vertices: aT = 0..1 is how
+// far along the edge a pair is and aSide = -1 / +1 is the left / right vertex of the pair.
+// For every vertex the shader:
+//   1. moves both ends with the _Focus uniform (the GPU refocus),
+//   2. finds the point at fraction aT on the geodesic between the moved ends,
+//   3. finds the screen direction of the curve there (a second point slightly further on),
+//   4. pushes the vertex sideways by half the line width, perpendicular to that direction.
+// So the 1-pixel limit of GL lines disappears and the width can follow the fog.
+export const EDGE_VERT = /* glsl */ `
+uniform vec3 _Focus;
+uniform vec2 uResolution;     // drawing-buffer size in pixels
+uniform float uLineWidth;     // base width in drawing-buffer pixels
+
+attribute float aT;
+attribute float aSide;
+attribute vec3 aA;
+attribute vec3 aB;
+attribute float aHue;
+attribute float aEnergy;
+attribute float aSeed;
+
+varying float vAcross;        // -1 at one side of the line, +1 at the other
+varying float vT;
+varying float vSeed;
+varying float vBright;
+varying vec3 vColor;
+
+${MOBIUS_GLSL}
+${GEODESIC_GLSL}
+${COLOR_GLSL}
+
+void main() {
+  vec3 A = mobiusAdd3(-_Focus, aA);
+  vec3 B = mobiusAdd3(-_Focus, aB);
+  vec3 w = mobiusAdd3(-A, B);
+  vec3 P = mobiusAdd3(A, mobiusScale3(aT, w));
+  // A second point a little further along (or back, at the far end) gives the direction.
+  float dir = aT < 0.5 ? 1.0 : -1.0;
+  vec3 Q = mobiusAdd3(A, mobiusScale3(aT + dir * 0.04, w));
+
+  // Fog: same idea as for nodes, from the hyperbolic distance of this point to the focus.
+  float d = 2.0 * atanh(length(P));
+  float fog = exp(-d * 0.45);                       // 1 at the focus, 0.4 at d = 2, 0.1 at d = 5
+  vBright = 0.05 + 0.75 * fog;                      // never invisible, brightest near the focus
+  vColor = armColor(aHue, fog);
+  vT = aT; vSeed = aSeed; vAcross = aSide;
+
+  vec4 cp = projectionMatrix * viewMatrix * vec4(P, 1.0);
+  vec4 cq = projectionMatrix * viewMatrix * vec4(Q, 1.0);
+  // Screen-space (pixel) direction of the curve and its perpendicular.
+  vec2 dirPx = (cq.xy / cq.w - cp.xy / cp.w) * uResolution * 0.5 * dir;
+  dirPx = length(dirPx) > 1e-4 ? normalize(dirPx) : vec2(1.0, 0.0);
+  vec2 perp = vec2(-dirPx.y, dirPx.x);
+
+  // Width: 0.55x far away to 1.45x near the focus, a bit more for big subtrees.
+  float width = uLineWidth * (0.55 + 0.9 * fog) * (0.8 + 0.5 * aEnergy);
+  // One pixel is 2/uResolution in normalised screen units (the screen is 2 units wide).
+  gl_Position = cp;
+  gl_Position.xy += perp * aSide * (width * 0.5) * (2.0 / uResolution) * cp.w;
+}
+`;
+export const EDGE_FRAG = /* glsl */ `
+varying float vAcross;
+varying float vT;
+varying float vSeed;
+varying float vBright;
+varying vec3 vColor;
+void main() {
+  // Soft cross-section: 1 - x^2 is 1 along the middle of the line, 0.75 at x = 0.5, 0 at the sides.
+  float soft = 1.0 - vAcross * vAcross;
+  vec3 col = vColor * vBright * soft;
+  gl_FragColor = vec4(1.0 - exp(-col * 1.5), 1.0);
+}
+`;
+
+// ---------------------------------------------------------------------------
+// 7. Background dust: faint points inside the ball that fill the empty space
+// ---------------------------------------------------------------------------
+// They live at fixed home positions in the ball and are moved by the same _Focus
+// refocus as everything else, so they slide past with correct parallax when you refocus.
+export const DUST_VERT = /* glsl */ `
+uniform vec3 _Focus;
+uniform float uTime;
+attribute vec2 corner;
+attribute vec3 aPos;
+attribute float aSeed;
+varying vec2 vUv;
+varying vec3 vColor;
+varying float vBright;
+${MOBIUS_GLSL}
+void main() {
+  vec3 p = mobiusAdd3(-_Focus, aPos);
+  float r2 = dot(p, p);
+  float d = 2.0 * atanh(sqrt(r2));
+  float size = max(0.006 * (1.0 - r2) * 0.5, MIN_R);
+  // Each speck twinkles at its own speed; ~15 % are a bit brighter. Fades slowly with distance.
+  float twinkle = 0.5 + 0.5 * sin(uTime * (0.4 + 1.5 * aSeed) + aSeed * 60.0);
+  vBright = (0.16 + 0.45 * step(0.85, aSeed)) * (0.3 + 0.7 * twinkle) * (0.35 + 0.65 * exp(-d * 0.3));
+  vColor = mix(vec3(0.55, 0.75, 1.0), vec3(0.85, 0.65, 1.0), aSeed);  // pale blue .. pale violet
+  vUv = corner;
+  vec4 mv = viewMatrix * vec4(p, 1.0);
+  mv.xy += corner * size * 3.0;
+  gl_Position = projectionMatrix * mv;
+}
+`;
+export const DUST_FRAG = /* glsl */ `
+varying vec2 vUv;
+varying vec3 vColor;
+varying float vBright;
+void main() {
+  float q = length(vUv);
+  if (q > 1.0) discard;
+  float glow = pow(1.0 - q, 3.0);                   // q = 0.33 -> 0.30, q = 0.6 -> 0.06
+  gl_FragColor = vec4(1.0 - exp(-vColor * glow * vBright * 1.5), 1.0);
 }
 `;

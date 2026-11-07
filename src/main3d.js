@@ -21,7 +21,8 @@ import { vec3, vNeg, vLength, mobiusAdd3, geodesicLerp3, conformalFactor3 } from
 import { buildTree, computeLayout3d, nodePath } from './layout3d.js';
 import { createFpsCounter } from './fps.js';
 import {
-  NODE_VERT, NODE_FRAG, NEBULA_VERT, NEBULA_FRAG, SHELL_VERT, SHELL_FRAG,
+  NODE_VERT, NODE_FRAG, NEBULA_VERT, NEBULA_FRAG, HAZE_VERT, HAZE_FRAG,
+  SUN_VERT, SUN_FRAG, EDGE_VERT, EDGE_FRAG, DUST_VERT, DUST_FRAG,
 } from './glsl.js';
 import { gpuCheck } from './gpucheck.js';
 
@@ -30,19 +31,22 @@ import { gpuCheck } from './gpucheck.js';
 // ---------------------------------------------------------------------------
 const ANIM_SECONDS = 0.5;       // refocus animation length
 const CLICK_TOLERANCE_PX = 8;   // how far from a node a click still hits it
-const EDGE_SEGMENTS = 8;        // line pieces per curved edge (edges move to the GPU in Phase 3b)
-const STRAIGHT_EDGE = 0.03;     // edges shorter than this are drawn straight (curve too small to see)
+const EDGE_WIDTH_PX = 1.8;      // base edge width in CSS pixels (the shader varies it 0.55x..1.45x with fog)
 
 // Node sizes, in hyperbolic units (same meaning as in Phase 2). They are injected
 // into the shader as #defines, and the CPU picking code reads the same numbers.
 const SIZE = {
-  FOLDER_R: 0.075,    // folder core radius (before the energy factor 0.6..1.5)
+  FOLDER_R: 0.04,     // smallest folder core radius; folders scale x1..x3 with log(subtree size)
   FILE_R: 0.02,       // file core radius
-  FOCUS_BOOST: 1.7,   // the focus "sun" is this much bigger
+  FOCUS_R: 0.11,      // the focus sun's core radius (fixed, bigger than any folder)
+  HERO_AT: 0.9,       // folders with seed >= this are "hero" stars (~10 %)
+  HERO_SIZE: 1.25,    // hero stars are this much bigger (and twice as bright)
   MIN_R: 0.0025,      // never draw a core smaller than this (keeps far nodes visible)
   GLOW_SCALE: 3.0,    // quad is this many times the core radius (room for the glow)
   CHILD_HALO: 5.0,    // halo quad size for children of the focus (x core radius)
-  FOCUS_HALO: 9.0,    // halo quad size for the focus
+  FOCUS_HALO: 9.0,    // (halo quad size for the focus; the sun billboard now does this job)
+  SUN_SCALE: 14.0,    // the sun billboard is this many core radii wide (corona + rays)
+  HAZE_R: 1.0,        // the haze billboard fades to 0 at this world radius (= the ball's boundary)
 };
 
 // ?quality=low trades looks for speed on weak GPUs.
@@ -52,9 +56,9 @@ const QUALITY = {
   octaves: LOW ? 2 : 5,        // nebula noise layers
   starLayers: LOW ? 1 : 2,     // starfield layers
   pixelRatio: LOW ? 1 : 2,     // cap on render resolution (device pixels per CSS pixel)
-  dustCount: LOW ? 200 : 450,  // drifting dust particles (added in Phase 3b)
+  dustCount: LOW ? 200 : 450,  // faint background specks inside the ball
+  edgeSegments: LOW ? 6 : 10,  // pieces per curved edge
 };
-const EDGE_COLOR = 0x3a4a9a;
 
 document.getElementById('help').textContent =
   'Drag to look around · scroll to move in/out · click a node to focus it · Backspace = parent · F = fps';
@@ -106,23 +110,28 @@ nebula.renderOrder = -10;
 nebula.frustumCulled = false;
 scene.add(nebula);
 
-// The surface of the ball: only a faint rim glow (no solid disc).
-const shell = new THREE.Mesh(
-  new THREE.SphereGeometry(1, 64, 48),
+// No visible shell. Instead a very faint haze behind everything that fades smoothly
+// to nothing at the ball's boundary, so the galaxy dissolves into space.
+const haze = new THREE.Mesh(
+  new THREE.PlaneGeometry(2, 2),
   new THREE.ShaderMaterial({
-    vertexShader: SHELL_VERT, fragmentShader: SHELL_FRAG,
-    transparent: true, blending: THREE.AdditiveBlending,
-    side: THREE.DoubleSide, depthTest: false, depthWrite: false,
+    vertexShader: HAZE_VERT, fragmentShader: HAZE_FRAG,
+    defines: floatDefines({ HAZE_R: SIZE.HAZE_R }),
+    transparent: true, blending: THREE.AdditiveBlending, depthTest: false, depthWrite: false,
   }),
 );
-shell.renderOrder = -5;
-scene.add(shell);
+haze.renderOrder = -5;
+haze.frustumCulled = false;
+scene.add(haze);
 
 let pixelsPerUnitAt1 = 1; // screen pixels per world unit at distance 1 from the camera
 
 function resize() {
   const w = window.innerWidth, h = window.innerHeight;
   renderer.setSize(w, h);
+  const buf = renderer.getDrawingBufferSize(new THREE.Vector2());
+  edgeUniforms.uResolution.value.copy(buf);
+  edgeUniforms.uLineWidth.value = EDGE_WIDTH_PX * renderer.getPixelRatio();
   camera.aspect = w / h;
   camera.updateProjectionMatrix();
   // At distance D from the camera the screen is 2·D·tan(fov/2) units tall.
@@ -137,34 +146,51 @@ let root = null;
 let focusNode = null;
 let focusPoint = vec3(0, 0, 0); // the ball point currently shown at the centre
 let anim = null;                // { from, to, start } while animating
-let dirty = true;               // recompute the CPU copy (picking, edges) on the next frame?
+let dirty = true;               // focus point changed: upload the _Focus uniform on the next frame
 
-let shown = [];                 // per node: transformed position {x, y, z} (CPU copy, for picking/edges)
+let shown = [];                 // per node: transformed position {x, y, z} (CPU copy, ONLY for picking)
+let shownStale = true;          // is `shown` out of date? (it is rebuilt lazily when a pick needs it)
 let shownRadius = null;         // per node: drawn core radius (world units), for picking
 
 let nodeMesh = null;            // ONE instanced quad mesh holding every node (1 draw call)
 let haloMesh = null;            // a few additive glow quads behind the focus and its children (1 draw call)
-let edgeLines = null;           // one LineSegments holding every edge (1 draw call)
-let edgePositions = null;
+let edgeMesh = null;            // every edge as an instanced thick-line strip (1 draw call)
+let sunMesh = null;             // the focus sun billboard (1 draw call)
+let dustMesh = null;            // faint background specks (1 draw call)
 
 // The two shader uniforms that change on refocus. _Focus is the whole GPU refocus.
 const focusUniforms = { _Focus: { value: new THREE.Vector3() }, uFocusId: { value: -1 }, uTime };
+const edgeUniforms = { _Focus: focusUniforms._Focus, uResolution: { value: new THREE.Vector2(1, 1) }, uLineWidth: { value: 1.8 } };
+const sunUniforms = { _Focus: focusUniforms._Focus, uFocusPos: { value: new THREE.Vector3() }, uTime };
 
 // ---------------------------------------------------------------------------
 // Arm colours and energy (the "data hooks": Phase 6 only has to change these numbers)
 // ---------------------------------------------------------------------------
-// Every child of the root starts an "arm" with its own hue, spread evenly around
-// the colour wheel; everything inside the arm inherits that hue. Energy is
-// log(subtree size) / log(whole tree size): 0 for a lone file, 1 for the root.
-// Example with 5,000 nodes: a folder of 100 nodes -> ln100/ln5000 = 0.54.
+// Every child of the root starts an "arm". Arm hues are spread evenly over a narrow,
+// cinematic range of the colour wheel: 0.47 (teal) -> 0.62 (indigo) -> 0.75 (violet) -> 0.87
+// (magenta); no greens, no reds. 3 arms: 0.47, 0.67, 0.87; 5 arms: 0.47, 0.57, 0.67, 0.77, 0.87.
+// Everything inside an arm inherits its hue.
+// Energy drives size and brightness: for a folder it is the log of its subtree size rescaled
+// to 0..1 across all folders (smallest folder 0, biggest 1), so the shader's size factor
+// 1 + 2*energy makes the biggest folder 3x the smallest. Example: sizes 2, 20 and 200 nodes:
+// ln = 0.69, 3.0, 5.3 -> energy 0, 0.5, 1. Files get a small constant.
+const HUE_FIRST = 0.47, HUE_LAST = 0.87;
 function assignVisuals() {
-  const logTotal = Math.log(root.weight);
-  const armCount = root.children.length;
-  const GOLD = 0.11;
-  root.hue = GOLD;
-  root.children.forEach((arm, i) => paintArm(arm, i / armCount));
+  root.hue = 0.6;
+  // Only FOLDER arms share out the hue range (a loose file in the root is not an arm and
+  // gets violet). Example: 3 folder arms -> teal 0.47, indigo 0.67, magenta 0.87.
+  const arms = root.children.filter((c) => c.type === 'folder');
+  root.children.forEach((c) => { if (c.type !== 'folder') paintArm(c, 0.77); });
+  arms.forEach((arm, i) => {
+    paintArm(arm, arms.length > 1 ? HUE_FIRST + ((HUE_LAST - HUE_FIRST) * i) / (arms.length - 1) : HUE_FIRST);
+  });
+  const folders = nodes.filter((n) => n.type === 'folder' && n !== root);
+  const lo = Math.log(Math.min(...folders.map((n) => n.weight)));
+  const hi = Math.log(Math.max(...folders.map((n) => n.weight)));
   for (const node of nodes) {
-    node.energy = node.type === 'folder' ? Math.log(node.weight) / logTotal : 0.05;
+    if (node === root) node.energy = 1;
+    else if (node.type === 'folder') node.energy = hi > lo ? (Math.log(node.weight) - lo) / (hi - lo) : 0.5;
+    else node.energy = 0.05;
     node.flag = 0; // reserved for status markers
   }
 }
@@ -179,12 +205,13 @@ function paintArm(node, hue) {
 
 // The instanced geometry: one quad (4 corners) plus per-instance attributes.
 // `capacity` instances at most; the real number drawn is set with instanceCount.
-function makeQuadGeometry(capacity) {
+function makeQuadGeometry(capacity, only = null) {
   const g = new THREE.InstancedBufferGeometry();
   g.setAttribute('corner', new THREE.BufferAttribute(new Float32Array([-1, -1, 1, -1, 1, 1, -1, 1]), 2));
   g.setAttribute('position', new THREE.BufferAttribute(new Float32Array(12), 3)); // unused, but three.js wants one
   g.setIndex([0, 1, 2, 0, 2, 3]);
   const add = (name, itemSize) => {
+    if (only && !only.includes(name)) return null;
     const attr = new THREE.InstancedBufferAttribute(new Float32Array(capacity * itemSize), itemSize);
     g.setAttribute(name, attr);
     return attr.array;
@@ -251,22 +278,76 @@ function buildDrawables() {
   haloMesh.renderOrder = 0;
   scene.add(haloMesh);
 
-  // Worst case every edge needs EDGE_SEGMENTS pieces, 2 vertices each, 3 floats each.
-  edgePositions = new Float32Array((n - 1) * EDGE_SEGMENTS * 2 * 3);
-  const edgeGeom = new THREE.BufferGeometry();
-  edgeGeom.setAttribute('position', new THREE.BufferAttribute(edgePositions, 3).setUsage(THREE.DynamicDrawUsage));
-  edgeLines = new THREE.LineSegments(edgeGeom, new THREE.LineBasicMaterial({
-    color: EDGE_COLOR, transparent: true, opacity: 0.25, blending: THREE.AdditiveBlending, depthTest: false,
+  // Edges: ONE instance per parent->child edge; the vertex shader builds the curve (glsl.js).
+  const SEG = QUALITY.edgeSegments;
+  const eg = new THREE.InstancedBufferGeometry();
+  const verts = (SEG + 1) * 2;                       // a pair (left, right) at each of SEG+1 stops
+  const aT = new Float32Array(verts), aSide = new Float32Array(verts);
+  for (let i = 0; i <= SEG; i++) {
+    aT[2 * i] = aT[2 * i + 1] = i / SEG;
+    aSide[2 * i] = -1; aSide[2 * i + 1] = 1;
+  }
+  const idx = [];
+  for (let i = 0; i < SEG; i++) idx.push(2 * i, 2 * i + 1, 2 * i + 2, 2 * i + 1, 2 * i + 3, 2 * i + 2);
+  eg.setIndex(idx);
+  eg.setAttribute('position', new THREE.BufferAttribute(new Float32Array(verts * 3), 3)); // unused, three.js wants one
+  eg.setAttribute('aT', new THREE.BufferAttribute(aT, 1));
+  eg.setAttribute('aSide', new THREE.BufferAttribute(aSide, 1));
+  const edgeNodes = nodes.filter((nd) => nd.parent);
+  const ea = (name, size) => {
+    const attr = new THREE.InstancedBufferAttribute(new Float32Array(edgeNodes.length * size), size);
+    eg.setAttribute(name, attr);
+    return attr.array;
+  };
+  const eA = ea('aA', 3), eB = ea('aB', 3), eHue = ea('aHue', 1), eEnergy = ea('aEnergy', 1), eSeed = ea('aSeed', 1);
+  edgeNodes.forEach((nd, i) => {
+    eA.set([nd.parent.pos.x, nd.parent.pos.y, nd.parent.pos.z], i * 3);
+    eB.set([nd.pos.x, nd.pos.y, nd.pos.z], i * 3);
+    eHue[i] = nd.hue; eEnergy[i] = nd.energy; eSeed[i] = nd.seed;
+  });
+  eg.instanceCount = edgeNodes.length;
+  edgeMesh = new THREE.Mesh(eg, new THREE.ShaderMaterial({
+    uniforms: edgeUniforms, vertexShader: EDGE_VERT, fragmentShader: EDGE_FRAG,
+    transparent: true, blending: THREE.AdditiveBlending, depthTest: false, depthWrite: false,
+    side: THREE.DoubleSide, // the strip's facing flips with the screen direction
   }));
-  edgeLines.frustumCulled = false;
-  edgeLines.renderOrder = 0;
-  scene.add(edgeLines);
+  edgeMesh.frustumCulled = false;
+  edgeMesh.renderOrder = 0;
+  scene.add(edgeMesh);
+
+  // Dust: faint specks at random fixed places in the ball. Density falls toward the
+  // boundary (radius = 0.95 * sqrt(u)), so there are more in the middle where the gaps are.
+  const dg = makeQuadGeometry(QUALITY.dustCount, ['aPos', 'aSeed']);
+  for (let i = 0; i < QUALITY.dustCount; i++) {
+    let x, y, z, len;
+    do { x = rand() * 2 - 1; y = rand() * 2 - 1; z = rand() * 2 - 1; len = Math.hypot(x, y, z); } while (len > 1 || len < 1e-3);
+    const r = 0.95 * Math.sqrt(rand());
+    dg.arrays.aPos.set([(x / len) * r, (y / len) * r, (z / len) * r], i * 3);
+    dg.arrays.aSeed[i] = rand();
+  }
+  dustMesh = new THREE.Mesh(dg, new THREE.ShaderMaterial({
+    uniforms: focusUniforms, vertexShader: DUST_VERT, fragmentShader: DUST_FRAG,
+    defines: floatDefines({ MIN_R: SIZE.MIN_R }),
+    transparent: true, blending: THREE.AdditiveBlending, depthTest: false, depthWrite: false,
+  }));
+  dustMesh.frustumCulled = false;
+  dustMesh.renderOrder = -1;
+  scene.add(dustMesh);
+
+  // The sun: one billboard at the focus, with core, gold glow, corona and rays.
+  sunMesh = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), new THREE.ShaderMaterial({
+    uniforms: sunUniforms, vertexShader: SUN_VERT, fragmentShader: SUN_FRAG,
+    defines: floatDefines({ FOCUS_R: SIZE.FOCUS_R, MIN_R: SIZE.MIN_R, SUN_SCALE: SIZE.SUN_SCALE }),
+    transparent: true, blending: THREE.AdditiveBlending, depthTest: false, depthWrite: false,
+  }));
+  sunMesh.frustumCulled = false;
+  sunMesh.renderOrder = 2;
+  scene.add(sunMesh);
 }
 
-// Halos go behind the focus and its heaviest children (fake bloom, no post-processing).
+// Halos go behind the focus's heaviest children (the focus itself has the sun billboard) (fake bloom, no post-processing).
 function updateHalos() {
-  const list = [focusNode, ...[...focusNode.children].sort((x, y) => y.weight - x.weight)]
-    .slice(0, QUALITY.maxHalos);
+  const list = [...focusNode.children].sort((x, y) => y.weight - x.weight).slice(0, QUALITY.maxHalos);
   list.forEach((node, slot) => writeInstance(haloMesh.geometry, slot, node));
   haloMesh.geometry.instanceCount = list.length;
   for (const name of Object.keys(haloMesh.geometry.arrays)) haloMesh.geometry.attributes[name].needsUpdate = true;
@@ -274,55 +355,30 @@ function updateHalos() {
 
 // The core radius a node is drawn with: the same formula as the vertex shader
 // (without the tiny breathing wobble). Used to know how big a click target is.
-// Example: folder, energy 0.5, at |p| = 0 -> 0.075 * 1.05 * 0.5 = 0.039.
+// Example: folder, energy 0.5, not a hero, at |p| = 0 -> 0.04 * (1 + 2*0.5) * 0.5 = 0.04.
 function coreRadius(node, p) {
-  let rho = node.type === 'folder' ? SIZE.FOLDER_R * (0.6 + 0.9 * node.energy) : SIZE.FILE_R;
-  if (node === focusNode) rho *= SIZE.FOCUS_BOOST;
+  let rho;
+  if (node === focusNode) rho = SIZE.FOCUS_R;
+  else if (node.type === 'folder') {
+    const hero = node.seed >= SIZE.HERO_AT ? SIZE.HERO_SIZE : 1;
+    rho = SIZE.FOLDER_R * (1 + 2 * node.energy) * hero;
+  } else rho = SIZE.FILE_R;
   return Math.max(rho * conformalFactor3(p), SIZE.MIN_R);
 }
 
 // ---------------------------------------------------------------------------
-// CPU copy of the transform (runs when `dirty`): positions for picking + edges.
-// The GPU already draws the nodes by itself; this is only what the CPU needs.
-// ---------------------------------------------------------------------------
-function updateGeometry() {
-  // The Möbius move that puts the focus point at the centre is "add -f".
-  const shift = vNeg(focusPoint);
-
+// CPU copy of the transform, used ONLY for picking (and debugging). The GPU draws
+// everything by itself, so this runs lazily: only when someone clicks or asks where a
+// node is, and only if the focus has moved since the last time.
+function ensureShown() {
+  if (!shownStale) return;
+  const shift = vNeg(focusPoint); // the Möbius move that puts the focus point at the centre is "add -f"
   for (const node of nodes) {
     const p = mobiusAdd3(shift, node.pos);
     shown[node.id] = p;
     shownRadius[node.id] = coreRadius(node, p);
   }
-
-  // Edges: a geodesic arc from each parent to its child, as a short
-  // polyline. A Möbius move sends geodesics to geodesics, so we can build the
-  // arc between the MOVED endpoints directly. (Phase 3b moves this to the GPU.)
-  let v = 0; // number of floats written
-  for (const node of nodes) {
-    if (!node.parent) continue;
-    const a = shown[node.parent.id], b = shown[node.id];
-    const chord = Math.hypot(b.x - a.x, b.y - a.y, b.z - a.z);
-    if (chord < STRAIGHT_EDGE) {
-      v = pushSegment(v, a, b);
-      continue;
-    }
-    let prev = a;
-    for (let i = 1; i <= EDGE_SEGMENTS; i++) {
-      const next = i === EDGE_SEGMENTS ? b : geodesicLerp3(a, b, i / EDGE_SEGMENTS);
-      v = pushSegment(v, prev, next);
-      prev = next;
-    }
-  }
-  edgeLines.geometry.setDrawRange(0, v / 3);
-  edgeLines.geometry.attributes.position.needsUpdate = true;
-}
-
-// Append one line segment (two 3D vertices) to the edge buffer.
-function pushSegment(v, a, b) {
-  edgePositions[v++] = a.x; edgePositions[v++] = a.y; edgePositions[v++] = a.z;
-  edgePositions[v++] = b.x; edgePositions[v++] = b.y; edgePositions[v++] = b.z;
-  return v;
+  shownStale = false;
 }
 
 // ---------------------------------------------------------------------------
@@ -340,6 +396,7 @@ function focusOn(node, animate = true) {
   if (!node) return;
   focusNode = node;
   focusUniforms.uFocusId.value = node.id;
+  sunUniforms.uFocusPos.value.set(node.pos.x, node.pos.y, node.pos.z);
   updateHalos();
   updateInfo();
   if (animate) {
@@ -388,6 +445,7 @@ function updateInfo() {
 // if the node is behind the camera (possible when the camera is inside the ball).
 const tmp = new THREE.Vector3();
 function projectNode(id, rect) {
+  ensureShown();
   const p = shown[id];
   tmp.set(p.x, p.y, p.z).applyMatrix4(camera.matrixWorldInverse);
   const depth = -tmp.z; // the camera looks down its own −z axis
@@ -408,6 +466,7 @@ function projectNode(id, rect) {
 //  - Otherwise take the node within CLICK_TOLERANCE_PX whose distance,
 //    relative to its size, is smallest, so tiny far-away nodes are still clickable.
 function pickNode(clientX, clientY) {
+  ensureShown();
   const rect = renderer.domElement.getBoundingClientRect();
   let inside = null, insideDepth = Infinity;
   let near = null, nearScore = Infinity;
@@ -453,7 +512,7 @@ function frame(now) {
   stepAnimation(now);
   if (dirty) {
     focusUniforms._Focus.value.set(focusPoint.x, focusPoint.y, focusPoint.z); // the whole GPU refocus
-    updateGeometry();                                                          // CPU copy for picking + edges
+    shownStale = true;                                                         // CPU copy is rebuilt only if a pick needs it
     dirty = false;
   }
   nebula.position.copy(camera.position); // the sky follows the camera, so it never shows parallax
@@ -500,7 +559,7 @@ window.__explorer = {
   // Where the GPU says it drew a node, read back from the uniform + CPU formula.
   get focusPoint() { return focusPoint; },
   // Shown radius of a node's position (0 = at the centre of the ball).
-  shownR: (id) => vLength(shown[id]),
+  shownR: (id) => { ensureShown(); return vLength(shown[id]); },
   // Screen (CSS pixel) position of a node's centre, or null if behind the camera.
   screenPos: (id) => projectNode(id, renderer.domElement.getBoundingClientRect()),
 };

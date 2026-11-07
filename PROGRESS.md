@@ -84,7 +84,29 @@ While animating, the extra ≈ 3 ms is the CPU rebuilding the edges, which moves
 
 Interim in 3a: edges are still the CPU polylines from Phase 2 (faint additive blue), so they are not yet tinted by arm.
 
-### 3b — Edges and ambience (next)
+### 3a-tweaks — look pass before 3b  ✅ done (waiting for phone/laptop check)
+- [x] Shell removed. Replaced by a haze billboard whose brightness is (1 − q)² (q = 0 centre, 1 boundary), so it
+      fades to nothing with no edge
+- [x] Palette: arm hues only teal 0.47 → indigo 0.67 → magenta 0.87 (shared out over the FOLDER arms only; loose
+      root files are violet). Saturation 0.9 → 0.78, cooling toward blue reduced. Warm gold only on the focus
+- [x] Sun: its own billboard (`SUN_*` shaders): hot white core, gold inner glow, large faint corona, 6 + 4 soft rays
+      from cos(3a), cos(2a), slow rotation, ±8 % pulse. The focus node's solid ball is also whiter (95 %)
+- [x] Size variety: folder energy = ln(weight) rescaled 0..1 over all folders; radius × (1 + 2·energy), so the biggest
+      folder is 3× the smallest. ~10 % of folders (seed ≥ 0.9) are "heroes": 25 % bigger, ≈ 2× brighter
+- [x] Edges pulled forward from 3b because thick lines need quads: ONE instance per edge, the vertex shader builds the
+      geodesic (10 segments, 6 in low) from both endpoints and `_Focus`, pushes the vertices sideways in screen
+      space for width (1.8 px base, 0.55×–1.45× with fog), tint = arm colour, brightness 0.05 + 0.75·e^(−0.45 d).
+      The CPU edge polylines are gone; the CPU copy of the transform now runs lazily, only for picking
+- [x] Dust: 450 faint specks (200 low) at fixed places inside the ball, moved by the same `_Focus`, so they slide
+      with parallax on refocus. (Slow drift is still 3b.)
+- [x] `gpuCheck()` now also tests the GLSL geodesic against `geodesicLerp3`: max error 3.8e-6 (positions 7e-7)
+- Numbers (M4 laptop, headless): 7 draw calls (nodes, halos, sun, edges, dust, haze, nebula), 112 k triangles.
+  vsync fps 60 idle and animating. Uncapped: ≈ 540 idle, ≈ 500 animating (was ≈ 200 animating in 3a: the per-frame
+  CPU edge rebuild is gone). Low quality is not measurably faster on the M4 (noisy 400–550): the phone is the test
+
+### 3b — Ambience (next; edges and GPU geodesics already done above)
+- Still to do: travelling light pulse along edges (random phase per edge; `vT` and `vSeed` are already passed to the
+  fragment shader), slow dust drift, optional desktop-only ambient rotation, fps report
 ### 3c — Labels, semantic zoom, breadcrumb
 
 ### Known limitations (3a)
