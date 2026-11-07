@@ -8,7 +8,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "deploy": "vite build && gh-pages -d dist",
-    "test": "node tests/mobius.test.js"
+    "test": "node tests/mobius.test.js && node tests/layout.test.js"
   },
   "dependencies": {
     "three": "^0.187.0"
