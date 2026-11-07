@@ -15,8 +15,8 @@ const escapeHtml = (t) => String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;')
 export function createInfoCard() {
   const css = document.createElement('style');
   css.textContent = `
-    #card { position: fixed; z-index: 4; top: 64px; left: 12px; box-sizing: border-box; display: none;
-      width: min(${THEME.INFO_CARD_WIDTH_PX}px, calc(100vw - 24px - var(--panel-w, 0px))); max-height: calc(100vh - 150px); overflow: auto;
+    #card { position: fixed; z-index: 4; top: calc(64px + var(--study-h, 0px)); left: 12px; box-sizing: border-box; display: none;
+      width: min(${THEME.INFO_CARD_WIDTH_PX}px, calc(100vw - 24px - var(--panel-w, 0px))); max-height: calc(100vh - 150px - var(--study-h, 0px)); overflow: auto;
       padding: 8px 12px 10px; border-radius: 12px; background: ${cssRgb(THEME.CODE_BG, 0.94)}; color: ${cssRgb(THEME.CODE_TEXT)};
       border: 1px solid ${cssRgb(THEME.CODE_EDGE, 0.45)}; font: 13px/1.4 system-ui, sans-serif; }
     #card.open { display: block; }
@@ -26,9 +26,9 @@ export function createInfoCard() {
     #card dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }
     #card .c-note { margin-top: 6px; font-size: 11px; color: ${cssRgb(THEME.LINK_CALL_COLOR)}; }
     @media (max-height: ${THEME.COMPACT_HEIGHT_PX}px) {
-      #card { top: 44px; left: 104px; max-height: calc(100vh - 54px); width: min(${THEME.INFO_CARD_WIDTH_PX - 40}px, calc(100vw - 116px - var(--panel-w, 0px))); font-size: 12px; }
+      #card { top: calc(44px + var(--study-h, 0px)); left: 104px; max-height: calc(100vh - 54px); width: min(${THEME.INFO_CARD_WIDTH_PX - 40}px, calc(100vw - 116px - var(--panel-w, 0px))); font-size: 12px; }
     }
-    #legend { position: fixed; z-index: 4; top: 12px; right: calc(12px + var(--panel-w, 0px)); display: none; box-sizing: border-box;
+    #legend { position: fixed; z-index: 4; top: calc(12px + var(--study-h, 0px)); right: calc(12px + var(--panel-w, 0px)); display: none; box-sizing: border-box;
       padding: 6px 10px 7px; border-radius: 10px; background: ${cssRgb(THEME.CRUMB_BG, THEME.CRUMB_BG_ALPHA)};
       border: 1px solid ${cssRgb(THEME.CRUMB_SEP_COLOR)}; color: ${cssRgb(THEME.CRUMB_COLOR)}; font: 11px/1.3 system-ui, sans-serif; }
     #legend.open { display: block; }

@@ -446,5 +446,37 @@ Sub-steps 6a search · 6b info card + git heat · 6c minimap + second dataset ·
 - Numbers (headless, 1000×800, map open, refocusing every ~0.3 s for 2.5 s): sample 60 fps, 9 draw calls; WordNet 59.6 fps, 8 draw calls (the minimap is a 2D
   canvas, not a WebGL draw call). Phone portrait/landscape: taps on the map refocus, no console errors
 
+### 6d — Study mode and collapsible-tree baseline  ✅ done (waiting for your phone check)
+**How to run it** (add `&p=P07` to prefill the participant id; the three conditions use the same data and the same logger):
+| condition | URL |
+|---|---|
+| collapsible tree | `/?mode=tree&study=1` |
+| 2D hyperbolic disk | `/?mode=2d&study=1` |
+| 3D hyperbolic ball | `/?study=1` |
+Other options: `&tree=wordnet_tree.json` (other dataset; tasks come from `study/tasks_wordnet.json`), `&tasks=study/x.json`, `&search=0` (no search in 3D, no filter box in the list).
+- [x] **Flow** (`src/study.js`, loaded by `main.js` on `?study=1`): welcome card (participant id, condition shown, Resume if a session was saved) → for each task a bar at the top
+      with the task text → **Start** (the view is reset to the root / tree collapsed, the clock starts) → **Found it** or **Skip** → next task. One practice task (it tells you
+      right or wrong; scored tasks never do), then 6 scored tasks, shallow to deep. The final card shows a summary and the export buttons
+- [x] **Logged** (`src/studylog.js`, no DOM, tested): per task: elapsed ms, result (found/skipped), correct (does the selected node's path equal the target? a symbol of the
+      target file counts), the path selected at "Found it", **navigation actions** (= focus/selection changes the participant made; changes the viewer makes by itself, e.g. the
+      second step of a link glide, are logged as `auto` and not counted), backtracks (focus moved to a shallower node), max depth, plus the raw events with timestamps:
+      `focus` {path, source: canvas / search (+query) / map / toolbar:… / panel / breadcrumb / key:… / tree}, `click`, `drag`, `wheel`, `key`, `ui`
+- [x] **Observed from outside**: study.js only watches `window.__explorer` (focused node every frame) and DOM events, so **`main2d.js` is untouched** (verified: no diff) and
+      all three conditions are logged identically. The tree page exposes the same interface ("focus" = selected row)
+- [x] **Export**: JSON (everything), tasks CSV (one row per task: the table to analyse), events CSV (one row per event). Buttons use a download link; "Copy JSON" falls back to a
+      text box. The session is autosaved to localStorage after every task (a reload offers Resume)
+- [x] **Developer text hidden** in study mode (fps counter, key-help line); the 3D intro card is skipped (the study briefs people itself); the viewer's panels, search box and
+      info card move down by the height of the study bar (`--study-h`); on a sideways phone the bar is one slim row
+- [x] **Collapsible-tree baseline** (`src/maintree.js`, `?mode=tree`): a plain file-explorer list from the same JSON and the same `buildTree` (identical paths): click a folder
+      to open/close, click a file to select, arrow keys, a filter box, 44 px rows on touch. No map, heat, links or 3D
+- [x] **Tasks** (`tools/make_study_tasks.py`): "Find the file "X" inside the folder "Y"", only (folder, file) pairs that occur exactly once, seeded, same list for everyone;
+      `public/study/tasks_sample.json` and `tasks_wordnet.json` are committed (tests check every target exists once, is a leaf, and the pair is unique)
+- Caveats for the analysis: the sample's folder names repeat a lot (e.g. several folders called `io`), so the tasks are harder than "find main.css"; the 3D viewer also has
+  search, info card, heat and map, the tree only a filter box (use `&search=0` for a no-search comparison); the 3D info card shows the FAKE git numbers; headless runs only,
+  no real participant yet
+- Tests: `study.test.js` (depth, correctness, action/backtrack counting incl. `auto`, CSV escaping, task files). Checked headless in all three modes: a task logged with
+  the right events (`click`, `focus:canvas`, `key`, `focus:key:Backspace`; a search selection logged `source: search, query: main`), seven tasks finished and the three
+  files downloaded, phone portrait and landscape run without errors
+
 ## Later
 5 Cross-file links (done early, in 4c) · 6 Search/info/git heat/2nd dataset · 7 AR tabletop · 8 User study + report · 9 VR Cardboard + final visual polish

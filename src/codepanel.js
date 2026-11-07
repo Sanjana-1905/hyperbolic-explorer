@@ -76,7 +76,7 @@ export function createCodePanel({ onInset } = {}) {
   const css = document.createElement('style');
   css.textContent = `
     #code { position: fixed; z-index: 5; display: none; flex-direction: column; box-sizing: border-box;
-      top: 56px; right: 0; bottom: 56px; width: min(${THEME.CODE_PANEL_WIDTH_PX}px, 50vw);
+      top: calc(56px + var(--study-h, 0px)); right: 0; bottom: 56px; width: min(${THEME.CODE_PANEL_WIDTH_PX}px, 50vw);
       background: ${cssRgb(THEME.CODE_BG, THEME.CODE_BG_ALPHA)}; color: ${cssRgb(THEME.CODE_TEXT)};
       border-left: 2px solid ${cssRgb(THEME.CODE_EDGE, 0.7)}; border-radius: 10px 0 0 10px;
       box-shadow: -8px 0 24px rgba(0, 0, 0, 0.6);
@@ -125,7 +125,7 @@ export function createCodePanel({ onInset } = {}) {
     #code .cp-more { justify-content: center; color: ${cssRgb(THEME.CODE_HEADER)}; }
     /* Short windows (phone held sideways): the panel uses the whole height, with a slimmer header and smaller text. */
     @media ${COMPACT} {
-      #code { top: 6px; bottom: 6px; font-size: 12px; }
+      #code { top: calc(6px + var(--study-h, 0px)); bottom: 6px; font-size: 12px; }
       #code .cp-head { min-height: 40px; }
       #code button { width: 40px; height: 40px; }
       #code .cp-tabs button { height: 36px; }

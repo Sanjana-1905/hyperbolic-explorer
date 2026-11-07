@@ -298,6 +298,11 @@ export const THEME = {
   MINIMAP_SUBTREE: [0.45, 0.95, 0.90], // the focused subtree
   MINIMAP_FOCUS: [1.0, 0.85, 0.45],    // the focus ring and the crosshair
 
+  // ---- Collapsible-tree baseline page (?mode=tree) ---------------------------------------------------
+  TREE_ROW_PX: 32,             // height of a row (mouse)
+  TREE_ROW_TOUCH_PX: 44,       // ... on touch screens (thumb target)
+  TREE_INDENT_PX: 18,          // indent per tree level
+
   // ---- Compact layout (phone held sideways: very little height) ----------------------------------
   COMPACT_HEIGHT_PX: 520,      // a window at most this tall uses the compact layout: icon-only toolbar down the left side,
                                // smaller title/breadcrumb/code, labels scaled by COMPACT_LABEL_SCALE

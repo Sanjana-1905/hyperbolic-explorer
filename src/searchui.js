@@ -137,7 +137,8 @@ export function createSearchUI({ index, onSelect }) {
   function layout() {
     const vv = window.visualViewport;
     const h = vv ? vv.height : window.innerHeight;
-    box.style.top = `${(vv ? vv.offsetTop : 0) + (h <= THEME.COMPACT_HEIGHT_PX ? 4 : 8)}px`;
+    const studyH = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--study-h')) || 0;   // leave room for the study bar
+    box.style.top = `${(vv ? vv.offsetTop : 0) + (h <= THEME.COMPACT_HEIGHT_PX ? 4 : 8) + studyH}px`;
     const used = (h <= THEME.COMPACT_HEIGHT_PX ? 42 : row) + (status.textContent ? 24 : 0) + 20;
     list.style.maxHeight = `${Math.max(80, h - used)}px`;
   }
@@ -175,6 +176,7 @@ export function createSearchUI({ index, onSelect }) {
 
   window.addEventListener('keydown', (e) => {
     const typing = /^(input|textarea|select)$/i.test(e.target.tagName) || e.target.isContentEditable;
+    if (new URLSearchParams(location.search).get('search') === '0') return;   // &search=0: no search in this condition
     if (e.key === '/' && !typing && !e.ctrlKey && !e.metaKey && !e.altKey) { e.preventDefault(); open(); }
   });
 

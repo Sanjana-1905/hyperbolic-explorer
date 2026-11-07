@@ -1,0 +1,54 @@
+{
+ "dataset": "wordnet_tree.json",
+ "tasks": [
+  {
+   "id": "p0",
+   "practice": true,
+   "depth": 3,
+   "target": "entity/abstraction/relation/kinship",
+   "text": "Find the word \"kinship\" inside the category \"relation\"."
+  },
+  {
+   "id": "t1",
+   "practice": false,
+   "depth": 3,
+   "target": "entity/abstraction/communication/voice",
+   "text": "Find the word \"voice\" inside the category \"communication\"."
+  },
+  {
+   "id": "t2",
+   "practice": false,
+   "depth": 4,
+   "target": "entity/physical entity/causal agent/person/Jew",
+   "text": "Find the word \"Jew\" inside the category \"person\"."
+  },
+  {
+   "id": "t3",
+   "practice": false,
+   "depth": 5,
+   "target": "entity/abstraction/attribute/quality/sameness/similarity",
+   "text": "Find the word \"similarity\" inside the category \"sameness\"."
+  },
+  {
+   "id": "t4",
+   "practice": false,
+   "depth": 6,
+   "target": "entity/abstraction/attribute/state/feeling/emotion/anger",
+   "text": "Find the word \"anger\" inside the category \"emotion\"."
+  },
+  {
+   "id": "t5",
+   "practice": false,
+   "depth": 7,
+   "target": "entity/physical entity/object/whole/artifact/instrumentality/container/dish",
+   "text": "Find the word \"dish\" inside the category \"container\"."
+  },
+  {
+   "id": "t6",
+   "practice": false,
+   "depth": 8,
+   "target": "entity/abstraction/measure/system of measurement/standard/medium of exchange/currency/coinage/coin",
+   "text": "Find the word \"coin\" inside the category \"coinage\"."
+  }
+ ]
+}

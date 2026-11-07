@@ -39,8 +39,8 @@ export function createToolbar(actions) {
     }
     /* Compact layout (phone held sideways): a slim column of icon-only buttons down the left side. */
     @media (max-height: ${THEME.COMPACT_HEIGHT_PX}px) {
-      #tools { left: 6px; top: 58px; bottom: auto; flex-direction: column; flex-wrap: wrap; align-content: flex-start; gap: 5px;
-        max-height: calc(100vh - 66px); }
+      #tools { left: 6px; top: calc(58px + var(--study-h, 0px)); bottom: auto; flex-direction: column; flex-wrap: wrap; align-content: flex-start; gap: 5px;
+        max-height: calc(100vh - 66px - var(--study-h, 0px)); }
       #tools button { height: 40px; min-width: 40px; padding: 0 10px; justify-content: center; font-size: 16px; }
       #tools .lbl { display: none; }
       #tools .dot { width: 14px; height: 14px; }
@@ -76,7 +76,8 @@ export function createToolbar(actions) {
   const lbl = (t) => `<span class="lbl">${t}</span>`;
   const dot = (color) => `<span class="dot" style="background:${cssRgb(color)}"></span>`;
   const magnifier = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><circle cx="10" cy="10" r="6.5"/><path d="M15 15l6 6"/></svg>';
-  make(`${magnifier}${lbl('Search')}`, 'Search files, folders and functions (/)', actions.onSearch);
+  // &search=0 (study conditions without search) leaves the search button out.
+  if (new URLSearchParams(location.search).get('search') !== '0') make(`${magnifier}${lbl('Search')}`, 'Search files, folders and functions (/)', actions.onSearch);
   const home = make(`⌂${lbl(' Home')}`, 'Go to the top of the tree', actions.onHome);
   const up = make(`↑${lbl(' Up')}`, 'Go to the parent folder (Shift+Backspace)', actions.onUp);
   const back = make('‹', 'Return to where you were before following a link (Backspace)', actions.onBack);
@@ -105,7 +106,9 @@ export function createToolbar(actions) {
   document.body.appendChild(card);
   function showIntro() { card.hidden = false; }
   const mode = new URLSearchParams(location.search).get('intro');
-  if (mode === '1' || (mode !== '0' && !remembered())) showIntro();
+  // In study mode the intro card stays away: the study gives its own briefing.
+  const studying = new URLSearchParams(location.search).get('study') === '1';
+  if (mode === '1' || (mode !== '0' && !studying && !remembered())) showIntro();
 
   const setOn = (btn, on) => { btn.classList.toggle('on', on); btn.classList.toggle('off', !on); btn.setAttribute('aria-pressed', String(on)); };
 
