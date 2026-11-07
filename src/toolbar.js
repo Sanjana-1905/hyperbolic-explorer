@@ -95,10 +95,10 @@ export function createToolbar(actions) {
   card.innerHTML = `
     <h2>How to explore</h2>
     <ol>
-      <li>This is a whole code repository as <b>one picture</b>. Folders are glowing stars, files are small dots. The big bright one in the middle is <b>where you are</b>.</li>
+      <li>This is a whole <span class="i-about">code repository</span> as <b>one picture</b>. <span class="i-folders">Folders</span> are glowing stars, <span class="i-files">files</span> are small dots. The big bright one in the middle is <b>where you are</b>. The little <b>Map</b> in the corner shows where that is in the whole; tap it to jump.</li>
       <li><b>Click any node to fly into it.</b> Click a file to open its classes and functions and read the code. <b>+N</b> is a group of N hidden items: click it to open.</li>
       <li><b>↑ Up</b> goes to the parent folder, <b>⌂ Home</b> to the top. Drag to look around, scroll or pinch to move closer.</li>
-      <li>Arcs between nodes are connections: ${dot(THEME.LINK_IMPORT_COLOR)}<b>imports</b> (this file uses that file) and ${dot(THEME.LINK_CALL_COLOR)}<b>calls</b> (this function uses that one). Click an arc to follow it; <b>‹ Back</b> returns.</li>
+      <li class="i-arcs">Arcs between nodes are connections: ${dot(THEME.LINK_IMPORT_COLOR)}<b>imports</b> (this file uses that file) and ${dot(THEME.LINK_CALL_COLOR)}<b>calls</b> (this function uses that one). Click an arc to follow it; <b>‹ Back</b> returns.</li>
     </ol>
     <button type="button">Start exploring</button>`;
   card.querySelector('button').addEventListener('click', () => { card.hidden = true; remember(); });
@@ -121,9 +121,20 @@ export function createToolbar(actions) {
       back.style.display = s.backDepth > 0 ? '' : 'none';
       back.innerHTML = `‹${lbl(' Back')} (${s.backDepth})`;
       const folder = s.focusKind === 'folder';
-      deps.style.display = folder ? '' : 'none';
-      imports.style.display = calls.style.display = folder ? 'none' : '';
+      // Link chips only make sense for a code dataset (one that has symbols); heat only if the data has git history.
+      deps.style.display = folder && s.hasCode ? '' : 'none';
+      imports.style.display = calls.style.display = folder || !s.hasCode ? 'none' : '';
+      heatBtn.style.display = s.hasGit ? '' : 'none';
       setOn(imports, s.showImports); setOn(calls, s.showCalls); setOn(deps, s.showFolderDeps);
+    },
+    // Wording of the intro card for the dataset (a code repository by default, or e.g. WordNet).
+    setDataset({ about, words, hasCode }) {
+      if (about) card.querySelector('.i-about').textContent = about;
+      if (words) {
+        card.querySelector('.i-folders').textContent = `${words.folder}s`;
+        card.querySelector('.i-files').textContent = `${words.file.toLowerCase()}s`;
+      }
+      card.querySelector('.i-arcs').style.display = hasCode ? '' : 'none';
     },
     showIntro,
     get introVisible() { return !card.hidden; },

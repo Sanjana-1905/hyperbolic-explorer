@@ -287,6 +287,17 @@ export const THEME = {
   ZOOM_SIZE_EXPONENT: 0.7,     // zoomed in, cores shrink as (camera distance / default distance)^this, so crowds spread out (0 = off, 1 = no relative growth)
   ZOOM_SIZE_MIN: 0.25,         // ... but never below this fraction of their normal size
 
+  // ---- Minimap (small 2D disk map in a corner) ---------------------------------------------------------
+  MINIMAP_SIZE_PX: 150,        // width and height of the map
+  MINIMAP_COMPACT_PX: 100,     // ... in the compact layout (phone held sideways)
+  MINIMAP_HIT_PX: 22,          // a tap picks the nearest node within this many pixels
+  MINIMAP_BG: [0.02, 0.03, 0.08],      // map background
+  MINIMAP_BG_ALPHA: 0.82,
+  MINIMAP_RIM: [0.45, 0.55, 1.0],      // the circle that is the edge of the ball
+  MINIMAP_DOT: [0.55, 0.65, 1.0],      // ordinary nodes
+  MINIMAP_SUBTREE: [0.45, 0.95, 0.90], // the focused subtree
+  MINIMAP_FOCUS: [1.0, 0.85, 0.45],    // the focus ring and the crosshair
+
   // ---- Compact layout (phone held sideways: very little height) ----------------------------------
   COMPACT_HEIGHT_PX: 520,      // a window at most this tall uses the compact layout: icon-only toolbar down the left side,
                                // smaller title/breadcrumb/code, labels scaled by COMPACT_LABEL_SCALE

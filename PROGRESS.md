@@ -426,5 +426,25 @@ Sub-steps 6a search · 6b info card + git heat · 6c minimap + second dataset ·
 - Side effect: the base scene looks different from before (crowded siblings are smaller), so old byte-identical screenshot comparisons no longer apply
 - Tests: `symbols.test.js` checks fit on 20,679 sample nodes plus the worked example (gaps 0.06 / 0.10 → fits 0.024, 0.024, 0.04)
 
+### 6c — Minimap and second dataset  ✅ done (waiting for your phone check)
+- [x] **Minimap** (`src/minimap.js`, canvas 2D, bottom-right corner, collapses to one 44 px button; starts collapsed on a phone held upright, open otherwise).
+      The tree as laid out in the ball is flattened onto a disk (`x = cx + p.x·R`, `y = cy − p.y·R`; depth only dims dots): dim dots = folders (and files in a
+      small tree), bright dots and lines = the focused subtree (for a file or symbol: its folder), a gold line = path from the root to the focus, a ring = the
+      focus node, a cross = the point at the centre of the screen right now (it glides while you fly). Fixed picture, it does not turn with the camera.
+      **Tap = fly to the nearest node** within 22 px (pushes the back stack): distance is divided by `1 + 0.15·ln(weight)`, so a folder of 100 nodes 16 px away
+      beats a lone leaf 12 px away (9.5 vs 12). The background picture is cached and only rebuilt when the focus node changes, the cross is redrawn per frame.
+      Position: above the toolbar on a narrow screen, left of the code panel on a wide one, 100 px in the compact landscape layout. `MINIMAP_*` in theme.js
+- [x] **Second dataset: WordNet nouns** (`tools/make_wordnet_tree.py`, run with `nltk` + its free WordNet data → `public/data/wordnet_tree.json`, 180 KB,
+      licence in `public/data/wordnet_LICENSE.txt`). "X is a kind of Y": entity → physical entity → object → whole → living thing → organism → animal → … .
+      Recipe: WordNet is a DAG, so each noun keeps only its first hypernym (sorted by name, deterministic); count each noun's descendants in the full tree; start
+      at `entity` and repeatedly add the not-yet-included child (of an included node) with the MOST descendants until 3,000 nodes, depth ≤ 8 (the ball runs out of
+      room beyond ~9). Nodes with children in the subset are "folders", the rest "files"; `size` = descendants in the full WordNet (82,116 nouns total).
+      Root fields: `about` (intro sentence), `words` (Category / Word for the info card), `license`. View: `?tree=wordnet_tree.json`
+- [x] The viewer adapts to a non-code dataset: no Imports/Calls/Dependencies chips, no Heat button (no git data), info card without code rows (shows depth and
+      sizes), "Category / Word" wording, intro text and key line without code parts
+- Tests (`minimap.test.js`): flatten and pick examples, and the WordNet file (3,000 nodes, depth ≤ 8, valid folders/leaves, layout max radius 0.9912, licence shipped)
+- Numbers (headless, 1000×800, map open, refocusing every ~0.3 s for 2.5 s): sample 60 fps, 9 draw calls; WordNet 59.6 fps, 8 draw calls (the minimap is a 2D
+  canvas, not a WebGL draw call). Phone portrait/landscape: taps on the map refocus, no console errors
+
 ## Later
 5 Cross-file links (done early, in 4c) · 6 Search/info/git heat/2nd dataset · 7 AR tabletop · 8 User study + report · 9 VR Cardboard + final visual polish

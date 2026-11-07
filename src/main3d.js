@@ -38,6 +38,7 @@ import { createToolbar } from './toolbar.js';
 import { createIndex } from './search.js';
 import { createSearchUI } from './searchui.js';
 import { createInfoCard } from './infocard.js';
+import { createMinimap } from './minimap.js';
 import { computeHeat, encodeHeat, HEAT, HEAT_NAMES } from './heat.js';
 import { createCodePanel } from './codepanel.js';
 import { createFpsCounter } from './fps.js';
@@ -84,10 +85,13 @@ let showCalls = showImports;
 // A whole folder's imports are a hairball for a newcomer, so they are OFF until asked for (D key / Dependencies chip).
 // Hovering a file still previews its own arcs.
 let showFolderDeps = false;
+let hasCode = false;            // the dataset has code symbols (links, imports, lines of code make sense); set once the tree is loaded
 // Short help line (the buttons and the "?" card explain the rest); keys for people who like them.
 function updateHelp() {
   document.getElementById('help').textContent =
-    'Drag to look · scroll to zoom · click a node to fly in · keys: Backspace back · I imports · K calls · D folder deps · C code · F fps';
+    hasCode
+      ? 'Drag to look · scroll to zoom · click a node to fly in · keys: Backspace back · I imports · K calls · D folder deps · C code · F fps'
+      : 'Drag to look · scroll to zoom · click a node to fly in · keys: Backspace back · / search · F fps';
   if (typeof refreshToolbar === 'function') refreshToolbar();
 }
 const MAX_CODE_ORB_LABELS = 4;  // at file/symbol level, label at most this many "+N" orbs (the biggest on screen)
@@ -679,6 +683,7 @@ function focusOn(node, animate = true, via = null) {
   focusUniforms.uFocusId.value = node.id;
   sunUniforms.uFocusPos.value.set(node.pos.x, node.pos.y, node.pos.z);
   uFocusScale.value = node.type === 'folder' ? 1 : THEME.SYMBOL_FOCUS_SCALE;
+  if (minimap) minimap.setFocus(node.type === 'symbol' ? node.file : node);
   nav.flyTo(node.pos, animate, via);
   updateInfo();
   showCode(node);
@@ -869,6 +874,7 @@ function refreshToolbar() {
     focusKind: focusNode.type === 'symbol' ? 'symbol' : focusNode.type === 'folder' ? 'folder' : 'file',
     showImports, showCalls, showFolderDeps,
     infoOpen: infoCard ? infoCard.open : false, heatMode,
+    hasGit: !!(heatData && heatData.files), hasCode,
   });
 }
 function updateBackButton() { refreshToolbar(); }
@@ -970,6 +976,8 @@ function stepMark(now) {
 let heatData = null;            // heat.js: { commits, recency, ... } per base node id (-1 = no git data)
 let heatMode = HEAT.OFF;
 let infoCard = null;
+let minimap = null;            // small 2D map in a corner (minimap.js)
+let datasetWords = { folder: 'Folder', file: 'File' };   // what this dataset calls its two node types (WordNet: Category / Word)
 let fakeGit = false;            // the sample dataset's git history is generated, not real: say so on screen
 
 // The aFlag value (see heat.js) for a node under the current heat mode. Symbols take their file's heat.
@@ -1012,6 +1020,7 @@ function updateInfoCard() {
   const file = n.type === 'symbol' ? n.file : n;
   const counts = linkData ? linkCounts(linkData, subjectOf(n), (id) => fileById.get(id)) : null;
   rows.push(['Path', n.type === 'symbol' ? `${nodePath(file)} › ${n.name}` : nodePath(n)]);
+  const word = (t) => (t === 'folder' ? datasetWords.folder : datasetWords.file);
   if (n.type === 'folder') {
     let files = 0, commits = 0, newest = 0, loc = 0;
     for (let i = n.id + 1; i < n.id + n.weight; i++) {
@@ -1020,27 +1029,28 @@ function updateInfoCard() {
       files++; loc += f.loc || 0;
       if (f.commits) { commits += f.commits; newest = Math.max(newest, Date.parse(f.modified) || 0); }
     }
-    rows.push(['Contains', `${n.children.length} items · ${files} files`]);
-    rows.push(['Lines of code', loc ? loc.toLocaleString() : '—']);
-    rows.push(['Git commits', commits ? `${commits.toLocaleString()} (all files)` : '—']);
-    rows.push(['Last modified', newest ? fmtDate(newest) : '—']);
+    rows.push(['Contains', hasCode ? `${n.children.length} items · ${files} files` : `${n.children.length} direct · ${n.weight - 1} in all`]);
+    if (loc) rows.push(['Lines of code', loc.toLocaleString()]);
+    if (commits) rows.push(['Git commits', `${commits.toLocaleString()} (all files)`]);
+    if (newest) rows.push(['Last modified', fmtDate(newest)]);
+    if (!hasCode) rows.push(['Depth', `${n.depth} below the top`]);
   } else if (n.type === 'symbol') {
     rows.push(['Signature', n.signature]);
     rows.push(['Lines of code', `${n.endLine - n.startLine + 1} (${n.startLine}–${n.endLine})`]);
     rows.push(['In file', `${file.name} · ${file.commits ? `${file.commits} commits` : 'no git data'}`]);
   } else {
-    rows.push(['Lines of code', n.loc ? n.loc.toLocaleString() : '—']);
-    if (n.hasSymbols) {
-      rows.push(['Symbols', n.symState === 'open' ? String(dynamicCountOf(n)) : 'opens when you fly in']);
-    }
-    rows.push(['Git commits', n.commits ? String(n.commits) : '—']);
-    rows.push(['Last modified', n.modified || '—']);
+    if (n.loc) rows.push(['Lines of code', n.loc.toLocaleString()]);
+    if (n.hasSymbols) rows.push(['Symbols', n.symState === 'open' ? String(dynamicCountOf(n)) : 'opens when you fly in']);
+    if (n.commits) { rows.push(['Git commits', String(n.commits)]); rows.push(['Last modified', n.modified || '—']); }
+    if (!hasCode) rows.push(['Depth', `${n.depth} below the top`]);
   }
-  if (counts) {
-    if (n.type !== 'symbol') rows.push(['Imports', `${counts.importsOut} out · ${counts.importsIn} in`]);
-    if (n.type !== 'folder') rows.push(['Calls', `${counts.callsOut} out · ${counts.callsIn} in`]);
-  } else if (n.type !== 'folder') rows.push(['Imports / calls', '—']);
-  const kind = n.type === 'folder' ? 'Folder' : n.type === 'symbol' ? n.kind : `File${n.ext ? ` · .${n.ext}` : ''}`;
+  if (hasCode) {
+    if (counts) {
+      if (n.type !== 'symbol') rows.push(['Imports', `${counts.importsOut} out · ${counts.importsIn} in`]);
+      if (n.type !== 'folder') rows.push(['Calls', `${counts.callsOut} out · ${counts.callsIn} in`]);
+    } else if (n.type !== 'folder') rows.push(['Imports / calls', '—']);
+  }
+  const kind = n.type === 'symbol' ? n.kind : hasCode ? (n.type === 'folder' ? 'Folder' : `File${n.ext ? ` · .${n.ext}` : ''}`) : word(n.type);
   infoCard.setCard(kind, rows, fakeGit && (n.type !== 'symbol') ? 'Sample data: the git numbers are FAKE.' : null);
 }
 
@@ -1319,6 +1329,7 @@ function frame(now) {
   if (dirty) {
     const f = nav.focusPoint;
     focusUniforms._Focus.value.set(f.x, f.y, f.z); // the whole GPU refocus
+    if (minimap) minimap.setFocusPoint(f);
     shownStale = true;                              // CPU copy is rebuilt only if a pick needs it
     updateExpansion();                              // open / close files near the focus
     updateSemanticZoom();                                                      // collapse / expand folders by distance
@@ -1363,6 +1374,11 @@ async function start() {
   heatData = computeHeat(nodes);
   fakeGit = !!json.fakeGit;
   infoCard = createInfoCard();
+  hasCode = symbolFiles.length > 0;
+  if (json.words) datasetWords = json.words;
+  toolbar.setDataset({ about: json.about, words: json.words, hasCode });
+  updateHelp();
+  minimap = createMinimap({ nodes, onPick: (n) => goToPlace({ baseId: n.id }, true) });
   refreshToolbar();
   codePanel = createCodePanel({ onInset: nav.setInset });
   // Links (Phase 4c) load in the background: the galaxy is usable before they arrive.
@@ -1424,6 +1440,7 @@ window.__explorer = {
   heatOf: (id) => (heatMode === HEAT.COMMITS ? heatData.commits[id] : heatData.recency[id]),
   get focusScale() { return uFocusScale.value; },
   get zoomSize() { return uZoomSize.value; },
+  minimap: () => minimap,
   arcRoute: (i) => arcRoute(linkArcs[i]),
   searchStats: () => ({ ...indexStats, entries: searchIndex.size, indexed: searchIndex.symbolFilesIndexed, lastSearchMs: searchUI.lastMs }),
   search: (text, n = 10) => { const t0 = performance.now(); const r = searchIndex.search(text, n); return { ms: performance.now() - t0, results: r }; },
