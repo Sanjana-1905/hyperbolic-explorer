@@ -64,9 +64,9 @@ vec3 hsl2rgb(float h, float s, float l) {
   return l - a * max(vec3(-1.0), min(min(k - 3.0, 9.0 - k), vec3(1.0)));
 }
 vec3 armColor(float hue0, float fog) {
-  float towardBlue = fract(0.62 - hue0 + 0.5) - 0.5;
-  float hue = hue0 + towardBlue * (1.0 - fog) * 0.12;
-  return hsl2rgb(hue, 0.78, 0.52);
+  float towardBlue = fract(COOL_HUE - hue0 + 0.5) - 0.5;
+  float hue = hue0 + towardBlue * (1.0 - fog) * COOL_AMOUNT;
+  return hsl2rgb(hue, ARM_SATURATION, ARM_LIGHTNESS);
 }
 `;
 
@@ -85,8 +85,9 @@ vec3 armColor(float hue0, float fog) {
 //   aId       node index, so the shader can tell which node is the focus
 // Compiled twice: the normal version, and with HALO defined for the soft glow
 // quads that sit behind the focus and its children (our "fake bloom").
-// Constants (FOLDER_R, ...) are injected from main3d.js through `defines`, so
-// the CPU picking code uses exactly the same numbers.
+// Every look constant (FOLDER_R, ARM_SATURATION, TONE_GAIN, ...) lives in theme.js and is
+// injected through `defines`, so this file contains no tuning numbers: to restyle, edit
+// theme.js. The CPU picking code reads the same numbers.
 export const NODE_VERT = /* glsl */ `
 uniform vec3 _Focus;     // the ball point currently shown at the centre of the screen
 uniform float uFocusId;  // id of the node we are focusing on (gets the "sun" look)
@@ -130,34 +131,34 @@ void main() {
   // energy 0 -> 0.04, energy 0.5 -> 0.08, energy 1 -> 0.12.
   // ~10 % of folders (aSeed >= HERO_AT) are "heroes": 25 % bigger and about twice as bright.
   float hero = step(HERO_AT, aSeed) * aKind;
-  float rho = mix(FILE_R, FOLDER_R * (1.0 + 2.0 * aEnergy) * (1.0 + (HERO_SIZE - 1.0) * hero), aKind);
+  float rho = mix(FILE_R, FOLDER_R * (1.0 + SIZE_SPREAD * aEnergy) * (1.0 + (HERO_SIZE - 1.0) * hero), aKind);
   rho = mix(rho, FOCUS_R, isFocus);                 // the focus has one fixed, large size
   // Then the Poincare size factor (1 - r^2)/2 shrinks things toward the surface.
   // Example: at |p| = 0.9 the factor is (1 - 0.81)/2 = 0.095, so a 0.08 folder is
   // drawn 0.0076 across, but never below MIN_R.
   // Slow breathing, +-6 % for folders only (aSeed makes each one out of step).
-  float breathe = 1.0 + 0.06 * aKind * sin(uTime * 0.8 + aSeed * 6.2831);
+  float breathe = 1.0 + BREATHE_AMOUNT * aKind * sin(uTime * BREATHE_SPEED + aSeed * 6.2831);
   float size = max(rho * (1.0 - r2) * 0.5 * breathe, MIN_R);
 
   // --- 3. BRIGHTNESS and COLOUR by hyperbolic distance ----------------------
   // fog = e^(-d/2): 1 at the focus, 0.37 at d = 2, 0.08 at d = 5.
-  float fog = exp(-d * 0.5);
-  float distBright = 0.12 + 0.88 * fog;       // never fully black: context stays visible
+  float fog = exp(-d * NODE_FOG_RATE);
+  float distBright = NODE_FOG_FLOOR + (1.0 - NODE_FOG_FLOOR) * fog;       // never fully black: context stays visible
 
   // Files: faint, each twinkling at its own speed; ~7 % are bright stars.
-  float twinkle = 0.55 + 0.45 * sin(uTime * (1.0 + 3.0 * aSeed) + aSeed * 50.0);
-  float fileBright = (0.35 + 1.6 * step(0.93, aSeed)) * twinkle;
+  float twinkle = (1.0 - FILE_TWINKLE) + FILE_TWINKLE * sin(uTime * (1.0 + 3.0 * aSeed) + aSeed * 50.0);
+  float fileBright = (FILE_BRIGHT + FILE_STAR_BRIGHT * step(FILE_STAR_AT, aSeed)) * twinkle;
   // Folders: a gentle pulse, scaled by energy (0.7 .. 1.3).
-  float folderBright = (0.85 + 0.15 * sin(uTime * 0.6 + aSeed * 20.0)) * (0.7 + 0.6 * aEnergy) * (1.0 + 0.9 * hero);
+  float folderBright = ((1.0 - FOLDER_PULSE) + FOLDER_PULSE * sin(uTime * 0.6 + aSeed * 20.0))
+                     * (FOLDER_BRIGHT_BASE + FOLDER_BRIGHT_PER_ENERGY * aEnergy) * (1.0 + HERO_BRIGHT * hero);
   vBright = distBright * mix(fileBright, folderBright, aKind);
 
   vec3 col = armColor(aHue, fog);
-  vec3 warm = vec3(1.00, 0.85, 0.55);         // near the focus -> a little warm
-  col = mix(col, warm, exp(-d * 1.5) * 0.10);
-  col = mix(col, vec3(0.88, 0.92, 1.00), 0.6 * (1.0 - aKind)); // files: pale
+  col = mix(col, WARM_TINT, exp(-d * WARM_RATE) * WARM_AMOUNT);   // near the focus -> a little warm
+  col = mix(col, FILE_TINT, FILE_PALE * (1.0 - aKind));          // files: pale
   // The focus is a warm gold-white sun, always at full brightness.
-  col = mix(col, vec3(1.00, 0.78, 0.38), isFocus);
-  vBright = mix(vBright, 1.2, isFocus);
+  col = mix(col, FOCUS_COLOR, isFocus);
+  vBright = mix(vBright, FOCUS_BRIGHT, isFocus);
   vColor = col;
 
   vFocus = isFocus;
@@ -198,20 +199,20 @@ void main() {
 
 #ifdef HALO
   // Fake bloom: only a big soft glow, no ball. (1 - q)^2: q = 0.5 -> 0.25, q = 0.8 -> 0.04.
-  float strength = mix(0.30, 0.55, vFocus);
+  float strength = mix(HALO_CHILD_STRENGTH, HALO_FOCUS_STRENGTH, vFocus);
   vec3 halo = vColor * pow(1.0 - q, 2.0) * strength * vBright;
-  gl_FragColor = vec4(1.0 - exp(-halo * 1.5), 1.0);
+  gl_FragColor = vec4(1.0 - exp(-halo * TONE_GAIN), 1.0);
 #else
   vec3 col;
   if (vKind < 0.5) {
     // ---- FILE: a tiny glowing point ----
     // (1 - q)^4: q = 0.33 -> 0.20, q = 0.6 -> 0.026: falls off fast = a point of light.
-    float point = pow(1.0 - q, 4.0) + 0.8 * (1.0 - smoothstep(0.0, CORE, q));
+    float point = pow(1.0 - q, FILE_POINT_POWER) + FILE_CORE_GAIN * (1.0 - smoothstep(0.0, CORE, q));
     col = vColor * point;
   } else {
     // ---- FOLDER: a star = glow + fake sphere ----
     float s = q / CORE;                          // 0..1 across the solid ball
-    float ball = 1.0 - smoothstep(0.9, 1.0, s);  // 1 inside the ball, soft edge, 0 outside
+    float ball = 1.0 - smoothstep(BALL_EDGE, 1.0, s);  // 1 inside the ball, soft edge, 0 outside
 
     // Fake sphere: pretend this pixel is a point on a ball facing us. The sphere
     // surface height is z = sqrt(1 - s^2) (Pythagoras on the unit ball), so
@@ -220,33 +221,33 @@ void main() {
     float z = sqrt(max(1.0 - s * s, 0.0));
     vec3 n = normalize(vec3(vUv / CORE, z));
 
-    vec3 L = normalize(vec3(-0.4, 0.6, 0.7));    // direction toward a fake light
+    vec3 L = normalize(LIGHT_DIR);    // direction toward a fake light
     float diff = max(dot(n, L), 0.0);            // 1 facing the light, 0 at right angles
     // Fresnel rim glow: strong where the surface turns away from us (z -> 0).
     // (1 - z)^3: s = 0.6 -> 0.008 (nothing), s = 0.95 -> 0.57, s = 1 -> 1.
-    float fresnel = pow(1.0 - z, 3.0);
+    float fresnel = pow(1.0 - z, FRESNEL_POWER);
     // Tiny specular highlight: a small bright spot where the normal is halfway
     // between the light and the viewer. pow(..., 40) makes the spot tiny.
     vec3 H = normalize(L + vec3(0.0, 0.0, 1.0));
-    float spec = pow(max(dot(n, H), 0.0), 40.0);
+    float spec = pow(max(dot(n, H), 0.0), SPEC_POWER);
 
     // Bright core: the centre (z = 1) mixes toward white, 40 % for folders and 95 % for
     // the focus (a hot white core); z^3 keeps the edge coloured.
-    vec3 hot = mix(vColor, vec3(1.0), z * z * z * mix(0.4, 0.95, vFocus));
-    vec3 sphere = hot * (0.40 + 0.45 * z) + vColor * diff * 0.2
-                + vColor * fresnel * 1.1 + vec3(spec * 0.35);
+    vec3 hot = mix(vColor, vec3(1.0), z * z * z * mix(CORE_WHITE_FOLDER, CORE_WHITE_FOCUS, vFocus));
+    vec3 sphere = hot * (SPHERE_BASE + SPHERE_CENTRE * z) + vColor * diff * DIFFUSE_GAIN
+                + vColor * fresnel * RIM_GAIN + vec3(spec * SPEC_GAIN);
 
     // Soft halo outside the ball: (1 - q)^2.5: q = 0.5 -> 0.18, q = 0.8 -> 0.018.
-    float glow = pow(1.0 - q, 2.5);
-    col = vColor * glow * 0.6 + sphere * ball;
+    float glow = pow(1.0 - q, GLOW_POWER);
+    col = vColor * glow * GLOW_GAIN + sphere * ball;
   }
 
   // Reserved status marker (aFlag): a thin magenta ring. Phase 6 only changes the number.
-  col += vFlag * vec3(1.0, 0.2, 0.8) * smoothstep(0.06, 0.0, abs(q - 0.85));
+  col += vFlag * FLAG_COLOR * smoothstep(FLAG_RING_WIDTH, 0.0, abs(q - FLAG_RING_AT));
 
   col *= vBright;
   // Soft limiter: 1 - e^(-1.5 x). 0.2 -> 0.26, 1 -> 0.78, 3 -> 0.99. Never harshly clipped.
-  gl_FragColor = vec4(1.0 - exp(-col * 1.5), 1.0);
+  gl_FragColor = vec4(1.0 - exp(-col * TONE_GAIN), 1.0);
 #endif
 }
 `;
@@ -308,8 +309,8 @@ float starLayer(vec3 dir, float scale, float seed) {
   float h = hash31(cell + seed);
   vec3 jitter = vec3(hash31(cell + 3.1 + seed), hash31(cell + 7.7 + seed), hash31(cell + 5.3 + seed));
   float dist = length(fract(p) - (0.2 + 0.6 * jitter));
-  float star = smoothstep(0.10, 0.0, dist) * step(0.97, h);
-  float twinkle = 0.7 + 0.3 * sin(uTime * (0.5 + 3.0 * h) + h * 100.0);
+  float star = smoothstep(STAR_SIZE, 0.0, dist) * step(STAR_DENSITY, h);
+  float twinkle = (1.0 - STAR_TWINKLE) + STAR_TWINKLE * sin(uTime * (0.5 + 3.0 * h) + h * 100.0);
   return star * twinkle * (0.4 + 0.6 * hash31(cell + 9.9));
 }
 
@@ -317,23 +318,20 @@ void main() {
   vec3 dir = normalize(vDir);
 
   // Two big noise fields at different positions give two overlapping cloud systems.
-  float a = fbm(dir * 1.6 + vec3(0.0, uTime * 0.004, 0.0));
-  float b = fbm(dir * 2.6 + vec3(7.0, 3.0, uTime * 0.003));
+  float a = fbm(dir * NEBULA_SCALE_A + vec3(0.0, uTime * NEBULA_DRIFT_A, 0.0));
+  float b = fbm(dir * NEBULA_SCALE_B + vec3(7.0, 3.0, uTime * NEBULA_DRIFT_B));
 
-  vec3 violet = vec3(0.34, 0.12, 0.52);
-  vec3 teal   = vec3(0.04, 0.42, 0.48);
-  vec3 indigo = vec3(0.10, 0.14, 0.55);
-  vec3 col = vec3(0.004, 0.006, 0.020);                      // deep navy-black space
-  // smoothstep(0.45, 0.9, a): 0 below 0.45, 1 above 0.9: only the thick parts of the noise glow.
-  col += violet * smoothstep(0.42, 0.88, a) * 0.40;
-  col += teal   * smoothstep(0.48, 0.88, b) * 0.32;
-  col += indigo * smoothstep(0.35, 0.80, a * b * 2.0) * 0.25;
+  vec3 col = SPACE_COLOR;                                    // deep navy-black space
+  // smoothstep(lo, hi, a): 0 below lo, 1 above hi: only the thick parts of the noise glow.
+  col += NEBULA_VIOLET * smoothstep(NEBULA_VIOLET_RANGE.x, NEBULA_VIOLET_RANGE.y, a) * NEBULA_VIOLET_GAIN;
+  col += NEBULA_TEAL   * smoothstep(NEBULA_TEAL_RANGE.x,   NEBULA_TEAL_RANGE.y,   b) * NEBULA_TEAL_GAIN;
+  col += NEBULA_INDIGO * smoothstep(NEBULA_INDIGO_RANGE.x, NEBULA_INDIGO_RANGE.y, a * b * 2.0) * NEBULA_INDIGO_GAIN;
 
-  float stars = starLayer(dir, 60.0, 0.0);
+  float stars = starLayer(dir, STAR_SCALE_1, 0.0);
 #if STAR_LAYERS > 1
-  stars += 0.7 * starLayer(dir, 130.0, 17.0);
+  stars += STAR_LAYER2_GAIN * starLayer(dir, STAR_SCALE_2, 17.0);
 #endif
-  col += vec3(0.85, 0.9, 1.0) * stars;
+  col += STAR_COLOR * stars;
 
   gl_FragColor = vec4(col, 1.0);
 }
@@ -359,8 +357,8 @@ varying vec2 vUv;
 void main() {
   float q = length(vUv);
   if (q > 1.0) discard;
-  vec3 tint = mix(vec3(0.10, 0.14, 0.42), vec3(0.26, 0.12, 0.42), q);  // indigo inside, violet outside
-  gl_FragColor = vec4(tint * pow(1.0 - q, 2.0) * 0.45, 1.0);
+  vec3 tint = mix(HAZE_INNER, HAZE_OUTER, q);  // indigo inside, violet outside
+  gl_FragColor = vec4(tint * pow(1.0 - q, HAZE_POWER) * HAZE_STRENGTH, 1.0);
 }
 `;
 
@@ -390,27 +388,26 @@ varying vec2 vUv;
 void main() {
   float q = length(vUv);
   if (q > 1.0) discard;
-  float pulse = 1.0 + 0.08 * sin(uTime * 1.3);       // gentle pulsing, +-8 %
+  float pulse = 1.0 + SUN_PULSE * sin(uTime * SUN_PULSE_SPEED);       // gentle pulsing, +-8 %
 
   // Gaussians: exp(-(q/w)^2) is 1 at the centre, 0.37 at q = w, 0.02 at q = 2w.
-  float core   = exp(-pow(q / 0.055, 2.0));           // hot white core
-  float inner  = exp(-pow(q / 0.15, 2.0));            // warm gold inner glow
-  float corona = pow(1.0 - q, 4.0);                   // larger faint corona: q = 0.3 -> 0.24
+  float core   = exp(-pow(q / SUN_CORE_W, 2.0));           // hot white core
+  float inner  = exp(-pow(q / SUN_INNER_W, 2.0));            // warm gold inner glow
+  float corona = pow(1.0 - q, SUN_CORONA_POWER);       // larger faint corona: q = 0.3 -> 0.24
 
   // Star-shaped glow: cos(3a) has 3 positive and 3 negative lobes, abs() makes 6 spikes.
   // pow(.., 30) squeezes each lobe to a thin ray (cos = 0.9 -> 0.04). A second, shorter set of
   // 4 rays (cos(2a)) sits at another angle. Slow rotation: the angle offset grows with time.
   float a = atan(vUv.y, vUv.x);
-  float rays = pow(abs(cos(3.0 * a + uTime * 0.05)), 30.0) * pow(1.0 - q, 2.0) * exp(-q * 3.0)
-             + 0.5 * pow(abs(cos(2.0 * a - uTime * 0.04 + 0.6)), 40.0) * pow(1.0 - q, 3.0) * exp(-q * 4.0);
+  float rays = pow(abs(cos(3.0 * a + uTime * SUN_RAY_SPIN_A)), SUN_RAY_SHARP_A) * pow(1.0 - q, 2.0) * exp(-q * 3.0)
+             + SUN_RAY_B_GAIN * pow(abs(cos(2.0 * a - uTime * SUN_RAY_SPIN_B + 0.6)), SUN_RAY_SHARP_B) * pow(1.0 - q, 3.0) * exp(-q * 4.0);
 
-  vec3 gold = vec3(1.0, 0.72, 0.30);
-  vec3 col = vec3(1.0, 0.97, 0.9) * core * 1.2
-           + gold * inner * 0.9
-           + vec3(1.0, 0.6, 0.25) * corona * 0.30
-           + vec3(1.0, 0.85, 0.55) * rays * 0.9;
+  vec3 col = SUN_CORE_COLOR * core * SUN_CORE_GAIN
+           + SUN_GOLD * inner * SUN_INNER_GAIN
+           + SUN_CORONA_COLOR * corona * SUN_CORONA_GAIN
+           + SUN_RAY_COLOR * rays * SUN_RAY_GAIN;
   col *= pulse;
-  gl_FragColor = vec4(1.0 - exp(-col * 1.5), 1.0);
+  gl_FragColor = vec4(1.0 - exp(-col * TONE_GAIN), 1.0);
 }
 `;
 
@@ -460,8 +457,8 @@ void main() {
 
   // Fog: same idea as for nodes, from the hyperbolic distance of this point to the focus.
   float d = 2.0 * atanh(length(P));
-  float fog = exp(-d * 0.45);                       // 1 at the focus, 0.4 at d = 2, 0.1 at d = 5
-  vBright = 0.05 + 0.75 * fog;                      // never invisible, brightest near the focus
+  float fog = exp(-d * EDGE_FOG_RATE);              // 1 at the focus, 0.4 at d = 2, 0.1 at d = 5
+  vBright = EDGE_BRIGHT_FLOOR + EDGE_BRIGHT_NEAR * fog;                      // never invisible, brightest near the focus
   vColor = armColor(aHue, fog);
   vT = aT; vSeed = aSeed; vAcross = aSide;
 
@@ -473,7 +470,7 @@ void main() {
   vec2 perp = vec2(-dirPx.y, dirPx.x);
 
   // Width: 0.55x far away to 1.45x near the focus, a bit more for big subtrees.
-  float width = uLineWidth * (0.55 + 0.9 * fog) * (0.8 + 0.5 * aEnergy);
+  float width = uLineWidth * (EDGE_WIDTH_FAR + EDGE_WIDTH_NEAR * fog) * (EDGE_WIDTH_ENERGY_BASE + EDGE_WIDTH_PER_ENERGY * aEnergy);
   // One pixel is 2/uResolution in normalised screen units (the screen is 2 units wide).
   gl_Position = cp;
   gl_Position.xy += perp * aSide * (width * 0.5) * (2.0 / uResolution) * cp.w;
@@ -489,7 +486,7 @@ void main() {
   // Soft cross-section: 1 - x^2 is 1 along the middle of the line, 0.75 at x = 0.5, 0 at the sides.
   float soft = 1.0 - vAcross * vAcross;
   vec3 col = vColor * vBright * soft;
-  gl_FragColor = vec4(1.0 - exp(-col * 1.5), 1.0);
+  gl_FragColor = vec4(1.0 - exp(-col * TONE_GAIN), 1.0);
 }
 `;
 
@@ -512,11 +509,13 @@ void main() {
   vec3 p = mobiusAdd3(-_Focus, aPos);
   float r2 = dot(p, p);
   float d = 2.0 * atanh(sqrt(r2));
-  float size = max(0.006 * (1.0 - r2) * 0.5, MIN_R);
+  float size = max(DUST_SIZE * (1.0 - r2) * 0.5, MIN_R);
   // Each speck twinkles at its own speed; ~15 % are a bit brighter. Fades slowly with distance.
   float twinkle = 0.5 + 0.5 * sin(uTime * (0.4 + 1.5 * aSeed) + aSeed * 60.0);
-  vBright = (0.16 + 0.45 * step(0.85, aSeed)) * (0.3 + 0.7 * twinkle) * (0.35 + 0.65 * exp(-d * 0.3));
-  vColor = mix(vec3(0.55, 0.75, 1.0), vec3(0.85, 0.65, 1.0), aSeed);  // pale blue .. pale violet
+  vBright = (DUST_BRIGHT + DUST_STAR_BRIGHT * step(DUST_STAR_AT, aSeed))
+          * ((1.0 - DUST_TWINKLE) + DUST_TWINKLE * twinkle)
+          * (DUST_FOG_FLOOR + (1.0 - DUST_FOG_FLOOR) * exp(-d * DUST_FOG_RATE));
+  vColor = mix(DUST_TINT_A, DUST_TINT_B, aSeed);  // pale blue .. pale violet
   vUv = corner;
   vec4 mv = viewMatrix * vec4(p, 1.0);
   mv.xy += corner * size * 3.0;
@@ -531,6 +530,6 @@ void main() {
   float q = length(vUv);
   if (q > 1.0) discard;
   float glow = pow(1.0 - q, 3.0);                   // q = 0.33 -> 0.30, q = 0.6 -> 0.06
-  gl_FragColor = vec4(1.0 - exp(-vColor * glow * vBright * 1.5), 1.0);
+  gl_FragColor = vec4(1.0 - exp(-vColor * glow * vBright * TONE_GAIN), 1.0);
 }
 `;

@@ -25,29 +25,17 @@ import {
   SUN_VERT, SUN_FRAG, EDGE_VERT, EDGE_FRAG, DUST_VERT, DUST_FRAG,
 } from './glsl.js';
 import { gpuCheck } from './gpucheck.js';
+import { THEME, THEME_DEFINES } from './theme.js';
 
 // ---------------------------------------------------------------------------
 // Settings
 // ---------------------------------------------------------------------------
 const ANIM_SECONDS = 0.5;       // refocus animation length
 const CLICK_TOLERANCE_PX = 8;   // how far from a node a click still hits it
-const EDGE_WIDTH_PX = 1.8;      // base edge width in CSS pixels (the shader varies it 0.55x..1.45x with fog)
 
-// Node sizes, in hyperbolic units (same meaning as in Phase 2). They are injected
-// into the shader as #defines, and the CPU picking code reads the same numbers.
-const SIZE = {
-  FOLDER_R: 0.04,     // smallest folder core radius; folders scale x1..x3 with log(subtree size)
-  FILE_R: 0.02,       // file core radius
-  FOCUS_R: 0.11,      // the focus sun's core radius (fixed, bigger than any folder)
-  HERO_AT: 0.9,       // folders with seed >= this are "hero" stars (~10 %)
-  HERO_SIZE: 1.25,    // hero stars are this much bigger (and twice as bright)
-  MIN_R: 0.0025,      // never draw a core smaller than this (keeps far nodes visible)
-  GLOW_SCALE: 3.0,    // quad is this many times the core radius (room for the glow)
-  CHILD_HALO: 5.0,    // halo quad size for children of the focus (x core radius)
-  FOCUS_HALO: 9.0,    // (halo quad size for the focus; the sun billboard now does this job)
-  SUN_SCALE: 14.0,    // the sun billboard is this many core radii wide (corona + rays)
-  HAZE_R: 1.0,        // the haze billboard fades to 0 at this world radius (= the ball's boundary)
-};
+// Debug: ?time=12.5 freezes the clock the shaders animate with, so screenshots are repeatable.
+const FROZEN_TIME = new URLSearchParams(location.search).has('time')
+  ? Number(new URLSearchParams(location.search).get('time')) : null;
 
 // ?quality=low trades looks for speed on weak GPUs.
 const LOW = new URLSearchParams(location.search).get('quality') === 'low';
@@ -70,7 +58,7 @@ const fps = createFpsCounter();
 // No MSAA: nodes are soft additive glows (no hard edges to smooth), and MSAA is expensive on phones.
 const renderer = new THREE.WebGLRenderer({ antialias: false });
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, QUALITY.pixelRatio));
-renderer.setClearColor(0x03040c); // deep navy-black
+renderer.setClearColor(THEME.CLEAR_COLOR); // deep navy-black (theme.js)
 document.body.appendChild(renderer.domElement);
 
 const scene = new THREE.Scene();
@@ -102,7 +90,7 @@ const nebula = new THREE.Mesh(
     uniforms: { uTime },
     vertexShader: NEBULA_VERT,
     fragmentShader: NEBULA_FRAG,
-    defines: { OCTAVES: QUALITY.octaves, STAR_LAYERS: QUALITY.starLayers },
+    defines: { ...THEME_DEFINES, OCTAVES: QUALITY.octaves, STAR_LAYERS: QUALITY.starLayers },
     side: THREE.BackSide, depthTest: false, depthWrite: false,
   }),
 );
@@ -116,7 +104,7 @@ const haze = new THREE.Mesh(
   new THREE.PlaneGeometry(2, 2),
   new THREE.ShaderMaterial({
     vertexShader: HAZE_VERT, fragmentShader: HAZE_FRAG,
-    defines: floatDefines({ HAZE_R: SIZE.HAZE_R }),
+    defines: THEME_DEFINES,
     transparent: true, blending: THREE.AdditiveBlending, depthTest: false, depthWrite: false,
   }),
 );
@@ -131,7 +119,7 @@ function resize() {
   renderer.setSize(w, h);
   const buf = renderer.getDrawingBufferSize(new THREE.Vector2());
   edgeUniforms.uResolution.value.copy(buf);
-  edgeUniforms.uLineWidth.value = EDGE_WIDTH_PX * renderer.getPixelRatio();
+  edgeUniforms.uLineWidth.value = THEME.EDGE_WIDTH_PX * renderer.getPixelRatio();
   camera.aspect = w / h;
   camera.updateProjectionMatrix();
   // At distance D from the camera the screen is 2·D·tan(fov/2) units tall.
@@ -174,15 +162,16 @@ const sunUniforms = { _Focus: focusUniforms._Focus, uFocusPos: { value: new THRE
 // to 0..1 across all folders (smallest folder 0, biggest 1), so the shader's size factor
 // 1 + 2*energy makes the biggest folder 3x the smallest. Example: sizes 2, 20 and 200 nodes:
 // ln = 0.69, 3.0, 5.3 -> energy 0, 0.5, 1. Files get a small constant.
-const HUE_FIRST = 0.47, HUE_LAST = 0.87;
 function assignVisuals() {
-  root.hue = 0.6;
+  root.hue = THEME.ROOT_HUE;
   // Only FOLDER arms share out the hue range (a loose file in the root is not an arm and
   // gets violet). Example: 3 folder arms -> teal 0.47, indigo 0.67, magenta 0.87.
   const arms = root.children.filter((c) => c.type === 'folder');
-  root.children.forEach((c) => { if (c.type !== 'folder') paintArm(c, 0.77); });
+  root.children.forEach((c) => { if (c.type !== 'folder') paintArm(c, THEME.LOOSE_FILE_HUE); });
   arms.forEach((arm, i) => {
-    paintArm(arm, arms.length > 1 ? HUE_FIRST + ((HUE_LAST - HUE_FIRST) * i) / (arms.length - 1) : HUE_FIRST);
+    paintArm(arm, arms.length > 1
+      ? THEME.ARM_HUE_FIRST + ((THEME.ARM_HUE_LAST - THEME.ARM_HUE_FIRST) * i) / (arms.length - 1)
+      : THEME.ARM_HUE_FIRST);
   });
   const folders = nodes.filter((n) => n.type === 'folder' && n !== root);
   const lo = Math.log(Math.min(...folders.map((n) => n.weight)));
@@ -236,19 +225,12 @@ function writeInstance(g, slot, node) {
   a.aId[slot] = node.id;
 }
 
-// GLSL is strict: "3" is an int but we need the float "3.0" (otherwise mix(5, 9, t) fails to compile).
-function floatDefines(obj) {
-  const out = {};
-  for (const [k, v] of Object.entries(obj)) out[k] = Number.isInteger(v) ? v.toFixed(1) : String(v);
-  return out;
-}
-
 function makeNodeMaterial(isHalo) {
   return new THREE.ShaderMaterial({
     uniforms: focusUniforms,
     vertexShader: NODE_VERT,
     fragmentShader: NODE_FRAG,
-    defines: { ...floatDefines(SIZE), CORE: (1 / SIZE.GLOW_SCALE).toFixed(5), ...(isHalo ? { HALO: 1 } : {}) },
+    defines: { ...THEME_DEFINES, CORE: (1 / THEME.GLOW_SCALE).toFixed(5), ...(isHalo ? { HALO: 1 } : {}) },
     transparent: true,
     blending: THREE.AdditiveBlending, // overlapping glows ADD, they never cover each other
     depthTest: false, depthWrite: false,
@@ -307,7 +289,7 @@ function buildDrawables() {
   });
   eg.instanceCount = edgeNodes.length;
   edgeMesh = new THREE.Mesh(eg, new THREE.ShaderMaterial({
-    uniforms: edgeUniforms, vertexShader: EDGE_VERT, fragmentShader: EDGE_FRAG,
+    uniforms: edgeUniforms, vertexShader: EDGE_VERT, fragmentShader: EDGE_FRAG, defines: THEME_DEFINES,
     transparent: true, blending: THREE.AdditiveBlending, depthTest: false, depthWrite: false,
     side: THREE.DoubleSide, // the strip's facing flips with the screen direction
   }));
@@ -316,18 +298,18 @@ function buildDrawables() {
   scene.add(edgeMesh);
 
   // Dust: faint specks at random fixed places in the ball. Density falls toward the
-  // boundary (radius = 0.95 * sqrt(u)), so there are more in the middle where the gaps are.
+  // boundary (radius = DUST_RADIUS * sqrt(u)), so there are more in the middle where the gaps are.
   const dg = makeQuadGeometry(QUALITY.dustCount, ['aPos', 'aSeed']);
   for (let i = 0; i < QUALITY.dustCount; i++) {
     let x, y, z, len;
     do { x = rand() * 2 - 1; y = rand() * 2 - 1; z = rand() * 2 - 1; len = Math.hypot(x, y, z); } while (len > 1 || len < 1e-3);
-    const r = 0.95 * Math.sqrt(rand());
+    const r = THEME.DUST_RADIUS * Math.sqrt(rand());
     dg.arrays.aPos.set([(x / len) * r, (y / len) * r, (z / len) * r], i * 3);
     dg.arrays.aSeed[i] = rand();
   }
   dustMesh = new THREE.Mesh(dg, new THREE.ShaderMaterial({
     uniforms: focusUniforms, vertexShader: DUST_VERT, fragmentShader: DUST_FRAG,
-    defines: floatDefines({ MIN_R: SIZE.MIN_R }),
+    defines: THEME_DEFINES,
     transparent: true, blending: THREE.AdditiveBlending, depthTest: false, depthWrite: false,
   }));
   dustMesh.frustumCulled = false;
@@ -337,7 +319,7 @@ function buildDrawables() {
   // The sun: one billboard at the focus, with core, gold glow, corona and rays.
   sunMesh = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), new THREE.ShaderMaterial({
     uniforms: sunUniforms, vertexShader: SUN_VERT, fragmentShader: SUN_FRAG,
-    defines: floatDefines({ FOCUS_R: SIZE.FOCUS_R, MIN_R: SIZE.MIN_R, SUN_SCALE: SIZE.SUN_SCALE }),
+    defines: THEME_DEFINES,
     transparent: true, blending: THREE.AdditiveBlending, depthTest: false, depthWrite: false,
   }));
   sunMesh.frustumCulled = false;
@@ -358,12 +340,12 @@ function updateHalos() {
 // Example: folder, energy 0.5, not a hero, at |p| = 0 -> 0.04 * (1 + 2*0.5) * 0.5 = 0.04.
 function coreRadius(node, p) {
   let rho;
-  if (node === focusNode) rho = SIZE.FOCUS_R;
+  if (node === focusNode) rho = THEME.FOCUS_R;
   else if (node.type === 'folder') {
-    const hero = node.seed >= SIZE.HERO_AT ? SIZE.HERO_SIZE : 1;
-    rho = SIZE.FOLDER_R * (1 + 2 * node.energy) * hero;
-  } else rho = SIZE.FILE_R;
-  return Math.max(rho * conformalFactor3(p), SIZE.MIN_R);
+    const hero = node.seed >= THEME.HERO_AT ? THEME.HERO_SIZE : 1;
+    rho = THEME.FOLDER_R * (1 + THEME.SIZE_SPREAD * node.energy) * hero;
+  } else rho = THEME.FILE_R;
+  return Math.max(rho * conformalFactor3(p), THEME.MIN_R);
 }
 
 // ---------------------------------------------------------------------------
@@ -508,7 +490,7 @@ window.addEventListener('resize', resize);
 function frame(now) {
   fps.tick(now);
   controls.update(); // applies the damping glide
-  uTime.value = now / 1000;
+  uTime.value = FROZEN_TIME ?? now / 1000; // ?time=12.5 freezes the shader clock (repeatable screenshots)
   stepAnimation(now);
   if (dirty) {
     focusUniforms._Focus.value.set(focusPoint.x, focusPoint.y, focusPoint.z); // the whole GPU refocus

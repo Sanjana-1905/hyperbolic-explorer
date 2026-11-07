@@ -31,6 +31,10 @@ Solo student project for a Computer Graphics and AR/VR course. **Zero budget**: 
   - Move the transform to the GPU (a uniform in the vertex shader).
   - For free flight, store the camera as a **hyperboloid-model (Lorentz) matrix** so rotations don't drift.
 
+## Theme rule (keep the look restylable at the end)
+- **Every visual constant** (colour, size, brightness, glow/fog distance, effect speed, edge width...) lives in `src/theme.js` with a comment, and shaders read it through `#define`s (`THEME_DEFINES`). Do not put tuning numbers in shaders or `main3d.js`. `npm test` fails if theme.js has dead constants or glsl.js grows colour literals.
+- Debug: `?time=12.5` freezes the shader clock for repeatable screenshots.
+
 ## Visual goals (VR must look excellent)
 - Dark "data galaxy" look: near-black background, glowing orbs for folders, small particles for files, light pulses along edges, a procedural starfield, and floating dust for parallax.
 - Nodes are **camera-facing impostor quads** with a fake-sphere fragment shader (rim glow, highlight), drawn with **instancing**.
