@@ -127,6 +127,9 @@ export function createNavigation(renderer) {
       applyInset();
     },
 
+    // Pixels currently covered by the code panel (eased value), so labels can stay out of that area.
+    get inset() { return inset; },
+
     // Pixels of the screen covered on the right / at the bottom (0 = nothing covered).
     setInset(right, bottom) {
       inset.targetRight = right;

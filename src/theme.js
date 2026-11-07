@@ -201,8 +201,9 @@ export const THEME = {
   CODE_FONT_PX: 13,            // monospace text size (CSS pixels)
   CODE_PANEL_WIDTH_PX: 480,    // panel width on a wide screen (it docks to the right edge)
   CODE_SHEET_HEIGHT_VH: 40,    // on a narrow screen (phone) the panel is a bottom sheet this tall (% of screen height)
-  CODE_BG: [0.02, 0.03, 0.08], // panel background colour
-  CODE_BG_ALPHA: 0.88,         // panel background opacity
+  CODE_BG: [0.045, 0.055, 0.12], // panel background colour (a little lighter than the scene so the edge is obvious)
+  CODE_BG_ALPHA: 1.0,          // panel background opacity: 1 = solid, nothing of the galaxy or its labels shows through
+  CODE_EDGE: [0.45, 0.55, 1.0],// bright thin line along the panel's edge, separating it from the 3D view
   CODE_TEXT: [0.86, 0.90, 1.0],        // ordinary code
   CODE_LINENO: [0.40, 0.46, 0.66],     // line numbers
   CODE_KEYWORD: [0.78, 0.62, 1.0],     // keywords (function, class, def, return ...)

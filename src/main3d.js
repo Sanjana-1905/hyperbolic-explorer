@@ -635,8 +635,8 @@ function updateInfo() {
 const crumbs = document.createElement('div');
 crumbs.id = 'crumbs';
 Object.assign(crumbs.style, {
-  position: 'fixed', left: '50%', bottom: 'calc(34px + var(--sheet-h, 0px))', transform: 'translateX(-50%)',
-  maxWidth: 'calc(100vw - 24px)', padding: '4px 12px', borderRadius: '14px',
+  position: 'fixed', left: 'calc((100vw - var(--panel-w, 0px)) / 2)', bottom: 'calc(34px + var(--sheet-h, 0px))', transform: 'translateX(-50%)',
+  maxWidth: 'calc(100vw - var(--panel-w, 0px) - 24px)', padding: '4px 12px', borderRadius: '14px',
   font: `600 ${THEME.CRUMB_FONT_PX}px system-ui, sans-serif`,
   background: cssRgb(THEME.CRUMB_BG, THEME.CRUMB_BG_ALPHA), color: cssRgb(THEME.CRUMB_COLOR),
   whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', textShadow: '0 0 4px #000',
@@ -735,13 +735,20 @@ function projectForLabel(node) {
   };
 }
 
+// Labels must stay out of the area the code panel covers (the panel is solid, so they would be hidden anyway,
+// and they would use up label slots).
+function visibleOnScreen(x, y) {
+  const { right, bottom } = nav.inset;
+  return x < window.innerWidth - right - 20 && y < window.innerHeight - bottom - 10;
+}
+
 function collectLabelCandidates() {
   const out = [];
   const seen = new Set();
   const add = (node, priority, px, color, text) => {
     if (seen.has(node.id) || node.state === 1) return;
     const s = projectForLabel(node);
-    if (!s) return;
+    if (!s || !visibleOnScreen(s.x, s.y)) return;
     seen.add(node.id);
     out.push({ key: node.id, text, x: s.x, y: s.y, r: s.r, priority, px, color });
   };
@@ -762,7 +769,7 @@ function collectLabelCandidates() {
   for (const node of collapsedNodes) {
     if (seen.has(node.id)) continue;
     const s = projectForLabel(node);
-    if (s) add(node, 100 + Math.min(s.r, 50), THEME.LABEL_ORB_PX, THEME.LABEL_ORB_COLOR, orbText(node));
+    if (s && visibleOnScreen(s.x, s.y)) add(node, 100 + Math.min(s.r, 50), THEME.LABEL_ORB_PX, THEME.LABEL_ORB_COLOR, orbText(node));
   }
   return out;
 }

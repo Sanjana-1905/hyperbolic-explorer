@@ -68,7 +68,8 @@ export function createCodePanel({ onInset } = {}) {
     #code { position: fixed; z-index: 5; display: none; flex-direction: column; box-sizing: border-box;
       top: 56px; right: 0; bottom: 56px; width: min(${THEME.CODE_PANEL_WIDTH_PX}px, 92vw);
       background: ${cssRgb(THEME.CODE_BG, THEME.CODE_BG_ALPHA)}; color: ${cssRgb(THEME.CODE_TEXT)};
-      border-left: 1px solid ${cssRgb(THEME.CODE_LINENO, 0.4)}; border-radius: 10px 0 0 10px;
+      border-left: 2px solid ${cssRgb(THEME.CODE_EDGE, 0.7)}; border-radius: 10px 0 0 10px;
+      box-shadow: -8px 0 24px rgba(0, 0, 0, 0.6);
       font: ${THEME.CODE_FONT_PX}px/1.45 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
     #code.open { display: flex; }
     body.code-open #help { display: none; } /* the help line would show through the sheet */
@@ -85,7 +86,7 @@ export function createCodePanel({ onInset } = {}) {
     #code.folded .cp-body { display: none; }
     #code .cp-row { display: flex; white-space: pre; }
     #code .cp-ln { flex: none; text-align: right; padding: 0 10px 0 8px; color: ${cssRgb(THEME.CODE_LINENO)};
-      user-select: none; position: sticky; left: 0; background: ${cssRgb(THEME.CODE_BG, 0.95)}; }
+      user-select: none; position: sticky; left: 0; background: ${cssRgb(THEME.CODE_BG)}; }
     #code .cp-c { color: ${cssRgb(THEME.CODE_COMMENT)}; font-style: italic; }
     #code .cp-s { color: ${cssRgb(THEME.CODE_STRING)}; }
     #code .cp-n { color: ${cssRgb(THEME.CODE_NUMBER)}; }
@@ -94,7 +95,8 @@ export function createCodePanel({ onInset } = {}) {
     /* Narrow screens (phones): a bottom sheet instead of a side panel. */
     @media ${NARROW} {
       #code { top: auto; left: 0; right: 0; bottom: 0; width: auto; height: ${THEME.CODE_SHEET_HEIGHT_VH}vh;
-        border-left: 0; border-top: 1px solid ${cssRgb(THEME.CODE_LINENO, 0.4)}; border-radius: 12px 12px 0 0;
+        border-left: 0; border-top: 2px solid ${cssRgb(THEME.CODE_EDGE, 0.7)}; border-radius: 12px 12px 0 0;
+        box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.6);
         padding-bottom: env(safe-area-inset-bottom, 0px); }
       #code.folded { height: auto; }
     }`;
@@ -123,6 +125,7 @@ export function createCodePanel({ onInset } = {}) {
     const narrow = window.matchMedia(NARROW).matches;
     const sheet = open && narrow ? (folded ? '48px' : `${THEME.CODE_SHEET_HEIGHT_VH}vh`) : '0px';
     document.documentElement.style.setProperty('--sheet-h', sheet);
+    document.documentElement.style.setProperty('--panel-w', open && !narrow ? `${Math.min(THEME.CODE_PANEL_WIDTH_PX, 0.92 * window.innerWidth)}px` : '0px');
     if (onInset) {
       if (!open) onInset(0, 0);
       else if (narrow) onInset(0, folded ? 48 : (THEME.CODE_SHEET_HEIGHT_VH / 100) * window.innerHeight);

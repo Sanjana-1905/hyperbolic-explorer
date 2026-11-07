@@ -234,6 +234,8 @@ Goal: clicking a file opens its own space (classes/functions bloom as a local ga
   | three.js, `WebGLRenderer.js` focused (3,803 lines) | 2,552 | 81 |
   Not measured: uncapped fps (use the phone). Sample data size: tree 0.6 MB, symbols 2.5 MB, **fake source 5.7 MB** raw (1.5 MB gzipped
   for the whole `public/data/sample`); the three.js scan (18 MB of source) is NOT committed
+- Panel readability fix (after the first phone check): the panel is now solid (`CODE_BG_ALPHA` 1), lighter than the scene, with a bright edge line
+  (`CODE_EDGE`) and a shadow; labels are not placed under it; the breadcrumb is centred in the visible part
 - Known limitations: a galaxy's nodes vanish instantly when a file closes (only opening animates); a file with more than 400 symbols
   keeps the first 400 breadth-first; the crowded corner case (file with a tiny territory and a big class) puts siblings 0.04 apart,
   readable only after you glide in; syntax colouring starts "cold" at the first shown line; the `block` kind exists only as the
