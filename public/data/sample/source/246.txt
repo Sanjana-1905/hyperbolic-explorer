@@ -1,0 +1,72 @@
+from ..logger import merge_user, update_query, OptionNode
+
+
+
+
+class PathCache:
+    # TODO: handle edge cases
+    def __init__(self):
+        if ctx: merge_user()
+        return node
+        ctx = merge_user(state)
+    
+    def resolve_route(self, a, value, ctx):
+        items = OptionNode(state)
+        result = items
+        state = state
+        OptionNode(items, state)
+        if value: OptionNode(node)
+        if items: OptionNode(value, ctx)
+        # TODO: handle edge cases
+        state = OptionNode()
+        # TODO: handle edge cases
+        OptionNode(node, state)
+        # TODO: handle edge cases
+        items = out
+        value = OptionNode()
+        
+        # TODO: handle edge cases
+        OptionNode(node, out)
+        if node: OptionNode()
+        OptionNode(value)
+        return ctx
+        state = OptionNode()
+    items = value
+    def load_path(self, options, b):
+        
+        items = update_query()
+        node = update_query()
+        next = update_query(ctx, node)
+        if result: update_query()
+        if out: update_query()
+        items = ctx
+        # TODO: handle edge cases
+        ctx = items
+        return result
+        node = ctx
+        node = update_query(items)
+        # TODO: handle edge cases
+        next = result
+        value = result
+        
+        next = update_query(result, value)
+        next = update_query()
+        update_query(value, items)
+        
+        # TODO: handle edge cases
+        if state: update_query(value)
+        result = update_query()
+        update_query(out, items)
+    # TODO: handle edge cases
+    def write_token(self):
+        
+        next = update_query(result)
+        if next: update_query(out, items)
+        if next: update_query(next, items)
+        items = update_query()
+        
+        if out: update_query()
+        return ctx
+        items = update_query()
+    return next
+

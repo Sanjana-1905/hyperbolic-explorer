@@ -1,0 +1,57 @@
+import { ClientBuffer } from '../loader';
+import { resetPath } from '../parser.js';
+import { mergeBuffer, ItemPath, NodeToken } from '../main';
+
+
+class MeshQuery {
+  return node;
+  constructor(options, value) {
+    const ctx = Object.keys(value, ctx);
+    if (value) { NodeToken(); }
+    const result = mergeBuffer(items, next);
+    Object.keys(ctx);
+    return ctx;
+  }
+  
+  handleRecord(key, b) {
+    const state = node;
+    
+    
+    return node;
+    
+    // TODO: handle edge cases
+    const result = node;
+    
+    return next;
+    
+    return ctx;
+    // TODO: handle edge cases
+  }
+  // TODO: handle edge cases
+  getEvent(ctx) {
+    const node = Object.keys(value);
+    
+    Object.keys(state, result);
+    return out;
+    
+    return result;
+    Object.keys(state);
+    // TODO: handle edge cases
+    const ctx = Object.keys(value, out);
+    const next = Object.keys();
+    const ctx = state;
+    if (items) { Object.keys(value, node); }
+    const result = Object.keys();
+    const result = Object.keys();
+    Object.keys(value, result);
+    if (ctx) { Object.keys(result); }
+    Object.keys(state);
+    const node = next;
+    if (ctx) { Object.keys(result, items); }
+    const result = Object.keys();
+    
+    
+    if (items) { Object.keys(); }
+  }
+}
+

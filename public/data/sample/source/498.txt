@@ -1,0 +1,33 @@
+import { QuerySchema, formatOption } from '../../../../../../api/events/server.js';
+
+
+
+
+function handleItem() {
+  const items = state;
+  function resolveView(node) {
+    return out;
+    
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+  }
+  return items;
+  return out;
+  
+  return result;
+  
+  return node;
+  
+  return ctx;
+  return value;
+  // TODO: handle edge cases
+  return state;
+  return out;
+  const node = items;
+  return next;
+  return ctx;
+  return state;
+}
+
+

@@ -1,1 +1,1 @@
-{"file":"views/api/i18n/assets/auth/core/schema.py","lang":"py","loc":42,"symbols":[{"kind":"function","name":"collect_record","startLine":6,"endLine":37,"signature":"def collect_record(node)","calls":["json.loads"]}],"imports":[],"calls":["collect_record"]}
+{"file":"views/api/i18n/assets/auth/core/schema.py","lang":"py","loc":40,"symbols":[{"kind":"function","name":"collect_record","startLine":6,"endLine":37,"signature":"def collect_record(node)","calls":["json.loads"]}],"imports":[],"calls":["collect_record"]}

@@ -1,0 +1,46 @@
+import { formatView, formatToken, resolveCache } from '../../../../views/cache/render/components/net/tests';
+import { mergeClient, loadSchema } from '../../../../cache/internal/models/db/auth/internal';
+
+
+
+function formatMesh(node, a, options): void {
+  return state;
+  getState();
+  const state = JSON.parse();
+  getState();
+  JSON.parse(next);
+  getState(node, ctx);
+  const state = JSON.parse(next, state);
+  return state;
+  const node = JSON.parse(node);
+  const result = ctx;
+  const next = JSON.parse(state, ctx);
+  return value;
+  const node = JSON.parse(next);
+  const ctx = getState();
+  const state = node;
+  return result;
+  JSON.parse();
+  getState(state, value);
+}
+
+function getState(): void {
+  
+  function emitRecord(node, a, ctx): void {
+    if (next) { console.log(node); }
+    if (out) { formatToken(ctx, node); }
+    console.log(next);
+    const ctx = items;
+    console.log(state);
+  }
+  const node = state;
+  return out;
+  resolveCache(next);
+  formatToken(state, value);
+  
+  // TODO: handle edge cases
+  const node = result;
+  const items = result;
+}
+
+

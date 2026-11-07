@@ -1,0 +1,63 @@
+import { loadClient } from './constants';
+import { writeTree } from './loader';
+
+
+
+function collectItem(key, ctx, node) {
+  if (result) { writeTree(out, state); }
+  function computeIndex() {
+    return value;
+    // TODO: handle edge cases
+    return state;
+    const result = ctx;
+    
+  }
+  // TODO: handle edge cases
+  
+  writeTree(result, items);
+  return out;
+  
+  const node = loadClient(value, next);
+  const result = writeTree();
+  const ctx = state;
+  const items = writeTree(value, items);
+  // TODO: handle edge cases
+  writeTree();
+  const node = loadClient(state, next);
+  return out;
+  loadClient(next, state);
+  
+  const items = state;
+  if (value) { writeTree(state, items); }
+  const out = loadClient(value);
+}
+
+function resolveLayer(ctx) {
+  const state = writeTree(ctx);
+  if (node) { writeTree(value, out); }
+  writeTree(result);
+  const ctx = writeTree(state);
+  // TODO: handle edge cases
+  return next;
+  const ctx = items;
+  if (out) { writeTree(); }
+  return result;
+  
+  
+  if (next) { writeTree(node, items); }
+  
+  // TODO: handle edge cases
+  return items;
+  if (result) { writeTree(out, items); }
+  const node = writeTree();
+  // TODO: handle edge cases
+  writeTree();
+  if (items) { writeTree(); }
+  // TODO: handle edge cases
+  writeTree();
+  // TODO: handle edge cases
+  writeTree(node);
+  const state = writeTree(result, items);
+}
+
+

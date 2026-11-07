@@ -26,7 +26,7 @@
 // This file has no drawing code, so it can be tested from the command line.
 
 import {
-  vec3, vScale, vAdd, vNeg, vLength, mobiusAdd3, distanceToRadius,
+  vec3, vScale, vAdd, vNeg, vLength, mobiusAdd3, mobiusAdd3Free, distanceToRadius,
   coneAngleForTerritory,
 } from './mobius3d.js';
 
@@ -38,6 +38,13 @@ export { buildTree, nodePath } from './layout.js';
 // e^EDGE_LENGTH), but the deepest nodes move closer to the 0.995 limit.
 // 0.7 keeps the 5,000-node sample tree (depth 8) at max radius ≈ 0.991.
 export const EDGE_LENGTH = 0.7;
+
+// Hyperbolic length of every edge INSIDE a file (file -> class -> method ...). Shorter than a folder edge
+// because a file's whole galaxy has to fit in the one territory the file owns among its siblings.
+export const SYMBOL_EDGE_LENGTH = 0.5;
+
+// Fraction of a file's territory its symbol cone may use (see layoutSymbols).
+export const SYMBOL_CAP_FIT = 0.8;
 
 // How a child's share of its parent's cap is decided:
 //   share = (1 − WEIGHT_MIX) · (1 / number of children)
@@ -162,7 +169,9 @@ function placeChildren(node, axis, alpha, localRadius, opts) {
   // winds outward, so big subtrees get the central spots, and the territory
   // sizes change gradually along the spiral (which keeps the spacing even).
   const kids = [...node.children].sort((a, b) => b.weight - a.weight);
-  const totalWeight = node.weight - 1; // number of nodes below this node
+  // Sum of the children's weights (= number of nodes below this node, for a folder).
+  const totalWeight = kids.reduce((sum, child) => sum + child.weight, 0);
+  const add = opts.add || mobiusAdd3;
   const shares = kids.map((child) =>
     (1 - opts.weightMix) / n + opts.weightMix * (child.weight / totalWeight));
 
@@ -172,12 +181,12 @@ function placeChildren(node, axis, alpha, localRadius, opts) {
   kids.forEach((child, i) => {
     // In the node's own frame the child is simply `localRadius` along dirs[i];
     // moving back with ⊕ gives its real position.
-    child.pos = mobiusAdd3(node.pos, vScale(dirs[i], localRadius));
+    child.pos = add(node.pos, vScale(dirs[i], localRadius));
 
     // Which way is our node, as seen from the child's own frame? Move the
     // child to the centre and see where the node lands. The child's cap points
     // the OPPOSITE way, i.e. away from its parent.
-    const parentSeenFromChild = mobiusAdd3(vNeg(child.pos), node.pos);
+    const parentSeenFromChild = add(vNeg(child.pos), node.pos);
     const away = normalize(vNeg(parentSeenFromChild));
 
     // The child's territory, seen from our node: a cap with its share of our
@@ -185,6 +194,10 @@ function placeChildren(node, axis, alpha, localRadius, opts) {
     // its whole subtree stays inside that territory.
     const territory = capAngleFromArea(myArea * shares[i] * opts.packing);
     const childCap = Math.min(opts.maxCap, coneAngleForTerritory(territory, opts.edgeLength));
+    // Remember where this node's own cap points and how much room it owns, so a FILE can later
+    // open into a galaxy of symbols inside exactly that room (layoutSymbols below).
+    child.away = away;
+    child.territory = territory;
 
     placeChildren(child, away, childCap, localRadius, opts);
   });
@@ -193,4 +206,29 @@ function placeChildren(node, axis, alpha, localRadius, opts) {
 // Euclidean distance from the centre of the ball, handy for tests and drawing.
 export function radiusOf(node) {
   return vLength(node.pos);
+}
+
+// ---------------------------------------------------------------------------
+// Symbols: a file opens into its own little galaxy
+// ---------------------------------------------------------------------------
+
+// Place the symbol nodes already attached to `file` (file.children, each with a `weight`).
+// A file got a TERRITORY (a cap seen from its parent) when the folder tree was laid out, and the
+// cone rule guarantees that anything inside the file's cone, out to infinity, stays inside that
+// territory, so a file's galaxy can never run into a neighbouring file's. This is the same rule that
+// keeps folders apart, now applied one level further down:
+//   1. the file's own cone: half-angle  β = 2·atan(e^d · tan(θ/2))  with d = EDGE_LENGTH (the file's
+//      distance from its parent) and θ = the file's territory;
+//   2. its children sit SYMBOL_EDGE_LENGTH away on a Fibonacci spiral over that cone, and each of
+//      them gets a share of the cone for ITS children, exactly like folders.
+// Children near the rim of a cap own territories that spill a little over the rim, so the cone is first
+// shrunk to SYMBOL_CAP_FIT of the file's territory; the spill then still ends up inside it.
+// Positions are not clamped to 0.995 (mobiusAdd3Free): the file may already be near the rim.
+export function layoutSymbols(file, options = {}) {
+  const opts = {
+    edgeLength: SYMBOL_EDGE_LENGTH, weightMix: WEIGHT_MIX, packing: PACKING, maxCap: MAX_CAP,
+    add: mobiusAdd3Free, ...options,
+  };
+  const cap = Math.min(opts.maxCap, coneAngleForTerritory(file.territory * SYMBOL_CAP_FIT, EDGE_LENGTH));
+  placeChildren(file, file.away, cap, distanceToRadius(opts.edgeLength), opts);
 }

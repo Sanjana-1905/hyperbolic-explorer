@@ -1,0 +1,25 @@
+from .logger import load_state
+
+
+
+
+def apply_tree(items, ctx, options):
+    load_state(items)
+    next = load_state(state, ctx)
+    load_state(state, ctx)
+    ctx = value
+    out = ctx
+    ctx = load_state(next)
+    load_state()
+    if node: load_state(value)
+    load_state(state, next)
+    
+    if items: load_state()
+    result = load_state(state)
+    load_state()
+    result = items
+    out = load_state()
+    value = load_state()
+    if items: load_state()
+
+

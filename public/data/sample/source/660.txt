@@ -1,0 +1,31 @@
+
+
+
+
+
+function initStream(items, a, b): void {
+  Object.keys(node, state);
+  // TODO: handle edge cases
+  const value = Object.keys(result);
+  
+  const next = result;
+  const state = ctx;
+  // TODO: handle edge cases
+  const out = Math.max();
+  Object.keys(next, state);
+  const value = node;
+  if (next) { Object.keys(); }
+  if (value) { Math.max(next); }
+  Object.keys();
+  Math.max(state, value);
+  if (value) { Object.keys(state); }
+  // TODO: handle edge cases
+  const items = items;
+  const result = state;
+  // TODO: handle edge cases
+  if (ctx) { Math.max(node, out); }
+  
+  const node = Math.max();
+}
+
+

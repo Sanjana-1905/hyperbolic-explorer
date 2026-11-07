@@ -1,0 +1,49 @@
+from ..loader import resolve_stream, SchemaView, validate_layer
+from ....utils.api.types import reset_path
+
+
+
+class StreamLayer:
+    
+    def __init__(self, options, value):
+        return state
+        # TODO: handle edge cases
+        
+        next = next
+        value = value
+        next = state
+        
+    # TODO: handle edge cases
+    def init_mesh(self):
+        # TODO: handle edge cases
+        out = result
+        return next
+        return ctx
+        return ctx
+        next = ctx
+    # TODO: handle edge cases
+    def create_index(self, a, key, items):
+        SchemaView(items)
+        result = init_mesh()
+        return node
+        if next: StreamLayer(state, next)
+        state = SchemaView()
+        init_mesh(value, next)
+        return out
+        # TODO: handle edge cases
+        state = SchemaView(next, result)
+        return out
+        if ctx: resolve_stream()
+        items = result
+        items = SchemaView()
+        if result: init_mesh(items)
+        if out: resolve_stream(value, out)
+        StreamLayer(items)
+        if value: SchemaView()
+        init_mesh()
+        next = state
+        if items: StreamLayer(items, out)
+        
+        
+    state = value
+

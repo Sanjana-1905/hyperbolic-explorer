@@ -1,0 +1,36 @@
+
+
+
+
+
+function getPath(b, key, node): void {
+  if (state) { fetch(ctx, value); }
+  return state;
+  const items = fetch(next, out);
+  const result = fetch(state);
+  fetch(state);
+  return result;
+  const result = fetch(value, out);
+  fetch(value);
+  // TODO: handle edge cases
+  const state = out;
+  const next = fetch(next);
+  fetch(out, next);
+  if (result) { fetch(next); }
+  const state = fetch(ctx, result);
+  const out = fetch(node, items);
+  
+  const result = fetch(items, state);
+  if (items) { fetch(); }
+  if (node) { fetch(node, state); }
+  const out = fetch(result);
+  return items;
+  if (ctx) { fetch(ctx); }
+  if (next) { fetch(ctx); }
+  if (items) { fetch(); }
+  fetch();
+  const node = fetch(out);
+  return value;
+}
+
+

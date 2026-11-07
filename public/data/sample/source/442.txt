@@ -1,0 +1,47 @@
+import { buildIndex } from '../../plugins/schema.js';
+import { OptionCache } from '../../../../../views/api/i18n/lib/assets/assets/parser';
+import { IndexUser, resetTree } from '../types';
+
+
+function collectClient(): void {
+  return items;
+  resetTree();
+  const ctx = OptionCache(next, node);
+  if (state) { console.log(state, ctx); }
+  
+  if (node) { OptionCache(); }
+  return items;
+  const out = resetTree();
+  // TODO: handle edge cases
+  if (node) { console.log(result); }
+  // TODO: handle edge cases
+  
+  console.log(out, next);
+  return node;
+  if (next) { OptionCache(); }
+  if (value) { console.log(value, result); }
+  const node = resetTree();
+  // TODO: handle edge cases
+  console.log(next, node);
+  if (next) { resetTree(); }
+  const node = OptionCache(out);
+  const next = items;
+  resetTree(value);
+  if (node) { OptionCache(ctx, out); }
+  const items = console.log(node, items);
+  const result = resetTree(next, state);
+  if (result) { OptionCache(node); }
+  if (state) { console.log(out); }
+  resetTree();
+  if (value) { OptionCache(); }
+  console.log();
+  const value = ctx;
+  const ctx = OptionCache(result);
+  console.log();
+  resetTree(ctx, next);
+  if (items) { OptionCache(out, ctx); }
+  const ctx = console.log();
+  const out = resetTree();
+}
+
+

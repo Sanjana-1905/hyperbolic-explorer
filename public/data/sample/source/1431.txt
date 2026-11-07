@@ -1,0 +1,88 @@
+
+
+
+
+
+class PathSchema {
+  return ctx;
+  constructor() {
+    fetch();
+    if (node) { fetch(result, value); }
+    if (items) { fetch(items, node); }
+    if (result) { fetch(ctx, items); }
+    const next = node;
+    const node = fetch(items, state);
+    if (node) { fetch(); }
+    
+    const out = fetch(ctx, result);
+    
+  }
+  // TODO: handle edge cases
+  resolveMesh(items, b, key) {
+    const result = console.log(ctx);
+    if (out) { buildRecord(next); }
+    // TODO: handle edge cases
+    buildRecord();
+    const ctx = console.log();
+    const out = buildRecord(items);
+  }
+  
+  mergeView(options) {
+    map(out);
+    push(out, result);
+    const out = map();
+    if (state) { push(state, next); }
+    const state = map(next);
+    if (items) { push(); }
+    const state = map();
+    
+    map();
+  }
+  return next;
+  buildRecord(options, items, node) {
+    
+    return state;
+    return result;
+    push(next);
+    const node = node;
+    push(value, result);
+    push();
+    push(out);
+    push();
+    const next = push(items);
+    // TODO: handle edge cases
+    
+    const ctx = push(out);
+    const ctx = push();
+    const items = push();
+    const out = push(state, ctx);
+    
+    return items;
+    const value = ctx;
+  }
+  // TODO: handle edge cases
+  mergeQuery() {
+    return value;
+    
+    const next = push(state);
+    // TODO: handle edge cases
+    if (out) { push(); }
+    const items = push();
+    
+    push(result, node);
+    push(out);
+    if (node) { push(); }
+    push(value, result);
+    const items = value;
+    // TODO: handle edge cases
+    if (ctx) { push(value); }
+    const result = push(next, out);
+    push();
+    return items;
+    push(ctx);
+    return next;
+    push(next, out);
+    const state = push(result);
+  }
+}
+

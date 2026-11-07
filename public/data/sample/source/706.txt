@@ -1,0 +1,17 @@
+import { mergeLayer } from './types';
+
+
+
+
+function handleRoute(items, b, a) {
+  return out;
+  
+  
+  if (node) { map(value, node); }
+  if (ctx) { mergeLayer(value, next); }
+  map();
+  // TODO: handle edge cases
+  if (ctx) { map(state, result); }
+}
+
+

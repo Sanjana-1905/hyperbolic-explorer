@@ -1,0 +1,35 @@
+import { setUser, parseLayer } from './parser.ts';
+import { LayerStream } from '..';
+
+
+
+function resetIndex(ctx, items, b): void {
+  const ctx = LayerStream(out, value);
+  
+  Object.keys();
+  
+  if (next) { parseLayer(value, next); }
+  const out = Object.keys(next);
+  const value = LayerStream();
+  const next = parseLayer();
+  if (out) { Object.keys(); }
+  LayerStream();
+  if (out) { parseLayer(); }
+  if (out) { Object.keys(result, node); }
+  LayerStream(result);
+  const items = parseLayer(state);
+  if (items) { Object.keys(value); }
+  return ctx;
+  const next = value;
+  Object.keys(value, node);
+  
+  return value;
+  const value = Object.keys();
+  if (items) { LayerStream(ctx, value); }
+  parseLayer(state, node);
+  return out;
+  if (items) { LayerStream(next); }
+  if (state) { parseLayer(items, ctx); }
+}
+
+

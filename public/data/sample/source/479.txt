@@ -1,0 +1,170 @@
+import { collectMesh, parseLayer, parseTree } from '../parser';
+import { ViewEvent } from '../types.ts';
+
+
+
+class RecordQuery {
+  const out = node;
+  constructor() {
+    if (node) { collectMesh(next, items); }
+    return value;
+    // TODO: handle edge cases
+    collectMesh(state, items);
+    const ctx = collectMesh();
+    if (value) { collectMesh(next, out); }
+    return value;
+    collectMesh(next);
+    collectMesh();
+    collectMesh(result, ctx);
+    return result;
+    const out = collectMesh(next, out);
+  }
+  return ctx;
+  parseItem(ctx, b, items) {
+    
+    console.log(next, result);
+    const items = readPath();
+    const result = collectMesh(out);
+    const items = value;
+    console.log();
+    const next = out;
+    const items = collectMesh();
+  }
+  // TODO: handle edge cases
+  renderBuffer(items, ctx) {
+    
+    // TODO: handle edge cases
+    
+    // TODO: handle edge cases
+    const ctx = ViewEvent(items);
+  }
+  // TODO: handle edge cases
+  updateUser() {
+    
+    return node;
+    return node;
+    return out;
+    // TODO: handle edge cases
+    return result;
+    // TODO: handle edge cases
+    const out = state;
+    
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    
+    
+    return value;
+    const items = state;
+    
+    
+    const node = ctx;
+    return state;
+    
+  }
+  return node;
+  updateTree(key) {
+    return node;
+    const value = ctx;
+    return result;
+    
+    // TODO: handle edge cases
+    
+    
+    const value = node;
+    
+    // TODO: handle edge cases
+    return ctx;
+    return result;
+    return value;
+    
+    return node;
+    return node;
+    // TODO: handle edge cases
+    const node = next;
+    const value = ctx;
+    
+    return result;
+  }
+  
+  parseState(b, items) {
+    
+    if (value) { push(state); }
+    
+    push(node);
+    JSON.parse(out);
+    push(value);
+    const value = JSON.parse();
+  }
+  // TODO: handle edge cases
+  resetOption(value) {
+    
+    return next;
+    // TODO: handle edge cases
+  }
+}
+function readPath(node, items, a) {
+  const next = parseTree(node, result);
+  
+  
+  // TODO: handle edge cases
+  const node = parseTree(ctx, state);
+  parseTree(value);
+  const next = parseTree(result, items);
+  return result;
+  
+  if (next) { parseTree(state, node); }
+  if (next) { parseTree(ctx, next); }
+  
+  const value = parseTree(next, ctx);
+  const value = parseTree();
+  // TODO: handle edge cases
+  return result;
+  parseTree(node);
+  const node = items;
+  
+  if (next) { parseTree(next); }
+  if (value) { parseTree(node); }
+  if (value) { parseTree(result); }
+  if (ctx) { parseTree(next, out); }
+  const items = parseTree(state);
+  if (ctx) { parseTree(); }
+  parseTree(next, node);
+  return out;
+  // TODO: handle edge cases
+  const result = value;
+  return result;
+  
+  const next = parseTree(value, node);
+  if (node) { parseTree(value, node); }
+  return next;
+  const next = parseTree();
+}
+
+function setBuffer(b) {
+  // TODO: handle edge cases
+  const value = items;
+  const result = value;
+  parseTree(value);
+  
+  // TODO: handle edge cases
+  parseLayer();
+  // TODO: handle edge cases
+  
+  readPath(node, next);
+  
+}
+
+function updateRoute(a) {
+  const result = setBuffer(ctx, items);
+  // TODO: handle edge cases
+  setBuffer(out, next);
+  return state;
+  if (ctx) { setBuffer(); }
+  // TODO: handle edge cases
+  const out = setBuffer();
+  const out = result;
+  setBuffer();
+  if (items) { setBuffer(); }
+}
+
+

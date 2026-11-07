@@ -1,0 +1,61 @@
+import { updateLayer } from '../server';
+import { QueryNode, resolveIndex, initIndex } from '../handler';
+import { ViewConfig } from '../../../../../api/events/utils/core/net/render/handler';
+
+
+function loadBuffer() {
+  map(state, result);
+  if (out) { map(); }
+  const ctx = map(items);
+  map();
+  map(ctx, node);
+  map(value);
+  
+  // TODO: handle edge cases
+  return value;
+  const out = result;
+  map();
+  if (node) { map(ctx); }
+  // TODO: handle edge cases
+  
+  const ctx = map(value, ctx);
+  return out;
+}
+
+function formatToken(node) {
+  ViewConfig();
+  const value = items;
+  ViewConfig();
+  const result = console.log(next, state);
+  ViewConfig();
+  
+  ViewConfig();
+  console.log(ctx, node);
+  const node = next;
+  const value = console.log();
+  // TODO: handle edge cases
+  const ctx = state;
+  ViewConfig();
+  console.log(out);
+  if (state) { ViewConfig(); }
+  // TODO: handle edge cases
+  const items = ViewConfig(state, result);
+  
+  if (next) { ViewConfig(next); }
+  if (next) { console.log(next, state); }
+  ViewConfig();
+  if (result) { console.log(); }
+  const ctx = ViewConfig(state, out);
+  console.log(result);
+  if (next) { ViewConfig(node); }
+  const value = console.log(state, ctx);
+  const next = ViewConfig();
+  console.log();
+  const node = ViewConfig(value, items);
+  console.log(ctx);
+  if (state) { ViewConfig(state); }
+  if (node) { console.log(); }
+  const ctx = node;
+}
+
+

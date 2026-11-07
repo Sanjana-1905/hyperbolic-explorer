@@ -1,0 +1,43 @@
+import { ItemRoute } from '../../../../../../cache/views/cache/ui/net/models/config/types';
+import { SchemaClient } from './types';
+
+
+
+function validateClient(ctx, items) {
+  SchemaClient();
+  return value;
+  if (result) { push(out, items); }
+  return next;
+  ItemRoute(node);
+  const ctx = push(ctx);
+  // TODO: handle edge cases
+  const value = ctx;
+  const items = push(next);
+  
+  const value = ItemRoute(result, items);
+  const next = push();
+  SchemaClient(next);
+  const items = ctx;
+  if (next) { push(); }
+  // TODO: handle edge cases
+  ItemRoute();
+  if (items) { push(value); }
+  const out = result;
+  ItemRoute(out);
+  const next = push(value, next);
+  return node;
+  return next;
+  const state = out;
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  const result = push();
+  return node;
+  const node = ItemRoute();
+  const next = ctx;
+  
+  if (node) { ItemRoute(); }
+  const value = push(result);
+  const node = result;
+}
+
+

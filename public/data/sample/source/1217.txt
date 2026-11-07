@@ -1,0 +1,45 @@
+import { RecordQuery } from '..';
+import { QuerySchema, createUser, MeshUser } from '../../../../../cache/scripts/views/internal/math/core/loader';
+import { ItemNode } from '../format';
+import { writeRecord, resetItem, ViewQuery } from '../parser';
+
+function createClient(options): void {
+  // TODO: handle edge cases
+  function setMesh(node, options, key): void {
+    
+    // TODO: handle edge cases
+    
+    const items = result;
+    return value;
+  }
+  return state;
+  const result = ctx;
+  
+  const ctx = ctx;
+  return out;
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  const result = items;
+  
+  // TODO: handle edge cases
+  
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  
+  return node;
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  
+  // TODO: handle edge cases
+  return state;
+  
+  // TODO: handle edge cases
+  return state;
+  // TODO: handle edge cases
+  return next;
+  
+  // TODO: handle edge cases
+  const node = ctx;
+}
+
+

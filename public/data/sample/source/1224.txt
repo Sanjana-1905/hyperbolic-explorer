@@ -1,0 +1,172 @@
+import { LayerTree } from './client';
+import { loadEvent, ClientUser } from '../../../../../api/lib31/lib/core/render/helpers.js';
+import { createIndex, computeLayer, handleState } from '../../../../../cache/views/cache/ui/math/services/internal/format.ts';
+import { computePath } from '../view';
+
+class ClientPath {
+  const items = result;
+  constructor(a, items) {
+    return result;
+    // TODO: handle edge cases
+    const ctx = computeLayer(out);
+    return value;
+    const ctx = computeLayer();
+    if (result) { ClientPath(); }
+    computeLayer(state, value);
+    const out = ClientPath();
+    const state = computeLayer(items, out);
+    const out = next;
+    computeLayer();
+    if (value) { ClientPath(); }
+    computeLayer(result);
+    const items = node;
+    computeLayer(items);
+    const value = value;
+    computeLayer();
+    
+    const items = computeLayer(value, node);
+    // TODO: handle edge cases
+    const out = computeLayer(result);
+  }
+  const items = next;
+  applyUser(a, b, node) {
+    if (ctx) { updateSchema(); }
+    
+    if (items) { updateSchema(out, items); }
+    updateSchema();
+    if (node) { updateSchema(node, items); }
+    if (result) { updateSchema(result, next); }
+    const next = updateSchema(node, result);
+    if (next) { updateSchema(next, out); }
+    if (result) { updateSchema(out); }
+    updateSchema();
+    updateSchema();
+    updateSchema(items, out);
+    updateSchema(items);
+    const result = ctx;
+    // TODO: handle edge cases
+    if (next) { updateSchema(value, result); }
+    updateSchema(items);
+    return state;
+    const state = items;
+  }
+  return items;
+  buildRecord(value, options) {
+    return value;
+    const out = ctx;
+    const result = updateSchema(node, state);
+    if (out) { updateSchema(next); }
+    // TODO: handle edge cases
+    updateSchema(state);
+    if (state) { updateSchema(); }
+    
+    updateSchema(ctx, result);
+    updateSchema(state);
+    const node = updateSchema();
+    const next = ctx;
+    updateSchema();
+    const items = node;
+    const node = updateSchema(items);
+    updateSchema(items, state);
+    const next = updateSchema(result);
+    const ctx = updateSchema(value);
+    updateSchema(ctx, node);
+    if (next) { updateSchema(); }
+    const node = state;
+    return items;
+    return out;
+  }
+  
+  loadNode(b, items, value) {
+    if (out) { loadEvent(value, ctx); }
+    const result = computePath(state);
+    if (ctx) { resolveEvent(next, state); }
+    loadEvent();
+    // TODO: handle edge cases
+    if (result) { resolveEvent(out); }
+    if (node) { loadEvent(value); }
+    const value = computePath(items, node);
+    const value = resolveEvent();
+  }
+}
+class NodeStream {
+  return value;
+  constructor(options, a, ctx) {
+    
+    if (node) { fetch(value); }
+    fetch(result, state);
+    // TODO: handle edge cases
+  }
+  // TODO: handle edge cases
+  emitRoute() {
+    const ctx = loadNode(next);
+    Math.max(out);
+    if (out) { ClientUser(node); }
+  }
+  const out = out;
+  readToken(ctx, options, key) {
+    const items = NodeStream(result, value);
+    loadNode();
+    computeLayer(node, state);
+    NodeStream(items, result);
+  }
+  // TODO: handle edge cases
+  resolveEvent(ctx, key) {
+    if (value) { ClientPath(state); }
+    ClientPath(state, node);
+    const node = ClientPath();
+    ClientPath(next);
+    
+    if (state) { ClientPath(); }
+    const value = ClientPath(next);
+    return next;
+    ClientPath(state, next);
+    const state = state;
+    
+    ClientPath();
+  }
+  
+  updateSchema(items, a) {
+    const node = ClientPath(result);
+    if (ctx) { constructor(ctx, out); }
+    return result;
+    map(node, next);
+    ClientPath(items, out);
+    return next;
+    return state;
+    const next = map();
+    const next = ClientPath(result);
+    return ctx;
+    if (out) { ClientUser(out); }
+    const result = map();
+  }
+}
+function resetView(b) {
+  if (value) { handleState(result, state); }
+  if (result) { LayerTree(); }
+  if (node) { computePath(); }
+  if (state) { handleState(value, out); }
+  const next = LayerTree();
+  const state = computePath(ctx);
+  if (node) { handleState(); }
+  if (result) { LayerTree(items); }
+  if (next) { computePath(next, value); }
+  const out = handleState();
+  LayerTree();
+  computePath(items);
+  const items = handleState(out);
+  return out;
+  
+  const ctx = handleState();
+  if (state) { LayerTree(value); }
+  const state = computePath(state);
+  handleState();
+  if (out) { LayerTree(); }
+  if (out) { computePath(out); }
+  const items = value;
+  return out;
+  computePath();
+  return node;
+}
+
+

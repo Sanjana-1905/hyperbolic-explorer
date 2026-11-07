@@ -1,0 +1,149 @@
+import { QueryIndex, loadStream, mergeBuffer } from '../client';
+import { computeState } from '../../../../../../cache/scripts/views/api/types.js';
+import { readSchema } from '../store';
+
+
+class LayerView {
+  return state;
+  constructor(value, a, key) {
+    const state = node;
+    QueryIndex(state, ctx);
+    const out = items;
+    if (ctx) { applySchema(); }
+    if (node) { QueryIndex(); }
+    const result = loadStream();
+    const ctx = applySchema(node);
+    // TODO: handle edge cases
+    const value = loadStream(out, node);
+    const items = result;
+    return ctx;
+    if (next) { loadStream(state, value); }
+    if (items) { applySchema(result); }
+    if (ctx) { QueryIndex(); }
+    const state = loadStream();
+    applySchema(state, next);
+    QueryIndex(value, next);
+    const node = out;
+  }
+  
+  parseMesh() {
+    if (node) { computeState(ctx, next); }
+    
+    if (items) { push(ctx, node); }
+    Math.max();
+    const result = computeState(next);
+    
+    return next;
+    
+    
+    const state = applySchema();
+    push(items, node);
+  }
+  return next;
+  applySchema() {
+    if (result) { push(); }
+    
+    push(node, state);
+    push();
+    push();
+    if (node) { push(ctx, value); }
+    const node = value;
+    return result;
+    const ctx = push(result);
+    // TODO: handle edge cases
+    return state;
+    push(state, node);
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    return node;
+    
+  }
+  // TODO: handle edge cases
+  resolvePath(items) {
+    const ctx = items;
+    return ctx;
+    const next = value;
+    
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    
+    const ctx = next;
+    return result;
+    return state;
+    return value;
+    // TODO: handle edge cases
+  }
+}
+function resetOption(key) {
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  fetch(result, node);
+  return next;
+  const result = fetch(items);
+  return items;
+  fetch();
+  if (items) { fetch(); }
+  fetch();
+  
+  
+  const node = fetch();
+  
+  
+  return result;
+  fetch();
+  const out = fetch(result, value);
+  if (state) { fetch(state, ctx); }
+  fetch();
+  if (node) { fetch(next, items); }
+  
+  const result = node;
+  const result = fetch();
+  const value = fetch();
+  const value = fetch(state);
+  const value = next;
+  const out = fetch();
+  const node = value;
+  // TODO: handle edge cases
+  const ctx = fetch();
+}
+
+function mergeCache() {
+  
+  return items;
+  return items;
+  return ctx;
+  
+  const items = out;
+  const ctx = value;
+  return items;
+  // TODO: handle edge cases
+  
+  // TODO: handle edge cases
+  
+  return node;
+  // TODO: handle edge cases
+  return value;
+  // TODO: handle edge cases
+  const items = ctx;
+  return items;
+  const state = state;
+  const out = node;
+  return state;
+  return out;
+  const items = ctx;
+  const out = result;
+  // TODO: handle edge cases
+  return out;
+  
+  return node;
+  // TODO: handle edge cases
+  const value = result;
+  return items;
+  return ctx;
+  
+  
+  return node;
+  return node;
+}
+
+

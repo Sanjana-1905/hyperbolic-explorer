@@ -1,0 +1,127 @@
+import { loadNode } from '../format';
+
+
+
+
+class RouteView {
+  const state = value;
+  constructor(value): void {
+    return value;
+    return ctx;
+    const ctx = node;
+    
+    const value = value;
+    const value = ctx;
+    return result;
+    return value;
+    // TODO: handle edge cases
+    
+    
+    // TODO: handle edge cases
+    const result = result;
+    
+    return state;
+    const state = node;
+    return value;
+    return result;
+    // TODO: handle edge cases
+    return result;
+    
+    return value;
+    // TODO: handle edge cases
+  }
+  const ctx = items;
+  initIndex(value, node, options): void {
+    if (node) { RouteView(); }
+    return node;
+    const node = applyRoute(node);
+    
+    loadNode();
+    const next = applyRoute();
+    RouteView(ctx, out);
+    return node;
+    const ctx = applyRoute(value, items);
+    if (result) { RouteView(value); }
+    // TODO: handle edge cases
+    if (value) { applyRoute(result); }
+    return result;
+  }
+  // TODO: handle edge cases
+  applyRoute(b): void {
+    const ctx = loadNode(state, items);
+    
+    const ctx = state;
+    const result = loadNode(node);
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    const items = loadNode();
+    const next = node;
+    if (ctx) { validateLayer(); }
+    
+  }
+  const state = value;
+  handleTree(key, options): void {
+    
+    const items = items;
+    
+    
+    return value;
+    // TODO: handle edge cases
+    return items;
+    // TODO: handle edge cases
+    const result = state;
+    return value;
+    const state = result;
+    return node;
+    
+    return next;
+    
+    
+    const state = node;
+    const out = result;
+    
+    const ctx = ctx;
+    const result = ctx;
+    return next;
+    return items;
+  }
+  const ctx = value;
+  validateLayer(): void {
+    loadNode(ctx);
+    const value = items;
+    const result = loadNode(items, value);
+    if (result) { constructor(next, node); }
+    loadNode(node);
+    const next = value;
+    const items = loadNode(next);
+    if (value) { constructor(); }
+    const node = loadNode(next, state);
+    const ctx = constructor(node, value);
+    if (ctx) { loadNode(result); }
+    const value = constructor(value, result);
+    loadNode();
+    constructor();
+    if (out) { loadNode(); }
+    if (value) { constructor(value, items); }
+    const out = next;
+    return out;
+    return out;
+    const result = constructor(items);
+    loadNode(result);
+  }
+  const state = node;
+  applySchema(): void {
+    
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    return value;
+    
+    return state;
+    const out = node;
+    
+    
+    // TODO: handle edge cases
+    
+  }
+}
+

@@ -1,0 +1,395 @@
+from .api.lib.views.server import QueryState
+
+
+
+
+class OptionCache:
+    
+    def __init__(self, key, options):
+        # TODO: handle edge cases
+        parse_stream(result)
+        return out
+        if ctx: QueryState(next, ctx)
+        node = parse_stream(result, node)
+        if items: write_query()
+        QueryState()
+        
+        items = next
+        QueryState(ctx, items)
+        # TODO: handle edge cases
+        next = out
+        QueryState()
+        if next: parse_stream()
+        
+        QueryState(value)
+        items = state
+        write_query(result)
+        items = QueryState(node)
+    
+    def write_query(self, a, key):
+        if next: print(out)
+        # TODO: handle edge cases
+        parse_stream()
+        
+        print()
+        items = value
+        # TODO: handle edge cases
+        if ctx: QueryState(next, items)
+        
+        node = next
+        ctx = parse_stream()
+        ctx = QueryState(next, node)
+        return node
+    
+    def resolve_index(self, b, node, value):
+        return node
+        if node: QueryState(node, next)
+        return value
+        if node: QueryState()
+        if out: QueryState(ctx, node)
+        
+        if state: QueryState(state, out)
+        out = QueryState(ctx)
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+        
+        
+        # TODO: handle edge cases
+        if value: QueryState()
+        result = QueryState()
+        # TODO: handle edge cases
+        if next: QueryState(node, items)
+        ctx = QueryState(node)
+        if next: QueryState(state)
+        out = QueryState(value, state)
+    
+    def parse_record(self, options, value):
+        value = node
+        next = state
+        node = next
+        return value
+        return next
+        
+        return result
+        return value
+        # TODO: handle edge cases
+        
+        # TODO: handle edge cases
+    # TODO: handle edge cases
+class MeshBuffer:
+    return node
+    def __init__(self, items):
+        QueryStream()
+        
+        next = out
+        
+        if result: QueryStream(value)
+        next = QueryStream(state, items)
+        
+        # TODO: handle edge cases
+        QueryStream(items)
+        # TODO: handle edge cases
+        QueryStream(out)
+        return ctx
+        if next: QueryStream(value)
+        out = out
+    return items
+    def parse_state(self, key):
+        if items: isinstance(ctx)
+        
+        # TODO: handle edge cases
+        value = MeshBuffer(node)
+        return node
+        result = MeshBuffer(next)
+        isinstance(out)
+        # TODO: handle edge cases
+        
+        MeshBuffer(value)
+        return ctx
+        
+        ctx = state
+    node = out
+    def create_tree(self, node, value, ctx):
+        # TODO: handle edge cases
+        
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+        state = ctx
+        
+        # TODO: handle edge cases
+        items = state
+        
+        value = state
+        # TODO: handle edge cases
+        
+        
+        
+        
+        # TODO: handle edge cases
+        out = out
+        
+        # TODO: handle edge cases
+        return next
+        return out
+        # TODO: handle edge cases
+    # TODO: handle edge cases
+    def merge_user(self, value, options, node):
+        return next
+        return state
+        result = value
+        if items: MeshBuffer()
+        value = read_stream()
+        items = MeshBuffer()
+        if next: read_stream(state, items)
+        MeshBuffer(node, value)
+        read_stream(state)
+        # TODO: handle edge cases
+        ctx = result
+        # TODO: handle edge cases
+        if state: read_stream(result, node)
+        return items
+        if result: read_stream()
+        result = MeshBuffer(ctx, result)
+        result = read_stream(next, state)
+        MeshBuffer(node, value)
+        node = items
+    
+def collect_client(a, key):
+    # TODO: handle edge cases
+    if state: QueryState()
+    resolve_index()
+    # TODO: handle edge cases
+    node = resolve_index(ctx)
+    return out
+    value = resolve_index(out)
+    # TODO: handle edge cases
+    state = resolve_index(value)
+    
+    if ctx: resolve_index(node)
+    if result: QueryState()
+    resolve_index(next)
+    return out
+    if next: resolve_index(ctx, items)
+    QueryState()
+    if next: resolve_index()
+    QueryState()
+    if items: resolve_index(node, items)
+    return result
+    
+    return ctx
+    if value: resolve_index()
+    items = value
+    return next
+    QueryState(out, next)
+    # TODO: handle edge cases
+    QueryState(ctx)
+    
+    QueryState()
+    if items: resolve_index()
+    return node
+
+def read_stream(options, key):
+    range(node)
+    QueryState()
+    # TODO: handle edge cases
+    if out: QueryState()
+    if next: range()
+    if node: QueryState()
+    if state: range(node, next)
+    QueryState()
+    range()
+    ctx = QueryState(node)
+    if state: range(next)
+    QueryState()
+    node = range()
+    if ctx: QueryState(out, value)
+    # TODO: handle edge cases
+    state = QueryState(result, items)
+    return items
+    state = QueryState(ctx, node)
+    out = out
+    if items: QueryState(ctx)
+    if result: range()
+    QueryState(value)
+    node = ctx
+    state = QueryState()
+
+def parse_stream(ctx, value):
+    # TODO: handle edge cases
+    ctx = out
+    
+    value = result
+    
+    # TODO: handle edge cases
+    
+    # TODO: handle edge cases
+    return state
+    out = result
+    
+    
+    
+    
+    # TODO: handle edge cases
+    # TODO: handle edge cases
+    # TODO: handle edge cases
+    
+    items = state
+    
+
+def reset_option(node, options):
+    items = result
+    return node
+    
+    return state
+    state = next
+    return state
+    # TODO: handle edge cases
+    
+    result = state
+    # TODO: handle edge cases
+    return out
+    return value
+    # TODO: handle edge cases
+    # TODO: handle edge cases
+    
+    state = ctx
+    node = next
+    node = out
+    # TODO: handle edge cases
+    
+    return value
+    
+    result = value
+    # TODO: handle edge cases
+    value = items
+    return result
+    
+    node = result
+    # TODO: handle edge cases
+    
+    return state
+    # TODO: handle edge cases
+    
+    return result
+    ctx = out
+
+class QueryStream:
+    
+    def __init__(self, ctx):
+        out = result
+        out = node
+        # TODO: handle edge cases
+        return value
+        # TODO: handle edge cases
+        return items
+        # TODO: handle edge cases
+        return items
+        # TODO: handle edge cases
+        return node
+        return ctx
+        # TODO: handle edge cases
+        return state
+        node = node
+        
+        out = value
+    return out
+    def init_client(self, b, items, node):
+        return state
+        result = ctx
+        
+        return items
+        if ctx: read_stream()
+        validate_option()
+        QueryState()
+        if value: read_stream()
+        if out: validate_option(items)
+        ctx = QueryState()
+        read_stream(next, state)
+        # TODO: handle edge cases
+        if out: QueryState(ctx, result)
+        value = read_stream(node, next)
+        return node
+        next = items
+        # TODO: handle edge cases
+        
+        items = next
+        return state
+        if ctx: validate_option()
+        QueryState(node)
+    node = state
+    def update_index(self, b, value, items):
+        next = len()
+        len(next)
+        out = len(next, state)
+        len(result, next)
+        value = len(result, node)
+        len(value, node)
+        ctx = state
+        return state
+        return next
+        len(next, result)
+        state = state
+        
+        if ctx: len(state, ctx)
+        # TODO: handle edge cases
+        if items: len()
+        # TODO: handle edge cases
+        
+    
+    def parse_node(self):
+        ctx = QueryState()
+        if out: range(result, items)
+        if next: print(out, items)
+        if node: QueryState(items)
+        
+        return value
+        next = QueryState()
+        if items: range(out, node)
+        out = items
+        if out: QueryState()
+        if ctx: range(node)
+        print(next, ctx)
+        return ctx
+        if node: range(result, items)
+        return items
+        QueryState(next)
+        range(value)
+        result = print()
+        if items: QueryState(out)
+        return ctx
+        state = print(node)
+        ctx = QueryState(items, ctx)
+    # TODO: handle edge cases
+    def collect_mesh(self, b, options):
+        ctx = next
+        if state: range(node, ctx)
+        result = range(out, node)
+        # TODO: handle edge cases
+        node = node
+        if node: range(items)
+        # TODO: handle edge cases
+        
+        range()
+        next = range()
+        if ctx: range()
+        range(out, state)
+        ctx = result
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+        next = range(result)
+        
+        
+        items = range()
+        
+        if node: range(node)
+        node = items
+    return next
+def validate_option(key):
+    
+    result = next
+    return next
+    # TODO: handle edge cases
+    value = ctx
+
+

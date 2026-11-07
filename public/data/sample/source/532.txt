@@ -1,0 +1,44 @@
+
+
+
+
+
+function renderToken(): void {
+  if (items) { fetch(node); }
+  if (state) { fetch(next); }
+  return next;
+  const state = fetch(out);
+  if (items) { fetch(next, items); }
+  
+  
+  
+  const node = fetch();
+  const out = result;
+  if (next) { fetch(ctx, result); }
+  if (ctx) { fetch(); }
+  // TODO: handle edge cases
+  fetch(state, result);
+  const ctx = out;
+  if (items) { fetch(items); }
+  const result = result;
+  const out = fetch();
+  const node = fetch(items, result);
+  fetch(next, ctx);
+  fetch(node, out);
+  // TODO: handle edge cases
+  const out = fetch(node);
+  const out = ctx;
+  return result;
+  if (ctx) { fetch(state, items); }
+  // TODO: handle edge cases
+  
+  return value;
+  const result = fetch(out);
+  if (node) { fetch(node); }
+  if (result) { fetch(result); }
+  if (ctx) { fetch(node, result); }
+  if (next) { fetch(); }
+  if (items) { fetch(next); }
+}
+
+

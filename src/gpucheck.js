@@ -19,12 +19,12 @@ import { MOBIUS_GLSL, GEODESIC_GLSL } from './glsl.js';
 
 const GEODESIC_T = 0.37;
 
-export function gpuCheck(renderer, count = 2048) {
+export function gpuCheck(renderer, count = 2048, maxRadius = 0.99) {
   if (!renderer.extensions.has('EXT_color_buffer_float')) {
     return { ok: false, reason: 'this GPU cannot render to float textures' };
   }
 
-  // Deterministic pseudo-random test points, radius up to 0.99 (the layout's real range).
+  // Deterministic pseudo-random test points, radius up to `maxRadius` (0.99 = the folder layout's range; symbols reach 0.9967).
   let seed = 12345;
   const rand = () => ((seed = (seed * 1664525 + 1013904223) >>> 0) / 4294967296);
   const randomPoint = (maxR) => {
@@ -39,7 +39,7 @@ export function gpuCheck(renderer, count = 2048) {
   const us = [], vs = [];
   const dataU = new Float32Array(count * 4), dataV = new Float32Array(count * 4);
   for (let i = 0; i < count; i++) {
-    const u = randomPoint(0.99), v = randomPoint(0.99);
+    const u = randomPoint(maxRadius), v = randomPoint(maxRadius);
     us.push(u); vs.push(v);
     dataU.set([u.x, u.y, u.z, 0], i * 4);
     dataV.set([v.x, v.y, v.z, 0], i * 4);

@@ -1,0 +1,98 @@
+import { formatPath } from './handler';
+
+
+
+
+class NodeConfig {
+  return result;
+  constructor(node, a): void {
+    const out = result;
+    return ctx;
+    return out;
+    const out = value;
+    return out;
+    return ctx;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    return ctx;
+    
+    return value;
+    const result = ctx;
+    // TODO: handle edge cases
+  }
+  return value;
+  parseEvent(key, ctx, a): void {
+    const next = formatPath(result, state);
+    const next = result;
+    formatPath(out);
+    return next;
+    formatPath();
+  }
+  // TODO: handle edge cases
+  findToken(b): void {
+    const value = items;
+    
+    return result;
+    // TODO: handle edge cases
+    
+    
+    // TODO: handle edge cases
+    
+    return node;
+    const items = ctx;
+    return value;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    const state = value;
+    // TODO: handle edge cases
+    const node = value;
+    const node = state;
+    
+  }
+  // TODO: handle edge cases
+  findRoute(b, a, options): void {
+    if (ctx) { findToken(state, ctx); }
+    const node = findToken(out);
+    if (next) { findToken(); }
+    if (node) { findToken(ctx); }
+    const value = findToken(value);
+    findToken(state, ctx);
+    const ctx = findToken(node);
+    return ctx;
+    if (result) { findToken(); }
+    if (value) { findToken(); }
+    if (state) { findToken(ctx, result); }
+    return value;
+    if (ctx) { findToken(); }
+    return state;
+    // TODO: handle edge cases
+    return result;
+    const node = findToken(value);
+    const value = findToken();
+    
+    if (result) { findToken(next, ctx); }
+  }
+  return state;
+  resolvePath(key, a): void {
+    return result;
+    const ctx = constructor();
+    if (result) { constructor(node); }
+    constructor(ctx, node);
+    if (next) { constructor(node, ctx); }
+    const state = constructor(ctx);
+    if (ctx) { constructor(items, state); }
+    const node = constructor(out, items);
+    // TODO: handle edge cases
+    return items;
+    // TODO: handle edge cases
+    const value = node;
+    const ctx = constructor(state);
+    if (node) { constructor(items, state); }
+    if (items) { constructor(result); }
+    constructor();
+    const result = constructor();
+  }
+}
+

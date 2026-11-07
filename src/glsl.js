@@ -80,7 +80,10 @@ vec3 armColor(float hue0, float fog) {
 //   aEnergy   0..1: bigger and brighter when higher. (Phase 3: log of subtree size;
 //             Phase 6: real data, e.g. file size or recent activity)
 //   aFlag     reserved status marker (0 = none; 1 draws a magenta ring)
-//   aKind     1 = folder, 0 = file
+//   aKind     0 file, 1 folder, 2 class, 3 function, 4 method, 5 block (top-level code). Classes are spheres with a
+//             permanent ring, functions plain spheres, methods diamonds, blocks rounded squares (Phase 4b)
+//   aOrigin   where the node grows from: its parent's position (new symbols bloom out of their parent)
+//   aBorn     time (seconds on the bloom clock `uBloom`) when the node was created; -100 = always been there
 //   aSeed     random 0..1 per node, makes twinkles and breathing out of step
 //   aId       node index, so the shader can tell which node is the focus
 //   aState    semantic zoom (set on the CPU): 0 = normal, 1 = hidden (inside a collapsed folder),
@@ -94,6 +97,7 @@ export const NODE_VERT = /* glsl */ `
 uniform vec3 _Focus;     // the ball point currently shown at the centre of the screen
 uniform float uFocusId;  // id of the node we are focusing on (gets the "sun" look)
 uniform float uTime;     // seconds, drives breathing and twinkling
+uniform float uBloom;    // real-time clock for the bloom-in animation (not frozen by ?time=)
 
 attribute vec2 corner;   // quad corner: (-1,-1) (1,-1) (1,1) (-1,1)
 attribute vec3 aPos;
@@ -104,6 +108,8 @@ attribute float aKind;
 attribute float aSeed;
 attribute float aId;
 attribute float aState;
+attribute vec3 aOrigin;
+attribute float aBorn;
 
 varying vec2 vUv;        // where in the quad this pixel is: -1..1 in x and y
 varying vec3 vColor;
@@ -119,9 +125,16 @@ ${COLOR_GLSL}
 void main() {
   float orb = step(1.5, aState);                     // state 2
   float hidden = step(0.5, aState) * step(aState, 1.5); // state 1
+  // --- 0. BLOOM: a new symbol grows out of its parent ------------------------
+  // grow goes 0 -> 1 over BLOOM_SECONDS with smoothstep (slow-fast-slow). The node starts at its
+  // parent's position and slides to its own. Example: 0.225 s into a 0.45 s bloom: t = 0.5, grow = 0.5,
+  // the node is half way there and half size. Old nodes (aBorn = -100) have grow = 1: no effect.
+  float grow = clamp((uBloom - aBorn) / BLOOM_SECONDS, 0.0, 1.0);
+  grow = grow * grow * (3.0 - 2.0 * grow);
+  vec3 home = mix(aOrigin, aPos, grow);
   // --- 1. REFOCUS ON THE GPU: bring the focus point to the centre ----------
   // Same as the CPU did before: p = (-focus) (+) home position.
-  vec3 p = mobiusAdd3(-_Focus, aPos);
+  vec3 p = mobiusAdd3(-_Focus, home);
   float r2 = dot(p, p);
 
   // After the move the focus sits at the origin, so the hyperbolic distance
@@ -136,16 +149,24 @@ void main() {
   // rescaled to 0..1, so the biggest folder is 3x the smallest. Example, FOLDER_R = 0.04:
   // energy 0 -> 0.04, energy 0.5 -> 0.08, energy 1 -> 0.12.
   // ~10 % of folders (aSeed >= HERO_AT) are "heroes": 25 % bigger and about twice as bright.
-  float hero = step(HERO_AT, aSeed) * aKind;
-  float rho = mix(FILE_R, FOLDER_R * (1.0 + SIZE_SPREAD * aEnergy) * (1.0 + (HERO_SIZE - 1.0) * hero), aKind);
+  float isFolder = step(0.5, aKind) * step(aKind, 1.5);   // kind 1
+  float isSymbol = step(1.5, aKind);                      // kinds 2..5
+  float notFile = step(0.5, aKind);                       // folders and symbols
+  float hero = step(HERO_AT, aSeed) * isFolder;
+  float rho = mix(FILE_R, FOLDER_R * (1.0 + SIZE_SPREAD * aEnergy) * (1.0 + (HERO_SIZE - 1.0) * hero), isFolder);
+  // Symbols: a base radius per kind, grown by the line count (energy): R * (1 + SPREAD * energy).
+  // Example: a function (0.026) with energy 1: 0.026 * 2.5 = 0.065; a method (0.02) with energy 0: 0.02.
+  float symR = aKind < 2.5 ? CLASS_R : (aKind < 3.5 ? FUNCTION_R : (aKind < 4.5 ? METHOD_R : BLOCK_R));
+  float symBright = aKind < 2.5 ? CLASS_BRIGHT : (aKind < 3.5 ? FUNCTION_BRIGHT : (aKind < 4.5 ? METHOD_BRIGHT : BLOCK_BRIGHT));
+  rho = mix(rho, symR * (1.0 + SYMBOL_SIZE_SPREAD * aEnergy), isSymbol);
   rho = mix(rho, FOCUS_R, isFocus);                 // the focus has one fixed, large size
   rho *= mix(1.0, COLLAPSED_SIZE, orb);             // a collapsed orb is drawn bigger
   // Then the Poincare size factor (1 - r^2)/2 shrinks things toward the surface.
   // Example: at |p| = 0.9 the factor is (1 - 0.81)/2 = 0.095, so a 0.08 folder is
   // drawn 0.0076 across, but never below MIN_R.
   // Slow breathing, +-6 % for folders only (aSeed makes each one out of step).
-  float breathe = 1.0 + BREATHE_AMOUNT * aKind * sin(uTime * BREATHE_SPEED + aSeed * 6.2831);
-  float size = max(rho * (1.0 - r2) * 0.5 * breathe, MIN_R);
+  float breathe = 1.0 + BREATHE_AMOUNT * notFile * sin(uTime * BREATHE_SPEED + aSeed * 6.2831);
+  float size = max(rho * (1.0 - r2) * 0.5 * breathe, MIN_R) * grow;
 
   // --- 3. BRIGHTNESS and COLOUR by hyperbolic distance ----------------------
   // fog = e^(-d/2): 1 at the focus, 0.37 at d = 2, 0.08 at d = 5.
@@ -158,11 +179,14 @@ void main() {
   // Folders: a gentle pulse, scaled by energy (0.7 .. 1.3).
   float folderBright = ((1.0 - FOLDER_PULSE) + FOLDER_PULSE * sin(uTime * 0.6 + aSeed * 20.0))
                      * (FOLDER_BRIGHT_BASE + FOLDER_BRIGHT_PER_ENERGY * aEnergy) * (1.0 + HERO_BRIGHT * hero);
-  vBright = distBright * mix(fileBright, folderBright, aKind);
+  // Symbols pulse like folders; brightness = kind factor * (BASE + PER_ENERGY * energy).
+  float symbolBright = ((1.0 - FOLDER_PULSE) + FOLDER_PULSE * sin(uTime * 0.6 + aSeed * 20.0))
+                     * symBright * (SYMBOL_BRIGHT_BASE + SYMBOL_BRIGHT_PER_ENERGY * aEnergy);
+  vBright = distBright * mix(mix(fileBright, folderBright, isFolder), symbolBright, isSymbol);
 
   vec3 col = armColor(aHue, fog);
   col = mix(col, WARM_TINT, exp(-d * WARM_RATE) * WARM_AMOUNT);   // near the focus -> a little warm
-  col = mix(col, FILE_TINT, FILE_PALE * (1.0 - aKind));          // files: pale
+  col = mix(col, FILE_TINT, FILE_PALE * (1.0 - notFile));        // files: pale
   // The focus is a warm gold-white sun, always at full brightness.
   col = mix(col, FOCUS_COLOR, isFocus);
   vBright = mix(vBright, FOCUS_BRIGHT, isFocus);
@@ -216,6 +240,9 @@ void main() {
   gl_FragColor = vec4(1.0 - exp(-halo * TONE_GAIN), 1.0);
 #else
   vec3 col;
+  float shapeQ = q;                              // distance used for the solid ball: circle ...
+  if (vKind > 3.5 && vKind < 4.5) shapeQ = abs(vUv.x) + abs(vUv.y);          // ... diamond (method)
+  if (vKind > 4.5) shapeQ = max(abs(vUv.x), abs(vUv.y)) * 1.15 + q * 0.1;    // ... rounded square (block)
   if (vKind < 0.5) {
     // ---- FILE: a tiny glowing point ----
     // (1 - q)^4: q = 0.33 -> 0.20, q = 0.6 -> 0.026: falls off fast = a point of light.
@@ -223,7 +250,7 @@ void main() {
     col = vColor * point;
   } else {
     // ---- FOLDER: a star = glow + fake sphere ----
-    float s = q / CORE;                          // 0..1 across the solid ball
+    float s = shapeQ / CORE;                     // 0..1 across the solid ball (any shape)
     float ball = 1.0 - smoothstep(BALL_EDGE, 1.0, s);  // 1 inside the ball, soft edge, 0 outside
 
     // Fake sphere: pretend this pixel is a point on a ball facing us. The sphere
@@ -257,6 +284,8 @@ void main() {
   // Reserved status marker (aFlag): a thin magenta ring. Phase 6 only changes the number.
   // Collapsed orb: a faint ring around the star says "there is more inside".
   col += vOrb * vColor * COLLAPSED_RING_GAIN * smoothstep(COLLAPSED_RING_WIDTH, 0.0, abs(q - COLLAPSED_RING_AT));
+  // Class: a permanent thin ring (a "planet" with a ring).
+  col += step(1.5, vKind) * step(vKind, 2.5) * vColor * CLASS_RING_GAIN * smoothstep(CLASS_RING_WIDTH, 0.0, abs(q - CLASS_RING_AT));
   col += vFlag * FLAG_COLOR * smoothstep(FLAG_RING_WIDTH, 0.0, abs(q - FLAG_RING_AT));
 
   col *= vBright;
@@ -439,6 +468,7 @@ void main() {
 // So the 1-pixel limit of GL lines disappears and the width can follow the fog.
 export const EDGE_VERT = /* glsl */ `
 uniform vec3 _Focus;
+uniform float uBloom;         // bloom clock (see NODE_VERT)
 uniform vec2 uResolution;     // drawing-buffer size in pixels
 uniform float uLineWidth;     // base width in drawing-buffer pixels
 
@@ -450,6 +480,7 @@ attribute float aHue;
 attribute float aEnergy;
 attribute float aSeed;
 attribute float aHide;        // 1 = the child end is inside a collapsed folder: do not draw
+attribute float aBorn;        // bloom start time (-100 = always there): the child end grows out of the parent end
 
 varying float vAcross;        // -1 at one side of the line, +1 at the other
 varying float vT;
@@ -463,7 +494,9 @@ ${COLOR_GLSL}
 
 void main() {
   vec3 A = mobiusAdd3(-_Focus, aA);
-  vec3 B = mobiusAdd3(-_Focus, aB);
+  float grow = clamp((uBloom - aBorn) / BLOOM_SECONDS, 0.0, 1.0);
+  grow = grow * grow * (3.0 - 2.0 * grow);
+  vec3 B = mobiusAdd3(-_Focus, mix(aA, aB, grow));
   vec3 w = mobiusAdd3(-A, B);
   vec3 P = mobiusAdd3(A, mobiusScale3(aT, w));
   // A second point a little further along (or back, at the far end) gives the direction.

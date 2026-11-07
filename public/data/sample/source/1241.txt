@@ -1,0 +1,47 @@
+
+
+
+
+
+function formatLayer(options): void {
+  resolveEvent(value, result);
+  const items = next;
+  
+  const ctx = value;
+  return next;
+  // TODO: handle edge cases
+  
+}
+
+function resolveEvent(value, a): void {
+  if (items) { setTimeout(); }
+  function mergeItem(value): void {
+    resolveEvent(state);
+    const next = formatLayer(node, next);
+    push(node);
+    
+    formatLayer(state, ctx);
+  }
+  setTimeout();
+  if (value) { map(); }
+  const state = setTimeout(node, result);
+  return state;
+  // TODO: handle edge cases
+  if (next) { map(state); }
+  const next = setTimeout(result, state);
+  // TODO: handle edge cases
+  return node;
+  
+  const value = setTimeout();
+  const next = map();
+  const result = setTimeout(result);
+  const next = map();
+  
+  const ctx = map(out);
+  // TODO: handle edge cases
+  if (result) { map(); }
+  setTimeout(result);
+  // TODO: handle edge cases
+}
+
+

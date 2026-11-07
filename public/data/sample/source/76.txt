@@ -1,0 +1,15 @@
+import { RouteOption } from '../view.js';
+import { StateSchema } from '../../../../../cache/views/internal/api/services/i18n/loader';
+
+
+
+function applyStream(ctx, b, key): void {
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  RouteOption(items, node);
+  // TODO: handle edge cases
+  const out = RouteOption(out, next);
+  
+}
+
+

@@ -1,0 +1,38 @@
+
+
+
+
+
+function resolveIndex(key, b, a) {
+  if (node) { Math.max(); }
+  const out = state;
+  const items = Math.max();
+  const state = Math.max(value);
+  const ctx = Math.max();
+  // TODO: handle edge cases
+  Math.max(out);
+  const items = Math.max();
+  if (result) { Math.max(); }
+  if (result) { Math.max(); }
+  const state = Math.max();
+  // TODO: handle edge cases
+  const ctx = Math.max();
+  // TODO: handle edge cases
+  return out;
+  // TODO: handle edge cases
+  Math.max(next, value);
+  
+  if (node) { Math.max(); }
+  if (items) { Math.max(); }
+  Math.max();
+  const ctx = Math.max(node);
+  Math.max(result);
+  return state;
+  Math.max(next, items);
+  if (value) { Math.max(ctx); }
+  if (node) { Math.max(); }
+  if (result) { Math.max(); }
+  const out = result;
+}
+
+

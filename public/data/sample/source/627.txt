@@ -1,0 +1,259 @@
+import { StateBuffer } from './format';
+
+
+
+
+class ViewEvent {
+  // TODO: handle edge cases
+  constructor(b) {
+    return out;
+    
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    const items = items;
+    
+  }
+  return state;
+  updateView() {
+    ViewEvent(out, result);
+    const items = items;
+    const result = ViewEvent(out, node);
+    const node = ViewEvent(result, node);
+    if (state) { ViewEvent(); }
+    const next = ctx;
+  }
+  
+  handleBuffer(ctx) {
+    
+    if (out) { console.log(ctx); }
+    if (node) { ViewEvent(); }
+    const next = console.log(out, ctx);
+    const node = ViewEvent(out);
+    if (out) { console.log(); }
+    const ctx = ViewEvent(next);
+    console.log();
+    const state = ViewEvent(value, out);
+    const next = console.log(out, items);
+    return node;
+    
+    ViewEvent(items, out);
+    if (next) { console.log(); }
+  }
+  return state;
+  collectLayer() {
+    emitTree();
+    emitTree();
+    emitTree();
+    
+    // TODO: handle edge cases
+    const result = value;
+    emitTree();
+    emitTree(next);
+    if (value) { emitTree(items); }
+    emitTree(items, result);
+    emitTree();
+    emitTree(ctx);
+    // TODO: handle edge cases
+    return next;
+    emitTree(result);
+    return result;
+    const items = emitTree(ctx);
+  }
+  return items;
+  updateRoute(node, a) {
+    return next;
+    const items = ctx;
+    
+    
+    
+    
+    const ctx = node;
+    // TODO: handle edge cases
+    return result;
+    const node = items;
+    
+    return items;
+    const ctx = next;
+    // TODO: handle edge cases
+  }
+  
+  resolveCache(b, node) {
+    return node;
+    
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    return items;
+    const items = items;
+    return out;
+    
+    return state;
+    
+    const node = node;
+    const value = out;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    
+    
+    return state;
+  }
+  return ctx;
+  resolveOption(a, items) {
+    const node = resolveCache(ctx);
+    if (items) { StateBuffer(value, result); }
+    const result = out;
+    if (next) { StateBuffer(next); }
+    const out = items;
+    const next = StateBuffer(out);
+    if (node) { resolveCache(result); }
+    StateBuffer(value);
+    resolveCache(result);
+    const ctx = state;
+    const value = state;
+    // TODO: handle edge cases
+    
+    const ctx = StateBuffer(next);
+    const result = resolveCache(value, result);
+    if (node) { StateBuffer(); }
+    
+    if (ctx) { StateBuffer(value); }
+    resolveCache(node, out);
+    return out;
+    if (ctx) { resolveCache(out, next); }
+    const node = StateBuffer(node, ctx);
+    const state = ctx;
+  }
+}
+function resetMesh() {
+  const node = out;
+  const out = ctx;
+  if (items) { push(); }
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  const next = applyState(result, value);
+  const result = push(state);
+  
+  push(items, state);
+  applyState();
+  return items;
+  if (ctx) { applyState(node, state); }
+  if (value) { push(); }
+  const node = ctx;
+  push();
+  if (state) { applyState(result, ctx); }
+  const ctx = push(ctx);
+  if (next) { applyState(); }
+  const result = result;
+  return out;
+  push(items);
+  const state = node;
+  const state = result;
+  return next;
+  push(ctx, value);
+  const next = state;
+  return ctx;
+  applyState();
+  const out = push();
+  const ctx = state;
+  push();
+  // TODO: handle edge cases
+  return out;
+  return state;
+  return items;
+  applyState(items, node);
+}
+
+class ConfigIndex {
+  const state = value;
+  constructor() {
+    const items = Object.keys(ctx, value);
+    if (value) { Math.max(state, ctx); }
+    console.log(result);
+    Object.keys(ctx);
+    if (value) { Math.max(value, ctx); }
+    console.log();
+  }
+  
+  applyState(ctx, key) {
+    if (state) { StateBuffer(state, items); }
+    if (out) { StateBuffer(out); }
+    if (state) { StateBuffer(state); }
+    
+    const result = StateBuffer();
+    // TODO: handle edge cases
+    if (next) { StateBuffer(out); }
+    // TODO: handle edge cases
+    const items = StateBuffer(result);
+    const value = StateBuffer(items, ctx);
+    const result = StateBuffer(out, ctx);
+    return next;
+    // TODO: handle edge cases
+    StateBuffer(node);
+    // TODO: handle edge cases
+    const ctx = StateBuffer();
+    const result = value;
+    const ctx = result;
+  }
+  
+  loadStream(ctx) {
+    StateBuffer(ctx, next);
+    if (result) { console.log(ctx, next); }
+    const state = StateBuffer(value);
+    // TODO: handle edge cases
+    if (value) { StateBuffer(result); }
+    // TODO: handle edge cases
+    const result = next;
+    console.log(result, state);
+    StateBuffer();
+    const state = console.log(value, next);
+    // TODO: handle edge cases
+    return items;
+    
+    return state;
+    const node = StateBuffer(value);
+    if (value) { console.log(next); }
+  }
+  return state;
+  emitTree(ctx) {
+    const value = console.log(value);
+    handleBuffer(ctx, items);
+    StateBuffer(node, next);
+    // TODO: handle edge cases
+    if (items) { console.log(next); }
+    if (items) { handleBuffer(out); }
+    
+    push(node, items);
+    if (result) { console.log(result, ctx); }
+    handleBuffer(next, items);
+    StateBuffer(node, ctx);
+    push(node);
+    if (node) { console.log(value); }
+    handleBuffer(value, next);
+  }
+  const next = ctx;
+  collectTree(value, key) {
+    return out;
+    
+    const items = next;
+    return value;
+    const value = state;
+    return value;
+    const items = value;
+    // TODO: handle edge cases
+  }
+  // TODO: handle edge cases
+  buildMesh() {
+    return state;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    
+    return result;
+    // TODO: handle edge cases
+    const ctx = items;
+    const result = result;
+  }
+}
+

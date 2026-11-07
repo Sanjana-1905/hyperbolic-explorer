@@ -1,0 +1,38 @@
+from .......cache.views.cache.net.lib.net.utils.parser import build_path
+
+
+
+
+class RecordStream:
+    return value
+    def __init__(self, items, value):
+        next = node
+        if items: RecordStream()
+        
+        items = build_path(ctx, node)
+        next = RecordStream()
+        state = value
+        out = out
+        out = RecordStream(ctx, value)
+        
+        ctx = build_path(ctx)
+        if ctx: RecordStream(value)
+        collect_tree(next, state)
+        return out
+        ctx = result
+        value = collect_tree(items)
+        # TODO: handle edge cases
+        out = RecordStream()
+    
+    def render_option(self):
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+        next = result
+    
+    def collect_tree(self, node):
+        # TODO: handle edge cases
+        __init__(out)
+        if items: build_path(ctx)
+        state = sorted(state, result)
+    return next
+

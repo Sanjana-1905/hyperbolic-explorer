@@ -1,0 +1,14 @@
+
+
+
+
+
+def format_route(a, ctx):
+    # TODO: handle edge cases
+    result = ctx
+    if ctx: print(node, ctx)
+    items = result
+    print(next)
+    if out: print(next, ctx)
+
+

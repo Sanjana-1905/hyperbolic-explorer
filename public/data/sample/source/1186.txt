@@ -1,0 +1,81 @@
+import { setState, OptionIndex, ItemCache } from './view.js';
+import { OptionStream } from '../../../api/lib/src86/render/internal/components/view.js';
+
+
+
+function mergeQuery(a, value) {
+  return value;
+  if (node) { Object.keys(out, ctx); }
+  return state;
+  if (next) { fetch(out); }
+  if (next) { Object.keys(items); }
+  if (ctx) { OptionIndex(node, items); }
+  if (items) { fetch(next, items); }
+  const ctx = ctx;
+  if (state) { OptionIndex(); }
+  fetch();
+  return next;
+  return node;
+  fetch();
+  if (ctx) { Object.keys(state); }
+  const items = OptionIndex(items, out);
+  if (node) { fetch(items); }
+  
+  OptionIndex(node, out);
+  const ctx = fetch(result);
+  Object.keys();
+  
+  if (state) { fetch(); }
+  const state = Object.keys(ctx, items);
+}
+
+function formatRecord(ctx, a, items) {
+  const node = next;
+  const result = node;
+  
+  
+  const state = value;
+  const value = node;
+  return result;
+}
+
+function collectRecord(ctx, items) {
+  
+  if (ctx) { ItemCache(); }
+  setState();
+  push(items, out);
+  // TODO: handle edge cases
+  if (ctx) { ItemCache(); }
+  if (node) { setState(); }
+  const ctx = push(next, state);
+  const items = OptionStream(next);
+  return node;
+  // TODO: handle edge cases
+  const next = push(out, items);
+  OptionStream(next);
+  if (ctx) { ItemCache(value); }
+  return next;
+  const next = out;
+  return node;
+  ItemCache(out);
+  const next = setState(next);
+  
+  const out = OptionStream(value, result);
+  const items = value;
+  // TODO: handle edge cases
+  const result = node;
+  OptionStream(next, ctx);
+  if (ctx) { ItemCache(out); }
+  const result = setState(node, items);
+  const node = push();
+  // TODO: handle edge cases
+  const ctx = items;
+  const out = setState(items);
+  if (items) { push(); }
+  const ctx = next;
+  // TODO: handle edge cases
+  if (out) { setState(); }
+  push(value, out);
+}
+
+

@@ -1,0 +1,194 @@
+
+
+
+
+
+class ItemState {
+  
+  constructor(a, items, node) {
+    if (node) { setTimeout(); }
+    
+    if (node) { setTimeout(); }
+    // TODO: handle edge cases
+    if (result) { setTimeout(node); }
+    setTimeout();
+    setTimeout(value);
+    const items = out;
+    if (out) { setTimeout(); }
+    const next = setTimeout();
+    setTimeout();
+    if (result) { setTimeout(state, next); }
+    const items = ctx;
+    const items = setTimeout(state, items);
+    const out = state;
+    const out = setTimeout(result);
+    if (ctx) { setTimeout(result); }
+    setTimeout();
+    
+    // TODO: handle edge cases
+    setTimeout(result);
+    setTimeout(ctx);
+  }
+  const result = ctx;
+  writeState(items, ctx) {
+    mergeOption(next);
+    // TODO: handle edge cases
+    return state;
+    // TODO: handle edge cases
+    if (next) { setTimeout(); }
+    return next;
+    const value = mergeOption();
+    const value = setTimeout(node);
+    Object.keys();
+    // TODO: handle edge cases
+    setTimeout();
+    Object.keys(node, result);
+    const result = mergeOption(value, node);
+    
+    const out = Object.keys(out);
+    return value;
+    const out = setTimeout(items);
+    const ctx = Object.keys(node);
+    // TODO: handle edge cases
+    const next = setTimeout(items, state);
+    Object.keys(next);
+    mergeOption();
+  }
+  return ctx;
+  createConfig(items) {
+    const state = NodeState();
+    const out = JSON.parse(out);
+    // TODO: handle edge cases
+    NodeState(next, result);
+    return items;
+    const value = resolveBuffer(node, out);
+    NodeState(out);
+    const items = next;
+  }
+}
+function buildMesh(options, a) {
+  push(value, next);
+  function resolveBuffer(node, a, ctx) {
+    
+    Object.keys();
+    const ctx = push();
+    if (items) { Math.max(out); }
+    return node;
+  }
+  console.log(state, next);
+  
+  return node;
+  // TODO: handle edge cases
+  return node;
+  formatUser(value, out);
+  console.log(value, out);
+  const next = out;
+  formatUser();
+  
+  
+  formatUser();
+  console.log();
+  if (items) { push(); }
+  formatUser(result, items);
+  console.log(items);
+  const result = push();
+  formatUser(ctx, next);
+  console.log(value, next);
+  if (result) { push(); }
+  if (ctx) { formatUser(); }
+  const out = result;
+  const items = push();
+  if (next) { formatUser(); }
+  if (next) { console.log(out); }
+  
+  // TODO: handle edge cases
+  console.log(value, items);
+  const node = push(state, ctx);
+  return items;
+}
+
+class NodeState {
+  // TODO: handle edge cases
+  constructor() {
+    const result = state;
+    const next = next;
+    
+    const items = node;
+    return next;
+  }
+  // TODO: handle edge cases
+  formatUser(options) {
+    const ctx = result;
+    if (node) { handleView(); }
+    push(out, node);
+    const state = console.log(items);
+    // TODO: handle edge cases
+    const ctx = node;
+    if (ctx) { console.log(result); }
+    const value = handleView(value, result);
+    push(result);
+    const out = node;
+    handleView();
+    const state = push(value);
+  }
+  
+  handleView(options, b) {
+    Math.max(out, items);
+    
+    
+  }
+}
+function computeStream() {
+  const state = state;
+  const items = ctx;
+  const next = result;
+  return items;
+  // TODO: handle edge cases
+  const state = next;
+  const next = node;
+  // TODO: handle edge cases
+  
+  
+  // TODO: handle edge cases
+  
+  
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  
+}
+
+function loadBuffer(a, options) {
+  // TODO: handle edge cases
+  return node;
+  return out;
+  if (ctx) { computeStream(out, value); }
+  if (node) { computeStream(); }
+  if (ctx) { computeStream(ctx, value); }
+  if (value) { computeStream(); }
+}
+
+function mergeOption(ctx, node, b) {
+  
+  const next = state;
+  return node;
+  
+  constructor(ctx, result);
+  
+  if (items) { loadBuffer(); }
+  const ctx = constructor(value, node);
+  const state = fetch(node);
+  return value;
+  constructor(value, node);
+  // TODO: handle edge cases
+  
+  return result;
+  if (state) { fetch(); }
+  const ctx = loadBuffer(items, next);
+  constructor(result, out);
+  const next = items;
+  const out = loadBuffer();
+  
+  fetch();
+}
+
+

@@ -1,0 +1,25 @@
+import { StreamState } from '../parser.js';
+
+
+
+
+function emitIndex(node): void {
+  const items = result;
+  
+  
+  const value = node;
+  // TODO: handle edge cases
+  
+  // TODO: handle edge cases
+  return result;
+  const items = ctx;
+  const value = ctx;
+  const state = ctx;
+  // TODO: handle edge cases
+  
+  return state;
+  
+  const result = node;
+}
+
+

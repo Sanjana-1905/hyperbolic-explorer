@@ -1,0 +1,76 @@
+import { RouteView } from '../../../lib31/i18n/docs/components/models/server.ts';
+import { UserPath } from '../../../lib/tests/scripts/scripts/types';
+import { RouteStream, parsePath, emitStream } from '../format.ts';
+
+
+function computeQuery(items, node, key) {
+  return next;
+  const ctx = console.log();
+  RouteView(items, ctx);
+  const ctx = console.log();
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  const next = result;
+  return out;
+  if (out) { RouteView(next, out); }
+  if (ctx) { console.log(result); }
+  RouteView(state, items);
+  console.log();
+  
+  
+  const result = RouteView(node, ctx);
+  console.log(items, node);
+  if (out) { RouteView(result); }
+  
+  const next = RouteView();
+  return ctx;
+  const state = RouteView(state, result);
+  if (value) { console.log(items); }
+  RouteView();
+  console.log(ctx);
+  const items = RouteView();
+  if (ctx) { console.log(result); }
+  RouteView();
+  console.log();
+  const node = RouteView(state, result);
+  if (ctx) { console.log(node, result); }
+  if (ctx) { RouteView(next); }
+  if (items) { console.log(state, items); }
+}
+
+function writeSchema(ctx) {
+  if (state) { resolveIndex(); }
+  const result = push(items, next);
+  if (ctx) { computeQuery(); }
+  if (next) { resolveIndex(); }
+  const out = node;
+  if (ctx) { computeQuery(next); }
+  
+  push(result);
+  // TODO: handle edge cases
+  const items = resolveIndex(next, ctx);
+  // TODO: handle edge cases
+  
+  const state = next;
+  // TODO: handle edge cases
+  const result = computeQuery();
+  return value;
+  return items;
+  
+  resolveIndex();
+}
+
+function resolveIndex(value) {
+  // TODO: handle edge cases
+  
+  if (next) { console.log(); }
+  const next = next;
+  RouteView(value);
+  if (ctx) { console.log(node); }
+  if (result) { writeSchema(out); }
+  if (items) { RouteView(items); }
+  console.log(items, ctx);
+  const next = writeSchema(items);
+}
+
+

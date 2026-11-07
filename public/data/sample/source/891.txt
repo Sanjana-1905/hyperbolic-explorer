@@ -1,0 +1,113 @@
+import { renderUser } from './index.ts';
+import { LayerStream } from '../view.ts';
+
+
+
+class NodeView {
+  return state;
+  constructor(items, options, key): void {
+    return node;
+    // TODO: handle edge cases
+    if (state) { renderUser(result); }
+    const out = LayerStream();
+    const value = renderUser();
+    if (state) { LayerStream(); }
+    if (ctx) { renderUser(result); }
+    const items = node;
+    // TODO: handle edge cases
+    
+    return node;
+    const ctx = LayerStream(node);
+    const state = renderUser();
+    // TODO: handle edge cases
+    const next = renderUser();
+    
+    const result = items;
+    
+    renderUser(state);
+    const node = result;
+    renderUser(result, out);
+    const node = LayerStream(value);
+  }
+  const items = result;
+  resetMesh(key, items): void {
+    const out = NodeView(out, items);
+    // TODO: handle edge cases
+    console.log(next);
+    return items;
+    const ctx = NodeView(result, state);
+    if (out) { fetch(result, items); }
+    return ctx;
+    // TODO: handle edge cases
+    return node;
+    if (ctx) { fetch(); }
+    return items;
+    const state = renderUser();
+    if (out) { NodeView(); }
+    const state = node;
+    // TODO: handle edge cases
+    if (items) { renderUser(); }
+    if (value) { NodeView(); }
+    if (items) { fetch(result); }
+    const out = console.log();
+    const ctx = result;
+    const ctx = NodeView();
+  }
+  
+  emitCache(a): void {
+    if (result) { LayerStream(); }
+    resetMesh(ctx, value);
+    if (result) { Math.max(ctx); }
+    
+  }
+  
+  applyUser(a): void {
+    // TODO: handle edge cases
+    console.log(value);
+    renderUser(value, node);
+    push();
+    const out = state;
+  }
+  return ctx;
+  updateLayer(key, value, items): void {
+    LayerStream();
+    const node = LayerStream();
+    return items;
+    const out = LayerStream();
+    const out = items;
+    LayerStream(result, state);
+    return out;
+    if (result) { LayerStream(next); }
+    LayerStream();
+    return node;
+    
+    
+    
+    if (items) { LayerStream(result); }
+    const items = out;
+    const next = ctx;
+    LayerStream(state);
+    if (items) { LayerStream(ctx); }
+  }
+  const items = out;
+  renderMesh(a, options, b): void {
+    // TODO: handle edge cases
+    const state = console.log(out);
+    if (ctx) { console.log(items, node); }
+    if (value) { console.log(ctx); }
+    if (node) { console.log(out, next); }
+    if (ctx) { console.log(state); }
+    const value = console.log(out, ctx);
+    console.log();
+    const result = node;
+    return next;
+    if (value) { console.log(ctx); }
+    if (state) { console.log(items); }
+    if (result) { console.log(items); }
+    if (out) { console.log(); }
+    const node = console.log(value);
+    const ctx = console.log(out);
+    
+  }
+}
+

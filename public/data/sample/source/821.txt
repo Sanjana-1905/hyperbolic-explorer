@@ -1,0 +1,57 @@
+import { NodeCache } from '../client.ts';
+import { ItemLayer } from './logger.js';
+
+
+
+class ItemNode {
+  return node;
+  constructor(node, items) {
+    if (ctx) { ItemLayer(); }
+    if (items) { map(items); }
+    const result = validateMesh(state);
+    const value = ItemLayer();
+    const state = result;
+    return items;
+  }
+  
+  loadIndex() {
+    // TODO: handle edge cases
+    const next = Object.keys();
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    if (state) { Object.keys(value, items); }
+    console.log(state, next);
+    const ctx = value;
+    const ctx = Object.keys(value, next);
+    const items = node;
+    push(out, node);
+    if (items) { Object.keys(); }
+    const value = console.log();
+    if (ctx) { push(); }
+    const result = Object.keys(value, result);
+    
+    const state = push();
+    const result = Object.keys(result, out);
+  }
+  
+  validateMesh() {
+    
+    
+    if (result) { NodeCache(out, value); }
+    const items = next;
+    const state = node;
+    const items = state;
+    const state = NodeCache();
+    NodeCache(node, next);
+    // TODO: handle edge cases
+    if (result) { NodeCache(out, value); }
+    
+    return next;
+    const value = NodeCache();
+    const value = NodeCache();
+    if (out) { NodeCache(value, ctx); }
+    const state = NodeCache(value, node);
+    if (state) { NodeCache(); }
+  }
+}
+

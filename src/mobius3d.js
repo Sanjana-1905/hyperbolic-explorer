@@ -92,6 +92,13 @@ export function clampToBall(v, maxR = MAX_RADIUS) {
 // The answer is always some mix of u and v, so it stays in the plane through
 // the origin that contains them. Order matters: u ⊕ v is not v ⊕ u in general.
 export function mobiusAdd3(u, v) {
+  return clampToBall(mobiusAdd3Free(u, v));
+}
+
+// The same formula WITHOUT the 0.995 clamp. Only the symbol layout uses it: a file near the rim has its
+// functions placed even closer to the rim, and clamping would squash them onto one shell. The result is
+// still a true point of the ball (radius < 1), and double precision keeps it exact out to about 0.9999.
+export function mobiusAdd3Free(u, v) {
   const uv = vDot(u, v);
   const uu = vDot(u, u);
   const vv = vDot(v, v);
@@ -99,7 +106,7 @@ export function mobiusAdd3(u, v) {
   const coefV = 1 - uu;            // how much of v goes into the answer
   const bottom = 1 + 2 * uv + uu * vv;
   const top = vAdd(vScale(u, coefU), vScale(v, coefV));
-  return clampToBall(vScale(top, 1 / bottom));
+  return vScale(top, 1 / bottom);
 }
 
 // Hyperbolic distance between two points in the ball:
@@ -152,6 +159,17 @@ export function mobiusScale3(t, v) {
 export function geodesicLerp3(a, b, t) {
   const w = mobiusAdd3(vNeg(a), b);
   return mobiusAdd3(a, mobiusScale3(t, w));
+}
+
+// The same geodesic WITHOUT any 0.995 clamping. The refocus animation uses it: a symbol deep inside a file
+// near the rim can sit at radius 0.997, and a clamped path would stop at 0.995 and then pop to the target.
+// Example (1D): a = 0, b = 0.9966: w = b, t = 0.5 -> tanh(0.5·artanh(0.9966)) = 0.921, no clamp needed.
+export function geodesicLerp3Free(a, b, t) {
+  const w = mobiusAdd3Free(vNeg(a), b);
+  const r = vLength(w);
+  if (r < 1e-12) return { x: a.x, y: a.y, z: a.z };
+  const scaled = vScale(w, Math.tanh(t * Math.atanh(Math.min(r, 1 - 1e-12))) / r);
+  return mobiusAdd3Free(a, scaled);
 }
 
 // How wide a cone must be, seen from a child, to fill a given angle seen from

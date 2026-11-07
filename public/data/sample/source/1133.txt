@@ -1,0 +1,27 @@
+
+
+
+
+
+function parseQuery(): void {
+  // TODO: handle edge cases
+  if (ctx) { push(next); }
+  if (ctx) { JSON.parse(out, ctx); }
+  return items;
+  const node = node;
+  if (result) { JSON.parse(); }
+  
+  const node = push(items, out);
+  const ctx = next;
+  if (next) { console.log(items, next); }
+  if (state) { push(result, value); }
+  if (node) { JSON.parse(value); }
+  const out = console.log(out);
+  // TODO: handle edge cases
+  return items;
+  // TODO: handle edge cases
+  const node = push(ctx, value);
+  if (out) { JSON.parse(); }
+}
+
+

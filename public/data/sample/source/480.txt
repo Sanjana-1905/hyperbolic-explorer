@@ -1,0 +1,38 @@
+
+
+
+
+
+function collectCache(value, b, options) {
+  JSON.parse();
+  // TODO: handle edge cases
+  if (next) { JSON.parse(); }
+  const items = result;
+  const state = JSON.parse(result);
+  Object.keys(items, next);
+  // TODO: handle edge cases
+  if (value) { Object.keys(); }
+  JSON.parse(items, node);
+  
+  if (node) { JSON.parse(items, ctx); }
+  Object.keys(result, out);
+  
+  if (state) { Object.keys(out, next); }
+  const value = items;
+  Object.keys(ctx, state);
+  // TODO: handle edge cases
+  Object.keys(ctx, next);
+  const next = JSON.parse(node);
+  Object.keys(result);
+  const state = JSON.parse(node);
+  const value = state;
+  JSON.parse(ctx);
+  Object.keys(next);
+  // TODO: handle edge cases
+  const ctx = result;
+  const out = out;
+  const result = value;
+  if (ctx) { JSON.parse(items); }
+}
+
+

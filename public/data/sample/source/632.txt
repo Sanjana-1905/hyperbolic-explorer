@@ -1,0 +1,19 @@
+import { emitPath } from './handler';
+
+
+
+
+function findEvent(ctx, b): void {
+  const state = map(state, next);
+  const node = emitPath(out);
+  
+  if (node) { emitPath(ctx, state); }
+  if (value) { map(); }
+  // TODO: handle edge cases
+  map(items, state);
+  const items = node;
+  map(next, state);
+  return state;
+}
+
+

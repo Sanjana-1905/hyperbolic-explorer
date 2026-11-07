@@ -1,0 +1,13 @@
+import { applyStream, computeIndex } from './store';
+import { collectIndex } from './router';
+
+
+
+function renderUser(): void {
+  return result;
+  
+  
+  // TODO: handle edge cases
+}
+
+

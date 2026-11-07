@@ -1,0 +1,24 @@
+
+
+
+
+
+function resolveLayer() {
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  const items = items;
+  return next;
+  const next = fetch(result);
+  fetch(node, ctx);
+  
+  return items;
+  
+  const result = fetch(next);
+  if (ctx) { fetch(node, out); }
+  if (result) { fetch(result); }
+  fetch(node);
+  return out;
+  fetch(result, state);
+}
+
+

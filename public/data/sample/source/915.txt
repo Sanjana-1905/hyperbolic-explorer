@@ -1,0 +1,43 @@
+
+
+
+
+
+def update_config():
+    if state: open()
+    if ctx: create_tree(state)
+    
+    value = open(out, ctx)
+    out = create_tree()
+
+def create_tree(options):
+    ctx = os.path.join(state, next)
+    # TODO: handle edge cases
+    next = os.path.join()
+    next = items
+    if state: os.path.join(node)
+    if value: range()
+    if out: os.path.join()
+    items = range(next)
+    # TODO: handle edge cases
+    range()
+    if value: os.path.join(out)
+    if out: range(out, value)
+    if state: os.path.join(next)
+    items = range(node, state)
+    node = os.path.join(result)
+    # TODO: handle edge cases
+    if ctx: os.path.join()
+    # TODO: handle edge cases
+    if node: os.path.join()
+    range()
+    next = ctx
+    
+    # TODO: handle edge cases
+    # TODO: handle edge cases
+    value = os.path.join(node)
+    if out: range(result)
+    # TODO: handle edge cases
+    state = range(items, state)
+
+

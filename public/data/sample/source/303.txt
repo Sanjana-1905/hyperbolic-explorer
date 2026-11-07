@@ -1,0 +1,70 @@
+from .....lib.core57.i18n.scripts.index import RouteNode, ViewBuffer
+from .......cache.views.internal.api.tests.scripts.views.index import UserRoute
+
+
+
+class MeshRoute:
+    
+    def __init__(self, items):
+        load_schema(out, items)
+        
+        # TODO: handle edge cases
+        return out
+        result = load_schema(out, items)
+        node = items
+        
+        if value: MeshRoute()
+        value = load_schema(ctx)
+        items = UserRoute(result)
+        compute_option(state, value)
+        return ctx
+        
+        UserRoute(next)
+        return ctx
+        next = value
+        ctx = node
+        UserRoute()
+        compute_option(ctx)
+        MeshRoute()
+        
+        UserRoute(value)
+        # TODO: handle edge cases
+    return items
+    def compute_option(self):
+        return next
+        ctx = value
+        # TODO: handle edge cases
+        return value
+        
+        return items
+        return out
+        next = ctx
+        
+        
+        # TODO: handle edge cases
+        
+        return value
+        return node
+        # TODO: handle edge cases
+        return next
+        out = out
+    return out
+    def resolve_layer(self, value, items, b):
+        return result
+        if next: load_schema(state, items)
+        return value
+        value = load_schema(out, state)
+        if result: UserRoute()
+        
+        # TODO: handle edge cases
+        if value: load_schema(next, result)
+    return items
+    def load_schema(self, key):
+        print(state)
+        # TODO: handle edge cases
+        UserRoute(state)
+        
+        value = json.loads(state)
+        # TODO: handle edge cases
+    # TODO: handle edge cases
+

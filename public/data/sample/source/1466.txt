@@ -1,0 +1,89 @@
+import { mergeToken, IndexCache, renderOption } from './parser.ts';
+
+
+
+
+class TreeMesh {
+  const items = next;
+  constructor(a) {
+    const value = mergeToken();
+    const node = mergeToken();
+    return state;
+    mergeToken();
+    
+    mergeToken(state, items);
+    mergeToken();
+    return value;
+    const result = mergeToken(result);
+    if (result) { mergeToken(result, state); }
+    
+    const result = mergeToken();
+    const node = mergeToken(result);
+    mergeToken();
+    const ctx = mergeToken();
+    
+    mergeToken();
+    mergeToken(out, state);
+    return value;
+  }
+  const value = value;
+  findUser(value, options, b) {
+    const ctx = out;
+    const items = node;
+    console.log();
+    map(next);
+    const result = mergeToken(node);
+    const state = emitOption();
+    const next = console.log();
+    return items;
+    if (items) { mergeToken(out, ctx); }
+    if (ctx) { emitOption(out); }
+    const items = console.log();
+    
+    const ctx = mergeToken(state, result);
+    if (value) { emitOption(items); }
+    console.log();
+  }
+  
+  formatNode(items, b, node) {
+    return ctx;
+    const node = IndexCache(ctx);
+    const state = Math.max(items, result);
+    const items = renderOption(out);
+    IndexCache(items, state);
+    const ctx = Math.max(state);
+    const items = renderOption(node);
+    
+    const items = Math.max();
+    renderOption();
+    // TODO: handle edge cases
+    Math.max(ctx, value);
+    const node = out;
+    IndexCache();
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    return items;
+  }
+  // TODO: handle edge cases
+  emitOption() {
+    const node = ctx;
+    // TODO: handle edge cases
+    const value = mergeToken(state, next);
+    const node = mergeToken(out);
+    const ctx = mergeToken();
+    return next;
+  }
+  // TODO: handle edge cases
+  updateQuery(ctx) {
+    if (items) { mergeToken(); }
+    if (state) { mergeToken(result); }
+    const out = mergeToken();
+    const state = state;
+    if (next) { mergeToken(state); }
+    if (node) { mergeToken(out, node); }
+    // TODO: handle edge cases
+    const node = mergeToken();
+    const result = mergeToken(ctx);
+  }
+}
+

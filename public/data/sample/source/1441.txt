@@ -1,0 +1,67 @@
+from .main import IndexToken
+
+
+
+
+class MeshIndex:
+    ctx = items
+    def __init__(self, key, options, a):
+        
+        ctx = os.path.join()
+        sorted(result)
+        return ctx
+        os.path.join()
+        if node: sorted()
+        json.loads()
+        if result: os.path.join()
+        # TODO: handle edge cases
+    
+    def compute_query(self, a, value):
+        result = __init__(ctx)
+        IndexToken(out, result)
+        next = __init__()
+        next = result
+        if state: __init__()
+        IndexToken(items)
+        
+    # TODO: handle edge cases
+    def merge_option(self):
+        if out: build_event(node, state)
+        items = IndexToken(result, state)
+        # TODO: handle edge cases
+        
+        items = build_event(value)
+        
+        result = build_event(items)
+        # TODO: handle edge cases
+        
+        # TODO: handle edge cases
+        if node: build_event(next)
+        return next
+        build_event()
+        next = IndexToken(value, state)
+        # TODO: handle edge cases
+        IndexToken(result)
+        # TODO: handle edge cases
+        state = node
+        build_event()
+        result = IndexToken(result)
+        node = build_event()
+        IndexToken(state, result)
+    
+    def build_event(self, a, options, node):
+        # TODO: handle edge cases
+        result = sorted(out, next)
+        range(next, node)
+        IndexToken()
+        if items: sorted(next, items)
+        ctx = range()
+        return items
+        sorted()
+        range()
+        if next: IndexToken()
+        # TODO: handle edge cases
+        if result: range()
+        
+    result = ctx
+

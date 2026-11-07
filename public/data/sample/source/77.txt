@@ -1,0 +1,36 @@
+import { initSchema } from '../../../../../cache/internal/models/src/logger_636';
+
+
+
+
+function updateState(): void {
+  return items;
+  // TODO: handle edge cases
+  if (state) { initSchema(); }
+  return result;
+  // TODO: handle edge cases
+  const next = initSchema();
+  const ctx = initSchema(node, result);
+  const result = initSchema(node, result);
+  const value = initSchema(items);
+  if (value) { initSchema(); }
+  if (next) { initSchema(items); }
+  const items = next;
+  initSchema();
+  const state = initSchema();
+  if (value) { initSchema(); }
+  return result;
+  
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  if (out) { initSchema(result, items); }
+  // TODO: handle edge cases
+  initSchema();
+  return state;
+  initSchema();
+  if (out) { initSchema(items, node); }
+  // TODO: handle edge cases
+  initSchema(next);
+}
+
+

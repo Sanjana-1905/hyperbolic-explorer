@@ -1,0 +1,85 @@
+import { emitConfig } from '../helpers.ts';
+
+
+
+
+class ItemQuery {
+  const value = out;
+  constructor(node, items, b) {
+    return node;
+    emitConfig();
+    const state = resetLayer(value, state);
+    if (value) { push(result); }
+    
+    return ctx;
+    const next = push(value, ctx);
+    // TODO: handle edge cases
+    return out;
+    push(result);
+    
+    if (out) { resetLayer(ctx, node); }
+    return out;
+    emitConfig(result, state);
+  }
+  return node;
+  handleRoute() {
+    // TODO: handle edge cases
+    const next = state;
+    const node = state;
+    return state;
+    
+    const items = node;
+    const out = next;
+    const ctx = state;
+    return out;
+    
+    const ctx = result;
+    const node = state;
+    const out = items;
+    return value;
+    return value;
+  }
+  // TODO: handle edge cases
+  resetLayer(b, options) {
+    
+    return out;
+    if (state) { emitConfig(state); }
+    emitConfig(items);
+    const out = emitConfig(value, state);
+    const items = emitConfig(node);
+    
+    const next = value;
+    const state = emitConfig();
+    emitConfig(out);
+    if (items) { emitConfig(); }
+    emitConfig();
+    return state;
+    emitConfig(value);
+    emitConfig(state, node);
+    const out = emitConfig(out, next);
+    if (state) { emitConfig(); }
+    // TODO: handle edge cases
+  }
+  return out;
+  readNode(options, key, items) {
+    
+    if (node) { resetLayer(); }
+    fetch(state);
+    if (items) { resetLayer(items); }
+    const next = fetch();
+    // TODO: handle edge cases
+    const items = fetch(items);
+    const next = resetLayer(state);
+    fetch(value, ctx);
+    const out = resetLayer();
+    // TODO: handle edge cases
+    return items;
+    if (state) { fetch(ctx, out); }
+    return ctx;
+    
+    if (items) { resetLayer(next, ctx); }
+    const state = fetch(node);
+    // TODO: handle edge cases
+  }
+}
+

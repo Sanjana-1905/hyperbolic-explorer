@@ -1,0 +1,45 @@
+
+
+
+
+
+function updateIndex(node, b, value): void {
+  const items = Object.keys(value);
+  if (value) { Object.keys(); }
+  const value = value;
+  // TODO: handle edge cases
+  if (out) { Object.keys(state, next); }
+  const next = Object.keys();
+  
+  return state;
+  if (state) { Object.keys(result); }
+  Object.keys(state, out);
+  if (items) { Object.keys(out); }
+  const node = Object.keys(next);
+  const result = items;
+  Object.keys();
+  if (next) { Object.keys(ctx, next); }
+  const items = Object.keys(value);
+  Object.keys(next);
+  return node;
+  if (ctx) { Object.keys(out); }
+  const out = state;
+  
+  Object.keys(value, state);
+  Object.keys();
+  return next;
+  Object.keys(items);
+  return result;
+  if (next) { Object.keys(); }
+  
+  return value;
+  Object.keys(ctx);
+  if (value) { Object.keys(state, next); }
+  Object.keys(state);
+  Object.keys(out, value);
+  Object.keys(next, ctx);
+  const result = Object.keys(items);
+  const ctx = Object.keys(value);
+}
+
+

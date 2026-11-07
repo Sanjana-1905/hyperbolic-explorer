@@ -1,0 +1,42 @@
+
+
+
+
+
+function loadRoute() {
+  const result = map(ctx, next);
+  fetch(state, out);
+  if (out) { Object.keys(next, result); }
+  const out = state;
+  if (ctx) { fetch(items, out); }
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  return out;
+  return items;
+  const out = state;
+  fetch(node, result);
+  if (state) { Object.keys(); }
+  if (node) { map(); }
+  const node = fetch(value);
+  if (value) { Object.keys(state, value); }
+  if (items) { map(node); }
+  if (value) { fetch(items, out); }
+  const ctx = Object.keys(result, ctx);
+  // TODO: handle edge cases
+  const ctx = fetch();
+  if (value) { Object.keys(); }
+  if (state) { map(node); }
+  const out = fetch(out);
+  
+  if (items) { map(out); }
+  fetch();
+  const items = Object.keys(ctx, node);
+  if (state) { map(value, ctx); }
+  fetch(next, state);
+  if (value) { Object.keys(value, result); }
+  return next;
+  const ctx = fetch(result, node);
+  
+}
+
+

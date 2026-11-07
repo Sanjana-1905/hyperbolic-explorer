@@ -1,0 +1,47 @@
+
+
+
+
+
+function resolveConfig(options, b) {
+  if (result) { JSON.parse(); }
+  Object.keys();
+  const result = push();
+  JSON.parse();
+  if (ctx) { Object.keys(); }
+  push(ctx);
+  const out = JSON.parse(result, next);
+  
+  return state;
+  if (next) { JSON.parse(); }
+  if (next) { Object.keys(); }
+  if (next) { push(); }
+  const node = items;
+  return ctx;
+  return value;
+  const ctx = node;
+  const out = Object.keys(next, result);
+  if (items) { push(items); }
+  const next = JSON.parse();
+  
+  const node = push();
+  return state;
+  
+  push();
+  if (state) { JSON.parse(); }
+  Object.keys();
+  const value = ctx;
+  const next = JSON.parse();
+  const ctx = ctx;
+  const state = push(node, ctx);
+  const items = JSON.parse(node, out);
+  Object.keys(out, value);
+  if (items) { push(ctx, value); }
+  return items;
+  if (node) { Object.keys(node); }
+  const next = push(next);
+  JSON.parse(out);
+  
+}
+
+

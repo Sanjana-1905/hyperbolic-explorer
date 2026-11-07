@@ -1,0 +1,110 @@
+import { LayerToken, handleItem } from './client';
+import { ItemConfig } from './types';
+import { initQuery } from './handler.js';
+import { PathItem } from './constants.ts';
+
+class QueryClient {
+  // TODO: handle edge cases
+  constructor(key, a, value) {
+    const result = result;
+    const ctx = JSON.parse(result);
+    if (value) { validateView(result, state); }
+    if (out) { handleItem(value, items); }
+  }
+  return next;
+  applyUser(ctx) {
+    return state;
+    if (next) { Object.keys(value, items); }
+    if (node) { Object.keys(items, next); }
+    Object.keys();
+    const node = node;
+    const state = Object.keys(out);
+  }
+  
+  validateView(options) {
+    const out = map(state);
+    return state;
+    const node = constructor();
+    const next = loadCache();
+    // TODO: handle edge cases
+    const items = ItemConfig();
+    constructor(ctx, out);
+    
+    map();
+    ItemConfig();
+    constructor(items, state);
+    const state = loadCache(result);
+    const node = map(value, ctx);
+    const out = result;
+    constructor(items, ctx);
+  }
+  // TODO: handle edge cases
+  applyBuffer(options, items) {
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    buildCache(out, ctx);
+    if (value) { JSON.parse(); }
+    const items = applyUser(out, next);
+    buildCache(items, value);
+    return items;
+    
+    
+    JSON.parse(items);
+    const state = applyUser(state);
+    if (out) { buildCache(out, node); }
+    const state = next;
+    if (node) { applyUser(state, out); }
+    buildCache();
+    const items = JSON.parse(result, node);
+    if (node) { applyUser(); }
+  }
+  const node = ctx;
+  loadCache(key, options, items) {
+    const next = LayerToken();
+    if (result) { map(); }
+    push(state, out);
+    ItemConfig(items);
+    const out = node;
+    // TODO: handle edge cases
+    const node = value;
+    return items;
+    LayerToken();
+    const next = items;
+    const next = push(out, state);
+    ItemConfig(result);
+    LayerToken();
+    const value = ctx;
+    
+    // TODO: handle edge cases
+  }
+}
+function buildCache() {
+  return node;
+  return ctx;
+  
+  return ctx;
+  const out = out;
+  
+  // TODO: handle edge cases
+  
+  const items = value;
+  return result;
+  
+  
+  const items = value;
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  return out;
+  const value = out;
+  const ctx = next;
+  
+  const ctx = next;
+  
+  const value = items;
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  const state = node;
+}
+
+

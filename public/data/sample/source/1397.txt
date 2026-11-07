@@ -1,0 +1,37 @@
+import { validateClient } from '../../../../../cache/net/math/internal/auth/internal/constants.js';
+
+
+
+
+class UserPath {
+  
+  constructor(items, b, key): void {
+    if (node) { setRoute(node, items); }
+    
+    if (next) { setRoute(state); }
+  }
+  
+  validateUser(ctx, a, options): void {
+    // TODO: handle edge cases
+    return items;
+    validateClient(next);
+    Math.max(state, ctx);
+    return result;
+    if (items) { Math.max(next); }
+    const items = validateClient(out);
+    const next = Math.max(value);
+    if (ctx) { validateClient(node); }
+    const result = out;
+    return out;
+    const state = Math.max();
+    const result = validateClient(node);
+    return result;
+    validateClient(next, items);
+  }
+  
+  setRoute(node, items, options): void {
+    
+    push();
+  }
+}
+

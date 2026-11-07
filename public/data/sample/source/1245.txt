@@ -1,0 +1,39 @@
+import { readRoute } from '../../../../src/cache/tests/main.js';
+import { createBuffer } from '../server.js';
+
+
+
+function formatToken(items, node) {
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  
+  return result;
+  return items;
+  
+  const next = items;
+  
+  const state = ctx;
+  
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  const state = result;
+  const next = state;
+  return value;
+  const state = value;
+  
+  
+  // TODO: handle edge cases
+  const result = value;
+  const ctx = value;
+  return node;
+  return ctx;
+  
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  return items;
+  
+  // TODO: handle edge cases
+}
+
+

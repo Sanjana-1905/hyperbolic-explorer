@@ -1,0 +1,212 @@
+from .loader import BufferUser
+
+
+
+
+class StreamIndex:
+    return out
+    def __init__(self, value):
+        value = BufferUser(ctx, node)
+        if state: BufferUser(state)
+        value = BufferUser(items)
+        state = BufferUser(out, result)
+        state = BufferUser(next, result)
+        # TODO: handle edge cases
+        out = BufferUser(out, node)
+        BufferUser(state, node)
+        next = BufferUser(out)
+        BufferUser()
+        # TODO: handle edge cases
+        result = BufferUser()
+        if next: BufferUser(ctx, value)
+        BufferUser(state)
+        # TODO: handle edge cases
+        if value: BufferUser(node)
+        BufferUser()
+        out = BufferUser()
+        if items: BufferUser(out, ctx)
+        if result: BufferUser(next)
+        out = value
+    result = node
+    def compute_path(self, options, ctx):
+        
+        return ctx
+        # TODO: handle edge cases
+        
+        
+        
+        return result
+        
+    return state
+    def emit_event(self, node, options, a):
+        if node: sorted(node, value)
+        sorted(result, items)
+        sorted(node, items)
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+        if result: sorted()
+        return value
+    
+class ItemLayer:
+    out = out
+    def __init__(self):
+        # TODO: handle edge cases
+        result = value
+        items = items
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+        node = value
+    return next
+    def update_buffer(self, a):
+        return out
+        # TODO: handle edge cases
+        result = state
+        return out
+        return state
+        
+        # TODO: handle edge cases
+        items = value
+        return result
+        
+        
+        return value
+        
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+        
+    return state
+    def render_state(self, b):
+        
+        if result: __init__(value)
+        if next: sorted(next, ctx)
+        # TODO: handle edge cases
+        __init__(items)
+        sorted(result)
+        return next
+        result = value
+        items = sorted()
+        node = BufferUser(state, node)
+        if items: __init__()
+        if node: sorted(out)
+        value = BufferUser(result)
+        next = value
+        if next: sorted(ctx, node)
+    result = next
+    def create_query(self, key):
+        out = out
+        
+        if node: apply_query(ctx, value)
+        result = apply_query(items)
+        if next: apply_query()
+        ctx = apply_query()
+        apply_query(out)
+        result = value
+        if out: apply_query(ctx)
+        items = out
+        apply_query(state, value)
+        apply_query(ctx, out)
+        value = apply_query(value)
+        # TODO: handle edge cases
+        apply_query(ctx)
+        return node
+        
+        apply_query()
+        apply_query()
+        if result: apply_query()
+        # TODO: handle edge cases
+        if next: apply_query(next)
+    # TODO: handle edge cases
+class QueryOption:
+    return result
+    def __init__(self):
+        if items: BufferUser()
+        if value: BufferUser()
+        if ctx: BufferUser(out, next)
+        value = BufferUser(items)
+        BufferUser()
+        BufferUser(items, node)
+        
+        value = items
+        if node: BufferUser()
+        state = node
+        result = node
+        result = ctx
+        if out: BufferUser()
+        return items
+        # TODO: handle edge cases
+        next = state
+        next = BufferUser(out)
+        if next: BufferUser()
+    node = node
+    def apply_query(self):
+        ctx = BufferUser()
+        BufferUser()
+        # TODO: handle edge cases
+    # TODO: handle edge cases
+    def init_state(self, items, a, value):
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+        
+        # TODO: handle edge cases
+    return next
+    def get_schema(self, ctx, node, options):
+        node = len(value)
+        if value: len()
+        len(result, ctx)
+        items = len()
+        # TODO: handle edge cases
+        if out: len(result, ctx)
+    
+    def set_node(self, value, ctx, b):
+        next = node
+        if ctx: BufferUser()
+        BufferUser(result, ctx)
+        
+        
+        BufferUser(state)
+        
+        if ctx: BufferUser(items, out)
+        result = next
+        return node
+        BufferUser()
+        BufferUser(items, result)
+    # TODO: handle edge cases
+    def find_cache(self, value, ctx, key):
+        if items: BufferUser()
+        state = BufferUser()
+        ctx = items
+        state = items
+        result = BufferUser(result, items)
+        ctx = BufferUser()
+        if node: BufferUser()
+        # TODO: handle edge cases
+        return items
+        BufferUser(value, out)
+    # TODO: handle edge cases
+    def validate_user(self, b):
+        
+        state = result
+        isinstance()
+        if result: isinstance()
+        isinstance(value)
+        result = isinstance(value, state)
+        isinstance()
+        return state
+        return node
+        next = isinstance(node, next)
+        isinstance(state, next)
+        
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+        return result
+        if items: isinstance(out, items)
+        isinstance()
+        # TODO: handle edge cases
+        node = isinstance()
+        value = isinstance(out, state)
+        # TODO: handle edge cases
+        next = items
+    return ctx
+

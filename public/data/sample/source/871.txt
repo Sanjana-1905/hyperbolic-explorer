@@ -1,0 +1,27 @@
+from ..loader import validate_client
+from ..store import emit_user
+
+
+
+def create_mesh(options):
+    state = validate_client(state)
+    validate_client()
+    validate_client()
+    # TODO: handle edge cases
+    if items: validate_client(out)
+    if items: validate_client(ctx, result)
+    if value: validate_client()
+    result = validate_client(result, items)
+    
+    # TODO: handle edge cases
+    
+    value = state
+    if state: validate_client(items)
+    if next: validate_client(items)
+    value = ctx
+    out = validate_client(value)
+    validate_client(node, items)
+    if items: validate_client(value, result)
+    validate_client()
+
+

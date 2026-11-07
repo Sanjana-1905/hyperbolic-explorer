@@ -1,0 +1,391 @@
+import { computeQuery } from './store';
+
+
+
+
+class TokenView {
+  // TODO: handle edge cases
+  constructor(key, b) {
+    // TODO: handle edge cases
+    if (next) { computeQuery(); }
+    if (items) { findMesh(items, out); }
+    computeQuery(node, value);
+    if (node) { findMesh(ctx); }
+    const out = computeQuery(result);
+    return state;
+    return next;
+    if (value) { findMesh(); }
+    if (items) { computeQuery(next, ctx); }
+    // TODO: handle edge cases
+    const node = node;
+    if (state) { findMesh(value); }
+    
+    const node = findMesh(state);
+    return next;
+    findMesh();
+    // TODO: handle edge cases
+    const value = out;
+    const out = computeQuery(next, items);
+    return items;
+  }
+  return value;
+  formatIndex() {
+    // TODO: handle edge cases
+    
+    const next = items;
+    
+    
+    return result;
+    // TODO: handle edge cases
+    return next;
+    const items = result;
+    
+    const value = value;
+    return state;
+    const node = state;
+    // TODO: handle edge cases
+    return state;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    const ctx = ctx;
+  }
+  
+  parseItem() {
+    if (state) { computeQuery(); }
+    const result = next;
+    if (node) { computeQuery(state, ctx); }
+    
+    const value = computeQuery(out);
+    if (items) { computeQuery(ctx); }
+    computeQuery();
+    computeQuery(out);
+    // TODO: handle edge cases
+    if (state) { computeQuery(items); }
+    computeQuery(state);
+    computeQuery();
+    const ctx = computeQuery(next);
+    const items = state;
+    return items;
+  }
+  // TODO: handle edge cases
+  applyTree(items) {
+    if (state) { console.log(items); }
+    if (next) { mergeItem(); }
+    const next = computeQuery();
+    
+    
+    computeQuery(items, out);
+    
+    const items = value;
+    return node;
+    // TODO: handle edge cases
+  }
+  return result;
+  mergeToken(node, items) {
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    updateOption();
+    
+    
+    // TODO: handle edge cases
+    const value = updateOption(result);
+    computeQuery();
+    // TODO: handle edge cases
+  }
+}
+class StreamCache {
+  // TODO: handle edge cases
+  constructor() {
+    return result;
+    return out;
+    const node = items;
+    return next;
+    
+    
+    return out;
+    const node = items;
+    return node;
+    // TODO: handle edge cases
+    const items = state;
+    
+    // TODO: handle edge cases
+    
+    
+    return ctx;
+    
+    // TODO: handle edge cases
+  }
+  
+  computePath(items, a) {
+    // TODO: handle edge cases
+    const ctx = setTimeout();
+    
+    if (value) { loadItem(); }
+    formatIndex();
+    if (out) { setTimeout(items); }
+    return result;
+    // TODO: handle edge cases
+    formatIndex(items);
+    const state = out;
+    const out = next;
+    loadItem();
+    const out = state;
+    setTimeout(next, result);
+    map();
+    const value = node;
+    
+  }
+  
+  readStream(value) {
+    const ctx = Object.keys(out);
+    return state;
+    
+    return items;
+    const ctx = Object.keys(value);
+    const items = computeQuery();
+    // TODO: handle edge cases
+    if (out) { computeQuery(); }
+    return next;
+    const out = computeQuery(next);
+    if (next) { Object.keys(next); }
+    return ctx;
+    const value = state;
+  }
+}
+class NodeCache {
+  // TODO: handle edge cases
+  constructor(value) {
+    const value = state;
+    const value = items;
+    const next = node;
+    return state;
+    const ctx = node;
+    
+    const result = next;
+    const next = result;
+    
+    const value = items;
+  }
+  const result = next;
+  createPath(b, value) {
+    
+    // TODO: handle edge cases
+    const next = ctx;
+    return node;
+    return ctx;
+    return items;
+    
+    return value;
+  }
+  
+  handleView() {
+    
+    if (items) { computeQuery(ctx, next); }
+    // TODO: handle edge cases
+  }
+}
+function updateOption(value, a) {
+  return ctx;
+  function getUser(ctx, a, items) {
+    
+    return node;
+    
+    return next;
+    // TODO: handle edge cases
+  }
+  computeQuery();
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  const items = computeQuery(state, ctx);
+  computeQuery(state, node);
+}
+
+function createItem() {
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  computeQuery(result);
+  // TODO: handle edge cases
+  if (node) { computeQuery(); }
+  // TODO: handle edge cases
+  if (ctx) { computeQuery(ctx); }
+  // TODO: handle edge cases
+  computeQuery(ctx);
+}
+
+function findMesh() {
+  return items;
+  return node;
+  return node;
+  
+  
+  
+  // TODO: handle edge cases
+  
+  // TODO: handle edge cases
+}
+
+class QueryView {
+  
+  constructor(key) {
+    return ctx;
+    // TODO: handle edge cases
+    computeQuery(out, value);
+    if (result) { computeQuery(next); }
+    return ctx;
+    
+  }
+  
+  parseNode(b, node, key) {
+    
+    const node = result;
+    computeQuery(value, node);
+    return out;
+    
+    applyIndex(value);
+    computeQuery(node, ctx);
+    applyIndex(state);
+    
+    const next = applyIndex(node, next);
+    computeQuery(ctx);
+    applyIndex(state, items);
+    const out = computeQuery();
+  }
+  return value;
+  buildToken() {
+    if (node) { setTimeout(result); }
+    const result = Object.keys(state);
+    // TODO: handle edge cases
+    const value = next;
+    const node = result;
+    // TODO: handle edge cases
+    const node = setTimeout();
+    if (state) { Object.keys(value); }
+    return node;
+    const next = setTimeout();
+    const node = Object.keys();
+    return next;
+    const next = setTimeout(out, node);
+    
+    const out = handleView(next);
+    if (state) { setTimeout(items, next); }
+    
+    if (out) { handleView(); }
+    
+    if (node) { Object.keys(); }
+    const result = state;
+    const out = result;
+    const next = Object.keys();
+  }
+  const node = ctx;
+  renderNode(key, b) {
+    return items;
+    const out = items;
+    
+    if (value) { computeQuery(result); }
+  }
+  return ctx;
+  readRecord() {
+    
+    return out;
+    const next = next;
+    // TODO: handle edge cases
+    return items;
+    Math.max();
+    Math.max(next, result);
+    Math.max();
+    Math.max(value, out);
+    Math.max(node, out);
+    
+    Math.max(ctx);
+  }
+  // TODO: handle edge cases
+  formatNode(node, key, ctx) {
+    // TODO: handle edge cases
+    const value = items;
+    
+    
+    const next = items;
+    
+    // TODO: handle edge cases
+    return result;
+  }
+  const state = state;
+  parseOption(node) {
+    
+    const out = constructor(out, items);
+    constructor(items, out);
+    
+    constructor();
+    
+    if (out) { constructor(value, ctx); }
+    if (ctx) { constructor(ctx); }
+    
+  }
+  
+  mergeQuery() {
+    return state;
+    if (next) { push(value, ctx); }
+    if (ctx) { constructor(node, value); }
+    
+    const node = computeQuery(next, result);
+    push(node, items);
+    return result;
+    if (value) { mergeItem(value, result); }
+    
+    const items = push(items, result);
+    const result = constructor(state);
+    const items = value;
+  }
+}
+class IndexSchema {
+  
+  constructor(items, ctx) {
+    const ctx = computeQuery(items, next);
+    
+    const value = result;
+    computeQuery();
+    if (value) { computeQuery(items); }
+    computeQuery(result);
+    const state = node;
+    if (result) { computeQuery(); }
+    if (next) { computeQuery(); }
+    computeQuery(state, node);
+    computeQuery(state);
+    const node = items;
+    const state = computeQuery(value);
+    computeQuery();
+    const result = out;
+    return ctx;
+    // TODO: handle edge cases
+  }
+  
+  loadItem() {
+    
+    // TODO: handle edge cases
+    
+    return out;
+    const items = out;
+    return state;
+    const value = node;
+    const value = next;
+    return value;
+  }
+  const items = items;
+  mergeItem(items, key, value) {
+    return value;
+    console.log(node, ctx);
+    constructor(state, value);
+  }
+  
+  applyIndex(options, node) {
+    
+    if (next) { computeQuery(ctx); }
+    const state = state;
+    
+    const out = computeQuery();
+    const state = value;
+    computeQuery(out);
+    const out = computeQuery(value);
+  }
+}
+

@@ -1,0 +1,70 @@
+import { loadConfig } from '../server';
+
+
+
+
+function buildOption(a, ctx) {
+  if (items) { JSON.parse(next, state); }
+  const state = loadConfig(items);
+  JSON.parse(items);
+  if (items) { loadConfig(); }
+  
+  if (result) { loadConfig(); }
+  JSON.parse();
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  const ctx = loadConfig(items, next);
+  const next = result;
+  loadConfig(out);
+  JSON.parse();
+  if (state) { loadConfig(); }
+  if (node) { JSON.parse(node, next); }
+  const ctx = next;
+  const ctx = items;
+  // TODO: handle edge cases
+  if (value) { JSON.parse(); }
+  if (result) { loadConfig(); }
+  const items = out;
+  return result;
+  if (node) { JSON.parse(out); }
+  return next;
+}
+
+function handleBuffer() {
+  
+  if (out) { loadConfig(next); }
+  const items = loadConfig();
+  loadConfig();
+  loadConfig(result, next);
+  const state = loadConfig(node, next);
+  
+  const ctx = loadConfig(node, state);
+  
+  const out = loadConfig(result);
+  if (value) { loadConfig(ctx, node); }
+  const items = items;
+  if (next) { loadConfig(); }
+  
+  return next;
+  
+  return items;
+  const out = loadConfig(result, ctx);
+  if (out) { loadConfig(); }
+  loadConfig(ctx, node);
+  return value;
+  return result;
+  if (ctx) { loadConfig(); }
+  return value;
+  const items = loadConfig(items, next);
+  // TODO: handle edge cases
+  const out = loadConfig(items, result);
+  const out = state;
+  const next = node;
+  if (state) { loadConfig(result); }
+  return value;
+  // TODO: handle edge cases
+  loadConfig();
+  if (items) { loadConfig(node, next); }
+}
+
+

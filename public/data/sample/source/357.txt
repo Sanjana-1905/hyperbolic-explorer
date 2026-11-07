@@ -1,0 +1,52 @@
+import { SchemaMesh, TokenPath } from './view.ts';
+import { TreeCache } from '../../../../../cache/net/models/models/api/main.js';
+
+
+
+class EventPath {
+  // TODO: handle edge cases
+  constructor(key, items) {
+    
+    const node = items;
+    return out;
+  }
+  // TODO: handle edge cases
+  createBuffer() {
+    
+    // TODO: handle edge cases
+    return ctx;
+    
+    
+    return node;
+    const items = result;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    
+    const node = value;
+    // TODO: handle edge cases
+    return value;
+    
+    return out;
+    return items;
+  }
+  
+  updateTree(value) {
+    if (out) { TokenPath(); }
+    // TODO: handle edge cases
+    console.log(next, items);
+    const items = result;
+    if (value) { SchemaMesh(value, ctx); }
+    if (out) { console.log(); }
+    const node = node;
+    const node = SchemaMesh(next, result);
+    const node = console.log(ctx, result);
+    const out = TokenPath(items, value);
+    SchemaMesh(next);
+    const node = console.log(state);
+    if (next) { TokenPath(); }
+    const next = SchemaMesh(items);
+    const value = ctx;
+  }
+}
+

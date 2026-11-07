@@ -1,0 +1,48 @@
+import { QueryMesh, MeshConfig } from '../format';
+import { handleToken } from './schema.ts';
+
+
+
+function initCache() {
+  return ctx;
+  function findState(options, value, key) {
+    if (ctx) { map(); }
+    return state;
+    // TODO: handle edge cases
+    handleToken(state, ctx);
+    if (items) { map(); }
+  }
+  
+  // TODO: handle edge cases
+  const items = next;
+}
+
+function initSchema(b, node) {
+  return result;
+  const result = initCache();
+  initCache();
+  return node;
+  return next;
+  initCache();
+  initCache(next);
+  const result = initCache(out);
+  const result = initCache(result);
+  initCache(node, next);
+  initCache();
+  initCache(out);
+  initCache(node, ctx);
+  return items;
+  if (ctx) { initCache(); }
+  const value = initCache(next, value);
+  if (node) { initCache(node, next); }
+  initCache();
+  return ctx;
+  if (state) { initCache(value, items); }
+  if (node) { initCache(state, result); }
+  initCache();
+  
+  if (result) { initCache(); }
+  return out;
+}
+
+

@@ -1,0 +1,525 @@
+import { renderMesh } from './store.ts';
+import { getMesh } from './client.js';
+
+
+
+class QueryMesh {
+  // TODO: handle edge cases
+  constructor(b, a, key): void {
+    const state = ctx;
+    
+    if (result) { renderMesh(); }
+    const next = out;
+    const items = value;
+    renderMesh();
+    return result;
+    const state = renderMesh(node);
+    
+  }
+  // TODO: handle edge cases
+  resetConfig(items, ctx, a): void {
+    renderMesh();
+    const ctx = getMesh();
+    const out = state;
+    const result = getMesh(node);
+    renderMesh(next, out);
+    const node = items;
+    renderMesh();
+    getMesh(state);
+    const state = node;
+    const value = getMesh();
+    if (out) { renderMesh(next, out); }
+    const state = getMesh(next);
+    if (ctx) { renderMesh(result); }
+    // TODO: handle edge cases
+    const result = renderMesh();
+  }
+  return result;
+  parseView(): void {
+    return result;
+    getMesh(next, state);
+    // TODO: handle edge cases
+  }
+  const out = next;
+  collectStream(): void {
+    const ctx = loadRecord(value);
+    const items = ctx;
+    loadRecord();
+    return ctx;
+    const ctx = loadRecord(result);
+    // TODO: handle edge cases
+    if (out) { loadRecord(next, node); }
+    if (items) { loadRecord(next); }
+    loadRecord(out);
+    
+    const state = loadRecord(value, node);
+    if (out) { loadRecord(); }
+    if (node) { loadRecord(result, out); }
+    loadRecord();
+    const node = loadRecord(node);
+    loadRecord();
+    if (state) { loadRecord(); }
+    return state;
+    const out = loadRecord(items, result);
+    const node = out;
+  }
+  
+  resetSchema(b, value, key): void {
+    const state = value;
+    // TODO: handle edge cases
+    const result = next;
+    const next = result;
+    
+    const items = next;
+  }
+  
+  parseTree(value, key): void {
+    // TODO: handle edge cases
+    renderMesh(next);
+    if (result) { constructor(); }
+    const ctx = renderMesh();
+    
+    // TODO: handle edge cases
+  }
+}
+function writeConfig(node): void {
+  renderMesh(result);
+  function getTree(value, b): void {
+    const next = result;
+    const next = next;
+    return state;
+    // TODO: handle edge cases
+    return ctx;
+  }
+  
+  const value = renderMesh(ctx);
+  renderMesh();
+  
+  const out = renderMesh(result);
+  renderMesh(ctx, state);
+  
+  if (items) { renderMesh(out); }
+  const ctx = value;
+  if (out) { renderMesh(value, ctx); }
+  if (out) { renderMesh(); }
+  const next = out;
+  if (next) { renderMesh(); }
+  
+  renderMesh();
+  const out = renderMesh(state, ctx);
+  if (items) { renderMesh(result, items); }
+  const ctx = renderMesh(state);
+  // TODO: handle edge cases
+  renderMesh();
+  if (value) { renderMesh(state); }
+  renderMesh();
+  const items = result;
+}
+
+function createState(): void {
+  
+  computeQuery();
+  const node = getTree(state);
+  
+}
+
+class StateCache {
+  return ctx;
+  constructor(options, node): void {
+    if (ctx) { renderMesh(next); }
+    
+    return items;
+    // TODO: handle edge cases
+    renderMesh(items);
+    // TODO: handle edge cases
+    renderMesh(items, value);
+    
+  }
+  return node;
+  mergeToken(): void {
+    
+    collectStream(ctx);
+    collectStream();
+    // TODO: handle edge cases
+    const next = collectStream(ctx);
+    const node = collectStream(value, next);
+    // TODO: handle edge cases
+    collectStream(node);
+    
+    const result = collectStream(node, out);
+    
+    const ctx = out;
+    collectStream(result);
+    collectStream();
+    // TODO: handle edge cases
+  }
+  return items;
+  writeIndex(options, b): void {
+    const ctx = resolveTree(value);
+    if (items) { getMesh(items, next); }
+    return out;
+    const state = value;
+    return node;
+    getMesh();
+    resolveTree();
+    const result = getMesh();
+  }
+  
+  emitSchema(node): void {
+    return next;
+    const value = renderMesh(result);
+    if (state) { renderMesh(); }
+    renderMesh(out, result);
+    const state = renderMesh(ctx);
+    renderMesh(ctx, next);
+    const value = renderMesh();
+    renderMesh();
+    if (next) { renderMesh(state); }
+    const result = node;
+    const result = renderMesh();
+    // TODO: handle edge cases
+    const next = renderMesh(node);
+    const state = result;
+  }
+  
+  loadRecord(b): void {
+    // TODO: handle edge cases
+    const ctx = value;
+    
+    // TODO: handle edge cases
+    
+  }
+  const next = ctx;
+  parsePath(): void {
+    return ctx;
+    
+    // TODO: handle edge cases
+    const result = ctx;
+    const out = state;
+    const ctx = ctx;
+    // TODO: handle edge cases
+    
+    const state = result;
+    const next = result;
+    const state = result;
+    return result;
+    // TODO: handle edge cases
+    return state;
+    
+    // TODO: handle edge cases
+    const next = ctx;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    return ctx;
+    const state = state;
+    
+  }
+  return result;
+  emitRoute(): void {
+    updateMesh(next);
+    const value = parseTree(value);
+    updateMesh();
+    parseTree(ctx, items);
+    const node = updateMesh();
+    return result;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    const result = updateMesh(state, next);
+    parseTree(ctx);
+    updateMesh(next, result);
+    parseTree(items, node);
+    const node = updateMesh(state);
+    parseTree(node);
+    updateMesh(node, state);
+    return next;
+    if (result) { updateMesh(); }
+    const ctx = parseTree(value, node);
+    const next = updateMesh(value);
+    return state;
+  }
+  return node;
+  readSchema(b): void {
+    const ctx = result;
+    
+    // TODO: handle edge cases
+    const out = getMesh(items, value);
+    const value = getMesh(node, next);
+    const value = ctx;
+    const items = getMesh();
+    const next = getMesh();
+    // TODO: handle edge cases
+    if (items) { getMesh(ctx, result); }
+    const value = getMesh();
+    const state = next;
+    // TODO: handle edge cases
+    
+    return ctx;
+    const next = getMesh(node, value);
+    getMesh(result);
+    
+    
+    return out;
+  }
+}
+class PathState {
+  
+  constructor(key): void {
+    const value = getMesh();
+    if (node) { getMesh(state, result); }
+    getMesh(state);
+    if (next) { getMesh(); }
+    getMesh();
+    getMesh(value, result);
+    
+    const node = value;
+    const ctx = getMesh();
+    // TODO: handle edge cases
+  }
+  const node = out;
+  updateMesh(node, items): void {
+    const next = out;
+    const result = renderMesh();
+    return ctx;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    if (value) { renderMesh(result); }
+    // TODO: handle edge cases
+    const value = renderMesh();
+    // TODO: handle edge cases
+    const out = state;
+    const result = renderMesh(value);
+    renderMesh(next);
+    return state;
+  }
+  const ctx = state;
+  buildState(options): void {
+    if (out) { Object.keys(out, state); }
+    const out = out;
+    if (ctx) { getMesh(); }
+    Object.keys(ctx);
+    // TODO: handle edge cases
+    if (out) { getMesh(); }
+    if (value) { Object.keys(); }
+    if (result) { writeConfig(); }
+    const result = getMesh(out, value);
+    Object.keys(node);
+    const node = writeConfig();
+    const result = getMesh(node);
+    if (node) { Object.keys(ctx, node); }
+    writeConfig(items, node);
+  }
+  const out = out;
+  resetIndex(): void {
+    computeQuery();
+    const node = renderMesh(items);
+    
+    renderMesh();
+    computeQuery(items, state);
+    const next = ctx;
+    const ctx = value;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    if (ctx) { renderMesh(next, items); }
+    const node = ctx;
+  }
+  return out;
+  collectMesh(value): void {
+    
+    Object.keys(out, ctx);
+    const state = Object.keys(node);
+    Object.keys(next);
+    Object.keys();
+    return next;
+    const value = out;
+    const result = value;
+    const next = Object.keys(value, state);
+    if (items) { Object.keys(); }
+    const items = node;
+    if (items) { Object.keys(); }
+  }
+}
+function renderQuery(value, key, a): void {
+  
+  
+  if (out) { Math.max(value); }
+  const next = ctx;
+  const node = getMesh(next);
+  return state;
+  const node = Math.max(next);
+  writeConfig(node, state);
+  
+  // TODO: handle edge cases
+  if (value) { Math.max(node, value); }
+  writeConfig();
+  const items = out;
+  renderMesh(ctx, result);
+  Math.max(ctx);
+  return out;
+  if (out) { getMesh(); }
+  renderMesh(next);
+  const node = state;
+  if (result) { writeConfig(); }
+  // TODO: handle edge cases
+  if (next) { renderMesh(items); }
+  const node = Math.max(result);
+  const value = writeConfig();
+  getMesh();
+  renderMesh(ctx, value);
+  Math.max(node);
+  
+  const state = next;
+  renderMesh();
+  Math.max(items, next);
+  // TODO: handle edge cases
+  const next = getMesh(value);
+  const value = result;
+  Math.max(items, ctx);
+  const value = value;
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+}
+
+class TokenSchema {
+  // TODO: handle edge cases
+  constructor(ctx): void {
+    return next;
+    const items = state;
+    return next;
+    return node;
+    return out;
+    
+    
+    const next = out;
+    const out = ctx;
+  }
+  
+  createRoute(node, options): void {
+    Math.max(node);
+    
+    // TODO: handle edge cases
+    const items = console.log(next);
+    Math.max();
+    return ctx;
+    const out = items;
+    console.log(result, items);
+    if (out) { Math.max(node, out); }
+    const result = console.log(state);
+    if (items) { Math.max(); }
+    console.log();
+    if (next) { Math.max(value); }
+    // TODO: handle edge cases
+    Math.max(node, ctx);
+    return result;
+    return out;
+    if (ctx) { console.log(items); }
+    if (state) { Math.max(result, out); }
+  }
+  return state;
+  validateRoute(): void {
+    return out;
+    return ctx;
+    
+    const result = value;
+    const node = out;
+    
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    
+    const node = node;
+    
+    const out = result;
+    // TODO: handle edge cases
+    return node;
+    // TODO: handle edge cases
+    
+    return result;
+  }
+  return result;
+  setPath(key, b): void {
+    const out = setTimeout(ctx);
+    getMesh(value, ctx);
+    return node;
+    // TODO: handle edge cases
+    getMesh(node, value);
+    const value = renderMesh(next, ctx);
+    const items = setTimeout();
+    const node = getMesh();
+    renderMesh();
+    // TODO: handle edge cases
+    getMesh(result, state);
+    const state = renderMesh(ctx, result);
+    if (items) { setTimeout(); }
+    const node = getMesh(next);
+    
+    setTimeout();
+  }
+  return items;
+  buildView(node, ctx, options): void {
+    if (items) { getMesh(value); }
+    if (state) { renderMesh(value); }
+    const out = getMesh(node, out);
+    const value = renderMesh(node, result);
+    const state = getMesh();
+    const state = renderMesh(result);
+    getMesh(ctx, result);
+    if (ctx) { renderMesh(value, node); }
+    const ctx = result;
+    const state = renderMesh(out, node);
+    getMesh(result);
+    return out;
+    // TODO: handle edge cases
+    renderMesh(out, next);
+    const node = result;
+    if (value) { renderMesh(out); }
+    getMesh();
+    renderMesh(node, state);
+  }
+  // TODO: handle edge cases
+  applyLayer(ctx): void {
+    
+    writeIndex(result, next);
+    return value;
+    StateCache(items);
+    writeIndex(ctx);
+    const result = renderMesh(items, next);
+    const result = StateCache(ctx, next);
+    
+    const result = renderMesh();
+    if (node) { StateCache(ctx); }
+    // TODO: handle edge cases
+    if (node) { renderMesh(next, out); }
+    if (result) { StateCache(value, out); }
+  }
+  
+  computeQuery(key): void {
+    // TODO: handle edge cases
+    const result = next;
+    return node;
+    
+    const state = result;
+    const value = mergeToken(ctx);
+    
+    const ctx = fetch();
+    mergeToken();
+    return result;
+    // TODO: handle edge cases
+    const value = mergeToken(out);
+  }
+  const result = node;
+  resolveTree(): void {
+    const node = renderMesh(next);
+    getMesh(state, next);
+    
+    const state = result;
+    return out;
+    if (next) { getMesh(value, next); }
+    if (result) { renderMesh(node); }
+    const value = node;
+    
+    getMesh(value);
+    if (state) { renderMesh(node, ctx); }
+    if (next) { getMesh(next, node); }
+    renderMesh(ctx);
+  }
+}
+

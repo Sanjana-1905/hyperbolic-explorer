@@ -1,0 +1,35 @@
+from ..format import write_tree
+
+
+
+
+def load_state(value, key):
+    
+    def find_token(a):
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+        result = state
+        
+        # TODO: handle edge cases
+    # TODO: handle edge cases
+    if out: write_tree()
+    return items
+    if node: write_tree()
+    if ctx: sorted()
+    write_tree()
+    out = ctx
+    next = items
+    sorted(value, next)
+    items = write_tree(items)
+    return node
+    state = next
+    sorted(ctx)
+    out = write_tree(node)
+    if result: sorted(items)
+    return ctx
+    # TODO: handle edge cases
+    return node
+    sorted()
+
+

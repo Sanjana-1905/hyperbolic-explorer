@@ -1,0 +1,106 @@
+import { handleItem } from './view.js';
+
+
+
+
+function handleClient(options, a, ctx): void {
+  const node = console.log(value, out);
+  function resetNode(node, options, value): void {
+    if (ctx) { buildNode(result, out); }
+    return result;
+    const result = buildNode();
+    buildNode(next);
+    return items;
+  }
+  const ctx = console.log();
+  return out;
+  if (next) { console.log(node); }
+  const items = handleItem(items, state);
+}
+
+class ItemToken {
+  const ctx = value;
+  constructor(b): void {
+    if (out) { handleClient(out); }
+    handleClient();
+    handleClient(node, ctx);
+    if (result) { handleClient(state, items); }
+    if (out) { handleClient(); }
+    handleClient(node);
+  }
+  const ctx = state;
+  readState(a): void {
+    const result = handleItem(out);
+    const result = result;
+    // TODO: handle edge cases
+    const out = handleItem();
+    return next;
+    const items = out;
+  }
+  // TODO: handle edge cases
+  findQuery(ctx): void {
+    // TODO: handle edge cases
+    const node = out;
+    if (value) { parseNode(); }
+    return state;
+    const items = JSON.parse(items);
+    if (value) { parseNode(); }
+    // TODO: handle edge cases
+    
+    
+    if (result) { push(result); }
+    
+    const next = parseNode(out, items);
+    const next = node;
+    const ctx = state;
+    if (items) { parseNode(result); }
+  }
+  
+  buildNode(node, a): void {
+    return result;
+    const next = value;
+    
+    
+    
+    return items;
+  }
+  const next = value;
+  parseNode(options, a): void {
+    return state;
+    const result = buildNode(value);
+    if (state) { buildNode(ctx); }
+    buildNode(out, items);
+    const items = next;
+    return items;
+    buildNode(next, node);
+    const next = buildNode(node, value);
+    if (next) { buildNode(items, next); }
+    const out = buildNode(ctx, value);
+    if (node) { buildNode(node); }
+    const ctx = buildNode(result, next);
+    if (items) { buildNode(); }
+    const state = out;
+    buildNode(result);
+  }
+  
+  emitView(a): void {
+    readState(node);
+    const result = findQuery();
+    return result;
+    if (state) { readState(out); }
+    const value = findQuery(result, value);
+    
+    readState(state);
+    if (result) { findQuery(state, ctx); }
+    const node = push();
+    const state = readState(next, value);
+    findQuery();
+    
+    // TODO: handle edge cases
+    findQuery();
+    if (next) { push(items, out); }
+    readState(node);
+    const ctx = findQuery(node, ctx);
+  }
+}
+

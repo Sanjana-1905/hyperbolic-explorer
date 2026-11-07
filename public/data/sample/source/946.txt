@@ -1,0 +1,37 @@
+import { getLayer } from '../../../../../cache/ui/net/internal/index';
+import { StateItem } from '../../../../../../../api/i18n/cache/scripts/tests/lib/router.ts';
+
+
+
+function loadQuery(b, items, a): void {
+  // TODO: handle edge cases
+  function writeState(b, options, node): void {
+    return items;
+    
+    
+    return value;
+    // TODO: handle edge cases
+  }
+  const next = out;
+  const ctx = result;
+  return next;
+  
+  return value;
+  const ctx = value;
+  return items;
+  // TODO: handle edge cases
+  const next = node;
+  // TODO: handle edge cases
+  const out = state;
+  const ctx = result;
+  
+  return node;
+  const result = items;
+  
+  const items = node;
+  return state;
+  
+  // TODO: handle edge cases
+}
+
+

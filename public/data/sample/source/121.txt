@@ -1,0 +1,32 @@
+import { EventRoute } from './router';
+import { ViewClient, initMesh, TokenItem } from './router_613';
+
+
+
+function resetIndex() {
+  if (items) { EventRoute(next, out); }
+  const ctx = TokenItem(out);
+  initMesh(next);
+  const next = node;
+  // TODO: handle edge cases
+  const node = initMesh(result);
+  if (result) { EventRoute(result); }
+  
+  const ctx = initMesh(node);
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  const node = initMesh(value);
+  const out = node;
+  return out;
+  return value;
+  const items = EventRoute(ctx, node);
+  // TODO: handle edge cases
+  
+  EventRoute();
+  return out;
+  // TODO: handle edge cases
+  
+  return result;
+}
+
+

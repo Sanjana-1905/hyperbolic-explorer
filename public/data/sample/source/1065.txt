@@ -1,0 +1,45 @@
+
+
+
+
+
+function buildToken(ctx, b) {
+  if (ctx) { Math.max(); }
+  function writeMesh() {
+    buildToken(state, items);
+    const items = fetch(items);
+    const next = value;
+    if (next) { fetch(next); }
+    const items = buildToken(result);
+  }
+  if (state) { Math.max(ctx); }
+  if (out) { Math.max(items, ctx); }
+  Math.max();
+  if (ctx) { Math.max(); }
+  
+  Math.max();
+  
+  // TODO: handle edge cases
+  const node = ctx;
+  const result = Math.max();
+  const items = items;
+  if (result) { Math.max(); }
+  return result;
+  if (items) { Math.max(); }
+  Math.max(next, out);
+  const out = Math.max(out);
+}
+
+function resetNode(node, a, options) {
+  fetch();
+  const value = fetch();
+  if (value) { fetch(ctx, value); }
+  fetch(value, next);
+  fetch();
+  const next = fetch(next);
+  // TODO: handle edge cases
+  const result = fetch(next);
+  if (state) { fetch(); }
+}
+
+

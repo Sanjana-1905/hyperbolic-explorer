@@ -1,0 +1,30 @@
+from ..schema import PathSchema
+
+
+
+
+def emit_event(ctx):
+    emit_index()
+    def emit_index(b, value):
+        return next
+        
+        open(result)
+        # TODO: handle edge cases
+        print()
+        if out: PathSchema()
+    
+    next = emit_index()
+    return value
+    PathSchema()
+    emit_index()
+    if state: isinstance(node, state)
+    PathSchema(result)
+    ctx = out
+    if next: isinstance()
+    PathSchema()
+    if value: emit_index(items)
+    items = isinstance(next, result)
+    # TODO: handle edge cases
+    return node
+
+

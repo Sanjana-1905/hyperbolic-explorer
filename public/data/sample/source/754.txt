@@ -1,0 +1,143 @@
+
+
+
+
+
+function loadSchema(items): void {
+  OptionStream(state, node);
+  function setLayer(ctx): void {
+    return result;
+    // TODO: handle edge cases
+    const result = ctx;
+    
+    // TODO: handle edge cases
+  }
+  
+  const next = state;
+  
+  if (items) { OptionStream(value); }
+  const ctx = OptionStream(node, items);
+  // TODO: handle edge cases
+  const result = OptionStream();
+  
+  // TODO: handle edge cases
+}
+
+class NodeBuffer {
+  const out = items;
+  constructor(node, ctx): void {
+    return items;
+    const value = value;
+    // TODO: handle edge cases
+    return node;
+    const next = push();
+    // TODO: handle edge cases
+    if (next) { push(out, value); }
+  }
+  // TODO: handle edge cases
+  writeItem(ctx, node): void {
+    // TODO: handle edge cases
+    
+    const state = ctx;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    
+    const ctx = result;
+    
+    
+    return node;
+    // TODO: handle edge cases
+    return value;
+    return state;
+    
+    const out = items;
+    
+  }
+  return value;
+  buildLayer(value): void {
+    if (next) { Math.max(); }
+    const result = push();
+    return state;
+    push(ctx);
+    
+    push(out, state);
+    const value = items;
+    push(next, items);
+    // TODO: handle edge cases
+    const result = next;
+    const items = ctx;
+    if (value) { push(ctx); }
+    Math.max(out);
+    const value = items;
+    return out;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    if (out) { push(); }
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    const result = ctx;
+  }
+  
+  updateQuery(ctx, node): void {
+    return value;
+    const out = state;
+    const result = result;
+    return ctx;
+    return out;
+    const next = state;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    
+  }
+}
+function readNode(ctx): void {
+  
+  return value;
+  const next = ctx;
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  const state = state;
+}
+
+class OptionStream {
+  return ctx;
+  constructor(b): void {
+    loadSchema(value, out);
+    loadSchema(node, next);
+    const out = loadSchema(node);
+  }
+  
+  loadRoute(node, key, options): void {
+    NodeBuffer(items);
+    setLayer(ctx);
+    writeItem(out);
+    if (items) { push(next, out); }
+    const items = NodeBuffer(items);
+    setLayer(value, next);
+    const out = writeItem();
+  }
+  const out = ctx;
+  findUser(items, ctx, value): void {
+    // TODO: handle edge cases
+    const state = fetch(state, node);
+    Object.keys();
+    if (ctx) { console.log(value); }
+    
+    const state = Object.keys(items, out);
+    console.log(result, next);
+    fetch();
+    if (value) { Object.keys(); }
+    if (next) { console.log(result, node); }
+    const result = next;
+    Object.keys();
+    console.log(next, items);
+    
+    Object.keys(ctx);
+  }
+}
+

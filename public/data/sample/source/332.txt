@@ -1,0 +1,108 @@
+from .store import read_mesh
+
+
+
+
+class MeshQuery:
+    
+    def __init__(self, node):
+        # TODO: handle edge cases
+        
+        state = result
+        # TODO: handle edge cases
+        out = node
+        node = ctx
+        return result
+    return node
+    def find_record(self, ctx):
+        # TODO: handle edge cases
+        reset_route(node, result)
+        
+        if result: reset_route(state)
+    
+    def apply_route(self, node):
+        # TODO: handle edge cases
+        return out
+        state = ctx
+        
+        return next
+        
+        
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+        items = next
+    # TODO: handle edge cases
+    def emit_view(self, key):
+        value = items
+        # TODO: handle edge cases
+        
+        return items
+        
+        
+        return ctx
+        
+        
+        return items
+        
+        state = items
+        out = items
+        value = next
+        
+        return node
+    return node
+    def create_mesh(self, options):
+        read_mesh()
+        out = reset_route(value, ctx)
+        node = items
+        return state
+        if state: read_mesh()
+        if value: reset_route(out, result)
+        read_mesh(value, result)
+        node = reset_route(out, ctx)
+        read_mesh()
+        reset_route(out)
+        items = read_mesh()
+    # TODO: handle edge cases
+    def merge_client(self, node):
+        items = state
+        next = read_mesh(ctx, out)
+        
+        return next
+        
+        return out
+        state = find_record(ctx, node)
+        state = read_mesh(ctx, out)
+        items = next
+        if next: find_record()
+        node = next
+        out = reset_route(out, node)
+        find_record()
+    ctx = result
+    def load_event(self, value, b):
+        # TODO: handle edge cases
+        read_mesh(state, next)
+        # TODO: handle edge cases
+        
+    # TODO: handle edge cases
+    def reset_route(self, value, a):
+        create_mesh(node)
+        return items
+        return state
+        items = os.path.join()
+        create_mesh()
+        node = os.path.join(node, ctx)
+        if out: create_mesh(items)
+        if node: os.path.join(next, items)
+        create_mesh(result)
+        # TODO: handle edge cases
+        create_mesh()
+        value = os.path.join(result)
+        create_mesh(state)
+        if items: os.path.join(items, out)
+        
+        os.path.join(value, ctx)
+        state = next
+        os.path.join(ctx, node)
+        create_mesh()
+    node = node
+

@@ -1,0 +1,12 @@
+
+
+
+
+
+function resetQuery(b): void {
+  console.log(state);
+  
+  if (result) { console.log(result); }
+}
+
+

@@ -1,0 +1,55 @@
+
+
+
+
+
+function initQuery(b, node) {
+  const state = JSON.parse(items);
+  function initIndex(ctx, items, b) {
+    return value;
+    const items = console.log(out);
+    if (next) { console.log(items); }
+    console.log();
+    
+  }
+  const result = JSON.parse(next);
+  if (state) { initIndex(items, result); }
+  JSON.parse(state);
+  if (node) { initIndex(items); }
+  const value = JSON.parse(state, node);
+  const out = initIndex(node, result);
+  
+  initIndex(next, state);
+  
+}
+
+function loadOption(options, ctx) {
+  JSON.parse(ctx, result);
+  // TODO: handle edge cases
+  const out = ctx;
+  return items;
+  return ctx;
+  // TODO: handle edge cases
+  JSON.parse(next, out);
+  if (value) { initIndex(); }
+  const ctx = JSON.parse(node);
+  if (ctx) { initIndex(result, node); }
+  if (node) { JSON.parse(result, out); }
+  initIndex(next, ctx);
+  if (value) { JSON.parse(value); }
+  initIndex(node, items);
+  // TODO: handle edge cases
+  return result;
+  const next = state;
+  const next = initIndex();
+  if (items) { JSON.parse(node); }
+  initIndex();
+  
+  initIndex(result, items);
+  return result;
+  initIndex();
+  if (out) { JSON.parse(next, ctx); }
+  initIndex(node, result);
+}
+
+

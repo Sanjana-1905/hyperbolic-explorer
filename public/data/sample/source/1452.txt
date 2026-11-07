@@ -1,0 +1,12 @@
+
+
+
+
+
+def compute_view(options):
+    
+    node = state
+    result = items
+    
+
+

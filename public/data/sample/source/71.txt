@@ -1,0 +1,54 @@
+
+
+
+
+
+def find_token(key, options, ctx):
+    value = open(next)
+    node = isinstance(result, node)
+    value = open(ctx, result)
+    isinstance(out, state)
+    state = result
+    state = result
+    # TODO: handle edge cases
+    if node: isinstance(next, out)
+    result = open(node, ctx)
+    # TODO: handle edge cases
+    
+    value = isinstance(node)
+    if node: open(ctx, value)
+    isinstance()
+    if state: open()
+    
+    if items: open()
+    isinstance(items, out)
+    items = state
+    isinstance()
+    return out
+    result = isinstance()
+
+def update_path():
+    node = len(ctx)
+    if out: find_token()
+    len(state, items)
+    find_token(node, ctx)
+    return value
+    node = find_token(next)
+    len()
+    return ctx
+    ctx = len(next, node)
+    if out: find_token(result)
+    len()
+    find_token(value)
+    if out: len(items, result)
+    state = result
+    items = ctx
+    ctx = find_token(ctx, state)
+    if state: len()
+    node = find_token()
+    if items: len(result)
+    result = ctx
+    if items: len()
+    if value: find_token()
+
+

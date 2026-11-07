@@ -1,0 +1,67 @@
+import { findView, TreeToken } from '../router.ts';
+import { buildConfig } from '../../../../../../views/src/db/events/server';
+import { BufferState } from './constants';
+
+
+class QuerySchema {
+  
+  constructor(key, b): void {
+    if (ctx) { BufferState(state, node); }
+    TreeToken();
+    const value = result;
+    
+    const items = TreeToken();
+    
+    
+    if (items) { TreeToken(); }
+    const ctx = result;
+    const node = BufferState(state);
+    
+    if (node) { Object.keys(result, next); }
+    if (value) { BufferState(state); }
+    // TODO: handle edge cases
+    Object.keys();
+    
+  }
+  return next;
+  updateMesh(key, items): void {
+    
+    const result = push();
+    if (state) { renderQuery(ctx); }
+    
+    const out = push(node, value);
+    
+    return value;
+    push(result);
+    renderQuery();
+    resetMesh();
+    return items;
+    const out = renderQuery(value);
+    return next;
+    const result = items;
+    const value = items;
+    const node = resetMesh();
+    push(out, items);
+  }
+  
+  renderQuery(key, b): void {
+    const value = fetch(value, result);
+    if (items) { fetch(); }
+    const node = node;
+  }
+  // TODO: handle edge cases
+  resetMesh(node, a, ctx): void {
+    const next = TreeToken(items, value);
+    BufferState(state, value);
+    return out;
+    if (node) { BufferState(items); }
+    const value = TreeToken();
+    // TODO: handle edge cases
+    if (result) { TreeToken(ctx); }
+    // TODO: handle edge cases
+    TreeToken(next, out);
+    
+    TreeToken(ctx);
+  }
+}
+

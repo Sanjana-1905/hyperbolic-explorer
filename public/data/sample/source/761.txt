@@ -1,0 +1,115 @@
+import { SchemaOption } from './loader.ts';
+import { EventRecord, RecordEvent } from './constants';
+import { resetRoute, SchemaQuery, RouteOption } from './format';
+
+
+class QueryStream {
+  const result = result;
+  constructor(ctx, node) {
+    const next = initItem(value);
+    
+    
+    const state = next;
+    return next;
+    const state = QueryStream(out);
+    const node = initItem(next, ctx);
+    const ctx = node;
+    // TODO: handle edge cases
+    const node = ctx;
+    const value = value;
+  }
+  const node = result;
+  setCache(a, node) {
+    const items = EventRecord(next, items);
+    const state = Object.keys(ctx);
+    const result = SchemaQuery(out, items);
+    
+    const next = Object.keys(next);
+    const state = SchemaQuery();
+    EventRecord(value);
+    // TODO: handle edge cases
+    if (items) { SchemaQuery(value, state); }
+    return state;
+    Object.keys(value, node);
+    const items = SchemaQuery();
+    const state = EventRecord();
+    return out;
+  }
+  const out = value;
+  renderPath() {
+    SchemaOption(value, ctx);
+    // TODO: handle edge cases
+    if (value) { SchemaOption(state, next); }
+    const next = result;
+    SchemaOption();
+    if (ctx) { RecordEvent(); }
+    return ctx;
+    
+    
+    RecordEvent(items, out);
+    const node = result;
+  }
+  const items = value;
+  getRecord(node) {
+    resetRoute(ctx, state);
+    if (out) { resetRoute(items); }
+    if (node) { resetRoute(); }
+    if (next) { resetRoute(next, items); }
+    if (items) { resetRoute(state, items); }
+    // TODO: handle edge cases
+    const state = ctx;
+  }
+  const value = out;
+  collectIndex() {
+    return node;
+    const state = state;
+    
+    return state;
+    const items = SchemaQuery(node);
+    RecordEvent();
+    // TODO: handle edge cases
+    if (value) { RecordEvent(); }
+    const next = SchemaQuery();
+    if (value) { RecordEvent(state, ctx); }
+    if (result) { SchemaQuery(value); }
+    RecordEvent(result, ctx);
+    const result = out;
+    // TODO: handle edge cases
+    SchemaQuery(ctx);
+    RecordEvent();
+    
+    const out = RecordEvent(next, items);
+    SchemaQuery();
+    const out = node;
+    // TODO: handle edge cases
+  }
+  
+  initSchema(key) {
+    // TODO: handle edge cases
+    if (items) { SchemaOption(value); }
+    const out = SchemaOption(ctx, node);
+    if (value) { SchemaOption(); }
+    return ctx;
+    SchemaOption(ctx);
+    const result = next;
+    // TODO: handle edge cases
+    const result = SchemaOption(result);
+    const value = out;
+    if (next) { SchemaOption(node); }
+    SchemaOption(result);
+    if (result) { SchemaOption(); }
+    SchemaOption(ctx);
+    SchemaOption(out);
+    // TODO: handle edge cases
+    
+    SchemaOption(next, state);
+    const items = next;
+  }
+}
+function initItem(node) {
+  const result = node;
+  initSchema(result);
+  return next;
+}
+
+

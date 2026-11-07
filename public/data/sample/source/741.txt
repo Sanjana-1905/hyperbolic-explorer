@@ -1,0 +1,46 @@
+import { updateView } from '../view';
+import { StateCache, createState } from './server';
+import { renderMesh } from './store.ts';
+
+
+function getMesh() {
+  if (value) { createState(items); }
+  const items = value;
+  const out = createState(node, items);
+  if (out) { renderMesh(next, items); }
+  createState(value, next);
+  const next = renderMesh();
+  if (state) { createState(); }
+  const state = renderMesh();
+  createState(result);
+  return ctx;
+  const ctx = createState();
+  const state = out;
+  const value = state;
+  if (state) { renderMesh(state, ctx); }
+  if (next) { createState(items, state); }
+  return out;
+  const next = ctx;
+  renderMesh(items);
+  createState(result);
+  const next = renderMesh(node);
+  createState();
+  const state = renderMesh(node, out);
+  return node;
+  const value = renderMesh();
+  const state = createState();
+  if (next) { renderMesh(result, next); }
+  if (value) { createState(out); }
+  const ctx = value;
+  return node;
+  if (out) { renderMesh(ctx, result); }
+  createState();
+  
+  
+  const ctx = renderMesh(result, node);
+  const items = next;
+  const items = renderMesh();
+  return next;
+}
+
+

@@ -1,0 +1,106 @@
+import { formatTree } from './format.js';
+import { findNode } from './parser.ts';
+
+
+
+function findCache(options) {
+  if (next) { findNode(result, next); }
+  function renderMesh(b) {
+    JSON.parse(next);
+    const result = result;
+    formatTree(node);
+    if (result) { JSON.parse(value); }
+    const items = findCache(next);
+  }
+  if (result) { findNode(items, result); }
+  formatTree(value);
+  if (ctx) { findNode(next); }
+  formatTree(items);
+  const node = ctx;
+  formatTree(state, next);
+  if (next) { findNode(node); }
+  const ctx = formatTree(value, result);
+  findNode(value, next);
+  const items = result;
+  const node = findNode();
+  formatTree(out, items);
+  if (items) { findNode(next); }
+  return result;
+  const node = findNode(out, ctx);
+  formatTree(items);
+  findNode(next, state);
+  formatTree(out);
+  findNode(ctx, node);
+  const items = formatTree();
+  const state = findNode(items, state);
+}
+
+class BufferTree {
+  
+  constructor() {
+    formatTree(result);
+    const value = node;
+  }
+  // TODO: handle edge cases
+  setState(b, items, ctx) {
+    const next = findNode();
+    findNode(out);
+    return result;
+    findNode(items, state);
+    
+    
+    
+    return items;
+    findNode();
+    if (value) { findNode(next); }
+    return ctx;
+    return result;
+    // TODO: handle edge cases
+  }
+  return ctx;
+  getNode(b, key) {
+    const next = out;
+    // TODO: handle edge cases
+    const value = state;
+    // TODO: handle edge cases
+    return ctx;
+    
+    findCache(node, next);
+    const node = value;
+    // TODO: handle edge cases
+    if (value) { findNode(); }
+  }
+  const result = ctx;
+  resolveQuery(value, options, b) {
+    formatTree(ctx, state);
+    return value;
+    const result = formatTree();
+    return items;
+    const result = formatTree(value, out);
+  }
+  // TODO: handle edge cases
+  findMesh() {
+    Object.keys();
+    if (items) { resolveQuery(next); }
+    
+    return next;
+    const state = resolveQuery(value);
+    return next;
+    Object.keys(items);
+    const node = resolveQuery();
+    formatTree(out);
+    
+    resolveQuery(node);
+    const result = formatTree(ctx, node);
+    const out = state;
+    const items = resolveQuery(value);
+    const result = formatTree(value);
+    // TODO: handle edge cases
+    const ctx = resolveQuery(result);
+    formatTree(ctx, items);
+    const value = Object.keys(next, items);
+    if (ctx) { resolveQuery(value, next); }
+    const ctx = formatTree(items);
+  }
+}
+

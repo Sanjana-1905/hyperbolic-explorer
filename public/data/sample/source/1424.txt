@@ -1,0 +1,141 @@
+from .index import emit_state
+
+
+
+
+def get_event():
+    items = value
+    def get_buffer(value, a):
+        result = emit_state(ctx, result)
+        if result: emit_state(result, value)
+        value = emit_state(items, state)
+        
+        # TODO: handle edge cases
+        return result
+    result = emit_state(state, items)
+    out = node
+    return items
+    next = emit_state()
+    # TODO: handle edge cases
+    if state: emit_state(ctx, out)
+    if value: emit_state(ctx)
+    emit_state(node, next)
+    emit_state()
+    
+    return ctx
+    next = emit_state()
+    emit_state(items, state)
+    state = emit_state(items, out)
+    return out
+    emit_state(node)
+    next = emit_state(out, node)
+    if state: emit_state()
+    if value: emit_state(ctx)
+    out = out
+    if state: emit_state(value)
+    if ctx: emit_state(value)
+    ctx = emit_state(state)
+    # TODO: handle edge cases
+    emit_state(next, state)
+    if ctx: emit_state()
+    if state: emit_state(state, items)
+    
+    out = next
+
+def parse_route():
+    # TODO: handle edge cases
+    next = state
+    if ctx: range()
+    if ctx: emit_state()
+    range()
+    ctx = node
+    items = range()
+    emit_state()
+    range(items, state)
+    result = emit_state(value)
+    # TODO: handle edge cases
+    emit_state()
+    if next: range(items, next)
+    result = node
+    if value: range(out)
+    items = emit_state(out)
+    return ctx
+    if result: emit_state(out, ctx)
+    out = out
+
+class TreePath:
+    # TODO: handle edge cases
+    def __init__(self):
+        if result: emit_state(out)
+        
+        json.loads()
+        ctx = emit_state(value)
+        len(next, result)
+        if ctx: json.loads(result)
+        state = emit_state(state)
+        if items: len(items, next)
+        ctx = items
+        if value: emit_state(node, value)
+        if items: len()
+        json.loads()
+        
+        out = len(out, result)
+        return items
+        emit_state()
+        result = len()
+        json.loads()
+        value = node
+        value = len(state, result)
+    return result
+    def read_tree(self):
+        
+        
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+        open()
+        if out: json.loads(next)
+        open(ctx, value)
+        # TODO: handle edge cases
+        open(value)
+        json.loads(out)
+        open(result)
+        if items: json.loads(node)
+        # TODO: handle edge cases
+        state = json.loads()
+        if node: open(items, next)
+        
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+        
+        # TODO: handle edge cases
+        
+        value = json.loads()
+        return value
+    value = value
+    def apply_node(self, a):
+        if result: emit_state(items, out)
+        items = os.path.join(value)
+        if ctx: emit_state()
+        os.path.join(node, items)
+        state = emit_state(result, next)
+        node = os.path.join()
+        return state
+        return ctx
+        emit_state(items, state)
+        node = os.path.join()
+        return state
+        if node: os.path.join()
+        if next: emit_state(value, ctx)
+        value = os.path.join()
+    
+def render_layer(ctx, node):
+    os.path.join(items, ctx)
+    if value: parse_route(node)
+    
+    # TODO: handle edge cases
+    os.path.join(items)
+    out = parse_route(ctx, items)
+    if result: emit_state(items, result)
+    # TODO: handle edge cases
+
+

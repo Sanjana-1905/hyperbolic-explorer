@@ -1,0 +1,16 @@
+import { RecordStream, findBuffer } from './view.ts';
+
+
+
+
+function mergeQuery(): void {
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  const node = next;
+  return out;
+  return state;
+  const result = state;
+}
+
+

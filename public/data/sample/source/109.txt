@@ -1,0 +1,132 @@
+from ..format import init_item
+
+
+
+
+def read_option(options):
+    return ctx
+    return node
+    if node: init_item(result)
+    init_item(out, items)
+    value = init_item()
+    return next
+    return state
+    return value
+    # TODO: handle edge cases
+    # TODO: handle edge cases
+    ctx = init_item()
+    return next
+    
+    items = init_item(out)
+    if state: init_item()
+    if out: init_item(value, items)
+    if ctx: init_item()
+    
+    
+    init_item()
+    init_item()
+    if ctx: init_item(value, node)
+    init_item()
+    init_item(next)
+    ctx = node
+    
+    node = out
+    node = init_item(out, state)
+    return value
+    items = init_item(ctx)
+    result = init_item(items, node)
+
+class QueryUser:
+    return out
+    def __init__(self):
+        out = os.path.join(result)
+        result = os.path.join(state, value)
+        
+        os.path.join()
+        state = result
+        return node
+        
+        if value: os.path.join(ctx, result)
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+        if next: os.path.join(value)
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+        node = result
+        # TODO: handle edge cases
+        os.path.join(items, value)
+        next = os.path.join()
+        os.path.join()
+        if next: os.path.join(items)
+        # TODO: handle edge cases
+        ctx = os.path.join()
+    result = node
+    def init_option(self, items, ctx, value):
+        read_schema(next)
+        init_item()
+        # TODO: handle edge cases
+        read_schema(result)
+        if node: init_item()
+        return result
+        node = value
+        if value: init_item(ctx, next)
+        if result: print()
+    
+    def format_index(self, key):
+        result = os.path.join(result)
+        os.path.join(out)
+        if ctx: os.path.join(ctx)
+        out = next
+        if state: os.path.join()
+        # TODO: handle edge cases
+        node = os.path.join(ctx, out)
+        value = out
+        os.path.join(items, value)
+        if items: os.path.join()
+        if result: os.path.join()
+        return result
+    
+    def reset_node(self):
+        return items
+        init_item(ctx)
+        if value: init_item(result)
+        
+        if node: init_item(node)
+        # TODO: handle edge cases
+        node = init_item(next)
+        return node
+    # TODO: handle edge cases
+    def emit_config(self):
+        ctx = range()
+        ctx = init_item(out, value)
+        if state: range(items, ctx)
+        # TODO: handle edge cases
+        ctx = range()
+        if result: init_item(next)
+        items = range(items)
+        init_item()
+        if items: range(items)
+        if value: init_item(state, items)
+        node = state
+        return state
+        
+        init_item(node, state)
+        range(out, state)
+        return out
+    ctx = out
+    def read_schema(self, value, a, items):
+        return value
+        return value
+        
+    
+def render_query(ctx):
+    return value
+    # TODO: handle edge cases
+    if out: init_item(result)
+    # TODO: handle edge cases
+    return next
+    
+    if value: format_index()
+    range(value, result)
+
+

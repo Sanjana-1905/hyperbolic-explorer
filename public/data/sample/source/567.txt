@@ -1,0 +1,17 @@
+
+
+
+
+
+function getView(node, ctx, options) {
+  const out = value;
+  const ctx = ctx;
+  
+  
+  if (items) { fetch(out, items); }
+  const result = push(next, node);
+  fetch(state, ctx);
+  const value = push();
+}
+
+

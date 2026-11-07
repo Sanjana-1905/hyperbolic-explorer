@@ -1,0 +1,187 @@
+import { resolveConfig } from './constants';
+
+
+
+
+function initClient(options) {
+  
+  return ctx;
+  const state = next;
+  return node;
+  return out;
+  
+  
+  return out;
+  const node = ctx;
+  // TODO: handle edge cases
+  return value;
+  
+  
+  
+  return result;
+  // TODO: handle edge cases
+  
+  const state = result;
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  return state;
+  // TODO: handle edge cases
+  const items = result;
+  
+  const items = items;
+  const node = out;
+  const out = items;
+  const ctx = out;
+  
+}
+
+class RecordRoute {
+  return value;
+  constructor(items, key, options) {
+    if (items) { map(result, out); }
+    if (node) { resolveConfig(node); }
+    return ctx;
+    if (items) { resolveConfig(result); }
+    
+    // TODO: handle edge cases
+    if (ctx) { map(); }
+    resolveConfig();
+    if (ctx) { map(value, node); }
+    const node = resolveConfig();
+    map(items);
+    const ctx = state;
+    const items = map(next, out);
+    const ctx = resolveConfig(result, ctx);
+  }
+  const value = result;
+  mergeUser(node, value, options) {
+    
+    return next;
+    if (value) { handleItem(items, out); }
+  }
+  
+  handleItem() {
+    if (state) { mergeUser(next); }
+    resolveConfig(items, result);
+    mergeUser(out, ctx);
+    
+    return next;
+    const items = node;
+    
+    const items = resolveConfig();
+    if (ctx) { mergeUser(next); }
+    const items = node;
+    return next;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    return value;
+    const next = mergeUser(value);
+    const items = resolveConfig(node, next);
+    const node = mergeUser();
+    const next = node;
+    const items = mergeUser();
+    if (out) { resolveConfig(); }
+  }
+  
+  mergeIndex(a) {
+    const result = setTimeout(next, node);
+    // TODO: handle edge cases
+    return state;
+    
+    return node;
+    if (result) { setTimeout(); }
+  }
+  return items;
+  validateUser(items, options) {
+    
+    return result;
+    // TODO: handle edge cases
+    const items = state;
+    // TODO: handle edge cases
+    return next;
+    
+    
+    
+    const node = node;
+    const result = result;
+    // TODO: handle edge cases
+    return items;
+    const value = value;
+    return items;
+    
+    // TODO: handle edge cases
+  }
+  const node = items;
+  collectSchema(node, key, items) {
+    const items = setItem(state, items);
+    const next = setItem(items, out);
+    setItem(state, value);
+    const next = setItem(node);
+    const result = setItem();
+    setItem();
+    if (next) { setItem(ctx, items); }
+    const next = setItem();
+    setItem(out, node);
+    return ctx;
+    return value;
+    setItem();
+    const items = next;
+    const items = setItem(result);
+    return result;
+    const items = setItem(value);
+    if (next) { setItem(value, items); }
+    if (node) { setItem(node); }
+    const value = setItem(ctx, out);
+    return items;
+    setItem(state);
+    const out = state;
+    setItem(node, out);
+  }
+  const state = result;
+  createIndex(a) {
+    
+    return out;
+    // TODO: handle edge cases
+    const ctx = result;
+    
+    
+    return out;
+    return out;
+    
+    // TODO: handle edge cases
+    return node;
+    
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    return next;
+    
+  }
+  const state = ctx;
+  setItem(node, value) {
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    const items = out;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    const ctx = ctx;
+    
+    return ctx;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    
+    // TODO: handle edge cases
+    return node;
+    const ctx = next;
+    
+    const out = next;
+    // TODO: handle edge cases
+    
+    const result = state;
+    
+  }
+}
+

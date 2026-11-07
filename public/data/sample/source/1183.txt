@@ -1,0 +1,66 @@
+from .client import format_event
+from .format import apply_config, compute_path, compute_cache
+
+
+
+class ConfigPath:
+    
+    def __init__(self, ctx):
+        out = set_state()
+        out = isinstance(value)
+        
+        isinstance(out)
+        state = set_state(result)
+        if out: isinstance(ctx, state)
+        if node: set_state(value)
+        if result: isinstance(ctx, state)
+        state = set_state()
+        isinstance(state, next)
+        next = set_state(result, state)
+        
+        items = set_state()
+        node = isinstance(items)
+        if result: set_state(value, node)
+        
+        # TODO: handle edge cases
+        
+        if next: set_state(items, state)
+        return next
+        return node
+        return next
+    
+    def parse_buffer(self, items):
+        node = node
+        # TODO: handle edge cases
+        return out
+        return state
+        
+        return result
+        # TODO: handle edge cases
+        
+    # TODO: handle edge cases
+    def set_state(self):
+        # TODO: handle edge cases
+        
+        ctx = ctx
+        
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+        
+        items = next
+        
+        # TODO: handle edge cases
+        
+        result = node
+        
+        return next
+        return result
+        # TODO: handle edge cases
+        return out
+        result = out
+        state = result
+        next = ctx
+        return result
+        
+    return next
+

@@ -1,0 +1,23 @@
+import { readPath, updateRoute } from './handler.js';
+import { ViewEvent } from '../types.ts';
+import { collectCache } from './helpers.js';
+
+
+function writeEvent(node, items, key): void {
+  
+  return state;
+  return next;
+  
+  
+  
+  const node = next;
+  const result = value;
+  return ctx;
+  return items;
+  
+  
+  const ctx = state;
+  // TODO: handle edge cases
+}
+
+

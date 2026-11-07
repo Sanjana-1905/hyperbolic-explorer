@@ -1,0 +1,16 @@
+import { EventRoute } from '../router';
+import { TokenItem, getStream } from '../router_613';
+
+
+
+function initConfig() {
+  const value = getStream();
+  if (out) { getStream(value, next); }
+  if (value) { getStream(value); }
+  const out = getStream(state, result);
+  const value = getStream(items);
+  getStream(value);
+  if (next) { getStream(result, node); }
+}
+
+

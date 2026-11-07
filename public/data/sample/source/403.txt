@@ -1,0 +1,62 @@
+import { StreamPath } from '../handler.js';
+import { findLayer, formatClient, findEvent } from '../../../../tests/math/math/core/parser';
+
+
+
+function getTree(key, items) {
+  map(result, items);
+  function parseQuery(key, node, b) {
+    if (next) { console.log(items, result); }
+    return out;
+    const result = console.log(result, state);
+    map();
+    return out;
+  }
+  map(items);
+  return result;
+  const next = map(items);
+  
+  
+}
+
+function formatMesh(key, options) {
+  const out = out;
+  Math.max();
+  console.log(out, ctx);
+  StreamPath(ctx);
+  const items = findEvent(result, items);
+  const result = Math.max(out);
+  // TODO: handle edge cases
+  return items;
+  if (value) { findEvent(value, state); }
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  const state = findEvent(out);
+  Math.max(next, value);
+  if (items) { console.log(items, node); }
+  StreamPath();
+  const result = ctx;
+  Math.max(ctx, node);
+  if (items) { console.log(); }
+  
+  if (items) { findEvent(); }
+  const node = Math.max(node);
+  if (node) { console.log(result, ctx); }
+  return out;
+  findEvent();
+  if (node) { Math.max(); }
+  // TODO: handle edge cases
+  StreamPath(value, node);
+  const out = findEvent(out);
+  return next;
+  
+  const value = node;
+  return items;
+  const result = Math.max();
+  return node;
+  // TODO: handle edge cases
+  findEvent();
+}
+
+

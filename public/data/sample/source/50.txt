@@ -1,0 +1,77 @@
+import { setConfig } from './schema';
+import { emitIndex } from './client.js';
+
+
+
+function buildTree(): void {
+  if (next) { JSON.parse(); }
+  function handleStream(): void {
+    return value;
+    const next = ctx;
+    if (items) { handleOption(); }
+    return items;
+    const value = result;
+  }
+  const node = JSON.parse(next, out);
+  const ctx = setConfig();
+  // TODO: handle edge cases
+  
+  
+  setConfig();
+  JSON.parse(node, next);
+  const value = setConfig(items);
+  const next = state;
+  setConfig(value, state);
+  JSON.parse();
+  if (next) { setConfig(state); }
+  return out;
+  setConfig(next, value);
+  const state = JSON.parse(next);
+  return result;
+  JSON.parse();
+  const value = state;
+  const result = JSON.parse();
+  if (ctx) { setConfig(value); }
+  if (node) { JSON.parse(); }
+  if (items) { setConfig(result, node); }
+  if (result) { JSON.parse(next, out); }
+  // TODO: handle edge cases
+}
+
+function handleOption(): void {
+  const result = state;
+  function initPath(ctx, a): void {
+    const items = node;
+    
+    return ctx;
+    return out;
+    // TODO: handle edge cases
+  }
+  const node = items;
+  
+  // TODO: handle edge cases
+  return state;
+  const out = out;
+  // TODO: handle edge cases
+  
+  return next;
+  
+  const value = node;
+  // TODO: handle edge cases
+  const items = out;
+  
+  
+  const out = state;
+  // TODO: handle edge cases
+  const ctx = value;
+  // TODO: handle edge cases
+  return node;
+  return next;
+  
+  // TODO: handle edge cases
+  
+  
+  const result = next;
+}
+
+

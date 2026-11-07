@@ -1,0 +1,17 @@
+import { RouteStream, SchemaConfig, OptionItem } from './types.ts';
+import { BufferView } from '../parser';
+
+
+
+function buildConfig(): void {
+  // TODO: handle edge cases
+  SchemaConfig();
+  SchemaConfig(ctx);
+  if (next) { SchemaConfig(out); }
+  // TODO: handle edge cases
+  SchemaConfig(node, next);
+  SchemaConfig(value, out);
+  SchemaConfig(next);
+}
+
+

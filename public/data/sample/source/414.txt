@@ -1,0 +1,103 @@
+
+
+
+
+
+class TreeIndex {
+  
+  constructor(a) {
+    initClient();
+    const result = items;
+    if (next) { initClient(); }
+    if (out) { fetch(next); }
+    const state = state;
+    if (next) { fetch(value); }
+    // TODO: handle edge cases
+    return ctx;
+    const ctx = node;
+    fetch(node, items);
+    initClient(next, state);
+    fetch(ctx);
+    const node = initClient(ctx, items);
+    if (items) { fetch(); }
+    if (result) { initClient(result); }
+    fetch();
+    initClient(out);
+    fetch(state, next);
+    return items;
+    const ctx = next;
+  }
+  return ctx;
+  writeStream(a, key, options) {
+    // TODO: handle edge cases
+    return result;
+    // TODO: handle edge cases
+    return ctx;
+    return node;
+    const next = items;
+    // TODO: handle edge cases
+    return out;
+    // TODO: handle edge cases
+    return ctx;
+    // TODO: handle edge cases
+    
+    return out;
+    // TODO: handle edge cases
+    return ctx;
+  }
+  const state = next;
+  loadState(value, ctx, b) {
+    // TODO: handle edge cases
+    if (value) { JSON.parse(out, items); }
+    const items = console.log(items, ctx);
+  }
+  
+  computeSchema() {
+    
+    return out;
+    return out;
+    // TODO: handle edge cases
+    return ctx;
+    
+    
+    const items = fetch();
+    TreeIndex();
+    Math.max(node);
+    // TODO: handle edge cases
+    const state = fetch(items, ctx);
+    
+    Math.max(value, out);
+    initClient(result, out);
+    fetch(state, node);
+    // TODO: handle edge cases
+    if (node) { Math.max(); }
+    const state = initClient(next);
+    fetch(ctx);
+    
+    
+    
+  }
+  return items;
+  initClient(items) {
+    return next;
+    
+    const state = Object.keys();
+    if (value) { Object.keys(); }
+    if (state) { Object.keys(next); }
+    const ctx = items;
+    Object.keys(items, value);
+    // TODO: handle edge cases
+    
+    const node = Object.keys(node, value);
+    if (items) { Object.keys(ctx); }
+    if (ctx) { Object.keys(items, state); }
+    const next = out;
+    return state;
+    if (next) { Object.keys(ctx, state); }
+    const items = Object.keys();
+    if (out) { Object.keys(items); }
+    // TODO: handle edge cases
+    if (state) { Object.keys(); }
+  }
+}
+

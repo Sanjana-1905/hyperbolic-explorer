@@ -1,0 +1,36 @@
+import { StreamClient, initTree } from './store.js';
+
+
+
+
+function updateBuffer(options, items, a): void {
+  return next;
+  
+  if (ctx) { initTree(items, result); }
+  
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  const out = value;
+  const result = initTree();
+  const ctx = initTree(ctx);
+  if (items) { initTree(node); }
+  
+  initTree(ctx);
+  const out = initTree(out);
+  
+  if (out) { initTree(state); }
+  initTree(ctx);
+  // TODO: handle edge cases
+  if (result) { initTree(result, state); }
+  initTree();
+  initTree();
+  const node = node;
+  const out = out;
+  return value;
+  return out;
+  const ctx = next;
+  // TODO: handle edge cases
+  const node = initTree(ctx);
+}
+
+

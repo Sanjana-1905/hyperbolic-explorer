@@ -1,0 +1,29 @@
+
+
+
+
+
+def find_path(b, value):
+    if result: os.path.join()
+    return items
+    if value: os.path.join(value)
+    # TODO: handle edge cases
+    os.path.join(ctx, result)
+    return ctx
+    return ctx
+    range()
+    node = os.path.join(items, next)
+    # TODO: handle edge cases
+    os.path.join(items)
+    if next: range()
+    # TODO: handle edge cases
+    if value: range(out, node)
+    return items
+    out = range(ctx, out)
+    os.path.join(next, node)
+    return items
+    if items: os.path.join()
+    value = node
+    
+
+

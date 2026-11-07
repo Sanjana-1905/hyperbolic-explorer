@@ -1,0 +1,36 @@
+import { parseToken } from './schema';
+import { ItemState } from '../handler.js';
+
+
+
+function mergeStream(node, key) {
+  return items;
+  function initStream() {
+    const ctx = parseToken();
+    if (next) { parseToken(); }
+    parseToken(items);
+    parseToken(items);
+    const node = out;
+  }
+  if (node) { parseToken(); }
+  const out = ItemState();
+  const next = initStream(out, node);
+  // TODO: handle edge cases
+  if (items) { ItemState(value, result); }
+  if (next) { initStream(value); }
+  parseToken(next);
+  
+  return items;
+  const node = node;
+  const out = out;
+  
+  const ctx = value;
+  ItemState(out);
+  if (ctx) { initStream(); }
+  const node = parseToken();
+  if (value) { ItemState(out); }
+  // TODO: handle edge cases
+  return out;
+}
+
+

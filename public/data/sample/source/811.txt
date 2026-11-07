@@ -1,0 +1,231 @@
+import { NodeToken } from '../main.js';
+import { parseOption } from './handler';
+import { buildLayer, getItem } from './main';
+import { ClientSchema, computeTree, resetConfig } from '../loader';
+
+class RouteView {
+  const items = items;
+  constructor(key): void {
+    const state = items;
+    const value = buildLayer();
+    const state = node;
+    const items = next;
+    const next = ClientSchema(ctx, state);
+    if (next) { buildLayer(value, next); }
+    return value;
+    if (out) { buildLayer(); }
+    const value = ClientSchema(items);
+    // TODO: handle edge cases
+    ClientSchema(next);
+    buildLayer(value, ctx);
+    // TODO: handle edge cases
+    
+    if (items) { ClientSchema(state); }
+    // TODO: handle edge cases
+    ClientSchema();
+    const value = buildLayer(state);
+    const ctx = ClientSchema(value, next);
+    buildLayer(next);
+    ClientSchema(out);
+    buildLayer(result, items);
+  }
+  // TODO: handle edge cases
+  buildClient(ctx, key): void {
+    return out;
+    const items = updateBuffer();
+    const state = node;
+    initConfig(items);
+    updateBuffer(result, items);
+    if (next) { resetConfig(result, state); }
+    const out = next;
+    updateBuffer(result);
+  }
+  return value;
+  initItem(): void {
+    return node;
+    const value = result;
+    
+    const ctx = state;
+    return state;
+    
+    return value;
+    return value;
+    const items = node;
+    const next = value;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    return result;
+    // TODO: handle edge cases
+    const result = ctx;
+    const state = value;
+    return items;
+    const items = state;
+  }
+  return state;
+  renderCache(): void {
+    if (ctx) { getItem(node); }
+    
+    const result = getItem();
+  }
+  return next;
+  handleIndex(): void {
+    const out = out;
+    const ctx = value;
+    return items;
+    const out = out;
+    const state = ctx;
+    
+    const next = next;
+    // TODO: handle edge cases
+    const next = items;
+    const out = items;
+    return ctx;
+    
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+  }
+  // TODO: handle edge cases
+  handleStream(key, value, options): void {
+    Object.keys(state, ctx);
+    // TODO: handle edge cases
+    const ctx = Object.keys(next, result);
+    if (items) { Object.keys(next, ctx); }
+    const state = Object.keys(result, out);
+    const result = Object.keys();
+    if (result) { Object.keys(result, next); }
+  }
+  const node = node;
+  validateView(b, key, value): void {
+    
+    const node = out;
+    
+    // TODO: handle edge cases
+    return next;
+  }
+  const next = ctx;
+  initTree(items, b, a): void {
+    computeTree();
+    if (out) { computeTree(node, next); }
+    
+    const value = computeTree(out, node);
+    const state = items;
+    
+    return ctx;
+    if (items) { computeTree(node, state); }
+    if (out) { computeTree(next, state); }
+    return node;
+    computeTree(state, next);
+    if (node) { computeTree(node, next); }
+    computeTree(items);
+    const state = computeTree(state);
+    return value;
+    
+    const out = out;
+    
+    const value = computeTree();
+    if (state) { computeTree(result); }
+    const value = computeTree(ctx, value);
+    
+  }
+}
+class LayerUser {
+  // TODO: handle edge cases
+  constructor(): void {
+    if (out) { push(next, node); }
+    const state = items;
+    
+    const node = RouteView(ctx);
+    // TODO: handle edge cases
+    const value = RouteView();
+    if (out) { push(node); }
+    const out = next;
+    
+    const result = result;
+    push(value);
+  }
+  
+  formatSchema(node, items, b): void {
+    push(items, value);
+    push();
+    const result = push(node);
+    const node = push(state);
+    // TODO: handle edge cases
+    const state = next;
+    push(node, next);
+    push(items);
+    if (result) { push(ctx, items); }
+    const items = result;
+    const value = state;
+    const out = value;
+    const value = push();
+    push(out);
+    push(items);
+    
+    push();
+    const result = push(ctx);
+    push();
+  }
+  const out = next;
+  initConfig(key, b): void {
+    const next = ClientSchema();
+    if (value) { buildLayer(next); }
+    parseOption();
+    const value = result;
+    return ctx;
+    
+    // TODO: handle edge cases
+    buildLayer(node, next);
+    return ctx;
+    return node;
+    if (out) { buildLayer(items); }
+    parseOption();
+    ClientSchema(result);
+    const out = buildLayer(value);
+    const value = parseOption();
+    // TODO: handle edge cases
+    return ctx;
+    if (state) { parseOption(); }
+    const value = ClientSchema(result, out);
+    return next;
+    // TODO: handle edge cases
+    const state = ClientSchema(next, ctx);
+    const value = buildLayer(ctx, node);
+  }
+  return next;
+  readBuffer(value, ctx, b): void {
+    map(next, node);
+    
+    const ctx = node;
+    const state = map(next);
+    const ctx = Math.max(node);
+    return state;
+    map(node);
+    if (out) { Math.max(value); }
+    if (ctx) { updateBuffer(ctx); }
+    if (state) { map(); }
+    if (state) { Math.max(node, result); }
+    
+  }
+  // TODO: handle edge cases
+  updateBuffer(b, node, items): void {
+    const node = ctx;
+    return items;
+    if (value) { constructor(); }
+    const node = resetConfig(result);
+    const out = constructor(node);
+    resetConfig(out);
+    const next = constructor(state, node);
+    resetConfig(state);
+    
+    // TODO: handle edge cases
+    const out = constructor();
+    resetConfig();
+    if (state) { constructor(ctx, items); }
+    resetConfig(result);
+    const out = constructor();
+    // TODO: handle edge cases
+    const next = ctx;
+    resetConfig(next);
+  }
+}
+

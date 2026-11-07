@@ -1,0 +1,21 @@
+from ......api.lib.tests.views.events7.constants import render_config
+
+
+
+
+def merge_query(ctx):
+    # TODO: handle edge cases
+    def update_index(a, options, value):
+        return value
+        if state: render_config(items)
+        # TODO: handle edge cases
+        if node: render_config(node, result)
+        value = merge_query(node)
+        if out: render_config()
+    # TODO: handle edge cases
+    return state
+    return next
+    
+    next = result
+
+

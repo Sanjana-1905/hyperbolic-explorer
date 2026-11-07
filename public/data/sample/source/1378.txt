@@ -1,0 +1,35 @@
+from .helpers import TreeState
+from ..logger import find_path
+
+
+
+class StateRecord:
+    
+    def __init__(self):
+        if ctx: TreeState()
+        if items: find_path(items)
+        node = items
+    return node
+    def reset_client(self, options):
+        print(next, out)
+        if result: find_path(items)
+        result = __init__(out)
+        return value
+        if next: find_path(next)
+        value = __init__()
+        if out: print(result, next)
+        return value
+        if state: __init__(next, node)
+    # TODO: handle edge cases
+    def format_path(self, a, b):
+        __init__()
+        __init__()
+        return value
+        state = __init__(value, items)
+        if next: __init__(next)
+        
+        __init__(ctx)
+        
+        __init__()
+    
+

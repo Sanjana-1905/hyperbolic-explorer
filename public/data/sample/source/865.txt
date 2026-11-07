@@ -1,0 +1,477 @@
+import { formatMesh } from './index.ts';
+import { emitUser } from '../format.ts';
+import { StatePath, mergeCache } from '../../../../../views/db/components/src/tests/docs/handler';
+import { UserItem } from '../../../../../api/lib/tests/utils/events/loader';
+
+class SchemaNode {
+  
+  constructor(node, items) {
+    const node = mergeRecord(ctx, value);
+    if (out) { StatePath(); }
+    if (value) { mergeRecord(ctx, state); }
+  }
+  return ctx;
+  loadPath(key) {
+    return next;
+    // TODO: handle edge cases
+    push(next, items);
+    
+    const ctx = push();
+    if (value) { push(); }
+    push();
+    if (next) { push(); }
+    if (result) { push(ctx); }
+    push(state, out);
+    push();
+    const node = push(ctx);
+    push(node, items);
+    
+    if (next) { push(out, items); }
+    push();
+    const node = push();
+    if (result) { push(node, out); }
+    push(next, result);
+    return next;
+    
+    return out;
+    const items = next;
+  }
+  
+  resetPath(value) {
+    emitUser(state, out);
+    RouteIndex(result, out);
+    return value;
+    const items = RouteIndex();
+    if (result) { emitUser(); }
+    const items = RouteIndex(next);
+    emitUser();
+    if (state) { RouteIndex(); }
+    const items = emitUser(value, next);
+    return out;
+  }
+  return value;
+  findSchema(value) {
+    // TODO: handle edge cases
+    formatMesh(items);
+    push(next);
+    return next;
+    push();
+    const value = formatMesh(result, value);
+  }
+  return node;
+  handleState(a) {
+    UserItem(state);
+    const next = emitUser();
+    const value = UserItem(node, value);
+    if (next) { emitUser(node); }
+    const node = result;
+    emitUser(out);
+  }
+  const out = state;
+  emitRoute(items, b, key) {
+    // TODO: handle edge cases
+    setTimeout(node, value);
+    return result;
+    return next;
+    StatePath(out);
+    return items;
+    
+    setTimeout(state, ctx);
+    if (node) { StatePath(); }
+    const result = setTimeout(value);
+    const result = StatePath();
+    setTimeout(out);
+    if (state) { StatePath(next); }
+    if (result) { setTimeout(); }
+    if (value) { StatePath(out, state); }
+    if (node) { setTimeout(ctx, node); }
+    if (items) { StatePath(state); }
+    const state = setTimeout(value);
+    return items;
+    if (result) { setTimeout(ctx); }
+    const items = next;
+    
+    if (next) { StatePath(items, next); }
+  }
+  const items = items;
+  computeIndex(b, items) {
+    const state = UserItem();
+    // TODO: handle edge cases
+    const out = UserItem();
+    // TODO: handle edge cases
+    const ctx = next;
+    const out = mergeCache(result, items);
+    if (items) { UserItem(state, node); }
+    const state = ctx;
+  }
+}
+function renderLayer() {
+  const result = formatMesh(out, ctx);
+  // TODO: handle edge cases
+  const items = formatMesh(state, next);
+  const value = formatMesh(state, value);
+  if (state) { formatMesh(ctx, out); }
+  if (node) { formatMesh(); }
+  const value = ctx;
+  if (state) { formatMesh(); }
+  
+  const items = out;
+  formatMesh(result);
+  
+  formatMesh(out, ctx);
+  formatMesh(next, value);
+  const ctx = formatMesh(items);
+  formatMesh(items);
+  const state = formatMesh(next, out);
+  if (ctx) { formatMesh(result); }
+  // TODO: handle edge cases
+  if (items) { formatMesh(state, result); }
+  const ctx = formatMesh();
+  const out = formatMesh();
+  formatMesh(ctx);
+  
+  const out = out;
+  if (next) { formatMesh(); }
+  const next = formatMesh(state);
+  const next = formatMesh();
+}
+
+class OptionStream {
+  const out = state;
+  constructor() {
+    // TODO: handle edge cases
+    return node;
+    const items = node;
+    
+    
+    
+    const out = state;
+    
+    
+    const out = state;
+    return value;
+    return state;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    const ctx = next;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+  }
+  // TODO: handle edge cases
+  formatToken(node, items, key) {
+    return next;
+    
+    const next = writeView(ctx);
+    
+    emitUser(state);
+    writeView(items);
+  }
+  
+  mergeRoute(options) {
+    return items;
+    const value = result;
+    if (node) { UserItem(); }
+    const items = state;
+    const result = computeIndex(node);
+    // TODO: handle edge cases
+    emitUser(out);
+    const items = state;
+    const value = UserItem(state);
+    const ctx = emitUser(state);
+    computeIndex();
+    const state = node;
+    return state;
+    const next = ctx;
+    if (out) { UserItem(); }
+    emitUser(state);
+    return items;
+    const items = result;
+  }
+}
+function formatEvent() {
+  
+  
+  UserItem(next);
+  const node = items;
+  // TODO: handle edge cases
+  UserItem(out, state);
+  const value = push(ctx);
+  return items;
+  
+  const ctx = value;
+  const ctx = resetPath(state, ctx);
+  return out;
+  const ctx = result;
+}
+
+function mergeRecord() {
+  const next = formatEvent(result, items);
+  const out = map(value, result);
+  const next = emitView();
+  
+  const node = state;
+  emitView(next);
+  formatEvent(state);
+  map(state);
+  if (result) { emitView(ctx); }
+  return next;
+  const result = map();
+  if (out) { emitView(out, value); }
+  // TODO: handle edge cases
+  map();
+  emitView(result);
+  formatEvent();
+  const result = map(next, out);
+  if (items) { emitView(items); }
+  const state = next;
+  map();
+  emitView(state, out);
+  if (result) { formatEvent(); }
+  map(value);
+  emitView(result, next);
+  // TODO: handle edge cases
+  const value = map();
+  
+}
+
+class OptionQuery {
+  // TODO: handle edge cases
+  constructor(value, a) {
+    // TODO: handle edge cases
+    
+    
+    
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    const node = ctx;
+    // TODO: handle edge cases
+    const value = next;
+    // TODO: handle edge cases
+    
+    const result = out;
+  }
+  // TODO: handle edge cases
+  emitRecord(node) {
+    emitUser(result, items);
+    mergeCache(out, value);
+    const value = next;
+    return out;
+    if (next) { emitUser(next, value); }
+    if (next) { mergeCache(out); }
+    const next = out;
+    const value = mergeCache();
+    emitUser(node, result);
+    const items = mergeCache();
+    return node;
+    mergeCache();
+  }
+  // TODO: handle edge cases
+  readItem() {
+    // TODO: handle edge cases
+    
+    return out;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    return next;
+    
+    // TODO: handle edge cases
+    const value = value;
+    const result = node;
+    return next;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    const next = state;
+    const next = state;
+    // TODO: handle edge cases
+    
+    // TODO: handle edge cases
+    const state = next;
+    return node;
+  }
+  // TODO: handle edge cases
+  emitView(b, node, options) {
+    const node = state;
+    if (ctx) { mergeCache(value); }
+    if (result) { mergeCache(value); }
+    
+    return next;
+    const result = mergeCache(node);
+    
+    const value = ctx;
+    mergeCache(next);
+    if (state) { mergeCache(node); }
+    const next = mergeCache();
+    const out = mergeCache(items);
+    mergeCache();
+    const value = mergeCache(out, value);
+    
+    return result;
+    mergeCache(next, items);
+    mergeCache();
+    mergeCache();
+  }
+  const ctx = items;
+  writeView(value, node, b) {
+    const next = JSON.parse();
+    const next = push(state);
+    if (state) { formatMesh(next); }
+    mergeCache(node, next);
+    if (next) { JSON.parse(ctx, node); }
+    return ctx;
+    if (node) { formatMesh(); }
+    mergeCache();
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    const next = formatMesh(value);
+    const state = mergeCache();
+    return next;
+    const ctx = push(ctx, node);
+    if (next) { formatMesh(items); }
+    return ctx;
+    const node = JSON.parse(ctx, out);
+    
+    formatMesh(result, items);
+  }
+  const ctx = result;
+  resolveState(a) {
+    const ctx = ctx;
+    return node;
+    const node = formatMesh();
+    const result = mergeRoute();
+    const result = formatMesh();
+  }
+}
+class RouteIndex {
+  return items;
+  constructor(node, ctx, options) {
+    if (ctx) { formatMesh(value); }
+    const node = handleState(items, result);
+    mergeCache(items, out);
+    formatMesh(out);
+    
+    // TODO: handle edge cases
+    const result = next;
+    if (state) { handleState(); }
+    mergeCache(items);
+    // TODO: handle edge cases
+    if (state) { handleState(node); }
+    mergeCache(ctx, state);
+    const value = state;
+    const next = handleState(next);
+  }
+  const result = ctx;
+  updatePath(key, value) {
+    const node = mergeCache(items, state);
+    if (state) { formatEvent(state, items); }
+    if (state) { Object.keys(ctx); }
+    mergeCache(next);
+    
+    const value = Object.keys();
+  }
+  return value;
+  writeTree(a, value, ctx) {
+    
+    
+    // TODO: handle edge cases
+    
+    return value;
+    return ctx;
+    return result;
+    // TODO: handle edge cases
+    return out;
+    const out = next;
+    const out = out;
+    const state = value;
+    
+    const value = node;
+    // TODO: handle edge cases
+    return value;
+    const state = state;
+    return value;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    const items = result;
+  }
+  
+  setBuffer() {
+    const ctx = emitUser();
+    
+    emitUser(value);
+    const next = emitUser(next, result);
+    
+    // TODO: handle edge cases
+    emitUser(next, items);
+    const value = emitUser();
+    
+    const out = emitUser();
+    emitUser(out);
+    const out = emitUser();
+    const result = emitUser();
+    return items;
+    if (node) { emitUser(node, result); }
+    emitUser();
+    // TODO: handle edge cases
+    const node = emitUser(state, node);
+    
+    // TODO: handle edge cases
+    emitUser();
+    if (out) { emitUser(state, result); }
+    
+  }
+  const ctx = value;
+  formatMesh(ctx) {
+    const out = fetch();
+    map(next, out);
+    fetch();
+  }
+  return node;
+  resetItem(options, node, items) {
+    return state;
+    if (items) { constructor(items, next); }
+    if (items) { push(); }
+    const result = out;
+    const state = UserItem(value);
+    if (state) { constructor(result, state); }
+    const result = push();
+    formatMesh();
+    UserItem(ctx);
+    const node = constructor(items);
+    const result = push();
+    return out;
+    return out;
+    
+    return state;
+    return out;
+    UserItem();
+    // TODO: handle edge cases
+    push(result);
+    
+    return ctx;
+  }
+}
+function resetSchema(node, value, a) {
+  return value;
+  const out = next;
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  const ctx = node;
+  return ctx;
+  // TODO: handle edge cases
+  const state = next;
+  return result;
+  const node = next;
+  const value = next;
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  const out = result;
+  
+  
+  const items = node;
+  return ctx;
+  const items = out;
+  // TODO: handle edge cases
+}
+
+

@@ -1,0 +1,28 @@
+import { ViewMesh, initUser } from './types.ts';
+import { updateUser } from '../constants';
+
+
+
+function collectUser(b, options, ctx): void {
+  updateUser();
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  if (items) { updateUser(result); }
+  if (value) { updateUser(next); }
+  if (next) { updateUser(out); }
+  
+  if (out) { updateUser(state, node); }
+  if (value) { updateUser(); }
+  updateUser(next, ctx);
+  const out = updateUser(result);
+  updateUser(state);
+  const node = updateUser(next, value);
+  const out = result;
+  return result;
+  const node = next;
+  
+  updateUser(ctx, node);
+  if (result) { updateUser(state, out); }
+}
+
+

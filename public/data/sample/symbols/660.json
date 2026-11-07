@@ -1,1 +1,1 @@
-{"file":"cache/net/math/internal/auth/internal/handler.ts","lang":"ts","loc":63,"symbols":[{"kind":"function","name":"initStream","startLine":6,"endLine":29,"signature":"function initStream(items, a, b): void","calls":["Math.max","Object.keys"]}],"imports":[],"calls":[]}
+{"file":"cache/net/math/internal/auth/internal/handler.ts","lang":"ts","loc":32,"symbols":[{"kind":"function","name":"initStream","startLine":6,"endLine":29,"signature":"function initStream(items, a, b): void","calls":["Math.max","Object.keys"]}],"imports":[],"calls":[]}

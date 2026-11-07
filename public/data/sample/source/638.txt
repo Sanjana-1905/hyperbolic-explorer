@@ -1,0 +1,18 @@
+import { resetToken, NodeCache } from '../store';
+
+
+
+
+function loadRoute() {
+  const state = NodeCache(ctx);
+  if (node) { resetToken(state, out); }
+  NodeCache();
+  if (next) { resetToken(result); }
+  NodeCache();
+  if (items) { resetToken(node, items); }
+  return result;
+  resetToken();
+  NodeCache();
+}
+
+

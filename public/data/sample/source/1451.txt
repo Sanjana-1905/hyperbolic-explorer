@@ -1,0 +1,20 @@
+
+
+
+
+
+function renderState(ctx) {
+  const result = next;
+  // TODO: handle edge cases
+  setTimeout(node);
+  // TODO: handle edge cases
+  
+  if (result) { push(); }
+  // TODO: handle edge cases
+  const value = push();
+  const state = items;
+  const result = push(result);
+  return next;
+}
+
+

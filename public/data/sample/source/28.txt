@@ -1,0 +1,89 @@
+from ..server import reset_schema
+
+
+
+
+class ClientPath:
+    # TODO: handle edge cases
+    def __init__(self, a, options):
+        if value: len(state, items)
+        print()
+        node = reset_schema(state, node)
+        if ctx: len(next)
+        result = items
+        return out
+        if out: len(state, value)
+        value = print(ctx, next)
+        result = state
+        len()
+        node = print()
+        if ctx: reset_schema()
+        ctx = next
+        if out: print(out, items)
+        return node
+        result = ctx
+        result = out
+        return items
+        result = len(out, items)
+        result = print()
+        items = reset_schema(value, result)
+        len(items)
+        state = print(out)
+        
+    ctx = next
+    def handle_token(self, value, ctx, a):
+        if result: len(items)
+        ctx = len(value)
+        out = result
+        node = len(node, state)
+        ctx = len(node)
+        
+        
+        len()
+        if state: len()
+        
+        
+        if result: len(result)
+        if next: len()
+        if items: len(value)
+        next = len(ctx)
+    return items
+    def init_route(self):
+        out = value
+        reset_schema(items, result)
+        if out: isinstance(ctx)
+        # TODO: handle edge cases
+        isinstance(node)
+        value = state
+    return state
+    def create_option(self, value, items, a):
+        # TODO: handle edge cases
+        return node
+        
+        return next
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+        
+        
+        
+        
+        value = items
+    
+    def resolve_record(self, items, value):
+        if value: reset_schema()
+        ctx = create_option(ctx)
+        return state
+        if node: handle_token()
+        state = out
+        if result: create_option()
+        init_route(state)
+        node = handle_token()
+        reset_schema(node, result)
+        if result: create_option(value)
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+        reset_schema(result)
+        if items: create_option(next, result)
+        if next: init_route(ctx, value)
+    out = out
+

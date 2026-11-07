@@ -45,6 +45,9 @@ export function buildTree(json) {
       name: raw.name,
       type: raw.type,
       size: raw.size,
+      // scanner-v2 fields (all optional): extension, lines of code, symbols-file id, git info
+      ext: raw.ext, loc: raw.loc, hasSymbols: !!raw.hasSymbols, fileId: raw.id,
+      commits: raw.commits, modified: raw.modified,
       parent,
       children: [],
       depth,

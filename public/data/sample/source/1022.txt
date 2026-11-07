@@ -1,0 +1,31 @@
+import { setLayer, BufferIndex } from '../index.ts';
+import { MeshState } from '../../../cache/views/lib/scripts/api/handler.ts';
+import { readCache, parseUser } from '../../../api/lib31/lib/utils/db/schema.ts';
+
+
+function createUser(node, ctx) {
+  if (ctx) { MeshState(ctx); }
+  function findClient() {
+    if (result) { MeshState(ctx); }
+    const next = MeshState(next);
+    if (next) { MeshState(); }
+    return value;
+    // TODO: handle edge cases
+  }
+  if (value) { MeshState(result); }
+  if (items) { MeshState(value, ctx); }
+  
+  MeshState();
+  if (state) { MeshState(next); }
+  const out = value;
+  return node;
+  if (value) { MeshState(); }
+  // TODO: handle edge cases
+  if (node) { MeshState(); }
+  // TODO: handle edge cases
+  MeshState(value, out);
+  
+  if (next) { MeshState(next, items); }
+}
+
+

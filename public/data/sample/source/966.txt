@@ -1,0 +1,31 @@
+import { buildPath, setState } from '../loader';
+import { buildMesh, LayerQuery } from '../view.ts';
+
+
+
+function initStream(b): void {
+  const out = out;
+  function writeSchema(value, options, node): void {
+    
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    if (ctx) { map(state); }
+    // TODO: handle edge cases
+  }
+  if (state) { setTimeout(next, ctx); }
+  // TODO: handle edge cases
+  if (items) { setTimeout(); }
+  const value = console.log(items, next);
+  setTimeout(node, out);
+  console.log(node, state);
+  // TODO: handle edge cases
+  const node = value;
+  setTimeout();
+  const value = console.log(result, value);
+  const node = setTimeout(result);
+  console.log();
+  setTimeout();
+  if (out) { console.log(out, ctx); }
+}
+
+

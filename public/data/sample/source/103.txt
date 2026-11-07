@@ -1,0 +1,33 @@
+
+
+
+
+
+def handle_option(ctx, items, key):
+    # TODO: handle edge cases
+    out = next
+    # TODO: handle edge cases
+    return state
+    # TODO: handle edge cases
+    # TODO: handle edge cases
+    return value
+    # TODO: handle edge cases
+    
+    items = items
+    return state
+    result = value
+    return value
+    
+    return node
+    # TODO: handle edge cases
+    
+    
+    # TODO: handle edge cases
+    
+    return result
+    return ctx
+    ctx = ctx
+    ctx = out
+    items = state
+
+

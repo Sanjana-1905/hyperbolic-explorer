@@ -9,16 +9,23 @@
 //      (glsl.js) does the move for all nodes at once. The CPU copy of the same
 //      maths (mobius3d.js) is still used for picking and the edges.
 //   3. Clicking a node animates f along the geodesic from the old focus to the
-//      new one (0.5 s, ease-in-out). Backspace focuses the parent.
+//      new one (0.5 s, ease-in-out). Backspace focuses the parent. (All camera and navigation
+//      code lives in navigation.js.)
 //   4. Nodes are camera-facing quads ("impostors") drawn with additive blending:
 //      folders look like glowing stars, files like faint twinkling points. Each
 //      top-level folder is an "arm" with its own hue.
 // The camera orbits the centre of the ball (where the focus node sits).
+//   5. (Phase 4b) A file that has symbols OPENS when the focus comes near it: its classes, functions
+//      and methods are loaded lazily (symbols.js), laid out inside the file's own territory
+//      (layoutSymbols) and written into spare slots of the same instance buffers. Far files close
+//      again and free their slots. The code panel (codepanel.js) shows the focused symbol's source.
 
 import * as THREE from 'three';
-import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-import { vec3, vNeg, vLength, mobiusAdd3, geodesicLerp3, conformalFactor3, hyperbolicDistance3 } from './mobius3d.js';
-import { buildTree, computeLayout3d, nodePath } from './layout3d.js';
+import { vNeg, vLength, mobiusAdd3, conformalFactor3, hyperbolicDistance3 } from './mobius3d.js';
+import { buildTree, computeLayout3d, layoutSymbols, nodePath } from './layout3d.js';
+import { createNavigation } from './navigation.js';
+import { createSymbolStore, buildSymbolNodes } from './symbols.js';
+import { createCodePanel } from './codepanel.js';
 import { createFpsCounter } from './fps.js';
 import {
   NODE_VERT, NODE_FRAG, NEBULA_VERT, NEBULA_FRAG, HAZE_VERT, HAZE_FRAG,
@@ -31,8 +38,14 @@ import { createLabels } from './labels.js';
 // ---------------------------------------------------------------------------
 // Settings
 // ---------------------------------------------------------------------------
-const ANIM_SECONDS = 0.5;       // refocus animation length
 const CLICK_TOLERANCE_PX = 8;   // how far from a node a click still hits it
+
+// Symbol galaxies (Phase 4b). Not look constants: they decide WHEN files open.
+const EXPAND_DIST = 0.45;       // a file with symbols opens when the focus is within this hyperbolic distance (a folder's
+                                // files sit 0.7 away, so focusing a folder does NOT open them; focusing or reaching a file does)
+const EXPAND_HYST = 0.25;       // ... and closes again only beyond EXPAND_DIST + this (no flicker)
+const MAX_OPEN_FILES = 6;       // at most this many files open at once (nearest first)
+const MAX_SYMBOL_NODES = 3000;  // spare buffer slots for symbol nodes (CLAUDE.md: ~3,000 visible nodes)
 
 // Debug: ?time=12.5 freezes the clock the shaders animate with, so screenshots are repeatable.
 const FROZEN_TIME = new URLSearchParams(location.search).has('time')
@@ -50,9 +63,9 @@ const QUALITY = {
 };
 
 document.getElementById('help').textContent =
-  'Drag to look around · scroll to move in/out · click a node to focus it · Backspace = parent · F = fps · R = slow spin (desktop)';
+  'Drag to look around · scroll to move in/out · click a node to focus it (click a file to open its code) · Backspace = parent · C = code panel · F = fps · R = slow spin (desktop)';
 const COLLAPSE_MIN_NODES = 4;   // folders with fewer nodes inside than this are never collapsed (a "+2" orb is pointless)
-const fps = createFpsCounter(() => `${labels ? labels.count : 0} labels · ${visibleCount} nodes`);
+const fps = createFpsCounter(() => `${labels ? labels.count : 0} labels · ${visibleCount} nodes · ${dynamicCount} symbols`);
 
 // ---------------------------------------------------------------------------
 // three.js scene: a perspective camera orbiting the centre of the unit ball
@@ -68,37 +81,16 @@ document.body.appendChild(renderer.domElement);
 
 const scene = new THREE.Scene();
 
-// 70° vertical field of view. From 1.8 units away the whole ball (radius 1)
-// fits: it spans asin(1 / 1.8) ≈ 34° either side of the centre, under 35°.
-const camera = new THREE.PerspectiveCamera(70, 1, 0.01, 40);
-camera.position.set(0, 0.3, 1.8);
+// Camera, orbit controls, focus animation: all in navigation.js (replaceable by the VR camera later).
+const nav = createNavigation(renderer);
+const camera = nav.camera;
 scene.add(camera);
-
-// OrbitControls: drag rotates the camera around the target (the ball's centre),
-// scroll moves it closer or further. Panning is off so the focus node always
-// stays at the middle of the screen.
-const controls = new OrbitControls(camera, renderer.domElement);
-controls.target.set(0, 0, 0);
-controls.enablePan = false;
-controls.enableDamping = true;   // smooth glide after letting go
-controls.minDistance = 0.15;     // can go inside the ball, close to the focus
-controls.maxDistance = 4;
-
-// Optional slow ambient rotation of the view. Desktop (mouse) only, OFF by default:
-// turn it on with ?spin=1 or the R key. It is never active on touch devices, and the VR
-// phase must keep `ambientSpinAllowed` false (no automatic camera motion in a headset).
-let ambientSpinAllowed = window.matchMedia('(pointer: fine)').matches;
-function setSpin(on) {
-  controls.autoRotate = ambientSpinAllowed && on;
-  controls.autoRotateSpeed = THEME.AMBIENT_SPIN_SPEED;
-}
-setSpin(new URLSearchParams(location.search).get('spin') === '1');
-window.addEventListener('keydown', (e) => {
-  if (e.key === 'r' || e.key === 'R') setSpin(!controls.autoRotate);
-});
+const controls = nav.controls;
 
 // Shared by every shader: the time in seconds (breathing, twinkling, drifting clouds).
 const uTime = { value: 0 };
+// Real-time clock (seconds) for the bloom-in of new symbols. Not frozen by ?time=, or new nodes would never grow.
+const uBloom = { value: 0 };
 
 // Procedural nebula + stars: one big inward-facing sphere that follows the
 // camera (so it behaves like the sky: no parallax), drawn first, ignoring depth.
@@ -138,8 +130,7 @@ function resize() {
   const buf = renderer.getDrawingBufferSize(new THREE.Vector2());
   edgeUniforms.uResolution.value.copy(buf);
   edgeUniforms.uLineWidth.value = THEME.EDGE_WIDTH_PX * renderer.getPixelRatio();
-  camera.aspect = w / h;
-  camera.updateProjectionMatrix();
+  nav.resize(w, h);
   if (labels) labels.resize(w, h);
   // At distance D from the camera the screen is 2·D·tan(fov/2) units tall.
   pixelsPerUnitAt1 = h / (2 * Math.tan(THREE.MathUtils.degToRad(camera.fov) / 2));
@@ -151,8 +142,18 @@ function resize() {
 let nodes = [];
 let root = null;
 let focusNode = null;
-let focusPoint = vec3(0, 0, 0); // the ball point currently shown at the centre
-let anim = null;                // { from, to, start } while animating
+let allNodes = [];              // base tree nodes + the symbol nodes that are currently open
+let nodeById = [];              // buffer slot -> node (undefined for a free slot)
+let baseCount = 0;              // number of base tree nodes (slots 0..baseCount-1); symbol slots follow
+let baseEdgeCount = 0;          // edge instances of the base tree; symbol edge slot = baseEdgeCount + (slot - baseCount)
+let highWater = 0;              // slots 0..highWater-1 may be in use: this many instances are drawn
+let freeSlots = [];             // freed symbol slots, reused first
+let dynamicCount = 0;           // symbol nodes currently alive
+let symbolFiles = [];           // base file nodes that have a symbols file
+const openFiles = new Set();    // files currently opened into galaxies
+let store = null;               // lazy loader of symbol / source files (symbols.js)
+let codePanel = null;           // HTML code panel (codepanel.js)
+let edgeArr = null;             // typed arrays behind the edge instance attributes
 let labels = null;              // screen-space SDF labels (labels.js)
 let hoverNode = null;           // node under the pointer (desktop), gets a label
 let visibleCount = 0;           // nodes currently drawn (not hidden inside a collapsed folder)
@@ -171,8 +172,8 @@ let sunMesh = null;             // the focus sun billboard (1 draw call)
 let dustMesh = null;            // faint background specks (1 draw call)
 
 // The two shader uniforms that change on refocus. _Focus is the whole GPU refocus.
-const focusUniforms = { _Focus: { value: new THREE.Vector3() }, uFocusId: { value: -1 }, uTime };
-const edgeUniforms = { _Focus: focusUniforms._Focus, uTime, uResolution: { value: new THREE.Vector2(1, 1) }, uLineWidth: { value: 1.8 } };
+const focusUniforms = { _Focus: { value: new THREE.Vector3() }, uFocusId: { value: -1 }, uTime, uBloom };
+const edgeUniforms = { _Focus: focusUniforms._Focus, uTime, uBloom, uResolution: { value: new THREE.Vector2(1, 1) }, uLineWidth: { value: 1.8 } };
 const sunUniforms = { _Focus: focusUniforms._Focus, uFocusPos: { value: new THREE.Vector3() }, uTime };
 
 // ---------------------------------------------------------------------------
@@ -232,7 +233,7 @@ function makeQuadGeometry(capacity, only = null) {
   g.arrays = {
     aPos: add('aPos', 3), aHue: add('aHue', 1), aEnergy: add('aEnergy', 1),
     aFlag: add('aFlag', 1), aKind: add('aKind', 1), aSeed: add('aSeed', 1), aId: add('aId', 1),
-    aState: add('aState', 1),
+    aState: add('aState', 1), aOrigin: add('aOrigin', 3), aBorn: add('aBorn', 1),
   };
   g.instanceCount = capacity;
   return g;
@@ -245,7 +246,11 @@ function writeInstance(g, slot, node) {
   a.aHue[slot] = node.hue;
   a.aEnergy[slot] = node.energy;
   a.aFlag[slot] = node.flag;
-  a.aKind[slot] = node.type === 'folder' ? 1 : 0;
+  a.aKind[slot] = node.kindCode ?? (node.type === 'folder' ? 1 : 0);   // 0 file, 1 folder, 2.. symbol kinds
+  // Where a new symbol grows from (its parent) and when it was born; base nodes were "always there" (-100).
+  const from = node.parent ? node.parent.pos : node.pos;
+  a.aOrigin[slot * 3] = from.x; a.aOrigin[slot * 3 + 1] = from.y; a.aOrigin[slot * 3 + 2] = from.z;
+  a.aBorn[slot] = node.born ?? -100;
   a.aSeed[slot] = node.seed;
   a.aId[slot] = node.id;
   a.aState[slot] = node.state;
@@ -265,16 +270,21 @@ function makeNodeMaterial(isHalo) {
 
 function buildDrawables() {
   const n = nodes.length;
-  shownRadius = new Float32Array(n);
+  baseCount = n;
+  highWater = n;
+  const capacity = n + MAX_SYMBOL_NODES;   // spare slots after the base tree hold symbol nodes
+  shownRadius = new Float32Array(capacity);
 
   // A fixed random number per node (the same every run, so screenshots are repeatable).
   let seed = 2024;
   const rand = () => ((seed = (seed * 1664525 + 1013904223) >>> 0) / 4294967296);
-  for (const node of nodes) { node.seed = rand(); node.state = 0; node.collapsed = false; }
+  for (const node of nodes) { node.seed = rand(); node.state = 0; node.collapsed = false; nodeById[node.id] = node; }
+  allNodes = nodes.slice();
 
   assignVisuals();
 
-  const geom = makeQuadGeometry(n);
+  const geom = makeQuadGeometry(capacity);
+  geom.instanceCount = n;                 // only the used slots are drawn; this grows when symbols open
   for (const node of nodes) writeInstance(geom, node.id, node);
   nodeMesh = new THREE.Mesh(geom, makeNodeMaterial(false));
   nodeMesh.frustumCulled = false; // positions are computed in the shader, so CPU bounds are meaningless
@@ -303,19 +313,24 @@ function buildDrawables() {
   eg.setAttribute('aSide', new THREE.BufferAttribute(aSide, 1));
   const edgeNodes = nodes.filter((nd) => nd.parent);
   edgeNodes.forEach((nd, i) => { nd.edgeIndex = i; });
+  baseEdgeCount = edgeNodes.length;
+  const edgeCapacity = baseEdgeCount + MAX_SYMBOL_NODES; // one spare edge per spare node slot
   const ea = (name, size) => {
-    const attr = new THREE.InstancedBufferAttribute(new Float32Array(edgeNodes.length * size), size);
+    const attr = new THREE.InstancedBufferAttribute(new Float32Array(edgeCapacity * size), size);
     eg.setAttribute(name, attr);
     return attr.array;
   };
   const eA = ea('aA', 3), eB = ea('aB', 3), eHue = ea('aHue', 1), eEnergy = ea('aEnergy', 1), eSeed = ea('aSeed', 1);
-  ea('aHide', 1);
+  const eHide = ea('aHide', 1);
+  const eBorn = ea('aBorn', 1);
+  edgeArr = { eA, eB, eHue, eEnergy, eSeed, eHide, eBorn };
   edgeNodes.forEach((nd, i) => {
     eA.set([nd.parent.pos.x, nd.parent.pos.y, nd.parent.pos.z], i * 3);
     eB.set([nd.pos.x, nd.pos.y, nd.pos.z], i * 3);
     eHue[i] = nd.hue; eEnergy[i] = nd.energy; eSeed[i] = nd.seed;
+    eBorn[i] = -100;
   });
-  eg.instanceCount = edgeNodes.length;
+  eg.instanceCount = baseEdgeCount;
   edgeMesh = new THREE.Mesh(eg, new THREE.ShaderMaterial({
     uniforms: edgeUniforms, vertexShader: EDGE_VERT, fragmentShader: EDGE_FRAG, defines: THEME_DEFINES,
     transparent: true, blending: THREE.AdditiveBlending, depthTest: false, depthWrite: false,
@@ -373,6 +388,10 @@ function coreRadius(node, p) {
     const hero = node.seed >= THEME.HERO_AT ? THEME.HERO_SIZE : 1;
     rho = THEME.FOLDER_R * (1 + THEME.SIZE_SPREAD * node.energy) * hero;
     if (node.state === 2) rho *= THEME.COLLAPSED_SIZE;
+  } else if (node.type === 'symbol') {
+    const base = [THEME.CLASS_R, THEME.FUNCTION_R, THEME.METHOD_R, THEME.BLOCK_R][node.kindCode - 2];
+    rho = base * (1 + THEME.SYMBOL_SIZE_SPREAD * node.energy);
+    if (node.state === 2) rho *= THEME.COLLAPSED_SIZE;
   } else rho = THEME.FILE_R;
   return Math.max(rho * conformalFactor3(p), THEME.MIN_R);
 }
@@ -383,8 +402,8 @@ function coreRadius(node, p) {
 // node is, and only if the focus has moved since the last time.
 function ensureShown() {
   if (!shownStale) return;
-  const shift = vNeg(focusPoint); // the Möbius move that puts the focus point at the centre is "add -f"
-  for (const node of nodes) {
+  const shift = vNeg(nav.focusPoint); // the Möbius move that puts the focus point at the centre is "add -f"
+  for (const node of allNodes) {
     const p = mobiusAdd3(shift, node.pos);
     shown[node.id] = p;
     shownRadius[node.id] = coreRadius(node, p);
@@ -419,9 +438,11 @@ function updateSemanticZoom() {
   const visit = (node, hidden) => {
     let state;
     if (hidden) state = 1;
-    else if (node.type === 'folder' && node.weight - 1 >= COLLAPSE_MIN_NODES && !node.onPath) {
-      const d = hyperbolicDistance3(focusPoint, node.pos);
-      const limit = node.collapsed ? THEME.COLLAPSE_DIST - THEME.COLLAPSE_HYST : THEME.COLLAPSE_DIST + THEME.COLLAPSE_HYST;
+    // Folders and symbols that contain other nodes (a class with methods) can collapse; symbols use their own, shorter distance.
+    else if ((node.type === 'folder' || node.type === 'symbol') && node.weight - 1 >= COLLAPSE_MIN_NODES && !node.onPath) {
+      const d = hyperbolicDistance3(nav.focusPoint, node.pos);
+      const base = node.type === 'symbol' ? THEME.SYMBOL_COLLAPSE_DIST : THEME.COLLAPSE_DIST;
+      const limit = node.collapsed ? base - THEME.COLLAPSE_HYST : base + THEME.COLLAPSE_HYST;
       node.collapsed = d > limit;
       state = node.collapsed ? 2 : 0;
     } else {
@@ -449,14 +470,107 @@ function updateSemanticZoom() {
 }
 
 // ---------------------------------------------------------------------------
+// Opening files: lazy-loaded symbol galaxies
+// ---------------------------------------------------------------------------
+// A file that has symbols OPENS when the focus is within EXPAND_DIST of it (or it is the focus, or an
+// ancestor of the focused symbol), and closes when the focus is further than EXPAND_DIST + EXPAND_HYST.
+// Opening = fetch the symbols file (cached), build nodes, lay them out inside the file's territory, give
+// every node a spare buffer slot and write its instance + edge. Closing = hide the slots and free them.
+// The base tree is never touched, so nothing else (picking, shaders, semantic zoom) needs a special case.
+// Example (EXPAND_DIST 0.45, HYST 0.25): a file 0.3 from the focus opens; it stays open until the focus
+// is more than 0.7 away; a file 0.6 away that is closed stays closed.
+
+function slotFor(node) {
+  const slot = freeSlots.length ? freeSlots.pop() : highWater++;
+  node.id = slot;
+  nodeById[slot] = node;
+  return slot;
+}
+
+function addSymbolNodes(file, made) {
+  const g = nodeMesh.geometry;
+  const bornAt = performance.now() / 1000;
+  for (const node of made) {
+    node.born = bornAt;
+    node.energy = node.energy ?? 0.5;
+    slotFor(node);
+    writeInstance(g, node.id, node);
+    // Its edge lives in the edge slot parallel to the node slot.
+    const e = baseEdgeCount + (node.id - baseCount);
+    node.edgeIndex = e;
+    edgeArr.eA.set([node.parent.pos.x, node.parent.pos.y, node.parent.pos.z], e * 3);
+    edgeArr.eB.set([node.pos.x, node.pos.y, node.pos.z], e * 3);
+    edgeArr.eHue[e] = node.hue; edgeArr.eEnergy[e] = node.energy; edgeArr.eSeed[e] = node.seed;
+    edgeArr.eHide[e] = 0; edgeArr.eBorn[e] = bornAt;
+    dynamicCount++;
+    allNodes.push(node);
+  }
+  g.instanceCount = highWater;
+  edgeMesh.geometry.instanceCount = baseEdgeCount + (highWater - baseCount);
+  uploadBuffers();
+}
+
+function uploadBuffers() {
+  for (const name of Object.keys(nodeMesh.geometry.arrays)) nodeMesh.geometry.attributes[name].needsUpdate = true;
+  for (const name of ['aA', 'aB', 'aHue', 'aEnergy', 'aSeed', 'aHide', 'aBorn']) edgeMesh.geometry.attributes[name].needsUpdate = true;
+  shownStale = true;
+}
+
+async function openFile(file) {
+  if (file.symState) return;               // already loading or open
+  file.symState = 'loading';
+  const doc = await store.getDoc(file);
+  if (file.symState !== 'loading') return; // closed again while we were loading
+  if (!doc) { file.symState = undefined; return; }
+  const made = buildSymbolNodes(file, doc);
+  if (dynamicCount + made.length > MAX_SYMBOL_NODES) { file.symState = undefined; return; } // out of spare slots
+  file.children = made.filter((n) => n.parent === file);
+  layoutSymbols(file);
+  addSymbolNodes(file, made);
+  file.symState = 'open';
+  openFiles.add(file);
+  dirty = true; // semantic zoom, halos and the info line must see the new children
+  if (focusNode === file) updateInfo();
+}
+
+function closeFile(file) {
+  const doomed = [];
+  const collect = (node) => { for (const c of node.children) { doomed.push(c); collect(c); } };
+  collect(file);
+  for (const node of doomed) {
+    nodeMesh.geometry.arrays.aState[node.id] = 1;     // hidden: the vertex shader throws it off screen
+    edgeArr.eHide[node.edgeIndex] = 1;
+    nodeById[node.id] = undefined;
+    freeSlots.push(node.id);
+    dynamicCount--;
+    if (hoverNode === node) hoverNode = null;
+  }
+  const gone = new Set(doomed);
+  allNodes = allNodes.filter((n) => !gone.has(n));
+  file.children = [];
+  file.symState = undefined;
+  openFiles.delete(file);
+  uploadBuffers();
+  dirty = true;
+}
+
+function updateExpansion() {
+  if (!symbolFiles.length) return;
+  const f = nav.focusPoint;
+  const focusFile = focusNode.type === 'symbol' ? focusNode.file : focusNode; // never close the file we are inside
+  const near = [];
+  for (const file of symbolFiles) {
+    const d = hyperbolicDistance3(f, file.pos);
+    if (d < EXPAND_DIST || file === focusFile) near.push({ file, d });
+    else if (file.symState === 'open' && d > EXPAND_DIST + EXPAND_HYST) closeFile(file);
+  }
+  near.sort((a, b) => a.d - b.d);
+  near.slice(0, MAX_OPEN_FILES).forEach(({ file }) => { openFile(file); });
+}
+
+// ---------------------------------------------------------------------------
 // Focusing
 // ---------------------------------------------------------------------------
-
-// Ease-in-out: slow start, fast middle, slow end. smoothstep(t) = 3t² − 2t³.
-// Example: t = 0.25 -> 0.156, t = 0.5 -> 0.5, t = 0.75 -> 0.844.
-function easeInOut(t) {
-  return t * t * (3 - 2 * t);
-}
 
 // Start moving the view so that `node` ends up at the centre.
 function focusOn(node, animate = true) {
@@ -464,27 +578,25 @@ function focusOn(node, animate = true) {
   focusNode = node;
   focusUniforms.uFocusId.value = node.id;
   sunUniforms.uFocusPos.value.set(node.pos.x, node.pos.y, node.pos.z);
+  nav.flyTo(node.pos, animate);
   updateInfo();
-  if (animate) {
-    // If a previous animation is still running, start from where the view is now.
-    anim = { from: focusPoint, to: node.pos, start: performance.now() };
-  } else {
-    focusPoint = node.pos;
-    anim = null;
-  }
+  showCode(node);
   dirty = true;
 }
 
-function stepAnimation(now) {
-  if (!anim) return;
-  const t = Math.min((now - anim.start) / (ANIM_SECONDS * 1000), 1);
-  // Slide the focus point along the geodesic between the old and new focus.
-  focusPoint = geodesicLerp3(anim.from, anim.to, easeInOut(t));
-  if (t >= 1) {
-    focusPoint = anim.to; // land exactly on the target (no rounding drift)
-    anim = null;
-  }
-  dirty = true;
+// Fill the code panel for the focus: a symbol shows its own lines, a file with source shows the file.
+async function showCode(node) {
+  const file = node.type === 'symbol' ? node.file : node;
+  if (!file || !file.hasSymbols || node.type === 'folder') { codePanel.hide(); return; }
+  const lines = await store.getLines(file);
+  if (focusNode !== node) return; // the user moved on while the file was loading
+  const from = node.type === 'symbol' ? node.startLine : 1;
+  const to = node.type === 'symbol' ? node.endLine : (file.loc || (lines ? lines.length : 1));
+  codePanel.show({
+    title: node.name,
+    subtitle: `${nodePath(file)} · lines ${from}–${to}`,
+    lines, from, to, lang: file.ext === 'py' ? 'py' : 'js',
+  });
 }
 
 // ---------------------------------------------------------------------------
@@ -493,10 +605,27 @@ function stepAnimation(now) {
 const infoName = document.querySelector('#info .name');
 const infoPath = document.querySelector('#info .path');
 
+// Number of symbol nodes under a file.
+function dynamicCountOf(file) {
+  let count = 0;
+  const walk = (node) => { for (const c of node.children) { count++; walk(c); } };
+  walk(file);
+  return count;
+}
+
 function updateInfo() {
   const n = focusNode;
   infoName.textContent = n.name + (n.type === 'folder' ? '/' : '');
-  infoPath.textContent = n.type === 'folder' ? `${n.children.length} items, ${n.weight - 1} nodes inside` : '';
+  if (n.type === 'folder') infoPath.textContent = `${n.children.length} items, ${n.weight - 1} nodes inside`;
+  else if (n.type === 'symbol') infoPath.textContent = `${n.kind} · ${n.signature} · lines ${n.startLine}–${n.endLine}`;
+  else {
+    // A file: size, git info (if the scanner had it) and how many symbols it holds once opened.
+    const bits = [];
+    if (n.loc) bits.push(`${n.loc} lines`);
+    if (n.hasSymbols) bits.push(n.symState === 'open' ? `${dynamicCountOf(n)} symbols` : 'has symbols');
+    if (n.commits) bits.push(`${n.commits} commits, last ${n.modified}`);
+    infoPath.textContent = bits.join(' · ');
+  }
   updateBreadcrumb();
 }
 
@@ -506,7 +635,7 @@ function updateInfo() {
 const crumbs = document.createElement('div');
 crumbs.id = 'crumbs';
 Object.assign(crumbs.style, {
-  position: 'fixed', left: '50%', bottom: '34px', transform: 'translateX(-50%)',
+  position: 'fixed', left: '50%', bottom: 'calc(34px + var(--sheet-h, 0px))', transform: 'translateX(-50%)',
   maxWidth: 'calc(100vw - 24px)', padding: '4px 12px', borderRadius: '14px',
   font: `600 ${THEME.CRUMB_FONT_PX}px system-ui, sans-serif`,
   background: cssRgb(THEME.CRUMB_BG, THEME.CRUMB_BG_ALPHA), color: cssRgb(THEME.CRUMB_COLOR),
@@ -572,7 +701,7 @@ function pickNode(clientX, clientY) {
   const rect = renderer.domElement.getBoundingClientRect();
   let inside = null, insideDepth = Infinity;
   let near = null, nearScore = Infinity;
-  for (const node of nodes) {
+  for (const node of allNodes) {
     if (node.state === 1) continue; // hidden inside a collapsed folder: not pickable
     const s = projectNode(node.id, rect);
     if (!s) continue;
@@ -594,7 +723,7 @@ function pickNode(clientX, clientY) {
 // Project one node to CSS pixels using its CURRENT position (computed on the spot: only a
 // few dozen nodes need it, so we do not rebuild the pick table every animation frame).
 function projectForLabel(node) {
-  const p = mobiusAdd3(vNeg(focusPoint), node.pos);
+  const p = mobiusAdd3(vNeg(nav.focusPoint), node.pos);
   tmp.set(p.x, p.y, p.z).applyMatrix4(camera.matrixWorldInverse);
   const depth = -tmp.z;
   if (depth <= camera.near) return null;
@@ -669,12 +798,14 @@ window.addEventListener('resize', resize);
 // ---------------------------------------------------------------------------
 function frame(now) {
   fps.tick(now);
-  controls.update(); // applies the damping glide
   uTime.value = FROZEN_TIME ?? now / 1000; // ?time=12.5 freezes the shader clock (repeatable screenshots)
-  stepAnimation(now);
+  uBloom.value = performance.now() / 1000;  // bloom clock: always real time
+  if (nav.update(now)) dirty = true;        // camera damping + the refocus glide (navigation.js)
   if (dirty) {
-    focusUniforms._Focus.value.set(focusPoint.x, focusPoint.y, focusPoint.z); // the whole GPU refocus
-    shownStale = true;                                                         // CPU copy is rebuilt only if a pick needs it
+    const f = nav.focusPoint;
+    focusUniforms._Focus.value.set(f.x, f.y, f.z); // the whole GPU refocus
+    shownStale = true;                              // CPU copy is rebuilt only if a pick needs it
+    updateExpansion();                              // open / close files near the focus
     updateSemanticZoom();                                                      // collapse / expand folders by distance
     updateHalos();                                                             // halos copy each node's state, so refresh them too
     dirty = false;
@@ -696,10 +827,16 @@ async function start() {
   const response = await fetch(url);
   if (!response.ok) throw new Error(`Could not load ${url} (${response.status})`);
 
-  const tree = buildTree(await response.json());
+  const json = await response.json();
+  const tree = buildTree(json);
   root = tree.root;
   nodes = tree.nodes;
   computeLayout3d(root);
+  // Symbol and source files sit in folders named by the tree JSON, relative to the tree file's folder.
+  const baseUrl = url.slice(0, url.lastIndexOf('/') + 1);
+  store = createSymbolStore(baseUrl, json.symbolsDir, json.sourceDir);
+  symbolFiles = nodes.filter((n) => n.hasSymbols);
+  codePanel = createCodePanel({ onInset: nav.setInset });
 
   labels = createLabels(renderer);
   buildDrawables();
@@ -720,26 +857,36 @@ window.__explorer = {
   focusOn,
   focusId: () => focusNode.id,
   get fps() { return fps.value; },
-  get animating() { return anim !== null; },
+  get animating() { return nav.animating; },
+  get allNodes() { return allNodes; },
+  nodeById: (id) => nodeById[id],
+  get dynamicCount() { return dynamicCount; },
+  get openFiles() { return [...openFiles].map((f) => f.id); },
+  get symbolFileIds() { return symbolFiles.map((f) => f.id); },
+  get panelVisible() { return codePanel.visible; },
+  get panelText() { return codePanel.element.innerText; },
+  get focusNode() { return focusNode; },
   get labelCount() { return labels.count; },
   labelDebug: () => labels.debug(),
   get visibleCount() { return visibleCount; },
   get collapsedCount() { return collapsedNodes.length; },
-  nodeState: (id) => nodes[id].state,
+  nodeState: (id) => nodeById[id].state,
   pick: (x, y) => { const n = pickNode(x, y); return n ? n.id : null; },
   orbIds: () => collapsedNodes.map((n) => n.id),
-  setHover: (id) => { hoverNode = id === null ? null : nodes[id]; },
-  get spinning() { return controls.autoRotate; },
-  setSpin,
+  setHover: (id) => { hoverNode = id === null ? null : nodeById[id]; },
+  get spinning() { return nav.spinning; },
+  setSpin: nav.setSpin,
   get drawCalls() { return renderer.info.render.calls; },
   get triangles() { return renderer.info.render.triangles; },
   quality: LOW ? 'low' : 'high',
   // Compare the GPU's Möbius maths with the CPU's (see gpucheck.js).
-  gpuCheck: () => gpuCheck(renderer),
+  gpuCheck: (count, maxRadius) => gpuCheck(renderer, count, maxRadius),
   // Where the GPU says it drew a node, read back from the uniform + CPU formula.
-  get focusPoint() { return focusPoint; },
+  get focusPoint() { return nav.focusPoint; },
   // Shown radius of a node's position (0 = at the centre of the ball).
   shownR: (id) => { ensureShown(); return vLength(shown[id]); },
+  // Position (from the CPU copy) of any live node id, symbols included.
+  shownPos: (id) => { ensureShown(); return shown[id]; },
   // Screen (CSS pixel) position of a node's centre, or null if behind the camera.
   screenPos: (id) => projectNode(id, renderer.domElement.getBoundingClientRect()),
 };

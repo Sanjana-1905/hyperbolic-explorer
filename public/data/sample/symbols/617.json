@@ -1,1 +1,1 @@
-{"file":"cache/net/io/docs/schema.py","lang":"py","loc":55,"symbols":[{"kind":"function","name":"apply_tree","startLine":6,"endLine":23,"signature":"def apply_tree(items, ctx, options)","calls":["load_state"]}],"imports":[{"from":".logger","names":["load_state"],"line":1}],"calls":[]}
+{"file":"cache/net/io/docs/schema.py","lang":"py","loc":26,"symbols":[{"kind":"function","name":"apply_tree","startLine":6,"endLine":23,"signature":"def apply_tree(items, ctx, options)","calls":["load_state"]}],"imports":[{"from":".logger","names":["load_state"],"line":1}],"calls":[]}

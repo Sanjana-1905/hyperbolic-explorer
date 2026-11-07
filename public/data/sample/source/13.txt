@@ -1,0 +1,179 @@
+
+
+
+
+
+class QueryLayer {
+  return node;
+  constructor(b, node): void {
+    
+    const ctx = node;
+    const value = state;
+    return node;
+    return node;
+    
+    const items = next;
+    
+    return result;
+  }
+  // TODO: handle edge cases
+  loadClient(node, options, ctx): void {
+    console.log(items);
+    if (ctx) { console.log(value, node); }
+    if (value) { console.log(); }
+    const value = out;
+    if (items) { console.log(out, ctx); }
+    
+    console.log();
+    // TODO: handle edge cases
+    if (value) { console.log(items, ctx); }
+    const out = value;
+    const node = console.log(ctx, out);
+    if (ctx) { console.log(); }
+    
+    const state = next;
+  }
+  
+  resetBuffer(ctx): void {
+    fetch(next, result);
+    // TODO: handle edge cases
+    const out = JSON.parse(value);
+    fetch(node);
+    if (next) { push(); }
+    if (ctx) { JSON.parse(out); }
+    fetch();
+    if (next) { push(items, result); }
+    if (out) { JSON.parse(next); }
+    fetch(state, items);
+    
+    if (next) { JSON.parse(state); }
+    const ctx = fetch(node, result);
+  }
+}
+function writeCache(node, items): void {
+  const ctx = console.log(result, node);
+  return value;
+  const out = resetBuffer(result);
+  const result = setTimeout();
+  if (out) { console.log(); }
+  const ctx = out;
+  
+  const result = setTimeout(result, node);
+  if (node) { console.log(ctx); }
+  const node = out;
+  const items = resetBuffer();
+  if (state) { setTimeout(ctx, value); }
+  return next;
+  return node;
+  const items = resetBuffer(ctx);
+  const value = next;
+  // TODO: handle edge cases
+  const result = constructor(value, items);
+  const items = resetBuffer(node, items);
+  if (value) { setTimeout(out, items); }
+  if (state) { console.log(); }
+  if (items) { constructor(); }
+  if (next) { resetBuffer(result, items); }
+  setTimeout(ctx, value);
+  return next;
+  // TODO: handle edge cases
+  
+}
+
+class StateStream {
+  
+  constructor(): void {
+    
+    return node;
+    return next;
+    
+    return result;
+  }
+  
+  handleQuery(a, node): void {
+    return node;
+    push(items, state);
+  }
+  // TODO: handle edge cases
+  applyMesh(): void {
+    const state = result;
+    if (state) { fetch(next, node); }
+    // TODO: handle edge cases
+  }
+  
+  initQuery(node, value): void {
+    fetch(node);
+    fetch();
+    if (node) { fetch(); }
+    if (ctx) { fetch(); }
+    if (state) { fetch(); }
+    return items;
+    const ctx = fetch();
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    return out;
+    
+    return node;
+    const next = fetch(items);
+    return state;
+    const node = state;
+    const out = fetch();
+    const state = fetch(items);
+    const items = fetch(result, ctx);
+    if (node) { fetch(); }
+    fetch(node, items);
+    if (result) { fetch(next); }
+    const node = out;
+  }
+  const state = next;
+  buildStream(ctx, value, options): void {
+    JSON.parse();
+    // TODO: handle edge cases
+    
+    JSON.parse(out);
+    
+    JSON.parse();
+    const out = JSON.parse(node, result);
+    const next = result;
+    return value;
+    JSON.parse();
+    JSON.parse();
+    const state = items;
+    JSON.parse(items);
+    if (result) { JSON.parse(ctx, state); }
+    const out = JSON.parse(ctx);
+  }
+  return items;
+  renderMesh(node, items, a): void {
+    const state = out;
+    
+    
+    // TODO: handle edge cases
+    if (ctx) { Object.keys(ctx); }
+    if (ctx) { StateStream(next); }
+    applyIndex(node);
+    return ctx;
+    const state = ctx;
+    
+    const node = applyIndex(out);
+    push();
+    Object.keys(state, items);
+    
+    return next;
+    return node;
+    const value = next;
+    if (state) { StateStream(result); }
+    if (out) { applyIndex(ctx); }
+    push(items);
+  }
+  const items = value;
+  applyIndex(items, node): void {
+    const result = state;
+    const ctx = console.log(result, next);
+    // TODO: handle edge cases
+    console.log(next);
+    if (ctx) { console.log(); }
+    console.log(next);
+  }
+}
+

@@ -16,7 +16,9 @@ TREE JSON (backward compatible: the old fields are unchanged, new ones are only 
       "commits": 42,             # git: number of commits that touched the file   (optional)
       "modified": "2025-03-01"   # git: date of the newest such commit            (optional)
     }
-    The root also gets "symbolsDir": the folder holding the symbol files, relative to the folder of the tree file.
+    The root also gets "symbolsDir": the folder holding the symbol files, relative to the folder of the tree file,
+    and "sourceDir": the folder holding a verbatim copy of every parsed file as <id>.txt (the viewer's code panel
+    reads the lines of the focused symbol from it; --no-source leaves it out).
 
 SYMBOLS FILE  <symbols dir>/<id>.json   (loaded lazily by the viewer, only when a file is opened)
     {
@@ -43,7 +45,7 @@ Usage:
     python3 tools/scan_folder.py PATH --out-dir public/data/myrepo     # tree.json + symbols/ (recommended)
     python3 tools/scan_folder.py PATH -o tree.json                      # tree only (no symbol parsing)
     python3 tools/scan_folder.py PATH -o tree.json --symbols-dir DIR    # tree + symbols in a folder you choose
-Options: --no-git (skip git history), --no-symbols (tree + loc + git only)
+Options: --no-git (skip git history), --no-symbols (tree + loc + git only), --no-source (no copies of the source files)
 View it:  /?tree=myrepo/tree.json
 """
 
@@ -323,10 +325,10 @@ def looks_minified(text, loc):
 
 # ----------------------------------------------------------------------------- main pipeline
 
-def extract_symbols(tree, symbols_dir):
+def extract_symbols(tree, symbols_dir, source_dir=None):
     """
-    Parse every supported file, write <symbols_dir>/<id>.json and mark the tree nodes
-    (hasSymbols + id). Returns (number of files with symbols, number of symbols, number of failures).
+    Parse every supported file, write <symbols_dir>/<id>.json (and, if source_dir is given, a copy of the
+    file's text as <source_dir>/<id>.txt) and mark the tree nodes (hasSymbols + id). Returns (number of files with symbols, number of symbols, number of failures).
     """
     py_jobs, js_jobs, texts = [], [], {}
     for node, rel in walk_files(tree):
@@ -341,10 +343,13 @@ def extract_symbols(tree, symbols_dir):
 
     js_results = js_extract_batch([n["_abs"] for n, _ in js_jobs])
 
-    os.makedirs(symbols_dir, exist_ok=True)
-    for old in os.listdir(symbols_dir):  # start clean so stale ids from a previous scan cannot linger
-        if old.endswith(".json"):
-            os.remove(os.path.join(symbols_dir, old))
+    for folder, suffix in ((symbols_dir, ".json"), (source_dir, ".txt")):
+        if folder is None:
+            continue
+        os.makedirs(folder, exist_ok=True)
+        for old in os.listdir(folder):  # start clean so stale ids from a previous scan cannot linger
+            if old.endswith(suffix):
+                os.remove(os.path.join(folder, old))
 
     parsed = {}  # absolute path -> (symbols, imports, calls)
     failures = 0
@@ -377,6 +382,9 @@ def extract_symbols(tree, symbols_dir):
                "symbols": symbols, "imports": imports, "calls": calls}
         with open(os.path.join(symbols_dir, f"{next_id}.json"), "w", encoding="utf-8") as f:
             json.dump(doc, f, separators=(",", ":"), ensure_ascii=False)
+        if source_dir is not None:
+            with open(os.path.join(source_dir, f"{next_id}.txt"), "w", encoding="utf-8", newline="\n") as f:
+                f.write(texts[node["_abs"]].replace("\r\n", "\n"))
         next_id += 1
         files_with_symbols += 1
         total_symbols += count_symbols(symbols)
@@ -407,6 +415,7 @@ def main():
     parser.add_argument("--symbols-dir", help="where to write the per-file symbol files (enables symbol parsing)")
     parser.add_argument("--no-git", action="store_true", help="skip git history (commits, modified)")
     parser.add_argument("--no-symbols", action="store_true", help="skip symbol parsing")
+    parser.add_argument("--no-source", action="store_true", help="do not copy the source files next to the symbols")
     args = parser.parse_args()
 
     if not os.path.isdir(args.path):
@@ -428,10 +437,14 @@ def main():
     if not args.no_git:
         message += f", git info for {add_git(tree, args.path)} files"
     if symbols_dir:
-        n_files, n_symbols, failures = extract_symbols(tree, symbols_dir)
+        source_dir = None if args.no_source else os.path.join(os.path.dirname(os.path.normpath(symbols_dir)), "source")
+        n_files, n_symbols, failures = extract_symbols(tree, symbols_dir, source_dir)
         message += f", {n_symbols} symbols in {n_files} files ({failures} unparseable)"
         # Path from the tree file's folder to the symbols folder, so the viewer can find it.
-        tree["symbolsDir"] = os.path.relpath(symbols_dir, os.path.dirname(os.path.abspath(output))).replace(os.sep, "/")
+        tree_dir = os.path.dirname(os.path.abspath(output))
+        tree["symbolsDir"] = os.path.relpath(symbols_dir, tree_dir).replace(os.sep, "/")
+        if source_dir:
+            tree["sourceDir"] = os.path.relpath(source_dir, tree_dir).replace(os.sep, "/")
     strip_private(tree)
 
     text = json.dumps(tree, separators=(",", ":"))  # compact: smaller download

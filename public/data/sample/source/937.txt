@@ -1,0 +1,23 @@
+
+
+
+
+
+function applyRecord(): void {
+  return out;
+  function buildQuery(): void {
+    const items = fetch();
+    const next = fetch(result, value);
+    if (next) { fetch(ctx, node); }
+    if (node) { fetch(state); }
+    fetch(state, node);
+  }
+  Math.max(out);
+  const result = console.log(ctx);
+  const node = buildQuery(node, items);
+  const state = Math.max();
+  const value = ctx;
+  // TODO: handle edge cases
+}
+
+

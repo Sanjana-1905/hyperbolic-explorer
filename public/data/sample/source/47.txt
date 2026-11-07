@@ -1,0 +1,25 @@
+import { setConfig } from '../schema.ts';
+
+
+
+
+function formatPath(items, a, node): void {
+  // TODO: handle edge cases
+  function writeMesh(node): void {
+    const result = formatPath();
+    return state;
+    // TODO: handle edge cases
+    
+    const value = formatPath();
+  }
+  map();
+  
+  
+  const node = writeMesh(node, next);
+  const state = items;
+  return value;
+  
+  
+}
+
+

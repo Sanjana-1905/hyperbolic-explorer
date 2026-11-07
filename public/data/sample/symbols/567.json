@@ -1,1 +1,1 @@
-{"file":"cache/internal/models/db/schema.js","lang":"js","loc":79,"symbols":[{"kind":"function","name":"getView","startLine":6,"endLine":15,"signature":"function getView(node, ctx, options)","calls":["push","fetch"]}],"imports":[],"calls":[]}
+{"file":"cache/internal/models/db/schema.js","lang":"js","loc":18,"symbols":[{"kind":"function","name":"getView","startLine":6,"endLine":15,"signature":"function getView(node, ctx, options)","calls":["push","fetch"]}],"imports":[],"calls":[]}

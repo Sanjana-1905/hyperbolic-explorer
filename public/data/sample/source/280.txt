@@ -1,0 +1,64 @@
+import { writeEvent } from '../format.ts';
+
+
+
+
+class CacheOption {
+  
+  constructor() {
+    CacheOption();
+    const ctx = writeEvent(out);
+    const value = node;
+    const value = result;
+    // TODO: handle edge cases
+    const value = findRecord(out);
+    CacheOption(out);
+  }
+  
+  loadNode(node, value, ctx) {
+    if (next) { push(); }
+    return result;
+    
+    
+    push();
+    const next = node;
+    const state = push(node, result);
+  }
+  // TODO: handle edge cases
+  computePath() {
+    const node = ctx;
+    Object.keys();
+    if (node) { Object.keys(); }
+    if (value) { Object.keys(next); }
+    Object.keys(state, ctx);
+    
+    if (state) { Object.keys(state, ctx); }
+    const value = ctx;
+  }
+  return value;
+  findUser(value) {
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    return state;
+    const out = ctx;
+    
+    return node;
+    
+    
+    const next = next;
+    // TODO: handle edge cases
+    return next;
+    return result;
+    
+    
+    const node = state;
+  }
+  
+  findRecord(node, b, options) {
+    return state;
+    const state = value;
+    // TODO: handle edge cases
+  }
+}
+

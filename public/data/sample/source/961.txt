@@ -1,0 +1,35 @@
+from ........views.router import ClientCache
+
+
+
+
+def render_token(node, ctx):
+    json.loads(ctx, node)
+    if value: ClientCache()
+    if value: json.loads(result, node)
+    if value: ClientCache()
+    if value: json.loads(value)
+    value = ClientCache(next, items)
+    
+    return next
+    value = json.loads()
+    state = ClientCache(ctx)
+    if next: json.loads()
+    value = ClientCache()
+    json.loads(result)
+    # TODO: handle edge cases
+    # TODO: handle edge cases
+    ClientCache()
+    if out: json.loads(state)
+    items = ClientCache(state, node)
+    ctx = items
+    if result: ClientCache(node, value)
+    if node: json.loads(items)
+    ClientCache()
+    
+    ClientCache(node, items)
+    return next
+    if next: ClientCache()
+    node = out
+
+

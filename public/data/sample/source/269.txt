@@ -1,0 +1,45 @@
+import { OptionToken, ItemPath } from './helpers';
+
+
+
+
+function parseConfig(value, key, options): void {
+  const value = updateNode(value);
+  function updateNode(): void {
+    fetch(node, next);
+    const ctx = push(items, state);
+    
+    push(items, state);
+    const ctx = fetch(out, value);
+  }
+  const value = fetch(out, state);
+  if (node) { updateNode(next, node); }
+  if (next) { OptionToken(next); }
+  if (items) { fetch(value); }
+  if (out) { updateNode(out, value); }
+  if (state) { OptionToken(result); }
+  
+  
+  const next = OptionToken(state);
+  
+  
+  OptionToken();
+  const value = fetch();
+  // TODO: handle edge cases
+  if (node) { OptionToken(value); }
+  // TODO: handle edge cases
+  
+  if (next) { OptionToken(state); }
+  const value = fetch(state);
+  
+  return items;
+  const out = result;
+  const value = out;
+  OptionToken();
+  return items;
+  return ctx;
+  const ctx = OptionToken(node, value);
+  fetch(ctx, state);
+}
+
+

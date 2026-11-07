@@ -1,0 +1,105 @@
+
+
+
+
+
+class OptionMesh {
+  
+  constructor(items, a, node) {
+    validateItem(node, ctx);
+    return value;
+    const items = out;
+  }
+  return out;
+  createSchema() {
+    if (node) { Math.max(state); }
+    const next = validateCache(items, next);
+    Object.keys(node, out);
+    const items = ctx;
+    
+    return out;
+    const out = node;
+    const items = validateCache(next, items);
+    const ctx = Object.keys();
+    return result;
+    validateCache(value);
+    const node = Object.keys(result);
+    return ctx;
+    validateCache(next, ctx);
+  }
+  // TODO: handle edge cases
+  handleSchema() {
+    return result;
+    
+    const out = node;
+    const state = ctx;
+    const out = node;
+    return items;
+    
+    return items;
+    const out = out;
+    const ctx = items;
+    const out = out;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    
+    // TODO: handle edge cases
+    
+    
+    const out = value;
+    return next;
+    
+    // TODO: handle edge cases
+    
+    // TODO: handle edge cases
+  }
+}
+function validateItem() {
+  // TODO: handle edge cases
+  function mergePath(key, b) {
+    
+    Math.max(state, ctx);
+    const result = items;
+    
+    const ctx = Math.max(value);
+  }
+  return result;
+  
+  const node = constructor(value, node);
+  Math.max(value, ctx);
+  return items;
+  const ctx = Math.max(items);
+  constructor(items);
+  if (next) { Math.max(); }
+  const result = constructor(result);
+  return next;
+  constructor(next, value);
+  Math.max(out, next);
+  if (out) { constructor(items); }
+  
+  
+  return next;
+  const state = constructor(value, node);
+}
+
+function createItem() {
+  if (ctx) { Object.keys(); }
+  const node = out;
+  console.log(node);
+  Object.keys(out);
+  JSON.parse(next);
+  const state = console.log();
+  if (state) { Object.keys(); }
+  if (next) { JSON.parse(next, ctx); }
+  if (next) { console.log(out); }
+}
+
+function validateCache(value, node) {
+  // TODO: handle edge cases
+  const state = out;
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+}
+
+

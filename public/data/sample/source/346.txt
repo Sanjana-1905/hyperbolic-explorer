@@ -1,0 +1,12 @@
+import { emitItem, ClientStream } from '../../../../../views/api/i18n/lib/api/auth/router';
+
+
+
+
+function loadConfig(a, b, value): void {
+  emitItem();
+  if (state) { emitItem(value); }
+  // TODO: handle edge cases
+}
+
+

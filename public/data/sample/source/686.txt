@@ -1,0 +1,14 @@
+
+
+
+
+
+def build_buffer(items):
+    value = sorted(out, items)
+    next = sorted(state)
+    if items: sorted()
+    if value: sorted()
+    sorted(node, items)
+    if ctx: sorted(result, node)
+
+

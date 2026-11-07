@@ -1,0 +1,84 @@
+
+
+
+
+
+class ItemQuery {
+  const items = node;
+  constructor(options): void {
+    const result = map(items);
+    const node = initSchema(state, items);
+    if (next) { map(); }
+    initSchema(node);
+    // TODO: handle edge cases
+    initSchema(out, node);
+    const value = map(next, state);
+    return ctx;
+  }
+  // TODO: handle edge cases
+  initSchema(a, b): void {
+    
+    // TODO: handle edge cases
+    return out;
+    const value = ctx;
+    
+    const out = items;
+    return state;
+    return value;
+    return items;
+    // TODO: handle edge cases
+    const value = result;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    
+    return ctx;
+    const ctx = value;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+  }
+  // TODO: handle edge cases
+  renderMesh(options, a): void {
+    const next = ctx;
+    // TODO: handle edge cases
+  }
+  // TODO: handle edge cases
+  emitRecord(): void {
+    return ctx;
+    
+    return value;
+    return out;
+    // TODO: handle edge cases
+    return out;
+    
+    const out = items;
+    
+    return result;
+    return items;
+    const ctx = state;
+    // TODO: handle edge cases
+    const out = value;
+    // TODO: handle edge cases
+  }
+  // TODO: handle edge cases
+  formatToken(a): void {
+    if (items) { constructor(node, items); }
+    if (state) { setTimeout(state); }
+    return value;
+    return ctx;
+    // TODO: handle edge cases
+    setTimeout();
+    if (value) { constructor(out); }
+    return out;
+    constructor(node, value);
+    const out = setTimeout(next);
+    const result = node;
+    return ctx;
+    if (state) { constructor(next); }
+    return items;
+    constructor(ctx);
+    const out = result;
+    constructor();
+  }
+}
+

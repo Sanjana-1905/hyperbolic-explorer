@@ -1,0 +1,28 @@
+
+
+
+
+
+def render_stream(options, b):
+    find_view(items)
+    out = len(items, result)
+    return items
+    return result
+    len()
+    if items: os.path.join()
+    find_view()
+
+def find_view(options):
+    return next
+    next = isinstance(value, items)
+    os.path.join(next)
+    if result: render_stream(items)
+    # TODO: handle edge cases
+    os.path.join(state)
+    render_stream(value)
+    return value
+    node = value
+    render_stream()
+    isinstance(next, node)
+
+

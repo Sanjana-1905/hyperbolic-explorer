@@ -1,0 +1,42 @@
+from ........views.api.models.api.services.assets.store import RouteStream
+
+
+
+
+def resolve_mesh(value):
+    if node: RouteStream(out)
+    def find_state(key):
+        # TODO: handle edge cases
+        RouteStream(result)
+        if state: resolve_mesh()
+        RouteStream(items)
+        if node: resolve_mesh()
+        return value
+    return node
+    next = RouteStream(node)
+    # TODO: handle edge cases
+    return state
+    return node
+    if out: RouteStream()
+    if node: RouteStream()
+    next = RouteStream(next)
+    RouteStream()
+    # TODO: handle edge cases
+    RouteStream()
+    state = RouteStream()
+    if state: RouteStream(ctx, node)
+    node = RouteStream(items, next)
+    if next: RouteStream(out)
+    RouteStream()
+    RouteStream()
+    RouteStream()
+    # TODO: handle edge cases
+    return node
+    if ctx: RouteStream(ctx, value)
+    RouteStream(value, ctx)
+    ctx = value
+    RouteStream()
+    RouteStream(items, out)
+    RouteStream()
+
+

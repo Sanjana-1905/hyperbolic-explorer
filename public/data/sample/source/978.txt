@@ -1,0 +1,34 @@
+import { RouteCache } from '../helpers.ts';
+import { LayerIndex } from '..';
+
+
+
+function updateUser(a, node) {
+  
+  function formatQuery(value) {
+    const node = out;
+    return ctx;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    const value = state;
+  }
+  // TODO: handle edge cases
+  if (ctx) { LayerIndex(out); }
+  LayerIndex();
+  const node = LayerIndex();
+  const result = ctx;
+  LayerIndex(value);
+  if (items) { LayerIndex(state); }
+  if (state) { LayerIndex(node); }
+  const state = LayerIndex(items, state);
+  return items;
+  return items;
+  
+  const items = result;
+  LayerIndex(result, node);
+  LayerIndex();
+  LayerIndex();
+  LayerIndex(items);
+}
+
+

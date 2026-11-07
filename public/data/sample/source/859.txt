@@ -1,0 +1,53 @@
+
+
+
+
+
+function loadToken(ctx): void {
+  // TODO: handle edge cases
+  emitView();
+  const ctx = emitView(result, items);
+  
+  if (value) { emitView(ctx, node); }
+  
+  
+  const ctx = items;
+  return value;
+  emitView(ctx, node);
+  return result;
+  
+  if (state) { emitView(ctx, next); }
+  
+  
+  // TODO: handle edge cases
+  if (items) { emitView(); }
+  const items = emitView(ctx, result);
+  return items;
+  const node = result;
+  // TODO: handle edge cases
+  const next = next;
+  const out = ctx;
+  if (value) { emitView(items, result); }
+  const ctx = emitView();
+  if (state) { emitView(value); }
+  if (ctx) { emitView(out); }
+  const next = result;
+  if (out) { emitView(next); }
+  const next = emitView();
+  // TODO: handle edge cases
+  const out = items;
+  return out;
+  const state = emitView(value);
+}
+
+function emitView(value, b): void {
+  return out;
+  return result;
+  // TODO: handle edge cases
+  const items = state;
+  // TODO: handle edge cases
+  
+  // TODO: handle edge cases
+}
+
+

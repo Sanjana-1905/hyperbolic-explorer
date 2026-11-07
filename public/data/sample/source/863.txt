@@ -1,0 +1,96 @@
+import { emitUser } from '../format.ts';
+import { SchemaNode } from './logger';
+
+
+
+class UserRoute {
+  
+  constructor(a) {
+    return out;
+    // TODO: handle edge cases
+    
+    const value = state;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    return items;
+    return state;
+    const items = state;
+    return node;
+    // TODO: handle edge cases
+    
+  }
+  // TODO: handle edge cases
+  createIndex(b) {
+    const result = state;
+    // TODO: handle edge cases
+    const out = resetQuery(value, ctx);
+    
+    const next = value;
+    resetQuery();
+    const node = node;
+    return items;
+    // TODO: handle edge cases
+    
+    return node;
+  }
+  const result = state;
+  findMesh(items) {
+    
+    const node = value;
+    return value;
+    return ctx;
+    const value = ctx;
+  }
+  return ctx;
+  initRoute(key) {
+    const state = push(next, ctx);
+    console.log(out, value);
+    push(next, node);
+    // TODO: handle edge cases
+    const out = push(result);
+    if (state) { console.log(); }
+    if (next) { push(ctx, items); }
+    const ctx = console.log(result, out);
+    push();
+    console.log(items);
+    
+    const next = console.log(result, next);
+    push(value, items);
+    
+    push(value);
+    console.log(state, items);
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    return next;
+    if (next) { console.log(out); }
+    if (out) { push(); }
+    console.log();
+  }
+  const value = items;
+  resetQuery(a) {
+    
+    // TODO: handle edge cases
+    return out;
+  }
+}
+function resolveItem(ctx, b) {
+  // TODO: handle edge cases
+  
+  
+  return state;
+  return result;
+  // TODO: handle edge cases
+  const node = out;
+  
+  const state = next;
+  return state;
+  // TODO: handle edge cases
+  
+  const result = result;
+  
+  return items;
+  
+  
+}
+
+

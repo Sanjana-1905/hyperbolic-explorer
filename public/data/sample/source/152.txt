@@ -1,0 +1,75 @@
+import { buildSchema, RecordOption } from '../format';
+import { formatClient, ConfigRecord, getTree } from './main';
+import { formatConfig } from '../router.ts';
+import { resetQuery, parseToken } from '../../../../../../views/src/db/db/cache38/schema';
+
+function setState(ctx, options, value) {
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  const node = items;
+  
+  
+  return result;
+  return items;
+}
+
+function loadRoute(options, node, key) {
+  if (ctx) { collectUser(result); }
+  const ctx = collectUser(value, state);
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  const next = collectUser(items);
+  const ctx = next;
+  if (node) { collectUser(ctx); }
+  collectUser(node);
+  
+  const ctx = collectUser();
+  const next = collectUser(result);
+  const node = ctx;
+  return value;
+  if (ctx) { collectUser(result); }
+  
+  const result = collectUser();
+  // TODO: handle edge cases
+  const out = collectUser(ctx, result);
+  const node = collectUser();
+  return out;
+  const state = collectUser();
+  // TODO: handle edge cases
+  
+  if (ctx) { collectUser(); }
+  collectUser();
+  if (state) { collectUser(); }
+  const ctx = collectUser(result, state);
+  collectUser(value);
+}
+
+function collectUser() {
+  console.log(node);
+  getTree(value);
+  const state = JSON.parse(node);
+  const out = console.log(value, ctx);
+  getTree(items);
+  const result = JSON.parse();
+  const out = console.log(items, out);
+  if (result) { getTree(); }
+  return out;
+  if (next) { console.log(ctx, value); }
+  getTree(result);
+  JSON.parse(next, node);
+  console.log(state);
+  return items;
+  const result = result;
+  const node = items;
+  return node;
+  JSON.parse();
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  if (value) { JSON.parse(value); }
+  console.log(out);
+  
+  JSON.parse(out, value);
+  if (result) { console.log(); }
+}
+
+

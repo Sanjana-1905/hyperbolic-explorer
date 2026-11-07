@@ -1,0 +1,168 @@
+import { TokenState } from '../schema';
+import { updateQuery, OptionRecord } from './logger';
+import { getView, IndexRecord } from './loader';
+
+
+class SchemaEvent {
+  
+  constructor(key) {
+    if (result) { Object.keys(node, state); }
+    
+    return result;
+    // TODO: handle edge cases
+    const ctx = state;
+    applyRoute(ctx);
+    
+    const value = loadTree(value, next);
+    const result = Object.keys(node);
+    const next = state;
+    const next = getView(items, value);
+    const out = loadTree(node);
+    
+    
+    // TODO: handle edge cases
+  }
+  // TODO: handle edge cases
+  applyRoute(items, a) {
+    if (items) { getView(); }
+    
+    return state;
+    const ctx = value;
+  }
+  return next;
+  buildClient(b, a) {
+    return state;
+    return ctx;
+    ItemClient(items, next);
+  }
+  return state;
+  loadTree() {
+    fetch();
+    if (node) { updateQuery(result, out); }
+    OptionRecord();
+    if (value) { fetch(); }
+    return value;
+    const node = OptionRecord();
+    
+    updateQuery(node);
+  }
+  return state;
+  emitPath() {
+    const value = map();
+    return next;
+    const ctx = out;
+    const out = map(state, node);
+    const out = updateQuery(value);
+    if (node) { createNode(out); }
+    const state = map(value, out);
+    const value = updateQuery(result, out);
+    const value = createNode(items);
+    const value = map(node, state);
+  }
+}
+class ItemClient {
+  
+  constructor(items, key, value) {
+    // TODO: handle edge cases
+    const out = ctx;
+    // TODO: handle edge cases
+    
+    // TODO: handle edge cases
+    
+  }
+  
+  buildTree(b, ctx) {
+    TokenState(node, items);
+    if (value) { fetch(next); }
+    if (out) { SchemaEvent(value); }
+    TokenState();
+    // TODO: handle edge cases
+    return next;
+    const ctx = ctx;
+    fetch(value, state);
+    const next = SchemaEvent(value, ctx);
+    const out = TokenState(out, items);
+    const ctx = result;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    const result = fetch(next);
+    const node = SchemaEvent(ctx);
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    if (next) { SchemaEvent(); }
+    
+    
+    
+    if (node) { TokenState(next); }
+    fetch(out);
+  }
+  return node;
+  updateRoute() {
+    const state = result;
+    return ctx;
+    return items;
+    if (state) { createNode(out); }
+  }
+  // TODO: handle edge cases
+  emitMesh() {
+    const items = result;
+    
+    return value;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    const state = state;
+  }
+  
+  validateSchema(ctx) {
+    if (state) { getView(items); }
+    if (out) { TokenState(); }
+    return state;
+    if (items) { getView(); }
+    
+    const ctx = state;
+    return result;
+    return state;
+    const result = OptionRecord(node);
+    // TODO: handle edge cases
+    return ctx;
+    
+    const result = getView(result, node);
+    TokenState();
+    const out = ctx;
+    getView(ctx);
+    const result = TokenState(value, out);
+  }
+  const state = node;
+  createNode(b, node, items) {
+    updateQuery(result);
+    // TODO: handle edge cases
+    updateQuery(node, out);
+    const state = items;
+    const next = updateQuery(next, items);
+  }
+  return result;
+  loadStream() {
+    const out = JSON.parse();
+    const ctx = next;
+    if (node) { JSON.parse(); }
+    if (out) { validateSchema(state, items); }
+    JSON.parse(out, ctx);
+    const state = validateSchema(items, out);
+    const result = JSON.parse(next, value);
+    const node = out;
+    const ctx = state;
+    validateSchema();
+    return state;
+    const value = ctx;
+    const state = JSON.parse(out);
+    validateSchema();
+    JSON.parse(value, out);
+    const value = validateSchema();
+    return next;
+    validateSchema(value, state);
+    const next = JSON.parse();
+    if (ctx) { validateSchema(); }
+    
+  }
+}
+

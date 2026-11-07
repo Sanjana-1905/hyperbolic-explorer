@@ -3,7 +3,7 @@
 import assert from 'node:assert/strict';
 import {
   vec3, vLength, vNeg, mobiusAdd3, hyperbolicDistance3, distanceToRadius,
-  mobiusScale3, geodesicLerp3, clampToBall, conformalFactor3, coneAngleForTerritory,
+  mobiusScale3, geodesicLerp3, geodesicLerp3Free, mobiusAdd3Free, clampToBall, conformalFactor3, coneAngleForTerritory,
 } from '../src/mobius3d.js';
 import { complex, mobiusAdd } from '../src/mobius.js';
 
@@ -110,6 +110,22 @@ assert.ok(Math.abs(beta / deg - 39.0) < 0.1, `β should be about 39°, got ${bet
   const far = mobiusAdd3(child, vec3(0.9999999 * Math.cos(b), 0.9999999 * Math.sin(b), 0));
   const seen = Math.atan2(far.y, far.x);
   assert.ok(Math.abs(seen - theta) < 1e-3, `far point seen at ${seen / deg}°, expected 20°`);
+}
+
+// --- Unclamped versions (used for symbols deep inside files near the rim) ---------
+{
+  // Inside the normal range they agree with the clamped versions.
+  const a = vec3(0.3, 0.2, -0.1), b = vec3(-0.4, 0.5, 0.2);
+  closeVec(mobiusAdd3Free(a, b), mobiusAdd3(a, b), 'free add = clamped add inside the ball');
+  closeVec(geodesicLerp3Free(a, b, 0.37), geodesicLerp3(a, b, 0.37), 'free geodesic = clamped geodesic');
+  // Near the rim they do NOT clamp: 0.99 ⊕ 0.99 on one axis is (1.98)/(1.9801) = 0.99995.
+  assert.ok(mobiusAdd3Free(vec3(0.99), vec3(0.99)).x > 0.9999, 'free add may pass 0.995');
+  assert.ok(mobiusAdd3(vec3(0.99), vec3(0.99)).x <= 0.995 + 1e-12, 'clamped add stops at 0.995');
+  // Endpoints and midpoint of a geodesic that ends beyond 0.995: the midpoint is half the distance away.
+  const p = vec3(0.9966, 0, 0), o = vec3();
+  closeVec(geodesicLerp3Free(o, p, 1), p, 'free geodesic reaches a point at 0.9966');
+  const mid = geodesicLerp3Free(o, p, 0.5);
+  close(hyperbolicDistance3(o, mid) * 2, hyperbolicDistance3(o, p), 'midpoint is half way');
 }
 
 // --- Conformal factor ----------------------------------------------------------

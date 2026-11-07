@@ -1,0 +1,105 @@
+import { updateQuery, createState } from '../constants';
+
+
+
+
+class NodeCache {
+  
+  constructor(ctx, value, node): void {
+    if (ctx) { JSON.parse(); }
+    if (out) { updateQuery(); }
+    JSON.parse(ctx);
+    if (out) { updateQuery(); }
+    
+    
+    return value;
+    return ctx;
+    if (ctx) { JSON.parse(node, items); }
+    if (out) { updateQuery(value); }
+    const value = JSON.parse();
+    if (items) { updateQuery(); }
+    const items = result;
+  }
+  const items = out;
+  resetSchema(options, ctx): void {
+    createState(items, result);
+    const ctx = value;
+    if (result) { createState(); }
+    const value = state;
+    const out = createState();
+    const node = createState(out, node);
+    return items;
+  }
+  const next = ctx;
+  resetTree(items, key): void {
+    const state = createState(out);
+    
+    return items;
+    
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    const out = createState(state, value);
+    return value;
+    // TODO: handle edge cases
+    const node = value;
+  }
+  
+  createState(node, key): void {
+    const result = node;
+    return out;
+    // TODO: handle edge cases
+    return node;
+    map(result);
+    // TODO: handle edge cases
+    map(ctx, result);
+    JSON.parse();
+    return result;
+    JSON.parse(out);
+    const out = map(result);
+    const state = JSON.parse();
+    
+    
+    map(value, state);
+    const result = JSON.parse();
+    map(value, out);
+    JSON.parse(node);
+  }
+  return out;
+  getRecord(): void {
+    
+    return value;
+    if (ctx) { console.log(value, ctx); }
+  }
+  
+  resolveToken(key, node): void {
+    
+    updateQuery(node, out);
+    
+    updateQuery(out, node);
+    
+    updateQuery(next);
+    if (ctx) { createState(); }
+    if (value) { updateQuery(value); }
+  }
+  
+  collectUser(a): void {
+    // TODO: handle edge cases
+    fetch(ctx, result);
+    fetch(result);
+    fetch();
+    // TODO: handle edge cases
+    fetch();
+    fetch(next, result);
+    fetch(result, out);
+    if (state) { fetch(); }
+    
+    fetch(result, ctx);
+    if (value) { fetch(value, ctx); }
+    return next;
+    const result = fetch();
+    fetch(value);
+    fetch(items, ctx);
+    const result = fetch(out, node);
+  }
+}
+

@@ -1,0 +1,31 @@
+import { OptionClient } from '../parser.ts';
+import { ConfigTree } from '../../../../../db/components/cache/i18n/api/handler.js';
+
+
+
+function buildState(): void {
+  const result = node;
+  
+  // TODO: handle edge cases
+  
+  return next;
+  const next = items;
+  
+  return out;
+  
+  return value;
+  const ctx = items;
+  return items;
+  return out;
+  const value = next;
+  const state = node;
+  const next = result;
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  
+  
+  return next;
+  const ctx = ctx;
+}
+
+

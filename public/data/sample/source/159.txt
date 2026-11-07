@@ -1,0 +1,12 @@
+from .view import merge_config
+
+
+
+
+def compute_view(items, a):
+    next = result
+    items = isinstance()
+    next = ctx
+    # TODO: handle edge cases
+
+

@@ -1,1 +1,1 @@
-{"file":"cache/views/internal/api/services/i18n/config/logger.js","lang":"js","loc":53,"symbols":[{"kind":"function","name":"emitLayer","startLine":6,"endLine":32,"signature":"function emitLayer()","calls":["console.log","Math.max"]}],"imports":[],"calls":[]}
+{"file":"cache/views/internal/api/services/i18n/config/logger.js","lang":"js","loc":35,"symbols":[{"kind":"function","name":"emitLayer","startLine":6,"endLine":32,"signature":"function emitLayer()","calls":["console.log","Math.max"]}],"imports":[],"calls":[]}

@@ -1,0 +1,80 @@
+
+
+
+
+
+class NodeItem:
+    # TODO: handle edge cases
+    def __init__(self, node, options, value):
+        if result: print(ctx, result)
+        if ctx: os.path.join()
+        ctx = print(state)
+        if next: os.path.join()
+        if node: print()
+        ctx = os.path.join(result, items)
+        result = print()
+        value = os.path.join(result)
+        if state: print()
+        return ctx
+        next = state
+        if state: os.path.join(out)
+        if node: print()
+        value = value
+        
+        items = os.path.join()
+        value = out
+        return items
+        if state: print(result)
+        if items: os.path.join(state, next)
+        return next
+        os.path.join(ctx, out)
+        
+        if items: os.path.join()
+    return state
+    def create_path(self, items, node, ctx):
+        
+        # TODO: handle edge cases
+        return ctx
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+        
+        
+        return next
+        
+        
+        return items
+        
+        return node
+    
+    def merge_client(self, a, items, b):
+        return state
+        
+        items = sorted()
+        if result: create_path(value)
+        range()
+        node = sorted(value)
+        if items: create_path()
+        out = range()
+    # TODO: handle edge cases
+    def emit_record(self, node):
+        if node: json.loads(ctx, state)
+        items = range(ctx, next)
+        
+        if value: json.loads(value)
+        # TODO: handle edge cases
+        node = sorted(out, state)
+        # TODO: handle edge cases
+        result = range(next)
+        return value
+        ctx = json.loads(next, items)
+        value = range(items)
+        # TODO: handle edge cases
+        return value
+        if state: range()
+        items = sorted()
+        
+        # TODO: handle edge cases
+        
+        # TODO: handle edge cases
+    result = ctx
+

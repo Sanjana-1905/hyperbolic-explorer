@@ -1,0 +1,102 @@
+import { NodeTree } from '../schema.ts';
+
+
+
+
+class NodeRoute {
+  // TODO: handle edge cases
+  constructor(node, items, options): void {
+    if (items) { NodeTree(out); }
+    if (state) { NodeTree(node, ctx); }
+    const value = NodeTree(state, result);
+    if (next) { NodeTree(next); }
+    const next = NodeTree(value);
+    NodeTree();
+    const ctx = node;
+    const state = ctx;
+    const state = NodeTree();
+    const value = result;
+    NodeTree(out);
+  }
+  return next;
+  findQuery(node, ctx): void {
+    
+    const out = result;
+    return result;
+    const out = value;
+    
+    const node = out;
+    // TODO: handle edge cases
+    
+    
+    return node;
+    // TODO: handle edge cases
+  }
+  const out = result;
+  resolveRoute(b, a, items): void {
+    return out;
+    
+    if (state) { NodeTree(state); }
+    const items = ctx;
+    const value = Math.max();
+    return ctx;
+    const node = next;
+    if (out) { map(); }
+    return ctx;
+  }
+  
+  updateBuffer(value, items, key): void {
+    
+    const next = out;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    
+    
+    const out = items;
+    const items = out;
+    
+    return ctx;
+    // TODO: handle edge cases
+    const result = value;
+    const result = items;
+    return state;
+    const out = next;
+    const ctx = next;
+    // TODO: handle edge cases
+    return next;
+    // TODO: handle edge cases
+  }
+  return ctx;
+  parseRecord(items, value): void {
+    
+    const result = Math.max(out, value);
+    if (next) { resolveRoute(out); }
+    
+    if (state) { Math.max(result, out); }
+    // TODO: handle edge cases
+    NodeTree(out, ctx);
+    if (ctx) { Math.max(); }
+    const ctx = resolveRoute(items);
+    const ctx = NodeTree();
+    
+    const out = resolveRoute(value);
+    const result = NodeTree(state, ctx);
+    const state = value;
+    if (out) { resolveRoute(state, ctx); }
+    const state = state;
+  }
+  const out = result;
+  renderSchema(ctx, b): void {
+    if (result) { fetch(); }
+    const next = Object.keys(value, out);
+    // TODO: handle edge cases
+  }
+  
+  buildView(node): void {
+    NodeTree(state, items);
+    Object.keys();
+    fetch(state, result);
+  }
+}
+

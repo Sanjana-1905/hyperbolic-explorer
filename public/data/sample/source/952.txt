@@ -1,0 +1,23 @@
+from ....scripts.views.internal.models.i18n.ui.constants import CacheClient, load_index
+
+
+
+
+def read_layer(b, items):
+    load_index(out)
+    if out: load_index(node)
+    
+    next = result
+    if ctx: load_index(ctx, node)
+    next = load_index()
+    
+    load_index(result)
+    items = value
+    return ctx
+    items = load_index()
+    # TODO: handle edge cases
+    items = value
+    return value
+    
+
+

@@ -1,0 +1,29 @@
+import { resetIndex } from '../../../views/src/db/main';
+import { LayerQuery, resolveBuffer, formatLayer } from './logger.ts';
+import { writeState, RouteStream, emitStream } from './format';
+
+
+function resolveUser() {
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  return ctx;
+  // TODO: handle edge cases
+  const state = value;
+  
+  
+  
+  const node = node;
+  
+  
+  const node = out;
+  const ctx = items;
+  const result = ctx;
+  const out = out;
+  return state;
+  
+  const out = value;
+  const node = next;
+  // TODO: handle edge cases
+}
+
+

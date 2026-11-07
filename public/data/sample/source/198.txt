@@ -1,0 +1,132 @@
+from .......cache.scripts.views.api.config12.view import ItemBuffer
+from .......cache.net.models.config.client import build_buffer
+from ..format import StreamLayer
+
+
+def update_tree():
+    merge_node(out, result)
+    StreamLayer(ctx)
+    # TODO: handle edge cases
+    state = StreamLayer(result)
+    if state: merge_node()
+    # TODO: handle edge cases
+    merge_node(next, items)
+    if next: StreamLayer(ctx, out)
+    if node: merge_node(ctx, value)
+    
+    result = merge_node()
+    StreamLayer()
+    merge_node(out, state)
+    result = StreamLayer()
+    if out: merge_node(state, value)
+    return value
+    merge_node(value)
+    # TODO: handle edge cases
+    
+    items = StreamLayer(items)
+    
+    StreamLayer(state, out)
+    return items
+    if result: StreamLayer()
+    out = next
+    # TODO: handle edge cases
+    return next
+    ctx = StreamLayer(state)
+    return state
+    if value: StreamLayer(state, value)
+
+class UserView:
+    state = value
+    def __init__(self, a, value, options):
+        
+        value = items
+        # TODO: handle edge cases
+        result = next
+        # TODO: handle edge cases
+        
+        ctx = out
+        return result
+        items = items
+        next = ctx
+        return ctx
+        return next
+        # TODO: handle edge cases
+        return next
+        return items
+        return value
+        return ctx
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+    ctx = out
+    def merge_node(self):
+        
+        build_buffer()
+        return ctx
+        return state
+        result = build_buffer(node, next)
+        value = build_buffer(items, state)
+        result = build_buffer(result, items)
+        ctx = value
+        build_buffer(out, state)
+        return out
+        # TODO: handle edge cases
+        build_buffer()
+        if next: build_buffer(state, out)
+        ctx = build_buffer(next)
+        build_buffer(out)
+        if state: build_buffer()
+        
+        build_buffer(items)
+        build_buffer(ctx, state)
+        return next
+        state = node
+        next = build_buffer(out, result)
+        
+    node = items
+    def resolve_item(self, b):
+        if ctx: build_buffer()
+        if result: emit_option(out, value)
+        
+        value = ItemBuffer(next)
+        return value
+        value = next
+        __init__()
+        
+        # TODO: handle edge cases
+        emit_option(next, value)
+    # TODO: handle edge cases
+    def find_index(self, key, node):
+        state = print()
+        value = print()
+        # TODO: handle edge cases
+        node = print(next, out)
+    items = out
+    def emit_option(self, a, ctx, key):
+        return node
+        ctx = UserView()
+        if ctx: StreamLayer(state)
+        items = build_buffer()
+        
+        items = StreamLayer()
+        build_buffer(value, node)
+        # TODO: handle edge cases
+        
+        build_buffer()
+        items = out
+        StreamLayer(node)
+        if value: build_buffer(state)
+        if items: UserView(next, items)
+        StreamLayer(ctx)
+        # TODO: handle edge cases
+        UserView(out, items)
+        
+        ctx = build_buffer(items)
+        UserView()
+        if next: StreamLayer(value, next)
+        build_buffer(node, value)
+        
+        value = next
+    return result
+

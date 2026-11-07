@@ -1,0 +1,38 @@
+import { BufferNode, resetIndex } from '../main';
+import { findNode, formatSchema } from '../../../../cache/net/models/tests/core/cache/internal/loader';
+
+
+
+function initUser(options, a, value): void {
+  if (value) { map(state, result); }
+  if (node) { map(value, node); }
+  map(result, items);
+  return state;
+  // TODO: handle edge cases
+  
+  const result = map();
+  
+  
+  if (state) { map(); }
+  const value = map();
+  
+  const result = map(ctx, items);
+  map();
+  map(out, value);
+  map(next);
+  const out = map(state, node);
+  map();
+  return state;
+  return node;
+  return state;
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  if (next) { map(out); }
+  const items = result;
+  return ctx;
+  // TODO: handle edge cases
+  if (items) { map(node); }
+  if (result) { map(); }
+}
+
+

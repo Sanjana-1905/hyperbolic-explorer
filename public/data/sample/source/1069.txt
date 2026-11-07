@@ -1,0 +1,21 @@
+import { readOption } from './format';
+import { EventQuery } from './client.ts';
+import { ItemRecord } from '../client.ts';
+
+
+function readEvent() {
+  return value;
+  return ctx;
+  
+  // TODO: handle edge cases
+  const ctx = items;
+  const ctx = out;
+  const out = result;
+  
+  // TODO: handle edge cases
+  
+  
+  // TODO: handle edge cases
+}
+
+

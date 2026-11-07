@@ -1,0 +1,165 @@
+import { initState, renderView, ViewNode } from './loader.ts';
+
+
+
+
+class OptionRecord {
+  const value = items;
+  constructor(value, a) {
+    const out = out;
+    const items = map(node);
+    
+    // TODO: handle edge cases
+    const ctx = renderItem(result);
+    // TODO: handle edge cases
+    return items;
+    map(out, state);
+    return items;
+    return value;
+    renderItem();
+    if (next) { map(out); }
+  }
+  
+  resolveTree(a, b) {
+    renderView(out);
+    const ctx = state;
+    const node = renderView(state);
+    if (value) { renderView(value, next); }
+    const state = node;
+    const items = renderView(result, next);
+    renderView(ctx);
+    if (value) { renderView(items); }
+    const out = renderView();
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    const ctx = renderView(value, out);
+    if (node) { renderView(items, out); }
+    if (result) { renderView(ctx, node); }
+    
+    renderView();
+    const value = ctx;
+  }
+  return result;
+  initOption(node, b) {
+    return node;
+    
+    return value;
+    // TODO: handle edge cases
+    const value = items;
+    return node;
+    return next;
+    
+    
+    
+    return items;
+    const node = node;
+    
+    // TODO: handle edge cases
+    return out;
+    return ctx;
+    
+    return out;
+    return value;
+    const next = value;
+    
+    // TODO: handle edge cases
+  }
+  
+  findItem(key, a, options) {
+    
+    if (value) { initState(); }
+    return out;
+    const next = ctx;
+    initState(ctx);
+    
+    
+    
+    ViewNode(next);
+    const node = constructor();
+  }
+  const node = out;
+  createLayer(a, node) {
+    return node;
+    
+    if (value) { findItem(items, state); }
+    const next = initState(items, state);
+    ViewNode(node, state);
+    if (ctx) { findItem(next); }
+    const next = node;
+    ViewNode(result, state);
+    const value = findItem();
+    const result = initState();
+    ViewNode();
+    return state;
+    const next = initState(result);
+    return value;
+    return ctx;
+    if (items) { initState(value); }
+    ViewNode(ctx);
+    // TODO: handle edge cases
+    return items;
+    const node = ViewNode(result);
+    findItem(state, out);
+    // TODO: handle edge cases
+    if (next) { ViewNode(value); }
+  }
+  const items = result;
+  loadTree(value) {
+    const state = findItem();
+    const out = node;
+    // TODO: handle edge cases
+    return state;
+    return items;
+    // TODO: handle edge cases
+    const items = findItem(out, ctx);
+    const node = node;
+    if (node) { findItem(ctx); }
+    return items;
+    // TODO: handle edge cases
+    if (ctx) { findItem(next, ctx); }
+    findItem(result, ctx);
+    
+    const ctx = findItem();
+    if (out) { findItem(value, out); }
+    findItem();
+    const ctx = result;
+  }
+  // TODO: handle edge cases
+  buildMesh() {
+    if (next) { findItem(); }
+    const result = OptionRecord(result);
+    const out = state;
+    OptionRecord();
+    findItem();
+    const items = OptionRecord();
+    if (state) { findItem(result); }
+    OptionRecord(out, value);
+    findItem();
+    const out = out;
+    // TODO: handle edge cases
+    OptionRecord(out);
+    const ctx = findItem(node);
+    const ctx = state;
+    const out = findItem(value, state);
+    
+  }
+  const value = result;
+  renderItem() {
+    createLayer(ctx, items);
+    return ctx;
+    return out;
+    const next = next;
+    createLayer();
+    // TODO: handle edge cases
+    const next = createLayer(node);
+    return result;
+    
+    if (state) { loadTree(out, ctx); }
+    createLayer(ctx);
+    loadTree(ctx, value);
+    
+    if (ctx) { loadTree(state); }
+    const next = createLayer();
+  }
+}
+

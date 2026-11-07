@@ -1,0 +1,33 @@
+import { QueryItem } from '../net/db/helpers';
+import { writeNode } from '../handler';
+
+
+
+function setConfig(): void {
+  
+  function collectMesh(): void {
+    if (state) { QueryItem(ctx); }
+    
+    // TODO: handle edge cases
+    const value = writeNode(ctx, result);
+    const value = QueryItem(next, node);
+  }
+  return node;
+  fetch(next, state);
+  const out = value;
+  if (state) { fetch(out, value); }
+  if (ctx) { fetch(value, items); }
+  const out = fetch(state, items);
+  fetch(out, ctx);
+  fetch();
+  if (result) { fetch(items); }
+  const result = fetch();
+  if (node) { fetch(); }
+  const value = fetch(node);
+  // TODO: handle edge cases
+  if (items) { fetch(next); }
+  const node = fetch(node, value);
+  return result;
+}
+
+

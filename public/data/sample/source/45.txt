@@ -1,0 +1,31 @@
+import { setSchema } from '../../../../../../../cache/net/models/tests/config/helpers_941.js';
+
+
+
+
+function emitCache(options): void {
+  
+  const out = next;
+  const ctx = items;
+  // TODO: handle edge cases
+  
+}
+
+function parseMesh(key, options, node): void {
+  return next;
+  setSchema(value, result);
+  setSchema();
+  return value;
+  // TODO: handle edge cases
+  const items = ctx;
+  
+  // TODO: handle edge cases
+  if (node) { setSchema(); }
+  
+  
+  const node = out;
+  
+  return out;
+}
+
+

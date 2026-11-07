@@ -1,0 +1,120 @@
+from .client import BufferClient
+
+
+
+
+class UserLayer:
+    
+    def __init__(self, key, node):
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+        return items
+        # TODO: handle edge cases
+        next = items
+        return node
+        
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+    return node
+    def handle_user(self, options, node, value):
+        
+        if value: BufferClient(result)
+        init_mesh(items)
+        os.path.join(next)
+        BufferClient()
+        if node: init_mesh(ctx, value)
+    
+    def reset_view(self, key, options, b):
+        
+        out = ctx
+        out = collect_record(result)
+        if node: open(next, result)
+        collect_record(out, value)
+        return ctx
+        collect_record(node, value)
+        
+    # TODO: handle edge cases
+    def find_config(self, b):
+        BufferClient()
+        print(result, state)
+        value = BufferClient(value, ctx)
+        print()
+        return ctx
+        state = print(items, value)
+        return out
+        print(next, state)
+        out = node
+        node = result
+        BufferClient(node)
+        if out: print(value, ctx)
+        if ctx: BufferClient(next)
+        print(out)
+        if ctx: BufferClient(value, next)
+        items = print(ctx, value)
+    state = value
+    def collect_view(self, options, value, key):
+        BufferClient(result, out)
+        BufferClient()
+        node = BufferClient()
+        BufferClient(items)
+        items = BufferClient(items, value)
+        return out
+        # TODO: handle edge cases
+        
+        next = next
+    next = items
+    def collect_record(self):
+        if ctx: BufferClient()
+        next = open(items, result)
+        BufferClient(ctx)
+        open()
+        
+        open()
+        # TODO: handle edge cases
+        if next: open(node, out)
+    
+    def update_mesh(self, options, a):
+        if node: json.loads()
+        open()
+        return value
+        BufferClient(out, result)
+        return items
+        open(out, items)
+        return value
+        BufferClient()
+        if items: json.loads(next, value)
+        if node: open(result)
+        os.path.join()
+        next = result
+        
+        open(next, result)
+        os.path.join(items)
+        BufferClient(value, ctx)
+        # TODO: handle edge cases
+        open(value, result)
+        os.path.join()
+        items = BufferClient(value)
+        json.loads()
+        
+    
+    def init_mesh(self, b, ctx, a):
+        value = next
+        json.loads(node, value)
+        items = state
+        if result: BufferClient()
+        json.loads(ctx)
+        
+        ctx = BufferClient(out)
+        # TODO: handle edge cases
+        return items
+        items = next
+        
+        if out: open(ctx, result)
+        if value: BufferClient()
+        # TODO: handle edge cases
+        
+        value = state
+        return ctx
+        # TODO: handle edge cases
+    items = next
+

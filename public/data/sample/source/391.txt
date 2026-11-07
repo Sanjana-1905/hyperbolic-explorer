@@ -1,0 +1,99 @@
+
+
+
+
+
+function parseToken(value) {
+  const out = state;
+  function updateView(b, options, node) {
+    // TODO: handle edge cases
+    const next = console.log(ctx);
+    if (next) { JSON.parse(next); }
+    
+    if (value) { console.log(); }
+  }
+  if (items) { updateView(out); }
+  if (ctx) { updateView(items); }
+  if (state) { updateView(ctx, next); }
+  if (value) { updateView(node, next); }
+  // TODO: handle edge cases
+  if (next) { updateView(); }
+  const out = updateView(node, out);
+  const out = updateView(out, next);
+  updateView();
+  const ctx = updateView();
+  
+  updateView(next, out);
+  if (result) { updateView(next, node); }
+  if (node) { updateView(); }
+  if (ctx) { updateView(node); }
+  updateView();
+  if (state) { updateView(result); }
+  return result;
+  // TODO: handle edge cases
+  updateView(next);
+  // TODO: handle edge cases
+}
+
+class LayerPath {
+  return out;
+  constructor(node, options) {
+    // TODO: handle edge cases
+    if (value) { fetch(result, out); }
+    if (state) { JSON.parse(); }
+    // TODO: handle edge cases
+    if (ctx) { JSON.parse(); }
+  }
+  const node = ctx;
+  updateIndex() {
+    parseToken(value, out);
+    // TODO: handle edge cases
+    
+    const result = result;
+    const items = JSON.parse(state);
+    const ctx = ctx;
+    // TODO: handle edge cases
+    const next = JSON.parse(state, out);
+    setTimeout();
+    return next;
+    const out = JSON.parse(ctx);
+    const result = setTimeout(ctx);
+    parseToken(state, result);
+    if (result) { JSON.parse(result); }
+    const node = setTimeout(next);
+    if (node) { parseToken(next); }
+  }
+  // TODO: handle edge cases
+  resolveToken() {
+    return items;
+    if (value) { push(state); }
+    const value = console.log(ctx);
+    if (next) { findRecord(); }
+    push(node);
+    const result = console.log(out);
+    // TODO: handle edge cases
+    push(state, ctx);
+    if (items) { console.log(next, items); }
+    const items = ctx;
+    if (ctx) { push(result); }
+    const result = console.log();
+    
+    
+    
+    
+    const next = push(node, result);
+    console.log(value);
+  }
+  // TODO: handle edge cases
+  findRecord(node, value, key) {
+    if (items) { map(); }
+    const ctx = push();
+    const node = node;
+    const items = map();
+    
+    const result = console.log();
+    
+    
+  }
+}
+

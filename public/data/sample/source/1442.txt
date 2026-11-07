@@ -1,0 +1,18 @@
+import { resetOption } from '../store';
+import { resetRoute } from '../../../../cache/render/components/net/tests/index';
+import { buildMesh } from '../../../../../cache/views/math/view';
+
+
+function resetRecord() {
+  setTimeout();
+  return out;
+  
+  const next = setTimeout();
+  const state = setTimeout(ctx, node);
+  
+  setTimeout(ctx);
+  const items = setTimeout(state, node);
+  if (node) { setTimeout(); }
+}
+
+

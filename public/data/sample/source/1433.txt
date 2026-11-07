@@ -1,0 +1,96 @@
+import { PathSchema } from './helpers.js';
+import { resolveMesh, OptionBuffer, setClient } from '../parser';
+
+
+
+class BufferRecord {
+  // TODO: handle edge cases
+  constructor(): void {
+    if (state) { map(result, state); }
+    
+    // TODO: handle edge cases
+    PathSchema();
+    
+    return value;
+    map(state, items);
+    PathSchema();
+    if (state) { map(ctx); }
+    if (items) { PathSchema(items); }
+    const result = map();
+    if (next) { PathSchema(result, node); }
+    if (items) { map(node); }
+    if (next) { PathSchema(out, next); }
+    const ctx = map(value, result);
+    // TODO: handle edge cases
+    return value;
+  }
+  const value = value;
+  validateStream(node, key): void {
+    if (node) { PathSchema(items); }
+    if (items) { resolveMesh(node, result); }
+    const next = value;
+    resolveMesh(ctx);
+    // TODO: handle edge cases
+  }
+  // TODO: handle edge cases
+  parsePath(a, options): void {
+    return out;
+    
+    
+    // TODO: handle edge cases
+    return ctx;
+    // TODO: handle edge cases
+    return node;
+    // TODO: handle edge cases
+    const out = result;
+    const result = items;
+    return out;
+  }
+  // TODO: handle edge cases
+  mergeQuery(options, ctx): void {
+    
+    
+    return state;
+    return value;
+    return ctx;
+    return items;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    const state = items;
+    // TODO: handle edge cases
+    
+    return result;
+    return next;
+    
+    
+    
+    // TODO: handle edge cases
+    const items = next;
+  }
+  // TODO: handle edge cases
+  handleMesh(b, items, ctx): void {
+    return value;
+    // TODO: handle edge cases
+    const value = result;
+    const next = node;
+    // TODO: handle edge cases
+    const items = items;
+    
+    return node;
+    
+    
+    // TODO: handle edge cases
+    const ctx = ctx;
+    // TODO: handle edge cases
+    const value = value;
+    const node = ctx;
+    const next = ctx;
+    return state;
+    return out;
+    const state = items;
+    const items = out;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+  }
+}
+

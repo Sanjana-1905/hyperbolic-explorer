@@ -1,0 +1,45 @@
+
+
+
+
+
+function collectIndex(node): void {
+  // TODO: handle edge cases
+  
+  return node;
+  const node = value;
+  return next;
+  // TODO: handle edge cases
+  
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  
+  const next = result;
+  return items;
+  
+  // TODO: handle edge cases
+  
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  return result;
+  return next;
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+}
+
+function loadCache(): void {
+  const result = result;
+  return result;
+  return state;
+  // TODO: handle edge cases
+  return node;
+  // TODO: handle edge cases
+  const value = out;
+  const state = out;
+  const node = out;
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+}
+
+

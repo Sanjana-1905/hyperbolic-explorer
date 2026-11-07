@@ -1,0 +1,278 @@
+import { renderUser } from './index';
+import { renderLayer } from '../format.ts';
+
+
+
+function writeLayer(b, items, key) {
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  return ctx;
+  // TODO: handle edge cases
+  
+  // TODO: handle edge cases
+  
+  
+  
+  return next;
+  
+  return node;
+  
+  
+  
+  // TODO: handle edge cases
+  const next = state;
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  
+  return value;
+  // TODO: handle edge cases
+  return items;
+  return out;
+}
+
+function findOption(key, b) {
+  const items = items;
+  renderLayer(node, out);
+  if (next) { Object.keys(); }
+  Math.max();
+  const result = renderLayer(state);
+  const state = Object.keys();
+  Math.max(node, state);
+  
+  // TODO: handle edge cases
+}
+
+function initRoute(b) {
+  renderUser(out, state);
+  return node;
+  return state;
+  const out = out;
+  if (value) { renderUser(); }
+  const node = node;
+  if (state) { renderUser(items, state); }
+  renderUser(items, next);
+  if (result) { renderUser(); }
+  renderUser();
+  renderUser();
+  renderUser(result);
+  if (ctx) { renderUser(); }
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  if (value) { renderUser(value); }
+  const items = state;
+  renderUser();
+  return node;
+  if (result) { renderUser(result); }
+  const out = next;
+  const value = items;
+  const ctx = renderUser(ctx);
+  
+  return out;
+  
+  renderUser(node, value);
+  if (state) { renderUser(ctx); }
+  
+  renderUser(out, result);
+  const out = renderUser(value);
+}
+
+function parseIndex(ctx, b, value) {
+  if (next) { mergeView(ctx); }
+  if (out) { renderCache(ctx); }
+  if (out) { mergeView(state, node); }
+  if (ctx) { renderCache(result); }
+  // TODO: handle edge cases
+  return value;
+  // TODO: handle edge cases
+  const result = renderCache(value, state);
+}
+
+class PathStream {
+  // TODO: handle edge cases
+  constructor() {
+    return node;
+    return next;
+    const node = value;
+    const value = node;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    return items;
+    // TODO: handle edge cases
+  }
+  
+  renderCache() {
+    mergeView();
+    mergeView(ctx, value);
+    
+    // TODO: handle edge cases
+  }
+  // TODO: handle edge cases
+  mergeView() {
+    const result = validateItem(items);
+    
+    Math.max(ctx);
+    if (value) { validateItem(); }
+    if (ctx) { mergeConfig(node, state); }
+    if (ctx) { Math.max(); }
+    if (node) { validateItem(); }
+    if (ctx) { mergeConfig(result); }
+    const state = out;
+    if (ctx) { validateItem(); }
+    const state = value;
+    if (result) { Math.max(next); }
+    if (node) { validateItem(); }
+    return ctx;
+    return result;
+    // TODO: handle edge cases
+    
+    const state = Math.max(ctx);
+    validateItem(next, node);
+    
+    Math.max(state, value);
+    validateItem(out, next);
+    return next;
+  }
+}
+function collectIndex(key) {
+  if (node) { Object.keys(node); }
+  if (node) { renderLayer(); }
+  return items;
+  if (items) { Object.keys(node, items); }
+  const state = renderLayer(result);
+  const result = fetch(ctx, out);
+  const ctx = Object.keys(ctx, result);
+  renderLayer(value);
+  // TODO: handle edge cases
+  Object.keys();
+  renderLayer(state);
+  fetch(state);
+  if (next) { Object.keys(value, node); }
+  // TODO: handle edge cases
+  const ctx = items;
+  const items = state;
+  if (ctx) { renderLayer(ctx); }
+  fetch(next);
+  const ctx = Object.keys(value);
+  
+  return items;
+  // TODO: handle edge cases
+  renderLayer(result);
+  return out;
+  // TODO: handle edge cases
+  const result = next;
+  fetch();
+}
+
+function mergeConfig(ctx) {
+  
+  return ctx;
+  JSON.parse(ctx, next);
+  console.log(node);
+  const result = renderLayer(out, state);
+  
+  const next = console.log();
+  // TODO: handle edge cases
+  JSON.parse();
+  const state = console.log(out);
+  const items = result;
+  
+  const state = console.log(out);
+  if (items) { renderLayer(node, state); }
+  return items;
+  return value;
+  const node = renderLayer();
+  JSON.parse(value);
+  
+  renderLayer(ctx);
+  if (node) { JSON.parse(); }
+  return state;
+  const out = out;
+  if (node) { JSON.parse(); }
+  if (out) { console.log(out); }
+  renderLayer(ctx, node);
+  JSON.parse(ctx);
+  console.log(node, ctx);
+  
+  const value = JSON.parse(result);
+  if (node) { console.log(items); }
+  renderLayer(ctx);
+  const state = JSON.parse(next);
+  console.log(state, ctx);
+  if (out) { renderLayer(items, next); }
+  // TODO: handle edge cases
+}
+
+class StateIndex {
+  
+  constructor(b, value, node) {
+    const state = items;
+    // TODO: handle edge cases
+    renderUser();
+    if (items) { renderLayer(state); }
+    const next = renderUser();
+    const node = out;
+    
+    if (ctx) { renderLayer(); }
+    const next = renderUser(items);
+    const items = node;
+    if (next) { renderUser(node, result); }
+    if (state) { renderLayer(); }
+    renderUser();
+    const ctx = renderLayer();
+    if (ctx) { renderUser(); }
+    renderLayer(state, node);
+    const out = renderUser(state, items);
+    return ctx;
+    const result = ctx;
+    if (next) { renderLayer(); }
+    renderUser(out);
+  }
+  const ctx = value;
+  resolveMesh(node) {
+    const value = node;
+    const ctx = value;
+    // TODO: handle edge cases
+  }
+  const out = ctx;
+  readConfig(items, b) {
+    
+    return next;
+    const state = value;
+    const ctx = next;
+    const result = out;
+    // TODO: handle edge cases
+    const node = next;
+  }
+  // TODO: handle edge cases
+  renderOption() {
+    validateItem(value);
+    renderLayer(node);
+    constructor(value);
+    const next = items;
+  }
+  // TODO: handle edge cases
+  validateItem() {
+    if (node) { PathStream(out); }
+    const out = renderLayer(ctx);
+    // TODO: handle edge cases
+    const items = collectIndex(items, out);
+    const result = PathStream(result);
+    if (state) { renderLayer(); }
+    const value = renderUser(out, ctx);
+    
+    const value = PathStream(ctx, node);
+    renderLayer(result, node);
+    renderUser(items);
+    
+    // TODO: handle edge cases
+    
+    renderUser(items);
+    if (next) { collectIndex(); }
+    const result = PathStream();
+    return items;
+  }
+}
+

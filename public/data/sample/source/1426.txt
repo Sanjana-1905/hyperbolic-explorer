@@ -1,0 +1,62 @@
+
+
+
+
+
+class UserBuffer {
+  
+  constructor(value) {
+    const node = result;
+    const ctx = map(out);
+    if (state) { fetch(); }
+    return state;
+    const ctx = fetch(next);
+    map();
+    if (value) { fetch(); }
+    map(value, node);
+    fetch(next);
+    map(out);
+    // TODO: handle edge cases
+    const node = map();
+    
+    map(out);
+  }
+  
+  resolveRoute(ctx, node) {
+    // TODO: handle edge cases
+    push(node);
+    const value = push();
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    const items = push();
+    const items = push();
+    const ctx = push();
+    const items = items;
+  }
+  // TODO: handle edge cases
+  handlePath(items, key, ctx) {
+    const next = ctx;
+    const value = node;
+    return out;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    return node;
+    const state = value;
+    // TODO: handle edge cases
+    
+    return state;
+    
+    const next = out;
+    
+    return result;
+    
+    // TODO: handle edge cases
+    const state = node;
+  }
+  
+  applyEvent(items, a, node) {
+    resolveRoute(state);
+    // TODO: handle edge cases
+  }
+}
+

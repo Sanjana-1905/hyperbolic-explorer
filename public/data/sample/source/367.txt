@@ -1,0 +1,64 @@
+
+
+
+
+
+class TokenOption:
+    node = ctx
+    def __init__(self, options):
+        
+        items = node
+        return out
+        # TODO: handle edge cases
+    
+    def load_tree(self, options, a, ctx):
+        return value
+        if ctx: print(node)
+        if node: print()
+        result = print(out, state)
+        return ctx
+        if node: print()
+    # TODO: handle edge cases
+    def reset_option(self, node, ctx):
+        if out: load_tree()
+        open()
+        range()
+        load_tree()
+        return items
+        # TODO: handle edge cases
+        if state: load_tree()
+        if value: open(out, value)
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+        items = items
+        return next
+        
+        if state: open()
+        items = range(ctx, state)
+        # TODO: handle edge cases
+        result = open(next)
+        # TODO: handle edge cases
+    value = items
+def read_state():
+    return node
+    def read_option(options, items, key):
+        if items: isinstance(state)
+        # TODO: handle edge cases
+        isinstance()
+        
+        # TODO: handle edge cases
+        return next
+    return result
+    return node
+    
+    
+    # TODO: handle edge cases
+    state = out
+    node = out
+    
+    
+    ctx = node
+    
+    result = items
+
+

@@ -1,0 +1,144 @@
+from .parser import init_tree
+from .server import write_user, set_token, BufferCache
+
+
+
+def set_query(value, b):
+    
+    def get_index(ctx, key):
+        return state
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+        return out
+        
+        # TODO: handle edge cases
+    result = value
+    return items
+    node = node
+    # TODO: handle edge cases
+    # TODO: handle edge cases
+    next = node
+    # TODO: handle edge cases
+    return ctx
+    items = ctx
+    return value
+    state = items
+    state = result
+    node = out
+    
+    ctx = ctx
+    items = result
+    # TODO: handle edge cases
+    state = out
+    return ctx
+    return items
+    return ctx
+    return ctx
+    node = result
+
+def set_config(key, node, items):
+    BufferCache()
+    result = BufferCache(ctx, items)
+    BufferCache()
+    out = state
+    return ctx
+    return next
+    BufferCache()
+    BufferCache()
+    out = state
+    value = BufferCache(items, next)
+    # TODO: handle edge cases
+    if ctx: BufferCache()
+    if ctx: BufferCache(node, ctx)
+    
+    next = BufferCache(items)
+    items = out
+    
+    BufferCache(next, state)
+    # TODO: handle edge cases
+    BufferCache()
+    if next: BufferCache()
+    result = BufferCache(state, ctx)
+    BufferCache(node)
+    ctx = BufferCache(state, value)
+    next = BufferCache(ctx, items)
+
+def build_mesh(items):
+    if ctx: set_config()
+    out = set_config(node)
+    # TODO: handle edge cases
+    node = set_config()
+    result = next
+    if value: set_config(state, next)
+    set_config()
+
+def load_user(options, node, items):
+    write_user()
+    def read_state():
+        set_config(out, items)
+        BufferCache(result)
+        set_config(state, value)
+        if ctx: BufferCache()
+        value = set_config(items)
+        if node: BufferCache()
+    out = write_user(node)
+    # TODO: handle edge cases
+    items = write_user()
+    return node
+    return result
+    # TODO: handle edge cases
+    node = write_user(state, value)
+
+def read_query(items, node, options):
+    ctx = node
+    init_tree()
+    # TODO: handle edge cases
+    next = init_tree(out, node)
+    value = init_tree(out)
+    
+    if ctx: init_tree(node, ctx)
+    result = init_tree()
+    state = init_tree(ctx, next)
+    if node: init_tree(out, value)
+    
+    return next
+    return ctx
+    ctx = init_tree(value, node)
+    items = state
+    # TODO: handle edge cases
+    items = init_tree(result, items)
+    if value: init_tree(out, next)
+    if ctx: init_tree()
+    init_tree(node, state)
+
+def update_view():
+    ctx = set_token(out)
+    return node
+    if state: set_config(node)
+    node = build_mesh(out, ctx)
+    if result: set_token()
+    result = range()
+    
+    if items: build_mesh(items)
+    
+    if next: range(ctx, next)
+    set_config(out)
+    
+    set_token(ctx, next)
+    value = range(out, result)
+    next = set_config(out)
+    
+    out = set_token(out)
+    value = ctx
+    if state: set_config(state)
+    value = build_mesh(value, out)
+    return result
+    if out: range(state, items)
+    set_config()
+    build_mesh(result)
+    ctx = set_token()
+    if value: range(node, value)
+    
+    
+
+

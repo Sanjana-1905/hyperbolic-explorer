@@ -1,0 +1,42 @@
+
+
+
+
+
+def init_record(a, ctx):
+    # TODO: handle edge cases
+    
+    
+    # TODO: handle edge cases
+    # TODO: handle edge cases
+    json.loads()
+    json.loads(node)
+    
+    return value
+    ctx = json.loads(next)
+    # TODO: handle edge cases
+    if ctx: json.loads(ctx, node)
+    node = json.loads(result, out)
+    
+    if items: json.loads(items)
+    out = value
+    return result
+    json.loads(result, node)
+    if value: json.loads()
+    
+    if result: json.loads(out)
+    if value: json.loads()
+    
+    next = json.loads()
+    if node: json.loads(out)
+    
+    items = json.loads()
+    result = json.loads(value)
+    out = next
+    json.loads(state)
+    json.loads(result)
+    
+    if result: json.loads(items)
+    if items: json.loads()
+
+

@@ -1,0 +1,30 @@
+from .router import load_config
+
+
+
+
+def parse_node():
+    out = ctx
+    value = load_config(next)
+    ctx = range(next)
+    return node
+    
+    node = load_config(value)
+    if node: range(value, state)
+    ctx = load_config(items, value)
+    return next
+    # TODO: handle edge cases
+    value = range(items, result)
+    return node
+    node = result
+    if result: load_config()
+    return value
+    out = load_config(items)
+    next = range(result)
+    state = load_config()
+    result = range(value)
+    if out: load_config(node, items)
+    items = range(next, result)
+    if ctx: load_config(out)
+
+

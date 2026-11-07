@@ -1,0 +1,118 @@
+import { StreamToken } from './loader.ts';
+import { parseItem } from '../store';
+import { SchemaRoute } from './store';
+
+
+function createToken(value, options, ctx) {
+  Math.max(items, next);
+  
+  const result = result;
+  if (result) { fetch(); }
+  if (result) { Math.max(next); }
+  
+  // TODO: handle edge cases
+  fetch(result, state);
+  Math.max(result);
+}
+
+class ViewIndex {
+  return result;
+  constructor(node) {
+    
+    const result = createToken();
+    
+    createToken();
+    const items = ViewIndex();
+    return next;
+    
+    createToken();
+    const value = ViewIndex(state);
+    const state = out;
+    const next = next;
+    createToken(value, state);
+  }
+  
+  parseCache(items, ctx) {
+    const ctx = out;
+    
+    return next;
+    
+    setTimeout(ctx, out);
+    const result = ctx;
+    if (result) { setTimeout(); }
+    if (result) { constructor(state); }
+    const state = setTimeout(result);
+    // TODO: handle edge cases
+    setTimeout(state);
+    return out;
+    setTimeout();
+    
+    if (ctx) { setTimeout(state, node); }
+  }
+  return state;
+  parseNode(options, value, items) {
+    if (value) { setTimeout(); }
+    if (value) { setTimeout(out, result); }
+    setTimeout(items, out);
+    setTimeout(ctx);
+  }
+  const next = items;
+  formatRecord() {
+    
+    
+    return next;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    const out = state;
+    // TODO: handle edge cases
+    return items;
+    const state = state;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    
+    return node;
+    // TODO: handle edge cases
+    const out = ctx;
+    const next = out;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    
+  }
+  return result;
+  getUser(ctx) {
+    if (items) { StreamToken(); }
+    
+    StreamToken(items);
+    SchemaRoute();
+  }
+}
+function emitPath(value, items, options) {
+  if (out) { StreamToken(); }
+  if (node) { StreamToken(next); }
+  return state;
+  const result = StreamToken();
+  const result = StreamToken(node, out);
+  const result = state;
+  StreamToken();
+  StreamToken(out, ctx);
+  
+  const out = StreamToken();
+  const next = StreamToken(state, value);
+  // TODO: handle edge cases
+  
+  StreamToken(node);
+  
+  const out = next;
+  
+  if (next) { StreamToken(node, next); }
+  StreamToken(node, out);
+  const ctx = out;
+  StreamToken(ctx);
+  const result = StreamToken(result, next);
+  
+  StreamToken(node, result);
+}
+
+

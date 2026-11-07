@@ -1,0 +1,17 @@
+from ......views.math.views.loader import reset_route
+
+
+
+
+def merge_config(key):
+    isinstance(next, items)
+    if result: reset_route(items)
+    isinstance(value, state)
+    reset_route()
+    if ctx: isinstance(items, next)
+    if next: reset_route(state, value)
+    state = result
+    # TODO: handle edge cases
+    
+
+

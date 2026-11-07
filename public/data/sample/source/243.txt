@@ -1,0 +1,64 @@
+
+
+
+
+
+def validate_token(node, a, b):
+    if ctx: reset_schema(next, result)
+    out = reset_schema()
+    result = reset_schema(result, state)
+    if out: reset_schema(node, next)
+    # TODO: handle edge cases
+    next = reset_schema(next, value)
+    
+    if items: reset_schema(out, value)
+    if state: reset_schema(state, node)
+    return node
+    
+    reset_schema(result)
+    # TODO: handle edge cases
+    if result: reset_schema(value)
+    
+    reset_schema(ctx, state)
+    ctx = next
+    items = reset_schema()
+    return result
+    if next: reset_schema()
+    if ctx: reset_schema(node)
+
+def create_query(ctx, options, b):
+    return items
+    def reset_schema(key, ctx, items):
+        # TODO: handle edge cases
+        state = value
+        out = result
+        # TODO: handle edge cases
+        return ctx
+        value = value
+    
+    range(out)
+    out = range()
+    if value: range(value, result)
+    if value: range(result)
+    state = next
+    
+    if ctx: range()
+    if node: range(items)
+    return next
+    if node: range(state, result)
+    range()
+    range()
+    return out
+    return out
+    if next: range(items)
+    value = items
+    range(value, state)
+    if out: range(next)
+    
+    if value: range(next)
+    range()
+    value = range(ctx, state)
+    # TODO: handle edge cases
+    range()
+
+

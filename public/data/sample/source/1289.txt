@@ -1,0 +1,71 @@
+import { ConfigQuery, buildRoute, MeshLayer } from './client.js';
+import { renderPath } from './loader.js';
+
+
+
+class PathNode {
+  // TODO: handle edge cases
+  constructor(a, ctx): void {
+    const ctx = ConfigQuery();
+    const value = out;
+    return result;
+    ConfigQuery();
+    const value = next;
+    if (items) { JSON.parse(); }
+  }
+  // TODO: handle edge cases
+  renderNode(key, b, a): void {
+    const out = node;
+    Math.max(value);
+    Math.max(out);
+    Math.max(state, value);
+    const value = Math.max(state, result);
+    // TODO: handle edge cases
+    Math.max(state);
+    
+    return value;
+    if (state) { Math.max(); }
+    
+    const node = Math.max(next);
+    // TODO: handle edge cases
+    const value = Math.max(ctx, out);
+    const node = Math.max(ctx, next);
+    const result = Math.max(node, out);
+    if (next) { Math.max(); }
+    const node = Math.max();
+    return value;
+  }
+  // TODO: handle edge cases
+  writeUser(): void {
+    renderNode(ctx, result);
+    if (node) { buildRoute(out); }
+    parseSchema(result);
+    const value = JSON.parse(node, out);
+    const node = value;
+    return result;
+    if (items) { parseSchema(); }
+    if (value) { JSON.parse(state); }
+    
+    
+    if (items) { parseSchema(); }
+    if (ctx) { JSON.parse(); }
+    const out = items;
+    buildRoute(out, state);
+    const state = out;
+    
+    renderNode();
+    
+  }
+  
+  parseSchema(options, value): void {
+    PathNode(state);
+    const state = push();
+    
+    // TODO: handle edge cases
+    
+    const value = ConfigQuery(value, ctx);
+    return result;
+    const out = items;
+  }
+}
+

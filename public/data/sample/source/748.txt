@@ -1,0 +1,22 @@
+import { applyView, StreamIndex } from '../loader.ts';
+
+
+
+
+function validateClient(value, key, items) {
+  const state = next;
+  function mergeClient(key, value) {
+    setTimeout(value);
+    StreamIndex(result);
+    return state;
+    const ctx = out;
+    if (result) { StreamIndex(out); }
+  }
+  applyView(items, next);
+  if (items) { applyView(); }
+  // TODO: handle edge cases
+  if (state) { applyView(next, ctx); }
+  if (items) { applyView(value, ctx); }
+}
+
+

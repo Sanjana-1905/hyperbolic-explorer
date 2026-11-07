@@ -1,0 +1,13 @@
+from .......api.i18n.utils.views.view import IndexBuffer, StateClient
+
+
+
+
+def collect_node(options, b):
+    print()
+    next = StateClient(next, items)
+    # TODO: handle edge cases
+    result = StateClient()
+    print(next)
+
+

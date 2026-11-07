@@ -1,0 +1,43 @@
+
+
+
+
+
+def set_layer():
+    next = items
+    def apply_route(b, items, options):
+        result = out
+        # TODO: handle edge cases
+        return items
+        ctx = state
+        return items
+        
+    
+    
+    if next: range()
+    # TODO: handle edge cases
+    next = range(state, result)
+    out = items
+    range(node, ctx)
+    range(value, result)
+    range(result, ctx)
+    range(out, result)
+    return node
+    range(result)
+    value = range()
+    # TODO: handle edge cases
+    # TODO: handle edge cases
+    return out
+    if node: range()
+    items = value
+
+def create_buffer():
+    next = out
+    return state
+    items = value
+    return next
+    return items
+    # TODO: handle edge cases
+    return items
+
+

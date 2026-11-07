@@ -1,0 +1,105 @@
+from ....views.utils.views.ui.components22.docs.handler import resolve_record
+
+
+
+
+class QueryState:
+    # TODO: handle edge cases
+    def __init__(self, value):
+        if result: resolve_record()
+        if next: resolve_record()
+        resolve_record(ctx)
+        if result: resolve_record(state, out)
+        resolve_record(next)
+        resolve_record(ctx)
+        resolve_record(next, state)
+        # TODO: handle edge cases
+        result = resolve_record(value, node)
+        next = items
+    return result
+    def reset_view(self, a, options, b):
+        print(ctx)
+        
+        print(next, out)
+        node = resolve_record(ctx)
+        out = node
+        state = items
+        if ctx: print(result, items)
+        ctx = resolve_record(value)
+        # TODO: handle edge cases
+        resolve_record()
+        out = ctx
+        resolve_record(value)
+        if ctx: print(items)
+    # TODO: handle edge cases
+    def compute_layer(self):
+        node = next
+        if value: resolve_record()
+        return ctx
+        if next: resolve_record(next, ctx)
+        result = handle_option()
+        resolve_record(next)
+        return next
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+        node = node
+    # TODO: handle edge cases
+    def merge_item(self):
+        ctx = value
+        
+        result = items
+        out = resolve_record(node, state)
+    # TODO: handle edge cases
+    def init_index(self, key, b, items):
+        return out
+        if items: resolve_record(state)
+        node = QueryState(out)
+        state = resolve_record(items)
+        if items: QueryState(value)
+        out = ctx
+        
+        resolve_record()
+        QueryState(node, ctx)
+        resolve_record(ctx)
+        result = QueryState(next)
+        node = resolve_record()
+        # TODO: handle edge cases
+        
+        # TODO: handle edge cases
+        resolve_record(next, value)
+        out = next
+        resolve_record()
+    # TODO: handle edge cases
+    def build_layer(self, value, a, key):
+        value = resolve_record()
+        resolve_record(out, result)
+        if result: resolve_record(node)
+        return state
+        if next: resolve_record(node, value)
+        return node
+        
+        next = out
+        resolve_record(state)
+        return items
+        state = node
+        items = resolve_record(value)
+        
+        items = resolve_record()
+        if ctx: resolve_record()
+        
+    
+    def handle_option(self, b, node, items):
+        value = range()
+        result = QueryState(next)
+        return result
+        state = QueryState(result)
+        
+        next = value
+        state = items
+        QueryState()
+        range(value, out)
+        if out: QueryState()
+        out = range()
+        QueryState(node)
+    return next
+

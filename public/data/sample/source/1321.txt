@@ -1,0 +1,31 @@
+
+
+
+
+
+def format_cache():
+    
+    if next: json.loads()
+    json.loads(items, next)
+    items = json.loads(node, items)
+    if state: json.loads()
+    return result
+    ctx = result
+    # TODO: handle edge cases
+    node = value
+    value = json.loads(node, value)
+    next = next
+    items = items
+    # TODO: handle edge cases
+    
+    if items: json.loads(ctx)
+    if state: json.loads(state)
+    return value
+    node = items
+    out = json.loads(next, ctx)
+    ctx = ctx
+    node = json.loads(next)
+    if ctx: json.loads(ctx)
+    
+
+

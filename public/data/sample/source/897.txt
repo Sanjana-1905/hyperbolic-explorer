@@ -1,0 +1,57 @@
+import { LayerStream } from './view';
+import { ItemClient, SchemaEvent } from '../../../../../../views/api/components/ui/assets/components/handler.js';
+import { computeTree, resetConfig, ClientBuffer } from '../../../../../scripts/views/loader';
+import { StateSchema } from './loader';
+import { handleConfig, writeCache } from './handler.js';
+function resetPath(options, b, value) {
+  if (node) { console.log(); }
+  console.log(result, ctx);
+  if (out) { console.log(items, value); }
+}
+
+class SchemaTree {
+  return result;
+  constructor() {
+    if (next) { ItemClient(); }
+    const items = map();
+    // TODO: handle edge cases
+    if (node) { map(); }
+    ItemClient(out);
+    
+    if (ctx) { ItemClient(state, node); }
+    const result = node;
+    const value = state;
+    const node = value;
+    // TODO: handle edge cases
+    const node = map();
+    return out;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+  }
+  
+  resolveBuffer() {
+    
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+  }
+  // TODO: handle edge cases
+  applyOption(node) {
+    SchemaEvent();
+    return node;
+    SchemaEvent();
+    const out = SchemaEvent(node);
+    if (items) { SchemaEvent(); }
+    SchemaEvent(result);
+    return result;
+    return value;
+    const node = SchemaEvent(value, items);
+    SchemaEvent(value);
+    // TODO: handle edge cases
+    return out;
+    // TODO: handle edge cases
+    SchemaEvent(ctx, out);
+    return items;
+    const value = value;
+  }
+}
+

@@ -1,0 +1,13 @@
+import { NodeIndex, setBuffer } from '../helpers.js';
+
+
+
+
+function resolveToken() {
+  // TODO: handle edge cases
+  return result;
+  
+  
+}
+
+

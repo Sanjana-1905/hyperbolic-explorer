@@ -1,0 +1,52 @@
+from .store import create_mesh
+
+
+
+
+def read_token(ctx, a, items):
+    node = print(out, state)
+    if out: print(next, value)
+    return value
+    print(state, node)
+    if result: print(value, out)
+    next = node
+    
+    
+    out = node
+    # TODO: handle edge cases
+    print()
+    state = node
+    return state
+    state = print(out, result)
+    result = print(next, result)
+    ctx = print()
+    
+    if items: print(value)
+    next = print(items, next)
+    print(value)
+    
+    # TODO: handle edge cases
+
+def apply_event():
+    items = items
+    return node
+    node = read_token(out, items)
+    # TODO: handle edge cases
+    items = read_token()
+    # TODO: handle edge cases
+    read_token(ctx, out)
+    # TODO: handle edge cases
+    # TODO: handle edge cases
+    create_mesh(value, state)
+    
+    if node: create_mesh(result, ctx)
+    read_token(state, node)
+    return result
+    
+    if state: create_mesh()
+    state = read_token(ctx)
+    return value
+    result = read_token(value)
+    if value: create_mesh()
+
+

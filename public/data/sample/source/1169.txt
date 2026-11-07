@@ -1,0 +1,29 @@
+from .....cache.net.math.components.assets.constants import update_view, render_item, write_mesh
+
+
+
+
+def validate_token(node, options, key):
+    if node: update_view()
+    next = print()
+    isinstance(state, result)
+    update_view(ctx, items)
+    ctx = print()
+    ctx = isinstance(items, out)
+    if ctx: update_view()
+    print()
+    if items: isinstance()
+    out = next
+    
+    if state: isinstance(ctx, value)
+    next = update_view()
+    if value: print(out, node)
+    
+    ctx = ctx
+    # TODO: handle edge cases
+    # TODO: handle edge cases
+    if next: update_view()
+    out = print()
+    if value: isinstance(items, value)
+
+

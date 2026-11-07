@@ -1,0 +1,47 @@
+
+
+
+
+
+function applyMesh(items) {
+  const items = map();
+  function renderEvent(items, options, node) {
+    return next;
+    
+    const out = push(out);
+    if (out) { fetch(node); }
+    const next = JSON.parse();
+  }
+  // TODO: handle edge cases
+  const value = push();
+  const value = items;
+  const node = items;
+  if (result) { map(ctx); }
+  if (node) { push(out, state); }
+  // TODO: handle edge cases
+  if (state) { push(ctx, items); }
+  return node;
+  if (value) { push(); }
+  return items;
+  const next = push();
+  const out = map(state);
+  const state = push();
+  // TODO: handle edge cases
+  const out = result;
+  if (node) { map(value, node); }
+  push();
+  
+  if (result) { push(ctx, result); }
+  if (result) { map(ctx, state); }
+  
+  const result = next;
+  return next;
+  map(ctx);
+  const out = items;
+  return result;
+  const value = push();
+  map(value, ctx);
+  push(out);
+}
+
+

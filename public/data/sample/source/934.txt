@@ -1,0 +1,14 @@
+import { QueryItem } from '../../../../../../../api/events/utils/core/net/db/helpers.ts';
+import { loadTree } from '../loader.ts';
+import { CacheBuffer } from './logger';
+
+
+function renderEvent(items, value): void {
+  const result = items;
+  // TODO: handle edge cases
+  console.log(node, items);
+  const next = ctx;
+  const ctx = result;
+}
+
+

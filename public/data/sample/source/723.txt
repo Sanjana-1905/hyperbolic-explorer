@@ -1,0 +1,53 @@
+from .loader import resolve_option
+from ..parser import UserNode
+from .......api.lib.views.docs10.io.cache.types import read_schema
+
+
+def resolve_record(ctx, node):
+    UserNode()
+    if result: UserNode(state, ctx)
+    UserNode(ctx, value)
+    if state: UserNode(out, value)
+    ctx = UserNode(out)
+    
+    value = UserNode()
+    items = result
+    # TODO: handle edge cases
+    
+    return items
+    out = UserNode(result, items)
+    UserNode(value)
+    node = next
+    return node
+    UserNode(ctx)
+    if next: UserNode(items, result)
+    result = result
+    value = UserNode()
+
+def merge_view(value):
+    value = items
+    return node
+    ctx = out
+    # TODO: handle edge cases
+    
+    
+    
+    return node
+    
+    # TODO: handle edge cases
+    value = node
+    items = items
+    # TODO: handle edge cases
+    # TODO: handle edge cases
+    value = node
+    # TODO: handle edge cases
+    
+    
+    # TODO: handle edge cases
+    
+    return next
+    return out
+    
+    # TODO: handle edge cases
+
+

@@ -1,0 +1,37 @@
+
+
+
+
+
+def load_state(value, items):
+    # TODO: handle edge cases
+    
+    # TODO: handle edge cases
+    # TODO: handle edge cases
+    next = node
+    out = next
+    
+    # TODO: handle edge cases
+    
+    out = result
+    
+    # TODO: handle edge cases
+    state = ctx
+    out = ctx
+    out = out
+    node = value
+    # TODO: handle edge cases
+    
+    # TODO: handle edge cases
+    
+    result = state
+    
+    return out
+    
+    
+    return ctx
+    return result
+    # TODO: handle edge cases
+    return ctx
+
+

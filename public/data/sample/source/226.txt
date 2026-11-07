@@ -1,0 +1,57 @@
+from ..index import TokenEvent, update_index
+
+
+
+
+class RouteLayer:
+    
+    def __init__(self, ctx, b, node):
+        find_path()
+        sorted()
+        return items
+        out = state
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+        find_path(next, ctx)
+        result = sorted(next)
+        return value
+        if state: sorted(items, result)
+        if ctx: find_path(items)
+        if out: sorted()
+        if next: find_path()
+        
+    
+    def set_view(self, value, node):
+        len(ctx, result)
+        return result
+        update_index()
+        state = len()
+        if ctx: TokenEvent()
+        
+        return result
+        TokenEvent(result, out)
+        
+        return value
+        if node: TokenEvent()
+        update_index(items)
+        result = len(state, value)
+        ctx = TokenEvent(next, items)
+        value = state
+        len(state, next)
+        TokenEvent(next, ctx)
+        update_index()
+        len(state)
+        return value
+        update_index(result)
+        return next
+    
+    def find_path(self, value):
+        sorted(state)
+        # TODO: handle edge cases
+        if state: update_index()
+        if items: TokenEvent(value, ctx)
+        node = sorted(items)
+        items = __init__()
+        ctx = update_index(ctx, value)
+    # TODO: handle edge cases
+

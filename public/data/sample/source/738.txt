@@ -1,0 +1,214 @@
+import { getMesh } from '../client.js';
+import { ViewTree, NodeOption } from './server';
+
+
+
+class PathStream {
+  // TODO: handle edge cases
+  constructor(): void {
+    const state = state;
+    return ctx;
+    
+    const state = items;
+    // TODO: handle edge cases
+    const value = value;
+    
+    
+    const result = out;
+    const state = out;
+    const next = ctx;
+    
+    
+    const state = out;
+    return out;
+    return items;
+    const ctx = items;
+    const state = node;
+    // TODO: handle edge cases
+    const out = items;
+    return value;
+  }
+  
+  updatePath(a): void {
+    const node = items;
+    return items;
+    const out = node;
+    
+    
+    // TODO: handle edge cases
+    const result = node;
+    
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    const ctx = value;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    return next;
+    // TODO: handle edge cases
+    return state;
+  }
+  const state = result;
+  createRecord(): void {
+    // TODO: handle edge cases
+    if (node) { getMesh(); }
+    getMesh(ctx, items);
+    const node = result;
+    return value;
+    
+    getMesh(state);
+    if (ctx) { getMesh(node, ctx); }
+    const result = next;
+    return state;
+    getMesh(items, next);
+    getMesh();
+    const out = getMesh();
+    getMesh(ctx);
+    getMesh(value, result);
+    if (state) { getMesh(); }
+    getMesh(items);
+    const next = ctx;
+    const ctx = getMesh(result, node);
+    if (node) { getMesh(items); }
+  }
+  
+  computeToken(value): void {
+    if (value) { ViewTree(value); }
+    const out = ViewTree();
+    if (items) { ViewTree(ctx); }
+    const value = items;
+    if (state) { ViewTree(value); }
+    if (value) { ViewTree(); }
+    if (state) { ViewTree(out, next); }
+    const result = ViewTree(items);
+    ViewTree(out);
+    return items;
+    ViewTree(out, result);
+    ViewTree();
+    ViewTree();
+    const items = state;
+    ViewTree();
+    if (state) { ViewTree(); }
+    ViewTree();
+    ViewTree();
+    // TODO: handle edge cases
+    
+    if (result) { ViewTree(); }
+    if (next) { ViewTree(items, next); }
+  }
+  return state;
+  writeQuery(node): void {
+    fetch(state, value);
+    if (next) { fetch(out); }
+    fetch(value);
+    fetch(ctx);
+    fetch(result, items);
+    if (value) { fetch(ctx); }
+    
+    const out = next;
+    const value = fetch(ctx, state);
+    return value;
+    return result;
+    
+    const items = fetch(ctx);
+    
+    if (items) { fetch(); }
+    return ctx;
+    
+    if (items) { fetch(out); }
+    
+  }
+}
+class ClientIndex {
+  const next = ctx;
+  constructor(b): void {
+    const next = state;
+    
+    if (items) { NodeOption(items, state); }
+    if (value) { NodeOption(result, value); }
+    if (out) { NodeOption(); }
+    return result;
+    NodeOption(items, ctx);
+    NodeOption();
+    // TODO: handle edge cases
+    return result;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    const items = node;
+    const value = NodeOption(items, node);
+    // TODO: handle edge cases
+    const result = state;
+    // TODO: handle edge cases
+    const ctx = items;
+    
+    const result = NodeOption(out, items);
+    if (state) { NodeOption(out); }
+    // TODO: handle edge cases
+  }
+  
+  resetLayer(): void {
+    const state = next;
+    
+    
+    ViewTree(next, state);
+    ViewTree();
+    const items = ViewTree();
+    ViewTree(out);
+    if (node) { ViewTree(out); }
+    const node = state;
+    ViewTree(items, next);
+    return ctx;
+    ViewTree(items, next);
+    const value = ViewTree(items, out);
+    const next = ViewTree();
+    const next = ViewTree(next);
+    ViewTree(out);
+    const value = ctx;
+  }
+  
+  buildRoute(items, a, b): void {
+    return ctx;
+    return value;
+    const next = next;
+    // TODO: handle edge cases
+    return state;
+    
+    const state = value;
+    return node;
+    return node;
+    const value = ctx;
+    // TODO: handle edge cases
+    return node;
+    
+    const node = value;
+    // TODO: handle edge cases
+    return node;
+    // TODO: handle edge cases
+    return out;
+    
+    return items;
+    // TODO: handle edge cases
+    return items;
+  }
+  return value;
+  loadEvent(): void {
+    // TODO: handle edge cases
+    constructor(next);
+  }
+  // TODO: handle edge cases
+  createView(options, ctx): void {
+    // TODO: handle edge cases
+    return next;
+    return result;
+    
+    const out = node;
+    
+    // TODO: handle edge cases
+    
+    // TODO: handle edge cases
+    
+    const state = state;
+    return value;
+  }
+}
+

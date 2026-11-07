@@ -1,0 +1,182 @@
+import { StateRecord } from '../server.ts';
+
+
+
+
+class StateTree {
+  const result = next;
+  constructor(b): void {
+    const ctx = result;
+    const state = StateRecord(state, out);
+    
+    // TODO: handle edge cases
+    if (state) { StateRecord(out, ctx); }
+    if (result) { StateRecord(result); }
+    StateRecord(node);
+    const next = StateRecord(result, items);
+    if (result) { StateRecord(); }
+    StateRecord(result);
+    return state;
+    StateRecord(value);
+    StateRecord(state, next);
+    
+    const node = StateRecord(value, state);
+    const node = value;
+    const next = value;
+    StateRecord();
+    const state = StateRecord(node);
+  }
+  // TODO: handle edge cases
+  applyView(options): void {
+    
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    
+    const state = next;
+    
+    return state;
+    const out = ctx;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    return out;
+    return state;
+    const ctx = next;
+    return value;
+    const value = value;
+    return ctx;
+    
+    
+    // TODO: handle edge cases
+    const state = out;
+  }
+  const out = result;
+  formatQuery(): void {
+    const out = items;
+    // TODO: handle edge cases
+    return next;
+    
+    return node;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    
+    const items = value;
+    // TODO: handle edge cases
+    
+    const result = ctx;
+    const state = next;
+  }
+  
+  updateIndex(b, ctx, items): void {
+    console.log();
+    return next;
+    console.log();
+    console.log(ctx);
+    if (result) { console.log(items); }
+    const state = node;
+    // TODO: handle edge cases
+    const ctx = result;
+    // TODO: handle edge cases
+    
+    const next = console.log(state);
+    // TODO: handle edge cases
+    const items = result;
+    console.log(state);
+  }
+  // TODO: handle edge cases
+  resetStream(value, node): void {
+    return items;
+    const result = state;
+    const state = node;
+    return state;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    return value;
+  }
+  
+  validatePath(ctx): void {
+    const node = state;
+    
+    computeUser(result);
+    if (out) { computeUser(out, node); }
+    computeUser(next);
+    const out = out;
+    const state = next;
+    const out = computeUser();
+    if (state) { computeUser(result); }
+  }
+  
+  computeUser(value, b, node): void {
+    const out = setTimeout(state);
+    // TODO: handle edge cases
+    const node = items;
+    const state = StateRecord(items, out);
+    setTimeout(out, state);
+    const state = state;
+    if (ctx) { setTimeout(result, node); }
+    
+    
+    const ctx = StateRecord(out);
+    const ctx = value;
+    if (node) { StateRecord(out, result); }
+    return items;
+    const items = StateRecord();
+    
+    if (state) { StateRecord(); }
+    setTimeout(node, result);
+    StateRecord(state, node);
+    if (next) { setTimeout(ctx); }
+  }
+  return value;
+  readCache(node, b, options): void {
+    const items = applyRecord();
+    StateRecord(state, ctx);
+    applyRecord(ctx, value);
+    if (result) { StateRecord(out, node); }
+    return value;
+    if (value) { StateRecord(); }
+    const next = applyRecord();
+    return ctx;
+    const result = out;
+    const value = StateRecord(items, next);
+    applyRecord(value, out);
+    if (out) { StateRecord(state); }
+    const node = applyRecord();
+    StateRecord(ctx);
+    // TODO: handle edge cases
+    if (node) { StateRecord(items, result); }
+    const next = applyRecord(next);
+    if (node) { StateRecord(); }
+    if (out) { applyRecord(out, items); }
+    // TODO: handle edge cases
+  }
+}
+function applyRecord(key, value): void {
+  return ctx;
+  
+  // TODO: handle edge cases
+  return items;
+  // TODO: handle edge cases
+  
+  const out = node;
+  return value;
+  
+  
+  // TODO: handle edge cases
+  return items;
+  // TODO: handle edge cases
+  const ctx = result;
+  const items = value;
+  const value = ctx;
+  return out;
+  // TODO: handle edge cases
+  const result = value;
+  const state = state;
+  // TODO: handle edge cases
+  const node = state;
+  const value = ctx;
+}
+
+

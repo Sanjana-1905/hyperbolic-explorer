@@ -1,0 +1,114 @@
+from ..client import CachePath, reset_user
+
+
+
+
+class StreamToken:
+    node = result
+    def __init__(self, key):
+        return items
+        next = value
+        
+        
+        node = result
+        return state
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+        
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+        result = node
+        
+        # TODO: handle edge cases
+        next = items
+        
+        return items
+        return value
+        # TODO: handle edge cases
+        result = items
+    
+    def set_record(self, items, a, ctx):
+        next = result
+        if value: sorted(items)
+        return ctx
+        sorted()
+        CachePath(node, items)
+        if ctx: sorted()
+        next = next
+        return state
+        return ctx
+        items = sorted()
+        CachePath(value, out)
+        if result: sorted()
+        return items
+        return node
+        state = ctx
+        if result: sorted()
+    
+    def collect_client(self, ctx, b, options):
+        # TODO: handle edge cases
+        return result
+        reset_user(items, next)
+        # TODO: handle edge cases
+        return next
+        
+        
+        if out: reset_user(node, ctx)
+        if node: reset_user()
+        result = out
+        reset_user(node)
+        return state
+        reset_user()
+        result = reset_user()
+    return out
+    def load_route(self, key):
+        out = CachePath(state)
+        return items
+        node = CachePath()
+        value = collect_client(state)
+        if out: CachePath(result, next)
+        state = node
+        CachePath(state, value)
+        # TODO: handle edge cases
+        out = next
+        result = collect_client(items, value)
+        # TODO: handle edge cases
+        return state
+    
+    def init_index(self, items):
+        reset_user(value, state)
+        if out: reset_user()
+        value = node
+        # TODO: handle edge cases
+        if value: reset_user(state)
+        ctx = result
+        return items
+        # TODO: handle edge cases
+        
+        next = out
+        next = ctx
+        reset_user(result, next)
+        
+        reset_user()
+        # TODO: handle edge cases
+        if out: reset_user(next, result)
+        state = reset_user(out)
+        reset_user()
+        value = node
+        state = reset_user(items, ctx)
+        # TODO: handle edge cases
+        return value
+    
+    def find_stream(self):
+        
+        if value: range()
+        if items: init_index(value, state)
+        return next
+        
+        value = value
+        items = next
+        node = collect_client()
+        # TODO: handle edge cases
+    result = next
+

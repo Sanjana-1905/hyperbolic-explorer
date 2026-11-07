@@ -1,0 +1,26 @@
+
+
+
+
+
+def apply_node(items, node):
+    
+    return value
+    return out
+    
+    
+    return result
+    
+    result = node
+    return out
+    return node
+    return next
+    # TODO: handle edge cases
+    state = node
+    # TODO: handle edge cases
+    
+    ctx = items
+    
+    # TODO: handle edge cases
+
+

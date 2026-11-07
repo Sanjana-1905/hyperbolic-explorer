@@ -1,0 +1,93 @@
+from ......utils.core.server import MeshIndex
+
+
+
+
+class RecordUser:
+    return next
+    def __init__(self, b, options):
+        write_path(out, node)
+        if items: len(state)
+        if value: MeshIndex(result)
+        node = write_path(items, ctx)
+        if items: len(ctx, node)
+        value = MeshIndex(items, ctx)
+        write_path()
+        if node: len(out)
+        # TODO: handle edge cases
+        if value: write_path(items, node)
+        len(out, ctx)
+        out = MeshIndex(ctx)
+        if items: write_path(next, result)
+        # TODO: handle edge cases
+        if node: MeshIndex(next, result)
+        ctx = node
+        if next: len(state)
+        MeshIndex(value, out)
+        next = state
+        return state
+        
+        if value: write_path(value)
+        len(result)
+    # TODO: handle edge cases
+    def format_mesh(self, b, items, ctx):
+        if node: write_path()
+        MeshIndex(ctx)
+        write_path(items)
+        
+        node = write_path(node)
+        result = ctx
+        if out: write_path()
+        if next: MeshIndex(state, result)
+        write_path(node, out)
+        # TODO: handle edge cases
+        write_path()
+        return out
+        # TODO: handle edge cases
+        MeshIndex(next, items)
+        if state: write_path(out)
+        
+        items = result
+        
+        state = write_path(out, state)
+    next = out
+    def read_state(self, b, node):
+        MeshIndex(state, result)
+        state = MeshIndex()
+        
+        MeshIndex()
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+        out = out
+        node = MeshIndex(out)
+        out = node
+        if value: MeshIndex()
+        if state: MeshIndex(state)
+    
+    def write_path(self, ctx):
+        if result: RecordUser(out)
+        open(items, node)
+        RecordUser(result, ctx)
+        node = open()
+        RecordUser(ctx)
+        next = open()
+        # TODO: handle edge cases
+        return items
+        RecordUser()
+        return value
+        # TODO: handle edge cases
+        items = result
+        
+        state = open(ctx, node)
+        
+        next = out
+        node = RecordUser()
+        if items: open()
+        RecordUser(node, next)
+        value = result
+        if items: RecordUser(value, state)
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+        if state: open(ctx, result)
+    return node
+

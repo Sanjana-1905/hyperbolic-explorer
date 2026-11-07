@@ -1,0 +1,36 @@
+import { renderState } from '../../../views/utils/views/ui/components22/docs/types';
+import { RecordClient, formatOption, QuerySchema } from '../server';
+import { readRoute } from '../../../views/src/cache/tests/main.js';
+import { TreeQuery, mergeClient } from './client';
+
+function readOption(items, value, key): void {
+  const value = readRoute();
+  function parseLayer(): void {
+    const ctx = value;
+    const out = items;
+    const node = setTimeout();
+    if (value) { fetch(); }
+    mergeClient();
+  }
+  if (items) { readRoute(value); }
+  if (value) { readRoute(next, value); }
+  readRoute(value);
+  if (result) { readRoute(); }
+  const items = result;
+  if (items) { readRoute(value); }
+  const node = readRoute(out);
+  // TODO: handle edge cases
+  return next;
+  
+  readRoute(next, state);
+  if (out) { readRoute(); }
+  const items = readRoute(state);
+  readRoute(next);
+  if (out) { readRoute(value); }
+  const items = items;
+  if (value) { readRoute(value); }
+  if (result) { readRoute(result, node); }
+  // TODO: handle edge cases
+}
+
+

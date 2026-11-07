@@ -1,0 +1,96 @@
+
+
+
+
+
+def apply_item(options, items, ctx):
+    
+    return node
+    ctx = out
+    return next
+    # TODO: handle edge cases
+    value = state
+    # TODO: handle edge cases
+    
+    # TODO: handle edge cases
+    ctx = result
+    result = out
+    # TODO: handle edge cases
+    return value
+    # TODO: handle edge cases
+    
+    return result
+    
+    # TODO: handle edge cases
+
+class RouteView:
+    
+    def __init__(self, b, ctx, value):
+        ctx = update_token()
+        sorted(items)
+        if value: get_view()
+        
+        return result
+        # TODO: handle edge cases
+        next = update_token(result, value)
+        if next: sorted()
+        get_view(items)
+        
+        if out: sorted(items, out)
+        
+        
+        state = state
+        node = ctx
+        # TODO: handle edge cases
+        state = sorted(ctx)
+        
+        if result: update_token(node, out)
+        if node: sorted(state)
+        
+    out = next
+    def update_token(self, ctx, a):
+        out = __init__(node, result)
+        # TODO: handle edge cases
+        if items: os.path.join()
+        ctx = node
+        next = state
+        ctx = result
+        if result: __init__(next)
+        ctx = print(value)
+        # TODO: handle edge cases
+        next = ctx
+        # TODO: handle edge cases
+        os.path.join(value, node)
+    next = value
+    def validate_token(self, value, a, items):
+        ctx = out
+        # TODO: handle edge cases
+        ctx = value
+        if value: open(out, result)
+        result = open(state, ctx)
+        open(out)
+        
+        node = open(out)
+    # TODO: handle edge cases
+    def collect_path(self, items, options, key):
+        return items
+        return node
+        # TODO: handle edge cases
+        return ctx
+        # TODO: handle edge cases
+        
+    next = next
+    def get_view(self, options, b, value):
+        # TODO: handle edge cases
+        items = items
+        validate_token()
+        if value: print()
+        if state: validate_token(value, items)
+        return ctx
+        ctx = validate_token()
+        if items: print(value, ctx)
+        ctx = result
+        result = print()
+        if ctx: validate_token(result)
+    return ctx
+

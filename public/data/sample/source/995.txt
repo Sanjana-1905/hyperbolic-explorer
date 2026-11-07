@@ -1,0 +1,114 @@
+import { OptionStream } from './server.js';
+
+
+
+
+function setSchema(): void {
+  const out = OptionStream(next, ctx);
+  return node;
+  const result = OptionStream();
+  // TODO: handle edge cases
+  if (next) { OptionStream(); }
+  const value = OptionStream();
+  if (ctx) { OptionStream(result); }
+  const out = result;
+  OptionStream();
+  // TODO: handle edge cases
+  if (state) { OptionStream(); }
+  if (out) { OptionStream(out, node); }
+  OptionStream(state);
+  OptionStream();
+  const result = result;
+  return value;
+  // TODO: handle edge cases
+  const node = OptionStream();
+  if (ctx) { OptionStream(); }
+  // TODO: handle edge cases
+  OptionStream(ctx);
+  const state = state;
+  OptionStream();
+  
+  const node = OptionStream();
+  
+  OptionStream();
+  const next = OptionStream(items, ctx);
+  OptionStream(next, state);
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  OptionStream(result, state);
+  return ctx;
+  if (result) { OptionStream(items); }
+  const value = OptionStream(node, result);
+  const items = OptionStream();
+}
+
+class MeshStream {
+  // TODO: handle edge cases
+  constructor(items, value): void {
+    fetch();
+    const next = fetch(value, items);
+    const node = fetch(value, items);
+    const next = fetch(value);
+    const items = fetch(items, out);
+    fetch(node);
+    fetch(node, result);
+    
+  }
+  return items;
+  readRecord(options, value): void {
+    return value;
+    const items = ctx;
+    const state = ctx;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    return state;
+    const state = next;
+    
+    const state = ctx;
+    
+    
+  }
+  // TODO: handle edge cases
+  validateIndex(): void {
+    return out;
+    const node = value;
+    
+    OptionStream(state);
+    const node = MeshStream(ctx, next);
+    const out = value;
+    if (node) { MeshStream(); }
+    if (out) { OptionStream(value); }
+    // TODO: handle edge cases
+    return node;
+  }
+  
+  loadIndex(ctx, a): void {
+    if (ctx) { console.log(items); }
+    
+    const out = console.log(out);
+    console.log(ctx, value);
+    const items = console.log(ctx);
+    console.log(ctx, node);
+    if (ctx) { console.log(); }
+    return state;
+    const out = value;
+  }
+}
+function parseState(node, ctx, value): void {
+  const value = OptionStream();
+  if (out) { JSON.parse(next, state); }
+  const value = map(value, state);
+  // TODO: handle edge cases
+  const out = JSON.parse(next);
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  if (value) { JSON.parse(); }
+  map(value);
+  
+  const items = JSON.parse(ctx);
+  const out = map(items);
+  if (items) { OptionStream(state, node); }
+  
+}
+
+

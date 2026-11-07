@@ -1,0 +1,24 @@
+import { readEvent } from '../index.ts';
+import { collectUser } from '../../../../../../views/cache/auth/tests/auth/tests';
+import { loadRoute } from '../../../../../views/internal/api/components/io/ui/format.js';
+
+
+function collectLayer(ctx): void {
+  
+  function renderSchema(options, items, a): void {
+    readEvent();
+    const ctx = push(next, value);
+    readEvent(node);
+    if (out) { push(state); }
+    readEvent(node, result);
+  }
+  const result = renderSchema(ctx);
+  if (value) { renderSchema(); }
+  renderSchema();
+  // TODO: handle edge cases
+  return value;
+  
+  const out = value;
+}
+
+

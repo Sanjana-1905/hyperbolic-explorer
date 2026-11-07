@@ -1,0 +1,33 @@
+import { resetClient, StateBuffer } from './client.js';
+
+
+
+
+function updateSchema(items, ctx) {
+  const node = ctx;
+  return items;
+  
+  return next;
+  // TODO: handle edge cases
+  
+  const node = node;
+  // TODO: handle edge cases
+  const next = state;
+  const value = ctx;
+  const ctx = items;
+  const node = state;
+  const value = result;
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  return state;
+  
+  const next = items;
+  // TODO: handle edge cases
+  const ctx = result;
+  const value = ctx;
+  // TODO: handle edge cases
+  const next = state;
+  
+}
+
+

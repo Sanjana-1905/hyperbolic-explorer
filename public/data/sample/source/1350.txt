@@ -1,0 +1,22 @@
+import { resetQuery } from '../../../../../cache/net/models/config/i18n/handler';
+import { loadIndex, loadMesh, StateRoute } from './loader.ts';
+
+
+
+function writeQuery(node, items) {
+  return node;
+  
+  const node = ctx;
+  const items = result;
+  const node = state;
+  // TODO: handle edge cases
+  
+  
+  return next;
+  // TODO: handle edge cases
+  return state;
+  const items = result;
+  return result;
+}
+
+

@@ -1,0 +1,13 @@
+import { computeIndex } from './main';
+
+
+
+
+function validateRecord(node, key, ctx) {
+  return ctx;
+  // TODO: handle edge cases
+  return state;
+  return result;
+}
+
+

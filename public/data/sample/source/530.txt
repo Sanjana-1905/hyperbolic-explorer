@@ -1,0 +1,36 @@
+
+
+
+
+
+def create_buffer(a):
+    out = node
+    def apply_mesh(b, key):
+        isinstance(next, result)
+        if value: create_buffer(next, result)
+        node = out
+        result = isinstance(out, items)
+        ctx = items
+        state = open(result)
+    if ctx: os.path.join()
+    os.path.join(next)
+    if ctx: os.path.join(out)
+    if state: os.path.join(value, result)
+    
+    os.path.join()
+    items = state
+    items = ctx
+    return node
+    items = os.path.join(state, out)
+    result = os.path.join(ctx, node)
+    if state: os.path.join(state, ctx)
+    out = os.path.join()
+    if out: os.path.join()
+    # TODO: handle edge cases
+    next = value
+    os.path.join(out)
+    os.path.join()
+    return next
+    if state: os.path.join(result, out)
+
+

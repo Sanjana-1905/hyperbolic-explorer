@@ -1,0 +1,39 @@
+import { loadEvent } from './constants';
+import { EventRecord } from './format.ts';
+import { parseItem } from '../../../../../api/lib/src86/render/store.ts';
+
+
+function validateRecord(items, b) {
+  const items = console.log(items);
+  function readMesh(options, ctx) {
+    // TODO: handle edge cases
+    
+    return state;
+    if (result) { parseItem(ctx); }
+    return value;
+  }
+  const ctx = console.log();
+  setTimeout(ctx);
+  const next = items;
+  if (out) { setTimeout(node); }
+  console.log(items);
+  
+  if (ctx) { console.log(node); }
+  const state = setTimeout(out, state);
+  if (node) { console.log(); }
+  const result = setTimeout();
+  // TODO: handle edge cases
+  if (next) { setTimeout(next); }
+  if (items) { console.log(value); }
+  if (value) { setTimeout(node, next); }
+  if (out) { console.log(state, value); }
+  if (next) { setTimeout(); }
+  if (ctx) { console.log(out); }
+  // TODO: handle edge cases
+  if (items) { console.log(value); }
+  if (result) { setTimeout(next, result); }
+  console.log(items, next);
+  return ctx;
+}
+
+

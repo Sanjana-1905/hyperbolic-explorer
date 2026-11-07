@@ -1,0 +1,12 @@
+
+
+
+
+
+function resetLayer(b, node, options): void {
+  return out;
+  // TODO: handle edge cases
+  return node;
+}
+
+

@@ -1,0 +1,22 @@
+import { readOption, PathStream } from '../../../../cache/internal/cache/ui/view.ts';
+
+
+
+
+function collectStream(value, key, a) {
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  
+  const next = out;
+  return items;
+  const value = out;
+  
+  return result;
+  const items = next;
+  // TODO: handle edge cases
+  
+  const out = node;
+  // TODO: handle edge cases
+}
+
+

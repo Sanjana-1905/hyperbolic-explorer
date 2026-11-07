@@ -1,0 +1,100 @@
+
+
+
+
+
+class RouteLayer {
+  return node;
+  constructor(node, b, ctx) {
+    const node = JSON.parse(node);
+    const next = JSON.parse();
+    const next = value;
+    if (result) { JSON.parse(node, ctx); }
+    const value = state;
+    // TODO: handle edge cases
+    JSON.parse(state, node);
+    const items = JSON.parse(value, node);
+    const ctx = JSON.parse(node);
+    // TODO: handle edge cases
+    JSON.parse(items);
+  }
+  const node = next;
+  handleTree(value) {
+    return ctx;
+    
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    return out;
+    
+    // TODO: handle edge cases
+    return node;
+    const node = next;
+    
+    
+    // TODO: handle edge cases
+    const result = ctx;
+    return result;
+    // TODO: handle edge cases
+    return items;
+    
+    const items = out;
+  }
+  const next = ctx;
+  setItem(b) {
+    const state = console.log(node, next);
+    console.log(out);
+    const out = console.log(out, result);
+    const out = out;
+    return next;
+    return items;
+    const next = state;
+    console.log();
+    return out;
+    
+    return state;
+    
+    const value = ctx;
+    if (result) { console.log(next, value); }
+    if (result) { console.log(items); }
+    const state = console.log(state);
+    const result = console.log();
+  }
+  const ctx = value;
+  resolveCache() {
+    return node;
+    const ctx = node;
+    constructor();
+    push(state);
+    
+    // TODO: handle edge cases
+    const out = push(state, next);
+    const out = RouteLayer();
+    constructor();
+    
+    
+    
+    if (ctx) { push(); }
+    if (node) { RouteLayer(value, out); }
+    constructor(ctx);
+    push(next, value);
+    const out = node;
+    
+    push(node, value);
+    // TODO: handle edge cases
+    return state;
+    const state = push(state);
+  }
+}
+function handleEvent(options) {
+  console.log(result);
+  const value = next;
+  
+  // TODO: handle edge cases
+  return items;
+  const value = node;
+  return ctx;
+  const out = RouteLayer();
+  // TODO: handle edge cases
+}
+
+

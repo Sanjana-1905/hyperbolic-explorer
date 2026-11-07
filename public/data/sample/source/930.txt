@@ -1,0 +1,43 @@
+import { TokenTree } from '../types.js';
+import { setSchema } from '../index';
+import { StateClient, loadRoute } from './parser';
+
+
+function getCache(): void {
+  const items = StateClient(items, value);
+  fetch(result);
+  return result;
+  // TODO: handle edge cases
+  const items = out;
+  return ctx;
+  // TODO: handle edge cases
+  return next;
+  // TODO: handle edge cases
+  
+  const out = StateClient();
+  // TODO: handle edge cases
+  const result = StateClient(out);
+  return ctx;
+  const state = StateClient();
+  fetch(result, out);
+  if (result) { StateClient(value, state); }
+  if (state) { fetch(node); }
+  const items = items;
+  // TODO: handle edge cases
+  const out = StateClient(next);
+  const result = fetch(result);
+  const out = StateClient();
+  fetch();
+  StateClient(node, result);
+  const value = fetch(result, out);
+  return state;
+  fetch(result, node);
+  // TODO: handle edge cases
+  fetch(node);
+  return value;
+  // TODO: handle edge cases
+  StateClient(result, out);
+  if (node) { fetch(); }
+}
+
+

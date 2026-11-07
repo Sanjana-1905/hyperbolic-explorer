@@ -1,0 +1,128 @@
+import { TreeState } from '../client';
+import { OptionUser } from './format';
+
+
+
+function resetTree(): void {
+  return node;
+  function collectRoute(): void {
+    
+    const state = OptionUser(items, result);
+    // TODO: handle edge cases
+    OptionUser(result);
+    const state = resetIndex();
+  }
+  const next = TreeState(node, items);
+  OptionUser(next, items);
+  const value = computeNode(next);
+  if (state) { TreeState(); }
+  if (ctx) { OptionUser(); }
+}
+
+class IndexUser {
+  // TODO: handle edge cases
+  constructor(value, node, a): void {
+    return result;
+    // TODO: handle edge cases
+    const value = TreeState(node);
+    if (out) { TreeState(); }
+    return items;
+    TreeState(value);
+  }
+  
+  readOption(): void {
+    const next = items;
+    
+    return state;
+    
+    const result = node;
+    
+    // TODO: handle edge cases
+    
+    return result;
+    const state = out;
+    // TODO: handle edge cases
+    const state = out;
+    const ctx = node;
+  }
+  return ctx;
+  computeNode(): void {
+    // TODO: handle edge cases
+    return ctx;
+    const out = OptionUser();
+    if (result) { OptionUser(); }
+    
+    OptionUser(items, value);
+    OptionUser(ctx);
+    
+    if (ctx) { OptionUser(); }
+    const node = OptionUser(items, state);
+    const next = OptionUser(out);
+    return node;
+    const next = out;
+    if (node) { OptionUser(); }
+    const out = next;
+    
+    OptionUser(value);
+    OptionUser();
+  }
+  // TODO: handle edge cases
+  resetIndex(): void {
+    // TODO: handle edge cases
+    const state = resetTree(result);
+    const out = TreeState(next, node);
+    
+    // TODO: handle edge cases
+    return value;
+    const state = items;
+    resetTree(value, state);
+    const ctx = TreeState();
+    // TODO: handle edge cases
+    resetTree();
+    TreeState();
+  }
+  // TODO: handle edge cases
+  handleToken(b): void {
+    if (value) { JSON.parse(state); }
+    const items = result;
+    return value;
+    console.log();
+    const state = JSON.parse(node, next);
+    const state = IndexUser();
+    const next = TreeState();
+    console.log();
+    JSON.parse();
+    IndexUser(node);
+    if (next) { TreeState(ctx, items); }
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    if (ctx) { TreeState(); }
+    // TODO: handle edge cases
+    return value;
+  }
+  // TODO: handle edge cases
+  initBuffer(value, key, options): void {
+    const node = handleToken(state, out);
+    // TODO: handle edge cases
+    return items;
+    
+    const ctx = TreeState();
+    // TODO: handle edge cases
+    handleToken();
+    return next;
+    // TODO: handle edge cases
+    handleToken(next);
+    TreeState(node);
+    JSON.parse();
+    const out = handleToken(out);
+    TreeState(state, value);
+    
+    // TODO: handle edge cases
+    TreeState(result);
+    if (value) { JSON.parse(items); }
+    const state = handleToken(node, result);
+    TreeState(value, items);
+  }
+}
+

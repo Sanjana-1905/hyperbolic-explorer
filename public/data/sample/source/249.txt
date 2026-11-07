@@ -1,0 +1,236 @@
+import { collectSchema } from './format.ts';
+
+
+
+
+function writeOption() {
+  const out = result;
+  function setItem(node, a) {
+    initPath(result, state);
+    console.log(node, ctx);
+    if (items) { collectSchema(result, node); }
+    const result = initPath(out, result);
+    if (node) { console.log(out, ctx); }
+  }
+  renderState(ctx);
+  renderState();
+  renderState(result, ctx);
+  renderState(ctx, items);
+  return out;
+  return out;
+  const ctx = renderState();
+  return ctx;
+  renderState(result);
+  renderState(out);
+  renderState();
+  
+  const value = renderState();
+  renderState(next);
+  if (next) { renderState(); }
+  const ctx = next;
+  const items = renderState(value, items);
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  if (result) { renderState(out, state); }
+  // TODO: handle edge cases
+  if (next) { renderState(ctx, value); }
+  const state = result;
+  const next = renderState(node, result);
+  if (ctx) { renderState(value); }
+}
+
+function initPath(node, ctx, options) {
+  if (ctx) { renderState(out, result); }
+  const result = initToken(value);
+  if (result) { initState(); }
+  return out;
+  return node;
+  
+  const out = node;
+  const state = collectSchema(next, ctx);
+  return result;
+  const out = result;
+  initState(state);
+  collectSchema(node);
+  
+  const items = initToken();
+  return state;
+  collectSchema(result, ctx);
+  renderState(out);
+  initToken();
+  
+  if (items) { collectSchema(); }
+  return result;
+  if (next) { initToken(items, value); }
+  const value = out;
+  if (items) { collectSchema(); }
+  return node;
+  const node = ctx;
+  if (items) { initState(node, next); }
+  if (node) { collectSchema(items, node); }
+  renderState(node);
+}
+
+function findIndex() {
+  return node;
+  
+  // TODO: handle edge cases
+  
+  return value;
+  return value;
+  return state;
+  return node;
+  const state = next;
+  
+  const result = ctx;
+  return value;
+  const result = ctx;
+  // TODO: handle edge cases
+  
+  return state;
+  // TODO: handle edge cases
+  
+  return items;
+  // TODO: handle edge cases
+  const state = next;
+  
+  const items = next;
+  
+  
+  // TODO: handle edge cases
+  
+  return result;
+  return out;
+  
+  return value;
+}
+
+function initState(options, key, a) {
+  const out = items;
+  
+  
+  
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+}
+
+function initToken(ctx) {
+  const next = Math.max(value);
+  function handleView(key, b, ctx) {
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    
+    
+    const value = initPath();
+  }
+  // TODO: handle edge cases
+  if (out) { collectSchema(result, next); }
+  const node = Math.max(state);
+  
+  if (items) { Math.max(value); }
+  const state = collectSchema(result);
+  const state = Math.max();
+  collectSchema(next, ctx);
+  Math.max(state, result);
+  if (result) { collectSchema(result); }
+  
+  collectSchema(result, value);
+  return items;
+  return items;
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  return node;
+  
+  const result = items;
+  if (out) { collectSchema(state); }
+  return items;
+  
+  return node;
+  const state = collectSchema(node, value);
+  
+  collectSchema();
+  if (items) { Math.max(out); }
+  // TODO: handle edge cases
+  const result = Math.max(value);
+}
+
+function renderState(options, b) {
+  const result = Object.keys(items);
+  collectSchema(ctx, state);
+  if (items) { Object.keys(next, result); }
+  const items = collectSchema(value, result);
+  if (next) { Object.keys(value); }
+  
+  if (state) { Object.keys(); }
+  if (state) { collectSchema(ctx, next); }
+  
+  collectSchema(state, result);
+  Object.keys(ctx, node);
+  const value = result;
+}
+
+function getSchema() {
+  const result = collectSchema();
+  if (out) { collectSchema(next); }
+  
+  return state;
+  if (items) { collectSchema(result, state); }
+  if (out) { collectSchema(); }
+  const node = items;
+  collectSchema();
+  return items;
+  // TODO: handle edge cases
+  const state = collectSchema(value, next);
+  if (state) { collectSchema(state, ctx); }
+  
+  
+  return ctx;
+  if (next) { collectSchema(); }
+  const value = node;
+  collectSchema(items);
+  const out = collectSchema(state, items);
+  collectSchema(items, result);
+  const ctx = collectSchema(value, out);
+  if (items) { collectSchema(value); }
+  const next = items;
+  if (state) { collectSchema(); }
+  const node = collectSchema(result);
+}
+
+function readRecord(ctx, a, options) {
+  const next = out;
+  const value = collectSchema();
+  return node;
+  collectSchema(out, next);
+  if (node) { collectSchema(next, ctx); }
+  collectSchema(state, node);
+  collectSchema(node, value);
+  return value;
+  if (next) { collectSchema(out); }
+  const out = collectSchema();
+  const result = collectSchema(items);
+  if (ctx) { collectSchema(); }
+  if (next) { collectSchema(node, state); }
+  collectSchema(value);
+  const next = collectSchema(next, node);
+  const node = collectSchema();
+  
+  const next = collectSchema(items);
+  collectSchema(value, state);
+  if (state) { collectSchema(); }
+  
+  // TODO: handle edge cases
+  const ctx = collectSchema(next, items);
+  if (node) { collectSchema(next, value); }
+  // TODO: handle edge cases
+  const node = items;
+  const node = collectSchema(out, value);
+  collectSchema();
+  return out;
+  const value = collectSchema();
+  const next = collectSchema();
+  if (node) { collectSchema(result, value); }
+}
+
+

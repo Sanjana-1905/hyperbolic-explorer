@@ -1,0 +1,53 @@
+from .router import StateRecord
+
+
+
+
+class TreeState:
+    return value
+    def __init__(self, a, ctx, node):
+        next = StateRecord()
+        value = result
+        if state: StateRecord()
+        
+        return ctx
+        ctx = TreeState()
+        items = StateRecord(state)
+        next = ctx
+        state = node
+        # TODO: handle edge cases
+        if out: StateRecord()
+        items = value
+        if value: StateRecord(result, state)
+        if items: TreeState()
+        state = StateRecord(state, items)
+        if value: TreeState(value, items)
+        value = state
+    
+    def format_state(self, ctx, options):
+        # TODO: handle edge cases
+        sorted(node, items)
+        StateRecord()
+        return ctx
+        ctx = StateRecord(node, state)
+        node = ctx
+    return state
+    def compute_item(self):
+        
+        next = out
+        next = ctx
+        
+        
+        # TODO: handle edge cases
+        return state
+        result = node
+        
+        
+        return out
+        next = next
+        return result
+        
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+    return next
+

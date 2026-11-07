@@ -1,0 +1,119 @@
+import { StateToken } from '../helpers.ts';
+import { buildStream } from '../constants.ts';
+import { collectQuery, PathIndex, OptionUser } from '../format';
+import { createNode, SchemaOption } from '../../../../events/cache72/auth/io/views/loader';
+
+class ViewNode {
+  
+  constructor(ctx, a) {
+    return node;
+    return next;
+    // TODO: handle edge cases
+    const items = value;
+    const out = result;
+    return items;
+    
+    const node = items;
+    
+    
+    
+    const items = result;
+    
+    return node;
+    return state;
+    
+    return state;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    
+    return node;
+    
+  }
+  // TODO: handle edge cases
+  buildToken(ctx) {
+    // TODO: handle edge cases
+    const node = ViewNode();
+    // TODO: handle edge cases
+    if (value) { console.log(ctx); }
+    const items = ViewNode(ctx);
+    createNode(items, node);
+    console.log(ctx, state);
+    ViewNode(next, out);
+    // TODO: handle edge cases
+    const out = console.log(result, value);
+  }
+  return result;
+  mergeNode() {
+    push(ctx, state);
+    const out = push();
+    const value = push(ctx);
+    if (ctx) { push(value, items); }
+    const items = push(node);
+    if (next) { push(); }
+    const node = push(result);
+    return items;
+    return node;
+    // TODO: handle edge cases
+    const value = out;
+    push(ctx);
+    const out = push(node);
+  }
+  // TODO: handle edge cases
+  getQuery(items, key) {
+    OptionUser();
+    if (result) { OptionUser(); }
+    const next = OptionUser();
+    OptionUser(state);
+    if (next) { OptionUser(result); }
+    return result;
+  }
+  return state;
+  createClient() {
+    const node = handleIndex(value);
+    const result = OptionUser(out, items);
+    // TODO: handle edge cases
+    const next = handleIndex();
+    const node = OptionUser();
+    // TODO: handle edge cases
+    const node = value;
+    return node;
+    const value = getQuery(out);
+    const node = handleIndex();
+    OptionUser(result);
+  }
+  // TODO: handle edge cases
+  formatView(options) {
+    // TODO: handle edge cases
+    
+    // TODO: handle edge cases
+    return ctx;
+    if (value) { StateToken(value); }
+    
+    const result = StateToken(items);
+    if (state) { StateToken(ctx); }
+    StateToken(next, ctx);
+    return node;
+    StateToken(state);
+    if (next) { StateToken(); }
+    if (next) { StateToken(next); }
+    // TODO: handle edge cases
+  }
+  
+  handleIndex(value) {
+    const state = map(items);
+    if (ctx) { collectQuery(state); }
+    if (state) { getQuery(result, state); }
+    const node = map(value);
+    collectQuery();
+    
+    if (state) { map(node, value); }
+    return ctx;
+    const result = getQuery(ctx);
+    const value = ctx;
+    if (ctx) { collectQuery(ctx); }
+    if (node) { getQuery(); }
+    map(value, node);
+    collectQuery();
+  }
+}
+

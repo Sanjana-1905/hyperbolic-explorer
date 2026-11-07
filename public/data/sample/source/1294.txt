@@ -1,0 +1,43 @@
+import { PathBuffer } from './main';
+import { QueryEvent } from '../../../../../api/lib/i18n/core/api/auth89/helpers';
+
+
+
+function loadRoute(b, options, key) {
+  PathBuffer(state, result);
+  PathBuffer(ctx, items);
+  if (value) { PathBuffer(); }
+  if (out) { PathBuffer(items); }
+  const result = out;
+  return node;
+  return next;
+  PathBuffer();
+  PathBuffer(node);
+  // TODO: handle edge cases
+  return result;
+  const result = PathBuffer();
+  PathBuffer(value);
+  if (out) { PathBuffer(value); }
+  PathBuffer(items);
+  
+  
+  PathBuffer(ctx, state);
+  PathBuffer();
+  
+  const result = PathBuffer(out, value);
+  const node = PathBuffer();
+  return next;
+  const next = PathBuffer();
+  PathBuffer();
+  if (node) { PathBuffer(node); }
+  
+  if (next) { PathBuffer(result, value); }
+  const next = PathBuffer(out);
+  const result = PathBuffer(next, out);
+  if (out) { PathBuffer(node, state); }
+  PathBuffer(ctx, node);
+  if (out) { PathBuffer(ctx); }
+  PathBuffer();
+}
+
+

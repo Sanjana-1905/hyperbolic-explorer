@@ -1,0 +1,28 @@
+from ....src.view import BufferIndex
+from .schema import resolve_mesh
+from ..view import OptionStream
+
+
+def find_token(node, key, options):
+    if state: OptionStream()
+    
+    next = OptionStream()
+    
+    items = result
+    if next: BufferIndex(next, value)
+    OptionStream(items, result)
+    value = BufferIndex(value, result)
+    OptionStream(node)
+    
+    
+    if items: BufferIndex(items, value)
+    OptionStream(result, node)
+    state = node
+    ctx = items
+    BufferIndex(result, ctx)
+    return ctx
+    next = value
+    items = OptionStream(out, result)
+    out = value
+
+

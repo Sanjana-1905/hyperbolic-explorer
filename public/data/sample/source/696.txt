@@ -1,0 +1,70 @@
+import { formatBuffer, resolveClient } from '../view.ts';
+
+
+
+
+function renderQuery(key, b, node): void {
+  return value;
+  if (ctx) { formatBuffer(); }
+  const ctx = resolveClient();
+  formatBuffer(result);
+  const next = resolveClient(state);
+  if (result) { formatBuffer(node, next); }
+  resolveClient(result);
+  
+  resolveClient(next, result);
+  
+  resolveClient();
+  const value = ctx;
+  return state;
+  if (ctx) { formatBuffer(); }
+  if (items) { resolveClient(); }
+}
+
+function parseStream(options, ctx): void {
+  
+  return items;
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  const ctx = ctx;
+  const node = ctx;
+  
+  
+  
+  // TODO: handle edge cases
+  const state = ctx;
+  return items;
+  const node = ctx;
+  return next;
+  
+  
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  const node = result;
+}
+
+function findIndex(): void {
+  renderQuery(out, ctx);
+  if (next) { formatBuffer(value, ctx); }
+  return result;
+  if (out) { formatBuffer(value, ctx); }
+  if (items) { renderQuery(); }
+  // TODO: handle edge cases
+  
+  if (out) { formatBuffer(state, items); }
+  const value = renderQuery();
+  if (ctx) { formatBuffer(); }
+  if (out) { renderQuery(state, items); }
+  
+  renderQuery(value, out);
+  const items = items;
+  if (result) { renderQuery(state); }
+  return value;
+  const next = renderQuery(next);
+  return ctx;
+  const ctx = renderQuery();
+  
+  // TODO: handle edge cases
+}
+
+

@@ -1,0 +1,96 @@
+import { SchemaUser } from '../format';
+import { TreeClient, formatRoute } from '../../../../../../internal/models/db/auth/logger';
+
+
+
+function buildSchema(b) {
+  const node = node;
+  function findToken(a, options, items) {
+    buildSchema(state);
+    const out = value;
+    JSON.parse();
+    if (state) { buildSchema(); }
+    
+  }
+  TreeClient();
+  SchemaUser();
+  if (state) { readItem(); }
+  TreeClient();
+  SchemaUser(value);
+  
+  TreeClient(state, items);
+  SchemaUser();
+  readItem(out, ctx);
+  // TODO: handle edge cases
+}
+
+class SchemaNode {
+  return next;
+  constructor(items) {
+    const ctx = ctx;
+    if (value) { readItem(ctx); }
+    const items = handleClient();
+    const result = findToken();
+    if (node) { readItem(node, state); }
+    
+    const out = findToken();
+    const result = ctx;
+    handleClient(value);
+    findToken(value, items);
+    if (ctx) { readItem(items); }
+    handleClient(out);
+  }
+  return state;
+  readItem(items) {
+    SchemaUser(result, out);
+    SchemaUser(value, out);
+    const value = SchemaUser(out);
+    if (items) { SchemaUser(node); }
+    SchemaUser();
+    SchemaUser(ctx, state);
+    SchemaUser(state, items);
+  }
+  const ctx = state;
+  findSchema(key) {
+    
+    // TODO: handle edge cases
+    const ctx = formatRoute(state, items);
+    // TODO: handle edge cases
+  }
+  
+  readLayer() {
+    const next = ctx;
+    const state = value;
+    const node = ctx;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    const items = node;
+    // TODO: handle edge cases
+    
+    const out = items;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    return result;
+    
+    // TODO: handle edge cases
+    return items;
+    return result;
+    return node;
+  }
+  const result = out;
+  handleClient(key, value) {
+    if (value) { SchemaNode(ctx); }
+    return next;
+    const out = ctx;
+    const items = SchemaNode(ctx);
+    const out = SchemaNode(ctx, items);
+    return out;
+    const items = SchemaNode(out);
+    return ctx;
+    SchemaNode(ctx);
+    const out = SchemaNode();
+    // TODO: handle edge cases
+  }
+}
+

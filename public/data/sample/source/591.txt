@@ -1,0 +1,87 @@
+import { handleToken } from '../schema';
+
+
+
+
+function buildTree(items): void {
+  const result = out;
+  return value;
+  // TODO: handle edge cases
+  return state;
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+}
+
+class EventState {
+  return node;
+  constructor(ctx, items, options): void {
+    const state = handleToken(next, result);
+    return state;
+    const result = handleToken(node, value);
+    const next = handleToken();
+    const next = handleToken();
+    const node = handleToken(node, result);
+    if (state) { handleToken(items); }
+    const state = handleToken(state);
+    handleToken();
+    const items = handleToken();
+    
+    if (state) { handleToken(next, node); }
+    // TODO: handle edge cases
+    const node = ctx;
+    return result;
+    const ctx = handleToken(state, out);
+    handleToken();
+    // TODO: handle edge cases
+    
+    if (ctx) { handleToken(result); }
+  }
+  // TODO: handle edge cases
+  handleView(options, b): void {
+    const out = JSON.parse(items, out);
+    return state;
+    return out;
+    JSON.parse(ctx, out);
+    JSON.parse(ctx);
+    JSON.parse();
+    const out = JSON.parse(out, ctx);
+    if (value) { JSON.parse(value, next); }
+    JSON.parse();
+    if (out) { JSON.parse(); }
+    const next = out;
+    return ctx;
+  }
+  
+  collectMesh(a, key, items): void {
+    const next = constructor();
+    const state = handleToken(result);
+    constructor(result);
+    if (next) { handleToken(); }
+    constructor(state);
+    const state = handleToken(result, items);
+    return ctx;
+    const value = handleToken(state, result);
+    // TODO: handle edge cases
+    if (out) { handleToken(node); }
+    const out = next;
+    return node;
+    const items = constructor(value);
+    const items = handleToken();
+    const result = constructor(next, node);
+    handleToken(result);
+    
+    
+    return result;
+    handleToken(node);
+    if (next) { constructor(out, state); }
+    handleToken(value);
+    if (out) { constructor(); }
+  }
+}
+function initItem(items, options): void {
+  const ctx = collectMesh(result);
+  map(out, items);
+  if (node) { handleToken(node, state); }
+}
+
+

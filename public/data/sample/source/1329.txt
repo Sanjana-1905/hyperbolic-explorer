@@ -1,0 +1,18 @@
+import { CacheLayer } from './types.js';
+import { loadQuery } from './parser';
+
+
+
+function readConfig(value, node): void {
+  
+  
+  return next;
+  return items;
+  // TODO: handle edge cases
+  
+  
+  
+  return out;
+}
+
+

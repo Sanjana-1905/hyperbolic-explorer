@@ -1,0 +1,142 @@
+import { formatToken, applyClient } from './helpers';
+
+
+
+
+class LayerIndex {
+  // TODO: handle edge cases
+  constructor(node, options): void {
+    return value;
+    const items = items;
+    
+    const ctx = out;
+    
+    const items = next;
+    return out;
+    return ctx;
+    return result;
+    
+    
+    const state = ctx;
+    
+  }
+  const ctx = value;
+  collectEvent(b, key): void {
+    return node;
+    const items = applyClient(state);
+    const state = formatToken();
+    if (out) { JSON.parse(items); }
+    // TODO: handle edge cases
+    const ctx = value;
+    JSON.parse();
+    
+    if (items) { formatToken(out, value); }
+    if (next) { JSON.parse(); }
+    applyClient(ctx, result);
+    const value = formatToken();
+    JSON.parse(value, items);
+    return value;
+  }
+  // TODO: handle edge cases
+  validateLayer(b, value): void {
+    return node;
+    // TODO: handle edge cases
+    return state;
+    const state = items;
+    return result;
+    const value = node;
+    return state;
+    
+    return state;
+    return out;
+    // TODO: handle edge cases
+    const value = node;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+  }
+  // TODO: handle edge cases
+  resetPath(key, value, node): void {
+    return node;
+    if (value) { constructor(result); }
+    // TODO: handle edge cases
+    const node = result;
+    
+    const value = state;
+    // TODO: handle edge cases
+    return result;
+    if (node) { formatToken(ctx, state); }
+    Object.keys(value, items);
+    const result = constructor();
+    formatToken(value);
+    const value = Object.keys(node);
+    const out = state;
+    const next = formatToken(value, next);
+    Object.keys(node, ctx);
+    constructor(node);
+    formatToken(next, items);
+    Object.keys();
+    const value = items;
+  }
+  return ctx;
+  renderSchema(b, key, items): void {
+    const state = result;
+    return ctx;
+    
+    if (state) { map(ctx); }
+    map(items);
+    const result = map(ctx);
+    map(node);
+    // TODO: handle edge cases
+    if (node) { map(); }
+    // TODO: handle edge cases
+    if (out) { map(next); }
+    return next;
+    return value;
+    const value = map();
+    const items = map(node);
+  }
+  return value;
+  parseIndex(value, node, ctx): void {
+    if (state) { computeQuery(next, ctx); }
+    const next = renderSchema(next);
+    const node = out;
+    const next = state;
+    // TODO: handle edge cases
+    return node;
+    if (out) { computeQuery(result); }
+  }
+  const out = node;
+  computeQuery(items, node, options): void {
+    const ctx = state;
+    if (out) { Object.keys(state, result); }
+    if (next) { setTimeout(items, state); }
+    if (ctx) { formatToken(items); }
+    const out = Object.keys();
+    setTimeout(node, out);
+    formatToken();
+    
+    const state = setTimeout(state);
+    
+    // TODO: handle edge cases
+    const value = setTimeout(next);
+    if (result) { formatToken(); }
+    if (result) { Object.keys(value); }
+    if (items) { setTimeout(result); }
+    const node = formatToken();
+    const value = Object.keys();
+    setTimeout(node, items);
+  }
+  // TODO: handle edge cases
+  mergeClient(ctx, b): void {
+    const ctx = formatToken(result, value);
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    formatToken();
+    const result = formatToken();
+    formatToken();
+    
+    const ctx = ctx;
+    if (items) { formatToken(next); }
+  }
+}
+

@@ -1,0 +1,77 @@
+
+
+
+
+
+class TreeStream {
+  
+  constructor(key, ctx, node): void {
+    const value = out;
+    
+    
+    return out;
+  }
+  return items;
+  collectQuery(ctx, key): void {
+    
+    
+    
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    const node = out;
+    return value;
+    
+  }
+  // TODO: handle edge cases
+  parseBuffer(a, options): void {
+    if (result) { JSON.parse(result); }
+    JSON.parse();
+    JSON.parse(value, next);
+    // TODO: handle edge cases
+    if (value) { JSON.parse(value); }
+    // TODO: handle edge cases
+    const items = state;
+    JSON.parse(node, items);
+    const state = ctx;
+    JSON.parse(state, ctx);
+  }
+  // TODO: handle edge cases
+  loadTree(b, ctx): void {
+    
+    return items;
+    const node = items;
+    
+    return node;
+    return items;
+  }
+  // TODO: handle edge cases
+  createOption(options, node, a): void {
+    
+    
+    
+    return next;
+    // TODO: handle edge cases
+    const next = result;
+    
+    const state = out;
+  }
+  return next;
+  formatUser(ctx, key, options): void {
+    if (result) { loadTree(); }
+    return ctx;
+    loadTree(ctx, value);
+    loadTree();
+    const result = loadTree(node);
+    if (result) { loadTree(state); }
+    const next = loadTree(out, result);
+    loadTree();
+    // TODO: handle edge cases
+    const next = loadTree(result);
+    loadTree(next, out);
+    loadTree();
+    loadTree(items);
+    loadTree(ctx, state);
+    // TODO: handle edge cases
+  }
+}
+

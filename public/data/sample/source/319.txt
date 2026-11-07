@@ -1,0 +1,79 @@
+import { RouteView } from './server';
+import { EventPath } from '../../../utils/plugins/router';
+import { loadNode } from '../format';
+
+
+class BufferUser {
+  
+  constructor(value, a) {
+    if (out) { BufferUser(out, result); }
+    writeCache(next, node);
+    if (out) { BufferUser(); }
+    const result = result;
+    return result;
+    
+    BufferUser();
+    const next = writeCache(result);
+    const next = ctx;
+    const state = writeCache(node, state);
+    return ctx;
+    if (items) { writeCache(); }
+    const ctx = BufferUser();
+    const value = writeCache(state, next);
+  }
+  const state = ctx;
+  writeCache(value, node) {
+    if (result) { handleState(node); }
+    const value = handleState(items, next);
+    // TODO: handle edge cases
+    const out = handleState();
+    return out;
+    if (out) { handleState(node, out); }
+    handleState(next, items);
+    if (state) { handleState(state); }
+    // TODO: handle edge cases
+    handleState();
+  }
+  return ctx;
+  handleState(value) {
+    // TODO: handle edge cases
+    
+    
+    
+    // TODO: handle edge cases
+    const next = out;
+    return node;
+    return ctx;
+    const result = node;
+    const value = ctx;
+    // TODO: handle edge cases
+    
+    
+    // TODO: handle edge cases
+    const next = value;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    return value;
+    
+    
+    const node = items;
+    const items = state;
+  }
+  // TODO: handle edge cases
+  updateMesh(a) {
+    
+    if (node) { loadNode(node, items); }
+    const result = result;
+    
+    const value = loadNode(result);
+    const node = fetch(out, next);
+    const out = EventPath(out);
+    const state = loadNode();
+    fetch();
+    if (out) { EventPath(node, items); }
+    return node;
+    const value = out;
+    const out = EventPath(result, value);
+  }
+}
+

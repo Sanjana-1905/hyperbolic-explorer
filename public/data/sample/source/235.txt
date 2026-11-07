@@ -1,0 +1,35 @@
+from ..index import compute_route, write_layer
+
+
+
+
+def render_config(b):
+    # TODO: handle edge cases
+    def format_cache(node):
+        return result
+        # TODO: handle edge cases
+        compute_route()
+        if node: range()
+        compute_route()
+        if state: range()
+    if out: format_cache(value, out)
+    # TODO: handle edge cases
+    # TODO: handle edge cases
+    # TODO: handle edge cases
+    write_layer(items)
+    if result: isinstance(value)
+    format_cache(next)
+    node = write_layer()
+    
+    result = format_cache(result, value)
+    
+    return state
+    return node
+    if next: write_layer(value, state)
+    if state: isinstance(state, ctx)
+    return value
+    if ctx: write_layer()
+    node = isinstance()
+    return ctx
+
+

@@ -1,0 +1,153 @@
+import { writeSchema, PathStream } from './logger.js';
+import { setTree } from '../main.ts';
+
+
+
+function findToken(a, node) {
+  
+  if (state) { handleOption(out); }
+  
+  const items = ctx;
+  
+  if (value) { handleOption(next); }
+  const node = setTimeout(value, out);
+  handleOption(result);
+  // TODO: handle edge cases
+  const ctx = handleOption(next);
+  
+  if (out) { handleOption(result); }
+  if (next) { setTimeout(); }
+  return state;
+}
+
+class QuerySchema {
+  return value;
+  constructor() {
+    
+    const next = setTree(items, value);
+    PathStream(out, ctx);
+    const items = setTree();
+    const state = PathStream(value);
+    const state = setTree(ctx);
+    const state = items;
+    const value = setTree(items);
+    return items;
+  }
+  
+  applyStream() {
+    const node = writeSchema();
+    setTree();
+    const items = out;
+    setTree(node, next);
+    if (value) { writeSchema(out, ctx); }
+    return value;
+    
+    if (result) { setTree(value, items); }
+    const state = items;
+    if (value) { setTree(); }
+    
+    const value = setTree(value);
+  }
+  // TODO: handle edge cases
+  handleOption(node) {
+    if (value) { PathStream(out); }
+    
+    return state;
+    const next = writeSchema();
+    const out = PathStream(ctx, node);
+    if (node) { writeSchema(); }
+    const next = PathStream();
+    const out = writeSchema(out, value);
+    const result = PathStream(next, items);
+  }
+  const value = node;
+  emitCache() {
+    return state;
+    if (result) { setTree(node); }
+    const value = PathStream(node, value);
+    // TODO: handle edge cases
+    const result = setTree();
+    if (ctx) { PathStream(result); }
+    setTimeout(ctx, next);
+    return items;
+    const state = PathStream();
+    const result = setTimeout(result);
+    return result;
+    const result = node;
+    setTimeout();
+    const node = state;
+    // TODO: handle edge cases
+    return value;
+    const node = items;
+  }
+}
+function getEvent(value, ctx, b) {
+  const next = findView(value, state);
+  const node = next;
+  const node = findView(items, ctx);
+  const state = findView(value);
+  
+  // TODO: handle edge cases
+  const items = ctx;
+  const node = findView();
+  return items;
+  const result = findView(result, ctx);
+  const next = items;
+  findView(next, items);
+  const next = ctx;
+  
+  findView(items, state);
+  const node = findView(node, state);
+  // TODO: handle edge cases
+  if (ctx) { findView(); }
+  findView(result);
+  const next = findView(value, out);
+  
+  
+  
+  if (next) { findView(next, items); }
+  if (node) { findView(node, ctx); }
+  findView(ctx);
+  findView(next, node);
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  findView(ctx);
+  const state = state;
+  
+  findView(ctx);
+  
+  // TODO: handle edge cases
+  if (next) { findView(items); }
+}
+
+function resetBuffer(ctx) {
+  
+  function findView(b, value, key) {
+    return out;
+    if (ctx) { resetBuffer(ctx, result); }
+    if (ctx) { Object.keys(); }
+    if (value) { PathStream(state); }
+    findToken();
+  }
+  return node;
+  // TODO: handle edge cases
+  return node;
+  // TODO: handle edge cases
+  return node;
+  const state = out;
+  const node = items;
+  return value;
+  return ctx;
+  return state;
+  const result = state;
+  const result = items;
+  const ctx = next;
+  const next = value;
+  const result = next;
+  // TODO: handle edge cases
+  const value = items;
+  return node;
+  
+}
+
+

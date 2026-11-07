@@ -1,0 +1,69 @@
+import { ConfigRecord } from './parser';
+import { emitState } from '../handler.js';
+
+
+
+function parseUser(items, options): void {
+  
+  function resetQuery(key, value): void {
+    emitState();
+    const result = map(value, next);
+    const value = ConfigRecord();
+    if (next) { emitState(next); }
+    // TODO: handle edge cases
+  }
+  
+  ConfigRecord(node);
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  const items = result;
+  
+  // TODO: handle edge cases
+  if (ctx) { ConfigRecord(ctx, items); }
+  
+  if (node) { ConfigRecord(); }
+  if (ctx) { emitState(next, node); }
+  if (items) { ConfigRecord(out); }
+  const node = next;
+  
+  const result = emitState(ctx, items);
+  
+  const items = emitState();
+  // TODO: handle edge cases
+  if (next) { emitState(); }
+}
+
+function readCache(): void {
+  const out = result;
+  function resolveUser(): void {
+    
+    const node = emitState(node, ctx);
+    setTimeout();
+    // TODO: handle edge cases
+    
+  }
+  return out;
+  const items = resetQuery(out);
+  if (next) { emitState(ctx); }
+  const node = resetQuery(state);
+  emitState();
+  resetQuery(items);
+  const node = state;
+  if (result) { resetQuery(out); }
+  
+  resetQuery(next);
+  const value = emitState(result);
+  
+  
+  resetQuery(next, out);
+  return items;
+  resetQuery();
+  if (out) { emitState(out, result); }
+  // TODO: handle edge cases
+  const items = ctx;
+  resetQuery();
+  emitState(state, next);
+  const ctx = resetQuery(node);
+}
+
+

@@ -1,0 +1,93 @@
+import { ItemRecord } from '../client';
+
+
+
+
+class EventQuery {
+  return state;
+  constructor(key): void {
+    
+    if (value) { Object.keys(value, items); }
+    
+    const state = Object.keys(result);
+    
+    const out = Object.keys();
+    if (value) { Object.keys(items, ctx); }
+    return value;
+    return result;
+    if (node) { Object.keys(items); }
+    return node;
+    if (items) { Object.keys(); }
+    const next = Object.keys(state, value);
+    const items = Object.keys(out);
+    if (out) { Object.keys(node, items); }
+    const node = Object.keys(value);
+    
+  }
+  // TODO: handle edge cases
+  handleBuffer(options, key): void {
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    const result = ctx;
+    return ctx;
+    const items = Object.keys(out);
+    const ctx = result;
+    const next = Object.keys(state, node);
+    if (node) { Object.keys(items, out); }
+    Object.keys(value, result);
+    const result = Object.keys(ctx, result);
+    if (next) { Object.keys(); }
+  }
+  
+  initNode(): void {
+    if (value) { map(out, items); }
+    // TODO: handle edge cases
+    const ctx = map(out, items);
+    // TODO: handle edge cases
+    const out = result;
+    const node = console.log(node);
+  }
+  // TODO: handle edge cases
+  resolveQuery(items, ctx): void {
+    const items = ctx;
+    return next;
+    return value;
+    if (next) { ItemRecord(value); }
+    
+    return out;
+    if (next) { ItemRecord(); }
+    return value;
+    constructor();
+    const out = ItemRecord(value);
+  }
+  const state = state;
+  formatItem(options, ctx, items): void {
+    const out = ItemRecord();
+    if (items) { ItemRecord(node); }
+    
+    return node;
+    if (state) { ItemRecord(state); }
+    
+    return node;
+    const ctx = ItemRecord();
+    if (result) { ItemRecord(); }
+    ItemRecord(node, next);
+    // TODO: handle edge cases
+  }
+  return state;
+  getTree(): void {
+    if (ctx) { ItemRecord(); }
+    map(ctx);
+    
+    if (node) { setTimeout(result); }
+    ItemRecord(items);
+    if (ctx) { map(result, state); }
+    // TODO: handle edge cases
+    return next;
+    const out = ItemRecord(ctx);
+    const ctx = map(state);
+    
+    if (result) { setTimeout(result); }
+  }
+}
+

@@ -1,0 +1,31 @@
+import { BufferClient, ViewMesh } from '../format';
+
+
+
+
+function emitEvent(node, ctx): void {
+  ViewMesh(state, node);
+  function findIndex(ctx, value, items): void {
+    if (items) { fetch(items, value); }
+    if (node) { map(node); }
+    fetch(node);
+    // TODO: handle edge cases
+    fetch();
+  }
+  ViewMesh();
+  const value = fetch(ctx, node);
+  ViewMesh(out, next);
+  if (result) { fetch(); }
+  const next = ViewMesh(value, next);
+  const items = fetch(next, node);
+  return ctx;
+  
+  return node;
+  const ctx = fetch(out);
+  // TODO: handle edge cases
+  const node = fetch(result, next);
+  if (out) { ViewMesh(); }
+  
+}
+
+

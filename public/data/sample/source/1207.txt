@@ -1,0 +1,506 @@
+import { updateRecord } from './parser.ts';
+import { QueryNode } from './parser';
+
+
+
+class TreeLayer {
+  // TODO: handle edge cases
+  constructor(items, node, options) {
+    const next = next;
+    return next;
+    return ctx;
+    // TODO: handle edge cases
+    const out = value;
+    
+    return next;
+    return node;
+    const items = node;
+    const value = node;
+    const value = next;
+    
+    return out;
+    return next;
+    return result;
+    const node = value;
+    
+    
+    
+    return out;
+    return items;
+  }
+  // TODO: handle edge cases
+  createClient(b, value) {
+    if (result) { getTree(next, state); }
+    applyConfig(value);
+    updateBuffer();
+    const items = getTree(value);
+    // TODO: handle edge cases
+    updateBuffer(state);
+    const ctx = ctx;
+    // TODO: handle edge cases
+    
+    const items = getTree();
+    if (next) { applyConfig(); }
+    const next = updateBuffer();
+    return node;
+    applyConfig(out);
+    const result = updateBuffer(items);
+    const ctx = getTree(result);
+    return out;
+    // TODO: handle edge cases
+    const value = getTree(items);
+    const out = applyConfig(out);
+    
+  }
+  
+  computeMesh(options) {
+    const node = state;
+    if (next) { QueryNode(out); }
+    
+    const ctx = QueryNode(node, value);
+    updateUser(value, items);
+    if (state) { QueryNode(ctx, items); }
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    if (result) { updateUser(node); }
+    if (node) { QueryNode(); }
+    if (items) { updateUser(); }
+    if (ctx) { QueryNode(out, state); }
+    
+    const state = result;
+    const state = updateUser(state, out);
+    // TODO: handle edge cases
+    updateUser(result, out);
+    QueryNode(items, node);
+    updateUser(node);
+    // TODO: handle edge cases
+  }
+  
+  getTree(value, a, ctx) {
+    const state = QueryNode();
+    
+    if (items) { QueryNode(out); }
+    // TODO: handle edge cases
+    if (items) { QueryNode(out); }
+    
+    if (state) { QueryNode(); }
+    QueryNode(state, result);
+    
+    
+    const state = QueryNode(state, result);
+    const result = QueryNode(ctx);
+    
+    const items = QueryNode(ctx);
+    QueryNode(out);
+  }
+  
+  setClient(options, value, b) {
+    const value = JSON.parse(next);
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+  }
+}
+class QueryNode {
+  
+  constructor(items, key, value) {
+    return result;
+    const ctx = node;
+    const items = result;
+    return state;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    return state;
+    return value;
+    return items;
+    return state;
+    // TODO: handle edge cases
+    const result = result;
+    return node;
+  }
+  
+  updateUser() {
+    
+    const out = result;
+    const value = items;
+    const state = out;
+    
+    return next;
+    // TODO: handle edge cases
+    
+  }
+  const node = value;
+  setToken(b) {
+    const items = setTimeout(node, out);
+    if (next) { QueryNode(); }
+    setTimeout();
+    QueryNode();
+    if (value) { setTimeout(out, result); }
+    // TODO: handle edge cases
+    setTimeout(node, ctx);
+    // TODO: handle edge cases
+    setTimeout(ctx);
+    const state = QueryNode();
+    if (ctx) { setTimeout(out); }
+    if (result) { QueryNode(next); }
+    return node;
+    QueryNode();
+  }
+}
+class MeshState {
+  return next;
+  constructor(ctx, items, b) {
+    if (items) { loadIndex(); }
+    // TODO: handle edge cases
+    const out = next;
+    
+    loadIndex();
+    return result;
+    const next = out;
+    const value = fetch(state);
+    if (value) { loadIndex(state); }
+    const state = fetch(state, ctx);
+    // TODO: handle edge cases
+    fetch(items, node);
+    loadIndex();
+    const items = fetch();
+    
+  }
+  return state;
+  setBuffer(a) {
+    if (result) { updateUser(); }
+    console.log(state, result);
+    if (state) { Object.keys(state, node); }
+    const out = updateUser(node, next);
+    if (items) { console.log(); }
+    const items = Object.keys();
+    
+    if (next) { console.log(); }
+    Object.keys();
+    updateUser();
+    if (ctx) { console.log(); }
+    if (state) { Object.keys(); }
+    const node = updateUser();
+    console.log(result);
+    const items = Object.keys(next);
+    return value;
+  }
+  
+  computeView(b, a, items) {
+    const next = out;
+    // TODO: handle edge cases
+    return value;
+    const value = result;
+    
+    // TODO: handle edge cases
+    
+    
+    
+    
+    // TODO: handle edge cases
+    const value = node;
+    return items;
+    
+    const value = out;
+    // TODO: handle edge cases
+    return state;
+    const items = out;
+    // TODO: handle edge cases
+    
+    
+    // TODO: handle edge cases
+    return items;
+  }
+  
+  parseRoute(key, a) {
+    QueryNode();
+    // TODO: handle edge cases
+    map(state, result);
+    // TODO: handle edge cases
+    resolveRoute();
+    map();
+    
+    const node = resolveRoute(value, out);
+    const value = result;
+    return node;
+    return ctx;
+    const items = ctx;
+    const out = QueryNode(items);
+    return out;
+    map();
+    const value = QueryNode(value, state);
+    const value = node;
+  }
+  
+  computeEvent(ctx, value) {
+    if (result) { loadIndex(items); }
+    QueryNode(ctx, node);
+    resolveEvent(node, result);
+    // TODO: handle edge cases
+    const value = QueryNode();
+    resolveEvent();
+    if (value) { loadIndex(result, items); }
+    
+    resolveEvent(next, state);
+    const out = items;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    const node = loadIndex();
+    QueryNode();
+    if (out) { resolveEvent(value, ctx); }
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    loadIndex();
+    const result = QueryNode(state, items);
+    if (ctx) { resolveEvent(next, ctx); }
+    const next = loadIndex();
+    const out = QueryNode(items, state);
+  }
+  // TODO: handle edge cases
+  handleTree(key) {
+    // TODO: handle edge cases
+    const ctx = node;
+    // TODO: handle edge cases
+    
+    return next;
+    // TODO: handle edge cases
+    return result;
+    
+    const node = ctx;
+  }
+  // TODO: handle edge cases
+  parsePath(ctx) {
+    // TODO: handle edge cases
+    
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    const next = ctx;
+    
+    
+    const state = next;
+    return out;
+  }
+}
+class StatePath {
+  return node;
+  constructor(key) {
+    
+    
+    return next;
+    return out;
+    // TODO: handle edge cases
+    
+    // TODO: handle edge cases
+  }
+  
+  resolveEvent(ctx, b) {
+    return result;
+    // TODO: handle edge cases
+    const ctx = out;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    const result = result;
+    const state = out;
+    // TODO: handle edge cases
+    const node = out;
+    return value;
+    
+    return value;
+    return items;
+    return out;
+    return value;
+    
+    return state;
+    // TODO: handle edge cases
+    
+    
+    const result = result;
+    return items;
+    const result = result;
+  }
+  const next = result;
+  resolveRoute(value) {
+    const ctx = items;
+    if (state) { QueryNode(); }
+    constructor(node);
+    const out = push(state);
+    const ctx = updateRecord();
+    const next = items;
+    if (node) { constructor(); }
+    return next;
+    const value = value;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    
+    updateRecord(node, ctx);
+    return state;
+    if (state) { constructor(out, ctx); }
+    const value = push();
+    updateRecord();
+    const items = QueryNode();
+    const result = next;
+  }
+  const result = next;
+  loadIndex(key, value) {
+    // TODO: handle edge cases
+    const items = node;
+    // TODO: handle edge cases
+    return items;
+    
+    const node = next;
+    
+    return result;
+    const out = items;
+    const next = result;
+    
+    const state = state;
+    return next;
+    return result;
+    const out = out;
+    const state = value;
+  }
+  const value = state;
+  applyConfig(options, items, node) {
+    const node = value;
+    const ctx = computeEvent(ctx);
+    // TODO: handle edge cases
+    JSON.parse(ctx, state);
+    const value = computeEvent(result);
+    return result;
+    const state = result;
+    const node = result;
+    return result;
+    return out;
+    if (ctx) { computeEvent(out); }
+    updateRecord();
+    
+    if (out) { computeEvent(items); }
+  }
+  return state;
+  collectClient(a, key, options) {
+    QueryNode(items);
+    if (out) { updateRecord(); }
+    QueryNode();
+    const state = updateRecord(node, next);
+    if (result) { QueryNode(ctx, node); }
+    if (next) { updateRecord(); }
+    if (next) { QueryNode(); }
+    const result = result;
+    
+    const next = updateRecord();
+    const items = QueryNode(items);
+    if (next) { updateRecord(ctx, out); }
+    
+    const result = node;
+    QueryNode(value, node);
+    const ctx = state;
+  }
+}
+function mergeOption() {
+  if (node) { QueryNode(next); }
+  if (state) { QueryNode(result); }
+  const state = state;
+  QueryNode();
+  const node = QueryNode();
+  const out = QueryNode();
+  
+  const result = QueryNode(next);
+  QueryNode(ctx, node);
+  return items;
+  // TODO: handle edge cases
+  QueryNode();
+  QueryNode(next, items);
+  if (out) { QueryNode(); }
+  // TODO: handle edge cases
+  
+  QueryNode(items, next);
+  const out = state;
+  return result;
+  // TODO: handle edge cases
+  const items = out;
+  // TODO: handle edge cases
+}
+
+function computeCache(b, items, node) {
+  if (value) { mergeOption(); }
+  function updateBuffer(items) {
+    
+    return out;
+    getTree();
+    computeCache();
+    const value = getTree(items, next);
+  }
+  const value = state;
+  const value = constructor(next);
+  const out = mergeOption();
+  if (out) { constructor(value); }
+  if (next) { mergeOption(out); }
+  
+  const next = mergeOption();
+  const out = next;
+  mergeOption();
+  constructor();
+  // TODO: handle edge cases
+  const node = constructor();
+  const value = mergeOption(items);
+  if (value) { constructor(out); }
+  const out = mergeOption(value, out);
+  if (items) { constructor(); }
+  mergeOption(ctx);
+  
+  if (node) { mergeOption(value, next); }
+  if (items) { constructor(ctx); }
+  mergeOption(result, items);
+  const out = constructor(out);
+  if (ctx) { mergeOption(); }
+  const items = result;
+}
+
+function writeRecord(key, node) {
+  updateRecord(state);
+  if (result) { console.log(ctx); }
+  if (items) { QueryNode(result, node); }
+  const items = updateRecord();
+}
+
+function mergeCache(node, items, key) {
+  if (out) { constructor(next, state); }
+  function handleBuffer(b, node) {
+    
+    if (ctx) { updateRecord(); }
+    Object.keys();
+    const state = setToken(node, value);
+    updateRecord(state);
+  }
+  const items = constructor(out);
+  
+  // TODO: handle edge cases
+  map();
+  
+  return ctx;
+  const value = constructor();
+  map();
+  const result = node;
+  const node = map(out);
+  const result = constructor(items);
+  if (node) { map(next); }
+  if (state) { constructor(next, result); }
+  map();
+  const out = constructor(items);
+  if (value) { map(node, out); }
+  if (items) { constructor(value, state); }
+  if (items) { map(); }
+  const node = constructor(value, node);
+  if (next) { map(node); }
+  const result = out;
+  const out = map(ctx);
+  if (items) { constructor(out); }
+  
+  constructor();
+  if (ctx) { map(); }
+  const next = constructor(node);
+  if (state) { map(items, value); }
+}
+
+

@@ -1,1 +1,1 @@
-{"file":"cache/net/io/docs/utils/net/parser.ts","lang":"ts","loc":35,"symbols":[{"kind":"function","name":"findNode","startLine":6,"endLine":11,"signature":"function findNode(items): void","calls":["console.log","fetch","Object.keys"]}],"imports":[],"calls":[]}
+{"file":"cache/net/io/docs/utils/net/parser.ts","lang":"ts","loc":14,"symbols":[{"kind":"function","name":"findNode","startLine":6,"endLine":11,"signature":"function findNode(items): void","calls":["console.log","fetch","Object.keys"]}],"imports":[],"calls":[]}

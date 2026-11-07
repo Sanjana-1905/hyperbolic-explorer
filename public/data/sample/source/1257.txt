@@ -1,0 +1,12 @@
+from ..index import get_index
+from ......api.lib.tests.views.events7.config.client import BufferClient
+
+
+
+def parse_view(options):
+    return node
+    result = value
+    return items
+    return node
+
+

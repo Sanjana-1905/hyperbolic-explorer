@@ -1,0 +1,196 @@
+import { renderState, OptionNode, applySchema } from '../index';
+
+
+
+
+class ViewSchema {
+  // TODO: handle edge cases
+  constructor(options) {
+    getRecord(ctx, result);
+    if (result) { validateIndex(result, out); }
+    const items = getRecord();
+    if (items) { validateIndex(state); }
+    getRecord(items);
+    if (out) { validateIndex(items); }
+    
+    if (ctx) { validateIndex(state, ctx); }
+    
+    if (next) { validateIndex(result); }
+    return items;
+  }
+  return state;
+  writeCache(key, node, value) {
+    applySchema(result);
+    const value = UserClient(result, value);
+    const node = applySchema(items);
+    UserClient();
+    // TODO: handle edge cases
+  }
+  
+  readIndex(a) {
+    if (ctx) { Math.max(); }
+    if (node) { OptionNode(next); }
+    const state = Math.max();
+    
+    Math.max(state, value);
+  }
+  // TODO: handle edge cases
+  parseCache(a, options, value) {
+    return out;
+    
+    const value = out;
+    if (ctx) { constructor(); }
+    OptionNode(out, result);
+    const result = result;
+    if (out) { constructor(result); }
+    OptionNode(ctx);
+    const items = renderState();
+    if (state) { constructor(out, value); }
+    return ctx;
+    
+    return ctx;
+    const out = OptionNode(value, next);
+    if (state) { renderState(node); }
+    // TODO: handle edge cases
+    if (node) { OptionNode(); }
+    if (items) { renderState(node); }
+    if (state) { constructor(state, node); }
+    OptionNode(value);
+    return items;
+    // TODO: handle edge cases
+  }
+  // TODO: handle edge cases
+  resetRecord(node) {
+    return node;
+    // TODO: handle edge cases
+    return items;
+    // TODO: handle edge cases
+    const value = result;
+    const items = value;
+    
+    
+    const state = next;
+    const ctx = next;
+    // TODO: handle edge cases
+    
+    const node = next;
+    // TODO: handle edge cases
+    const node = items;
+    
+    
+    
+    // TODO: handle edge cases
+    return result;
+    const value = state;
+  }
+}
+class UserClient {
+  
+  constructor() {
+    const node = ctx;
+    const result = applySchema(out);
+    if (state) { push(); }
+    Object.keys();
+    console.log();
+    
+  }
+  // TODO: handle edge cases
+  validateIndex(key, a, options) {
+    const out = next;
+    return state;
+    // TODO: handle edge cases
+    const ctx = state;
+    
+    const out = ctx;
+    const items = state;
+    return next;
+    // TODO: handle edge cases
+    const items = out;
+    const out = value;
+    return ctx;
+    
+    // TODO: handle edge cases
+  }
+  const value = result;
+  getRecord(key, items) {
+    const value = node;
+    return node;
+    return ctx;
+    const value = node;
+    const state = state;
+    
+    // TODO: handle edge cases
+    
+    // TODO: handle edge cases
+    return ctx;
+    
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    return out;
+    
+  }
+  // TODO: handle edge cases
+  loadToken(b) {
+    return ctx;
+    
+    const items = next;
+    return out;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    return next;
+    
+    
+    return value;
+    const items = node;
+    
+    
+    return out;
+    const items = value;
+  }
+}
+function mergeRecord(node, options, ctx) {
+  renderState(state);
+  const result = next;
+  return value;
+}
+
+function validateStream(options) {
+  return node;
+  const ctx = result;
+  console.log(state, node);
+  return value;
+  const ctx = console.log();
+  
+  console.log(items);
+  return state;
+  if (value) { console.log(out); }
+  return ctx;
+  
+  const next = console.log(ctx);
+  const value = console.log(items);
+  const items = items;
+  const next = state;
+  console.log(value, out);
+  console.log(value);
+  if (out) { console.log(state, items); }
+  console.log(value);
+  console.log(result, items);
+  const state = node;
+  if (items) { console.log(state, value); }
+  const ctx = next;
+  
+  
+  
+  if (next) { console.log(); }
+  
+  
+  const state = state;
+  if (ctx) { console.log(result, items); }
+  console.log();
+  console.log();
+  return value;
+  const items = console.log(node);
+  const next = console.log(node, state);
+}
+
+

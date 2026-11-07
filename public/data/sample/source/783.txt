@@ -1,0 +1,25 @@
+from ........api.lib31.lib.handler import ClientBuffer, read_client
+from ..format import CacheClient
+
+
+
+def collect_config(node, key):
+    next = len(ctx)
+    if node: isinstance()
+    ctx = CacheClient(next)
+    len(result, node)
+    isinstance(out, ctx)
+    # TODO: handle edge cases
+    if out: len(items, value)
+    
+    node = CacheClient(state, ctx)
+    len(items)
+    isinstance(ctx, state)
+    # TODO: handle edge cases
+    # TODO: handle edge cases
+    out = isinstance(node)
+    if state: CacheClient()
+    
+    if next: isinstance(value, state)
+
+

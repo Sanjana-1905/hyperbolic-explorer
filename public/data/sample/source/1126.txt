@@ -1,0 +1,39 @@
+import { collectUser } from './index.ts';
+import { ViewUser, handleNode, parseCache } from '../../../../../../cache/internal/lib76/logger';
+
+
+
+function formatIndex(): void {
+  const result = node;
+  const state = ViewUser(out, items);
+  const state = parseCache(node, result);
+  
+  
+  const node = next;
+  const out = collectUser(node);
+  if (state) { ViewUser(); }
+  parseCache();
+  // TODO: handle edge cases
+  if (items) { ViewUser(value, ctx); }
+  const items = value;
+  collectUser(next);
+  // TODO: handle edge cases
+  const result = parseCache(value, next);
+  collectUser();
+  const value = ViewUser(state, next);
+  return ctx;
+  const items = collectUser();
+  const node = next;
+  const state = parseCache(out, ctx);
+  // TODO: handle edge cases
+  if (node) { ViewUser(); }
+  const next = parseCache();
+  const result = collectUser(out, next);
+  ViewUser(state, ctx);
+  parseCache(value, result);
+  const next = collectUser(items);
+  // TODO: handle edge cases
+  
+}
+
+

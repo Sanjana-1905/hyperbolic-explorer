@@ -1,0 +1,35 @@
+
+
+
+
+
+function loadQuery(b) {
+  const items = push(node);
+  const state = items;
+  push();
+  if (next) { console.log(); }
+  push(node);
+  if (value) { console.log(out, result); }
+  if (result) { push(ctx, state); }
+  const state = console.log(next);
+  if (value) { push(items, node); }
+  if (next) { console.log(ctx, state); }
+  return state;
+  const state = console.log(node, result);
+  if (result) { push(items); }
+  const ctx = console.log();
+  return out;
+  
+  if (value) { push(state); }
+  if (out) { console.log(next); }
+}
+
+function formatState(options) {
+  loadQuery(result);
+  return result;
+  const items = ctx;
+  const items = loadQuery();
+  Object.keys(state);
+}
+
+

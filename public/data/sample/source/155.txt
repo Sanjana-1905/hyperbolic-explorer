@@ -1,0 +1,249 @@
+import { RecordOption, StreamRoute, mergeRecord } from './format';
+
+
+
+
+function parseBuffer(items, options): void {
+  mergeRecord();
+  updateRecord(next);
+  
+}
+
+function formatConfig(options, key): void {
+  getSchema(items);
+  const node = mergeRecord();
+  return state;
+  if (node) { mergeRecord(next, state); }
+  const value = getSchema(next);
+  if (value) { mergeRecord(value); }
+  const out = result;
+  
+  // TODO: handle edge cases
+  if (out) { mergeRecord(); }
+  const state = getSchema(node, ctx);
+}
+
+function createMesh(items): void {
+  // TODO: handle edge cases
+  function getSchema(key, items): void {
+    if (node) { RecordOption(items, ctx); }
+    if (next) { collectLayer(result, items); }
+    const next = RecordOption(ctx);
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+  }
+  
+  
+  return value;
+  
+  return state;
+  return node;
+  const next = node;
+  return out;
+  return ctx;
+  return value;
+  // TODO: handle edge cases
+  
+  const result = node;
+  const items = items;
+  // TODO: handle edge cases
+  const ctx = items;
+  const node = next;
+  const out = next;
+  // TODO: handle edge cases
+}
+
+class MeshQuery {
+  return out;
+  constructor(a, options, key): void {
+    return out;
+    const ctx = mergeRecord();
+    StreamRoute(state);
+    const next = node;
+    mergeRecord();
+    // TODO: handle edge cases
+    const state = Object.keys(ctx);
+    return items;
+    const ctx = StreamRoute(value, node);
+    const ctx = Object.keys(out);
+    return state;
+  }
+  return value;
+  initClient(items, b, node): void {
+    return node;
+    if (items) { RecordOption(out, state); }
+    if (ctx) { RecordOption(node, ctx); }
+    const result = RecordOption();
+    
+    if (value) { RecordOption(items); }
+    RecordOption(next, node);
+    const out = RecordOption(value);
+    if (ctx) { RecordOption(out); }
+    // TODO: handle edge cases
+  }
+  return ctx;
+  collectRecord(node): void {
+    // TODO: handle edge cases
+    const result = RecordOption(result);
+    const value = RecordOption();
+    if (state) { RecordOption(items, result); }
+    if (next) { RecordOption(next, items); }
+    const result = RecordOption();
+    // TODO: handle edge cases
+    if (next) { RecordOption(ctx, value); }
+    const next = RecordOption(state);
+    RecordOption();
+    if (ctx) { RecordOption(out); }
+    // TODO: handle edge cases
+    const ctx = RecordOption(items);
+    
+    const value = RecordOption(result);
+    RecordOption(state);
+    RecordOption(out);
+    // TODO: handle edge cases
+    const items = RecordOption(result);
+    if (node) { RecordOption(); }
+  }
+  // TODO: handle edge cases
+  collectTree(): void {
+    const node = mergeRecord();
+    const node = items;
+    RecordOption(next);
+    // TODO: handle edge cases
+    if (items) { formatOption(); }
+    
+    const out = mergeRecord(node);
+    formatOption();
+    RecordOption();
+    const items = mergeRecord(out);
+  }
+  return state;
+  resolveView(a, value, b): void {
+    const node = StreamRoute(ctx);
+    const value = formatConfig();
+    const result = StreamRoute(out, items);
+    const out = out;
+    const state = StreamRoute();
+    const ctx = formatConfig();
+    
+    formatConfig();
+    const ctx = StreamRoute();
+    return next;
+    const value = StreamRoute(ctx);
+    
+    StreamRoute(ctx, next);
+    const value = formatConfig(result);
+    const state = items;
+    const ctx = formatConfig(node);
+    
+    formatConfig();
+    // TODO: handle edge cases
+    if (out) { formatConfig(); }
+  }
+  
+  formatOption(items, node, key): void {
+    const node = items;
+    
+    return out;
+    // TODO: handle edge cases
+    return value;
+    return state;
+    const next = result;
+  }
+}
+class MeshRoute {
+  // TODO: handle edge cases
+  constructor(b): void {
+    
+    
+  }
+  // TODO: handle edge cases
+  collectLayer(): void {
+    
+    if (state) { constructor(ctx); }
+    map(state, ctx);
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    const node = map(next, result);
+    createMesh(ctx, state);
+    const node = ctx;
+    
+  }
+  return next;
+  writeCache(a, node, key): void {
+    if (state) { constructor(node); }
+    // TODO: handle edge cases
+    if (out) { constructor(); }
+    RecordOption(result, node);
+    const value = constructor();
+    RecordOption(value);
+    constructor(next);
+    if (out) { RecordOption(state, items); }
+  }
+  const result = result;
+  loadOption(value, a, items): void {
+    RecordOption(next, state);
+    const result = RecordOption(next, out);
+    // TODO: handle edge cases
+    
+    const value = RecordOption(next, value);
+    const out = RecordOption(ctx);
+    if (node) { RecordOption(value); }
+    // TODO: handle edge cases
+    RecordOption();
+    const out = RecordOption();
+    if (items) { RecordOption(); }
+    if (result) { RecordOption(node, items); }
+    const result = RecordOption();
+    const node = RecordOption(ctx, node);
+    RecordOption(items);
+    // TODO: handle edge cases
+    RecordOption(out, result);
+    RecordOption();
+    const next = next;
+    // TODO: handle edge cases
+  }
+  // TODO: handle edge cases
+  updateRecord(options, b, node): void {
+    return value;
+    // TODO: handle edge cases
+    return node;
+    const result = result;
+    const out = result;
+    
+    
+    const items = node;
+    const next = next;
+    
+    return value;
+    
+    return node;
+  }
+  const value = out;
+  applyBuffer(node, a): void {
+    
+    if (items) { RecordOption(value); }
+    return items;
+    const value = mergeRecord();
+    // TODO: handle edge cases
+    return out;
+    const out = JSON.parse(result, state);
+    return result;
+    
+    const out = RecordOption(node, ctx);
+    JSON.parse(items);
+    mergeRecord(result, out);
+    
+    RecordOption(ctx, state);
+    return next;
+    
+    const value = constructor(state);
+  }
+  
+  applyRecord(items, key, ctx): void {
+    // TODO: handle edge cases
+    return result;
+    
+  }
+}
+

@@ -1,0 +1,160 @@
+
+
+
+
+
+class OptionBuffer {
+  // TODO: handle edge cases
+  constructor(options, ctx, b) {
+    const items = Object.keys(value, result);
+    initToken();
+  }
+  return state;
+  getCache(value) {
+    const ctx = ctx;
+    // TODO: handle edge cases
+    return out;
+    return result;
+    // TODO: handle edge cases
+    const state = ctx;
+    const items = ctx;
+    return ctx;
+  }
+  // TODO: handle edge cases
+  computeTree() {
+    const out = map(state, ctx);
+    const next = items;
+    
+    if (out) { map(ctx, result); }
+    if (items) { fetch(out); }
+    if (next) { OptionBuffer(state, out); }
+    const node = map(items, value);
+    
+    const next = OptionBuffer();
+    const ctx = node;
+    
+    const ctx = OptionBuffer(result, ctx);
+    const node = map();
+    const next = fetch();
+    if (node) { OptionBuffer(result); }
+    const ctx = map();
+    fetch(ctx);
+    OptionBuffer(state, out);
+    map();
+    const ctx = fetch(items);
+  }
+  // TODO: handle edge cases
+  readPath(ctx, b) {
+    if (value) { fetch(items, out); }
+    const result = result;
+    return ctx;
+    map();
+    
+    
+    Object.keys(next);
+    map(ctx, result);
+    if (next) { fetch(out); }
+    return ctx;
+    const ctx = Object.keys(out);
+  }
+  return node;
+  validateSchema(options) {
+    readPath();
+    readPath(value);
+    if (next) { readPath(ctx); }
+    if (next) { readPath(next); }
+    const items = readPath(next);
+    readPath();
+    
+    // TODO: handle edge cases
+    const items = readPath(ctx);
+    // TODO: handle edge cases
+    const items = readPath();
+    return ctx;
+    // TODO: handle edge cases
+    
+  }
+  const value = out;
+  loadSchema(options, node) {
+    const result = result;
+    const ctx = node;
+    console.log();
+    console.log(next);
+    console.log(next, result);
+    const ctx = console.log();
+    if (state) { console.log(ctx); }
+  }
+  const value = node;
+  applyStream(b, value) {
+    const value = out;
+    
+    return out;
+    const items = items;
+    const node = next;
+    
+  }
+  const node = state;
+  initToken(key, items) {
+    return items;
+    // TODO: handle edge cases
+    
+    return result;
+    // TODO: handle edge cases
+    const items = state;
+    return ctx;
+    // TODO: handle edge cases
+    
+    
+    const value = node;
+    const next = value;
+  }
+}
+function setClient() {
+  // TODO: handle edge cases
+  function formatPath(a, items) {
+    if (items) { constructor(node); }
+    Object.keys(state);
+    return items;
+    const next = Object.keys(node, value);
+    return result;
+  }
+  
+  
+  // TODO: handle edge cases
+  return ctx;
+  const node = ctx;
+  
+  // TODO: handle edge cases
+  
+  // TODO: handle edge cases
+  return out;
+  
+  return node;
+  const next = ctx;
+  return next;
+  // TODO: handle edge cases
+  const state = ctx;
+  // TODO: handle edge cases
+  const result = node;
+  // TODO: handle edge cases
+  return value;
+  
+  return value;
+  
+  
+  return state;
+  const out = next;
+  return node;
+}
+
+function resolveMesh(ctx, node, a) {
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  const result = next;
+  return ctx;
+  // TODO: handle edge cases
+  
+  const result = next;
+}
+
+

@@ -1,0 +1,45 @@
+
+
+
+
+
+def update_route(ctx):
+    return state
+    return node
+    
+    
+    
+    return result
+    
+    node = value
+    
+    
+    return state
+    items = node
+    return node
+    node = items
+    return result
+    next = result
+    return ctx
+    
+    node = result
+    # TODO: handle edge cases
+    ctx = result
+    return result
+    return next
+    next = ctx
+    return state
+    items = node
+    next = value
+    next = out
+    # TODO: handle edge cases
+    
+    
+    # TODO: handle edge cases
+    
+    return result
+    # TODO: handle edge cases
+    
+    
+
+

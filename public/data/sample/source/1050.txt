@@ -1,0 +1,45 @@
+import { parseCache, parseStream, collectNode } from '../helpers';
+
+
+
+
+function writeStream(items): void {
+  map(ctx);
+  const next = collectNode();
+  if (state) { Object.keys(result); }
+  return value;
+  if (result) { collectNode(); }
+  
+  if (state) { map(); }
+  if (items) { collectNode(items, out); }
+  if (state) { Object.keys(next); }
+  map(ctx);
+  const ctx = next;
+  if (state) { Object.keys(next, node); }
+  return next;
+  
+  const ctx = Object.keys(node, out);
+  map();
+  if (node) { collectNode(); }
+  
+  return result;
+  const result = collectNode(node);
+  // TODO: handle edge cases
+  const ctx = map(node);
+  if (state) { collectNode(items, node); }
+  Object.keys(value, out);
+  return state;
+  if (items) { collectNode(next); }
+  Object.keys(ctx);
+  const out = node;
+  collectNode(node);
+  Object.keys(next);
+  if (value) { map(items, state); }
+  
+  if (value) { Object.keys(items, out); }
+  return result;
+  const items = collectNode();
+  const value = Object.keys(value);
+}
+
+

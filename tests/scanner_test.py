@@ -61,6 +61,7 @@ with tempfile.TemporaryDirectory() as tmp:
     sf.main()
     tree = json.load(open(os.path.join(out, "tree.json")))
     check(tree["symbolsDir"] == "symbols", "symbolsDir is relative to the tree file")
+    check(tree["sourceDir"] == "source", "sourceDir is relative to the tree file")
     files = dict(((rel), node) for node, rel in sf.walk_files(tree))
     check(files["notes.md"]["ext"] == "md" and files["notes.md"]["loc"] == 1, "ext + loc")
     check("loc" not in files["img.png"], "binary file has no loc")
@@ -70,6 +71,8 @@ with tempfile.TemporaryDirectory() as tmp:
     check(ids == [0, 1, 2], f"ids {ids}")
     b = json.load(open(os.path.join(out, "symbols", f"{files['lib/b.ts']['id']}.json")))
     check(b["lang"] == "ts" and b["symbols"][0]["children"][0]["calls"] == ["go"], "ts file via babel")
+    copy = open(os.path.join(out, "source", f"{files['a.js']['id']}.txt")).read()
+    check(copy == open(os.path.join(src, "a.js")).read(), "source copy is verbatim")
     a = json.load(open(os.path.join(out, "symbols", f"{files['a.js']['id']}.json")))
     check(a["imports"] == [{"from": "./lib/b", "names": ["f"], "line": 1}], "js import")
 
@@ -116,6 +119,10 @@ for node, rel in sf.walk_files(tree):
     doc = json.load(open(os.path.join(sym_dir, f"{node['id']}.json")))
     check(doc["file"] == rel, "symbol file matches its tree node")
     check_symbols(doc["symbols"], 1, node["loc"], rel)
+    src_lines = open(os.path.join(ROOT, "public/data", tree["sourceDir"], f"{node['id']}.txt"), encoding="utf-8").read().split("\n")
+    check(len(src_lines) == node["loc"], f"{rel}: fake source has {len(src_lines)} lines, loc says {node['loc']}")
+    for sym in doc["symbols"]:  # the signature really is on the symbol's first line
+        check(sym["signature"] in src_lines[sym["startLine"] - 1], f"{rel}: {sym['name']} header is not on line {sym['startLine']}")
     for imp in doc["imports"]:
         n_imports += 1
         check(any(c in paths for c in candidates(rel, imp["from"])), f"{rel}: import {imp['from']} resolves to no file")

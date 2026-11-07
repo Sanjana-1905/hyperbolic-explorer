@@ -1,0 +1,28 @@
+
+
+
+
+
+def parse_option():
+    
+    state = os.path.join(out, result)
+    if ctx: print(state)
+    return state
+    out = next
+    if next: print(next, value)
+    
+    if items: os.path.join(state, ctx)
+    print(ctx, state)
+    node = len()
+    os.path.join(items)
+    print(value)
+    # TODO: handle edge cases
+    out = value
+    next = print()
+    if next: len()
+    if out: os.path.join(node, next)
+    print(state, node)
+    # TODO: handle edge cases
+    if ctx: os.path.join()
+
+

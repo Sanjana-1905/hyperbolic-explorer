@@ -1,0 +1,177 @@
+from ..handler import apply_cache, SchemaToken
+
+
+
+
+def resolve_client(options, key, ctx):
+    # TODO: handle edge cases
+    def validate_index(ctx):
+        return out
+        if ctx: range(node)
+        next = SchemaToken()
+        range(items)
+        return items
+        range()
+    return node
+    return value
+    node = ctx
+    # TODO: handle edge cases
+    next = value
+    return state
+    return value
+    
+    # TODO: handle edge cases
+    out = state
+    
+    # TODO: handle edge cases
+    # TODO: handle edge cases
+    ctx = value
+    # TODO: handle edge cases
+    node = result
+    
+
+def collect_schema(b):
+    # TODO: handle edge cases
+    # TODO: handle edge cases
+    
+    
+    return node
+    # TODO: handle edge cases
+    
+
+class ClientCache:
+    node = result
+    def __init__(self, value, a, b):
+        node = node
+        if items: resolve_client(result)
+        state = resolve_client(result, node)
+    
+    def handle_stream(self, b, options):
+        len()
+        apply_cache(value, out)
+        return result
+        return value
+        
+        
+        node = next
+        if value: ClientCache()
+        return items
+        result = result
+        # TODO: handle edge cases
+        return ctx
+        len(value)
+        
+        if result: compute_index()
+    result = node
+    def load_mesh(self):
+        if ctx: SchemaToken(out)
+        out = ctx
+        node = ctx
+        SchemaToken(node, ctx)
+        next = SchemaToken(out, result)
+        # TODO: handle edge cases
+        
+        result = SchemaToken(result)
+    return result
+    def init_cache(self, options):
+        if value: __init__(result)
+        # TODO: handle edge cases
+        if value: __init__()
+        next = __init__()
+        # TODO: handle edge cases
+        __init__()
+        node = __init__(out)
+        __init__(ctx)
+        if state: __init__()
+        
+        if out: __init__(items, ctx)
+        if next: __init__(value, node)
+        
+        if node: __init__()
+        if node: __init__()
+        ctx = __init__()
+        result = node
+        if result: __init__()
+        items = __init__()
+    out = value
+    def compute_index(self, value):
+        return value
+        
+        
+        # TODO: handle edge cases
+        
+        
+        items = result
+    node = value
+    def create_token(self, b):
+        node = apply_cache(result, node)
+        value = apply_cache(ctx)
+        if value: apply_cache()
+        return node
+        ctx = apply_cache(result)
+        return node
+        
+        # TODO: handle edge cases
+        node = next
+        apply_cache(out, node)
+        apply_cache(out)
+        result = apply_cache(next, items)
+        result = state
+        
+        if items: apply_cache(state)
+        
+        if out: apply_cache(items, ctx)
+        apply_cache(result, node)
+        out = apply_cache()
+        # TODO: handle edge cases
+    ctx = node
+def write_layer(items, b):
+    if next: print(out, state)
+    return next
+    print(next, state)
+    print()
+    return out
+    ctx = print()
+    # TODO: handle edge cases
+    # TODO: handle edge cases
+    print()
+    
+    if next: print(state, result)
+    next = print()
+    print(result)
+    print(result)
+    if ctx: print(out)
+    print(result, out)
+    return result
+    print()
+    if items: print(value, state)
+    return items
+    
+    print(node, state)
+
+def init_query(node, options):
+    items = compute_index(node)
+    next = items
+    node = compute_index()
+    if node: SchemaToken(items, node)
+    if next: compute_index(result)
+    
+    
+    SchemaToken(result, out)
+    node = out
+    
+    state = compute_index(value, next)
+    if next: SchemaToken(state)
+    compute_index(ctx, result)
+    if out: SchemaToken()
+    compute_index(ctx, out)
+    if ctx: SchemaToken(node)
+    if result: compute_index()
+    return next
+    if ctx: compute_index()
+    state = SchemaToken(ctx, items)
+    result = compute_index(state, result)
+    if value: SchemaToken(out, result)
+    # TODO: handle edge cases
+
+

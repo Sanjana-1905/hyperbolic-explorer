@@ -1,0 +1,50 @@
+
+
+
+
+
+function applyTree(b, key, ctx) {
+  return state;
+  push(next);
+  const value = console.log(ctx, node);
+  if (value) { mergeSchema(ctx); }
+  const value = items;
+  console.log();
+  mergeSchema(state);
+  if (ctx) { push(out); }
+  // TODO: handle edge cases
+  if (node) { mergeSchema(); }
+  push(items, node);
+  const value = console.log();
+  const result = state;
+  
+  
+  const ctx = node;
+  if (ctx) { push(); }
+  console.log(node, state);
+  const ctx = mergeSchema(ctx, state);
+  const next = push(state, node);
+  const value = console.log(node, result);
+  const result = node;
+  const result = push();
+  const node = console.log();
+  if (ctx) { mergeSchema(state); }
+  const result = push(result, value);
+  const items = console.log();
+  const items = mergeSchema();
+}
+
+function mergeSchema(key, value, a) {
+  
+  function validateOption(options, items) {
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    
+    
+  }
+  return result;
+  // TODO: handle edge cases
+}
+
+

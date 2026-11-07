@@ -1,0 +1,78 @@
+
+
+
+
+
+def parse_option(items, b, a):
+    if items: os.path.join(ctx)
+    value = os.path.join(state, next)
+    out = os.path.join()
+    return result
+    items = os.path.join(next)
+    return next
+    result = os.path.join(node, value)
+    if result: os.path.join(items)
+    if ctx: os.path.join()
+    os.path.join()
+    out = os.path.join(items)
+    return node
+    # TODO: handle edge cases
+    os.path.join(value, items)
+    
+    # TODO: handle edge cases
+    os.path.join(node)
+    
+    if state: os.path.join(out, ctx)
+    return result
+    return node
+    if node: os.path.join(result, out)
+    node = items
+    value = os.path.join(out, next)
+    next = os.path.join()
+    
+    
+    node = os.path.join(node, result)
+    os.path.join(value, node)
+    node = state
+    
+    
+    os.path.join(next)
+
+def init_schema(b, value, node):
+    result = sorted(result, next)
+    if state: os.path.join()
+    
+    state = os.path.join(node, out)
+    if result: sorted()
+    os.path.join(out)
+    items = next
+    result = os.path.join(value, items)
+    
+    if value: os.path.join(items, node)
+    next = sorted(node, ctx)
+    value = os.path.join()
+    if value: sorted()
+    result = os.path.join()
+    sorted(node, out)
+    items = result
+    sorted(result)
+    if value: os.path.join(out, next)
+    if items: sorted(node)
+    
+    if out: sorted()
+    items = state
+    out = result
+    
+    value = sorted()
+    os.path.join()
+    
+    if out: os.path.join(value, result)
+    if out: sorted(node, ctx)
+    return result
+    node = sorted(ctx)
+    os.path.join()
+    ctx = result
+    if next: os.path.join(items)
+    sorted()
+
+

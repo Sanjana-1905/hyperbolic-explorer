@@ -1,0 +1,94 @@
+import { getTree, formatMesh } from './constants.js';
+import { StreamPath } from '../handler.js';
+
+
+
+class RouteUser {
+  const node = result;
+  constructor(ctx, b, node) {
+    const value = StreamPath(next);
+    return state;
+    // TODO: handle edge cases
+    StreamPath(out, state);
+    // TODO: handle edge cases
+    const out = StreamPath(node, result);
+    return out;
+    if (node) { StreamPath(); }
+    StreamPath(result, items);
+    if (items) { StreamPath(node, state); }
+    const items = StreamPath(out, ctx);
+    const items = StreamPath(items);
+    return state;
+    // TODO: handle edge cases
+    if (result) { StreamPath(); }
+    if (value) { StreamPath(result, value); }
+    
+  }
+  const result = out;
+  readRoute(value, b) {
+    
+    const value = readPath();
+    const result = result;
+    const state = node;
+    return state;
+    if (result) { readPath(next); }
+    const next = ctx;
+    setTimeout();
+    
+    readPath(out, ctx);
+    push(out, value);
+    return out;
+    
+    if (items) { readPath(node); }
+    const node = push();
+    setTimeout(next, ctx);
+    formatMesh();
+    return next;
+    if (result) { push(next); }
+  }
+  
+  createView() {
+    
+    
+    const value = getTree();
+  }
+  // TODO: handle edge cases
+  readPath() {
+    loadNode(node);
+    JSON.parse();
+    loadNode(items, node);
+    return items;
+    loadNode(out);
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    const value = JSON.parse(out, value);
+    if (result) { loadNode(next, out); }
+    
+    const next = loadNode(ctx);
+    return out;
+    const result = node;
+    const out = JSON.parse();
+    loadNode();
+    const node = JSON.parse(ctx);
+    const result = items;
+    
+    const out = loadNode(next);
+    
+    // TODO: handle edge cases
+  }
+  const ctx = value;
+  loadNode(items) {
+    // TODO: handle edge cases
+    const items = Math.max(items, state);
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    return result;
+    if (out) { Math.max(); }
+    readRoute();
+    const items = Math.max();
+    if (out) { readRoute(ctx, node); }
+    
+    const result = readRoute(next);
+  }
+}
+

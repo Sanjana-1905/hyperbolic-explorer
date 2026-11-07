@@ -1,0 +1,43 @@
+
+
+
+
+
+function renderMesh(): void {
+  // TODO: handle edge cases
+  function setView(): void {
+    if (ctx) { console.log(); }
+    const node = ctx;
+    const next = renderMesh(out, items);
+    if (state) { push(state, next); }
+    
+  }
+  
+  // TODO: handle edge cases
+  return result;
+  // TODO: handle edge cases
+  setView();
+  return value;
+  const node = setView();
+  setView(ctx);
+  if (items) { setView(); }
+  
+  const ctx = result;
+  setView();
+  
+  return items;
+  // TODO: handle edge cases
+  
+  const value = setView();
+  if (value) { setView(); }
+  const ctx = items;
+  const state = setView();
+  setView(state);
+  // TODO: handle edge cases
+  
+  setView(result, state);
+  const state = setView();
+  const result = result;
+}
+
+

@@ -13,7 +13,8 @@ random generator (seed + 1), so the folder/file structure is identical to the on
 
 Usage:
     python3 tools/make_sample_tree.py [-n 5000] [--seed 42] [-o public/data/sample_tree.json]
-Symbols go to <folder of -o>/<name of -o without "_tree">/symbols, e.g. public/data/sample/symbols.
+Symbols go to <folder of -o>/<name of -o without "_tree">/symbols, e.g. public/data/sample/symbols, and a fake
+source file for every code file (so the viewer's code panel has something to show) to .../sample/source/<id>.txt.
 """
 
 import argparse
@@ -180,6 +181,50 @@ def fake_symbols(rng, lang, loc, first_line):
     return symbols, line
 
 
+def fake_source(rng, doc):
+    """
+    Plausible-looking source text whose line numbers match the symbol ranges exactly: imports at the top,
+    then for every symbol a header line (its signature), statements that call the names in its `calls`,
+    and a closing brace (JS/TS). Children are written after their parent, so they overwrite its lines.
+    """
+    lang, loc = doc["lang"], doc["loc"]
+    py = lang == "py"
+    lines = [""] * loc
+    for imp in doc["imports"]:
+        names = ", ".join(imp["names"])
+        lines[imp["line"] - 1] = (f"from {imp['from']} import {names}" if py
+                                  else f"import {{ {names} }} from '{imp['from']}';")
+    var_names = ["result", "node", "items", "value", "ctx", "out", "state", "next"]
+
+    def statement(call):
+        v, w = rng.choice(var_names), rng.choice(var_names)
+        if call is None:
+            return rng.choice([f"{v} = {w}" if py else f"const {v} = {w};", "# TODO: handle edge cases" if py
+                               else "// TODO: handle edge cases", f"return {v}" if py else f"return {v};", ""])
+        args = ", ".join(rng.sample(var_names, rng.randint(0, 2)))
+        return rng.choice([
+            f"{v} = {call}({args})" if py else f"const {v} = {call}({args});",
+            f"if {v}: {call}({args})" if py else f"if ({v}) {{ {call}({args}); }}",
+            f"{call}({args})" if py else f"{call}({args});",
+        ])
+
+    def write(sym, depth):
+        pad = "    " * depth if py else "  " * depth
+        body_pad = pad + ("    " if py else "  ")
+        calls = sym.get("calls") or [None]
+        for n in range(sym["startLine"] + 1, sym["endLine"] + 1):
+            lines[n - 1] = body_pad + statement(calls[(n - sym["startLine"]) % len(calls)] if rng.random() < 0.6 else None)
+        lines[sym["startLine"] - 1] = pad + sym["signature"] + (":" if py else " {")
+        if not py and sym["endLine"] > sym["startLine"]:
+            lines[sym["endLine"] - 1] = pad + "}"
+        for child in sym.get("children", []):
+            write(child, depth + 1)
+
+    for sym in doc["symbols"]:
+        write(sym, 0)
+    return lines
+
+
 def relative_import(lang, src_rel, dst_rel, rng):
     """The import text a file at src_rel would write to reach dst_rel (both '/'-paths from the root)."""
     src_dir = src_rel.split("/")[:-1]
@@ -241,10 +286,9 @@ def add_fake_code(root, seed, symbols_dir, tree_dir):
         lang = CODE_EXTS.get(os.path.splitext(node["name"])[1])
         if not lang:
             continue
-        node["loc"] = min(node["loc"], 1500)
-        n_imports = 0  # real count decided in step 3; keep a few lines free at the top
-        symbols, last = fake_symbols(rng, lang, node["loc"], first_line=6)
-        node["loc"] = max(node["loc"], last + 1)
+        # Fake files are exactly as long as their symbols (keeps the committed fake source small).
+        symbols, last = fake_symbols(rng, lang, min(node["loc"], 1500), first_line=6)
+        node["loc"] = last + 1
         docs[rel] = {"file": rel, "lang": lang, "loc": node["loc"], "symbols": symbols, "imports": [], "calls": []}
 
     # 3) imports between real files of the tree, then calls that name symbols of the imported files
@@ -311,6 +355,20 @@ def add_fake_code(root, seed, symbols_dir, tree_dir):
         n_symbols += sum(1 for _ in flat_symbols(doc["symbols"]))
         next_id += 1
     root["symbolsDir"] = os.path.relpath(symbols_dir, tree_dir).replace(os.sep, "/")
+
+    # 5) fake source text, one file per symbol file, from a third generator so nothing above changes
+    source_dir = os.path.join(os.path.dirname(os.path.normpath(symbols_dir)), "source")
+    os.makedirs(source_dir, exist_ok=True)
+    for old in os.listdir(source_dir):
+        if old.endswith(".txt"):
+            os.remove(os.path.join(source_dir, old))
+    src_rng = random.Random(seed + 2)
+    for node, rel in files:
+        doc = docs.get(rel)
+        if doc is not None:
+            with open(os.path.join(source_dir, f"{node['id']}.txt"), "w", encoding="utf-8") as f:
+                f.write("\n".join(fake_source(src_rng, doc)))
+    root["sourceDir"] = os.path.relpath(source_dir, tree_dir).replace(os.sep, "/")
     return next_id, n_symbols
 
 

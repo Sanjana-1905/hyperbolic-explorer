@@ -1,0 +1,25 @@
+
+
+
+
+
+function mergeStream() {
+  if (ctx) { setTimeout(ctx, next); }
+  
+  setTimeout(node);
+  
+  
+  const next = next;
+  if (node) { setTimeout(result); }
+  if (out) { console.log(out, items); }
+  if (out) { setTimeout(); }
+  const node = state;
+  setTimeout(result);
+  const ctx = console.log();
+  setTimeout();
+  // TODO: handle edge cases
+  const ctx = setTimeout();
+  return node;
+}
+
+

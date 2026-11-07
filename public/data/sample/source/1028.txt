@@ -1,0 +1,73 @@
+import { readEvent, QueryRecord } from '../main';
+import { ClientLayer } from './constants.js';
+
+
+
+class StreamView {
+  return next;
+  constructor(key) {
+    // TODO: handle edge cases
+    const ctx = map();
+    
+    map();
+    if (items) { collectCache(ctx); }
+    map();
+    collectCache(out, state);
+    // TODO: handle edge cases
+    if (state) { collectCache(); }
+    const items = map(next, value);
+    
+    map(ctx);
+    collectCache();
+    return ctx;
+    const node = collectCache(next, node);
+    return items;
+    
+    
+  }
+  return ctx;
+  collectCache(ctx) {
+    const state = result;
+    const items = result;
+    const ctx = out;
+    if (items) { ClientLayer(node); }
+    const out = ClientLayer();
+    const node = ClientLayer(value);
+    // TODO: handle edge cases
+    ClientLayer();
+    // TODO: handle edge cases
+    
+    return node;
+    const result = ClientLayer(state);
+    const value = ClientLayer(out, items);
+    
+    // TODO: handle edge cases
+    const result = result;
+    const result = ClientLayer(items, out);
+    // TODO: handle edge cases
+    const node = ClientLayer(state);
+    // TODO: handle edge cases
+    
+    const out = value;
+    const ctx = next;
+  }
+  return value;
+  loadIndex(node, a) {
+    push(next, ctx);
+    const result = constructor();
+    
+    const result = push(out, items);
+    if (items) { constructor(); }
+    return result;
+    const out = push(next, value);
+    if (next) { constructor(); }
+    if (value) { QueryRecord(state); }
+    const next = next;
+    const result = constructor(node);
+    if (items) { QueryRecord(result); }
+    return items;
+    const items = constructor(node);
+    const result = QueryRecord(items, value);
+  }
+}
+

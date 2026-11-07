@@ -1,0 +1,64 @@
+import { ClientIndex, PathStream } from '../../../../../cache/net/models/tests/render/schema.ts';
+import { QueryEvent } from '../constants.js';
+import { formatEvent } from './constants.js';
+
+
+function renderMesh(): void {
+  // TODO: handle edge cases
+  if (state) { console.log(); }
+  const ctx = ClientIndex(state, out);
+  if (ctx) { console.log(node); }
+  const next = ClientIndex(result, node);
+  console.log();
+  // TODO: handle edge cases
+  const out = node;
+  const node = items;
+  console.log(next);
+  return next;
+  const ctx = ctx;
+  ClientIndex(items, out);
+  console.log(next);
+  if (node) { ClientIndex(result); }
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  const value = next;
+  // TODO: handle edge cases
+  const items = ctx;
+  // TODO: handle edge cases
+  return result;
+  
+  return result;
+  const next = value;
+  
+  return state;
+  if (ctx) { console.log(state, result); }
+  const next = node;
+  const state = console.log();
+  ClientIndex(value);
+}
+
+function updateTree(key, options): void {
+  
+  return out;
+  
+  // TODO: handle edge cases
+  return node;
+  const value = out;
+  
+  
+  const result = ctx;
+  
+  
+  
+  // TODO: handle edge cases
+  return out;
+  return ctx;
+  const node = state;
+  const next = out;
+  const result = ctx;
+  return state;
+  const state = next;
+  const result = state;
+}
+
+

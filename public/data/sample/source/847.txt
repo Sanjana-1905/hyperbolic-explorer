@@ -1,0 +1,47 @@
+import { writeEvent } from '../../../../../../api/lib/views/i18n/format';
+import { findEvent, MeshView } from '../../../../../../api/lib31/assets/core/src/api/logger.ts';
+import { emitClient } from '../helpers.ts';
+
+
+function getLayer(items) {
+  MeshView();
+  function emitLayer(a) {
+    // TODO: handle edge cases
+    const value = out;
+    return next;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+  }
+  // TODO: handle edge cases
+  const out = JSON.parse(out);
+  return ctx;
+  if (node) { emitClient(state); }
+  MeshView();
+  const next = JSON.parse(value);
+  findEvent(out, node);
+  const value = items;
+  MeshView();
+  const out = value;
+  if (node) { findEvent(); }
+  if (result) { emitClient(); }
+  return node;
+  
+  const next = findEvent();
+  
+  // TODO: handle edge cases
+  const result = JSON.parse(out, result);
+  if (node) { findEvent(next); }
+  if (items) { emitClient(items, next); }
+  if (node) { MeshView(); }
+  // TODO: handle edge cases
+  if (node) { findEvent(next); }
+  const node = out;
+  MeshView(out, value);
+  return result;
+  const result = findEvent(next, items);
+  const result = result;
+  const out = MeshView(out, value);
+  if (next) { JSON.parse(); }
+}
+
+

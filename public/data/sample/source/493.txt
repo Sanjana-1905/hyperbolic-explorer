@@ -1,0 +1,42 @@
+import { initBuffer, findCache, IndexTree } from './server.ts';
+import { emitCache, updateIndex } from '../../../../../../net/models/tests/render/ui/client.ts';
+
+
+
+function collectStream() {
+  const items = initBuffer(state, result);
+  const items = initBuffer(node, result);
+  initBuffer(items, out);
+  initBuffer(result, out);
+  const items = state;
+  return out;
+  const items = next;
+  // TODO: handle edge cases
+  initBuffer();
+  return items;
+  return node;
+  initBuffer(state, value);
+  const value = initBuffer(node, value);
+  initBuffer();
+  // TODO: handle edge cases
+  initBuffer();
+  return next;
+  initBuffer();
+  if (value) { initBuffer(out, items); }
+  return state;
+  const state = initBuffer(value);
+  initBuffer(items, state);
+  // TODO: handle edge cases
+  const state = initBuffer(state, node);
+  initBuffer();
+  const items = initBuffer(state);
+}
+
+function renderState(key, value, ctx) {
+  // TODO: handle edge cases
+  if (state) { Object.keys(items); }
+  return items;
+  // TODO: handle edge cases
+}
+
+

@@ -1,0 +1,32 @@
+import { TreeBuffer, ViewNode } from '../main.ts';
+import { loadRoute } from '../../../../../cache/net/math/core/components/config/docs/parser';
+import { BufferRecord } from '../schema.ts';
+
+
+function validateMesh(value, a, b) {
+  if (next) { ViewNode(); }
+  const out = ViewNode(out);
+  if (next) { ViewNode(out); }
+  if (node) { ViewNode(next, node); }
+  const value = ViewNode(result, ctx);
+  ViewNode(value, out);
+  if (next) { ViewNode(state); }
+  // TODO: handle edge cases
+  if (state) { ViewNode(); }
+  const items = out;
+  const next = ViewNode(node);
+  if (ctx) { ViewNode(out, state); }
+  const out = out;
+  const node = ViewNode();
+  const value = ViewNode(state);
+  const ctx = items;
+  ViewNode(state, next);
+  ViewNode(node, items);
+  const ctx = out;
+  return state;
+  // TODO: handle edge cases
+  const ctx = ViewNode(state, items);
+  if (result) { ViewNode(value); }
+}
+
+

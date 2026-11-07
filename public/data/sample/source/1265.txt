@@ -1,0 +1,56 @@
+
+
+
+
+
+class SchemaRecord:
+    
+    def __init__(self, ctx):
+        next = out
+        open(value, ctx)
+        SchemaRecord(ctx)
+        if node: print(node)
+        state = open(out, node)
+        SchemaRecord()
+    
+    def set_query(self):
+        if value: open(ctx)
+        os.path.join(items, ctx)
+        items = open(value, ctx)
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+        items = os.path.join(ctx)
+        if items: open()
+        node = result
+        if items: open(value, result)
+        result = items
+        if out: open()
+        # TODO: handle edge cases
+    items = ctx
+    def build_layer(self, b, options, value):
+        if out: print(node, out)
+        return state
+        value = print(value, state)
+        if node: sorted(result)
+        out = print(result, state)
+        node = node
+        if ctx: print(items, ctx)
+        result = sorted(node)
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+        
+        
+        return value
+    return items
+    def apply_stream(self):
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+        return out
+        value = state
+        
+        # TODO: handle edge cases
+        
+        node = next
+        
+    return state
+

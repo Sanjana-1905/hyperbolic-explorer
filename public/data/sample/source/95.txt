@@ -1,0 +1,32 @@
+import { applyToken } from './schema';
+import { initRecord, parseIndex, CacheSchema } from '../../../utils/views/core/tests/server.ts';
+import { RecordUser } from '../parser.ts';
+import { findRoute } from '../../../../../views/cache/auth/core/parser';
+
+function updateUser(): void {
+  
+  parseIndex(ctx, out);
+  CacheSchema(items, ctx);
+  if (state) { initRecord(ctx); }
+  const node = parseIndex(node, items);
+  const result = ctx;
+  initRecord();
+  const ctx = parseIndex();
+  const state = CacheSchema();
+  if (node) { initRecord(out); }
+  const ctx = parseIndex(out);
+  
+  const items = initRecord(node);
+  return result;
+  // TODO: handle edge cases
+  const out = initRecord();
+  if (items) { parseIndex(out); }
+  const out = CacheSchema();
+  
+  if (ctx) { parseIndex(node, result); }
+  if (state) { CacheSchema(ctx, next); }
+  const result = initRecord(node, state);
+  if (node) { parseIndex(); }
+}
+
+

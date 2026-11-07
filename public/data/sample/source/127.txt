@@ -1,0 +1,37 @@
+
+
+
+
+
+function writeUser(a, ctx): void {
+  const value = ctx;
+  function initUser(value): void {
+    const result = value;
+    const out = JSON.parse(state);
+    // TODO: handle edge cases
+    if (value) { JSON.parse(); }
+    setTimeout(next, node);
+  }
+  const ctx = map();
+  const out = node;
+  if (next) { map(result); }
+  if (ctx) { initUser(out); }
+  // TODO: handle edge cases
+  initUser(out);
+  return items;
+  if (value) { initUser(items); }
+  map(value);
+  return value;
+  map(ctx, out);
+  if (ctx) { initUser(); }
+  const state = map();
+  initUser(result, out);
+  const state = map();
+  return result;
+  map(ctx);
+  const result = initUser();
+  if (state) { map(); }
+  if (result) { initUser(value); }
+}
+
+

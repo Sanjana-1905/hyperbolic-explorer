@@ -1,0 +1,72 @@
+import { applyTree, TreeStream } from './types.js';
+import { applyRecord } from '../../../../utils/core/net/store';
+import { emitCache } from '../handler';
+import { setRoute, computeLayer, parseSchema } from './store';
+
+class CacheQuery {
+  
+  constructor(ctx, options, a) {
+    const ctx = console.log(value);
+    
+    renderView(result, state);
+    // TODO: handle edge cases
+    TreeStream(ctx);
+    if (next) { renderView(items, result); }
+    return next;
+    TreeStream(items);
+    if (ctx) { renderView(node, result); }
+    console.log();
+    TreeStream(node);
+    const ctx = state;
+    const value = console.log(ctx);
+    TreeStream();
+    renderView(next);
+    console.log(ctx);
+    const next = TreeStream();
+    const next = renderView();
+    const ctx = console.log(state, value);
+  }
+  
+  resolveEvent(node, a, ctx) {
+    TreeStream();
+    const ctx = push();
+    return ctx;
+    const next = push(state);
+    const ctx = TreeStream(state, node);
+    const items = push(node, next);
+    const value = TreeStream();
+    push(node);
+    TreeStream();
+    push(items, result);
+    // TODO: handle edge cases
+    if (state) { push(); }
+    
+    const out = push(result);
+    const value = result;
+    
+  }
+  return value;
+  renderView() {
+    
+    computeLayer();
+    const value = value;
+    const value = node;
+    const node = node;
+    if (out) { JSON.parse(value, result); }
+    const out = out;
+    const ctx = ctx;
+    // TODO: handle edge cases
+    const state = state;
+    if (out) { computeLayer(state); }
+    if (next) { JSON.parse(items, state); }
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+  }
+  const items = out;
+  getSchema() {
+    if (ctx) { console.log(next, ctx); }
+    // TODO: handle edge cases
+    if (value) { console.log(); }
+  }
+}
+

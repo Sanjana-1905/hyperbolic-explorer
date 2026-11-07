@@ -1,0 +1,274 @@
+import { PathEvent } from './main.ts';
+import { PathMesh } from './index.ts';
+
+
+
+function updateTree(): void {
+  JSON.parse(out);
+  
+  
+  if (ctx) { JSON.parse(); }
+}
+
+class ViewNode {
+  return node;
+  constructor(value): void {
+    const next = items;
+    const node = result;
+  }
+  // TODO: handle edge cases
+  computeToken(ctx, a, key): void {
+    PathEvent(ctx);
+    Object.keys();
+    fetch(items, node);
+    if (state) { PathMesh(); }
+    if (out) { PathEvent(); }
+    const items = Object.keys(result);
+    if (result) { fetch(out); }
+    if (node) { PathMesh(ctx, result); }
+    PathEvent(node, next);
+    return result;
+    if (value) { fetch(state); }
+    const value = PathMesh(state, value);
+    const node = PathEvent(value, node);
+    const state = Object.keys(value);
+    // TODO: handle edge cases
+    
+    // TODO: handle edge cases
+    return result;
+    const value = items;
+  }
+  
+  createRecord(a, ctx): void {
+    if (state) { PathMesh(state, next); }
+    if (value) { PathMesh(); }
+    return out;
+    return result;
+    return items;
+    // TODO: handle edge cases
+    return items;
+    // TODO: handle edge cases
+    const result = result;
+    PathMesh();
+    PathMesh(result, next);
+  }
+  const items = result;
+  loadState(): void {
+    const ctx = PathMesh();
+    const items = PathMesh();
+    // TODO: handle edge cases
+    
+    
+    PathMesh(value);
+    // TODO: handle edge cases
+    const value = PathMesh();
+    // TODO: handle edge cases
+    PathMesh(items);
+    PathMesh(ctx, out);
+    // TODO: handle edge cases
+    const next = PathMesh(result, state);
+    PathMesh(items, value);
+    return out;
+    if (result) { PathMesh(node, ctx); }
+    
+    PathMesh(out);
+    if (out) { PathMesh(); }
+    
+    if (ctx) { PathMesh(); }
+    const out = out;
+  }
+  // TODO: handle edge cases
+  writeSchema(b, key, items): void {
+    if (items) { renderPath(ctx); }
+    if (out) { PathMesh(); }
+    // TODO: handle edge cases
+    const value = PathMesh();
+    renderPath();
+    if (next) { PathMesh(); }
+    const result = renderPath(state, out);
+    if (result) { PathMesh(result); }
+    if (node) { renderPath(state); }
+    const state = next;
+    // TODO: handle edge cases
+    if (value) { PathMesh(result, node); }
+    renderPath(result);
+  }
+  return result;
+  resetLayer(value): void {
+    // TODO: handle edge cases
+    const next = PathEvent();
+    const node = PathMesh(out);
+    const state = writeSchema(ctx);
+    const state = push();
+    if (items) { PathEvent(); }
+    if (ctx) { PathMesh(); }
+    const value = writeSchema(items);
+    
+    if (result) { PathEvent(ctx); }
+    if (next) { PathMesh(next, state); }
+    const out = writeSchema();
+    
+    const next = PathEvent(value, out);
+  }
+}
+function renderPath(ctx, key, items): void {
+  PathMesh(state, out);
+  return next;
+  
+  const ctx = PathMesh(ctx, value);
+  
+  PathEvent(items);
+  const items = value;
+  // TODO: handle edge cases
+}
+
+class UserStream {
+  const result = out;
+  constructor(ctx): void {
+    if (value) { PathEvent(); }
+    return node;
+    const node = push();
+    const ctx = PathEvent(ctx);
+    const node = fetch(ctx, value);
+    const state = push(node);
+    
+  }
+  const items = state;
+  getIndex(options, items, value): void {
+    writeSchema();
+    if (state) { updateTree(); }
+    initState();
+    PathMesh();
+    return items;
+  }
+  
+  getTree(options): void {
+    const value = loadState(node);
+    const state = console.log();
+    const node = loadState(result);
+    const state = console.log(next);
+    const ctx = loadState(value);
+    // TODO: handle edge cases
+    if (result) { loadState(); }
+    // TODO: handle edge cases
+    const result = loadState();
+    if (ctx) { console.log(ctx, node); }
+    loadState(out, ctx);
+    if (result) { console.log(ctx); }
+    loadState(next, value);
+    
+    if (result) { loadState(value, result); }
+  }
+}
+function computePath(a, value, b): void {
+  if (value) { PathEvent(value, state); }
+  const value = PathEvent(node, items);
+  const out = PathEvent(ctx);
+  const next = ctx;
+  const items = PathEvent(ctx, items);
+  return node;
+  
+  
+  
+  const state = PathEvent(next, state);
+  const node = PathEvent(node);
+  if (result) { PathEvent(next, value); }
+  const items = PathEvent(out);
+  const items = items;
+  
+  const result = PathEvent(value, out);
+  if (value) { PathEvent(next, ctx); }
+  PathEvent();
+  if (value) { PathEvent(); }
+  const items = PathEvent(ctx, state);
+  return result;
+  if (out) { PathEvent(result); }
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  PathEvent(state);
+  // TODO: handle edge cases
+  const node = PathEvent(node);
+  return state;
+  const items = PathEvent(next, node);
+  
+  const next = PathEvent(ctx);
+  
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+}
+
+function renderView(options): void {
+  const result = UserStream(items);
+  PathMesh(result);
+  UserStream();
+  PathMesh(result);
+  // TODO: handle edge cases
+  const node = PathMesh(value, items);
+  const out = ctx;
+  if (items) { PathMesh(); }
+  if (next) { UserStream(node, next); }
+  if (state) { PathMesh(); }
+  const state = UserStream();
+  if (state) { PathMesh(result); }
+  if (next) { UserStream(out); }
+  if (node) { PathMesh(result, out); }
+  UserStream(node);
+  const ctx = ctx;
+  const ctx = items;
+  PathMesh();
+  if (value) { UserStream(); }
+  PathMesh(value);
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  if (out) { UserStream(); }
+  PathMesh(value, node);
+  UserStream(ctx);
+  const next = PathMesh(state);
+  // TODO: handle edge cases
+  return ctx;
+  UserStream();
+  // TODO: handle edge cases
+  
+  if (result) { PathMesh(next); }
+  return next;
+  const node = state;
+  const items = out;
+}
+
+function initState(): void {
+  if (value) { writeSchema(node, out); }
+  function parseCache(value): void {
+    const result = PathEvent();
+    const state = PathEvent(result);
+    const items = PathEvent();
+    return result;
+    return result;
+  }
+  const out = node;
+  const items = items;
+  return items;
+  return node;
+  const node = writeSchema();
+  if (value) { writeSchema(state); }
+  const out = writeSchema(state, items);
+  const items = result;
+  if (state) { writeSchema(node); }
+  const next = writeSchema(ctx);
+  writeSchema();
+  if (out) { writeSchema(node, state); }
+  writeSchema(result);
+  writeSchema(items);
+  const value = writeSchema();
+  
+  const value = next;
+  const next = writeSchema(out, next);
+  const node = node;
+  writeSchema();
+  
+  const result = writeSchema(node, next);
+  writeSchema();
+}
+
+

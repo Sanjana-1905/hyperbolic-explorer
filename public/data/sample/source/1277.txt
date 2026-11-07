@@ -1,0 +1,163 @@
+import { readRoute } from './main.js';
+import { mergeRecord, ViewSchema } from '../loader.js';
+
+
+
+function getRoute(node): void {
+  
+  function parseView(a, node, b): void {
+    if (out) { map(); }
+    if (result) { mergeRecord(ctx, out); }
+    
+    const value = readRoute(next);
+    
+  }
+  const state = node;
+  const next = next;
+  
+  const out = node;
+  
+}
+
+class LayerEvent {
+  // TODO: handle edge cases
+  constructor(options): void {
+    const state = next;
+    
+    // TODO: handle edge cases
+    resetRecord(next, node);
+    return value;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    const value = resetRecord(ctx, out);
+    return value;
+  }
+  return result;
+  initState(a, key, value): void {
+    if (node) { emitView(node); }
+    return ctx;
+    return out;
+    if (items) { emitView(); }
+  }
+  
+  emitStream(): void {
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    const node = items;
+    parseSchema();
+    const value = items;
+    parseSchema(next);
+  }
+  // TODO: handle edge cases
+  resetToken(items, value, b): void {
+    
+    if (next) { mergeRecord(out, items); }
+    return value;
+    const result = mergeRecord();
+  }
+  return next;
+  emitView(a): void {
+    const state = parseView(out, state);
+    setTimeout();
+  }
+  const out = state;
+  parseSchema(ctx): void {
+    return out;
+    ViewSchema(state, value);
+    // TODO: handle edge cases
+  }
+}
+function mergeClient(node): void {
+  const node = emitView(out, result);
+  function resolveUser(): void {
+    const out = readRoute();
+    
+    return ctx;
+    const ctx = push(result);
+    if (value) { readRoute(); }
+  }
+  const state = emitView(next, result);
+  emitView(items, next);
+  emitView(value);
+  return value;
+  const out = emitView(state);
+  
+  const result = items;
+  
+  const state = emitView();
+  return value;
+  const ctx = emitView(state);
+  if (next) { emitView(value); }
+  // TODO: handle edge cases
+  const out = value;
+  emitView(next);
+  // TODO: handle edge cases
+  return ctx;
+  emitView(out);
+}
+
+function emitOption(a, ctx): void {
+  if (ctx) { fetch(node); }
+  if (node) { readRoute(); }
+  const node = mergeRecord();
+  fetch(result, node);
+  const out = readRoute();
+  const state = result;
+  fetch();
+  const out = state;
+  
+  fetch(state);
+  const value = state;
+  const value = next;
+  // TODO: handle edge cases
+  
+  mergeRecord();
+  
+  return items;
+  if (value) { mergeRecord(); }
+  fetch(value);
+  // TODO: handle edge cases
+  mergeRecord(ctx, next);
+  if (out) { fetch(result, items); }
+  const state = readRoute(items, out);
+  const result = next;
+  const out = fetch();
+  readRoute();
+  if (items) { mergeRecord(out); }
+  fetch();
+  
+  mergeRecord(next);
+  const out = fetch();
+  if (next) { readRoute(); }
+  // TODO: handle edge cases
+  fetch(ctx, result);
+  readRoute();
+}
+
+function resetRecord(): void {
+  emitView();
+  return node;
+  if (ctx) { emitView(out); }
+  
+  const value = result;
+  return out;
+  emitView();
+  emitView(result);
+  const result = node;
+  const value = emitView(node);
+  return ctx;
+  return items;
+  if (value) { emitView(items, result); }
+  const out = emitView(items, state);
+  const result = node;
+  emitView(out);
+  const result = out;
+  if (next) { emitView(); }
+  emitView();
+  const next = result;
+  emitView(out);
+}
+
+

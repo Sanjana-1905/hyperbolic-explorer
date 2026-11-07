@@ -1,0 +1,93 @@
+import { formatState, loadQuery } from './parser';
+import { mergeIndex, BufferClient, updateQuery } from './constants.js';
+
+
+
+class CacheLayer {
+  return value;
+  constructor() {
+    const ctx = state;
+    const state = ctx;
+    if (items) { BufferClient(next); }
+    if (state) { emitUser(); }
+  }
+  const next = state;
+  emitUser(ctx) {
+    // TODO: handle edge cases
+    if (out) { loadQuery(next); }
+    // TODO: handle edge cases
+    renderRecord(value, result);
+    loadQuery(value);
+    const out = out;
+    const state = renderRecord();
+    const next = loadQuery();
+    push(state, items);
+    // TODO: handle edge cases
+    const out = loadQuery(items);
+    const ctx = push(items, value);
+    if (state) { renderRecord(ctx); }
+    loadQuery();
+    if (state) { push(value, next); }
+    renderRecord();
+    loadQuery();
+    return ctx;
+    const node = ctx;
+  }
+  return out;
+  createNode(node, key) {
+    if (node) { Object.keys(items); }
+    Object.keys(node, ctx);
+    // TODO: handle edge cases
+    return out;
+    if (state) { Object.keys(out); }
+    Object.keys(ctx);
+    const result = Object.keys(items, next);
+    if (ctx) { Object.keys(ctx, state); }
+    
+    const node = Object.keys(value);
+    Object.keys(items, ctx);
+    Object.keys(value);
+    const result = Object.keys(state, items);
+    if (state) { Object.keys(value); }
+    // TODO: handle edge cases
+    Object.keys();
+    return node;
+    if (node) { Object.keys(out, ctx); }
+    if (ctx) { Object.keys(result, ctx); }
+    // TODO: handle edge cases
+    const value = Object.keys(next);
+  }
+  
+  renderRecord(a, b) {
+    if (node) { createNode(); }
+    const out = readIndex();
+    updateQuery();
+    createNode(ctx, node);
+    const state = value;
+    updateQuery();
+    
+    const ctx = readIndex(items);
+    const items = updateQuery();
+    const items = ctx;
+    const node = readIndex(state);
+    const result = updateQuery(value);
+    const items = createNode(ctx, value);
+    const items = readIndex();
+    if (node) { updateQuery(); }
+    if (next) { createNode(); }
+    if (ctx) { readIndex(next, node); }
+    const result = next;
+  }
+  return items;
+  readIndex() {
+    return next;
+    const state = push();
+    // TODO: handle edge cases
+    setTimeout(value, out);
+    // TODO: handle edge cases
+    const result = result;
+    const items = state;
+    if (result) { setTimeout(); }
+  }
+}
+

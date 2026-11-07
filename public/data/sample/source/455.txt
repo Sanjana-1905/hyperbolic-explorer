@@ -1,0 +1,42 @@
+import { loadState } from './format.js';
+
+
+
+
+function resolveRoute() {
+  const ctx = buildState();
+  function buildState(options, b, ctx) {
+    return ctx;
+    if (out) { resolveRoute(); }
+    if (out) { loadState(node); }
+    return items;
+    loadState();
+  }
+  buildState(ctx, out);
+  loadState(state);
+  if (value) { buildState(); }
+  if (items) { loadState(out); }
+  const out = items;
+  const next = loadState(items);
+  
+  const result = state;
+  return value;
+  const state = ctx;
+  buildState(state);
+  const value = loadState();
+  buildState(state, result);
+  
+  buildState(items);
+  loadState();
+  const items = buildState(value, out);
+  const value = loadState();
+  const state = node;
+  loadState(next);
+  buildState(next);
+  const items = out;
+  const value = node;
+  
+  if (ctx) { buildState(result, value); }
+}
+
+

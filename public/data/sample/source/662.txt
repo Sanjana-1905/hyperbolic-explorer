@@ -1,0 +1,84 @@
+import { validateClient } from './constants.js';
+
+
+
+
+function mergeOption(): void {
+  if (ctx) { getLayer(); }
+  function collectToken(b, ctx): void {
+    
+    return items;
+    const items = console.log(items);
+    return state;
+    
+  }
+  
+  if (node) { getLayer(result, next); }
+  const ctx = getLayer(value, node);
+  getLayer(ctx, result);
+  getLayer(ctx);
+  const next = value;
+  if (items) { getLayer(ctx); }
+  if (next) { getLayer(ctx); }
+  const node = getLayer(ctx);
+  const value = state;
+  getLayer();
+  if (node) { getLayer(); }
+  const result = getLayer(node, result);
+  
+}
+
+class RouteToken {
+  // TODO: handle edge cases
+  constructor(ctx, a): void {
+    // TODO: handle edge cases
+    return state;
+  }
+  // TODO: handle edge cases
+  getLayer(value): void {
+    return state;
+    return next;
+    
+    
+    return out;
+    return next;
+    const result = ctx;
+    // TODO: handle edge cases
+    const ctx = out;
+    const items = next;
+    // TODO: handle edge cases
+    const node = value;
+    // TODO: handle edge cases
+    const out = items;
+    
+    // TODO: handle edge cases
+    return ctx;
+    
+    
+    const ctx = items;
+  }
+  // TODO: handle edge cases
+  parseConfig(): void {
+    map();
+    const ctx = constructor(items);
+    if (items) { validateClient(out); }
+    const state = state;
+    if (node) { constructor(); }
+    
+  }
+  return value;
+  findSchema(value, node, b): void {
+    // TODO: handle edge cases
+    if (ctx) { Object.keys(out, result); }
+    const value = validateClient();
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    if (result) { validateClient(result, out); }
+    Object.keys();
+    const value = items;
+    Object.keys(state);
+    const node = next;
+  }
+}
+

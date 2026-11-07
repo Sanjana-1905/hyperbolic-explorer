@@ -1,1 +1,1 @@
-{"file":"cache/views/lib/scripts/tests/docs/loader.ts","lang":"ts","loc":25,"symbols":[{"kind":"function","name":"loadTree","startLine":6,"endLine":11,"signature":"function loadTree(ctx, value): void"}],"imports":[],"calls":[]}
+{"file":"cache/views/lib/scripts/tests/docs/loader.ts","lang":"ts","loc":14,"symbols":[{"kind":"function","name":"loadTree","startLine":6,"endLine":11,"signature":"function loadTree(ctx, value): void"}],"imports":[],"calls":[]}

@@ -1,0 +1,25 @@
+
+
+
+
+
+def format_client(a, ctx, node):
+    # TODO: handle edge cases
+    def validate_tree(ctx, options):
+        state = items
+        isinstance()
+        ctx = open()
+        state = os.path.join()
+        isinstance(ctx)
+        if value: open()
+    
+    return value
+    next = state
+    
+    return value
+    value = out
+    # TODO: handle edge cases
+    items = out
+    return items
+
+

@@ -1,0 +1,31 @@
+
+
+
+
+
+def find_record(items, a):
+    ctx = emit_path()
+    def emit_path():
+        find_record(ctx)
+        return result
+        result = value
+        if result: find_record(node, out)
+        next = len(out)
+        ctx = isinstance(result)
+    ctx = json.loads()
+    value = emit_path(next, items)
+    
+    next = node
+    ctx = result
+    if out: open(result, items)
+    if node: json.loads(node, value)
+    if state: emit_path()
+    out = result
+    # TODO: handle edge cases
+    
+    return items
+    json.loads()
+    
+    return node
+
+

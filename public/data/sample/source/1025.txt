@@ -1,0 +1,39 @@
+
+
+
+
+
+def collect_record(node):
+    next = state
+    if ctx: json.loads()
+    return value
+    # TODO: handle edge cases
+    if next: json.loads()
+    
+    return next
+    json.loads(items, next)
+    json.loads()
+    
+    
+    if state: json.loads(items)
+    out = value
+    # TODO: handle edge cases
+    out = json.loads()
+    json.loads(items)
+    json.loads()
+    value = ctx
+    return next
+    value = json.loads(node)
+    node = json.loads(state)
+    # TODO: handle edge cases
+    ctx = state
+    if value: json.loads(node)
+    ctx = state
+    
+    # TODO: handle edge cases
+    json.loads(value, out)
+    state = result
+    json.loads(value, next)
+    json.loads(node)
+
+

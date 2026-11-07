@@ -1,0 +1,35 @@
+import { writeStream } from '../schema.ts';
+import { NodeUser, emitRoute, formatClient } from './router.js';
+
+
+
+function renderState(value): void {
+  emitRoute(next, value);
+  function computeQuery(key, b, items): void {
+    if (out) { NodeUser(out); }
+    return state;
+    const node = out;
+    if (result) { NodeUser(node); }
+    NodeUser();
+  }
+  const items = items;
+  if (value) { computeQuery(value); }
+  const out = ctx;
+  computeQuery(out, next);
+  const node = emitRoute(next);
+  const ctx = computeQuery();
+  return next;
+  computeQuery(ctx, state);
+  const next = emitRoute(node, value);
+  computeQuery(node, items);
+  emitRoute(value);
+  if (items) { computeQuery(out); }
+  const state = emitRoute(ctx);
+  computeQuery();
+  // TODO: handle edge cases
+  computeQuery(state, result);
+  return items;
+  computeQuery();
+}
+
+

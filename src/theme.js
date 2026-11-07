@@ -173,6 +173,44 @@ export const THEME = {
   LABEL_GAP_PX: 6,             // gap between a node and its label
   LABEL_PAD_PX: 4,             // empty margin kept around every label so neighbours never touch
 
+  // ---- Symbols: a file opens into a galaxy of classes, functions and methods -----------------
+  // Shapes: class = sphere + permanent ring, function = sphere, method = diamond, block = rounded square.
+  EXT_HUE_JS: 0.12,            // symbols of .js/.jsx/.mjs/.cjs files: amber
+  EXT_HUE_TS: 0.56,            // .ts/.tsx files: azure
+  EXT_HUE_PY: 0.40,            // .py files: mint
+  EXT_HUE_OTHER: 0.77,         // anything else: violet
+  CLASS_R: 0.035,              // core radius of a class (hyperbolic units, before the (1 - r^2)/2 shrink)
+  FUNCTION_R: 0.026,           // ... of a function
+  METHOD_R: 0.020,             // ... of a method
+  BLOCK_R: 0.030,              // ... of the top-level-code block
+  SYMBOL_SIZE_SPREAD: 1.5,     // symbol radius x (1 + SPREAD * energy); energy = log of its line count: 1.5 -> longest = 2.5x shortest
+  BLOCK_ENERGY: 0.3,           // energy (size/brightness) of the top-level-code block
+  CLASS_BRIGHT: 1.0,           // brightness factor per kind ...
+  FUNCTION_BRIGHT: 0.9,
+  METHOD_BRIGHT: 0.75,
+  BLOCK_BRIGHT: 0.6,
+  SYMBOL_BRIGHT_BASE: 0.7,     // symbol brightness = kind factor x (BASE + PER_ENERGY * energy)
+  SYMBOL_BRIGHT_PER_ENERGY: 0.5,
+  CLASS_RING_AT: 0.55,         // radius of a class's permanent ring (0..1 across the quad)
+  CLASS_RING_WIDTH: 0.045,     // ring thickness
+  CLASS_RING_GAIN: 0.55,       // ring brightness
+  SYMBOL_COLLAPSE_DIST: 1.0,   // a class/function with children further than this from the focus collapses into a "+N" orb
+  BLOOM_SECONDS: 0.45,         // new symbols grow out of their parent over this long (effect speed; comfort rule: under 0.6 s)
+
+  // ---- Code panel (HTML overlay with the source of the focused symbol) --------------------------
+  CODE_FONT_PX: 13,            // monospace text size (CSS pixels)
+  CODE_PANEL_WIDTH_PX: 480,    // panel width on a wide screen (it docks to the right edge)
+  CODE_SHEET_HEIGHT_VH: 40,    // on a narrow screen (phone) the panel is a bottom sheet this tall (% of screen height)
+  CODE_BG: [0.02, 0.03, 0.08], // panel background colour
+  CODE_BG_ALPHA: 0.88,         // panel background opacity
+  CODE_TEXT: [0.86, 0.90, 1.0],        // ordinary code
+  CODE_LINENO: [0.40, 0.46, 0.66],     // line numbers
+  CODE_KEYWORD: [0.78, 0.62, 1.0],     // keywords (function, class, def, return ...)
+  CODE_STRING: [0.55, 0.90, 0.70],     // string literals
+  CODE_COMMENT: [0.46, 0.53, 0.68],    // comments
+  CODE_NUMBER: [1.0, 0.76, 0.46],      // numbers
+  CODE_HEADER: [0.72, 0.80, 1.0],      // title bar text
+
   // ---- Breadcrumb (HTML line at the bottom of the screen) -------------------------------
   CRUMB_FONT_PX: 13,           // text size
   CRUMB_COLOR: [0.72, 0.80, 1.0],      // ancestors

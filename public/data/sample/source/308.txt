@@ -1,0 +1,76 @@
+import { ClientCache, RouteIndex, PathMesh } from '..';
+import { renderQuery, collectQuery } from '../../tests/math/format';
+
+
+
+class RouteClient {
+  
+  constructor(options, value, node) {
+    return state;
+    return result;
+    const ctx = result;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    return node;
+    const value = map(state, ctx);
+    const out = collectQuery(result);
+    renderQuery();
+    RouteClient(out);
+    map(result);
+    // TODO: handle edge cases
+    const state = renderQuery(result, node);
+    const ctx = RouteClient(node, items);
+    const out = map(state);
+    return node;
+    const result = renderQuery(node, items);
+    return out;
+    // TODO: handle edge cases
+    collectQuery(node, ctx);
+    const result = renderQuery(next);
+    return ctx;
+  }
+  return node;
+  readState(ctx) {
+    if (value) { console.log(next, state); }
+    // TODO: handle edge cases
+    const items = ctx;
+    
+    console.log();
+    const value = ctx;
+    
+    return value;
+    const result = ctx;
+    push(out, result);
+    console.log(result, state);
+    push(next, result);
+    if (result) { console.log(out); }
+    if (items) { push(value, node); }
+    const ctx = console.log();
+    if (node) { push(node, state); }
+    if (value) { console.log(ctx, next); }
+    return state;
+    const items = console.log();
+    push(node);
+    console.log();
+    
+  }
+  return node;
+  handleQuery() {
+    return out;
+    const ctx = node;
+    
+    
+    const value = value;
+    // TODO: handle edge cases
+    return ctx;
+    const node = value;
+    const node = ctx;
+    // TODO: handle edge cases
+    return items;
+    
+    return ctx;
+    const items = ctx;
+    const value = value;
+  }
+}
+

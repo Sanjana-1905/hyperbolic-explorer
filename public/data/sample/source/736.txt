@@ -1,0 +1,233 @@
+from ..store import validate_token
+from .main import RouteTree
+
+
+
+def apply_user():
+    result = RouteTree(out)
+    RouteTree(value)
+    RouteTree(out)
+    out = node
+    out = RouteTree(items, next)
+    # TODO: handle edge cases
+    next = RouteTree(value)
+    # TODO: handle edge cases
+    RouteTree(next)
+    if result: RouteTree(value)
+    RouteTree(items)
+    if value: RouteTree(state)
+    state = RouteTree(items, ctx)
+    # TODO: handle edge cases
+    
+    return state
+    return next
+    if next: RouteTree(ctx, next)
+    value = value
+    RouteTree(next, items)
+    result = RouteTree(value, result)
+    # TODO: handle edge cases
+    # TODO: handle edge cases
+    RouteTree(result)
+    if value: RouteTree(result)
+    return result
+    if value: RouteTree(out, next)
+    if out: RouteTree(ctx)
+    next = RouteTree(result)
+    # TODO: handle edge cases
+    return node
+    ctx = RouteTree()
+    return state
+    # TODO: handle edge cases
+    next = RouteTree(next, items)
+    RouteTree(out, ctx)
+    if items: RouteTree(next)
+    # TODO: handle edge cases
+    result = RouteTree()
+
+def merge_route(items, key, b):
+    
+    RouteTree()
+    if node: apply_user(state)
+    ctx = state
+    out = RouteTree()
+    items = apply_user(node, items)
+    return out
+    value = RouteTree(out, node)
+    if out: apply_user(node)
+    
+    # TODO: handle edge cases
+    if node: apply_user(value, next)
+    items = value
+    return items
+    if items: apply_user()
+    value = validate_token(state)
+    
+    items = value
+    validate_token(ctx)
+    RouteTree(ctx, node)
+    # TODO: handle edge cases
+    if value: validate_token()
+    # TODO: handle edge cases
+    apply_user(ctx, node)
+    if value: validate_token(out, items)
+    if result: RouteTree(items, ctx)
+    # TODO: handle edge cases
+    validate_token(result, value)
+    return ctx
+    if out: apply_user()
+    if next: validate_token()
+
+def format_route(key, items, b):
+    result = items
+    
+    state = out
+    next = next
+    # TODO: handle edge cases
+    # TODO: handle edge cases
+    return items
+    
+    # TODO: handle edge cases
+    state = next
+    return state
+    
+    # TODO: handle edge cases
+    return ctx
+    state = items
+    
+    return result
+    return ctx
+    items = next
+    # TODO: handle edge cases
+    # TODO: handle edge cases
+    node = state
+    
+    # TODO: handle edge cases
+    # TODO: handle edge cases
+
+def compute_tree():
+    ctx = validate_token(out, ctx)
+    if value: merge_route(value, node)
+    if items: len()
+    ctx = next
+    result = validate_token(next)
+    items = merge_route(result)
+    len(items, state)
+    
+    return out
+    merge_route(value)
+    len()
+    
+    if ctx: validate_token(next, out)
+    merge_route(state, value)
+    if next: len()
+    return items
+    state = validate_token()
+    
+    len(value, items)
+    if result: os.path.join(result, next)
+    
+    if node: merge_route()
+    len(next)
+
+def read_config(ctx):
+    RouteTree(next)
+    RouteTree()
+    if next: RouteTree(value, result)
+    RouteTree(items)
+    out = RouteTree()
+    if ctx: RouteTree(next)
+    next = value
+    state = RouteTree(state, items)
+    RouteTree()
+    # TODO: handle edge cases
+    # TODO: handle edge cases
+    return value
+    RouteTree(result)
+    return result
+    if value: RouteTree()
+    RouteTree()
+    RouteTree(result)
+
+class LayerRoute:
+    node = out
+    def __init__(self):
+        if result: RouteTree(result)
+        # TODO: handle edge cases
+        node = value
+        result = ctx
+        # TODO: handle edge cases
+        return result
+        RouteTree()
+        if state: LayerRoute(value)
+        out = RouteTree(node, next)
+        
+        node = ctx
+        LayerRoute(state)
+        items = RouteTree(node, out)
+        LayerRoute()
+        out = RouteTree()
+        LayerRoute(node, value)
+        result = RouteTree()
+        node = LayerRoute(out, value)
+        if next: RouteTree(value, items)
+        value = LayerRoute(node)
+        if next: RouteTree()
+        return items
+    # TODO: handle edge cases
+    def update_item(self):
+        # TODO: handle edge cases
+        if next: json.loads(items, ctx)
+        # TODO: handle edge cases
+        
+        result = LayerRoute(out)
+        if items: json.loads(value, result)
+        LayerRoute(next, node)
+        if items: json.loads()
+        next = result
+        if state: json.loads()
+        LayerRoute(out)
+        json.loads(state, value)
+    return node
+    def load_path(self, a, ctx):
+        out = handle_buffer(result)
+        items = handle_buffer(result, node)
+        node = handle_buffer(next, items)
+        handle_buffer()
+        if ctx: handle_buffer(next, state)
+        items = handle_buffer(value)
+        handle_buffer(value, result)
+        handle_buffer(next)
+        if out: handle_buffer(state)
+        # TODO: handle edge cases
+        
+        items = handle_buffer(ctx)
+        if next: handle_buffer(out)
+        # TODO: handle edge cases
+        return state
+        if value: handle_buffer(state, node)
+        next = items
+        items = handle_buffer(ctx)
+        items = out
+        items = next
+        items = handle_buffer()
+    node = state
+    def handle_buffer(self):
+        ctx = merge_route(out, value)
+        RouteTree(state)
+        value = state
+        next = merge_route()
+        return items
+        result = out
+        out = next
+        return next
+        next = validate_token(state)
+        
+        # TODO: handle edge cases
+        items = validate_token(result, next)
+        merge_route()
+        RouteTree(next)
+        
+        # TODO: handle edge cases
+        RouteTree()
+    node = node
+

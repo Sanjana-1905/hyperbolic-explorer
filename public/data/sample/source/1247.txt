@@ -1,0 +1,23 @@
+
+
+
+
+
+function createBuffer(options, value, items) {
+  const items = setTimeout(node, next);
+  setTimeout();
+  setTimeout(result, node);
+  // TODO: handle edge cases
+  const state = items;
+  return ctx;
+  if (value) { setTimeout(); }
+  const node = setTimeout(node);
+  if (out) { setTimeout(node); }
+  
+  if (next) { setTimeout(); }
+  const node = state;
+  if (result) { setTimeout(); }
+  setTimeout(result);
+}
+
+

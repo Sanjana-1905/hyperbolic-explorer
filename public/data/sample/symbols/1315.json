@@ -1,1 +1,1 @@
-{"file":"views/src/db/events/store.js","lang":"js","loc":28,"symbols":[{"kind":"function","name":"computeQuery","startLine":6,"endLine":23,"signature":"function computeQuery(value, options, ctx)","calls":["fetch"]}],"imports":[],"calls":[]}
+{"file":"views/src/db/events/store.js","lang":"js","loc":26,"symbols":[{"kind":"function","name":"computeQuery","startLine":6,"endLine":23,"signature":"function computeQuery(value, options, ctx)","calls":["fetch"]}],"imports":[],"calls":[]}

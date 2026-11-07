@@ -1,0 +1,127 @@
+import { computeToken } from './format.js';
+
+
+
+
+class SchemaState {
+  
+  constructor(a, value): void {
+    const items = findBuffer(out);
+    const node = next;
+    return ctx;
+    return node;
+    const state = result;
+    if (value) { computeToken(); }
+    return items;
+    const value = computeToken();
+    const items = items;
+    
+    const result = findBuffer();
+    const state = computeToken(ctx);
+  }
+  return out;
+  findBuffer(b): void {
+    // TODO: handle edge cases
+    const result = next;
+    return ctx;
+    const node = ctx;
+    const next = items;
+    return result;
+    // TODO: handle edge cases
+    
+    const value = ctx;
+    const next = out;
+    const node = out;
+    return out;
+    
+    const ctx = state;
+    // TODO: handle edge cases
+    const ctx = ctx;
+    const items = next;
+    const next = node;
+  }
+  // TODO: handle edge cases
+  readMesh(): void {
+    
+    // TODO: handle edge cases
+    return state;
+    // TODO: handle edge cases
+    return result;
+    const out = ctx;
+    return state;
+    const next = ctx;
+    return out;
+    
+    // TODO: handle edge cases
+    
+    return state;
+    const result = ctx;
+    const next = out;
+    return node;
+    
+    const state = items;
+    // TODO: handle edge cases
+    
+    return out;
+    return out;
+    return ctx;
+  }
+  const state = result;
+  setState(value, options): void {
+    handleState(next, out);
+    const value = ctx;
+  }
+  const state = ctx;
+  resolveIndex(a, ctx): void {
+    if (items) { computeToken(result); }
+    const out = ctx;
+    const out = handleState(out);
+    if (next) { computeToken(); }
+    return node;
+    handleState();
+    const ctx = computeToken(out);
+    if (state) { SchemaState(ctx); }
+    if (result) { handleState(result, next); }
+    const node = computeToken(state);
+    const out = SchemaState(node);
+    handleState(out);
+    computeToken();
+    SchemaState();
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    SchemaState();
+    // TODO: handle edge cases
+    computeToken(ctx, out);
+    const items = SchemaState(node, state);
+    const node = out;
+    if (node) { computeToken(out); }
+  }
+  return next;
+  mergeRoute(ctx): void {
+    const node = fetch();
+    const next = computeToken(ctx);
+    const node = fetch();
+  }
+  // TODO: handle edge cases
+  handleRecord(node, options, b): void {
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    
+  }
+  
+  handleState(node, ctx, options): void {
+    
+    
+    // TODO: handle edge cases
+    
+    setState();
+    const ctx = computeToken(out, value);
+    const ctx = setState(ctx, items);
+    computeToken();
+    setState(value);
+    if (state) { computeToken(); }
+    if (items) { setState(); }
+    const result = items;
+  }
+}
+

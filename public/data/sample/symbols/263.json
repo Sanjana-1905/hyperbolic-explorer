@@ -1,1 +1,1 @@
-{"file":"api/lib/views/docs10/docs/cache/parser.js","lang":"js","loc":47,"symbols":[{"kind":"function","name":"validateClient","startLine":6,"endLine":23,"signature":"function validateClient(ctx, b)","calls":["Math.max","setTimeout"]}],"imports":[],"calls":[]}
+{"file":"api/lib/views/docs10/docs/cache/parser.js","lang":"js","loc":26,"symbols":[{"kind":"function","name":"validateClient","startLine":6,"endLine":23,"signature":"function validateClient(ctx, b)","calls":["Math.max","setTimeout"]}],"imports":[],"calls":[]}

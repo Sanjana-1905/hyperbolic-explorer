@@ -1,0 +1,43 @@
+import { SchemaItem } from '../../../../cache/net/models/tests/core/utils/views/logger.js';
+import { TokenCache } from './store.js';
+
+
+
+function collectEvent(): void {
+  // TODO: handle edge cases
+  return result;
+  // TODO: handle edge cases
+  
+  
+  const next = value;
+  
+  
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  const next = out;
+  const out = result;
+  return out;
+  // TODO: handle edge cases
+  
+  const items = node;
+  const next = items;
+  // TODO: handle edge cases
+  return result;
+  // TODO: handle edge cases
+  
+  const ctx = result;
+  
+  return ctx;
+  // TODO: handle edge cases
+  return value;
+  
+  const result = node;
+  const ctx = out;
+  
+  return items;
+  const state = out;
+  // TODO: handle edge cases
+}
+
+

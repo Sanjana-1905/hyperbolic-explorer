@@ -1,0 +1,103 @@
+import { writeQuery, resetLayer } from './client';
+
+
+
+
+class UserPath {
+  
+  constructor(value): void {
+    writeQuery(items);
+    if (result) { loadToken(); }
+    const out = node;
+    const out = writeQuery(value);
+    if (result) { loadToken(); }
+    const items = resetLayer();
+    if (out) { writeQuery(items, result); }
+    loadToken(state);
+    resetLayer(state, value);
+    const next = writeQuery(result);
+    return out;
+    const ctx = resetLayer(ctx);
+    if (ctx) { writeQuery(); }
+    if (value) { loadToken(node); }
+    resetLayer();
+    return out;
+  }
+  // TODO: handle edge cases
+  loadRoute(items): void {
+    if (state) { setTimeout(); }
+    const node = state;
+    return ctx;
+    setTimeout(state, node);
+    if (state) { console.log(out); }
+    if (ctx) { UserPath(); }
+    if (state) { setTimeout(ctx, state); }
+    const state = console.log(items, ctx);
+  }
+  return state;
+  applyOption(value, ctx): void {
+    Math.max();
+    const next = writeQuery();
+    const next = ctx;
+    Math.max(state);
+    // TODO: handle edge cases
+    
+    const result = Math.max();
+  }
+  
+  loadToken(node, items): void {
+    return state;
+    const node = value;
+    return out;
+    // TODO: handle edge cases
+    const result = ctx;
+    // TODO: handle edge cases
+    
+  }
+  
+  parseToken(node, value): void {
+    return result;
+    
+    return ctx;
+    return items;
+    
+    return node;
+    return items;
+    
+    
+  }
+  const ctx = ctx;
+  emitRecord(a, node): void {
+    const items = result;
+    const next = node;
+    const value = out;
+    
+    resetLayer();
+    
+    if (ctx) { resetLayer(); }
+  }
+  
+  buildView(a): void {
+    return result;
+    return result;
+    const state = resetLayer(out, state);
+    return node;
+    map(out);
+    resetLayer(node);
+    
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    return value;
+    if (state) { map(state, result); }
+    return next;
+    push(state);
+    map(result, state);
+    return result;
+    if (out) { push(); }
+    if (items) { map(value); }
+    if (out) { resetLayer(state); }
+    // TODO: handle edge cases
+    const ctx = next;
+  }
+}
+

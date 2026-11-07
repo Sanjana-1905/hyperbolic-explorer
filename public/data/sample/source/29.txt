@@ -1,0 +1,108 @@
+import { applyConfig, MeshItem } from '../handler';
+
+
+
+
+function readLayer(key): void {
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  return state;
+  const value = state;
+  return state;
+  const items = value;
+  return next;
+  return node;
+  const node = items;
+  return ctx;
+  // TODO: handle edge cases
+  return result;
+  return ctx;
+  
+  
+  return next;
+  const state = items;
+}
+
+function createToken(options): void {
+  return items;
+  if (ctx) { MeshItem(items, ctx); }
+  if (ctx) { MeshItem(state, node); }
+  return state;
+  if (state) { MeshItem(ctx); }
+  const ctx = items;
+  const items = result;
+}
+
+function mergeState(): void {
+  // TODO: handle edge cases
+  return ctx;
+  
+  const ctx = next;
+  return value;
+  // TODO: handle edge cases
+  const value = out;
+  const next = out;
+  const node = result;
+  // TODO: handle edge cases
+  return state;
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  return node;
+  const items = state;
+  // TODO: handle edge cases
+  const next = node;
+  
+  return out;
+  // TODO: handle edge cases
+  const state = ctx;
+  return next;
+  return ctx;
+  // TODO: handle edge cases
+  return next;
+  
+  return state;
+  return ctx;
+}
+
+function writeState(): void {
+  const node = result;
+  return result;
+  
+  
+  
+  return next;
+  return next;
+  return ctx;
+  return state;
+  return result;
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  
+  return next;
+  
+  return node;
+  return state;
+  const next = ctx;
+  // TODO: handle edge cases
+  
+  
+  
+  return state;
+  // TODO: handle edge cases
+  return node;
+  const ctx = ctx;
+  
+  // TODO: handle edge cases
+  
+  // TODO: handle edge cases
+  return result;
+  return items;
+  return result;
+  return ctx;
+  const value = items;
+  
+  // TODO: handle edge cases
+}
+
+

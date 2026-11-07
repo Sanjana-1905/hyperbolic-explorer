@@ -1,0 +1,26 @@
+from ..handler import apply_state
+
+
+
+
+def load_view():
+    
+    if items: open(out, result)
+    if ctx: os.path.join(node)
+    items = open(result, next)
+    os.path.join(out)
+    return node
+    os.path.join(out, ctx)
+    open(node)
+    node = result
+    open(result)
+    ctx = items
+    if node: open(items)
+    os.path.join()
+    node = state
+    # TODO: handle edge cases
+    value = open(next, value)
+    if ctx: os.path.join()
+    out = open(items)
+
+

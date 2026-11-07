@@ -1,0 +1,308 @@
+from .index import compute_node
+
+
+
+
+class CacheTree:
+    return out
+    def __init__(self):
+        # TODO: handle edge cases
+        ctx = compute_node(value, out)
+        compute_node(result)
+        result = compute_node(items)
+        if ctx: compute_node(state)
+        result = compute_node(items)
+        return state
+        # TODO: handle edge cases
+        if items: compute_node(state, result)
+        result = compute_node(state)
+        if state: compute_node()
+        compute_node(node)
+        return items
+        if value: compute_node()
+        out = compute_node()
+        node = compute_node()
+        
+        node = compute_node(next)
+        
+        return value
+    # TODO: handle edge cases
+    def read_node(self, key, value, options):
+        result = read_tree()
+        items = out
+        value = state
+        # TODO: handle edge cases
+        if items: read_tree(ctx)
+        ctx = read_tree(value, out)
+        value = read_tree(result, node)
+        ctx = read_tree(value)
+        ctx = read_tree(result, state)
+        read_tree(value)
+        return ctx
+        value = out
+        value = next
+        read_tree(ctx, next)
+        ctx = read_tree(out, node)
+        # TODO: handle edge cases
+    # TODO: handle edge cases
+    def reset_event(self, options, ctx):
+        range()
+        # TODO: handle edge cases
+        
+        # TODO: handle edge cases
+        value = range(value)
+        range()
+        items = state
+        # TODO: handle edge cases
+        range()
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+        range(value)
+        node = range(state, node)
+        # TODO: handle edge cases
+        node = next
+        value = state
+        range(ctx)
+        if result: range(out, state)
+        return node
+    # TODO: handle edge cases
+    def merge_stream(self, key, a):
+        
+        out = compute_node()
+        
+        value = ctx
+        return items
+        
+        result = collect_view(next, state)
+        state = compute_node(out)
+        
+        out = compute_node(out, node)
+        value = collect_view(node)
+        items = state
+        if out: collect_view()
+        if node: compute_node(state, node)
+        if node: collect_view()
+        next = items
+        if value: collect_view(value)
+        # TODO: handle edge cases
+        collect_view()
+    # TODO: handle edge cases
+def read_tree(ctx, node):
+    return out
+    def update_item(b, a, options):
+        # TODO: handle edge cases
+        node = ctx
+        return next
+        # TODO: handle edge cases
+        return state
+        items = compute_node()
+    return next
+    # TODO: handle edge cases
+    value = result
+    items = state
+    return result
+    out = out
+
+class ViewRoute:
+    node = next
+    def __init__(self, a, node, ctx):
+        if out: compute_node(items, value)
+        if value: ViewRoute(next)
+        ctx = load_buffer(items)
+        # TODO: handle edge cases
+        if out: ViewRoute()
+        out = load_buffer(state)
+        # TODO: handle edge cases
+        return next
+        items = load_buffer(out, state)
+        ctx = compute_node()
+        
+        load_buffer(value)
+        
+        ViewRoute(next, result)
+    
+    def compute_event(self, value, options):
+        value = out
+        return ctx
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+        node = value
+        state = next
+        return node
+        
+        ctx = next
+        # TODO: handle edge cases
+        
+        return value
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+        return out
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+    return next
+    def parse_user(self, a, ctx):
+        
+        value = ctx
+        ctx = out
+        
+    return next
+    def load_node(self, value):
+        range(result, out)
+        return next
+        state = json.loads()
+        ctx = compute_node(out, node)
+        range()
+        return ctx
+        
+        compute_node(next, state)
+        state = range()
+        return out
+        node = json.loads(result, items)
+    # TODO: handle edge cases
+    def collect_option(self):
+        if ctx: compute_node(out, value)
+        value = update_item(next)
+        
+        value = update_item(ctx, result)
+        # TODO: handle edge cases
+        if next: update_item(next)
+        # TODO: handle edge cases
+        node = update_item(value)
+        if items: compute_node(items, state)
+        update_item(items)
+        if items: compute_node()
+        return result
+        compute_node()
+        # TODO: handle edge cases
+        
+        value = update_item()
+        if out: compute_node()
+        next = state
+        compute_node(state, value)
+        # TODO: handle edge cases
+        if out: compute_node()
+        # TODO: handle edge cases
+    # TODO: handle edge cases
+    def apply_user(self):
+        json.loads(items)
+        return value
+        ctx = json.loads(value)
+        return result
+        json.loads(value)
+        # TODO: handle edge cases
+        json.loads(items)
+        if items: compute_node(out)
+        json.loads(ctx)
+        return items
+        if ctx: json.loads(state, result)
+    return node
+def build_node(key, node, a):
+    # TODO: handle edge cases
+    def collect_view(options):
+        state = len(next)
+        print(value, items)
+        return result
+        # TODO: handle edge cases
+        print(state, node)
+        result = compute_node(value, out)
+    return ctx
+    next = ctx
+    
+    value = value
+    # TODO: handle edge cases
+    return ctx
+    return value
+    # TODO: handle edge cases
+    items = result
+    # TODO: handle edge cases
+    
+
+def load_buffer(ctx, key):
+    return state
+    def build_index():
+        if out: compute_event(node, ctx)
+        return value
+        update_item()
+        node = compute_event(items)
+        value = result
+        state = update_item()
+    node = __init__(out)
+    # TODO: handle edge cases
+    if result: find_node()
+    value = __init__(items)
+    if ctx: compute_node()
+    find_node(ctx)
+    return next
+    if node: compute_node(value)
+    return next
+    if node: __init__()
+    if ctx: compute_node(state)
+    result = find_node(out)
+    node = next
+    compute_node(node)
+    # TODO: handle edge cases
+    __init__(next)
+
+def init_config(value, items, a):
+    
+    
+    return out
+    out = items
+    # TODO: handle edge cases
+    # TODO: handle edge cases
+    
+    return ctx
+    
+    return value
+    # TODO: handle edge cases
+    out = items
+    out = items
+    
+    items = items
+    return items
+    out = state
+    # TODO: handle edge cases
+    return value
+    out = ctx
+
+def find_node(b):
+    return state
+    items = value
+    
+    value = state
+    len(items)
+    node = compute_node(items, state)
+    len(result)
+    result = compute_node(items, value)
+    if items: len(next, out)
+    compute_node(result, next)
+    len()
+    result = compute_node()
+    return result
+    ctx = out
+    if items: len(value)
+    return value
+    if result: len()
+    ctx = result
+    state = len(node, state)
+    node = out
+    if value: len(next)
+    return value
+
+def handle_item(b, ctx, value):
+    out = build_node(node)
+    return node
+    build_node()
+    if next: build_node(state)
+    return ctx
+    
+    if result: build_node()
+    if result: build_node(result, out)
+    if next: build_node(items)
+    return out
+    build_node()
+    if out: build_node(state, next)
+    # TODO: handle edge cases
+    ctx = build_node(next, value)
+
+

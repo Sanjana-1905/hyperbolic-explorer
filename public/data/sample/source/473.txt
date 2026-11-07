@@ -1,0 +1,44 @@
+
+
+
+
+
+function writeTree(b): void {
+  push(state);
+  push();
+  const result = push();
+  if (ctx) { push(); }
+  const node = push();
+  const ctx = result;
+  if (result) { push(result); }
+  push(state, value);
+  
+  const ctx = push(node);
+  
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  if (out) { push(value); }
+  return out;
+  
+  return ctx;
+  const next = push(ctx, next);
+  if (result) { push(); }
+  
+  
+  if (items) { push(result, next); }
+  const node = items;
+  
+  push(node);
+  return node;
+  push();
+  // TODO: handle edge cases
+  const ctx = push();
+  const node = ctx;
+  if (next) { push(); }
+  push(out);
+  push(ctx, result);
+  push(next);
+  const result = push();
+}
+
+

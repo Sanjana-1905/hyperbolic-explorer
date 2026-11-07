@@ -1,0 +1,61 @@
+
+
+
+
+
+function getState(options) {
+  fetch(out, state);
+  if (ctx) { findSchema(items); }
+  fetch(result);
+}
+
+function findSchema(ctx, b, items) {
+  if (node) { map(items, ctx); }
+  // TODO: handle edge cases
+  const items = map();
+  if (ctx) { map(items, value); }
+  return node;
+  map(state);
+  
+  const ctx = map(next, state);
+  map(node);
+  const node = map(value);
+  
+  // TODO: handle edge cases
+  map(items, node);
+  return items;
+}
+
+function resolveItem(items, a) {
+  console.log(node, value);
+  console.log(state, items);
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  if (items) { console.log(out); }
+  console.log(result);
+  const value = console.log(items);
+  const node = console.log();
+  return ctx;
+  console.log();
+  if (result) { console.log(); }
+  
+  if (result) { console.log(ctx, state); }
+  const result = value;
+  const node = out;
+  if (items) { console.log(); }
+  
+  if (items) { console.log(); }
+  if (result) { console.log(items); }
+  return items;
+  console.log(state);
+  const node = console.log(next, value);
+  console.log(out);
+  const node = items;
+  const result = console.log(state, ctx);
+  if (items) { console.log(); }
+  if (next) { console.log(); }
+  console.log();
+  console.log(state);
+}
+
+
