@@ -244,6 +244,22 @@ export const THEME = {
   UI_ACTIVE_ALPHA: 0.92,       // ... and its opacity
   INTRO_CARD_WIDTH_PX: 380,    // width of the "How to explore" card
 
+  SYMBOL_FOCUS_SCALE: 0.4,     // when a FILE or SYMBOL is focused its "sun" (core and billboard) is this fraction of a folder sun's size:
+                               // at code level you are zoomed in, and a full-size sun would swallow the small shapes around it
+
+  // ---- Git heat (H key / Heat button): files coloured by commit count or recency -----------------------
+  HEAT_COLD: [0.20, 0.42, 1.0],    // coldest (few commits / oldest change): blue
+  HEAT_MID: [0.95, 0.32, 0.70],    // middle: magenta
+  HEAT_HOT: [1.0, 0.66, 0.16],     // hottest (many commits / newest change): orange
+  HEAT_TINT: 0.88,                 // how far heat replaces a node's own colour (0 = none, 1 = fully the ramp colour)
+  HEAT_BRIGHT: 1.1,                // hottest nodes get this much extra brightness (x (1 + this))
+  HEAT_SIZE: 1.0,                  // hottest nodes are this much bigger (1.0 = 2x)
+  HEAT_NEUTRAL_DIM: 0.5,           // with heat on, nodes without git data keep their colour but are dimmed to this fraction
+  HEAT_LEGEND_WIDTH_PX: 120,       // width of the legend's colour bar
+
+  // ---- Info card -------------------------------------------------------------------------------
+  INFO_CARD_WIDTH_PX: 300,         // width of the info card (it shrinks on a narrow screen)
+
   // ---- Search result: the path from the root to the chosen node lights up for a few seconds ---------
   PATH_COLOR: [1.0, 0.92, 0.55],   // colour of the highlighted path: warm light gold
   PATH_TINT: 0.8,              // how far path nodes/edges lean toward PATH_COLOR (0 = own colour, 1 = fully gold)

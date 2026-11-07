@@ -10,12 +10,12 @@
       canvas { display: block; }
       /* Info overlay showing the focused node's name and path */
       #info {
-        position: fixed; top: 12px; left: 12px; right: calc(12px + var(--panel-w, 0px));
+        position: fixed; top: 12px; left: 12px; right: calc(12px + var(--panel-w, 0px) + var(--legend-w, 0px));
         pointer-events: none;
         text-shadow: 0 0 4px #000;
       }
       #info .name { font-size: 20px; font-weight: 600; }
-      #info .path { font-size: 13px; opacity: 0.75; word-break: break-all; }
+      #info .path { font-size: 13px; opacity: 0.75; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
       #help {
         position: fixed; bottom: 10px; left: 12px;
         font-size: 12px; opacity: 0.55; pointer-events: none;

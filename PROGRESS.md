@@ -383,5 +383,33 @@ Sub-steps 6a search · 6b info card + git heat · 6c minimap + second dataset ·
   file lands on its file with the path lit, marks clear after fade, Backspace returns; phone portrait (rows 48 px) and landscape (rows 40 px) tap-select works
 - Not measured: index time on the phone itself (on a real network the 1,475 small requests take longer than on localhost)
 
+### Clutter fixes at code level (before 6b)
+- [x] The focus "sun" is smaller when a FILE or SYMBOL is focused (`SYMBOL_FOCUS_SCALE` 0.4: core and billboard; `uFocusScale` uniform, 1 for folders so the
+      folder views are unchanged)
+- [x] Class/function orbs are labelled with their NAME ("Parser +12"), not a bare "+N"; at code level only the 4 biggest orbs are labelled
+- [x] Clicking the "(top level)" block focuses the FILE (the block stands for the whole file's loose code)
+
+### 6b — Info card and git heat  ✅ done (waiting for your phone check)
+- [x] **Info card** (`src/infocard.js`, Info button on the toolbar): kind, path, lines of code, symbols, git commits, last modified, imports in/out, calls in/out.
+      Folders add up their files (commits, lines, newest date) and count imports that cross the folder's boundary; a symbol shows its signature, its own lines
+      and calls in/out. Open by default only on a roomy screen (≥ 900×600); on a phone it starts closed. It stops before the code panel, starts right of the
+      toolbar columns in landscape, scrolls if too tall; the search box and intro card sit above it
+- [x] **Git heat** (`src/heat.js`, Heat button / **H**: off → commits → recency → off). Numbers only: each node's heat goes into the existing `aFlag` hook as
+      2 + heat (0 = none, 1 = the reserved ring, 2..3 = heat); the shader decodes it, tints by a 3-stop ramp (blue → magenta → orange, `HEAT_*` in theme.js),
+      makes hot nodes bigger and brighter, and (heat on) dims nodes WITHOUT git data to half so they stay neutral. Symbols take their file's heat
+- [x] **Heat formulas.** commits: `heat = ln(1 + commits) / ln(1 + most)` (most = 99: 9 commits → 0.5, 1 commit → 0.15). recency: `(time − oldest) / (newest − oldest)`.
+      A folder = the average of its files that have data, then **ranked** among all folders (0..1): plain averages bunch in the middle and the maximum made every big folder
+      hot (tried both, see the screenshots in the log)
+- [x] **Legend** (top right, left of the code panel): title, a cold→hot colour bar, the numbers under its ends (1 … max commits, or oldest … newest date); the
+      node title makes room for it (`--legend-w`); tooltip says grey = no git data
+- [x] **Sample git data is FAKE and says so**: `make_sample_tree.py` now generates a patterned history from its own random generator (seed + 3): ~25 % of the
+      folders two levels down are "hot" (median ≈ 14 commits, changed within weeks), the rest calm (median ≈ 3, anywhere in 4 years), ~10 % of files have none.
+      The tree root carries `"fakeGit": true`; the legend title says "(FAKE data)" and the card says "Sample data: the git numbers are FAKE". Only `sample_tree.json`
+      changed (symbols/links/source are byte-identical)
+- [x] Phone fixes found while testing: toolbar is icon-only on narrow screens (one row of 44 px buttons); landscape toolbar can use 2 columns and the card moves right
+      of them; the node title is one line with an ellipsis
+- Tests: `heat.test.js` (formulas, neutral files, folder ranking, sample is flagged fake, link counts)
+- Numbers (headless, M4, 1000×800): 9 draw calls at the root (10 when link arcs are drawn), the same with heat on or off; 60 fps vsync in all three cases tried (root heat off, root heat on, file focused with recency heat). Uncapped fps not measured
+
 ## Later
 5 Cross-file links (done early, in 4c) · 6 Search/info/git heat/2nd dataset · 7 AR tabletop · 8 User study + report · 9 VR Cardboard + final visual polish

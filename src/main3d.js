@@ -31,12 +31,14 @@ import { buildTree, computeLayout3d, layoutSymbols, nodePath } from './layout3d.
 import { createNavigation } from './navigation.js';
 import { createSymbolStore, buildSymbolNodes, hash01 } from './symbols.js';
 import {
-  createLinkData, subjectOf, selectLinks, buildArcs, arcTarget, bundledControlPoints, linkLists, symbolName,
+  createLinkData, linkCounts, subjectOf, selectLinks, buildArcs, arcTarget, bundledControlPoints, linkLists, symbolName,
   confidenceDots, liftEnd, MAX_VISIBLE_LINKS, CONTROL_POINTS,
 } from './links.js';
 import { createToolbar } from './toolbar.js';
 import { createIndex } from './search.js';
 import { createSearchUI } from './searchui.js';
+import { createInfoCard } from './infocard.js';
+import { computeHeat, encodeHeat, HEAT, HEAT_NAMES } from './heat.js';
 import { createCodePanel } from './codepanel.js';
 import { createFpsCounter } from './fps.js';
 import {
@@ -88,6 +90,7 @@ function updateHelp() {
     'Drag to look · scroll to zoom · click a node to fly in · keys: Backspace back · I imports · K calls · D folder deps · C code · F fps';
   if (typeof refreshToolbar === 'function') refreshToolbar();
 }
+const MAX_CODE_ORB_LABELS = 4;  // at file/symbol level, label at most this many "+N" orbs (the biggest on screen)
 const COLLAPSE_MIN_NODES = 4;   // folders with fewer nodes inside than this are never collapsed (a "+2" orb is pointless)
 const fps = createFpsCounter(() => `${labels ? labels.count : 0} labels · ${visibleCount} nodes · ${dynamicCount} symbols · ${linkArcs.length} links`);
 
@@ -117,6 +120,10 @@ const uTime = { value: 0 };
 const uBloom = { value: 0 };
 // Strength 0..1 of the search-result path highlight (set every frame from the time since the highlight started).
 const uMark = { value: 0 };
+// 1 for a folder focus, SYMBOL_FOCUS_SCALE for a file or symbol focus: shrinks the focus "sun" at code level.
+const uFocusScale = { value: 1 };
+// 1 while git heat is on (nodes without git data are dimmed), else 0.
+const uHeatOn = { value: 0 };
 
 // Procedural nebula + stars: one big inward-facing sphere that follows the
 // camera (so it behaves like the sky: no parallax), drawn first, ignoring depth.
@@ -210,9 +217,9 @@ let sunMesh = null;             // the focus sun billboard (1 draw call)
 let dustMesh = null;            // faint background specks (1 draw call)
 
 // The two shader uniforms that change on refocus. _Focus is the whole GPU refocus.
-const focusUniforms = { _Focus: { value: new THREE.Vector3() }, uFocusId: { value: -1 }, uTime, uBloom, uMark };
+const focusUniforms = { _Focus: { value: new THREE.Vector3() }, uFocusId: { value: -1 }, uTime, uBloom, uMark, uFocusScale, uHeatOn };
 const edgeUniforms = { _Focus: focusUniforms._Focus, uTime, uBloom, uMark, uResolution: { value: new THREE.Vector2(1, 1) }, uLineWidth: { value: 1.8 } };
-const sunUniforms = { _Focus: focusUniforms._Focus, uFocusPos: { value: new THREE.Vector3() }, uTime };
+const sunUniforms = { _Focus: focusUniforms._Focus, uFocusPos: { value: new THREE.Vector3() }, uTime, uFocusScale };
 const linkUniforms = { _Focus: focusUniforms._Focus, uTime, uBloom, uResolution: { value: new THREE.Vector2(1, 1) }, uLineWidth: { value: 2.2 }, uGain: { value: 1 } };
 
 // ---------------------------------------------------------------------------
@@ -455,7 +462,7 @@ function updateHalos() {
 // Example: folder, energy 0.5, not a hero, at |p| = 0 -> 0.04 * (1 + 2*0.5) * 0.5 = 0.04.
 function coreRadius(node, p) {
   let rho;
-  if (node === focusNode) rho = THEME.FOCUS_R;
+  if (node === focusNode) rho = THEME.FOCUS_R * uFocusScale.value;
   else if (node.type === 'folder') {
     const hero = node.seed >= THEME.HERO_AT ? THEME.HERO_SIZE : 1;
     rho = THEME.FOLDER_R * (1 + THEME.SIZE_SPREAD * node.energy) * hero;
@@ -565,6 +572,7 @@ function addSymbolNodes(file, made) {
   const bornAt = performance.now() / 1000;
   for (const node of made) {
     node.born = bornAt;
+    node.flag = heatFlagFor(node);   // symbols of a hot file glow hot too
     node.energy = node.energy ?? 0.5;
     slotFor(node);
     writeInstance(g, node.id, node);
@@ -665,6 +673,7 @@ function focusOn(node, animate = true) {
   focusNode = node;
   focusUniforms.uFocusId.value = node.id;
   sunUniforms.uFocusPos.value.set(node.pos.x, node.pos.y, node.pos.z);
+  uFocusScale.value = node.type === 'folder' ? 1 : THEME.SYMBOL_FOCUS_SCALE;
   nav.flyTo(node.pos, animate);
   updateInfo();
   showCode(node);
@@ -832,6 +841,8 @@ const toolbar = createToolbar({
   onBack: () => goBack(),
   onImports: () => { showImports = !showImports; linksDirty = true; updateHelp(); },
   onCalls: () => { showCalls = !showCalls; linksDirty = true; updateHelp(); },
+  onInfo: () => { if (infoCard) { infoCard.toggle(); refreshToolbar(); } },
+  onHeat: () => cycleHeat(),
   onFolderDeps: () => { showFolderDeps = !showFolderDeps; linksDirty = true; updateHelp(); },
 });
 function refreshToolbar() {
@@ -840,6 +851,7 @@ function refreshToolbar() {
     backDepth: nav.backDepth, isRoot: !focusNode.parent,
     focusKind: focusNode.type === 'symbol' ? 'symbol' : focusNode.type === 'folder' ? 'folder' : 'file',
     showImports, showCalls, showFolderDeps,
+    infoOpen: infoCard ? infoCard.open : false, heatMode,
   });
 }
 function updateBackButton() { refreshToolbar(); }
@@ -934,6 +946,87 @@ function stepMark(now) {
   }
 }
 
+
+// ---------------------------------------------------------------------------
+// Git heat (Phase 6b) and the info card
+// ---------------------------------------------------------------------------
+let heatData = null;            // heat.js: { commits, recency, ... } per base node id (-1 = no git data)
+let heatMode = HEAT.OFF;
+let infoCard = null;
+let fakeGit = false;            // the sample dataset's git history is generated, not real: say so on screen
+
+// The aFlag value (see heat.js) for a node under the current heat mode. Symbols take their file's heat.
+function heatFlagFor(node) {
+  if (heatMode === HEAT.OFF || !heatData) return 0;
+  const base = node.type === 'symbol' ? node.file : node;
+  const arr = heatMode === HEAT.COMMITS ? heatData.commits : heatData.recency;
+  return encodeHeat(arr[base.id]);
+}
+
+// H key / Heat button: off -> commits -> recency -> off. Only numbers change: aFlag of every node, one uniform.
+function cycleHeat() {
+  heatMode = (heatMode + 1) % 3;
+  for (const node of allNodes) {
+    node.flag = heatFlagFor(node);
+    nodeMesh.geometry.arrays.aFlag[node.id] = node.flag;
+  }
+  nodeMesh.geometry.attributes.aFlag.needsUpdate = true;
+  uHeatOn.value = heatMode === HEAT.OFF ? 0 : 1;
+  updateLegend();
+  refreshToolbar();
+  dirty = true;     // the halos copy node data
+}
+
+const fmtDate = (ms) => new Date(ms).toISOString().slice(0, 10);
+function updateLegend() {
+  if (heatMode === HEAT.OFF || !heatData || !heatData.files) { infoCard.setLegend(null); return; }
+  // Short title (the legend sits next to the node title); the tooltip says what grey means.
+  const fake = fakeGit ? ' (FAKE data)' : '';
+  const tip = fakeGit ? 'The sample dataset has generated, not real, git history. Grey = no git data.' : 'Grey = no git data.';
+  if (heatMode === HEAT.COMMITS) infoCard.setLegend(`Heat: commits${fake}`, '1', `${heatData.maxCommits}`, tip);
+  else infoCard.setLegend(`Heat: last change${fake}`, fmtDate(heatData.oldest), fmtDate(heatData.newest), tip);
+}
+
+// Facts about the focused node (the info card). Folders add up their files; symbols show their own lines and calls.
+function updateInfoCard() {
+  if (!infoCard) return;
+  const n = focusNode;
+  const rows = [];
+  const file = n.type === 'symbol' ? n.file : n;
+  const counts = linkData ? linkCounts(linkData, subjectOf(n), (id) => fileById.get(id)) : null;
+  rows.push(['Path', n.type === 'symbol' ? `${nodePath(file)} › ${n.name}` : nodePath(n)]);
+  if (n.type === 'folder') {
+    let files = 0, commits = 0, newest = 0, loc = 0;
+    for (let i = n.id + 1; i < n.id + n.weight; i++) {
+      const f = nodes[i];
+      if (f.type !== 'file') continue;
+      files++; loc += f.loc || 0;
+      if (f.commits) { commits += f.commits; newest = Math.max(newest, Date.parse(f.modified) || 0); }
+    }
+    rows.push(['Contains', `${n.children.length} items · ${files} files`]);
+    rows.push(['Lines of code', loc ? loc.toLocaleString() : '—']);
+    rows.push(['Git commits', commits ? `${commits.toLocaleString()} (all files)` : '—']);
+    rows.push(['Last modified', newest ? fmtDate(newest) : '—']);
+  } else if (n.type === 'symbol') {
+    rows.push(['Signature', n.signature]);
+    rows.push(['Lines of code', `${n.endLine - n.startLine + 1} (${n.startLine}–${n.endLine})`]);
+    rows.push(['In file', `${file.name} · ${file.commits ? `${file.commits} commits` : 'no git data'}`]);
+  } else {
+    rows.push(['Lines of code', n.loc ? n.loc.toLocaleString() : '—']);
+    if (n.hasSymbols) {
+      rows.push(['Symbols', n.symState === 'open' ? String(dynamicCountOf(n)) : 'opens when you fly in']);
+    }
+    rows.push(['Git commits', n.commits ? String(n.commits) : '—']);
+    rows.push(['Last modified', n.modified || '—']);
+  }
+  if (counts) {
+    if (n.type !== 'symbol') rows.push(['Imports', `${counts.importsOut} out · ${counts.importsIn} in`]);
+    if (n.type !== 'folder') rows.push(['Calls', `${counts.callsOut} out · ${counts.callsIn} in`]);
+  } else if (n.type !== 'folder') rows.push(['Imports / calls', '—']);
+  const kind = n.type === 'folder' ? 'Folder' : n.type === 'symbol' ? n.kind : `File${n.ext ? ` · .${n.ext}` : ''}`;
+  infoCard.setCard(kind, rows, fakeGit && (n.type !== 'symbol') ? 'Sample data: the git numbers are FAKE.' : null);
+}
+
 // ---------------------------------------------------------------------------
 // Text overlay
 // ---------------------------------------------------------------------------
@@ -962,6 +1055,7 @@ function updateInfo() {
     infoPath.textContent = bits.join(' · ');
   }
   updateBreadcrumb();
+  updateInfoCard();
 }
 
 // Breadcrumb: "repo / src / components" at a fixed place (bottom centre). Each segment is
@@ -1099,7 +1193,8 @@ function collectLabelCandidates() {
     seen.add(node.id);
     out.push({ key: node.id, text, x: s.x, y: s.y, r: s.r, priority, px, color });
   };
-  const orbText = (node) => `+${node.weight - 1}`;
+  // A folder orb says "+N"; a class/function orb also says WHAT it is ("Parser +12"), or a screen of bare "+N" tells nothing.
+  const orbText = (node) => (node.type === 'symbol' ? `${node.name} +${node.weight - 1}` : `+${node.weight - 1}`);
 
   add(focusNode, 1000, THEME.LABEL_FOCUS_PX * k, THEME.LABEL_COLOR, focusNode.name);
   if (hoverNode) {
@@ -1119,11 +1214,16 @@ function collectLabelCandidates() {
     }
   }
   // Collapsed orbs anywhere: the bigger on screen, the more important.
+  // At code level (a file or symbol focused) only the few biggest orbs are labelled, otherwise they bury the code shapes.
+  const orbs = [];
   for (const node of collapsedNodes) {
     if (seen.has(node.id)) continue;
     const s = projectForLabel(node);
-    if (s && visibleOnScreen(s.x, s.y)) add(node, 100 + Math.min(s.r, 50), THEME.LABEL_ORB_PX * k, THEME.LABEL_ORB_COLOR, orbText(node));
+    if (s && visibleOnScreen(s.x, s.y)) orbs.push({ node, s });
   }
+  orbs.sort((a, b) => b.s.r - a.s.r);
+  const orbCap = focusNode.type === 'folder' ? Infinity : MAX_CODE_ORB_LABELS;
+  for (const { node, s } of orbs.slice(0, orbCap)) add(node, 100 + Math.min(s.r, 50), THEME.LABEL_ORB_PX * k, THEME.LABEL_ORB_COLOR, orbText(node));
   return out;
 }
 
@@ -1147,7 +1247,9 @@ let downX = 0, downY = 0;
 renderer.domElement.addEventListener('pointerdown', (e) => { downX = e.clientX; downY = e.clientY; });
 renderer.domElement.addEventListener('pointerup', (e) => {
   if (Math.hypot(e.clientX - downX, e.clientY - downY) > 5) return;
-  const hit = pickNode(e.clientX, e.clientY);
+  const picked = pickNode(e.clientX, e.clientY);
+  // The "(top level)" block stands for the whole file's loose code: clicking it focuses the FILE (its code panel shows everything).
+  const hit = picked && picked.kind === 'block' ? picked.file : picked;
   if (hit && hit !== focusNode) {
     // The far end of one of the focus's arcs: that is following a link (remembered for Backspace).
     const arc = linkArcs.find((a) => a.role === 'focus' && a.far === hit);
@@ -1169,6 +1271,8 @@ window.addEventListener('keydown', (e) => {
     showImports = !showImports; linksDirty = true; updateHelp();
   } else if ((e.key === 'k' || e.key === 'K') && !e.ctrlKey && !e.metaKey) {
     showCalls = !showCalls; linksDirty = true; updateHelp();
+  } else if ((e.key === 'h' || e.key === 'H') && !e.ctrlKey && !e.metaKey) {
+    cycleHeat();
   } else if ((e.key === 'd' || e.key === 'D') && !e.ctrlKey && !e.metaKey) {
     showFolderDeps = !showFolderDeps; linksDirty = true; updateHelp();
   }
@@ -1228,12 +1332,16 @@ async function start() {
   symbolFiles = nodes.filter((n) => n.hasSymbols);
   for (const n of symbolFiles) fileById.set(n.fileId, n);
   buildSearch();
+  heatData = computeHeat(nodes);
+  fakeGit = !!json.fakeGit;
+  infoCard = createInfoCard();
+  refreshToolbar();
   codePanel = createCodePanel({ onInset: nav.setInset });
   // Links (Phase 4c) load in the background: the galaxy is usable before they arrive.
   if (json.linksFile) {
     fetch(`${baseUrl}${json.linksFile}`)
       .then((r) => (r.ok ? r.json() : null))
-      .then((lj) => { if (lj) { linkData = createLinkData(lj); linksDirty = true; updatePanelLinks(); } })
+      .then((lj) => { if (lj) { linkData = createLinkData(lj); linksDirty = true; updatePanelLinks(); updateInfoCard(); } })
       .catch((err) => console.warn('links not loaded', err));
   }
 
@@ -1281,6 +1389,12 @@ window.__explorer = {
   arcs: () => linkArcs.map((a) => ({ a: a.a.id, b: a.b.id, type: a.type, conf: a.conf, count: a.count, role: a.role, far: a.far ? a.far.id : null })),
   get backDepth() { return nav.backDepth; },
   goBack,
+  cycleHeat,
+  get heatMode() { return heatMode; },
+  get cardText() { return document.getElementById('card').innerText; },
+  get legendText() { return document.getElementById('legend').innerText; },
+  heatOf: (id) => (heatMode === HEAT.COMMITS ? heatData.commits[id] : heatData.recency[id]),
+  get focusScale() { return uFocusScale.value; },
   searchStats: () => ({ ...indexStats, entries: searchIndex.size, indexed: searchIndex.symbolFilesIndexed, lastSearchMs: searchUI.lastMs }),
   search: (text, n = 10) => { const t0 = performance.now(); const r = searchIndex.search(text, n); return { ms: performance.now() - t0, results: r }; },
   searchUI: () => searchUI,

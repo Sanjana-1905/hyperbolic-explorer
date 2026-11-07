@@ -252,3 +252,34 @@ export function linkLists(data, subject) {
 export function confidenceDots(conf) {
   return conf >= 0.75 ? 3 : conf >= 0.5 ? 2 : 1;
 }
+
+// ---------------------------------------------------------------------------
+// 7. Counts for the info card
+// ---------------------------------------------------------------------------
+// How many links go OUT of / INTO a subject, split by type. For a file: every link with an end in the file, except links
+// that stay inside it. For a symbol: links that start/end exactly at it. For a folder: only imports that cross its boundary
+// (one end inside, one outside). Example: a file that imports 3 files and is imported by 5 -> importsOut 3, importsIn 5.
+export function linkCounts(data, subject, fileNode) {
+  const c = { importsIn: 0, importsOut: 0, callsIn: 0, callsOut: 0 };
+  if (!subject) return c;
+  if (subject.folder) {
+    const F = subject.folder;
+    const inside = (n) => n.id >= F.id && n.id < F.id + F.weight;
+    for (const i of data.importLinks) {
+      const a = fileNode(data.fromFile[i]), b = fileNode(data.toFile[i]);
+      if (!a || !b) continue;
+      const ina = inside(a), inb = inside(b);
+      if (ina && !inb) c.importsOut++;
+      else if (!ina && inb) c.importsIn++;
+    }
+    return c;
+  }
+  for (const i of data.byFile.get(subject.fileId) || []) {
+    const from = endMatches(subject, data.fromFile[i], data.fromSym[i]);
+    const to = endMatches(subject, data.toFile[i], data.toSym[i]);
+    if (from && to) continue;                       // stays inside the subject
+    const key = (data.type[i] === LINK_IMPORT ? 'imports' : 'calls') + (from ? 'Out' : 'In');
+    if (from || to) c[key]++;
+  }
+  return c;
+}

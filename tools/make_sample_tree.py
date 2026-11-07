@@ -230,6 +230,31 @@ def fake_source(rng, doc):
     return lines
 
 
+def fake_git(files, root, rng):
+    """
+    FAKE git history with a pattern, so the heat view has something to show. Not real data: the tree root gets
+    "fakeGit": true and the viewer says so on screen.
+      - every folder two levels below the root is "hot" (about 25 %) or calm;
+      - commits ~ log-normal, median about 14 in a hot folder and 3 elsewhere; ~10 % of files have no git data at all;
+      - last change: hot folders are recent (about 0-120 days before 2026-10-31), calm ones anywhere in the last ~4 years.
+    """
+    newest = datetime.date(2026, 10, 31).toordinal()
+    hot = {}
+    for node, rel in files:
+        parts = rel.split("/")
+        key = "/".join(parts[:2]) if len(parts) > 2 else parts[0]
+        if key not in hot:
+            hot[key] = rng.random() < 0.25
+        if rng.random() < 0.10:
+            node.pop("commits", None); node.pop("modified", None)
+            continue
+        is_hot = hot[key]
+        node["commits"] = 1 + int(rng.lognormvariate(2.6 if is_hot else 1.1, 0.9))
+        days = int(rng.expovariate(1 / 50)) if is_hot else rng.randint(0, 1450)
+        node["modified"] = datetime.date.fromordinal(newest - min(days, 1450)).isoformat()
+    root["fakeGit"] = True
+
+
 def relative_import(lang, src_rel, dst_rel, rng):
     """The import text a file at src_rel would write to reach dst_rel (both '/'-paths from the root)."""
     src_dir = src_rel.split("/")[:-1]
@@ -282,8 +307,12 @@ def add_fake_code(root, seed, symbols_dir, tree_dir):
         node["ext"] = ext.lstrip(".").lower()
         if ext != ".png":
             node["loc"] = max(3, node["size"] // 30)
-        node["commits"] = 1 + int(rng.lognormvariate(1.5, 1.0))
-        node["modified"] = datetime.date.fromordinal(rng.randint(start, end)).isoformat()
+        # (These two draws are kept so the symbol data below stays byte-identical to before; the values are replaced
+        # by the pattern-ful FAKE git history made by fake_git() further down.)
+        rng.lognormvariate(1.5, 1.0)
+        rng.randint(start, end)
+
+    fake_git(files, root, random.Random(seed + 3))
 
     # 2) symbols for code files
     docs = {}  # rel path -> symbol file content

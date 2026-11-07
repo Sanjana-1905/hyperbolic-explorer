@@ -63,6 +63,12 @@ vec3 hsl2rgb(float h, float s, float l) {
   float a = s * min(l, 1.0 - l);
   return l - a * max(vec3(-1.0), min(min(k - 3.0, 9.0 - k), vec3(1.0)));
 }
+// Heat ramp: 0 = cold (HEAT_COLD, blue), 0.5 = HEAT_MID (magenta), 1 = HEAT_HOT (orange); mixed in two smooth steps.
+// Example: heat 0.25 is halfway between cold and mid; heat 0.75 halfway between mid and hot.
+vec3 heatRamp(float h) {
+  vec3 c = mix(HEAT_COLD, HEAT_MID, smoothstep(0.0, 0.5, h));
+  return mix(c, HEAT_HOT, smoothstep(0.5, 1.0, h));
+}
 vec3 armColor(float hue0, float fog) {
   float towardBlue = fract(COOL_HUE - hue0 + 0.5) - 0.5;
   float hue = hue0 + towardBlue * (1.0 - fog) * COOL_AMOUNT;
@@ -99,6 +105,8 @@ uniform float uFocusId;  // id of the node we are focusing on (gets the "sun" lo
 uniform float uTime;     // seconds, drives breathing and twinkling
 uniform float uBloom;    // real-time clock for the bloom-in animation (not frozen by ?time=)
 uniform float uMark;     // 0..1 strength of the search-result path highlight (fades out over a few seconds)
+uniform float uFocusScale; // 1 for a folder focus, SYMBOL_FOCUS_SCALE for a file/symbol focus (smaller sun)
+uniform float uHeatOn;     // 1 while git heat is shown: nodes WITHOUT git data are dimmed so the hot ones stand out
 
 attribute vec2 corner;   // quad corner: (-1,-1) (1,-1) (1,1) (-1,1)
 attribute vec3 aPos;
@@ -162,16 +170,20 @@ void main() {
   float symR = aKind < 2.5 ? CLASS_R : (aKind < 3.5 ? FUNCTION_R : (aKind < 4.5 ? METHOD_R : BLOCK_R));
   float symBright = aKind < 2.5 ? CLASS_BRIGHT : (aKind < 3.5 ? FUNCTION_BRIGHT : (aKind < 4.5 ? METHOD_BRIGHT : BLOCK_BRIGHT));
   rho = mix(rho, symR * (1.0 + SYMBOL_SIZE_SPREAD * aEnergy), isSymbol);
-  rho = mix(rho, FOCUS_R, isFocus);                 // the focus has one fixed, large size
+  rho = mix(rho, FOCUS_R * uFocusScale, isFocus);   // the focus has one fixed, large size (smaller at code level)
   rho *= mix(1.0, COLLAPSED_SIZE, orb);             // a collapsed orb is drawn bigger
   // Then the Poincare size factor (1 - r^2)/2 shrinks things toward the surface.
   // Example: at |p| = 0.9 the factor is (1 - 0.81)/2 = 0.095, so a 0.08 folder is
   // drawn 0.0076 across, but never below MIN_R.
   // Slow breathing, +-6 % for folders only (aSeed makes each one out of step).
   float breathe = 1.0 + BREATHE_AMOUNT * notFile * sin(uTime * BREATHE_SPEED + aSeed * 6.2831);
+  // aFlag decode: 0 none, 1 status ring, 2..3 = heat marker (2 + heat 0..1). Example: aFlag 2.75 -> heat 0.75.
+  float ring = step(0.5, aFlag) * step(aFlag, 1.5);
+  float hasHeat = step(1.5, aFlag);
+  float heat = clamp(aFlag - 2.0, 0.0, 1.0);
   float mark = aMark * uMark;
   // Path highlight: nodes on the path swell by (1 + PATH_NODE_SIZE * mark). Example: PATH_NODE_SIZE 0.6, mark 1 -> 1.6x.
-  float size = max(rho * (1.0 - r2) * 0.5 * breathe, MIN_R) * grow * (1.0 + PATH_NODE_SIZE * mark);
+  float size = max(rho * (1.0 - r2) * 0.5 * breathe, MIN_R) * grow * (1.0 + PATH_NODE_SIZE * mark) * (1.0 + HEAT_SIZE * heat * hasHeat);
 
   // --- 3. BRIGHTNESS and COLOUR by hyperbolic distance ----------------------
   // fog = e^(-d/2): 1 at the focus, 0.37 at d = 2, 0.08 at d = 5.
@@ -197,13 +209,16 @@ void main() {
   vBright = mix(vBright, FOCUS_BRIGHT, isFocus);
   vBright *= mix(1.0, COLLAPSED_BRIGHT, orb);
   vBright *= 1.0 + PATH_NODE_BRIGHT * mark;
+  // Git heat: hot nodes are tinted by the ramp, bigger and brighter; with heat on, nodes without data are dimmed.
+  col = mix(col, heatRamp(heat), hasHeat * HEAT_TINT);
+  vBright *= (1.0 + HEAT_BRIGHT * heat * hasHeat) * mix(1.0, HEAT_NEUTRAL_DIM, uHeatOn * (1.0 - hasHeat) * (1.0 - isFocus));
   col = mix(col, PATH_COLOR, mark * PATH_TINT);   // and lean toward the path colour
   vMark = mark;
   vColor = col;
 
   vFocus = isFocus;
   vKind = aKind;
-  vFlag = aFlag;
+  vFlag = ring;
   vOrb = orb;
   vUv = corner;
 
@@ -424,13 +439,14 @@ void main() {
 export const SUN_VERT = /* glsl */ `
 uniform vec3 _Focus;
 uniform vec3 uFocusPos;     // home position of the focused node
+uniform float uFocusScale;  // see NODE_VERT
 uniform float uTime;
 varying vec2 vUv;
 ${MOBIUS_GLSL}
 void main() {
   vUv = position.xy;
   vec3 p = mobiusAdd3(-_Focus, uFocusPos);          // same GPU refocus as every node
-  float size = max(FOCUS_R * (1.0 - dot(p, p)) * 0.5, MIN_R) * SUN_SCALE;
+  float size = max(FOCUS_R * uFocusScale * (1.0 - dot(p, p)) * 0.5, MIN_R) * SUN_SCALE;
   vec4 mv = viewMatrix * vec4(p, 1.0);
   mv.xy += position.xy * size;
   gl_Position = projectionMatrix * mv;

@@ -31,6 +31,12 @@ export function createToolbar(actions) {
     #tools button.on { background: ${cssRgb(THEME.UI_ACTIVE_BG, THEME.UI_ACTIVE_ALPHA)}; color: ${cssRgb(THEME.CRUMB_LAST_COLOR)};
       border-color: ${cssRgb(THEME.CRUMB_COLOR)}; }
     #tools button:disabled { opacity: 0.35; cursor: default; }
+    /* Narrow screens (a phone held upright): icon-only buttons, so all of them fit in one row. */
+    @media (max-width: 520px) {
+      #tools { gap: 4px; }
+      #tools button { padding: 0 10px; justify-content: center; }
+      #tools .lbl { display: none; }
+    }
     /* Compact layout (phone held sideways): a slim column of icon-only buttons down the left side. */
     @media (max-height: ${THEME.COMPACT_HEIGHT_PX}px) {
       #tools { left: 6px; top: 58px; bottom: auto; flex-direction: column; flex-wrap: wrap; align-content: flex-start; gap: 5px;
@@ -77,6 +83,8 @@ export function createToolbar(actions) {
   const imports = make(`${dot(THEME.LINK_IMPORT_COLOR)}${lbl('Imports')}`, 'Show or hide import arcs (I)', actions.onImports);
   const calls = make(`${dot(THEME.LINK_CALL_COLOR)}${lbl('Calls')}`, 'Show or hide call arcs (K)', actions.onCalls);
   const deps = make(`${dot(THEME.LINK_IMPORT_COLOR)}${lbl('Dependencies')}`, 'Show which parts of this folder import each other (D)', actions.onFolderDeps);
+  const infoBtn = make(`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg>${lbl('Info')}`, 'Show or hide the info card', actions.onInfo);
+  const heatBtn = make('', 'Git heat: colour files by commits or by recency (H)', actions.onHeat);
   const helpBtn = make('?', 'How to explore', () => showIntro());
   document.body.appendChild(bar);
 
@@ -104,6 +112,10 @@ export function createToolbar(actions) {
   return {
     // state: { backDepth, isRoot, focusKind: 'folder'|'file'|'symbol', showImports, showCalls, showFolderDeps }
     update(s) {
+      setOn(infoBtn, s.infoOpen);
+      const names = ['Heat', 'Heat: commits', 'Heat: recency'];
+      heatBtn.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c1 4 5 6 5 11a5 5 0 0 1-10 0c0-2 1-3 2-4 0 2 1 3 2 3 0-4-1-6 1-10z"/></svg>${lbl(' ' + names[s.heatMode])}`;
+      setOn(heatBtn, s.heatMode > 0);
       up.disabled = s.isRoot;
       home.disabled = s.isRoot;
       back.style.display = s.backDepth > 0 ? '' : 'none';
