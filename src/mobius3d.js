@@ -154,6 +154,25 @@ export function geodesicLerp3(a, b, t) {
   return mobiusAdd3(a, mobiusScale3(t, w));
 }
 
+// How wide a cone must be, seen from a child, to fill a given angle seen from
+// its parent "all the way out to infinity":
+//
+//   β = 2 · atan( e^d · tan(θ / 2) )
+//
+// Picture a child at hyperbolic distance d from its parent. Shine a cone of
+// half-angle β from the child, pointing straight away from the parent. Looking
+// from the parent, the far end of that cone (where it meets the surface of the
+// ball) covers only a smaller half-angle θ, because moving d away shrinks all
+// angles toward the direction of travel:  tan(θ/2) = e^(−d) · tan(β/2).
+// This function solves that for β. The layout uses it so that if a child's
+// subtree stays inside its cone of half-angle β, then (seen from the parent)
+// the WHOLE subtree, however deep, stays inside the child's θ "territory".
+// Example: d = 0.7, θ = 20° -> tan(10°) = 0.176, × e^0.7 (2.014) = 0.355,
+// atan = 19.5°, × 2 -> β ≈ 39°. The child may fan out twice as wide.
+export function coneAngleForTerritory(theta, d) {
+  return 2 * Math.atan(Math.exp(d) * Math.tan(theta / 2));
+}
+
 // Conformal size factor  (1 − |v|²) / 2.
 // The Poincaré ball is "conformal": small shapes keep their shape, only their
 // size changes. Something of hyperbolic size s drawn at point v appears with

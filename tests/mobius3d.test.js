@@ -3,7 +3,7 @@
 import assert from 'node:assert/strict';
 import {
   vec3, vLength, vNeg, mobiusAdd3, hyperbolicDistance3, distanceToRadius,
-  mobiusScale3, geodesicLerp3, clampToBall, conformalFactor3,
+  mobiusScale3, geodesicLerp3, clampToBall, conformalFactor3, coneAngleForTerritory,
 } from '../src/mobius3d.js';
 import { complex, mobiusAdd } from '../src/mobius.js';
 
@@ -94,6 +94,23 @@ close(vLength(c), 0.995, 'clamp radius'); close(c.x, c.y, 'clamp direction'); cl
 closeVec(clampToBall(vec3(0.1, 0.2, 0.3)), vec3(0.1, 0.2, 0.3), 'inside unchanged');
 // Möbius addition never returns anything beyond the clamp
 assert.ok(vLength(mobiusAdd3(vec3(0.99), vec3(0.99))) <= 0.995 + 1e-12, 'mobiusAdd3 clamps');
+
+// --- Cone angle for a territory ---------------------------------------------------
+// Worked example from the comment: d = 0.7, θ = 20° gives β ≈ 39.0°
+const deg = Math.PI / 180;
+const beta = coneAngleForTerritory(20 * deg, 0.7);
+assert.ok(Math.abs(beta / deg - 39.0) < 0.1, `β should be about 39°, got ${beta / deg}`);
+// Geometric check: put the child at distance d along +x. Walk very far from the
+// child at angle β off the "away" direction. Seen from the parent (the origin),
+// that far point should be at angle θ off the x axis.
+{
+  const d = 0.7, theta = 20 * deg;
+  const child = vec3(distanceToRadius(d), 0, 0);
+  const b = coneAngleForTerritory(theta, d);
+  const far = mobiusAdd3(child, vec3(0.9999999 * Math.cos(b), 0.9999999 * Math.sin(b), 0));
+  const seen = Math.atan2(far.y, far.x);
+  assert.ok(Math.abs(seen - theta) < 1e-3, `far point seen at ${seen / deg}°, expected 20°`);
+}
 
 // --- Conformal factor ----------------------------------------------------------
 close(conformalFactor3(vec3()), 0.5, 'factor at centre');
