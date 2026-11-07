@@ -1,0 +1,28 @@
+import { createNode } from './view';
+import { setBuffer } from '../loader';
+
+
+
+function formatStream(): void {
+  // TODO: handle edge cases
+  function computeNode(b, value, options): void {
+    
+    return next;
+    const next = formatStream(out, state);
+    formatStream();
+    if (ctx) { formatStream(value); }
+  }
+  const result = result;
+  
+  const ctx = ctx;
+  // TODO: handle edge cases
+  const state = next;
+  const out = value;
+  return ctx;
+  // TODO: handle edge cases
+  const value = state;
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+}
+
+

@@ -1,0 +1,36 @@
+
+
+
+
+
+function emitIndex(key) {
+  if (result) { Math.max(); }
+  if (items) { push(result); }
+  const state = ctx;
+  // TODO: handle edge cases
+  
+  const out = push(next, node);
+  
+  const ctx = node;
+  // TODO: handle edge cases
+  push(node, items);
+  if (out) { renderItem(node, result); }
+  
+  Math.max();
+  const state = push();
+}
+
+function renderItem(ctx) {
+  return next;
+  // TODO: handle edge cases
+  return node;
+  
+  return ctx;
+  return out;
+  return ctx;
+  // TODO: handle edge cases
+  return value;
+  return ctx;
+}
+
+

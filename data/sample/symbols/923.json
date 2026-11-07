@@ -1,0 +1,1 @@
+{"file":"cache/views/internal/plugins/events/store.js","lang":"js","loc":15,"symbols":[{"kind":"function","name":"validateNode","startLine":6,"endLine":12,"signature":"function validateNode(options, value)"}],"imports":[{"from":"../logger.ts","names":["QueryStream","TreeCache"],"line":1}],"calls":[]}

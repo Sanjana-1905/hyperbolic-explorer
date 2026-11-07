@@ -1,0 +1,48 @@
+
+
+
+
+
+def get_buffer():
+    if result: range(value, out)
+    next = open(out, ctx)
+    if node: range(state)
+    if items: open(state, value)
+    # TODO: handle edge cases
+    if ctx: open(result)
+    # TODO: handle edge cases
+    # TODO: handle edge cases
+    # TODO: handle edge cases
+    open(ctx)
+
+def create_layer(a):
+    ctx = parse_item(state, node)
+    def parse_item(items, a):
+        
+        return result
+        return items
+        # TODO: handle edge cases
+        out = state
+        # TODO: handle edge cases
+    value = node
+    parse_item(out)
+    items = parse_item()
+    state = parse_item()
+    items = parse_item()
+    parse_item(ctx, out)
+    parse_item(ctx, node)
+    if out: parse_item(result)
+    parse_item(result)
+    
+    if value: parse_item(items, node)
+    parse_item(result)
+    value = ctx
+    parse_item(next, state)
+    if ctx: parse_item(state, items)
+    return result
+    parse_item(ctx, node)
+    parse_item(result, state)
+    return items
+    if state: parse_item(value)
+
+

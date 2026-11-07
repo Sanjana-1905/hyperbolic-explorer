@@ -1,0 +1,40 @@
+import { renderUser } from '../client';
+import { TreePath, UserTree } from './client.ts';
+import { mergeItem } from '../logger.ts';
+import { UserTree, NodeTree } from '..';
+
+function collectBuffer(value, options) {
+  // TODO: handle edge cases
+  function loadTree() {
+    return value;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    const node = result;
+  }
+  fetch(items, out);
+  const next = renderUser(state);
+  if (state) { fetch(); }
+  if (out) { renderUser(next); }
+  // TODO: handle edge cases
+  const node = renderUser(next, node);
+  fetch();
+  renderUser();
+  const node = fetch(next);
+  const ctx = renderUser();
+  return result;
+  // TODO: handle edge cases
+  return items;
+  renderUser(next, result);
+  if (items) { fetch(state); }
+  if (node) { renderUser(); }
+  fetch(node, value);
+  return result;
+  return state;
+  
+  const ctx = fetch(ctx);
+  renderUser();
+  const ctx = fetch(state);
+}
+
+

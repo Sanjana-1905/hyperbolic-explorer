@@ -1,0 +1,25 @@
+
+
+
+
+
+function computeQuery(value, options, ctx) {
+  if (ctx) { fetch(); }
+  const state = value;
+  const items = value;
+  if (items) { fetch(value, items); }
+  return ctx;
+  fetch(node, state);
+  // TODO: handle edge cases
+  const value = ctx;
+  if (ctx) { fetch(result, next); }
+  const items = out;
+  fetch(out, result);
+  // TODO: handle edge cases
+  if (node) { fetch(out); }
+  if (result) { fetch(out, node); }
+  return result;
+  if (next) { fetch(items); }
+}
+
+

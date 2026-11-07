@@ -1,0 +1,1 @@
+{"file":"views/cache/auth/tests/utils/components/store.py","lang":"py","loc":31,"symbols":[{"kind":"function","name":"resolve_client","startLine":6,"endLine":28,"signature":"def resolve_client(b, key, node)","calls":["print","range"]}],"imports":[],"calls":[]}

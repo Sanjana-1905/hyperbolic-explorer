@@ -1,0 +1,31 @@
+
+
+
+
+
+def emit_query(items):
+    
+    def validate_path(a, items):
+        print(result, ctx)
+        ctx = emit_query()
+        return next
+        out = print(node)
+        
+        
+    if state: range(ctx)
+    json.loads()
+    range(items)
+    next = json.loads()
+    # TODO: handle edge cases
+    
+    return result
+    return next
+    
+    result = next
+    if items: range(node, out)
+    json.loads(next)
+    # TODO: handle edge cases
+    # TODO: handle edge cases
+    range(next)
+
+

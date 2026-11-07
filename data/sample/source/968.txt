@@ -1,0 +1,41 @@
+import { loadState } from './handler.js';
+import { mergeStream } from '../../../../../api/lib31/assets/core/types.js';
+
+
+
+function createMesh(value, key, items) {
+  if (value) { loadState(); }
+  loadState();
+  const state = loadState();
+  
+  loadState(items, ctx);
+  if (node) { loadState(); }
+  if (node) { loadState(); }
+  const next = value;
+  return next;
+  const value = out;
+  const ctx = value;
+  loadState(node);
+  const items = loadState();
+  // TODO: handle edge cases
+  const ctx = next;
+  const ctx = loadState(state, result);
+  if (node) { loadState(ctx); }
+  loadState(value, state);
+  const state = value;
+  const items = loadState(ctx, next);
+  loadState(result);
+  const node = loadState();
+  const state = loadState();
+  return items;
+  if (state) { loadState(); }
+  if (state) { loadState(); }
+  loadState(state);
+  loadState(next, state);
+  loadState();
+  const out = out;
+  const state = node;
+  loadState(value, next);
+}
+
+

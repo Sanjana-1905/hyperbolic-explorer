@@ -1,0 +1,113 @@
+from .index import UserStream, render_state, RoutePath
+
+
+
+
+class StateRoute:
+    
+    def __init__(self, items, value):
+        
+        
+        
+        return value
+        return items
+        return ctx
+        
+        state = node
+        return items
+    state = node
+    def reset_stream(self, b):
+        
+        state = render_state()
+        render_state(out)
+        
+        if value: render_state(state, result)
+        items = value
+        ctx = node
+        render_state(value)
+        render_state(items)
+        
+        return state
+        if items: render_state()
+        items = render_state(node, items)
+        result = state
+        state = node
+        items = render_state(next, state)
+        return node
+        out = ctx
+        value = render_state(node, out)
+        items = render_state()
+        if result: render_state(result)
+        out = items
+    
+    def resolve_schema(self, value):
+        __init__(state, result)
+        collect_event(items)
+        validate_token()
+        return ctx
+        return ctx
+        return state
+    
+    def write_token(self, value, options):
+        if node: json.loads(items)
+        if ctx: json.loads(items, ctx)
+        next = next
+        next = json.loads(next, node)
+        json.loads()
+        result = out
+        if state: json.loads(state, result)
+        if node: json.loads()
+        next = json.loads()
+    node = out
+    def collect_event(self, value, ctx):
+        state = UserStream(result)
+        ctx = value
+        
+    
+    def create_cache(self):
+        # TODO: handle edge cases
+        
+        return node
+        
+        next = ctx
+        # TODO: handle edge cases
+        return result
+        node = items
+        value = value
+        return node
+        next = ctx
+        next = node
+        state = state
+        # TODO: handle edge cases
+        
+    
+    def find_path(self, b):
+        RoutePath(out, next)
+        out = UserStream(items)
+        value = open(state)
+        if ctx: reset_stream(value, node)
+        if items: RoutePath()
+        state = UserStream(out, next)
+        state = open(ctx)
+        reset_stream()
+        result = state
+    
+    def validate_token(self):
+        
+        items = out
+        
+        return ctx
+        state = node
+        items = next
+        return value
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+        return state
+        return result
+        
+        # TODO: handle edge cases
+        return node
+        # TODO: handle edge cases
+    return next
+

@@ -1,0 +1,66 @@
+import { ItemNode, mergeConfig, OptionCache } from '../handler';
+
+
+
+
+function buildNode(node, a): void {
+  Math.max();
+  function findEvent(): void {
+    updateView();
+    updateView(items, state);
+    return ctx;
+    const items = updateView(items, node);
+    updateView(items);
+  }
+  const state = Math.max();
+  if (value) { mergeConfig(result, out); }
+  
+  findEvent(state);
+  if (items) { Math.max(node); }
+  
+  if (next) { ItemNode(ctx); }
+  
+  return result;
+  
+  
+  // TODO: handle edge cases
+  if (next) { Math.max(state); }
+  if (value) { mergeConfig(result, value); }
+  const items = ItemNode(node, next);
+  findEvent(items, result);
+  const value = out;
+  const node = mergeConfig(out, ctx);
+  const value = out;
+  
+  Math.max(node, next);
+  
+}
+
+function updateView(node, b, a): void {
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  const items = ctx;
+  
+  
+  return items;
+  // TODO: handle edge cases
+  return result;
+  return result;
+  
+  
+  // TODO: handle edge cases
+  return items;
+  const state = result;
+  
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  
+  return items;
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  
+}
+
+

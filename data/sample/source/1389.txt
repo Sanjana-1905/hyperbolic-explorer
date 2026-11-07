@@ -1,0 +1,36 @@
+import { RecordClient } from './router';
+
+
+
+
+function computeStream(key, options): void {
+  
+  return out;
+  const ctx = result;
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  const state = node;
+  return result;
+  return ctx;
+  const ctx = result;
+  return items;
+  
+  
+  
+  
+  // TODO: handle edge cases
+  const next = node;
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  
+  
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  const out = node;
+  
+  return ctx;
+  
+  // TODO: handle edge cases
+}
+
+

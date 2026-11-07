@@ -1,0 +1,1 @@
+{"file":"cache/internal/cache/ui/ui/constants.ts","lang":"ts","loc":46,"symbols":[{"kind":"function","name":"loadEvent","startLine":6,"endLine":43,"signature":"function loadEvent(a, value): void","calls":["map"]}],"imports":[],"calls":["loadEvent"]}

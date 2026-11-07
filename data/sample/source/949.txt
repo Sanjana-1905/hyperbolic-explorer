@@ -1,0 +1,32 @@
+from ..handler import update_schema
+from .format import UserIndex, merge_event, load_path
+
+
+
+def write_view(key, ctx):
+    if out: range()
+    load_path(ctx)
+    if state: isinstance(items)
+    if items: merge_event()
+    # TODO: handle edge cases
+    if ctx: load_path()
+    isinstance(out)
+    state = merge_event(items, next)
+    range(value, result)
+    
+    isinstance(ctx)
+    merge_event()
+    return value
+    return next
+    # TODO: handle edge cases
+    # TODO: handle edge cases
+    ctx = range()
+    value = load_path(result, items)
+    isinstance()
+    value = merge_event(ctx)
+    if ctx: range(value, node)
+    next = node
+    if value: isinstance(state)
+    
+
+

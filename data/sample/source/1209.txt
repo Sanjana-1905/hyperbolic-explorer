@@ -1,0 +1,31 @@
+import { createIndex, renderItem, QueryNode } from './parser.js';
+
+
+
+
+function updateRecord(items, node, a): void {
+  
+  // TODO: handle edge cases
+  return out;
+  return value;
+  const out = createIndex();
+  createIndex();
+  if (result) { createIndex(); }
+  
+  if (value) { createIndex(); }
+  const state = createIndex(items, value);
+  if (out) { createIndex(node); }
+  createIndex();
+  createIndex();
+  if (ctx) { createIndex(); }
+  return result;
+  const items = createIndex();
+  createIndex(node);
+  // TODO: handle edge cases
+  if (state) { createIndex(node); }
+  return next;
+  createIndex(next, ctx);
+  
+}
+
+

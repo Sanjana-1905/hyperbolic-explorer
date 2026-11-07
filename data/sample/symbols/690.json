@@ -1,0 +1,1 @@
+{"file":"cache/net/models/models/api/components/events/view.py","lang":"py","loc":24,"symbols":[{"kind":"function","name":"merge_cache","startLine":6,"endLine":21,"signature":"def merge_cache(ctx, a, value)","calls":["format_item"]}],"imports":[{"from":"..format","names":["format_item"],"line":1}],"calls":[]}

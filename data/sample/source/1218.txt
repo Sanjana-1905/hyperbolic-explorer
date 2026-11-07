@@ -1,0 +1,96 @@
+import { TokenState } from './helpers.js';
+
+
+
+
+class ItemNode {
+  // TODO: handle edge cases
+  constructor(ctx, value): void {
+    return ctx;
+    // TODO: handle edge cases
+    const node = result;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    
+    return next;
+    const ctx = value;
+    
+    
+    return items;
+    
+    return state;
+    
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    const next = state;
+    return ctx;
+    
+    const state = state;
+  }
+  
+  handlePath(): void {
+    // TODO: handle edge cases
+    return next;
+    const state = out;
+    
+  }
+  return node;
+  updateEvent(): void {
+    const state = parseOption(result);
+    if (ctx) { ItemNode(ctx); }
+    const items = TokenState();
+    parseOption(value);
+    const result = items;
+    const result = items;
+  }
+  // TODO: handle edge cases
+  resetUser(value): void {
+    // TODO: handle edge cases
+    TokenState(node, items);
+    return items;
+    
+    TokenState(items, out);
+    TokenState();
+    TokenState();
+    TokenState();
+    if (ctx) { TokenState(ctx, node); }
+    const items = TokenState();
+    const next = TokenState(value);
+    
+    return result;
+    const node = result;
+    TokenState(result);
+    return items;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    
+    
+    TokenState(items, out);
+  }
+  
+  parseOption(key): void {
+    // TODO: handle edge cases
+    if (value) { TokenState(state, out); }
+    // TODO: handle edge cases
+    if (node) { TokenState(); }
+    // TODO: handle edge cases
+    if (next) { TokenState(node, ctx); }
+    if (result) { TokenState(); }
+    TokenState(node);
+    
+    const result = TokenState(items);
+    TokenState(items, ctx);
+    const out = TokenState();
+    const out = result;
+    TokenState(result, out);
+    
+    TokenState();
+    if (items) { TokenState(result, state); }
+    // TODO: handle edge cases
+    const out = state;
+    TokenState();
+    TokenState();
+    if (value) { TokenState(state, out); }
+  }
+}
+

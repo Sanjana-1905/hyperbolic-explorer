@@ -1,0 +1,105 @@
+import { SchemaQuery, resetRoute, RouteOption } from '../format';
+
+
+
+
+function resolveItem(value, items, ctx): void {
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  const next = out;
+  const value = ctx;
+  // TODO: handle edge cases
+  return out;
+  const items = next;
+  return ctx;
+  
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  const items = items;
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  return items;
+  const node = items;
+  const out = next;
+  
+  return node;
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  const ctx = state;
+  const result = result;
+  const result = value;
+  return ctx;
+  return value;
+  return items;
+  const ctx = value;
+  const result = out;
+  
+  
+  
+  // TODO: handle edge cases
+  
+  
+}
+
+function computeRecord(node, value): void {
+  const state = JSON.parse(state);
+  RouteOption();
+  if (out) { resetRoute(value, out); }
+  if (out) { JSON.parse(out, items); }
+  // TODO: handle edge cases
+  
+  const out = JSON.parse();
+  return out;
+  resetRoute(state);
+  
+  const next = RouteOption();
+  const node = resetRoute(next, items);
+  JSON.parse(next, out);
+  RouteOption(result);
+  if (ctx) { resetRoute(out, node); }
+  JSON.parse();
+  const node = RouteOption(ctx, next);
+  return ctx;
+  JSON.parse();
+  const result = result;
+  return next;
+  
+  RouteOption(items);
+  if (out) { resetRoute(node, next); }
+  const next = JSON.parse(result);
+  const node = items;
+  const ctx = resetRoute(ctx);
+  const state = JSON.parse();
+}
+
+function parseLayer(a, value): void {
+  
+  function emitSchema(items, key): void {
+    if (result) { SchemaQuery(ctx, result); }
+    const state = SchemaQuery();
+    const state = ctx;
+    const value = SchemaQuery(out);
+    
+  }
+  return state;
+  const value = ctx;
+  const result = next;
+  // TODO: handle edge cases
+  const state = out;
+  
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  return value;
+  // TODO: handle edge cases
+  const ctx = value;
+  const next = state;
+  const value = next;
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  return value;
+  
+  
+  return state;
+}
+
+

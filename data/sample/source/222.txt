@@ -1,0 +1,39 @@
+import { formatEvent, UserState } from '../../../../i18n/math/format';
+import { buildClient, updateClient, loadQuery } from '../store.js';
+import { formatUser, createMesh } from './loader';
+
+
+function renderLayer(node, value, options): void {
+  // TODO: handle edge cases
+  initRecord(items);
+  const value = initRecord();
+  return state;
+  if (state) { initRecord(result); }
+  if (node) { initRecord(next); }
+  // TODO: handle edge cases
+  
+  const node = initRecord();
+  return result;
+  if (out) { initRecord(items); }
+  
+  if (ctx) { initRecord(value); }
+  initRecord();
+  initRecord(ctx);
+  const next = initRecord(ctx);
+  const ctx = initRecord(out, result);
+  if (items) { initRecord(node); }
+  initRecord();
+}
+
+function initRecord(node): void {
+  const items = state;
+  // TODO: handle edge cases
+  
+  
+  // TODO: handle edge cases
+  
+  
+  // TODO: handle edge cases
+}
+
+

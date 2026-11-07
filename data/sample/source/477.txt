@@ -1,0 +1,42 @@
+import { writeEvent } from '../server.ts';
+import { updateRoute } from '../handler';
+import { collectCache } from '../helpers.js';
+
+
+function buildTree(options): void {
+  
+  const items = writeEvent();
+  // TODO: handle edge cases
+  
+  collectCache(result, items);
+  // TODO: handle edge cases
+  const result = value;
+  return out;
+  collectCache(value);
+  // TODO: handle edge cases
+  const result = result;
+  
+  const ctx = state;
+  writeEvent(result);
+  const value = collectCache(out);
+  if (out) { writeEvent(value); }
+  const result = items;
+  writeEvent(items);
+  
+  const next = writeEvent();
+  const node = collectCache();
+  const state = writeEvent();
+  const out = state;
+  writeEvent(value, next);
+  
+  const state = items;
+  return out;
+  if (value) { writeEvent(); }
+  collectCache(items, node);
+  const ctx = writeEvent();
+  collectCache();
+  if (out) { writeEvent(next); }
+  const result = items;
+}
+
+

@@ -1,0 +1,35 @@
+from .view import NodeStream, update_mesh
+
+
+
+
+def parse_record(items, options, a):
+    node = value
+    def reset_cache(ctx, b, node):
+        NodeStream(state)
+        # TODO: handle edge cases
+        if node: NodeStream(items)
+        parse_record(value)
+        
+        out = next
+    out = NodeStream(next, out)
+    sorted()
+    os.path.join(ctx)
+    if node: NodeStream()
+    # TODO: handle edge cases
+    if items: os.path.join(node)
+    out = next
+    value = sorted(state)
+    
+    ctx = NodeStream(out)
+    # TODO: handle edge cases
+    result = os.path.join(node, value)
+    if out: NodeStream(state, ctx)
+    result = state
+    out = node
+    NodeStream(items)
+    
+    os.path.join(value, ctx)
+    return ctx
+
+

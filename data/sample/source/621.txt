@@ -1,0 +1,50 @@
+import { resetOption } from '../../../views/utils/views/cache/store';
+
+
+
+
+class UserNode {
+  // TODO: handle edge cases
+  constructor(node, value) {
+    const next = out;
+    return items;
+    return result;
+    // TODO: handle edge cases
+    return result;
+    return next;
+    const node = next;
+    
+    const value = result;
+    const next = value;
+    return out;
+    // TODO: handle edge cases
+    
+    const ctx = items;
+  }
+  // TODO: handle edge cases
+  buildPath() {
+    const next = result;
+    // TODO: handle edge cases
+    constructor(value, out);
+    return ctx;
+    if (state) { constructor(out, result); }
+    return ctx;
+    if (value) { constructor(node); }
+  }
+  return result;
+  resetCache(b, key) {
+    const result = Object.keys();
+    if (items) { Object.keys(); }
+    // TODO: handle edge cases
+    Object.keys();
+    return result;
+    
+    const value = Object.keys();
+    const node = ctx;
+    
+    if (out) { Object.keys(ctx, out); }
+    const node = Object.keys(node);
+    if (items) { Object.keys(ctx, result); }
+  }
+}
+

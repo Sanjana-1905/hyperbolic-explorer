@@ -1,0 +1,34 @@
+
+
+
+
+
+function createOption(ctx, key, items) {
+  return next;
+  const result = state;
+  const value = out;
+  // TODO: handle edge cases
+  return next;
+  const state = node;
+  const result = result;
+  return value;
+  
+  // TODO: handle edge cases
+  const state = ctx;
+  const ctx = state;
+  const out = result;
+  // TODO: handle edge cases
+  const value = state;
+  return node;
+  const ctx = node;
+  return result;
+  // TODO: handle edge cases
+  return ctx;
+  const value = out;
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  
+  const value = items;
+}
+
+

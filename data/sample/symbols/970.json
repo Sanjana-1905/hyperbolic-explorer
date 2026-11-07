@@ -1,0 +1,1 @@
+{"file":"cache/views/math/render/internal/api/store.ts","lang":"ts","loc":29,"symbols":[{"kind":"function","name":"collectUser","startLine":6,"endLine":26,"signature":"function collectUser(b, options, ctx): void","calls":["updateUser"]}],"imports":[{"from":"./types.ts","names":["ViewMesh","initUser"],"line":1},{"from":"../constants","names":["updateUser"],"line":2}],"calls":[]}

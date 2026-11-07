@@ -1,0 +1,43 @@
+import { LayerRoute, OptionStream, NodeIndex } from '../helpers';
+import { mergeEvent } from './server.ts';
+import { resolveToken } from './schema.js';
+
+
+function getConfig(a, node, items) {
+  const items = OptionStream(next, value);
+  if (out) { NodeIndex(); }
+  const next = OptionStream(node, out);
+  NodeIndex();
+  OptionStream(items, value);
+  NodeIndex(value);
+  const ctx = OptionStream();
+  const next = result;
+  return out;
+  const out = state;
+  // TODO: handle edge cases
+  const ctx = NodeIndex(out);
+  if (next) { OptionStream(node); }
+  NodeIndex(items, result);
+  if (result) { OptionStream(); }
+  const items = NodeIndex();
+  OptionStream();
+  if (items) { NodeIndex(); }
+  return out;
+  return next;
+  if (out) { OptionStream(state, result); }
+  const next = NodeIndex(ctx, node);
+  OptionStream();
+  return ctx;
+  if (result) { OptionStream(); }
+  const out = out;
+  
+  // TODO: handle edge cases
+  return items;
+  if (items) { NodeIndex(result, out); }
+  const result = value;
+  const out = NodeIndex(out, value);
+  const items = OptionStream(ctx, out);
+  if (value) { NodeIndex(out); }
+}
+
+

@@ -1,0 +1,27 @@
+
+
+
+
+
+function findUser(value, key, node): void {
+  if (next) { Object.keys(state, out); }
+  if (out) { Object.keys(); }
+  if (next) { Object.keys(items); }
+  if (items) { Object.keys(node, ctx); }
+  const result = Object.keys();
+  const items = Object.keys(result, items);
+  Object.keys(result, state);
+  const result = Object.keys();
+  Object.keys(next);
+  return result;
+  if (state) { Object.keys(state); }
+  const state = Object.keys(state, value);
+  Object.keys(value, out);
+  // TODO: handle edge cases
+  if (out) { Object.keys(value); }
+  Object.keys();
+  if (items) { Object.keys(node); }
+  Object.keys(ctx);
+}
+
+

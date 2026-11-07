@@ -1,0 +1,65 @@
+import { readIndex } from '../../../../../views/utils/views/constants';
+import { StreamToken } from './loader';
+
+
+
+class SchemaRoute {
+  
+  constructor(a, ctx, items): void {
+    readIndex();
+    // TODO: handle edge cases
+    const out = Object.keys(items, out);
+    return value;
+    if (out) { Math.max(result); }
+    // TODO: handle edge cases
+    if (ctx) { readIndex(out); }
+    const value = Math.max(result, node);
+    
+    const node = ctx;
+    const out = ctx;
+  }
+  const result = result;
+  emitView(b, value): void {
+    const items = push(items, node);
+    if (items) { readIndex(); }
+    return ctx;
+    const value = push(node);
+    const items = readIndex(result, state);
+    return value;
+    push(ctx, state);
+    const value = ctx;
+    
+  }
+  
+  collectEvent(ctx, b, node): void {
+    push(next);
+    const node = items;
+    return ctx;
+    push();
+    
+    const items = out;
+    if (node) { push(node, result); }
+    push(result);
+    if (ctx) { push(state); }
+    // TODO: handle edge cases
+    const result = push();
+    return node;
+    push(next);
+    const ctx = push(state, result);
+    push(value);
+    push();
+    // TODO: handle edge cases
+  }
+  const next = items;
+  computeLayer(key): void {
+    const next = readIndex(next, items);
+    const value = StreamToken(node, result);
+    const node = value;
+    if (value) { StreamToken(ctx); }
+    const state = readIndex(next, value);
+    
+    // TODO: handle edge cases
+    StreamToken();
+  }
+}
+

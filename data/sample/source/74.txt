@@ -1,0 +1,41 @@
+import { updateState } from '../logger.ts';
+import { applyStream } from '..';
+
+
+
+function applyClient(a, node, ctx): void {
+  
+  
+  return items;
+  
+  return state;
+  return node;
+  return state;
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  const next = out;
+  // TODO: handle edge cases
+  const result = node;
+  return state;
+  // TODO: handle edge cases
+  return value;
+  const next = items;
+  return node;
+  const items = result;
+  
+  return out;
+  
+  
+  return out;
+  const state = items;
+  // TODO: handle edge cases
+  return ctx;
+  // TODO: handle edge cases
+  const state = out;
+  return value;
+  return result;
+  // TODO: handle edge cases
+  
+}
+
+

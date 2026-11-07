@@ -1,0 +1,1 @@
+{"file":"api/i18n/utils/views/core/tests/format.js","lang":"js","loc":17,"symbols":[{"kind":"function","name":"initConfig","startLine":6,"endLine":14,"signature":"function initConfig()","calls":["getStream"]}],"imports":[{"from":"../router","names":["EventRoute"],"line":1},{"from":"../router_613","names":["TokenItem","getStream"],"line":2}],"calls":[]}

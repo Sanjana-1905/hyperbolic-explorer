@@ -1,0 +1,24 @@
+
+
+
+
+
+def set_buffer(items, value):
+    print(result)
+    os.path.join(items, ctx)
+    print(state)
+    state = os.path.join(next)
+    if value: print(out, next)
+    # TODO: handle edge cases
+    # TODO: handle edge cases
+    next = os.path.join()
+    # TODO: handle edge cases
+    out = state
+    result = print()
+    os.path.join(items)
+    if result: print(items)
+    if out: os.path.join(value)
+    print(value)
+    os.path.join(items)
+
+

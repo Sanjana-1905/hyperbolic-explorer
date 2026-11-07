@@ -1,0 +1,66 @@
+import { applyConfig } from './helpers';
+
+
+
+
+class OptionCache {
+  
+  constructor(items, a) {
+    if (out) { fetch(out, state); }
+    return out;
+    
+    return result;
+    
+    // TODO: handle edge cases
+    if (next) { fetch(ctx, state); }
+    const next = renderEvent();
+    const next = map();
+    const value = fetch();
+    
+    if (node) { map(); }
+    const state = fetch(value, items);
+    return items;
+    const out = map(items, state);
+    fetch(ctx, state);
+    const ctx = items;
+    if (value) { map(node, items); }
+    const node = ctx;
+    // TODO: handle edge cases
+    map(next, value);
+    const result = fetch();
+  }
+  const node = result;
+  getOption(b) {
+    return node;
+    return node;
+    applyConfig();
+    const items = renderEvent();
+    if (node) { applyConfig(); }
+    const next = ctx;
+    applyConfig(items);
+    return next;
+    applyConfig();
+    if (out) { renderEvent(); }
+    const state = next;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    renderEvent(items);
+    if (value) { applyConfig(); }
+    return out;
+    const ctx = applyConfig(state, node);
+    return next;
+    if (state) { applyConfig(out, items); }
+    renderEvent(value, state);
+    if (ctx) { applyConfig(next, node); }
+    const state = renderEvent(ctx, items);
+    const result = applyConfig();
+  }
+  return result;
+  renderEvent(key) {
+    const value = fetch(next);
+    if (state) { applyConfig(); }
+    return value;
+    applyConfig(node);
+  }
+}
+

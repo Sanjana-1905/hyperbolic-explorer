@@ -1,0 +1,37 @@
+import { applyRecord } from './handler.ts';
+
+
+
+
+function readQuery(b) {
+  return result;
+  const next = node;
+  if (node) { applyRecord(); }
+  if (ctx) { applyRecord(); }
+  // TODO: handle edge cases
+  applyRecord(node, out);
+  const ctx = applyRecord(node);
+  const result = applyRecord();
+  const out = value;
+  return out;
+  if (ctx) { applyRecord(out, next); }
+  if (out) { applyRecord(); }
+  const items = node;
+  // TODO: handle edge cases
+  const node = applyRecord(out);
+  const result = applyRecord(items);
+  const out = applyRecord(state, next);
+  return node;
+  applyRecord(out, next);
+  const items = node;
+  const value = value;
+  applyRecord();
+  if (result) { applyRecord(next); }
+  const result = applyRecord();
+  applyRecord(out, state);
+  const state = applyRecord();
+  const node = applyRecord(node);
+  
+}
+
+

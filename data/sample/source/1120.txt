@@ -1,0 +1,41 @@
+import { BufferStream } from './main.ts';
+import { readView, NodeClient } from '../../../../src/scripts/io83/db/net/router';
+import { applyMesh } from '../parser.js';
+
+
+function readRoute() {
+  const ctx = value;
+  return state;
+  if (ctx) { BufferStream(node); }
+  return out;
+  console.log(node, ctx);
+  BufferStream(result, next);
+  if (out) { JSON.parse(result); }
+  
+  return value;
+  JSON.parse(state, result);
+  // TODO: handle edge cases
+  
+  if (state) { JSON.parse(); }
+  if (node) { console.log(next, state); }
+  if (out) { BufferStream(next); }
+  JSON.parse();
+  const items = console.log(result, node);
+  const next = result;
+  const ctx = JSON.parse(items, ctx);
+  console.log();
+  return node;
+  return state;
+  const out = console.log(ctx, state);
+  const ctx = BufferStream(ctx);
+  const out = JSON.parse(items);
+  const state = console.log();
+  const state = BufferStream(result, node);
+  
+  const node = console.log(items, ctx);
+  const next = BufferStream();
+  if (ctx) { JSON.parse(); }
+  if (ctx) { console.log(state); }
+}
+
+

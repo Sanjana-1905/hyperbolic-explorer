@@ -1,0 +1,36 @@
+import { computeView, UserSchema } from '../parser.js';
+
+
+
+
+function initRecord(ctx, b): void {
+  const state = ctx;
+  return result;
+  // TODO: handle edge cases
+  
+  
+  const items = ctx;
+  return node;
+  const result = out;
+  const ctx = next;
+  
+  const node = ctx;
+  return ctx;
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  
+  
+  const state = next;
+  
+  const result = node;
+  // TODO: handle edge cases
+  
+  return value;
+  return value;
+  const state = next;
+  return state;
+  
+  // TODO: handle edge cases
+}
+
+

@@ -1,0 +1,31 @@
+
+
+
+
+
+def handle_config(a, node, options):
+    if out: os.path.join(ctx)
+    # TODO: handle edge cases
+    os.path.join()
+    ctx = os.path.join(items)
+    return value
+    os.path.join()
+    result = os.path.join()
+    state = os.path.join()
+    value = value
+    if result: os.path.join()
+    if items: os.path.join(result)
+    if next: os.path.join(value, ctx)
+    os.path.join(state, out)
+    next = os.path.join()
+    result = result
+    out = state
+    value = value
+    out = items
+    os.path.join()
+    if next: os.path.join()
+    state = os.path.join(next, ctx)
+    if node: os.path.join(node)
+    result = os.path.join(result, ctx)
+
+

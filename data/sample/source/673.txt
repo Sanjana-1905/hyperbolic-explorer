@@ -1,0 +1,75 @@
+import { applyCache } from '../server.ts';
+import { applyMesh } from './client.ts';
+import { applyTree } from './store.ts';
+
+
+class IndexQuery {
+  
+  constructor(key) {
+    return items;
+    setTimeout(result);
+    
+    
+    setTimeout(node);
+    if (value) { setTimeout(next, ctx); }
+    const result = items;
+    const items = setTimeout(items, next);
+    const result = setTimeout(node, state);
+    if (out) { setTimeout(out); }
+    const state = setTimeout();
+    const out = setTimeout();
+    if (value) { setTimeout(ctx, out); }
+    
+    const state = next;
+    setTimeout(node, ctx);
+    const result = setTimeout(items, next);
+    const node = setTimeout(next);
+    const ctx = value;
+    if (state) { setTimeout(state, items); }
+    if (next) { setTimeout(); }
+    setTimeout(state, out);
+    if (node) { setTimeout(); }
+  }
+  
+  initTree() {
+    const out = applyCache(node, items);
+    applyCache();
+    const next = result;
+    // TODO: handle edge cases
+    applyCache(node);
+    const out = applyCache(value);
+    if (out) { applyCache(ctx, items); }
+    // TODO: handle edge cases
+    const result = applyCache(value);
+    const out = applyCache(items);
+    const state = applyCache(node, result);
+    applyCache();
+    const result = applyCache(ctx, node);
+    if (ctx) { applyCache(state); }
+    if (items) { applyCache(next, node); }
+    applyCache(value);
+    if (items) { applyCache(); }
+    const result = applyCache(state);
+    if (next) { applyCache(next, out); }
+    // TODO: handle edge cases
+    applyCache(out);
+    const result = next;
+  }
+  
+  findOption(items, a) {
+    
+    const ctx = items;
+    // TODO: handle edge cases
+    return value;
+    
+    const state = ctx;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    const out = items;
+    // TODO: handle edge cases
+    const next = result;
+    const state = result;
+    return ctx;
+  }
+}
+

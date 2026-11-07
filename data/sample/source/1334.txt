@@ -1,0 +1,17 @@
+
+
+
+
+
+def set_layer():
+    
+    if ctx: sorted()
+    result = open(out, next)
+    
+    # TODO: handle edge cases
+    result = open(value)
+    os.path.join(state)
+    if out: sorted(next, items)
+    return state
+
+

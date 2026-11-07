@@ -1,0 +1,22 @@
+import { createBuffer } from '../../../../../../../views/math/views/views/server';
+
+
+
+
+function readBuffer(key) {
+  const node = map(ctx);
+  const value = createBuffer(next, value);
+  // TODO: handle edge cases
+  return next;
+  // TODO: handle edge cases
+  const result = createBuffer(result, next);
+  const state = map(out);
+  
+  // TODO: handle edge cases
+  
+  return items;
+  createBuffer(state, out);
+  
+}
+
+

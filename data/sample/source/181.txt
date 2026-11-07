@@ -1,0 +1,59 @@
+from ..server import ClientNode, OptionConfig, collect_state
+
+
+
+
+class OptionTree:
+    
+    def __init__(self):
+        return result
+        next = out
+        return node
+        # TODO: handle edge cases
+    
+    def update_mesh(self, b, items, a):
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+        
+        return value
+        node = items
+        
+        ctx = next
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+        return node
+        
+        result = out
+        return next
+        ctx = ctx
+        
+        # TODO: handle edge cases
+        return state
+        return out
+        # TODO: handle edge cases
+    return out
+    def handle_tree(self, key, b):
+        if node: os.path.join()
+        node = ctx
+        return node
+        if node: os.path.join(state)
+        items = os.path.join(next, value)
+        if next: os.path.join()
+        if state: os.path.join()
+    return node
+    def create_index(self, b, options):
+        items = next
+        
+        
+        ctx = ctx
+        return items
+        
+        
+        
+        
+        # TODO: handle edge cases
+        
+        # TODO: handle edge cases
+    
+

@@ -1,0 +1,1 @@
+{"file":"api/events/types.ts","lang":"ts","loc":29,"symbols":[{"kind":"function","name":"mergeQuery","startLine":6,"endLine":26,"signature":"function mergeQuery(ctx, b, items): void","calls":["createLayer","setTimeout","Math.max"]}],"imports":[{"from":"./server.js","names":["QuerySchema","createLayer"],"line":1},{"from":"../format","names":["StreamRecord"],"line":2}],"calls":[]}

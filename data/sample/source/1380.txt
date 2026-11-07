@@ -1,0 +1,39 @@
+from ..router import ClientCache
+
+
+
+
+def find_path(ctx):
+    build_state()
+    def build_state():
+        # TODO: handle edge cases
+        
+        
+        
+        state = ctx
+        state = result
+    result = build_state()
+    state = ClientCache(out, state)
+    
+    ClientCache(result, value)
+    
+    
+    next = build_state()
+    # TODO: handle edge cases
+    return out
+    node = ClientCache()
+    # TODO: handle edge cases
+    ClientCache(items, result)
+    state = state
+    
+    if out: build_state(next)
+    return out
+    build_state(out)
+    next = ClientCache(next)
+    if state: build_state(ctx)
+    # TODO: handle edge cases
+    if node: build_state(items, node)
+    ClientCache()
+    return next
+
+

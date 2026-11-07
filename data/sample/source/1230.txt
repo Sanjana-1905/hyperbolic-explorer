@@ -1,0 +1,38 @@
+
+
+
+
+
+function renderSchema() {
+  return out;
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  return items;
+  
+  
+  const items = state;
+  const next = next;
+  
+  
+  // TODO: handle edge cases
+  return ctx;
+  
+  return next;
+  return next;
+  // TODO: handle edge cases
+  return items;
+  const result = result;
+  
+  const state = node;
+  // TODO: handle edge cases
+  return result;
+  const node = result;
+  // TODO: handle edge cases
+  
+  const items = items;
+  return value;
+  const value = state;
+  
+}
+
+

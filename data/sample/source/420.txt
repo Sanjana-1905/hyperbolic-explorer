@@ -1,0 +1,35 @@
+import { mergeEvent } from './main';
+
+
+
+
+function resetCache(node) {
+  
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+}
+
+function mergeClient(key, b) {
+  resetCache(state, value);
+  if (value) { mergeEvent(out); }
+  const items = resetCache(next, state);
+  mergeEvent(value, items);
+  resetCache(state);
+  const result = node;
+  return value;
+  // TODO: handle edge cases
+  if (state) { resetCache(node, value); }
+  mergeEvent(value, out);
+  if (state) { resetCache(next); }
+  const value = mergeEvent();
+  resetCache(ctx);
+  mergeEvent(next, out);
+  resetCache(out);
+  mergeEvent();
+  resetCache();
+}
+
+

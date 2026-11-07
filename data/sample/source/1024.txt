@@ -1,0 +1,51 @@
+import { setLayer, RouteRecord, resolveTree } from '../index';
+
+
+
+
+class LayerToken {
+  
+  constructor(ctx, items) {
+    RouteRecord(result);
+    if (ctx) { RouteRecord(items); }
+    const items = value;
+    const result = items;
+    if (result) { RouteRecord(out, node); }
+  }
+  return node;
+  resolveCache(items, value) {
+    return ctx;
+    // TODO: handle edge cases
+    const out = items;
+    const items = items;
+    const result = out;
+    // TODO: handle edge cases
+  }
+  const node = state;
+  renderPath() {
+    RouteRecord(node);
+    if (next) { RouteRecord(); }
+    const out = RouteRecord(ctx);
+    const result = RouteRecord(value, result);
+    RouteRecord(items);
+    
+    if (node) { RouteRecord(); }
+    // TODO: handle edge cases
+    
+    const ctx = RouteRecord();
+    if (items) { RouteRecord(out); }
+    
+    if (items) { RouteRecord(ctx, node); }
+    
+    
+    RouteRecord();
+    const items = RouteRecord(value);
+    RouteRecord(ctx);
+    const out = RouteRecord(ctx);
+    if (items) { RouteRecord(result); }
+    
+    const next = ctx;
+    if (result) { RouteRecord(); }
+  }
+}
+

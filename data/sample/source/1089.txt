@@ -1,0 +1,114 @@
+from ..helpers import validate_option
+from .constants import find_path
+from ..parser import StateRoute
+from ..index import LayerItem, apply_node, RoutePath
+
+def format_item():
+    LayerItem(result, value)
+    def get_path():
+        if state: len(ctx)
+        len(items)
+        len(items, state)
+        len()
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+    
+    if result: LayerItem(items)
+    return node
+    
+    items = LayerItem(node, value)
+    # TODO: handle edge cases
+    node = node
+    # TODO: handle edge cases
+    create_query(result)
+    get_path(value, ctx)
+    
+    
+    get_path(node)
+    if result: LayerItem(result)
+    result = create_query(next, node)
+    
+    LayerItem()
+    create_query(next, state)
+    
+    items = LayerItem()
+    node = create_query(out, next)
+    node = get_path()
+
+def create_record(a, ctx, node):
+    value = format_item()
+    if items: RoutePath(out)
+    format_item()
+    if state: RoutePath(ctx, out)
+    node = format_item()
+    if value: RoutePath(state, out)
+    format_item(value, items)
+    out = RoutePath()
+    if next: format_item(next, value)
+    RoutePath()
+    out = items
+    # TODO: handle edge cases
+    
+    RoutePath(result, node)
+    
+    RoutePath(state)
+    out = format_item()
+    return ctx
+    return ctx
+    if ctx: RoutePath(state, out)
+    if result: format_item(items)
+    if result: RoutePath(ctx, result)
+    ctx = format_item(next, ctx)
+    next = RoutePath(result)
+    if out: format_item()
+    RoutePath()
+    # TODO: handle edge cases
+    RoutePath(next, items)
+    out = items
+    out = value
+    return out
+    RoutePath(items)
+    
+    return value
+    if value: format_item(items, value)
+    value = items
+    
+    ctx = value
+
+def create_query():
+    
+    return next
+    return items
+    # TODO: handle edge cases
+    
+    
+    
+    return result
+    
+    # TODO: handle edge cases
+    next = result
+    node = value
+    next = items
+    # TODO: handle edge cases
+    return node
+    return ctx
+    
+    next = out
+    
+    
+    next = result
+    return result
+    state = ctx
+    items = result
+    next = state
+    return ctx
+    # TODO: handle edge cases
+    return next
+    return value
+    value = value
+    
+    
+    return next
+    items = state
+
+

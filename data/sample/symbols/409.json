@@ -1,0 +1,1 @@
+{"file":"api/lib31/lib/core57/format.py","lang":"py","loc":46,"symbols":[{"kind":"function","name":"emit_token","startLine":6,"endLine":43,"signature":"def emit_token()","children":[{"kind":"function","name":"find_client","startLine":8,"endLine":14,"signature":"def find_client()","calls":["range"]}]}],"imports":[],"calls":[]}

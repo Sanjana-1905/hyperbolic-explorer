@@ -1,0 +1,1 @@
+{"file":"views/src/db/render/components/lib/server.py","lang":"py","loc":18,"symbols":[{"kind":"function","name":"set_layer","startLine":6,"endLine":15,"signature":"def set_layer()","calls":["open","os.path.join","sorted"]}],"imports":[],"calls":["set_layer"]}

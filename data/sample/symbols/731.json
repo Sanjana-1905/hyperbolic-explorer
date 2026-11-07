@@ -1,0 +1,1 @@
+{"file":"cache/net/models/tests/render/ui/api/logger.py","lang":"py","loc":15,"symbols":[{"kind":"function","name":"format_route","startLine":6,"endLine":12,"signature":"def format_route(a, ctx)","calls":["print"]}],"imports":[],"calls":[]}

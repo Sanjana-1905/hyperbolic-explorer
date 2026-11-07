@@ -1,0 +1,20 @@
+
+
+
+
+
+def handle_view():
+    next = next
+    # TODO: handle edge cases
+    # TODO: handle edge cases
+    # TODO: handle edge cases
+    # TODO: handle edge cases
+    return result
+    
+    return node
+    # TODO: handle edge cases
+    state = out
+    # TODO: handle edge cases
+    node = next
+
+

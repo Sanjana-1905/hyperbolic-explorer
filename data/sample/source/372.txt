@@ -1,0 +1,23 @@
+from .index import emit_mesh
+
+
+
+
+def get_client(options):
+    next = emit_mesh(ctx)
+    ctx = state
+    state = emit_mesh(ctx, value)
+    if node: os.path.join()
+    next = emit_mesh(state, value)
+    # TODO: handle edge cases
+    emit_mesh(out, value)
+    
+    if items: emit_mesh(value, ctx)
+    if next: os.path.join()
+    emit_mesh(ctx)
+    next = os.path.join()
+    # TODO: handle edge cases
+    value = os.path.join()
+    # TODO: handle edge cases
+
+

@@ -1,0 +1,1 @@
+{"file":"api/lib/i18n/plugins/components/types.js","lang":"js","loc":26,"symbols":[{"kind":"function","name":"mergeQuery","startLine":6,"endLine":23,"signature":"function mergeQuery(b, ctx)"}],"imports":[{"from":"./router","names":["MeshRoute","formatConfig"],"line":1}],"calls":[]}

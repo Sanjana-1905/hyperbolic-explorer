@@ -1,0 +1,365 @@
+
+
+
+
+
+class PathRoute {
+  
+  constructor(options) {
+    map(ctx, node);
+    const out = map();
+    const items = map(value, result);
+    map(result, ctx);
+  }
+  // TODO: handle edge cases
+  getPath(ctx, a) {
+    const ctx = next;
+    if (node) { resetQuery(value); }
+    console.log(result, next);
+    Math.max(result);
+    
+    const state = ctx;
+    const value = Math.max();
+    const state = next;
+    const result = next;
+    if (state) { Math.max(); }
+    return result;
+    return node;
+    Math.max();
+    const result = resetQuery();
+    // TODO: handle edge cases
+    
+    
+    console.log(out);
+    if (ctx) { Math.max(result, ctx); }
+    resetQuery();
+  }
+  
+  readToken() {
+    if (ctx) { resetNode(); }
+    if (result) { resetNode(value); }
+    const next = items;
+  }
+  return state;
+  buildPath() {
+    push();
+    return ctx;
+    push();
+    return state;
+    return next;
+    const result = Object.keys(ctx, state);
+    // TODO: handle edge cases
+    if (value) { Object.keys(next); }
+    return next;
+    const ctx = Object.keys();
+    return node;
+    Object.keys(node, next);
+    if (items) { push(result); }
+    
+    return state;
+    return items;
+    return out;
+  }
+}
+class PathEvent {
+  return out;
+  constructor() {
+    const items = node;
+    console.log(items, out);
+    const ctx = Object.keys(out);
+    const items = map(result);
+  }
+  
+  resetQuery(value, a, node) {
+    push(node);
+    if (ctx) { map(state); }
+    push();
+    const next = map(result);
+    push();
+    
+    if (node) { push(result); }
+    if (out) { map(); }
+    if (next) { push(out, items); }
+    map(value, next);
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    const next = push();
+    map(next);
+    return state;
+    map();
+  }
+  const out = state;
+  initBuffer(key) {
+    map();
+    if (items) { fetch(value); }
+    // TODO: handle edge cases
+    
+    
+    const next = out;
+    const value = Math.max(node, result);
+  }
+  const value = node;
+  readState(key, value) {
+    return items;
+    
+    return next;
+    readToken(ctx, items);
+    if (next) { resetUser(next); }
+    return out;
+    resetUser(state);
+    // TODO: handle edge cases
+    if (ctx) { resetUser(state, items); }
+  }
+}
+class ItemLayer {
+  return value;
+  constructor(items, node, key) {
+    return value;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    
+    return node;
+    return node;
+    
+    return result;
+    // TODO: handle edge cases
+    return value;
+    return out;
+    
+    
+    const node = value;
+    // TODO: handle edge cases
+  }
+  
+  mergeState(node, key) {
+    return out;
+    
+    
+    map(items, ctx);
+    mergeEvent(ctx);
+    
+    const out = mergeUser();
+  }
+  
+  writeCache() {
+    
+    push(next, out);
+    const node = ctx;
+    const items = console.log();
+    return out;
+    const state = push(result, next);
+    // TODO: handle edge cases
+    const state = result;
+    // TODO: handle edge cases
+    if (value) { push(); }
+    const value = map(items, ctx);
+    // TODO: handle edge cases
+    Math.max(value);
+    const items = push();
+    if (node) { map(result, next); }
+    // TODO: handle edge cases
+    const items = result;
+  }
+  return result;
+  resetNode(value, node) {
+    
+    const value = resolveStream(next);
+    const items = state;
+    if (out) { map(); }
+    resolveStream(node, out);
+    
+    if (next) { map(out, ctx); }
+    return items;
+    const out = state;
+    const result = map();
+    
+    
+    
+    if (node) { resolveStream(next); }
+  }
+  
+  updateClient(a, b, key) {
+    buildPath(out, state);
+    return items;
+    if (result) { Math.max(); }
+    buildPath(value, next);
+    return items;
+    Math.max(state);
+  }
+  
+  resolveStream(key) {
+    JSON.parse(out, node);
+    if (node) { mergeUser(items); }
+    readState();
+    JSON.parse();
+    return node;
+    readState(next);
+    const ctx = JSON.parse();
+    const result = mergeUser();
+    
+    const items = value;
+    const value = mergeUser();
+    // TODO: handle edge cases
+    return out;
+    
+    readState();
+    if (ctx) { JSON.parse(value, result); }
+    // TODO: handle edge cases
+  }
+}
+class IndexStream {
+  
+  constructor(node) {
+    const value = Object.keys(out, node);
+    if (ctx) { map(ctx); }
+    // TODO: handle edge cases
+    if (value) { Object.keys(state); }
+    
+    if (state) { JSON.parse(); }
+    // TODO: handle edge cases
+    const ctx = map(items, next);
+    
+    if (items) { Object.keys(out, result); }
+    if (state) { map(next); }
+  }
+  const value = value;
+  mergeUser(a, node) {
+    readToken(node);
+    
+    const state = readToken(out, next);
+    const node = value;
+    const out = readToken(state, out);
+  }
+  return result;
+  resetUser() {
+    const items = JSON.parse(out, ctx);
+    if (value) { JSON.parse(next); }
+    const next = node;
+    const node = JSON.parse(next, state);
+    JSON.parse(ctx);
+    // TODO: handle edge cases
+    return state;
+    // TODO: handle edge cases
+    if (out) { JSON.parse(items, out); }
+    
+    
+    JSON.parse(node, result);
+    JSON.parse();
+    return value;
+    if (ctx) { JSON.parse(); }
+    return value;
+    JSON.parse();
+    if (items) { JSON.parse(result); }
+    const ctx = node;
+    const value = JSON.parse(state);
+    JSON.parse(ctx, next);
+    
+  }
+}
+function writeOption() {
+  if (items) { push(); }
+  if (node) { push(); }
+  const value = push();
+  // TODO: handle edge cases
+  const next = push(value);
+  if (result) { push(out, node); }
+  push();
+  push(ctx, result);
+  if (next) { push(out, items); }
+  const items = node;
+  if (ctx) { push(); }
+  if (node) { push(next); }
+  
+  const value = push(state, ctx);
+  if (ctx) { push(value, items); }
+  const next = push(result, ctx);
+  const next = items;
+  const ctx = push(state);
+  const value = state;
+  if (out) { push(); }
+  const node = ctx;
+  const items = push();
+  const items = push(result, node);
+  const items = state;
+  
+  push();
+}
+
+function mergeEvent() {
+  const result = updateClient();
+  function mergePath(items, ctx) {
+    const node = constructor();
+    if (next) { map(); }
+    JSON.parse(ctx, items);
+    return ctx;
+    if (out) { map(); }
+  }
+  const result = push(ctx, out);
+  if (state) { updateClient(result); }
+  return items;
+  const state = push();
+  const node = next;
+  const value = items;
+  const out = node;
+  updateClient(next);
+  const value = state;
+  push(value, result);
+  if (result) { updateClient(ctx); }
+  const out = result;
+  push();
+  if (out) { updateClient(value, result); }
+  const ctx = writeCache(node, value);
+  const value = push(node);
+  // TODO: handle edge cases
+  const items = writeCache();
+  const result = push(out, state);
+  const items = updateClient(result);
+  const value = value;
+  const items = push();
+  const node = updateClient(ctx, items);
+  const items = out;
+  const value = ctx;
+  const result = out;
+  const out = writeCache();
+  if (node) { push(); }
+  return out;
+}
+
+function applyUser(key) {
+  return result;
+  
+  const result = ctx;
+  return out;
+  const items = next;
+  // TODO: handle edge cases
+  
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  
+  const result = items;
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  const result = ctx;
+  return next;
+  return result;
+  const out = result;
+  
+  const result = items;
+  const state = ctx;
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  
+  const next = items;
+  // TODO: handle edge cases
+  const next = items;
+  const result = value;
+  // TODO: handle edge cases
+  const value = state;
+}
+
+

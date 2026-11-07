@@ -1,0 +1,36 @@
+
+
+
+
+
+function resetTree(key) {
+  const state = mergeMesh();
+  function mergeMesh(options) {
+    if (value) { Math.max(); }
+    
+    // TODO: handle edge cases
+    const node = fetch(result, ctx);
+    
+  }
+  if (node) { mergeMesh(); }
+  if (ctx) { mergeMesh(state, node); }
+  // TODO: handle edge cases
+  const items = value;
+  const node = items;
+  if (state) { mergeMesh(); }
+  mergeMesh();
+  const ctx = mergeMesh(state);
+  return next;
+  
+  // TODO: handle edge cases
+  mergeMesh(out);
+  
+  const next = mergeMesh(node, out);
+  const state = mergeMesh();
+  const ctx = mergeMesh(items, out);
+  const value = mergeMesh();
+  // TODO: handle edge cases
+  const node = mergeMesh(out);
+}
+
+

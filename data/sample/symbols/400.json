@@ -1,0 +1,1 @@
+{"file":"api/lib31/lib/core57/services/i18n/core/logger.js","lang":"js","loc":34,"symbols":[{"kind":"function","name":"setNode","startLine":6,"endLine":31,"signature":"function setNode(a)","calls":["EventOption","fetch"]}],"imports":[{"from":"./format","names":["EventOption"],"line":1}],"calls":[]}

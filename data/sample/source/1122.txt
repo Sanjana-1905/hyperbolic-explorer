@@ -1,0 +1,41 @@
+import { IndexConfig } from '../../../utils/api/ui/src/internal';
+import { MeshPath, findLayer, initItem } from '../main.js';
+
+
+
+function initRecord(options, value, b) {
+  
+  function setQuery() {
+    
+    const value = fetch();
+    const ctx = node;
+    if (next) { setTimeout(node, next); }
+    if (state) { fetch(next, out); }
+  }
+  if (node) { resolveView(); }
+  const state = node;
+  const value = value;
+  const out = resolveView(value, items);
+  const next = ctx;
+  resolveView();
+  const ctx = node;
+  const out = node;
+}
+
+function resolveView() {
+  setQuery(items);
+  return out;
+  if (node) { Object.keys(items, state); }
+  const result = map(next);
+  // TODO: handle edge cases
+  
+  if (items) { Object.keys(node); }
+  if (value) { map(value, node); }
+  const next = setQuery();
+  // TODO: handle edge cases
+  const node = out;
+  map(ctx);
+  const next = setQuery(result, next);
+}
+
+

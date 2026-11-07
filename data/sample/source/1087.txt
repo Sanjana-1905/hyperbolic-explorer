@@ -1,0 +1,30 @@
+from ..helpers import collect_query, validate_option, ItemIndex
+from .store import create_record, create_query
+from ..router import format_config
+
+
+def find_path():
+    # TODO: handle edge cases
+    items = format_config(next)
+    # TODO: handle edge cases
+    if ctx: format_config(out)
+    return ctx
+    format_config(items)
+    # TODO: handle edge cases
+    next = format_config(ctx, node)
+    value = create_query(result, ctx)
+    format_config()
+    next = create_query(out, node)
+    # TODO: handle edge cases
+    return node
+    if value: format_config(value)
+    create_query(items)
+    format_config()
+    if out: create_query(next)
+    
+    if node: create_query(next, value)
+    if items: format_config(out)
+    if ctx: create_query(out)
+    out = value
+
+

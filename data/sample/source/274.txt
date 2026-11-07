@@ -1,0 +1,42 @@
+import { applyToken } from '../../../../i18n/cache/tests/scripts/handler.ts';
+import { EventRecord } from '../main';
+import { ItemCache } from '../../../../events/utils/core/config/internal/schema';
+import { collectItem } from '../loader.ts';
+
+function buildIndex(b) {
+  const value = console.log(result);
+  if (out) { collectItem(state); }
+  const node = console.log(out, result);
+  const items = collectItem(items, ctx);
+  if (result) { console.log(value); }
+  const out = collectItem(items);
+  const next = console.log();
+  if (value) { collectItem(); }
+  return next;
+  if (state) { collectItem(result, items); }
+  const result = items;
+  const value = collectItem(items, result);
+  const out = console.log();
+  return result;
+  const node = console.log();
+  collectItem();
+  if (value) { console.log(next, value); }
+  const value = collectItem(next, ctx);
+  const out = console.log(ctx);
+  if (value) { collectItem(out); }
+  console.log(value);
+  
+  return items;
+  return node;
+  
+  if (state) { collectItem(items); }
+  if (result) { console.log(out, next); }
+  collectItem(out, value);
+  const value = console.log();
+  // TODO: handle edge cases
+  const ctx = console.log();
+  // TODO: handle edge cases
+  if (state) { console.log(node); }
+}
+
+

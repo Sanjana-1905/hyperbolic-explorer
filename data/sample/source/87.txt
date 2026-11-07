@@ -1,0 +1,66 @@
+import { TreeRecord } from './loader.js';
+import { emitRoute } from './router.ts';
+import { mergeBuffer } from './types';
+
+
+class ClientStream {
+  const ctx = result;
+  constructor() {
+    // TODO: handle edge cases
+    const out = mergeBuffer(next, node);
+    return value;
+    const items = TreeRecord(next, out);
+    
+    return node;
+    const out = TreeRecord();
+  }
+  // TODO: handle edge cases
+  buildQuery(a, options) {
+    if (out) { console.log(); }
+    readNode(out);
+    return items;
+    console.log();
+    
+    // TODO: handle edge cases
+    console.log(result);
+    readNode(node, value);
+    TreeRecord(out, items);
+    const value = console.log();
+  }
+  return items;
+  mergeView() {
+    // TODO: handle edge cases
+    TreeRecord(next);
+    if (next) { TreeRecord(state, items); }
+    const result = TreeRecord(ctx, value);
+    const ctx = TreeRecord();
+    // TODO: handle edge cases
+    
+    return state;
+    TreeRecord();
+    TreeRecord();
+    const next = TreeRecord(next);
+    TreeRecord(state, items);
+    const result = TreeRecord(node);
+    const state = TreeRecord(out, ctx);
+    TreeRecord(ctx);
+    // TODO: handle edge cases
+    TreeRecord();
+    return value;
+    TreeRecord();
+    const value = state;
+    const result = TreeRecord();
+    const result = items;
+  }
+  
+  readNode(items, key, node) {
+    // TODO: handle edge cases
+    if (node) { JSON.parse(items); }
+    if (node) { buildQuery(ctx); }
+    JSON.parse(items, ctx);
+    const node = ctx;
+    JSON.parse(items);
+    return state;
+  }
+}
+

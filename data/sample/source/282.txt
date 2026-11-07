@@ -1,0 +1,31 @@
+import { NodeOption, ViewTree } from '../../../../cache/net/models/tests/render/server.ts';
+
+
+
+
+function writeEvent(b, value, key): void {
+  // TODO: handle edge cases
+  
+  return out;
+  if (node) { ViewTree(items); }
+  const out = result;
+  return node;
+  
+  // TODO: handle edge cases
+  const state = ctx;
+  const next = ViewTree(result, value);
+  // TODO: handle edge cases
+  return items;
+  NodeOption(value);
+  ViewTree(ctx, result);
+  NodeOption();
+  ViewTree(node);
+  const ctx = out;
+  if (value) { ViewTree(); }
+  NodeOption(node, ctx);
+  return value;
+  if (value) { NodeOption(state); }
+  if (next) { ViewTree(); }
+}
+
+

@@ -1,0 +1,32 @@
+import { validateClient } from './parser';
+
+
+
+
+function resolveStream(options, b) {
+  const out = node;
+  // TODO: handle edge cases
+  return items;
+  return node;
+  const result = result;
+  const result = Object.keys(value);
+  if (value) { Object.keys(state, out); }
+  Object.keys(state, ctx);
+  
+  const state = Object.keys(state);
+  return node;
+  if (items) { Object.keys(node); }
+  // TODO: handle edge cases
+  const node = Object.keys(node);
+  const node = Object.keys();
+  const value = Object.keys();
+  Object.keys(value, ctx);
+  Object.keys(out);
+  
+  return value;
+  if (node) { Object.keys(); }
+  if (result) { Object.keys(node); }
+  
+}
+
+

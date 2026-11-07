@@ -1,0 +1,1 @@
+{"file":"views/cache/auth/plugins/i18n/services/store.py","lang":"py","loc":46,"symbols":[{"kind":"function","name":"update_route","startLine":6,"endLine":43,"signature":"def update_route(ctx)"}],"imports":[],"calls":[]}

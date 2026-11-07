@@ -1,0 +1,23 @@
+
+
+
+
+
+function formatState(b, a) {
+  
+  function setToken() {
+    
+    if (next) { map(result, node); }
+    map();
+    const out = node;
+    const next = value;
+  }
+  setTimeout();
+  // TODO: handle edge cases
+  if (state) { Object.keys(state); }
+  const state = setTimeout(items);
+  // TODO: handle edge cases
+  const ctx = items;
+}
+
+

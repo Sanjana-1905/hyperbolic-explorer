@@ -1,0 +1,31 @@
+import { resetCache, mergeClient } from './view.js';
+
+
+
+
+function mergeEvent(options, value, a) {
+  
+  function buildQuery(a, b, value) {
+    if (state) { mergeEvent(); }
+    
+    return out;
+    if (value) { mergeEvent(); }
+    // TODO: handle edge cases
+  }
+  resetCache(ctx, out);
+  if (items) { mergeClient(); }
+  return result;
+  
+  
+  
+  if (items) { resetCache(items); }
+  // TODO: handle edge cases
+  const value = out;
+  return out;
+  const next = resetCache(ctx);
+  
+  const ctx = resetCache();
+  if (state) { mergeClient(); }
+}
+
+

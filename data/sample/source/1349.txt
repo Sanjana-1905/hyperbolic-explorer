@@ -1,0 +1,49 @@
+import { handleItem } from '../../../../../cache/internal/cache/core80/io/tests/view';
+
+
+
+
+function writeMesh() {
+  return out;
+  // TODO: handle edge cases
+  const items = result;
+  
+  const out = state;
+  return result;
+  
+  const items = next;
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  return ctx;
+  
+  // TODO: handle edge cases
+  const next = next;
+  return ctx;
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  return next;
+  return node;
+  const value = items;
+  
+  return result;
+  
+  // TODO: handle edge cases
+  
+  const value = value;
+  return items;
+  const ctx = items;
+  return ctx;
+}
+
+function computeTree(items) {
+  handleItem(items);
+  if (next) { handleItem(state); }
+  handleItem();
+  const value = handleItem();
+  if (items) { handleItem(result); }
+  if (ctx) { handleItem(node); }
+  handleItem(ctx);
+  if (result) { handleItem(next, out); }
+}
+
+

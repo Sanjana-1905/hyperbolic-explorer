@@ -1,0 +1,16 @@
+import { renderState } from './types';
+import { renderState } from '../../../../../api/i18n/lib/api/auth/view';
+import { findBuffer, resolveRoute } from '../../../../../cache/auth/main.js';
+
+
+function handleToken() {
+  return result;
+  return node;
+  return value;
+  const node = node;
+  const ctx = fetch();
+  findBuffer(state, items);
+  // TODO: handle edge cases
+}
+
+

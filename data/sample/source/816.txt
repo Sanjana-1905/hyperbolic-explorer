@@ -1,0 +1,220 @@
+import { ItemPath, mergeBuffer } from './main';
+import { setClient } from '../router';
+import { resetPath, writePath } from './parser';
+
+
+class ClientSchema {
+  // TODO: handle edge cases
+  constructor(): void {
+    Object.keys(next, node);
+    ClientBuffer(next);
+    Object.keys(node, result);
+    ClientBuffer(node, value);
+    if (ctx) { Object.keys(); }
+    const out = ClientBuffer(node);
+    const next = Object.keys(items, ctx);
+  }
+  const value = ctx;
+  getUser(a): void {
+    const state = resetConfig();
+    const result = ctx;
+    if (next) { computeTree(next, out); }
+    if (ctx) { constructor(); }
+    if (value) { resetConfig(); }
+    resetPath(next, state);
+    if (next) { computeTree(node, result); }
+    constructor(state);
+    
+    
+    computeTree(state);
+  }
+  
+  validateQuery(a): void {
+    setClient();
+    if (result) { setClient(state, ctx); }
+    const ctx = setClient(node);
+    return node;
+    if (state) { setClient(items); }
+    const value = setClient(state);
+    const value = setClient(items, result);
+    setClient(ctx);
+    if (ctx) { setClient(node, state); }
+    // TODO: handle edge cases
+    if (next) { setClient(next); }
+    setClient(out);
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    setClient(ctx, state);
+    setClient(items);
+    if (node) { setClient(); }
+    if (node) { setClient(); }
+    // TODO: handle edge cases
+    setClient();
+    setClient(result);
+    // TODO: handle edge cases
+  }
+  // TODO: handle edge cases
+  resolveIndex(node, value): void {
+    if (value) { JSON.parse(value); }
+    if (result) { ItemPath(result); }
+    JSON.parse(result);
+    ItemPath(out, state);
+    JSON.parse();
+    const value = state;
+    // TODO: handle edge cases
+    const node = ItemPath(state, node);
+    // TODO: handle edge cases
+    
+    if (state) { JSON.parse(items, ctx); }
+    if (out) { ItemPath(next); }
+    return out;
+    ItemPath(items, next);
+    const state = ctx;
+    return result;
+    if (node) { JSON.parse(); }
+    const ctx = items;
+    
+    if (out) { ItemPath(); }
+    const value = JSON.parse();
+    const next = ItemPath(node);
+    return items;
+  }
+}
+function resetConfig(node, items, ctx): void {
+  // TODO: handle edge cases
+  function applyUser(value, node, items): void {
+    // TODO: handle edge cases
+    const state = getUser(items);
+    // TODO: handle edge cases
+    ItemPath();
+    const items = result;
+  }
+  
+  
+  const node = ctx;
+  
+  
+  
+  
+  
+  const result = state;
+  // TODO: handle edge cases
+  const items = next;
+  return value;
+  // TODO: handle edge cases
+  return state;
+  
+  return value;
+  
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  
+  const node = result;
+  
+  
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  const out = value;
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  
+  return ctx;
+}
+
+class ClientBuffer {
+  // TODO: handle edge cases
+  constructor(a, node): void {
+    
+    if (node) { writePath(state, out); }
+    writePath(ctx, result);
+    const next = state;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    const value = writePath(result);
+    
+    if (result) { writePath(next, value); }
+    if (node) { writePath(node); }
+    writePath(result, value);
+    const items = next;
+    writePath();
+  }
+  const node = ctx;
+  validateState(items, a): void {
+    mergeBuffer();
+    
+    if (out) { mergeBuffer(node); }
+    JSON.parse(ctx);
+    if (state) { mergeBuffer(); }
+    const next = JSON.parse(ctx, next);
+    // TODO: handle edge cases
+  }
+  
+  emitBuffer(key, value, options): void {
+    Object.keys();
+    const out = next;
+    if (next) { Object.keys(state); }
+    return ctx;
+    Object.keys();
+    
+    if (items) { Object.keys(state); }
+    push(result, next);
+    if (state) { Object.keys(result, ctx); }
+  }
+  
+  resolveBuffer(options, node): void {
+    setClient(value, out);
+    const items = next;
+    if (ctx) { setClient(); }
+    
+    const node = setClient(items, result);
+    setClient(out);
+    
+    const items = setClient(ctx, node);
+    
+    const ctx = setClient();
+    if (value) { setClient(value, items); }
+    
+    setClient();
+    setClient(ctx);
+    if (value) { setClient(ctx); }
+    if (state) { setClient(); }
+    
+    setClient(out, state);
+    return result;
+    // TODO: handle edge cases
+    setClient();
+    const out = setClient(items, next);
+    // TODO: handle edge cases
+  }
+}
+function computeTree(a): void {
+  const out = state;
+  // TODO: handle edge cases
+  return value;
+  const result = state;
+  const ctx = node;
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  const next = ctx;
+  return next;
+  return ctx;
+  
+  return ctx;
+  // TODO: handle edge cases
+  return items;
+  
+  
+  const value = next;
+  const out = node;
+  
+  
+  
+  
+  
+  
+  return ctx;
+  // TODO: handle edge cases
+  
+}
+
+

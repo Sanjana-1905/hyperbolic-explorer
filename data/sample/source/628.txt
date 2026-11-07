@@ -1,0 +1,28 @@
+
+
+
+
+
+function applyPath() {
+  const result = map(state, next);
+  function updateSchema(options) {
+    return out;
+    
+    // TODO: handle edge cases
+    const next = result;
+    return node;
+  }
+  return items;
+  const next = node;
+  return ctx;
+  return state;
+  map(out);
+  return state;
+  
+  const state = ctx;
+  const value = items;
+  const state = updateSchema();
+  const node = items;
+}
+
+

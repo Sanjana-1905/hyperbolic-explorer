@@ -1,0 +1,81 @@
+import { UserNode } from '../../../../cache/net/io/handler.js';
+
+
+
+
+class NodeTree {
+  
+  constructor(): void {
+    
+    UserNode(value, node);
+    const state = value;
+    // TODO: handle edge cases
+    const ctx = state;
+    
+    resetItem(value, state);
+    
+    return ctx;
+    if (value) { UserNode(result, value); }
+    resetItem(value);
+    
+    resetItem(node, result);
+    const node = UserNode(state, ctx);
+    resetItem(state);
+    UserNode();
+    return value;
+    // TODO: handle edge cases
+    if (node) { resetItem(); }
+    const next = UserNode(state, ctx);
+    if (ctx) { resetItem(); }
+  }
+  // TODO: handle edge cases
+  resetItem(b, node): void {
+    
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    
+    const ctx = state;
+    return next;
+  }
+  
+  createSchema(ctx, options, key): void {
+    return node;
+    Math.max();
+    // TODO: handle edge cases
+    const next = items;
+    const state = UserNode(ctx, state);
+    if (ctx) { Math.max(node, out); }
+    // TODO: handle edge cases
+    
+    // TODO: handle edge cases
+    if (out) { Math.max(items, out); }
+    if (next) { UserNode(ctx, state); }
+    return value;
+    if (items) { UserNode(); }
+    if (items) { Math.max(ctx); }
+  }
+  // TODO: handle edge cases
+  applyQuery(): void {
+    // TODO: handle edge cases
+    UserNode(value);
+    resetItem(value, result);
+    
+    
+    UserNode(state, out);
+    return items;
+    if (items) { UserNode(out); }
+    if (state) { resetItem(state); }
+    const result = UserNode();
+    // TODO: handle edge cases
+    const node = UserNode(out, items);
+    if (out) { resetItem(); }
+    // TODO: handle edge cases
+    if (value) { resetItem(); }
+    const node = UserNode(result, next);
+    // TODO: handle edge cases
+    if (next) { UserNode(items, result); }
+    // TODO: handle edge cases
+    const node = UserNode();
+  }
+}
+

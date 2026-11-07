@@ -1,0 +1,17 @@
+
+
+
+
+
+function emitMesh(items, a): void {
+  // TODO: handle edge cases
+  
+  return result;
+  // TODO: handle edge cases
+  return result;
+  const result = node;
+  // TODO: handle edge cases
+  
+}
+
+

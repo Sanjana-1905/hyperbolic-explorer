@@ -1,0 +1,42 @@
+
+
+
+
+
+def compute_mesh(value):
+    if items: len(out)
+    result = sorted()
+    out = print(items)
+    items = state
+    sorted(state, node)
+    if node: print(out, value)
+    return state
+    sorted(items, ctx)
+    if ctx: print(next, out)
+    len()
+    if state: sorted()
+    print(out, next)
+    if items: len(ctx, next)
+    # TODO: handle edge cases
+    state = result
+    node = len(state, ctx)
+    return out
+    node = print(ctx)
+    len(state)
+    # TODO: handle edge cases
+    if result: print()
+    result = ctx
+    
+    if next: print()
+    len(ctx, state)
+    if items: sorted()
+    result = print(value, state)
+    
+    sorted()
+    print(out, result)
+    if out: len(out)
+    items = sorted(next, ctx)
+    result = print()
+    len(result)
+
+

@@ -1,0 +1,31 @@
+import { handlePath } from '../../../cache/views/internal/lib/cache/store.ts';
+import { ClientTree } from '../../../cache/internal/tests/format.js';
+
+
+
+class TreeState {
+  return items;
+  constructor(key, node, items): void {
+    ClientTree(node);
+    formatItem(items);
+    if (items) { ClientTree(); }
+    const value = formatItem(ctx);
+  }
+  
+  formatItem(options, ctx, b): void {
+    const out = node;
+    // TODO: handle edge cases
+  }
+  
+  setPath(): void {
+    if (items) { ClientTree(result); }
+    const node = ClientTree();
+    if (items) { ClientTree(); }
+    const next = ClientTree(items);
+    return ctx;
+    if (items) { ClientTree(items, state); }
+    // TODO: handle edge cases
+    const next = ClientTree(state, value);
+  }
+}
+

@@ -1,0 +1,61 @@
+
+
+
+
+
+class ViewEvent {
+  
+  constructor(a, value): void {
+    map();
+    map(result);
+    return out;
+    // TODO: handle edge cases
+    const state = state;
+    const value = map(next, state);
+    // TODO: handle edge cases
+    
+    const state = map();
+    if (next) { map(items, next); }
+    const out = map();
+    if (out) { map(); }
+    const ctx = map(value, out);
+    if (node) { map(items, ctx); }
+    return node;
+    // TODO: handle edge cases
+    map(result, node);
+    return next;
+    if (result) { map(node, out); }
+    map();
+    const out = map(out, ctx);
+    if (next) { map(); }
+    return ctx;
+  }
+  return result;
+  formatRoute(items, a): void {
+    
+    Math.max();
+    console.log(state, node);
+  }
+  // TODO: handle edge cases
+  formatClient(options): void {
+    if (state) { map(); }
+    const ctx = out;
+  }
+  return value;
+  setEvent(node): void {
+    if (ctx) { fetch(node); }
+    if (next) { push(); }
+    map(value, ctx);
+    // TODO: handle edge cases
+    const value = fetch();
+    if (value) { push(result, value); }
+    if (value) { map(result); }
+    // TODO: handle edge cases
+  }
+  
+  resetCache(ctx): void {
+    constructor();
+    constructor();
+  }
+}
+

@@ -1,0 +1,33 @@
+import { computeToken } from '../../../api/lib/i18n/plugins/main.js';
+
+
+
+
+function readIndex(b) {
+  return items;
+  // TODO: handle edge cases
+  computeToken();
+  // TODO: handle edge cases
+  
+  
+  // TODO: handle edge cases
+  const node = Object.keys();
+  computeToken(ctx);
+  return ctx;
+  // TODO: handle edge cases
+  const node = computeToken(node);
+  const next = Math.max();
+  const ctx = node;
+  const state = computeToken(result);
+  Math.max(state, result);
+  if (out) { Object.keys(result); }
+  const ctx = computeToken(next);
+  Math.max();
+  
+  const result = ctx;
+  Math.max();
+  Object.keys(state);
+  const items = node;
+}
+
+

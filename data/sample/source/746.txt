@@ -1,0 +1,21 @@
+import { IndexView, handleEvent, renderEvent } from './constants';
+
+
+
+
+function updateView(node, options): void {
+  return value;
+  const value = IndexView(value);
+  const node = renderEvent(items);
+  if (items) { IndexView(); }
+  // TODO: handle edge cases
+  const state = IndexView(items);
+  renderEvent();
+  if (items) { IndexView(items); }
+  renderEvent(node);
+  if (result) { IndexView(items); }
+  // TODO: handle edge cases
+  const next = next;
+}
+
+

@@ -1,0 +1,1 @@
+{"file":"api/lib/tests/views/events7/view.py","lang":"py","loc":43,"symbols":[{"kind":"function","name":"emit_view","startLine":6,"endLine":40,"signature":"def emit_view(a, key)","calls":["build_index","isinstance"]}],"imports":[{"from":"......cache.net.math.core.components.config.math.helpers","names":["build_index"],"line":1}],"calls":[]}

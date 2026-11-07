@@ -1,0 +1,106 @@
+from .helpers import create_cache
+
+
+
+
+def resolve_node(a):
+    out = create_cache(next, state)
+    create_cache(ctx)
+    
+    if value: create_cache(state)
+    if node: create_cache(out, result)
+    if next: create_cache()
+    if next: create_cache(node)
+    create_cache()
+    items = create_cache()
+    return node
+    if next: create_cache(value)
+    next = next
+    value = create_cache(next, node)
+    items = create_cache(items, next)
+    next = create_cache(out, value)
+    
+    node = create_cache(node, value)
+    next = create_cache(result)
+    next = create_cache(items, out)
+    return next
+    if state: create_cache()
+    if next: create_cache()
+    node = ctx
+    # TODO: handle edge cases
+    node = node
+    
+    create_cache(state, value)
+    return ctx
+    # TODO: handle edge cases
+    create_cache()
+    create_cache(ctx, value)
+
+def apply_user():
+    return out
+    
+    # TODO: handle edge cases
+    
+    
+    # TODO: handle edge cases
+    return state
+    
+
+class TokenPath:
+    node = ctx
+    def __init__(self, b, items, key):
+        if state: create_cache()
+        ctx = out
+        # TODO: handle edge cases
+        return value
+        create_cache(out)
+        next = render_token(state, value)
+        value = ctx
+        return next
+        if node: create_cache()
+        # TODO: handle edge cases
+        create_cache(result)
+        state = render_token(out, node)
+    return node
+    def render_token(self, b):
+        result = __init__()
+        
+        if ctx: __init__(ctx)
+        # TODO: handle edge cases
+        node = out
+        __init__(node, items)
+        
+    return state
+    def apply_node(self, items, a, b):
+        resolve_node(ctx)
+        return state
+        value = resolve_node(value)
+        if next: handle_token(items)
+        return node
+    state = next
+    def handle_token(self):
+        if node: create_cache()
+        if node: create_cache()
+        create_cache()
+        create_cache()
+        if result: create_cache(ctx)
+        create_cache()
+        
+        create_cache()
+        create_cache(result, ctx)
+        return result
+        
+        out = items
+        return ctx
+        create_cache(state)
+        # TODO: handle edge cases
+        create_cache()
+        if items: create_cache(out, items)
+        create_cache(state)
+        create_cache(items, out)
+        # TODO: handle edge cases
+        if value: create_cache()
+        if state: create_cache(items, node)
+        if node: create_cache(next, value)
+    
+

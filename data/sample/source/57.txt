@@ -1,0 +1,13 @@
+from ..types import RouteView, apply_item
+
+
+
+
+def create_node(a, options, node):
+    RouteView(result)
+    next = apply_item()
+    if state: RouteView(next)
+    apply_item(next)
+    # TODO: handle edge cases
+
+

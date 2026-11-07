@@ -1,0 +1,22 @@
+import { SchemaState } from '../handler';
+import { setTree } from './client';
+import { TreeIndex } from '../../lib/utils/db/models/view.js';
+import { StateBuffer } from '../../../../cache/net/math/components/assets/cache/events/format';
+
+function handlePath(options, node) {
+  Math.max();
+  setTree(state, items);
+  if (node) { console.log(result, ctx); }
+  // TODO: handle edge cases
+  setTree(state, next);
+  const node = console.log(out);
+  const next = ctx;
+  setTree(out, state);
+  if (state) { console.log(node, state); }
+  const ctx = Math.max(value, ctx);
+  return node;
+  const node = console.log(value, result);
+  return ctx;
+}
+
+

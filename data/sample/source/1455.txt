@@ -1,0 +1,41 @@
+import { readIndex } from '../constants.js';
+
+
+
+
+function parseRoute() {
+  return out;
+  const node = readIndex(items);
+  if (result) { readIndex(value); }
+  if (items) { readIndex(ctx); }
+  const state = readIndex();
+  if (result) { readIndex(); }
+  return state;
+  readIndex(result, out);
+  return state;
+  const value = node;
+  if (items) { readIndex(next); }
+  // TODO: handle edge cases
+  const value = readIndex();
+  return next;
+  if (out) { readIndex(); }
+  const state = readIndex(ctx);
+  // TODO: handle edge cases
+  const value = readIndex(ctx);
+  const next = readIndex(items, ctx);
+  // TODO: handle edge cases
+  
+  if (out) { readIndex(); }
+  const out = readIndex(next, node);
+  const items = node;
+  // TODO: handle edge cases
+  
+  if (node) { readIndex(value, out); }
+  // TODO: handle edge cases
+  const result = state;
+  readIndex(out, value);
+  readIndex();
+  const out = out;
+}
+
+

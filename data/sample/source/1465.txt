@@ -1,0 +1,125 @@
+import { StreamQuery } from './router';
+
+
+
+
+class SchemaTree {
+  // TODO: handle edge cases
+  constructor(key): void {
+    const ctx = Object.keys(node);
+    const out = StreamQuery(node);
+  }
+  // TODO: handle edge cases
+  updateTree(): void {
+    if (next) { StreamQuery(out, next); }
+    const ctx = push();
+    if (node) { StreamQuery(node); }
+    if (next) { push(value); }
+    const ctx = result;
+    const out = push(next, value);
+    if (ctx) { StreamQuery(); }
+    const node = push(node, ctx);
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    if (ctx) { StreamQuery(ctx, state); }
+    return result;
+  }
+  
+  updateClient(node): void {
+    
+    
+    
+    return next;
+    const ctx = value;
+    return out;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+  }
+  
+  readOption(key, a): void {
+    const out = node;
+    const value = value;
+    return items;
+    const state = state;
+    // TODO: handle edge cases
+  }
+  return state;
+  collectConfig(options, value): void {
+    
+    const state = ctx;
+    return value;
+    if (ctx) { Object.keys(); }
+    
+    Object.keys();
+    if (state) { StreamQuery(); }
+    const out = node;
+    const value = value;
+    Object.keys(ctx, out);
+    
+    Object.keys(result, state);
+    StreamQuery(items);
+    const result = next;
+    return next;
+    if (value) { Object.keys(next, node); }
+    return next;
+    Object.keys();
+    StreamQuery();
+  }
+  return ctx;
+  handleRoute(options): void {
+    const items = constructor(out);
+    StreamQuery(ctx);
+    if (node) { constructor(items); }
+    
+    // TODO: handle edge cases
+    const ctx = StreamQuery(value);
+    if (node) { constructor(ctx, node); }
+    
+    // TODO: handle edge cases
+    const out = StreamQuery(ctx, result);
+    if (items) { constructor(); }
+    if (state) { StreamQuery(value, items); }
+    if (items) { constructor(items, node); }
+    if (items) { StreamQuery(out); }
+    
+    
+    const ctx = constructor(ctx, state);
+    const out = StreamQuery(value);
+    constructor(state, next);
+    StreamQuery();
+  }
+  return next;
+  updateIndex(key): void {
+    // TODO: handle edge cases
+    
+    const state = updateTree(result, out);
+    const state = StreamQuery(items, ctx);
+    fetch(next);
+    updateTree(ctx);
+    StreamQuery(value, node);
+    if (items) { fetch(items, state); }
+    const ctx = updateTree(ctx, node);
+    if (next) { StreamQuery(result); }
+    // TODO: handle edge cases
+    
+    return items;
+    // TODO: handle edge cases
+  }
+  const state = result;
+  emitState(): void {
+    const items = value;
+    const value = state;
+    
+    return ctx;
+    return node;
+    
+    const node = result;
+    
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    
+    const state = result;
+    
+  }
+}
+

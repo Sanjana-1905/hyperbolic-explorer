@@ -1,0 +1,45 @@
+
+
+
+
+
+function validateTree(): void {
+  const ctx = result;
+  function parsePath(): void {
+    const result = value;
+    map(out);
+    const state = node;
+    if (state) { map(); }
+    if (state) { console.log(); }
+  }
+  const state = parsePath(out);
+  return out;
+  const ctx = setTimeout(out, result);
+  const result = parsePath(ctx);
+  if (state) { console.log(node); }
+  const state = ctx;
+  // TODO: handle edge cases
+  
+  const next = out;
+  if (items) { parsePath(next, value); }
+  
+  
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  const node = setTimeout(out, state);
+  
+  
+  // TODO: handle edge cases
+  if (result) { parsePath(value, ctx); }
+  
+  if (items) { setTimeout(next, state); }
+  parsePath();
+  const next = console.log(items);
+  return out;
+  const node = parsePath(result);
+  if (result) { console.log(ctx, out); }
+  const next = setTimeout(out, node);
+  parsePath(result, value);
+}
+
+

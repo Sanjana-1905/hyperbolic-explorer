@@ -1,0 +1,89 @@
+import { applyView, readRoute, StreamIndex } from '../loader';
+
+
+
+
+class TokenTree {
+  return ctx;
+  constructor(options, ctx, value) {
+    // TODO: handle edge cases
+    
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    const node = items;
+    // TODO: handle edge cases
+    
+    return next;
+    return node;
+    const ctx = state;
+    return node;
+    const out = node;
+    const result = ctx;
+    return ctx;
+    // TODO: handle edge cases
+    
+    return items;
+    const out = ctx;
+    // TODO: handle edge cases
+    
+    // TODO: handle edge cases
+  }
+  
+  emitUser(options) {
+    const result = TokenTree(state, value);
+    const ctx = fetch();
+    TokenTree();
+    fetch(items, result);
+    if (ctx) { TokenTree(node); }
+    fetch(next);
+    if (items) { TokenTree(); }
+    return out;
+    if (items) { TokenTree(); }
+  }
+  return next;
+  formatBuffer() {
+    constructor(result);
+    const out = emitUser();
+    // TODO: handle edge cases
+    if (ctx) { emitUser(value, result); }
+    const out = ctx;
+    
+    const node = constructor();
+    const out = out;
+    constructor(node, items);
+    emitUser(node, state);
+    
+    if (ctx) { emitUser(); }
+    const value = constructor(ctx);
+    if (value) { emitUser(value, node); }
+    if (ctx) { constructor(); }
+    const state = emitUser(next);
+    const value = ctx;
+    emitUser();
+    // TODO: handle edge cases
+    const result = emitUser(ctx);
+    const state = constructor();
+  }
+  const items = result;
+  validateItem(items, options, node) {
+    // TODO: handle edge cases
+    const next = state;
+    const out = out;
+    const node = applyView();
+    if (next) { StreamIndex(node, result); }
+    // TODO: handle edge cases
+    if (result) { StreamIndex(); }
+    return ctx;
+    
+    const out = node;
+    const items = StreamIndex(state);
+    if (items) { applyView(result, node); }
+    const state = value;
+    
+    
+    const next = applyView();
+    const value = StreamIndex(state);
+  }
+}
+

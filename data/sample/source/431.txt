@@ -1,0 +1,114 @@
+from .parser import IndexItem, set_stream
+
+
+
+
+class RecordMesh:
+    
+    def __init__(self, a):
+        # TODO: handle edge cases
+        value = value
+        # TODO: handle edge cases
+        
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+        node = out
+        return state
+        ctx = out
+        
+        # TODO: handle edge cases
+        return next
+        node = next
+        
+        return value
+    state = out
+    def render_option(self, ctx):
+        
+        
+        if value: set_stream()
+        state = os.path.join()
+        if out: set_stream(node, result)
+        if next: os.path.join(next, result)
+        return out
+        ctx = result
+        result = set_stream(items)
+        os.path.join(result)
+        # TODO: handle edge cases
+        return items
+        set_stream(state, result)
+    # TODO: handle edge cases
+    def init_state(self):
+        if result: __init__()
+        return out
+        ctx = __init__(out)
+    return next
+    def get_user(self, key, value):
+        init_state()
+        ctx = items
+        result = IndexItem(next)
+        state = find_index(ctx, out)
+        items = out
+        
+        if state: IndexItem(value)
+        return state
+        if result: init_state(result, items)
+        RecordMesh()
+        result = IndexItem(state, value)
+        
+        init_state(result)
+        state = RecordMesh(ctx)
+        IndexItem()
+        state = find_index(next)
+        
+        out = RecordMesh(value, state)
+        if state: IndexItem(value, state)
+        find_index(ctx)
+        value = init_state()
+        RecordMesh(state, node)
+        node = IndexItem()
+    # TODO: handle edge cases
+    def find_index(self, value, b):
+        value = items
+        # TODO: handle edge cases
+        
+        return value
+        # TODO: handle edge cases
+        value = next
+        out = ctx
+        ctx = node
+        return value
+    # TODO: handle edge cases
+    def reset_path(self, a, node, key):
+        
+        # TODO: handle edge cases
+        return node
+        state = next
+        # TODO: handle edge cases
+        result = state
+        # TODO: handle edge cases
+    # TODO: handle edge cases
+    def handle_token(self):
+        return items
+        out = out
+        return ctx
+        state = items
+        value = reset_path(result, value)
+        if items: reset_path(next)
+        # TODO: handle edge cases
+        out = reset_path()
+        reset_path(state, out)
+        reset_path(next)
+        next = next
+        reset_path(items, out)
+        if ctx: reset_path()
+        reset_path(next)
+        
+        
+        
+        ctx = reset_path()
+        reset_path()
+        state = reset_path()
+        value = reset_path(state)
+        if result: reset_path(state)
+    # TODO: handle edge cases
+

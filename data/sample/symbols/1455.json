@@ -1,0 +1,1 @@
+{"file":"views/utils/views/ui/schema_530.js","lang":"js","loc":42,"symbols":[{"kind":"function","name":"parseRoute","startLine":6,"endLine":39,"signature":"function parseRoute()","calls":["readIndex"]}],"imports":[{"from":"../constants.js","names":["readIndex"],"line":1}],"calls":[]}

@@ -1,0 +1,1 @@
+{"file":"views/math/helpers.js","lang":"js","loc":27,"symbols":[{"kind":"function","name":"applyConfig","startLine":6,"endLine":24,"signature":"function applyConfig()","calls":["Math.max","fetch"]}],"imports":[],"calls":["applyConfig"]}

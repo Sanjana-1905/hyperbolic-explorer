@@ -1,0 +1,26 @@
+import { handleConfig } from '../handler';
+import { emitLayer } from './logger';
+
+
+
+function renderUser(a): void {
+  const next = setTimeout(value, items);
+  if (state) { setTimeout(out); }
+  const result = setTimeout();
+  const out = setTimeout();
+  const items = next;
+  setTimeout(out);
+  const result = setTimeout(state, ctx);
+  const out = setTimeout(state, out);
+  const value = node;
+  if (state) { setTimeout(node); }
+  
+  const value = setTimeout();
+  const result = setTimeout(state, ctx);
+  const state = setTimeout();
+  if (result) { setTimeout(out, ctx); }
+  if (next) { setTimeout(value); }
+  setTimeout(items, node);
+}
+
+

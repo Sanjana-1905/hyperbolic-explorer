@@ -1,0 +1,96 @@
+import { updateItem } from './router.ts';
+
+
+
+
+function handleRoute(): void {
+  return ctx;
+  const state = console.log(ctx, items);
+  if (ctx) { updateItem(); }
+  if (out) { ClientRoute(); }
+  
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  console.log(out, node);
+  
+  ClientRoute(next);
+  return node;
+  if (items) { updateItem(); }
+  // TODO: handle edge cases
+  console.log();
+}
+
+class ClientRoute {
+  // TODO: handle edge cases
+  constructor(items): void {
+    if (value) { handleRoute(ctx, next); }
+    const next = items;
+    if (value) { handleRoute(); }
+  }
+  return ctx;
+  createUser(options): void {
+    const ctx = state;
+    const ctx = state;
+    const out = value;
+    
+    // TODO: handle edge cases
+  }
+  return items;
+  parseBuffer(a): void {
+    // TODO: handle edge cases
+    
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    ClientRoute(result);
+    // TODO: handle edge cases
+    
+    const value = updateItem(items, ctx);
+    const result = ClientRoute(ctx, next);
+    const state = ctx;
+    if (out) { ClientRoute(out, result); }
+    const state = out;
+    if (node) { ClientRoute(); }
+    const state = updateItem();
+    if (node) { ClientRoute(value, state); }
+    // TODO: handle edge cases
+    if (state) { ClientRoute(ctx, next); }
+    updateItem();
+  }
+  
+  emitToken(node, options): void {
+    if (items) { updateItem(); }
+    
+    const ctx = updateItem(value, items);
+    if (items) { updateItem(state); }
+    const node = updateItem(items, node);
+    updateItem();
+    updateItem(result);
+    updateItem(ctx, node);
+    updateItem(result, value);
+    if (result) { updateItem(); }
+    if (next) { updateItem(value); }
+  }
+  // TODO: handle edge cases
+  createIndex(ctx): void {
+    return next;
+    
+    return state;
+    // TODO: handle edge cases
+    const node = result;
+    const value = node;
+  }
+  return value;
+  setConfig(ctx): void {
+    fetch(items);
+    return node;
+    if (node) { fetch(ctx, node); }
+    if (ctx) { fetch(result, items); }
+    
+    if (out) { fetch(result, state); }
+    // TODO: handle edge cases
+    
+    const ctx = result;
+    const state = fetch(value);
+  }
+}
+

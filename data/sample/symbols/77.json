@@ -1,0 +1,1 @@
+{"file":"api/events/utils/events/lib/logger.ts","lang":"ts","loc":37,"symbols":[{"kind":"function","name":"updateState","startLine":6,"endLine":34,"signature":"function updateState(): void","calls":["initSchema"]}],"imports":[{"from":"../../../../../cache/internal/models/src/logger_636","names":["initSchema"],"line":1}],"calls":["updateState"]}

@@ -1,0 +1,33 @@
+import { renderSchema } from '../../../../../views/math/views/plugins/assets/main';
+import { TreeIndex } from '../../utils/db/models/view';
+import { renderTree, handleClient } from './logger.js';
+import { MeshRecord } from '../../../../../views/cache/auth/plugins/services/helpers';
+
+function emitNode(ctx) {
+  
+  if (value) { renderSchema(items, value); }
+  if (result) { renderTree(result, state); }
+  if (node) { renderSchema(value); }
+  
+  // TODO: handle edge cases
+  if (node) { renderTree(out, items); }
+  if (state) { renderSchema(state); }
+  const items = renderTree(ctx, next);
+  const result = renderSchema(value);
+  if (value) { renderTree(); }
+  const next = result;
+  renderTree();
+  const node = renderSchema();
+  const result = next;
+  const ctx = renderSchema();
+  const next = renderTree();
+  
+  // TODO: handle edge cases
+  renderSchema(next);
+  return ctx;
+  
+  return node;
+  
+}
+
+

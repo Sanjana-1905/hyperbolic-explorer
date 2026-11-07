@@ -1,0 +1,1 @@
+{"file":"cache/internal/models/src/docs/index.js","lang":"js","loc":39,"symbols":[{"kind":"function","name":"setSchema","startLine":6,"endLine":36,"signature":"function setSchema(key)"}],"imports":[],"calls":["setSchema"]}

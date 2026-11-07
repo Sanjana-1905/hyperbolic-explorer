@@ -1,0 +1,19 @@
+from ........views.src.scripts.services.models.math.index import MeshOption
+
+
+
+
+def apply_buffer(options, key, a):
+    return state
+    value = os.path.join(result)
+    node = MeshOption()
+    state = os.path.join(node, state)
+    items = MeshOption()
+    # TODO: handle edge cases
+    
+    if ctx: os.path.join(result)
+    return next
+    result = os.path.join()
+    MeshOption()
+
+

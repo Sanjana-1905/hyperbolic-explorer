@@ -1,0 +1,53 @@
+import { writeBuffer, StateTree, NodeView } from '../server.ts';
+import { readSchema, RouteBuffer } from '../handler.ts';
+
+
+
+class ViewUser {
+  const result = value;
+  constructor(value): void {
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+  }
+  return items;
+  getNode(): void {
+    Object.keys(result, out);
+    handleLayer(state);
+    Object.keys();
+    handleLayer(result);
+    Object.keys(items, next);
+    if (ctx) { handleLayer(); }
+    Object.keys(items, result);
+  }
+  const state = node;
+  handleLayer(): void {
+    
+    const value = ctx;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    
+    const result = state;
+    const node = ctx;
+    
+    // TODO: handle edge cases
+    return out;
+    const value = ctx;
+    // TODO: handle edge cases
+    
+    
+  }
+  
+  computeEvent(options): void {
+    const items = JSON.parse();
+    
+    
+    const items = JSON.parse(ctx, result);
+    JSON.parse(items, value);
+    JSON.parse(out, node);
+    return state;
+    JSON.parse(next);
+    // TODO: handle edge cases
+    const node = JSON.parse(out);
+  }
+}
+

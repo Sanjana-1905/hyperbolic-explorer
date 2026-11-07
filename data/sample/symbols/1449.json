@@ -1,0 +1,1 @@
+{"file":"views/utils/views/ui/components22/docs/handler.py","lang":"py","loc":16,"symbols":[{"kind":"function","name":"resolve_record","startLine":6,"endLine":13,"signature":"def resolve_record(a, ctx)","calls":["LayerQuery"]}],"imports":[{"from":".....api.types","names":["RecordCache"],"line":1},{"from":".constants","names":["LayerQuery"],"line":2}],"calls":[]}

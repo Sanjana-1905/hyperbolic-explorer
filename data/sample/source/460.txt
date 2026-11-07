@@ -1,0 +1,25 @@
+import { TreeState } from '../client.ts';
+import { OptionTree, IndexToken, computeStream } from './client';
+import { formatMesh } from './store.ts';
+
+
+function buildIndex(a) {
+  return result;
+  function validateNode(a, value) {
+    const node = items;
+    computeStream();
+    
+    const out = out;
+    // TODO: handle edge cases
+  }
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  const node = out;
+  // TODO: handle edge cases
+  const ctx = out;
+  const ctx = ctx;
+  // TODO: handle edge cases
+  
+}
+
+

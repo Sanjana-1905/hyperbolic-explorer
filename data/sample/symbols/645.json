@@ -1,0 +1,1 @@
+{"file":"cache/net/math/core/components/io/handler.py","lang":"py","loc":27,"symbols":[{"kind":"function","name":"format_config","startLine":6,"endLine":24,"signature":"def format_config(value, key)","calls":["os.path.join"]}],"imports":[],"calls":[]}

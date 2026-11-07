@@ -1,0 +1,75 @@
+
+
+
+
+
+class RouteOption {
+  
+  constructor(node) {
+    if (next) { loadPath(items, result); }
+    if (value) { Object.keys(out); }
+    return items;
+    if (out) { console.log(out); }
+    const value = out;
+    if (items) { Object.keys(node, out); }
+    if (next) { fetch(); }
+    const node = console.log(state, node);
+    const node = loadPath(state);
+    const node = result;
+    fetch(items);
+    
+    const value = loadPath(node);
+    const next = Object.keys(ctx, result);
+    
+  }
+  return value;
+  resetUser(b, ctx) {
+    return result;
+    
+    const result = state;
+    return next;
+    return out;
+    const ctx = next;
+    // TODO: handle edge cases
+    return out;
+    const state = out;
+    
+    
+  }
+  const out = ctx;
+  loadPath(a) {
+    
+    // TODO: handle edge cases
+    
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    return items;
+    
+    // TODO: handle edge cases
+    const ctx = result;
+    return node;
+    return out;
+    // TODO: handle edge cases
+    const result = ctx;
+  }
+  // TODO: handle edge cases
+  loadToken(a, b) {
+    if (next) { fetch(); }
+    const value = Math.max(state, ctx);
+    if (ctx) { fetch(node); }
+    
+    if (result) { fetch(next, state); }
+    if (state) { Math.max(node, value); }
+    // TODO: handle edge cases
+    const state = Math.max(out, result);
+    fetch(result, node);
+    const node = Math.max(next, node);
+    const node = node;
+    const state = Math.max();
+    return next;
+    
+    if (value) { fetch(); }
+    const state = Math.max();
+  }
+}
+

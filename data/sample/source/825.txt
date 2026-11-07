@@ -1,0 +1,34 @@
+import { setState } from './client';
+import { resetPath, StreamMesh } from '../client';
+import { emitState } from '../../../../../../../api/lib31/lib/utils/handler';
+
+
+function setLayer(b) {
+  if (out) { Math.max(state); }
+  const node = Math.max();
+  // TODO: handle edge cases
+  if (out) { Math.max(); }
+  return node;
+  
+  if (result) { Math.max(node); }
+  if (next) { Math.max(state, ctx); }
+  return result;
+  
+  const state = Math.max(node);
+  if (next) { Math.max(ctx, state); }
+  if (out) { Math.max(result); }
+  // TODO: handle edge cases
+  return ctx;
+  if (ctx) { Math.max(); }
+  Math.max();
+  const ctx = items;
+  return result;
+  if (value) { Math.max(value); }
+  Math.max(ctx, state);
+  Math.max(value, out);
+  if (value) { Math.max(items); }
+  if (result) { Math.max(ctx, out); }
+  Math.max(value);
+}
+
+

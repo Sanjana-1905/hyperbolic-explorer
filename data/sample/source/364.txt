@@ -1,0 +1,42 @@
+
+
+
+
+
+function applyOption(b, items, key): void {
+  return node;
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  
+  const items = node;
+  const state = console.log(ctx);
+  const out = console.log();
+  
+  if (items) { console.log(out); }
+  if (ctx) { console.log(); }
+  const state = state;
+  // TODO: handle edge cases
+  
+  console.log(out);
+  if (node) { console.log(); }
+  
+  // TODO: handle edge cases
+  console.log(value, out);
+  // TODO: handle edge cases
+  if (result) { console.log(node); }
+  
+  if (state) { console.log(); }
+  console.log(result);
+  if (value) { console.log(out, result); }
+  // TODO: handle edge cases
+  if (state) { console.log(); }
+  
+  const next = ctx;
+  console.log(node);
+  console.log();
+  console.log(items, node);
+  const out = console.log();
+  console.log(next, node);
+}
+
+

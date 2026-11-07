@@ -1,0 +1,180 @@
+import { writeCache } from './loader';
+
+
+
+
+function writeCache(options, node) {
+  console.log(value, ctx);
+  function updateConfig(a) {
+    
+    if (out) { setTimeout(items); }
+    writeCache(result);
+    const ctx = result;
+    if (ctx) { writeCache(ctx, result); }
+  }
+  const next = Math.max(result, ctx);
+  const items = ctx;
+  setTimeout();
+  Math.max(node, items);
+  
+  const value = setTimeout(ctx, state);
+  const out = Math.max(value);
+  const result = console.log(state);
+  setTimeout(value);
+  return items;
+  const value = node;
+}
+
+function handleConfig() {
+  const next = constructor();
+  // TODO: handle edge cases
+  const next = out;
+  if (ctx) { constructor(); }
+  const out = constructor(value);
+  if (ctx) { constructor(); }
+  constructor(node);
+  const value = out;
+  const ctx = next;
+  constructor();
+  constructor();
+  if (node) { constructor(ctx); }
+  constructor();
+  const result = constructor(value);
+  const node = constructor(result);
+}
+
+class ViewTree {
+  
+  constructor() {
+    const value = ctx;
+    return node;
+    
+    return value;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+  }
+  
+  createStream(ctx, items, node) {
+    // TODO: handle edge cases
+    return out;
+    // TODO: handle edge cases
+    
+    return value;
+    const out = ctx;
+    const node = items;
+    // TODO: handle edge cases
+    const result = value;
+    // TODO: handle edge cases
+    const node = next;
+    const ctx = ctx;
+    const node = node;
+    const next = ctx;
+    
+    
+  }
+  return value;
+  loadStream(key, a) {
+    if (ctx) { Math.max(result); }
+    
+    const ctx = emitConfig(result);
+    if (node) { Math.max(); }
+    writeCache(value, result);
+    const result = emitConfig(ctx);
+    const ctx = node;
+    const state = out;
+    emitConfig();
+    const result = Math.max(next);
+    if (out) { writeCache(ctx, node); }
+    emitConfig(result, items);
+    Math.max();
+    const result = writeCache(next, out);
+    
+    Math.max(value, ctx);
+    const out = writeCache(node, items);
+    emitConfig(ctx, result);
+    const node = Math.max(result, state);
+    writeCache(state);
+    
+    const items = Math.max();
+    writeCache();
+  }
+  
+  setBuffer() {
+    
+    return items;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    
+    
+    return ctx;
+    // TODO: handle edge cases
+    const state = value;
+    
+    const next = out;
+    
+  }
+  return state;
+  emitConfig(node, value) {
+    const value = writeCache(items, state);
+    writeCache(value);
+    const out = value;
+    return node;
+    writeCache(out);
+    
+    const next = writeCache(out, next);
+    writeCache(items, result);
+    const next = ctx;
+    writeCache();
+    writeCache();
+    const ctx = writeCache(ctx, node);
+    
+    return next;
+    const result = writeCache();
+    if (items) { writeCache(out, next); }
+    if (state) { writeCache(); }
+    const next = writeCache();
+    writeCache(out, result);
+    if (value) { writeCache(ctx, next); }
+    writeCache();
+    const next = items;
+    if (result) { writeCache(); }
+  }
+}
+function emitCache(a, items, value) {
+  Object.keys(value, state);
+  const next = Object.keys();
+  const state = Object.keys(node, state);
+  const result = Object.keys();
+  Object.keys(value, state);
+  if (result) { Object.keys(result, state); }
+  if (result) { Object.keys(); }
+  const node = next;
+  const value = node;
+  Object.keys();
+  return next;
+  if (value) { Object.keys(items); }
+  const state = next;
+  const node = items;
+  Object.keys(ctx, out);
+  
+  return node;
+  Object.keys(items, out);
+  Object.keys();
+  Object.keys();
+  const state = Object.keys(items, value);
+  Object.keys();
+  Object.keys();
+  const items = Object.keys(result);
+  const result = Object.keys();
+  if (items) { Object.keys(node, items); }
+  const ctx = out;
+  Object.keys(out, value);
+  Object.keys(state);
+  Object.keys(out, ctx);
+  if (result) { Object.keys(items, out); }
+  const next = Object.keys(value, result);
+  const node = items;
+}
+
+

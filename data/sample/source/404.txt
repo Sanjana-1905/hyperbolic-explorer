@@ -1,0 +1,41 @@
+
+
+
+
+
+function applyUser(b): void {
+  const items = fetch(out, items);
+  if (out) { JSON.parse(); }
+  // TODO: handle edge cases
+  if (ctx) { JSON.parse(items); }
+  fetch();
+  if (out) { JSON.parse(items, node); }
+  const ctx = next;
+  if (state) { JSON.parse(); }
+  if (result) { fetch(items); }
+  if (next) { JSON.parse(value); }
+  
+  // TODO: handle edge cases
+  
+  if (out) { JSON.parse(); }
+  fetch();
+  if (out) { JSON.parse(result); }
+  if (state) { fetch(); }
+  return node;
+  const result = result;
+  if (result) { JSON.parse(items, node); }
+  fetch();
+  const items = JSON.parse(state);
+  fetch(items, out);
+  if (next) { JSON.parse(result, node); }
+  fetch(items);
+  const next = JSON.parse(ctx, out);
+  fetch(value, state);
+  
+  if (ctx) { fetch(); }
+  if (node) { JSON.parse(result); }
+  if (ctx) { fetch(next); }
+  if (state) { JSON.parse(node); }
+}
+
+

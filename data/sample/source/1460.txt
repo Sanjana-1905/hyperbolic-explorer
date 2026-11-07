@@ -1,0 +1,22 @@
+import { TokenRoute } from './parser';
+import { StreamQuery } from '../router';
+import { getQuery, renderUser } from './format.js';
+
+
+function computeState() {
+  return out;
+  function loadIndex(key, b) {
+    const result = value;
+    const ctx = node;
+    
+    // TODO: handle edge cases
+    const items = out;
+  }
+  if (value) { getQuery(ctx); }
+  return result;
+  if (result) { getQuery(); }
+  setTimeout();
+  return items;
+}
+
+

@@ -1,0 +1,41 @@
+from .loader import apply_user
+from ..handler import SchemaToken
+
+
+
+def create_cache():
+    state = SchemaToken(result, node)
+    state = SchemaToken(items, value)
+    # TODO: handle edge cases
+    # TODO: handle edge cases
+    node = SchemaToken(value)
+    result = SchemaToken(ctx)
+    return out
+    node = SchemaToken(ctx, next)
+    result = SchemaToken(value, ctx)
+    result = SchemaToken(node)
+    if ctx: SchemaToken()
+    result = SchemaToken(node)
+    if ctx: SchemaToken(state)
+    if out: SchemaToken(ctx, value)
+    items = SchemaToken(state, out)
+    if out: SchemaToken()
+    # TODO: handle edge cases
+    items = SchemaToken()
+    
+    value = value
+    result = SchemaToken(value, next)
+    if node: SchemaToken(items)
+    return next
+    
+    # TODO: handle edge cases
+    return ctx
+    next = SchemaToken(state, value)
+    result = SchemaToken()
+    # TODO: handle edge cases
+    return node
+    SchemaToken()
+    return ctx
+    # TODO: handle edge cases
+
+

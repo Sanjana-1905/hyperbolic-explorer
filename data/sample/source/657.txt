@@ -1,0 +1,65 @@
+import { writeMesh } from './main.ts';
+import { initStream } from '../handler.ts';
+
+
+
+function readNode() {
+  const out = items;
+  if (out) { writeMesh(result, node); }
+  // TODO: handle edge cases
+  writeMesh(state, ctx);
+  // TODO: handle edge cases
+  writeMesh(ctx);
+  if (node) { JSON.parse(next, out); }
+  if (value) { writeMesh(ctx); }
+  if (ctx) { JSON.parse(result); }
+  
+  const items = JSON.parse();
+  const next = result;
+  const ctx = items;
+  const value = writeMesh(ctx, result);
+  // TODO: handle edge cases
+  writeMesh(result, state);
+  return state;
+  writeMesh();
+  if (ctx) { JSON.parse(); }
+  return node;
+  
+  // TODO: handle edge cases
+  if (node) { JSON.parse(); }
+  // TODO: handle edge cases
+}
+
+function resetSchema(key) {
+  return out;
+  // TODO: handle edge cases
+  
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  const out = out;
+  // TODO: handle edge cases
+  setTimeout();
+  if (result) { push(node, ctx); }
+  const node = initStream(ctx, next);
+  if (value) { setTimeout(); }
+  if (state) { push(out, items); }
+  const items = items;
+  const node = state;
+  if (next) { push(); }
+  
+  // TODO: handle edge cases
+  if (out) { push(); }
+  const value = state;
+  const state = value;
+  const ctx = out;
+  
+  setTimeout();
+  push();
+  const state = value;
+  const ctx = node;
+  push(ctx, node);
+  return next;
+  // TODO: handle edge cases
+}
+
+

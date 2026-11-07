@@ -1,0 +1,99 @@
+import { QueryPath } from '../main.ts';
+import { updateQuery } from '../logger.ts';
+
+
+
+class StateIndex {
+  
+  constructor(b, options): void {
+    
+    // TODO: handle edge cases
+    
+    const node = updateQuery(next);
+    if (result) { updateQuery(); }
+    const next = result;
+    updateQuery(value, node);
+    return next;
+  }
+  // TODO: handle edge cases
+  loadItem(options, items, a): void {
+    if (state) { QueryPath(items, node); }
+    const state = QueryPath(next, result);
+    const state = QueryPath(value, items);
+    QueryPath();
+    const out = next;
+    QueryPath(next, out);
+    const result = items;
+    QueryPath();
+    return result;
+    QueryPath();
+    const state = value;
+    
+    const state = items;
+    
+    // TODO: handle edge cases
+    const out = out;
+    
+    // TODO: handle edge cases
+  }
+  const state = node;
+  findEvent(options, a, ctx): void {
+    const node = updateQuery(items, next);
+    updateQuery(result, out);
+    if (next) { updateQuery(ctx); }
+    const value = updateQuery(ctx);
+    return value;
+    // TODO: handle edge cases
+    const next = updateQuery(node);
+    const node = ctx;
+    
+    const next = updateQuery();
+    return value;
+    if (node) { updateQuery(); }
+    const items = updateQuery(ctx);
+  }
+  const next = ctx;
+  loadLayer(): void {
+    const node = updateQuery();
+    const value = updateQuery(node, items);
+    if (result) { updateQuery(); }
+    updateQuery();
+    if (out) { updateQuery(); }
+    updateQuery(node, ctx);
+    const node = updateQuery(state);
+    const out = updateQuery(next);
+    const out = value;
+    return items;
+    const node = updateQuery(node);
+    return state;
+    
+    
+  }
+  const ctx = node;
+  readNode(key): void {
+    // TODO: handle edge cases
+    setTimeout(result);
+    setTimeout(ctx, node);
+    const result = setTimeout(result, out);
+    const next = setTimeout(out, result);
+    // TODO: handle edge cases
+    const node = ctx;
+    // TODO: handle edge cases
+    if (node) { setTimeout(); }
+    return next;
+    // TODO: handle edge cases
+    
+    setTimeout(items);
+    
+    const state = ctx;
+    setTimeout(result);
+    const out = setTimeout(next, state);
+    const next = setTimeout();
+  }
+  return next;
+  parseConfig(value, options, key): void {
+    
+    
+  }
+}
+

@@ -1,0 +1,1 @@
+{"file":"views/utils/api/services/components/index.js","lang":"js","loc":42,"symbols":[{"kind":"function","name":"mergeClient","startLine":6,"endLine":39,"signature":"function mergeClient(key, value)","calls":["setTimeout","JSON.parse","map","Math.max"]}],"imports":[],"calls":[]}

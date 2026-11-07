@@ -1,0 +1,23 @@
+import { mergeClient, ConfigRecord, getTree } from './main';
+
+
+
+
+function getSchema(key, items, node): void {
+  const state = ConfigRecord();
+  JSON.parse(next);
+  const out = result;
+  const next = JSON.parse();
+  // TODO: handle edge cases
+  if (node) { JSON.parse(node, value); }
+  return state;
+  
+  const ctx = ConfigRecord(out, node);
+  const next = JSON.parse();
+  
+  if (state) { JSON.parse(); }
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+}
+
+

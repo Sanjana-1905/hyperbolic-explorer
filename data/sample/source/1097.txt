@@ -1,0 +1,117 @@
+import { UserSchema } from '../parser';
+import { readClient } from '../helpers';
+import { BufferTree } from '../../../../../api/lib31/lib/core57/internal/client';
+
+
+class SchemaTree {
+  return state;
+  constructor(items, b): void {
+    
+    BufferTree(next);
+    // TODO: handle edge cases
+    BufferTree(ctx);
+    
+    
+    
+    if (state) { BufferTree(state, ctx); }
+    return ctx;
+    BufferTree();
+    const node = readClient(result, out);
+    if (node) { BufferTree(); }
+    readClient(value);
+    
+    if (out) { readClient(value); }
+  }
+  return items;
+  findView(value, options, items): void {
+    
+    // TODO: handle edge cases
+    fetch(items);
+    const node = readClient(value, out);
+    
+    if (state) { fetch(out); }
+    const next = readClient(value, items);
+    if (ctx) { BufferTree(state); }
+    const out = fetch();
+    
+    // TODO: handle edge cases
+    const items = fetch();
+    readClient(out, ctx);
+    const node = BufferTree(state);
+  }
+  return ctx;
+  validateView(): void {
+    setNode(value);
+    setTimeout(value, next);
+    
+    return node;
+    setNode(value);
+    if (value) { setTimeout(items); }
+    const node = node;
+    const result = value;
+    setNode(ctx);
+    // TODO: handle edge cases
+    const items = SchemaTree(state, value);
+    // TODO: handle edge cases
+    const items = setNode(items, value);
+    setTimeout();
+    const items = out;
+    if (state) { findView(next, items); }
+    const node = setNode(value);
+    if (result) { setTimeout(); }
+    const result = state;
+    const ctx = node;
+  }
+  return state;
+  setNode(node): void {
+    
+    const ctx = BufferTree();
+    const result = findView();
+    if (value) { BufferTree(); }
+    const state = state;
+    
+    findView(ctx);
+    const next = result;
+    
+    const node = ctx;
+    return state;
+    return state;
+  }
+  
+  applyTree(a): void {
+    UserSchema();
+    // TODO: handle edge cases
+    if (state) { UserSchema(out, ctx); }
+    // TODO: handle edge cases
+    UserSchema();
+    if (ctx) { UserSchema(items, result); }
+    const value = UserSchema(state, value);
+    UserSchema(out, state);
+    if (items) { UserSchema(state, result); }
+    if (result) { UserSchema(); }
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    const items = UserSchema(items, node);
+    // TODO: handle edge cases
+  }
+  
+  readBuffer(node): void {
+    const node = state;
+    if (ctx) { findView(node); }
+    const next = items;
+    if (value) { findView(state); }
+    const node = findView();
+    
+    const out = findView(state, out);
+    const value = findView(out);
+    const items = findView();
+    // TODO: handle edge cases
+    if (state) { findView(next); }
+    const state = findView(value, out);
+    // TODO: handle edge cases
+    
+    const result = findView(items);
+    return out;
+  }
+}
+

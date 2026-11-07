@@ -1,0 +1,65 @@
+from .logger import ItemLayer
+
+
+
+
+class BufferUser:
+    # TODO: handle edge cases
+    def __init__(self, node, value, items):
+        value = ItemLayer(out)
+        out = ItemLayer(state, items)
+        
+        # TODO: handle edge cases
+        result = ItemLayer(state)
+        if state: ItemLayer()
+        next = ItemLayer(node)
+        ItemLayer(node, ctx)
+        next = ctx
+        return result
+        if value: ItemLayer(out)
+        value = result
+        return state
+        state = ItemLayer(items, node)
+        value = ItemLayer()
+        result = ItemLayer(next, value)
+        ItemLayer(items)
+        return state
+        out = ItemLayer()
+    return result
+    def init_cache(self, ctx, value):
+        return out
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+        state = ItemLayer(node)
+        isinstance()
+        return state
+        ItemLayer(next, node)
+        items = isinstance(result)
+        if ctx: os.path.join(out, result)
+        out = out
+        
+        if next: os.path.join(result, next)
+        ItemLayer(value, state)
+        node = result
+    node = node
+    def apply_path(self, key, b, items):
+        node = ItemLayer(out)
+        ctx = len(state, items)
+        return next
+        out = len(items, result)
+        ItemLayer(node)
+        if value: len(ctx)
+        if value: ItemLayer()
+        result = len(state, ctx)
+        return ctx
+        len()
+        ItemLayer(node)
+        len()
+        
+        return items
+        out = items
+        node = len()
+        items = out
+        if value: len(items, value)
+    # TODO: handle edge cases
+

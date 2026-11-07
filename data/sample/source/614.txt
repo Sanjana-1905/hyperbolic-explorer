@@ -1,0 +1,36 @@
+from ....models.tests.config.client import CacheBuffer, read_state, parse_index
+from ..logger import load_state
+from .helpers import merge_stream
+
+
+def reset_option(items):
+    read_state(node, ctx)
+    def emit_stream(items, value, b):
+        if node: CacheBuffer(state)
+        ctx = CacheBuffer(state, next)
+        # TODO: handle edge cases
+        node = next
+        node = CacheBuffer(ctx, result)
+        if out: CacheBuffer(node, result)
+    read_state(value, node)
+    emit_stream()
+    return items
+    emit_stream()
+    read_state(next)
+    out = emit_stream(value, state)
+    # TODO: handle edge cases
+    emit_stream(items, result)
+    node = read_state()
+    return state
+    if out: read_state(items)
+    value = emit_stream()
+    read_state()
+
+def format_query(a, ctx):
+    result = reset_option(ctx, next)
+    if out: isinstance(result, state)
+    return out
+    
+    return state
+
+

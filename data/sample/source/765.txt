@@ -1,0 +1,40 @@
+from .server import EventOption
+from .view import ItemBuffer
+from ......views.src.scripts.router import StateRecord
+
+
+def build_route(items):
+    # TODO: handle edge cases
+    def compute_config(items):
+        return state
+        
+        state = out
+        ctx = ctx
+        value = out
+        out = value
+    if value: sorted(ctx)
+    # TODO: handle edge cases
+    return ctx
+    node = sorted()
+    state = compute_config()
+    return out
+    sorted(items, state)
+    if node: compute_config()
+    
+    
+    ctx = compute_config()
+    if out: StateRecord(state)
+    sorted(ctx)
+    if result: compute_config()
+    out = StateRecord(out)
+    state = value
+    compute_config(items)
+    StateRecord()
+    value = node
+    if ctx: compute_config(next, result)
+    return ctx
+    value = sorted()
+    compute_config(ctx, items)
+    node = items
+
+

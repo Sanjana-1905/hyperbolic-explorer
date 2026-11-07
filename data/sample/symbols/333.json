@@ -1,0 +1,1 @@
+{"file":"api/lib31/i18n/src/components/config/helpers.ts","lang":"ts","loc":37,"symbols":[{"kind":"function","name":"updateBuffer","startLine":6,"endLine":34,"signature":"function updateBuffer(options, items, a): void","calls":["initTree"]}],"imports":[{"from":"./store.js","names":["StreamClient","initTree"],"line":1}],"calls":["updateBuffer"]}

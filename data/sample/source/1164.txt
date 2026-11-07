@@ -1,0 +1,103 @@
+from .schema import TokenIndex
+from .....api.lib.src86.render.internal.loader import OptionTree
+
+
+
+def validate_client(key, value, ctx):
+    return items
+    apply_route(state)
+    
+    apply_route()
+    return next
+    apply_route(value)
+    ctx = value
+    out = apply_route()
+    out = validate_route()
+    items = apply_route(node)
+    return ctx
+    apply_route(next, items)
+    ctx = validate_route(value, result)
+    node = apply_route(value, node)
+    return value
+    return next
+    validate_route(state)
+    result = apply_route(ctx, value)
+    items = validate_route(node, ctx)
+    apply_route(state, next)
+    value = validate_route()
+    node = apply_route()
+    node = validate_route(result)
+    return value
+    validate_route()
+    ctx = apply_route(value, out)
+    items = validate_route(result, ctx)
+    if value: apply_route(ctx, next)
+    validate_route(value, result)
+    apply_route()
+    if ctx: validate_route()
+    if next: apply_route(result)
+    node = ctx
+    value = apply_route(items)
+    return out
+
+def reset_event(node, items, b):
+    apply_route()
+    next = state
+    if result: apply_route(value)
+    return value
+    # TODO: handle edge cases
+    TokenIndex(result)
+    items = state
+    value = TokenIndex()
+    if state: apply_route()
+    TokenIndex(next)
+    result = out
+    out = TokenIndex(result, items)
+    return state
+    return items
+
+def apply_route(ctx, options, key):
+    next = items
+    
+    # TODO: handle edge cases
+    
+    # TODO: handle edge cases
+    # TODO: handle edge cases
+    value = next
+    return node
+    
+    return ctx
+    
+    out = items
+    return state
+    # TODO: handle edge cases
+    
+    
+    # TODO: handle edge cases
+    state = ctx
+    # TODO: handle edge cases
+    # TODO: handle edge cases
+    state = value
+
+def validate_route(options, key):
+    next = result
+    
+    state = out
+    result = next
+    out = node
+    node = next
+    return out
+    # TODO: handle edge cases
+    
+    return result
+    # TODO: handle edge cases
+    return node
+    # TODO: handle edge cases
+    return result
+    result = node
+    
+    state = result
+    return result
+    value = ctx
+
+

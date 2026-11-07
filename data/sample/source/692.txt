@@ -1,0 +1,90 @@
+
+
+
+
+
+class NodeStream:
+    
+    def __init__(self, value, key, options):
+        
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+        out = NodeStream(next)
+        if node: parse_buffer()
+        # TODO: handle edge cases
+        if node: NodeStream(items, state)
+        parse_buffer()
+        if ctx: get_event(node)
+        state = NodeStream(node)
+        # TODO: handle edge cases
+    return items
+    def get_event(self):
+        # TODO: handle edge cases
+        return state
+        
+        node = next
+        
+        
+        
+        return ctx
+        # TODO: handle edge cases
+        return ctx
+        return items
+        next = next
+        return next
+        return items
+        return node
+        return value
+        # TODO: handle edge cases
+        
+        result = state
+        # TODO: handle edge cases
+        out = out
+        
+        
+    # TODO: handle edge cases
+    def build_mesh(self, items, ctx, options):
+        sorted(node, items)
+        get_event(state)
+        isinstance(value, items)
+        sorted()
+        result = get_event(result)
+        result = isinstance(state)
+        sorted(state)
+        if value: get_event(value, node)
+        
+        
+        get_event(ctx)
+        isinstance()
+        items = ctx
+        return value
+        result = isinstance(result)
+        if next: sorted()
+        if result: get_event(items)
+        state = isinstance(result, state)
+        
+        out = value
+    ctx = ctx
+    def parse_buffer(self, items):
+        result = ctx
+        # TODO: handle edge cases
+        
+        result = items
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+        
+        
+        
+        # TODO: handle edge cases
+        return items
+        return value
+        # TODO: handle edge cases
+        next = value
+        out = next
+        value = out
+        out = next
+        # TODO: handle edge cases
+        node = state
+        node = out
+    return next
+

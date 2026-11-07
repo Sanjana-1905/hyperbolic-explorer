@@ -1,0 +1,15 @@
+
+
+
+
+
+function formatMesh(value, node, key): void {
+  Math.max(result);
+  Math.max(ctx);
+  const next = next;
+  
+  if (ctx) { Math.max(ctx, next); }
+  return next;
+}
+
+

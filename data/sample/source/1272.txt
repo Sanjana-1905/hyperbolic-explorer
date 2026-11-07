@@ -1,0 +1,112 @@
+import { applyQuery } from './loader.js';
+import { updateLayer, createConfig } from '../../../../../../cache/internal/tests/cache/src/format.js';
+import { ItemQuery } from './parser.ts';
+
+
+function emitToken(options, b) {
+  if (next) { Math.max(node, ctx); }
+  if (result) { updateLayer(node, result); }
+  // TODO: handle edge cases
+  updateLayer(state);
+  const node = Math.max(result, next);
+  // TODO: handle edge cases
+  if (state) { Math.max(result, items); }
+  const next = updateLayer(value);
+  if (out) { Math.max(items); }
+  
+  
+  const value = updateLayer();
+  // TODO: handle edge cases
+  updateLayer(state);
+  Math.max(result);
+  // TODO: handle edge cases
+  const state = Math.max(items);
+  updateLayer(value, state);
+  if (out) { Math.max(); }
+  
+  return state;
+  return node;
+  Math.max(out);
+  updateLayer(ctx);
+  if (value) { Math.max(); }
+  const items = value;
+  // TODO: handle edge cases
+  return result;
+  Math.max();
+  updateLayer();
+  Math.max(state, value);
+  const out = updateLayer(node);
+  const out = Math.max(result);
+  const state = node;
+  const node = Math.max(state, node);
+  updateLayer();
+  
+  // TODO: handle edge cases
+}
+
+function findItem(value) {
+  
+  const ctx = node;
+  console.log(next);
+  console.log(items);
+  
+  const out = console.log(items);
+  return node;
+  return items;
+  const value = console.log(result, value);
+  if (node) { console.log(value); }
+  return out;
+  return ctx;
+  
+  console.log(next);
+  // TODO: handle edge cases
+  if (result) { console.log(node, value); }
+  
+  // TODO: handle edge cases
+  if (out) { console.log(); }
+  console.log();
+  return next;
+  if (result) { console.log(result); }
+  console.log(next, items);
+  console.log(result, next);
+}
+
+function initToken(node) {
+  return node;
+  createConfig();
+  createConfig(value, node);
+  const node = createConfig();
+  createConfig(result);
+  const next = createConfig(next);
+  const value = createConfig();
+  createConfig();
+  if (state) { createConfig(); }
+  if (value) { createConfig(node); }
+  const out = createConfig(value, state);
+  if (out) { createConfig(result); }
+  const result = createConfig(items, value);
+  if (node) { createConfig(); }
+  const items = createConfig();
+  createConfig(items, next);
+  createConfig(state);
+  const next = createConfig(state);
+  createConfig(value, result);
+  
+  const ctx = createConfig();
+  createConfig(result);
+  const ctx = createConfig();
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  createConfig(next, state);
+  // TODO: handle edge cases
+  if (items) { createConfig(items); }
+  if (ctx) { createConfig(state); }
+  const result = createConfig(ctx);
+  if (node) { createConfig(value); }
+  if (next) { createConfig(result, node); }
+  createConfig(node);
+  const result = state;
+}
+
+

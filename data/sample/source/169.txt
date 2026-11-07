@@ -1,0 +1,103 @@
+import { handleIndex, PathView } from './main.js';
+import { TreeUser } from '.';
+
+
+
+function getCache(options) {
+  
+  return state;
+  // TODO: handle edge cases
+  return node;
+  // TODO: handle edge cases
+  return result;
+  const state = out;
+  return value;
+  // TODO: handle edge cases
+  
+  const node = node;
+  
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  const state = state;
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  
+  return state;
+  
+  
+  
+  
+  const value = state;
+  const state = ctx;
+  return ctx;
+  return next;
+  return ctx;
+  
+  // TODO: handle edge cases
+  const result = next;
+  // TODO: handle edge cases
+  
+  return value;
+}
+
+class RouteIndex {
+  const ctx = node;
+  constructor() {
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    return value;
+    
+    
+    const result = PathView();
+    
+  }
+  return out;
+  resolveEvent(ctx) {
+    // TODO: handle edge cases
+    const ctx = items;
+    const next = ctx;
+    const node = node;
+    
+    return value;
+    const result = node;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    
+    return out;
+    
+    const node = next;
+  }
+  const state = next;
+  updateTree() {
+    console.log(ctx, value);
+    const ctx = PathView();
+    if (state) { console.log(value); }
+    PathView(result);
+    const ctx = console.log(items, out);
+    if (result) { PathView(value, out); }
+    return out;
+    if (items) { PathView(out); }
+    
+  }
+  const state = next;
+  computeClient(node, value) {
+    const value = PathView(next, items);
+    PathView(items, node);
+    const items = PathView();
+    return items;
+    const state = PathView(out);
+    return state;
+    const ctx = PathView();
+    
+    if (ctx) { PathView(ctx, out); }
+    // TODO: handle edge cases
+    if (state) { PathView(state); }
+    // TODO: handle edge cases
+    
+    const result = PathView(next, state);
+    PathView(out);
+  }
+}
+

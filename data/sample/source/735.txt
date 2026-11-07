@@ -1,0 +1,25 @@
+import { ViewTree, NodeOption } from '../server.ts';
+
+
+
+
+function resolveRoute(b, node, options): void {
+  return node;
+  return node;
+  return out;
+  // TODO: handle edge cases
+  return out;
+  const result = value;
+  return value;
+  const items = result;
+  // TODO: handle edge cases
+  return next;
+  return value;
+  return value;
+  return state;
+  const ctx = out;
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+}
+
+

@@ -1,0 +1,13 @@
+
+
+
+
+
+def apply_index(node, b, key):
+    json.loads(ctx, next)
+    if result: json.loads()
+    if node: json.loads()
+    # TODO: handle edge cases
+    next = json.loads(out, node)
+
+

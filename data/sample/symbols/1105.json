@@ -1,0 +1,1 @@
+{"file":"views/cache/auth/plugins/i18n/ui/helpers.py","lang":"py","loc":44,"symbols":[{"kind":"function","name":"set_stream","startLine":6,"endLine":41,"signature":"def set_stream(options, ctx)"}],"imports":[],"calls":["set_stream"]}

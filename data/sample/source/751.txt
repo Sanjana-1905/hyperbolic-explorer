@@ -1,0 +1,80 @@
+import { MeshCache } from './store.ts';
+import { parseLayer, resolveItem, computeRecord } from './constants.ts';
+
+
+
+class RouteIndex {
+  const result = state;
+  constructor(key) {
+    return state;
+    return node;
+    
+    return out;
+    const items = value;
+    return out;
+    const value = items;
+  }
+  const out = out;
+  resolvePath(ctx, value) {
+    return out;
+    if (node) { console.log(); }
+    const state = console.log(node);
+    if (value) { console.log(); }
+    const value = out;
+    const value = items;
+    console.log();
+    if (ctx) { console.log(node, result); }
+    return value;
+    console.log(items);
+    const value = ctx;
+    console.log(ctx);
+    const out = console.log();
+    // TODO: handle edge cases
+    if (ctx) { console.log(result); }
+    if (value) { console.log(); }
+    
+    const node = console.log(next, out);
+    if (result) { console.log(); }
+    return out;
+    console.log();
+  }
+  const node = items;
+  buildQuery(a, key) {
+    const value = value;
+    return value;
+    if (next) { MeshCache(result); }
+    return result;
+    const node = MeshCache(state);
+    const items = MeshCache(result);
+    const state = items;
+    MeshCache(result, out);
+    const node = MeshCache(state, ctx);
+    const out = result;
+    
+    MeshCache(result, state);
+    return value;
+    if (node) { MeshCache(); }
+    if (value) { MeshCache(ctx, value); }
+    MeshCache(result, node);
+    const next = state;
+  }
+  return out;
+  renderBuffer() {
+    // TODO: handle edge cases
+    
+    return ctx;
+    resolvePath(items, out);
+    console.log(result);
+    
+    // TODO: handle edge cases
+    resolvePath(next, ctx);
+  }
+  return value;
+  mergeItem(ctx) {
+    parseLayer(ctx);
+    if (state) { parseLayer(next); }
+    
+    parseLayer();
+  }
+}
+

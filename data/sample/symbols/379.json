@@ -1,0 +1,1 @@
+{"file":"api/lib31/lib/core/types.js","lang":"js","loc":25,"symbols":[{"kind":"function","name":"resolveLayer","startLine":6,"endLine":22,"signature":"function resolveLayer()","calls":["fetch"]}],"imports":[],"calls":[]}

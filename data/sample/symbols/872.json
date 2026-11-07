@@ -1,0 +1,1 @@
+{"file":"cache/views/internal/api/components/io/ui/format.js","lang":"js","loc":43,"symbols":[{"kind":"function","name":"loadRoute","startLine":6,"endLine":40,"signature":"function loadRoute()","calls":["Object.keys","map","fetch"]}],"imports":[],"calls":["loadRoute"]}

@@ -1,0 +1,1 @@
+{"file":"cache/views/internal/main.py","lang":"py","loc":13,"symbols":[{"kind":"function","name":"resolve_config","startLine":6,"endLine":10,"signature":"def resolve_config(ctx)","calls":["sorted"]}],"imports":[],"calls":[]}

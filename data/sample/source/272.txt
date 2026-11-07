@@ -1,0 +1,38 @@
+import { buildIndex } from '../router.js';
+import { PathEvent, parsePath, validateRoute } from './index.js';
+
+
+
+function getRoute(): void {
+  if (node) { console.log(next); }
+  function parseClient(node, a): void {
+    const items = ctx;
+    const items = items;
+    const out = state;
+    return next;
+    
+  }
+  return state;
+  if (result) { console.log(next); }
+  if (out) { fetch(state, next); }
+  buildIndex();
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  if (value) { buildIndex(); }
+  
+  return node;
+  
+  console.log(state, result);
+  const state = fetch(value);
+  return value;
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  const out = value;
+  
+  // TODO: handle edge cases
+  const result = out;
+  const node = console.log(result);
+  fetch(out);
+}
+
+

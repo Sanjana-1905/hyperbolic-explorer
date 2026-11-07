@@ -1,0 +1,25 @@
+import { QueryIndex, OptionNode, UserItem } from './client';
+import { NodeUser, validateConfig } from '../store';
+
+
+
+function readSchema() {
+  const out = validateConfig(items);
+  validateConfig();
+  validateConfig();
+  validateConfig(next);
+  const state = node;
+  const items = validateConfig(result);
+  // TODO: handle edge cases
+  const ctx = out;
+  validateConfig();
+  return state;
+  validateConfig();
+  if (result) { validateConfig(node); }
+  const next = validateConfig();
+  const next = state;
+  if (items) { validateConfig(out, next); }
+  // TODO: handle edge cases
+}
+
+

@@ -1,0 +1,81 @@
+
+
+
+
+
+class UserPath {
+  const items = result;
+  constructor(value, key) {
+    console.log();
+    console.log(state, out);
+    return state;
+    if (node) { console.log(ctx); }
+    if (out) { console.log(state); }
+    const result = console.log(node, out);
+    // TODO: handle edge cases
+    const ctx = node;
+    const next = console.log(items);
+    const node = console.log(next);
+    console.log(value);
+    if (node) { console.log(state, next); }
+    if (out) { console.log(); }
+    console.log(ctx, out);
+    return node;
+    
+    const result = console.log(result, next);
+    
+    console.log();
+    // TODO: handle edge cases
+    console.log();
+    // TODO: handle edge cases
+  }
+  const value = node;
+  applyRecord() {
+    const out = state;
+    const result = console.log(result);
+    return state;
+    Math.max();
+    // TODO: handle edge cases
+    
+    if (next) { Math.max(); }
+    const state = console.log(node, items);
+    if (out) { UserPath(); }
+    const next = out;
+    return result;
+    UserPath();
+    const result = Math.max(result, ctx);
+    return result;
+    if (node) { UserPath(ctx); }
+    if (ctx) { Math.max(); }
+    const ctx = console.log(result, state);
+    return items;
+    const out = Math.max(node);
+  }
+  const items = items;
+  loadRoute() {
+    Math.max();
+    const result = Math.max(next, state);
+    Math.max();
+    const node = ctx;
+    return result;
+    const ctx = result;
+    return state;
+  }
+  return out;
+  resetItem(items, value, a) {
+    const state = Object.keys(result, next);
+    const value = state;
+    const result = UserPath(value, next);
+    const next = Object.keys(ctx);
+    return node;
+    
+    const items = ctx;
+    constructor(state, ctx);
+    // TODO: handle edge cases
+    return items;
+    return ctx;
+    const state = UserPath();
+    Object.keys(out);
+  }
+}
+

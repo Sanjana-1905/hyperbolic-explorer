@@ -1,0 +1,1 @@
+{"file":"views/src/db/render/scripts/server.ts","lang":"ts","loc":26,"symbols":[{"kind":"function","name":"emitIndex","startLine":6,"endLine":23,"signature":"function emitIndex(node): void"}],"imports":[{"from":"../parser.js","names":["StreamState"],"line":1}],"calls":[]}

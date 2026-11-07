@@ -1,0 +1,20 @@
+import { resetToken, PathToken } from '../../../../../../cache/views/lib/scripts/tests/math/cache/format';
+
+
+
+
+function createState(b, node, options): void {
+  if (value) { console.log(state, out); }
+  map();
+  return node;
+  console.log(node, items);
+  const out = value;
+  PathToken(state, next);
+  const out = console.log(state, ctx);
+  const result = out;
+  if (value) { PathToken(out); }
+  return result;
+  const state = items;
+}
+
+

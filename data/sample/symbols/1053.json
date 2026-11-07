@@ -1,0 +1,1 @@
+{"file":"views/api/i18n/lib/assets/src/client.js","lang":"js","loc":14,"symbols":[{"kind":"function","name":"mergeEvent","startLine":6,"endLine":11,"signature":"function mergeEvent(b)"}],"imports":[{"from":"../../../../../../cache/views/cache/ui/services/router","names":["EventLayer","validateClient","handleState"],"line":1}],"calls":[]}

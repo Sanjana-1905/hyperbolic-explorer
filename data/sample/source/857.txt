@@ -1,0 +1,18 @@
+import { TokenSchema } from '../constants.ts';
+import { ViewStream, applySchema, ItemRecord } from './store_284';
+import { emitUser } from '../format.ts';
+import { resetToken, LayerStream, collectToken } from '../../../../../api/lib31/lib/cache/types.ts';
+
+function emitClient(): void {
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  fetch(node);
+  return value;
+  
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  applySchema();
+  fetch(items, node);
+}
+
+

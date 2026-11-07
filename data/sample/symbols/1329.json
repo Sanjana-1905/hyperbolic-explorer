@@ -1,0 +1,1 @@
+{"file":"views/src/db/render/assets/parser.ts","lang":"ts","loc":19,"symbols":[{"kind":"function","name":"readConfig","startLine":6,"endLine":16,"signature":"function readConfig(value, node): void"}],"imports":[{"from":"./types.js","names":["CacheLayer"],"line":1},{"from":"./parser","names":["loadQuery"],"line":2}],"calls":[]}

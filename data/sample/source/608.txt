@@ -1,0 +1,18 @@
+
+
+
+
+
+def render_query(b, a, value):
+    ctx = len(value)
+    range(value, ctx)
+    len(items)
+    if out: range()
+    len(result)
+    return result
+    # TODO: handle edge cases
+    
+    value = len()
+    if node: range(result)
+
+

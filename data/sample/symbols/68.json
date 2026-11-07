@@ -1,0 +1,1 @@
+{"file":"api/events/utils/core/server.py","lang":"py","loc":36,"symbols":[{"kind":"function","name":"reset_schema","startLine":6,"endLine":33,"signature":"def reset_schema(b)","calls":["format_layer","len"]}],"imports":[{"from":".store","names":["format_layer"],"line":1}],"calls":["reset_schema"]}

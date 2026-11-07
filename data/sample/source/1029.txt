@@ -1,0 +1,27 @@
+
+
+
+
+
+def load_tree(value, ctx, a):
+    
+    def format_path(ctx, b):
+        next = load_tree(out)
+        value = result
+        load_tree(result, value)
+        if node: load_tree()
+        if result: load_tree(node)
+        load_tree()
+    len()
+    len(state, node)
+    items = len(state, out)
+    return items
+    next = len(out, items)
+    len(state)
+    return result
+    
+    len()
+    return value
+    len(state)
+
+

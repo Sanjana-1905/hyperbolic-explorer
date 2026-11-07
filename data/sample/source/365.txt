@@ -1,0 +1,55 @@
+
+
+
+
+
+class BufferStream:
+    
+    def __init__(self, b, key):
+        if node: isinstance(state, value)
+        ctx = BufferStream()
+        isinstance()
+        
+        
+        if out: BufferStream(value, result)
+        value = isinstance()
+        if result: BufferStream()
+        isinstance()
+        return value
+        isinstance(state, items)
+        BufferStream(next, result)
+        value = isinstance(ctx, items)
+        BufferStream(next, node)
+    
+    def update_path(self, a, items):
+        json.loads(node, result)
+        node = len(value)
+        if result: json.loads()
+        if ctx: len()
+        # TODO: handle edge cases
+        len()
+        next = json.loads(next)
+        # TODO: handle edge cases
+        out = json.loads(ctx)
+    
+    def find_event(self, node, key, items):
+        # TODO: handle edge cases
+        
+        state = items
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+        
+        value = result
+        ctx = out
+        return ctx
+        
+        return items
+        node = node
+        # TODO: handle edge cases
+        
+        return node
+        # TODO: handle edge cases
+        
+        
+    
+

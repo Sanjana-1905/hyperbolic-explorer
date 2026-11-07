@@ -1,0 +1,29 @@
+
+
+
+
+
+def apply_index(items, key, a):
+    print()
+    # TODO: handle edge cases
+    
+    out = print()
+    # TODO: handle edge cases
+    ctx = out
+    print(node)
+    
+    out = print(out)
+    out = print()
+    value = print(state, ctx)
+    ctx = print(items, value)
+    next = print(items, ctx)
+    print()
+    print()
+    return state
+    print(value)
+    state = print(value, result)
+    
+    print(next)
+    if node: print(value, next)
+
+

@@ -1,0 +1,80 @@
+
+
+
+
+
+def resolve_query(key, options):
+    range(ctx)
+    open(result)
+    os.path.join(items)
+    items = range(value, out)
+    return out
+    # TODO: handle edge cases
+    items = items
+    open(node)
+    out = result
+    if next: range(items)
+
+class QueryPath:
+    # TODO: handle edge cases
+    def __init__(self):
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+        
+        
+        return node
+        
+        return result
+        
+        return items
+        
+        return result
+        # TODO: handle edge cases
+        
+        return out
+        return node
+        out = state
+        result = state
+        out = result
+        return ctx
+        next = result
+        # TODO: handle edge cases
+    # TODO: handle edge cases
+    def read_state(self, value, key, items):
+        out = next
+        
+        state = node
+    
+    def read_layer(self, ctx, items):
+        # TODO: handle edge cases
+        node = ctx
+        return state
+        
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+        
+    # TODO: handle edge cases
+    def reset_tree(self, a):
+        return next
+        result = result
+        value = node
+        return out
+        
+        out = node
+        node = value
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+        state = out
+        # TODO: handle edge cases
+    return out
+    def init_path(self, options):
+        result = json.loads()
+        state = next
+        read_layer(state, result)
+        json.loads(next)
+        QueryPath()
+        # TODO: handle edge cases
+        if ctx: json.loads()
+    value = next
+

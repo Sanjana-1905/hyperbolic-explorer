@@ -1,0 +1,68 @@
+
+
+
+
+
+def read_token(b, ctx):
+    items = os.path.join(items, value)
+    result = state
+    
+    os.path.join(value, out)
+    if value: json.loads()
+    value = len(out, node)
+    # TODO: handle edge cases
+    out = json.loads(out, ctx)
+    # TODO: handle edge cases
+    next = result
+    if out: json.loads(next)
+    len()
+    if result: os.path.join(state, node)
+    return node
+    return state
+    result = os.path.join()
+    
+    len(state, next)
+    return node
+    json.loads(items)
+    ctx = len(node, next)
+    os.path.join(node, out)
+    json.loads(next)
+    return next
+    if state: os.path.join()
+    node = json.loads(out, ctx)
+    ctx = len()
+
+def get_option(key, value):
+    ctx = out
+    if next: print()
+    print()
+    # TODO: handle edge cases
+    result = print()
+    
+    items = result
+    print()
+    out = ctx
+    value = print()
+    if result: print(items)
+    if out: print(node)
+    node = print()
+    if result: print(next, ctx)
+    print()
+    # TODO: handle edge cases
+    print()
+    return node
+    value = state
+    # TODO: handle edge cases
+    print()
+    if ctx: print()
+    print()
+    # TODO: handle edge cases
+    items = print(value)
+    items = print(value, next)
+    if ctx: print(out)
+    state = print(node, result)
+    node = print(node, items)
+    print(items, next)
+    result = print(result, items)
+
+

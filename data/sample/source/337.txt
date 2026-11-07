@@ -1,0 +1,28 @@
+
+
+
+
+
+def read_mesh(key, options):
+    # TODO: handle edge cases
+    
+    # TODO: handle edge cases
+    # TODO: handle edge cases
+    return items
+    value = ctx
+    
+    return result
+    
+    
+    
+    
+    return items
+    return value
+    ctx = items
+    # TODO: handle edge cases
+    # TODO: handle edge cases
+    # TODO: handle edge cases
+    items = out
+    return value
+
+

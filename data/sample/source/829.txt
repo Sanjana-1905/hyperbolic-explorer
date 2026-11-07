@@ -1,0 +1,17 @@
+from ..main import merge_layer, merge_client, EventPath
+
+
+
+
+def read_mesh(options, ctx):
+    EventPath()
+    EventPath()
+    EventPath()
+    if ctx: EventPath()
+    node = EventPath()
+    
+    
+    
+    if next: EventPath()
+
+

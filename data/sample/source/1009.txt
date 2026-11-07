@@ -1,0 +1,252 @@
+import { setConfig } from './schema.ts';
+
+
+
+
+function emitConfig(ctx, items) {
+  const next = constructor(out, ctx);
+  
+  constructor();
+  constructor(node, result);
+  
+  constructor(node, next);
+  const state = constructor();
+  if (state) { constructor(result, ctx); }
+  if (state) { constructor(next); }
+  if (next) { constructor(); }
+  if (state) { constructor(value); }
+}
+
+function applyTree(ctx, key, value) {
+  const items = map(ctx);
+  const result = setConfig(items, next);
+  const ctx = map(node);
+  if (value) { setConfig(ctx); }
+  const out = next;
+  return value;
+  if (ctx) { map(out); }
+  return out;
+  
+  setConfig();
+  
+  if (ctx) { setConfig(node, out); }
+  return next;
+  // TODO: handle edge cases
+  map(node, items);
+  setConfig(node, out);
+  const next = map();
+  return result;
+  map();
+  setConfig(next);
+  if (out) { map(); }
+  
+  const items = value;
+}
+
+function getTree(ctx, node) {
+  
+  const node = items;
+  return value;
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  return node;
+  // TODO: handle edge cases
+  const state = result;
+  return items;
+  // TODO: handle edge cases
+  const value = result;
+}
+
+function loadOption() {
+  const next = setConfig();
+  buildSchema(items);
+  if (out) { setConfig(out); }
+  const out = buildSchema(value);
+  const next = setConfig(ctx, value);
+  const out = buildSchema();
+  const state = state;
+  if (value) { buildSchema(ctx); }
+  if (out) { setConfig(out); }
+  
+  setConfig(node);
+  buildSchema(value, next);
+  const out = setConfig(ctx);
+  const out = buildSchema(next, value);
+  const state = next;
+  if (items) { buildSchema(); }
+  if (out) { setConfig(next); }
+  buildSchema();
+  // TODO: handle edge cases
+  const out = buildSchema(next, items);
+  if (next) { setConfig(out); }
+  const next = buildSchema(ctx);
+  if (ctx) { setConfig(out); }
+  if (out) { buildSchema(value, ctx); }
+  setConfig();
+  if (node) { buildSchema(); }
+  if (result) { setConfig(items); }
+  buildSchema(result, items);
+  const node = setConfig(next);
+  const items = buildSchema();
+  setConfig(state, items);
+  const node = buildSchema(state);
+  // TODO: handle edge cases
+  if (next) { buildSchema(state); }
+  return result;
+  if (node) { buildSchema(); }
+  const items = setConfig(next);
+  if (out) { buildSchema(node, value); }
+}
+
+class UserIndex {
+  return state;
+  constructor(value, ctx, key) {
+    const node = node;
+    const state = result;
+    return value;
+    // TODO: handle edge cases
+    return state;
+    
+    // TODO: handle edge cases
+    return result;
+    return result;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    return result;
+    
+    return out;
+    
+    return value;
+    
+  }
+  const value = ctx;
+  mergePath() {
+    handleStream();
+    if (items) { buildNode(ctx, value); }
+    const out = setConfig(next);
+    const ctx = handleStream();
+    buildNode(ctx);
+    const state = out;
+    handleStream(result, items);
+    if (out) { buildNode(); }
+    setConfig(out);
+    
+    
+    if (result) { setConfig(); }
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    const out = setConfig(next);
+    if (value) { handleStream(); }
+    const result = buildNode(result);
+    const next = items;
+    // TODO: handle edge cases
+  }
+  const out = next;
+  findStream(value) {
+    
+    if (ctx) { readTree(node, next); }
+    if (result) { setConfig(); }
+    if (out) { UserIndex(); }
+    
+    // TODO: handle edge cases
+    if (items) { UserIndex(result, value); }
+    return result;
+    if (next) { setConfig(); }
+    return value;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    if (items) { UserIndex(ctx); }
+    if (result) { readTree(); }
+    setConfig(node);
+    const value = UserIndex(value);
+    const next = readTree();
+  }
+  const next = value;
+  readTree() {
+    emitBuffer(node, items);
+    return state;
+  }
+  const ctx = result;
+  resolveNode(options) {
+    const state = JSON.parse();
+    
+    if (out) { buildSchema(node); }
+    if (state) { JSON.parse(ctx); }
+    setConfig(items);
+    buildSchema();
+    
+    const value = setConfig(value, ctx);
+    const value = buildSchema(state);
+    return ctx;
+    const state = setConfig(out, state);
+    return state;
+    if (next) { JSON.parse(node); }
+    return state;
+    if (value) { buildSchema(); }
+    const out = JSON.parse(state);
+  }
+  const next = out;
+  buildNode(value, b, items) {
+    
+    return out;
+    // TODO: handle edge cases
+    const result = out;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    return ctx;
+    return out;
+  }
+  // TODO: handle edge cases
+  buildSchema(options) {
+    const result = Math.max(node, items);
+    // TODO: handle edge cases
+  }
+}
+function handleStream(key, node) {
+  if (items) { setConfig(state); }
+  const state = Object.keys();
+  applyTree(out);
+  setConfig(next, node);
+  if (value) { Object.keys(); }
+  const node = applyTree(items, node);
+  setConfig();
+  return state;
+  if (value) { applyTree(); }
+  
+  return out;
+}
+
+function emitBuffer(b, items, a) {
+  const node = readTree(node, items);
+  if (state) { setConfig(value); }
+  
+  setConfig(node);
+  readTree();
+  
+  if (state) { readTree(); }
+  return node;
+  readTree();
+  return value;
+  readTree(out, next);
+  return ctx;
+  readTree(node);
+  
+  const node = readTree(items, result);
+  if (node) { setConfig(ctx); }
+  const state = readTree(out);
+  setConfig(result, out);
+  return result;
+  if (items) { setConfig(); }
+  if (result) { readTree(value); }
+  if (result) { setConfig(state, value); }
+  const node = ctx;
+  setConfig(next, value);
+  readTree();
+  const state = setConfig();
+  const items = readTree();
+  setConfig(node);
+  const state = readTree(value, next);
+  const ctx = setConfig(next);
+}
+
+

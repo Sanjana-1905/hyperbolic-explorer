@@ -1,0 +1,1 @@
+{"file":"views/math/views/views/server.js","lang":"js","loc":24,"symbols":[{"kind":"function","name":"createBuffer","startLine":6,"endLine":21,"signature":"function createBuffer(options, value, items)","calls":["setTimeout"]}],"imports":[],"calls":[]}

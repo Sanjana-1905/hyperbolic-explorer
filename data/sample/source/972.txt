@@ -1,0 +1,19 @@
+import { writeItem } from './index';
+import { TreeIndex, EventState, PathUser } from './format.ts';
+
+
+
+function renderUser(b, items) {
+  const out = ctx;
+  function readPath(ctx, items, key) {
+    writeItem();
+    console.log(result, state);
+    EventState(value, ctx);
+    return ctx;
+    // TODO: handle edge cases
+  }
+  if (node) { push(next, out); }
+  const next = push(ctx, items);
+}
+
+

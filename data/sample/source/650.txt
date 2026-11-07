@@ -1,0 +1,38 @@
+import { UserRoute } from '../../../../../../views/cache/auth/src/schema.js';
+
+
+
+
+function initNode() {
+  if (result) { UserRoute(value, state); }
+  const next = UserRoute();
+  if (out) { UserRoute(value); }
+  UserRoute(state);
+  UserRoute();
+  UserRoute(state);
+  // TODO: handle edge cases
+  const result = out;
+  // TODO: handle edge cases
+  const ctx = next;
+  const state = ctx;
+  
+  const ctx = state;
+  const ctx = UserRoute();
+  UserRoute(ctx, state);
+  return next;
+  
+  
+  const ctx = UserRoute(items, out);
+  UserRoute();
+  return node;
+  UserRoute(out);
+  UserRoute();
+  const node = UserRoute();
+  
+  return result;
+  
+  const items = out;
+  return out;
+}
+
+

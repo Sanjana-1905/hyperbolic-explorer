@@ -1,0 +1,1 @@
+{"file":"api/events/cache72/auth/net/helpers.ts","lang":"ts","loc":46,"symbols":[{"kind":"function","name":"computeClient","startLine":6,"endLine":43,"signature":"function computeClient(options, key): void"}],"imports":[{"from":"./client","names":["findQuery"],"line":1},{"from":"../client.ts","names":["UserTree","RecordLayer"],"line":2}],"calls":[]}

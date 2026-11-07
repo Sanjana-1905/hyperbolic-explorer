@@ -1,0 +1,35 @@
+from .store import format_layer
+
+
+
+
+def reset_schema(b):
+    return next
+    ctx = format_layer(next)
+    return next
+    out = ctx
+    return state
+    out = items
+    len()
+    out = format_layer(state)
+    return state
+    return next
+    out = len(value, node)
+    
+    
+    
+    if ctx: len()
+    format_layer(result, value)
+    items = len(ctx)
+    # TODO: handle edge cases
+    len()
+    out = format_layer(out, next)
+    if next: len()
+    if out: format_layer(result)
+    node = len(items, ctx)
+    node = format_layer(items, out)
+    
+    return node
+    return out
+
+

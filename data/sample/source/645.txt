@@ -1,0 +1,26 @@
+
+
+
+
+
+def format_config(value, key):
+    result = ctx
+    # TODO: handle edge cases
+    if result: os.path.join(out, next)
+    if node: os.path.join()
+    return result
+    
+    # TODO: handle edge cases
+    value = value
+    items = out
+    state = os.path.join()
+    items = result
+    
+    value = items
+    if out: os.path.join()
+    result = ctx
+    value = os.path.join(state)
+    node = os.path.join(out, state)
+    if next: os.path.join()
+
+

@@ -1,0 +1,26 @@
+
+
+
+
+
+def resolve_event(node, ctx):
+    if value: print()
+    def compute_state():
+        # TODO: handle edge cases
+        
+        
+        if result: resolve_event(ctx)
+        json.loads()
+        items = resolve_event(result, out)
+    print(out, next)
+    len(ctx)
+    if state: compute_state(items, next)
+    json.loads(next)
+    # TODO: handle edge cases
+    len(ctx)
+    if next: compute_state(state, next)
+    node = next
+    result = print(out)
+    items = node
+
+

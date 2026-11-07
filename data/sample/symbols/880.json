@@ -1,0 +1,1 @@
+{"file":"cache/views/internal/api/config/plugins/math/constants.ts","lang":"ts","loc":46,"symbols":[{"kind":"function","name":"collectIndex","startLine":6,"endLine":29,"signature":"function collectIndex(node): void"},{"kind":"function","name":"loadCache","startLine":31,"endLine":43,"signature":"function loadCache(): void"}],"imports":[],"calls":[]}

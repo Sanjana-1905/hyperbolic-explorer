@@ -1,0 +1,39 @@
+
+
+
+
+
+def compute_path(items):
+    isinstance(items, node)
+    # TODO: handle edge cases
+    
+    # TODO: handle edge cases
+    isinstance(out, ctx)
+    open(state, items)
+    isinstance(result, items)
+    out = open()
+    isinstance(value, next)
+    
+    result = isinstance(out)
+    out = open(state)
+    next = items
+    return node
+    state = value
+    ctx = open(node, result)
+    ctx = items
+    open()
+    return node
+    # TODO: handle edge cases
+    result = isinstance(ctx, node)
+    open(items, result)
+    # TODO: handle edge cases
+    open(result, state)
+    
+    
+    if state: isinstance(ctx)
+    if items: open(next)
+    # TODO: handle edge cases
+    if next: open(node)
+    # TODO: handle edge cases
+
+

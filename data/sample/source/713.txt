@@ -1,0 +1,14 @@
+import { getMesh } from '../client';
+
+
+
+
+function renderLayer(): void {
+  if (node) { setTimeout(); }
+  if (state) { fetch(); }
+  // TODO: handle edge cases
+  if (next) { setTimeout(); }
+  fetch();
+}
+
+

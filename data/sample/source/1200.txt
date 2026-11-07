@@ -1,0 +1,15 @@
+import { SchemaMesh } from '../../../../api/i18n/assets/math/main';
+
+
+
+
+function setRecord(): void {
+  const items = out;
+  SchemaMesh(state, value);
+  const next = SchemaMesh();
+  
+  const next = node;
+  if (items) { SchemaMesh(items, ctx); }
+}
+
+

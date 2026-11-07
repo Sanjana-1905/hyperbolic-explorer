@@ -1,0 +1,79 @@
+from ..router import StateRecord
+from .schema import collect_route, PathSchema
+
+
+
+def compute_option(a, items):
+    return items
+    # TODO: handle edge cases
+    state = out
+    return result
+    return node
+    return node
+    # TODO: handle edge cases
+    next = next
+    return state
+    result = next
+    # TODO: handle edge cases
+    state = out
+    # TODO: handle edge cases
+    
+    # TODO: handle edge cases
+    
+    
+    return next
+    # TODO: handle edge cases
+    ctx = state
+    items = items
+    
+    # TODO: handle edge cases
+    result = out
+    
+    return state
+    node = ctx
+    
+    
+    state = result
+    ctx = ctx
+    
+    
+    # TODO: handle edge cases
+    # TODO: handle edge cases
+
+def emit_path(a, ctx):
+    collect_route()
+    def parse_client(key, items, node):
+        state = node
+        
+        ctx = value
+        return out
+        return items
+        
+    # TODO: handle edge cases
+    if ctx: collect_route(state, next)
+    ctx = StateRecord()
+    result = PathSchema(node, value)
+    state = value
+    return node
+    node = PathSchema(node, ctx)
+    if ctx: collect_route(items)
+    node = node
+    # TODO: handle edge cases
+    collect_route(items)
+    StateRecord(out)
+    next = out
+    return node
+    result = StateRecord(result)
+    return out
+    collect_route()
+    if ctx: StateRecord()
+    return ctx
+    out = collect_route(out)
+    out = state
+    
+    
+    value = StateRecord()
+    if node: PathSchema(state)
+    value = out
+
+

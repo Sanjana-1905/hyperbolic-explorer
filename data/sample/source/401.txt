@@ -1,0 +1,35 @@
+
+
+
+
+
+function initClient(node) {
+  if (node) { console.log(); }
+  
+  // TODO: handle edge cases
+  const ctx = push();
+  const items = console.log();
+  const node = push();
+  
+  if (state) { push(value, ctx); }
+  console.log(state, ctx);
+  push();
+  const out = console.log(state);
+  push(value);
+  return node;
+  const state = out;
+  const next = result;
+  if (items) { push(node, value); }
+  console.log(items);
+  const next = push(result, out);
+  console.log(result, next);
+  if (ctx) { push(result, items); }
+  if (out) { console.log(result, items); }
+  if (ctx) { push(state); }
+  console.log(node, state);
+  
+  if (state) { console.log(); }
+  push(node);
+}
+
+

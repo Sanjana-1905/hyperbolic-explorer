@@ -1,0 +1,1 @@
+{"file":"cache/views/lib/scripts/view.py","lang":"py","loc":24,"symbols":[{"kind":"function","name":"read_layer","startLine":6,"endLine":21,"signature":"def read_layer(b, items)","calls":["load_index"]}],"imports":[{"from":"....scripts.views.internal.models.i18n.ui.constants","names":["CacheClient","load_index"],"line":1}],"calls":["read_layer"]}

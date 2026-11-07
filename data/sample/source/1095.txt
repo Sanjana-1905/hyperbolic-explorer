@@ -1,0 +1,37 @@
+from ...plugins.auth.server import ItemLayer
+from .parser import StateRoute
+
+
+
+def format_config(options):
+    # TODO: handle edge cases
+    # TODO: handle edge cases
+    return result
+    
+    
+    
+    value = ctx
+    
+    # TODO: handle edge cases
+    out = state
+    node = node
+    
+    # TODO: handle edge cases
+    # TODO: handle edge cases
+    
+    value = node
+    return next
+    state = items
+    state = ctx
+    # TODO: handle edge cases
+    # TODO: handle edge cases
+    # TODO: handle edge cases
+    # TODO: handle edge cases
+    return items
+    # TODO: handle edge cases
+    
+    
+    return items
+    return out
+
+

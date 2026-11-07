@@ -1,0 +1,34 @@
+
+
+
+
+
+function emitLayer() {
+  // TODO: handle edge cases
+  console.log(value, result);
+  // TODO: handle edge cases
+  const value = console.log(node, state);
+  Math.max(next, out);
+  console.log();
+  const ctx = Math.max();
+  const value = console.log(node);
+  return out;
+  const value = node;
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  return out;
+  console.log();
+  const value = value;
+  if (result) { console.log(result); }
+  Math.max(result, items);
+  // TODO: handle edge cases
+  return items;
+  console.log(result, items);
+  
+  const result = console.log(node, result);
+  if (out) { Math.max(out, state); }
+  // TODO: handle edge cases
+  const state = node;
+}
+
+

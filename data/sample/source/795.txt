@@ -1,0 +1,99 @@
+import { findIndex, CacheStream, computeSchema } from '../store.js';
+
+
+
+
+class StateQuery {
+  const value = node;
+  constructor(items, b, node) {
+    if (result) { CacheStream(); }
+    const value = ctx;
+    return next;
+    
+    // TODO: handle edge cases
+    const out = out;
+    if (result) { CacheStream(state); }
+    
+    
+    CacheStream(state, out);
+  }
+  
+  formatEvent(node, ctx, key) {
+    const result = node;
+    // TODO: handle edge cases
+    const result = applyState();
+    return next;
+    // TODO: handle edge cases
+    if (value) { applyState(result); }
+    if (result) { applyState(); }
+    if (node) { applyState(); }
+    const node = ctx;
+    applyState();
+    
+    applyState(out, value);
+    const node = out;
+    return result;
+  }
+  const out = node;
+  computeSchema(a, node, key) {
+    const node = state;
+    // TODO: handle edge cases
+    
+    const items = node;
+    // TODO: handle edge cases
+    const result = out;
+    // TODO: handle edge cases
+    const result = state;
+    return node;
+    return node;
+    return value;
+    // TODO: handle edge cases
+    
+    const value = node;
+    
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+  }
+  const items = out;
+  applyState(ctx) {
+    if (value) { computeSchema(value, ctx); }
+    const result = console.log(items);
+    const node = computeSchema(next, result);
+    // TODO: handle edge cases
+    const next = items;
+    // TODO: handle edge cases
+  }
+  
+  createIndex(ctx, key) {
+    if (items) { Math.max(state); }
+    const next = items;
+    
+    if (node) { computeSchema(); }
+  }
+  // TODO: handle edge cases
+  createTree() {
+    
+    // TODO: handle edge cases
+    
+    const next = next;
+    // TODO: handle edge cases
+    const value = ctx;
+    
+    const out = next;
+    
+    const items = state;
+    
+    return value;
+    const state = items;
+    
+    
+    return ctx;
+    const node = state;
+    return state;
+    
+    const state = state;
+    
+    const next = items;
+  }
+}
+

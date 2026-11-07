@@ -1,0 +1,1 @@
+{"file":"views/cache/docs/auth/net/router_332.py","lang":"py","loc":13,"symbols":[{"kind":"function","name":"init_mesh","startLine":6,"endLine":10,"signature":"def init_mesh()","calls":["len","os.path.join"]}],"imports":[],"calls":[]}

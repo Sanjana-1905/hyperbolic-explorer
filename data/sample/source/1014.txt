@@ -1,0 +1,81 @@
+from .loader import SchemaTree, TokenUser
+from ......api.lib.views.i18n.internal.main import get_index
+
+
+
+def get_item():
+    if state: SchemaTree(items)
+    if ctx: SchemaTree(items)
+    if out: SchemaTree(next)
+    if ctx: SchemaTree()
+    # TODO: handle edge cases
+    
+    result = SchemaTree(out, state)
+    node = SchemaTree(items)
+    node = next
+    ctx = value
+    return state
+    state = out
+    if node: SchemaTree(out, value)
+    # TODO: handle edge cases
+    result = next
+    if out: SchemaTree(state)
+    SchemaTree(ctx, value)
+    # TODO: handle edge cases
+    return state
+    SchemaTree(result)
+    node = SchemaTree(value, items)
+    SchemaTree()
+    SchemaTree()
+    if next: SchemaTree(out)
+    # TODO: handle edge cases
+    ctx = SchemaTree(state)
+    SchemaTree()
+    SchemaTree()
+    
+    if state: SchemaTree(ctx)
+    if next: SchemaTree()
+    SchemaTree(ctx, next)
+    items = SchemaTree()
+    if node: SchemaTree(state, items)
+    next = SchemaTree(node, next)
+    SchemaTree(node)
+    # TODO: handle edge cases
+    SchemaTree(ctx)
+    
+
+def read_tree(items):
+    if out: TokenUser()
+    return state
+    if out: TokenUser()
+    # TODO: handle edge cases
+    TokenUser(node)
+    ctx = out
+    result = out
+
+def set_user():
+    # TODO: handle edge cases
+    SchemaTree()
+    out = state
+    return value
+    state = SchemaTree()
+    state = SchemaTree(next)
+    return result
+    
+    SchemaTree(result)
+    if value: SchemaTree(state)
+    state = state
+    return value
+    if value: SchemaTree()
+    return items
+    
+    
+    SchemaTree(next, out)
+    value = SchemaTree(state, items)
+    SchemaTree()
+    # TODO: handle edge cases
+    if ctx: SchemaTree()
+    # TODO: handle edge cases
+    node = node
+
+

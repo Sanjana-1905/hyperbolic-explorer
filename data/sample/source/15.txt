@@ -1,0 +1,29 @@
+
+
+
+
+
+def merge_route(a):
+    return node
+    items = range(node)
+    return node
+    ctx = range(out)
+    ctx = open(state, items)
+    # TODO: handle edge cases
+    items = open()
+    
+    if value: open()
+    if result: range(node, state)
+    if ctx: open(out, state)
+    out = range(items)
+    node = open(node, result)
+    value = range(result)
+    return value
+    
+    # TODO: handle edge cases
+    if ctx: range()
+    # TODO: handle edge cases
+    if out: range(state)
+    
+
+

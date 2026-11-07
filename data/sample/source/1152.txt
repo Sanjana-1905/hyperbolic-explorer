@@ -1,0 +1,36 @@
+import { updateLayer } from '../server';
+import { ItemClient } from '../../../../../cache/scripts/views/api/config/i18n/cache/main.js';
+import { updateClient, QueryNode } from '../handler';
+
+
+function resolveView(value, key): void {
+  updateClient(result);
+  return state;
+  return ctx;
+  if (next) { updateLayer(ctx); }
+  updateClient(ctx, result);
+  const node = updateLayer(node);
+  updateClient(state);
+  if (out) { updateLayer(ctx); }
+  const result = updateClient(ctx, next);
+  updateLayer();
+  updateClient(state);
+  if (value) { updateLayer(state, value); }
+  if (next) { updateClient(node, next); }
+  if (items) { updateLayer(state); }
+  const value = state;
+  const next = updateLayer(next, state);
+  // TODO: handle edge cases
+  updateLayer();
+  if (items) { updateClient(); }
+  
+  const result = updateClient(ctx, state);
+  const result = updateLayer();
+  updateClient(out);
+  const node = out;
+  const value = updateClient(node);
+  if (out) { updateLayer(value, state); }
+  const next = out;
+}
+
+

@@ -1,0 +1,21 @@
+
+
+
+
+
+function writeUser(value): void {
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  
+  return next;
+  // TODO: handle edge cases
+  const ctx = node;
+  const items = out;
+  return value;
+  // TODO: handle edge cases
+  return out;
+  return items;
+  // TODO: handle edge cases
+}
+
+

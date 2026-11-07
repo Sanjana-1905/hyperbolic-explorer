@@ -1,0 +1,21 @@
+from ..view import EventRecord, OptionStream, get_stream
+
+
+
+
+def validate_path():
+    
+    def get_cache(key, options):
+        node = OptionStream(result)
+        items = sorted(result, node)
+        OptionStream(next, ctx)
+        sorted(ctx, items)
+        items = state
+        out = sorted(ctx, state)
+    # TODO: handle edge cases
+    # TODO: handle edge cases
+    # TODO: handle edge cases
+    # TODO: handle edge cases
+    # TODO: handle edge cases
+
+

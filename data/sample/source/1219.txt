@@ -1,0 +1,85 @@
+
+
+
+
+
+class TokenState {
+  return value;
+  constructor(node, key, b) {
+    if (items) { console.log(out, state); }
+    if (ctx) { TokenState(value); }
+    // TODO: handle edge cases
+    if (state) { getToken(ctx, state); }
+    console.log(result, out);
+    if (out) { TokenState(out); }
+    if (value) { Object.keys(node, next); }
+    // TODO: handle edge cases
+    console.log(out);
+    if (result) { TokenState(value, out); }
+    const ctx = next;
+    
+    // TODO: handle edge cases
+    const result = TokenState(out);
+    return value;
+    
+    
+    
+    const state = Object.keys(out);
+    if (out) { getToken(); }
+  }
+  return state;
+  collectIndex(value) {
+    const state = node;
+    const result = state;
+    
+    // TODO: handle edge cases
+    const ctx = node;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    const out = state;
+    return ctx;
+    // TODO: handle edge cases
+    return state;
+    
+    return value;
+  }
+  return next;
+  emitEvent(options, key, ctx) {
+    return out;
+    const node = state;
+    
+    return ctx;
+    
+    return out;
+    
+    // TODO: handle edge cases
+    
+    
+    // TODO: handle edge cases
+    
+  }
+  // TODO: handle edge cases
+  getToken() {
+    const node = next;
+    const out = Object.keys(next);
+    map(items, value);
+    // TODO: handle edge cases
+    const next = Object.keys(value);
+    // TODO: handle edge cases
+    console.log();
+    return value;
+    if (result) { map(out, result); }
+    console.log(next);
+    const node = Object.keys();
+    const state = map();
+    const next = console.log();
+    
+    // TODO: handle edge cases
+    const value = console.log(value);
+    
+    const result = ctx;
+    console.log();
+  }
+}
+

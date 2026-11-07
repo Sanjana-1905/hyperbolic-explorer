@@ -1,0 +1,19 @@
+import { findOption } from '../loader';
+
+
+
+
+function computeConfig(value, a) {
+  // TODO: handle edge cases
+  if (next) { findOption(ctx); }
+  
+  findOption(value, items);
+  
+  const state = findOption();
+  if (next) { findOption(value, next); }
+  findOption(state, node);
+  if (value) { findOption(ctx, value); }
+  findOption(node);
+}
+
+

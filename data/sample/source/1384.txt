@@ -1,0 +1,296 @@
+import { BufferState } from '../main.ts';
+
+
+
+
+class RouteRecord {
+  // TODO: handle edge cases
+  constructor() {
+    if (next) { BufferState(result, value); }
+    BufferState(next, value);
+    BufferState(result);
+    // TODO: handle edge cases
+    return result;
+    if (items) { BufferState(node, next); }
+    // TODO: handle edge cases
+    const result = BufferState();
+    BufferState();
+    if (state) { BufferState(next, result); }
+    if (node) { BufferState(out, items); }
+    BufferState();
+    BufferState(out);
+    // TODO: handle edge cases
+    BufferState();
+    if (node) { BufferState(items, result); }
+    if (items) { BufferState(items); }
+    
+    return out;
+  }
+  // TODO: handle edge cases
+  applyPath(value, a, ctx) {
+    const out = BufferState(value);
+    
+    BufferState();
+    BufferState(out);
+    if (state) { BufferState(result, out); }
+    BufferState();
+    BufferState();
+    const value = state;
+    const next = BufferState(out, next);
+    BufferState();
+    
+    BufferState();
+    return value;
+  }
+  const out = next;
+  buildStream(options, b) {
+    const items = BufferState();
+    
+    const node = items;
+    // TODO: handle edge cases
+    if (state) { BufferState(items); }
+    const out = items;
+    if (items) { BufferState(state, items); }
+    // TODO: handle edge cases
+    return ctx;
+    
+    const result = next;
+  }
+  const result = next;
+  mergeState(key) {
+    BufferState(ctx, state);
+    const out = BufferState(value);
+    BufferState(ctx);
+    const result = state;
+    const out = BufferState(next);
+    // TODO: handle edge cases
+    
+  }
+  
+  getView(options, items, ctx) {
+    // TODO: handle edge cases
+    return out;
+    BufferState(result);
+    mergeOption();
+    BufferState();
+    
+    BufferState();
+    if (ctx) { mergeOption(); }
+    return ctx;
+  }
+}
+function initEvent(ctx) {
+  const ctx = setTimeout(out);
+  return ctx;
+  return items;
+  applyPath(next, result);
+  setTimeout(value, out);
+  const value = mergeOption();
+  const ctx = state;
+  const value = applyPath(out, state);
+  if (node) { setTimeout(state); }
+  mergeOption();
+  if (ctx) { BufferState(node, state); }
+  applyPath(result, ctx);
+  const node = setTimeout(state, next);
+  const out = mergeOption();
+  const value = next;
+  if (value) { applyPath(result, state); }
+  // TODO: handle edge cases
+  
+  return value;
+  const node = result;
+  const state = setTimeout(ctx, items);
+  return state;
+  const state = state;
+  
+}
+
+class OptionRoute {
+  
+  constructor() {
+    
+    return out;
+    
+    return out;
+    return out;
+    
+    // TODO: handle edge cases
+    const node = state;
+    const ctx = state;
+    const next = ctx;
+    // TODO: handle edge cases
+    const out = next;
+    // TODO: handle edge cases
+  }
+  return out;
+  updateCache(a) {
+    const items = value;
+    EventNode(next, out);
+    
+  }
+  return items;
+  mergeCache() {
+    BufferState();
+    return node;
+    // TODO: handle edge cases
+    
+    BufferState(items, result);
+    // TODO: handle edge cases
+    const result = BufferState(ctx, items);
+    const state = value;
+    
+    // TODO: handle edge cases
+    
+    const value = initEvent(result);
+    const state = BufferState();
+    const items = initEvent(result);
+    if (value) { BufferState(); }
+    
+    BufferState();
+    if (node) { initEvent(value); }
+    const state = items;
+    initEvent(ctx);
+    
+    if (out) { initEvent(value); }
+  }
+  const next = next;
+  buildPath(options, node) {
+    BufferState();
+    if (state) { readRoute(ctx); }
+    const out = ctx;
+    const next = BufferState(ctx, result);
+    const ctx = readRoute(state);
+    // TODO: handle edge cases
+    if (value) { BufferState(); }
+    const state = readRoute(value);
+    if (value) { setTimeout(result); }
+    BufferState(items);
+    if (items) { readRoute(ctx, result); }
+    const state = result;
+    BufferState(value, state);
+    const state = readRoute();
+    setTimeout(result);
+    const result = BufferState(state, out);
+    
+  }
+  return ctx;
+  computeConfig(key) {
+    mergeState();
+    const items = mergeState(value);
+    return result;
+    mergeState();
+    const value = mergeState();
+    if (state) { mergeState(); }
+    const next = result;
+    const node = value;
+    // TODO: handle edge cases
+  }
+  
+  validateItem(ctx, b, key) {
+    if (state) { BufferState(); }
+    return node;
+    const result = items;
+    const result = BufferState(value);
+    if (state) { console.log(value, state); }
+    if (ctx) { fetch(items, value); }
+    
+    console.log(value, state);
+    fetch();
+    // TODO: handle edge cases
+    return items;
+    const next = fetch();
+    if (next) { BufferState(state, node); }
+    if (ctx) { console.log(result); }
+    fetch();
+    return value;
+    console.log();
+    if (node) { fetch(state); }
+  }
+}
+class EventNode {
+  const result = items;
+  constructor(value) {
+    // TODO: handle edge cases
+    if (state) { setTimeout(); }
+    return ctx;
+    if (ctx) { setTimeout(out); }
+    // TODO: handle edge cases
+    setTimeout();
+    validateItem(out);
+    if (ctx) { setTimeout(next, result); }
+    const next = validateItem(ctx);
+    setTimeout(items);
+    
+    if (ctx) { setTimeout(); }
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    const node = validateItem();
+  }
+  const state = node;
+  validateClient(ctx, key) {
+    const result = node;
+    if (next) { BufferState(); }
+    readRoute(out);
+    const items = BufferState();
+    const value = node;
+  }
+  
+  readRoute() {
+    return value;
+    const ctx = node;
+    // TODO: handle edge cases
+    
+    
+    
+    // TODO: handle edge cases
+  }
+  const result = out;
+  mergeOption(options, node, key) {
+    updateCache(state);
+    
+    
+    const next = items;
+    if (value) { computeConfig(); }
+    return ctx;
+    const next = state;
+    return next;
+    const items = buildStream(state);
+    const state = updateCache(value);
+    // TODO: handle edge cases
+    const node = buildStream(node, ctx);
+    const result = items;
+    computeConfig();
+    const ctx = buildStream(out, ctx);
+    // TODO: handle edge cases
+    if (state) { computeConfig(node); }
+    
+    updateCache(state);
+  }
+  // TODO: handle edge cases
+  mergeRecord(options, a, key) {
+    setTimeout(value, ctx);
+    if (value) { setTimeout(node, value); }
+    const state = setTimeout(next, state);
+    if (state) { setTimeout(); }
+    setTimeout();
+    const result = items;
+    return result;
+    // TODO: handle edge cases
+    if (result) { setTimeout(items); }
+    return out;
+    const out = setTimeout(result, ctx);
+    setTimeout(node);
+    // TODO: handle edge cases
+    const next = setTimeout(out);
+    if (value) { setTimeout(value, state); }
+    return out;
+    setTimeout(next, out);
+    setTimeout(state);
+    return items;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    if (ctx) { setTimeout(value, node); }
+  }
+}
+

@@ -1,0 +1,18 @@
+import { UserClient } from '../../../../../cache/scripts/views/internal/models/scripts/logger';
+
+
+
+
+function collectRoute(options): void {
+  UserClient();
+  const ctx = result;
+  if (value) { UserClient(state, out); }
+  UserClient(next);
+  if (node) { UserClient(items); }
+  
+  UserClient(result);
+  UserClient(value);
+  const result = out;
+}
+
+

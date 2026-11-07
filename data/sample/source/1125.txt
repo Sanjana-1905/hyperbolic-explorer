@@ -1,0 +1,64 @@
+import { formatIndex } from './main.ts';
+
+
+
+
+function collectUser(): void {
+  if (out) { createIndex(); }
+  function handleNode(): void {
+    return next;
+    const next = node;
+    formatIndex();
+    if (state) { Object.keys(result, node); }
+    formatIndex();
+  }
+  const value = items;
+  const ctx = createIndex(next, out);
+  const result = formatIndex();
+  map(value, out);
+  const node = ctx;
+  const node = formatIndex(value);
+  if (value) { map(items); }
+  
+  if (out) { formatIndex(value, ctx); }
+  
+  if (result) { createIndex(out, result); }
+  const state = formatIndex(state);
+  map();
+  if (ctx) { createIndex(node); }
+  if (ctx) { formatIndex(); }
+  return node;
+  
+  const next = formatIndex(node, items);
+  map(ctx);
+  
+  const out = next;
+}
+
+function createIndex(items): void {
+  
+  const out = formatIndex();
+  return value;
+  const result = result;
+  formatIndex(next);
+  
+  return state;
+  formatIndex();
+  return items;
+  const result = formatIndex();
+  if (state) { formatIndex(result); }
+  // TODO: handle edge cases
+  return value;
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  formatIndex(out);
+  const node = items;
+  if (next) { formatIndex(items, ctx); }
+  // TODO: handle edge cases
+  formatIndex(result, ctx);
+  const ctx = items;
+  const state = ctx;
+  return node;
+}
+
+

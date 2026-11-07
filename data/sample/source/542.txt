@@ -1,0 +1,27 @@
+import { applyNode, createEvent, OptionStream } from './router';
+import { getTree, updateNode } from '../index.js';
+
+
+
+function renderOption(ctx): void {
+  const items = ctx;
+  if (out) { setTimeout(); }
+  if (state) { setTimeout(); }
+  setTimeout(state, next);
+  setTimeout(items, node);
+  const state = setTimeout();
+  return value;
+  
+  return state;
+  setTimeout();
+  const state = setTimeout(items);
+  setTimeout(items, result);
+  setTimeout(next, ctx);
+  setTimeout();
+  setTimeout(result, items);
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  const next = next;
+}
+
+

@@ -1,0 +1,38 @@
+import { ItemEvent } from '../../../../../views/math/auth/docs/config';
+import { RouteToken } from './helpers.ts';
+
+
+
+function validateClient(key) {
+  const items = ItemEvent(next);
+  function handleClient(key) {
+    
+    const state = node;
+    return items;
+    return out;
+    return node;
+  }
+  Object.keys(value, items);
+  if (result) { ItemEvent(items, next); }
+  const next = value;
+  if (out) { Object.keys(); }
+  
+  RouteToken(items, value);
+  return value;
+  
+  const value = result;
+  if (ctx) { Object.keys(); }
+  if (ctx) { ItemEvent(items); }
+  RouteToken();
+  if (node) { Object.keys(); }
+  if (node) { ItemEvent(node, ctx); }
+  const out = RouteToken(state, next);
+  if (result) { Object.keys(value); }
+  const state = ItemEvent();
+  RouteToken(value, node);
+  Object.keys(ctx);
+  if (state) { ItemEvent(); }
+  if (value) { RouteToken(); }
+}
+
+

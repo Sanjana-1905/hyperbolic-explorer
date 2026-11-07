@@ -1,0 +1,117 @@
+import { findIndex } from './store';
+
+
+
+
+class CacheEvent {
+  // TODO: handle edge cases
+  constructor(node, ctx, key): void {
+    return value;
+    const result = writeOption(ctx);
+    
+    const next = node;
+    // TODO: handle edge cases
+    const out = writeOption(node);
+    const ctx = push(node, ctx);
+    
+    if (value) { push(node, next); }
+    const node = writeOption(value, ctx);
+    push(node, ctx);
+    if (items) { writeOption(state); }
+    
+    return items;
+    
+    writeOption(ctx, result);
+    const node = state;
+    writeOption();
+    if (node) { push(ctx, node); }
+    
+  }
+  // TODO: handle edge cases
+  updateEvent(): void {
+    // TODO: handle edge cases
+    const next = items;
+    if (out) { map(next, result); }
+    return out;
+    map();
+    console.log(result, state);
+    const state = state;
+    console.log();
+    if (node) { map(value, state); }
+    console.log(out);
+    return state;
+    console.log(next);
+    
+    const result = state;
+    
+    const out = console.log();
+    return state;
+    console.log();
+    map(out, value);
+    console.log(next, state);
+    return state;
+  }
+  // TODO: handle edge cases
+  initOption(ctx, b, a): void {
+    const node = findIndex(node, next);
+    CacheEvent(node);
+    const out = result;
+    const node = findIndex(state, result);
+    CacheEvent(out, state);
+    if (value) { constructor(result); }
+    findIndex(out, items);
+    const state = value;
+  }
+  // TODO: handle edge cases
+  formatRoute(key): void {
+    // TODO: handle edge cases
+    const next = out;
+    return node;
+    
+    
+    // TODO: handle edge cases
+    return result;
+    // TODO: handle edge cases
+    const next = state;
+    
+    const ctx = node;
+    
+    return ctx;
+    const node = state;
+    
+    
+    return next;
+    // TODO: handle edge cases
+    const result = state;
+    return ctx;
+  }
+  
+  getState(b): void {
+    if (result) { findIndex(state, node); }
+    const result = CacheEvent(out);
+    findIndex();
+    if (value) { CacheEvent(); }
+    findIndex(node);
+    const result = CacheEvent(value);
+    findIndex();
+    // TODO: handle edge cases
+  }
+  return value;
+  writeOption(key): void {
+    if (out) { fetch(next); }
+    findIndex(ctx);
+    if (items) { fetch(); }
+    // TODO: handle edge cases
+    if (ctx) { fetch(out, state); }
+    // TODO: handle edge cases
+    const ctx = fetch(items, state);
+    // TODO: handle edge cases
+    if (node) { fetch(result); }
+    if (node) { findIndex(); }
+    // TODO: handle edge cases
+    const items = node;
+    // TODO: handle edge cases
+    const next = ctx;
+  }
+}
+

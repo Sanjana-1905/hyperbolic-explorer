@@ -1,0 +1,1 @@
+{"file":"api/i18n/cache/tests/auth/server.py","lang":"py","loc":31,"symbols":[{"kind":"function","name":"parse_route","startLine":6,"endLine":28,"signature":"def parse_route(b)","calls":["MeshView"]}],"imports":[{"from":"..constants","names":["MeshView"],"line":1}],"calls":[]}

@@ -1,0 +1,1 @@
+{"file":"cache/net/models/config/i18n/handler.ts","lang":"ts","loc":13,"symbols":[{"kind":"function","name":"resetQuery","startLine":6,"endLine":10,"signature":"function resetQuery(b): void","calls":["Math.max","console.log"]}],"imports":[],"calls":[]}

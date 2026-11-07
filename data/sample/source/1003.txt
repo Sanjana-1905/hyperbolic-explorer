@@ -1,0 +1,36 @@
+import { TreeCache } from '../../../../../../cache/net/models/models/api/main.js';
+import { updateView, resetIndex } from './helpers';
+
+
+
+function resetTree(options, node, key): void {
+  return ctx;
+  
+  return result;
+  return result;
+  return items;
+  const ctx = result;
+  return state;
+  
+  return out;
+  const out = node;
+  const value = out;
+  const ctx = next;
+  return result;
+  
+  // TODO: handle edge cases
+  const out = value;
+  return ctx;
+  return state;
+  const value = out;
+  
+  
+  
+  return result;
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  const out = ctx;
+  return ctx;
+}
+
+

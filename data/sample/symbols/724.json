@@ -1,0 +1,1 @@
+{"file":"cache/net/models/tests/io/services/loader.py","lang":"py","loc":35,"symbols":[{"kind":"function","name":"resolve_option","startLine":6,"endLine":32,"signature":"def resolve_option(node)"}],"imports":[],"calls":[]}

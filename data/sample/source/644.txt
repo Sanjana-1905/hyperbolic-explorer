@@ -1,0 +1,19 @@
+import { writeNode } from '../../../../../../internal/cache/services';
+import { parseLayer } from '../../../../../../../api/lib31/tests/math/net/models/parser';
+
+
+
+function buildLayer(b): void {
+  if (state) { parseLayer(state); }
+  if (items) { writeNode(); }
+  if (next) { parseLayer(); }
+  writeNode(node);
+  if (node) { parseLayer(out, items); }
+  const node = items;
+  const next = parseLayer(out);
+  writeNode(value, ctx);
+  
+  return node;
+}
+
+

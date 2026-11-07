@@ -1,0 +1,45 @@
+import { findQuery } from './client';
+import { UserTree, RecordLayer } from '../client.ts';
+
+
+
+function computeClient(options, key): void {
+  const out = state;
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  
+  
+  const next = out;
+  return ctx;
+  
+  
+  
+  const state = items;
+  
+  const next = state;
+  
+  return value;
+  return node;
+  return items;
+  // TODO: handle edge cases
+  const ctx = result;
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  
+  return state;
+  return value;
+  const ctx = ctx;
+  const next = out;
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  
+  return node;
+  
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  const items = node;
+  return out;
+  const next = ctx;
+}
+
+

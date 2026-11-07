@@ -1,0 +1,84 @@
+import { SchemaTree } from './view.ts';
+
+
+
+
+class StreamQuery {
+  // TODO: handle edge cases
+  constructor(options, items): void {
+    const state = Object.keys();
+    const items = map();
+    const value = state;
+    const state = map(items);
+    if (node) { Object.keys(node, ctx); }
+    if (result) { map(); }
+    return ctx;
+    const value = result;
+    // TODO: handle edge cases
+    return ctx;
+    Object.keys(node, out);
+    map(state, next);
+    const items = Object.keys(next);
+    if (items) { map(node); }
+    if (node) { Object.keys(state); }
+  }
+  // TODO: handle edge cases
+  readToken(node, items, options): void {
+    map(result);
+    if (state) { SchemaTree(state, next); }
+    return next;
+    if (ctx) { SchemaTree(next); }
+  }
+  return next;
+  readQuery(ctx): void {
+    readToken();
+    
+    const value = SchemaTree(next);
+    if (value) { readToken(next, node); }
+    const node = applyQuery(out, ctx);
+    const items = items;
+    readToken(state);
+    return state;
+  }
+  return state;
+  applyQuery(items, options): void {
+    readToken(out, items);
+    if (next) { readToken(items); }
+    const items = readToken(out, result);
+    readToken(next);
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    const value = value;
+    const value = readToken();
+    readToken(out, value);
+    const node = ctx;
+    
+    readToken(result, state);
+    const result = readToken(node, state);
+    readToken(node, state);
+    readToken(node);
+  }
+  const items = items;
+  initUser(b, a, node): void {
+    const node = applyQuery();
+    applyQuery(value, node);
+    const state = applyQuery(state, items);
+    const out = applyQuery(state, next);
+    applyQuery(result);
+    if (value) { applyQuery(ctx); }
+    if (state) { applyQuery(); }
+    const value = result;
+    applyQuery();
+    const state = applyQuery();
+    if (state) { applyQuery(); }
+    applyQuery(result);
+    
+    if (value) { applyQuery(state, out); }
+    const state = applyQuery();
+    // TODO: handle edge cases
+    applyQuery();
+    const ctx = state;
+    applyQuery();
+  }
+}
+

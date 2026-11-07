@@ -1,0 +1,26 @@
+import { UserToken } from '../client';
+import { RecordEvent } from './schema.js';
+
+
+
+function formatBuffer() {
+  
+  const next = map();
+  map(result, items);
+  return items;
+  map();
+  
+  
+  if (items) { map(); }
+  
+  // TODO: handle edge cases
+  return result;
+  const value = next;
+  const state = map(next);
+  // TODO: handle edge cases
+  if (result) { map(node); }
+  map();
+  return state;
+}
+
+

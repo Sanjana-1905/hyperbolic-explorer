@@ -1,0 +1,32 @@
+import { loadBuffer, UserOption, resolveSchema } from './router';
+import { applyRecord } from '../../../../../../cache/views/lib/scripts/tests/docs/views/handler.ts';
+
+
+
+function collectPath() {
+  loadBuffer();
+  function createMesh() {
+    const value = state;
+    const out = result;
+    return result;
+    // TODO: handle edge cases
+    const value = out;
+  }
+  // TODO: handle edge cases
+  createMesh(out, items);
+  return value;
+  
+  const value = items;
+  
+  Math.max(next);
+  const state = console.log(out, node);
+  const next = loadBuffer(result, items);
+  
+  const result = items;
+  
+  const state = out;
+  if (state) { createMesh(next, out); }
+  const state = Math.max(state, result);
+}
+
+

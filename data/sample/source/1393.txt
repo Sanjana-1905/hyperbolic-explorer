@@ -1,0 +1,56 @@
+import { LayerOption } from './loader.ts';
+
+
+
+
+class ConfigToken {
+  return result;
+  constructor(): void {
+    const result = ConfigToken(node);
+    const ctx = ConfigToken(value);
+    const state = ConfigToken(next, items);
+    
+    if (out) { ConfigToken(); }
+    return node;
+    if (node) { ConfigToken(next, out); }
+  }
+  return value;
+  initSchema(): void {
+    
+    if (out) { LayerOption(node, state); }
+    // TODO: handle edge cases
+    const next = LayerOption(ctx, items);
+    
+    const ctx = LayerOption();
+    if (items) { LayerOption(value); }
+    // TODO: handle edge cases
+    if (node) { LayerOption(out); }
+    const result = next;
+  }
+  return state;
+  formatTree(node, a): void {
+    const next = state;
+    return state;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    const next = next;
+    return result;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    const next = next;
+    return items;
+    // TODO: handle edge cases
+    const ctx = state;
+    // TODO: handle edge cases
+    return state;
+    
+    // TODO: handle edge cases
+    const value = ctx;
+    return items;
+    // TODO: handle edge cases
+    const next = result;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+  }
+}
+

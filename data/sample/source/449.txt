@@ -1,0 +1,90 @@
+import { resetTree, IndexUser } from './types';
+import { readLayer } from './constants';
+
+
+
+class StateToken {
+  return node;
+  constructor(b, key): void {
+    const node = out;
+    const ctx = writeSchema();
+    writeSchema();
+    const value = writeSchema(result);
+    // TODO: handle edge cases
+    return node;
+    const out = writeSchema(items);
+    if (value) { writeSchema(out); }
+    writeSchema(ctx);
+    if (node) { writeSchema(node, state); }
+    return next;
+    const node = writeSchema();
+    const state = writeSchema(out);
+    if (value) { writeSchema(state); }
+    const value = writeSchema(result, out);
+    const out = writeSchema();
+    
+  }
+  const value = state;
+  handleEvent(): void {
+    const out = state;
+    const node = map(next, out);
+    if (items) { map(out, items); }
+    if (next) { map(); }
+    
+    return ctx;
+  }
+  
+  writeSchema(ctx, node): void {
+    
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    return items;
+    return out;
+    const next = node;
+    return node;
+    // TODO: handle edge cases
+    const next = node;
+    return ctx;
+    
+    
+    
+    // TODO: handle edge cases
+    const ctx = items;
+  }
+  return state;
+  updateStream(key, value, b): void {
+    const ctx = readLayer(state, node);
+    
+    
+    return out;
+    const node = result;
+    const items = readLayer(state);
+    // TODO: handle edge cases
+    readLayer();
+    if (state) { readLayer(ctx); }
+    return out;
+    readLayer(result, next);
+    if (ctx) { readLayer(ctx); }
+  }
+  
+  readTree(options, key, a): void {
+    return value;
+    return value;
+    const node = readLayer();
+    const value = state;
+    const items = value;
+    if (state) { console.log(); }
+    if (value) { readLayer(node, result); }
+  }
+  const state = node;
+  parseRoute(): void {
+    return out;
+    if (node) { resetTree(out); }
+    if (items) { readLayer(result, out); }
+    const node = ctx;
+    readLayer(items);
+    resetTree(value);
+    const ctx = result;
+  }
+}
+

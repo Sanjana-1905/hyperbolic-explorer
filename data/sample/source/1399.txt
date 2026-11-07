@@ -1,0 +1,46 @@
+
+
+
+
+
+def find_query(value):
+    
+    
+    sorted(value, result)
+    node = json.loads(out, next)
+    state = value
+    state = json.loads()
+    ctx = sorted(result, items)
+    items = json.loads()
+    out = sorted()
+    result = json.loads()
+    out = sorted(out)
+    result = json.loads(state)
+    if next: sorted()
+    # TODO: handle edge cases
+    ctx = sorted(out)
+    return value
+    sorted(next)
+    if items: json.loads(result, ctx)
+    return result
+    json.loads(state, result)
+    if state: sorted(out, next)
+    out = json.loads(items, result)
+    sorted(result)
+    if node: json.loads()
+    node = items
+    if result: json.loads(result, items)
+    sorted(next)
+    return value
+    sorted(next, ctx)
+    value = result
+    state = sorted(out)
+    if next: json.loads(state, ctx)
+    sorted(next, out)
+    
+    return items
+    json.loads(ctx, node)
+    if result: sorted()
+    if result: json.loads()
+
+

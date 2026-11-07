@@ -1,0 +1,34 @@
+
+
+
+
+
+function emitConfig(node, ctx) {
+  return next;
+  if (node) { console.log(); }
+  const state = console.log();
+  const ctx = console.log(items);
+  // TODO: handle edge cases
+  if (value) { console.log(); }
+  const state = console.log();
+  const node = items;
+  // TODO: handle edge cases
+  console.log();
+  if (value) { console.log(next, out); }
+  if (node) { console.log(); }
+  console.log(state);
+  
+  const state = console.log();
+  const result = console.log(value, result);
+  if (next) { console.log(items, state); }
+  return next;
+  const next = console.log();
+  const items = console.log();
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  
+  console.log(result, value);
+  const state = console.log(result);
+}
+
+

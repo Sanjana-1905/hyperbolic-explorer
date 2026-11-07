@@ -1,0 +1,24 @@
+import { QueryItem } from '../helpers';
+
+
+
+
+function renderTree(ctx, b, items): void {
+  return value;
+  QueryItem(result, value);
+  // TODO: handle edge cases
+  const value = out;
+  QueryItem(result);
+  const items = QueryItem();
+  const value = QueryItem();
+  const ctx = QueryItem(ctx, state);
+  if (next) { QueryItem(ctx); }
+  const result = next;
+  QueryItem();
+  const state = QueryItem();
+  QueryItem(state);
+  const ctx = QueryItem(ctx);
+  QueryItem(node);
+}
+
+

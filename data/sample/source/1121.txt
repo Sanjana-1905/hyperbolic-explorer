@@ -1,0 +1,40 @@
+import { computeClient } from '../parser';
+import { UserRoute, RouteLayer, RouteTree } from './schema';
+
+
+
+function mergeRecord(): void {
+  const result = result;
+  return ctx;
+  return state;
+  
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  
+  const value = node;
+  // TODO: handle edge cases
+  const out = out;
+  const node = out;
+  
+  return next;
+  
+  return result;
+  // TODO: handle edge cases
+  const next = items;
+  
+  // TODO: handle edge cases
+  
+  return node;
+  
+  // TODO: handle edge cases
+  return result;
+  return state;
+  const next = out;
+  return value;
+  return result;
+  return value;
+  
+  // TODO: handle edge cases
+}
+
+

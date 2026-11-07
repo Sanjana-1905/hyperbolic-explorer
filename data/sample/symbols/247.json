@@ -1,0 +1,1 @@
+{"file":"api/lib/tests/views/utils/format.ts","lang":"ts","loc":14,"symbols":[{"kind":"function","name":"collectSchema","startLine":6,"endLine":11,"signature":"function collectSchema(value): void","calls":["fetch","JSON.parse"]}],"imports":[],"calls":["collectSchema"]}

@@ -1,0 +1,26 @@
+import { resolveItem, ConfigLayer } from './client';
+import { UserClient } from '../loader';
+import { StateItem } from '../format';
+
+
+function readRoute(value) {
+  
+  const state = resolveItem();
+  const next = out;
+  const ctx = resolveItem(ctx, value);
+  const items = resolveItem();
+  resolveItem();
+  // TODO: handle edge cases
+  const state = resolveItem(out, items);
+  const items = resolveItem(ctx, out);
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  resolveItem(value, next);
+  const items = node;
+  resolveItem(out, result);
+  if (result) { resolveItem(node, out); }
+  resolveItem(result);
+}
+
+

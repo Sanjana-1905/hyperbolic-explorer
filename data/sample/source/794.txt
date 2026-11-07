@@ -1,0 +1,31 @@
+
+
+
+
+
+function initState(ctx): void {
+  
+  function computeItem(key): void {
+    if (result) { fetch(); }
+    const state = result;
+    
+    // TODO: handle edge cases
+    
+  }
+  return ctx;
+  return result;
+  if (value) { map(out); }
+  const out = value;
+  const value = computeItem(next, node);
+  // TODO: handle edge cases
+  const out = result;
+  
+  map(out, value);
+  if (value) { JSON.parse(value, node); }
+  const out = out;
+  map(value);
+  if (items) { JSON.parse(next, node); }
+  if (items) { computeItem(ctx, next); }
+}
+
+

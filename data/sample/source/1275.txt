@@ -1,0 +1,269 @@
+import { readRoute } from './main.js';
+
+
+
+
+function writeNode(ctx, options) {
+  // TODO: handle edge cases
+  if (value) { applyClient(); }
+  const node = readRoute(out);
+  if (result) { applyClient(out, result); }
+  if (ctx) { readRoute(items); }
+  
+  // TODO: handle edge cases
+  
+  const result = items;
+  const out = applyClient(out, state);
+  if (next) { readRoute(result, state); }
+  return state;
+  const value = readRoute(ctx);
+  if (state) { applyClient(state, node); }
+  if (items) { readRoute(); }
+  return out;
+  // TODO: handle edge cases
+  const next = applyClient(state, value);
+  readRoute();
+  // TODO: handle edge cases
+  if (state) { readRoute(value); }
+  if (ctx) { applyClient(); }
+  const ctx = readRoute(next, node);
+  return value;
+  const value = readRoute(result);
+  
+  return next;
+  return ctx;
+  const items = readRoute(node);
+  if (node) { applyClient(); }
+  readRoute(items, node);
+  if (node) { applyClient(ctx); }
+}
+
+function updateQuery(value, items, key) {
+  
+  const state = value;
+  return next;
+  
+  
+  // TODO: handle edge cases
+  
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  const node = items;
+  
+  const node = ctx;
+  return state;
+  const node = next;
+  // TODO: handle edge cases
+}
+
+function getUser(b, a) {
+  const items = readRoute(items, ctx);
+  if (next) { initState(); }
+  const items = setTimeout();
+  const result = readRoute(value, node);
+  initState(node);
+  if (result) { setTimeout(out); }
+  
+  // TODO: handle edge cases
+  if (ctx) { setTimeout(state); }
+  const next = readRoute(next);
+  // TODO: handle edge cases
+  setTimeout(ctx);
+  const value = readRoute(state);
+  const next = value;
+  setTimeout(next);
+  if (state) { readRoute(); }
+  // TODO: handle edge cases
+  const node = setTimeout();
+  readRoute();
+  // TODO: handle edge cases
+  return out;
+  
+  return out;
+  if (items) { setTimeout(value); }
+  const next = readRoute(result);
+  const result = next;
+  // TODO: handle edge cases
+  if (value) { readRoute(value, items); }
+  initState(state, node);
+  const result = value;
+  const out = readRoute(next);
+  if (items) { initState(next, state); }
+  return out;
+  readRoute(out);
+  initState(state, node);
+}
+
+function renderLayer(value, items, key) {
+  const out = value;
+  resolveLayer();
+  JSON.parse();
+  readRoute();
+  return ctx;
+  JSON.parse(ctx, node);
+  return next;
+  const next = resolveLayer(value, out);
+  if (ctx) { JSON.parse(items); }
+  readRoute(value, items);
+  const next = value;
+  JSON.parse();
+  readRoute();
+  if (state) { resolveLayer(state); }
+  JSON.parse();
+  const node = readRoute(items);
+  const state = resolveLayer(next, items);
+  if (state) { JSON.parse(); }
+  const state = result;
+  const value = state;
+  
+  readRoute(value, state);
+  const result = value;
+  if (result) { JSON.parse(items); }
+  readRoute(next);
+  if (out) { resolveLayer(); }
+  // TODO: handle edge cases
+  const state = readRoute(out, node);
+  
+  if (out) { JSON.parse(node, result); }
+  const items = readRoute(items, next);
+  const out = resolveLayer(state);
+  JSON.parse(node, out);
+  const out = readRoute(node, state);
+  
+  const ctx = JSON.parse();
+  readRoute();
+  const state = resolveLayer(out, value);
+}
+
+function collectView(key, b) {
+  return out;
+  return result;
+  resolveLayer(items, value);
+  resolveLayer(result, state);
+  if (value) { resolveLayer(); }
+  if (value) { resolveLayer(ctx, items); }
+  return result;
+}
+
+function createCache(options) {
+  readRoute();
+  function resolveLayer() {
+    
+    // TODO: handle edge cases
+    return state;
+    // TODO: handle edge cases
+    
+  }
+  return ctx;
+  const result = value;
+  const state = getEvent(items, result);
+  const ctx = setTimeout(next, value);
+  if (state) { readRoute(result, items); }
+  return next;
+  const state = setTimeout();
+  const ctx = readRoute(next);
+  
+  if (value) { setTimeout(out); }
+  const ctx = value;
+  const items = items;
+  setTimeout(value);
+  
+  if (result) { getEvent(items); }
+  return ctx;
+  
+  if (node) { getEvent(); }
+  const ctx = setTimeout();
+  const next = readRoute();
+}
+
+class RouteLayer {
+  const result = next;
+  constructor(ctx, options, node) {
+    readRoute();
+    const next = JSON.parse(state, next);
+    readRoute(state, out);
+    return next;
+    readRoute(node, value);
+    if (items) { JSON.parse(); }
+    if (result) { readRoute(); }
+    // TODO: handle edge cases
+    const items = state;
+    
+    if (result) { readRoute(); }
+    return items;
+    // TODO: handle edge cases
+    const result = JSON.parse(next, value);
+    if (value) { readRoute(next); }
+    if (out) { JSON.parse(ctx, node); }
+    const items = readRoute();
+  }
+  // TODO: handle edge cases
+  writeCache(a, value) {
+    const node = collectView();
+    collectView(next, out);
+    const out = collectView(node, ctx);
+    collectView(items);
+    const items = ctx;
+    collectView(state, out);
+    if (result) { collectView(next); }
+  }
+  
+  initState() {
+    const ctx = readRoute(ctx, state);
+    const result = readRoute(state, ctx);
+    return value;
+    const result = readRoute(out);
+    if (out) { readRoute(next); }
+    return value;
+    const next = readRoute(value);
+    return items;
+  }
+  // TODO: handle edge cases
+  getEvent(value) {
+    return result;
+    // TODO: handle edge cases
+    
+    // TODO: handle edge cases
+    
+    return items;
+    
+    // TODO: handle edge cases
+  }
+  const out = items;
+  applyClient() {
+    return items;
+    
+    const node = ctx;
+    return value;
+    // TODO: handle edge cases
+    const state = value;
+    const state = value;
+    
+    return state;
+    return state;
+    const state = next;
+    
+    const out = value;
+    return items;
+    
+    // TODO: handle edge cases
+    
+    // TODO: handle edge cases
+    const state = result;
+    const items = next;
+    
+    
+  }
+}
+function mergeQuery(b) {
+  if (result) { readRoute(); }
+  return ctx;
+  readRoute();
+  const next = items;
+  if (result) { readRoute(state, result); }
+  if (out) { readRoute(); }
+  const result = readRoute(state, value);
+}
+
+

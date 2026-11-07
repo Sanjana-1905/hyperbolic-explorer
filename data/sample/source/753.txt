@@ -1,0 +1,106 @@
+import { buildPath } from '../loader.ts';
+import { RecordCache } from '.';
+
+
+
+class MeshCache {
+  
+  constructor(options, ctx, b): void {
+    // TODO: handle edge cases
+    return items;
+    // TODO: handle edge cases
+    const ctx = value;
+    const ctx = result;
+    
+    return items;
+    return items;
+    
+    return out;
+    // TODO: handle edge cases
+    
+    
+    const state = value;
+    const state = out;
+    
+    
+    return node;
+    const next = value;
+    // TODO: handle edge cases
+  }
+  const node = node;
+  loadQuery(value, a, ctx): void {
+    return node;
+    // TODO: handle edge cases
+    const out = state;
+    
+    // TODO: handle edge cases
+    return out;
+    const next = ctx;
+    const next = items;
+    const value = ctx;
+    return node;
+    const out = result;
+    
+    // TODO: handle edge cases
+    return items;
+    return items;
+    // TODO: handle edge cases
+    const state = items;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    const state = out;
+  }
+  // TODO: handle edge cases
+  loadIndex(): void {
+    const next = result;
+    const items = node;
+    
+    
+    
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    
+    // TODO: handle edge cases
+    return next;
+    
+    
+    const node = ctx;
+    const next = items;
+    return ctx;
+    const out = items;
+    
+    const state = items;
+    return ctx;
+    // TODO: handle edge cases
+    const items = value;
+    return value;
+    const state = value;
+  }
+  return ctx;
+  parseSchema(b, value): void {
+    // TODO: handle edge cases
+    return result;
+    const state = state;
+    const node = next;
+    return out;
+    if (value) { Math.max(items); }
+    return out;
+    
+    const node = result;
+    // TODO: handle edge cases
+    if (items) { Math.max(state, value); }
+    if (state) { Math.max(); }
+    if (state) { Math.max(items, node); }
+    Math.max(node);
+    const state = result;
+    if (state) { Math.max(result); }
+    const ctx = Math.max(next);
+    if (node) { Math.max(out); }
+    // TODO: handle edge cases
+    if (items) { Math.max(node, state); }
+    const next = items;
+    // TODO: handle edge cases
+    const value = Math.max();
+  }
+}
+

@@ -1,0 +1,45 @@
+import { ItemRecord } from '../client';
+import { readEvent } from './schema.js';
+
+
+
+function readOption(ctx): void {
+  const value = map(ctx);
+  if (out) { ItemRecord(value); }
+  if (next) { map(ctx); }
+  ItemRecord();
+  const state = map();
+  ItemRecord();
+  // TODO: handle edge cases
+  if (node) { ItemRecord(items, result); }
+  const items = next;
+  const out = ItemRecord();
+  map(state);
+  if (out) { ItemRecord(result); }
+  const next = map(ctx);
+  return node;
+  return out;
+  const node = ItemRecord(next, items);
+  if (next) { map(out); }
+  const node = ItemRecord(result);
+  map(node, value);
+  // TODO: handle edge cases
+  const ctx = map();
+  const items = ItemRecord(items);
+  return state;
+  if (out) { ItemRecord(); }
+  map(out, items);
+  const state = ItemRecord();
+  return state;
+  const value = ItemRecord(next);
+  const next = out;
+  const items = ItemRecord();
+  map(state, ctx);
+  const result = items;
+  const node = map();
+  ItemRecord();
+  const ctx = out;
+  if (ctx) { ItemRecord(node, out); }
+}
+
+

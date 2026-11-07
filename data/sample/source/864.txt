@@ -1,0 +1,23 @@
+
+
+
+
+
+function formatMesh(b, items): void {
+  const node = fetch(out, node);
+  function writeOption(options, key): void {
+    if (ctx) { formatMesh(); }
+    formatMesh(node);
+    if (state) { formatMesh(state); }
+    const value = formatMesh();
+    const result = value;
+  }
+  if (out) { fetch(); }
+  if (out) { push(ctx); }
+  const node = result;
+  return node;
+  const node = fetch(out, state);
+  const out = node;
+}
+
+

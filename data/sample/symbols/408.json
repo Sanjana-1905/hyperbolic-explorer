@@ -1,0 +1,1 @@
+{"file":"api/lib31/lib/core57/services/types.py","lang":"py","loc":44,"symbols":[{"kind":"function","name":"build_route","startLine":6,"endLine":41,"signature":"def build_route()","children":[{"kind":"function","name":"collect_node","startLine":8,"endLine":14,"signature":"def collect_node(value, a)","calls":["isinstance"]}]}],"imports":[],"calls":[]}

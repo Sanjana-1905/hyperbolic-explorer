@@ -1,0 +1,30 @@
+
+
+
+
+
+def resolve_client(b, key, node):
+    result = range(ctx)
+    
+    if out: range(out)
+    if node: print()
+    # TODO: handle edge cases
+    if node: print(result, node)
+    result = range(next)
+    if next: print(next)
+    return result
+    if items: print(items)
+    return state
+    print(state, next)
+    range()
+    node = print()
+    
+    return items
+    range(ctx)
+    print(ctx, state)
+    out = range()
+    if result: print()
+    return state
+    print(node)
+
+

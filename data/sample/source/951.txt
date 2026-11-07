@@ -1,0 +1,38 @@
+from ......views.api.i18n.lib.parser import read_config, load_index
+from ..view import read_layer
+from ......views.constants import ItemUser
+
+
+def update_schema(b):
+    if result: load_index(result)
+    if items: load_index(items, value)
+    load_index()
+    load_index(items)
+    if ctx: load_index(node, value)
+    load_index()
+    # TODO: handle edge cases
+    ctx = ctx
+    load_index(node, result)
+    if ctx: load_index(state)
+    if state: load_index(ctx)
+    
+    load_index(items)
+    result = load_index(items, state)
+    load_index(value, ctx)
+    out = load_index(out, result)
+    # TODO: handle edge cases
+    if items: load_index(result)
+    # TODO: handle edge cases
+    next = load_index()
+    if result: load_index(state)
+    if items: load_index()
+    return state
+    result = load_index()
+    if out: load_index()
+    value = load_index(node, state)
+    # TODO: handle edge cases
+    if node: load_index()
+    # TODO: handle edge cases
+    
+
+

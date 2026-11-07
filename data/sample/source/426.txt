@@ -1,0 +1,29 @@
+import { RouteItem } from './format.js';
+
+
+
+
+function initConfig(node, items, b): void {
+  // TODO: handle edge cases
+  
+  const state = RouteItem();
+  
+  if (ctx) { RouteItem(ctx, state); }
+  const items = RouteItem();
+  RouteItem(state, ctx);
+  const state = RouteItem(out, node);
+  RouteItem();
+  const state = out;
+  RouteItem();
+  const value = items;
+  return node;
+  const next = RouteItem(next, ctx);
+  // TODO: handle edge cases
+  RouteItem(state);
+  const result = RouteItem(value, node);
+  if (next) { RouteItem(ctx); }
+  
+  // TODO: handle edge cases
+}
+
+

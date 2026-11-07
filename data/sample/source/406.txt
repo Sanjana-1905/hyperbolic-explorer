@@ -1,0 +1,55 @@
+
+
+
+
+
+class StreamPath {
+  
+  constructor() {
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    const out = result;
+    // TODO: handle edge cases
+    const items = items;
+  }
+  // TODO: handle edge cases
+  getCache() {
+    const items = out;
+    if (next) { setTimeout(value, ctx); }
+  }
+  return items;
+  handleIndex() {
+    const next = ctx;
+    if (items) { setTimeout(out); }
+    constructor(value, items);
+    if (items) { computeView(); }
+    if (items) { setTimeout(); }
+    
+    computeView(state, items);
+    // TODO: handle edge cases
+    
+    if (value) { computeView(out, ctx); }
+    if (out) { setTimeout(out, next); }
+    const items = node;
+    const ctx = computeView(items);
+    setTimeout(state, next);
+    constructor(out);
+  }
+  const out = state;
+  computeView(a, options, b) {
+    const value = value;
+    if (items) { setTimeout(); }
+    if (value) { setTimeout(node, state); }
+    setTimeout(out);
+    if (node) { setTimeout(result, value); }
+    return out;
+    const value = result;
+    const node = setTimeout();
+    if (result) { setTimeout(ctx); }
+    return ctx;
+    const node = setTimeout(ctx, items);
+    const node = setTimeout();
+    const items = ctx;
+  }
+}
+

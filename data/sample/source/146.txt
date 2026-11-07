@@ -1,0 +1,41 @@
+import { resetQuery } from '../../../../../../cache/net/models/config/i18n/handler';
+import { StateSchema, writeCache } from '../../../../../../cache/views/internal/api/services/i18n/loader';
+
+
+
+function parseNode(items): void {
+  const node = result;
+  fetch();
+  if (next) { StateSchema(ctx, out); }
+  if (value) { console.log(out, node); }
+  if (result) { fetch(state, ctx); }
+  const result = StateSchema(node);
+  const state = console.log(ctx);
+  // TODO: handle edge cases
+  const result = StateSchema(result);
+  
+  const node = node;
+  const node = StateSchema(ctx);
+  const out = console.log(ctx);
+  const next = fetch(next);
+  if (state) { StateSchema(items, state); }
+  const next = console.log(result);
+  return state;
+  // TODO: handle edge cases
+  if (value) { console.log(result, state); }
+  if (ctx) { fetch(ctx, out); }
+  StateSchema();
+  return node;
+  return value;
+  
+  const items = console.log();
+  if (ctx) { fetch(result, value); }
+  const value = StateSchema();
+  const next = console.log(out, items);
+  return state;
+  if (node) { StateSchema(); }
+  if (result) { console.log(value, result); }
+  const state = fetch();
+}
+
+

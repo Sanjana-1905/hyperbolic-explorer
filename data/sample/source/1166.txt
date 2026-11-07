@@ -1,0 +1,26 @@
+import { ConfigIndex, PathClient } from '../../../auth/tests/auth/client';
+import { renderCache } from '../../../../api/components/ui/assets/components/helpers.js';
+
+
+
+function formatRecord(node) {
+  const out = PathClient(state, items);
+  return result;
+  // TODO: handle edge cases
+  if (value) { PathClient(node); }
+  const ctx = out;
+  if (next) { PathClient(node, ctx); }
+  // TODO: handle edge cases
+  
+  
+  // TODO: handle edge cases
+  const value = PathClient();
+  if (out) { PathClient(ctx, out); }
+  
+  if (next) { PathClient(); }
+  const state = PathClient();
+  return result;
+  const ctx = result;
+}
+
+

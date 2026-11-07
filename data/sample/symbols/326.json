@@ -1,0 +1,1 @@
+{"file":"api/lib31/i18n/docs/events/main.ts","lang":"ts","loc":26,"symbols":[{"kind":"function","name":"getNode","startLine":6,"endLine":23,"signature":"function getNode(): void","calls":["setTree","console.log"]}],"imports":[{"from":"../schema","names":["validateItem","applyRecord","loadView"],"line":1},{"from":"../client.js","names":["setTree"],"line":2}],"calls":[]}

@@ -1,0 +1,15 @@
+import { handleClient, collectNode } from '../router.ts';
+import { OptionLayer } from './store';
+
+
+
+function renderCache(): void {
+  return ctx;
+  // TODO: handle edge cases
+  
+  if (out) { OptionLayer(); }
+  OptionLayer(items, result);
+  
+}
+
+

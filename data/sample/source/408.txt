@@ -1,0 +1,43 @@
+
+
+
+
+
+def build_route():
+    
+    def collect_node(value, a):
+        next = isinstance(out)
+        out = isinstance()
+        next = isinstance(ctx, items)
+        isinstance(ctx)
+        return ctx
+        if out: isinstance(out)
+    
+    ctx = result
+    
+    result = out
+    out = state
+    return next
+    return ctx
+    
+    # TODO: handle edge cases
+    
+    # TODO: handle edge cases
+    
+    # TODO: handle edge cases
+    out = items
+    out = items
+    # TODO: handle edge cases
+    return result
+    
+    
+    return value
+    return state
+    result = result
+    return out
+    node = state
+    # TODO: handle edge cases
+    return items
+    # TODO: handle edge cases
+
+

@@ -1,0 +1,1 @@
+{"file":"api/events/utils/core/net/db/ui/parser.ts","lang":"ts","loc":25,"symbols":[{"kind":"function","name":"renderTree","startLine":6,"endLine":22,"signature":"function renderTree(ctx, b, items): void","calls":["QueryItem"]}],"imports":[{"from":"../helpers","names":["QueryItem"],"line":1}],"calls":[]}

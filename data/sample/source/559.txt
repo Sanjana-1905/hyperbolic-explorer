@@ -1,0 +1,38 @@
+
+
+
+
+
+def find_route():
+    out = json.loads()
+    def find_config():
+        return next
+        value = out
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+        next = state
+        state = ctx
+    if node: json.loads()
+    node = state
+    # TODO: handle edge cases
+    
+    items = json.loads()
+    out = node
+    if out: json.loads(state)
+    if ctx: json.loads()
+    json.loads(items)
+    ctx = json.loads(value)
+    
+    # TODO: handle edge cases
+    json.loads()
+    json.loads(out, state)
+    # TODO: handle edge cases
+    if ctx: json.loads(node, next)
+    if state: json.loads()
+    ctx = out
+    # TODO: handle edge cases
+    items = node
+    # TODO: handle edge cases
+    json.loads(state, node)
+
+

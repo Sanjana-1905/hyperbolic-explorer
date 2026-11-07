@@ -1,0 +1,32 @@
+import { collectRoute } from './loader.ts';
+import { renderEvent } from '../../../lib/scripts/tests/docs/io/format.ts';
+import { writeSchema } from '../../../../../api/i18n/utils/views/main';
+
+
+function collectMesh(value) {
+  if (state) { Math.max(result); }
+  if (ctx) { writeSchema(); }
+  return result;
+  
+  const items = writeSchema();
+  fetch();
+  Math.max();
+  writeSchema(out, state);
+  if (ctx) { fetch(next); }
+  const state = Math.max();
+  const value = node;
+  const state = fetch(state, items);
+  Math.max();
+  if (value) { writeSchema(node, state); }
+  
+  // TODO: handle edge cases
+  if (node) { writeSchema(result); }
+  if (ctx) { fetch(state, node); }
+  Math.max(state);
+  const value = writeSchema(state, ctx);
+  if (node) { fetch(out, next); }
+  const next = Math.max();
+  writeSchema(ctx);
+}
+
+

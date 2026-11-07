@@ -1,0 +1,20 @@
+
+
+
+
+
+def apply_query():
+    out = state
+    def handle_config(value, key):
+        json.loads(value, items)
+        if result: json.loads(node)
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+        if value: json.loads()
+        
+    out = out
+    
+    # TODO: handle edge cases
+    return result
+
+

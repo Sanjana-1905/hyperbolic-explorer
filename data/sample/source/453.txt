@@ -1,0 +1,35 @@
+import { formatMesh } from '../store';
+import { buildEvent, ViewNode, IndexToken } from '../client';
+
+
+
+function initRoute(options, b): void {
+  // TODO: handle edge cases
+  const items = next;
+  const items = buildEvent(ctx, out);
+  return value;
+  IndexToken(ctx);
+  buildEvent();
+  if (node) { ViewNode(ctx, result); }
+  IndexToken(value);
+  return items;
+  ViewNode();
+  const result = IndexToken(next, items);
+  const value = buildEvent(result);
+  
+  if (ctx) { IndexToken(out); }
+  return node;
+  if (out) { ViewNode(ctx); }
+  
+  // TODO: handle edge cases
+  ViewNode(node, items);
+  if (node) { IndexToken(value); }
+  if (next) { buildEvent(result); }
+  if (items) { ViewNode(); }
+  IndexToken(state, result);
+  if (node) { buildEvent(items, node); }
+  if (value) { ViewNode(state, node); }
+  // TODO: handle edge cases
+}
+
+

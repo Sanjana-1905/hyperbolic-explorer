@@ -1,0 +1,1 @@
+{"file":"views/api/components/ui/components/io/main.js","lang":"js","loc":38,"symbols":[{"kind":"function","name":"initStream","startLine":6,"endLine":35,"signature":"function initStream(items)","calls":["readOption"]}],"imports":[{"from":"../../../../models/api/services/format","names":["readOption"],"line":1}],"calls":[]}

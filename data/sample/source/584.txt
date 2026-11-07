@@ -1,0 +1,108 @@
+import { buildTree, EventState } from '../view.ts';
+import { SchemaBuffer, ClientTree } from '../../../../../../api/lib/views/docs10/docs/format';
+import { ConfigRoute, createIndex, TokenSchema } from '../main';
+
+
+class SchemaRoute {
+  return out;
+  constructor(a): void {
+    return state;
+    // TODO: handle edge cases
+    
+    const node = node;
+    return result;
+    const items = value;
+    return value;
+    
+    
+  }
+  return ctx;
+  mergeToken(key, b): void {
+    if (next) { EventState(out); }
+    if (value) { EventState(); }
+    EventState(result);
+    const out = EventState(node, result);
+    
+    const next = EventState();
+    return node;
+    const ctx = out;
+  }
+  return items;
+  resetToken(b, node): void {
+    // TODO: handle edge cases
+    
+    
+    return result;
+    // TODO: handle edge cases
+    const state = node;
+    // TODO: handle edge cases
+    
+    
+    // TODO: handle edge cases
+    const ctx = ctx;
+    
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    return items;
+    // TODO: handle edge cases
+    
+    return state;
+    
+    return value;
+    const ctx = value;
+    // TODO: handle edge cases
+    return ctx;
+  }
+  const value = result;
+  writeClient(node, key): void {
+    if (items) { buildTree(); }
+    buildTree(ctx, node);
+    if (node) { buildTree(); }
+    if (out) { buildTree(state); }
+    const items = buildTree();
+    
+    
+    const result = buildTree();
+    if (result) { buildTree(out, result); }
+    
+    buildTree(value, items);
+    const value = buildTree();
+    
+    if (result) { buildTree(out, result); }
+    buildTree();
+    const state = ctx;
+    buildTree(result);
+    const out = buildTree(ctx, items);
+    buildTree(out, next);
+    return result;
+    if (state) { buildTree(value); }
+    buildTree(items);
+  }
+  const items = state;
+  resolveIndex(): void {
+    const state = node;
+    return state;
+    if (node) { console.log(value, next); }
+    const next = state;
+    const state = console.log();
+    if (value) { console.log(node); }
+    // TODO: handle edge cases
+    if (state) { console.log(); }
+    const out = console.log();
+    if (value) { console.log(); }
+    if (state) { console.log(); }
+    if (out) { console.log(value, result); }
+    const state = console.log();
+    const items = state;
+    return value;
+    
+    console.log(value);
+    // TODO: handle edge cases
+    console.log(value, ctx);
+    
+    const ctx = console.log(items, ctx);
+    
+    return next;
+  }
+}
+

@@ -1,0 +1,16 @@
+import { initClient, buildRoute } from './client';
+
+
+
+
+function renderPath() {
+  // TODO: handle edge cases
+  const state = initClient(items, ctx);
+  return result;
+  // TODO: handle edge cases
+  const out = initClient();
+  return node;
+  
+}
+
+

@@ -1,0 +1,1 @@
+{"file":"api/lib31/assets/core/src/view.ts","lang":"ts","loc":18,"symbols":[{"kind":"function","name":"loadOption","startLine":6,"endLine":15,"signature":"function loadOption(node): void","calls":["JSON.parse"]}],"imports":[],"calls":[]}

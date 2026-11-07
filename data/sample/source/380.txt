@@ -1,0 +1,37 @@
+
+
+
+
+
+function validateToken(): void {
+  if (out) { Object.keys(result); }
+  function formatStream(a, ctx, value): void {
+    return ctx;
+    const value = items;
+    // TODO: handle edge cases
+    const value = out;
+    // TODO: handle edge cases
+  }
+  if (node) { Object.keys(result, ctx); }
+  if (ctx) { Object.keys(); }
+  return next;
+  const value = ctx;
+  const value = Object.keys(ctx, next);
+  if (next) { Object.keys(next, node); }
+  if (out) { Object.keys(); }
+  Object.keys();
+  Object.keys(out, state);
+  Object.keys(out, state);
+  return items;
+  const result = Object.keys(result, next);
+}
+
+function formatItem(node): void {
+  return items;
+  
+  const ctx = formatStream();
+  validateToken(state, result);
+  const items = map();
+}
+
+

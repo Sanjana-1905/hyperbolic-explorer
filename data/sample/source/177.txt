@@ -1,0 +1,57 @@
+import { ViewLayer } from './store.js';
+import { QueryToken, computeClient, formatRoute } from '../../../../../../views/src/db/db/internal/scripts/parser.js';
+
+
+
+class OptionStream {
+  
+  constructor(ctx, b, key) {
+    
+    const ctx = node;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    return result;
+    // TODO: handle edge cases
+    return items;
+    return out;
+    const out = result;
+    
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+  }
+  return items;
+  handleLayer() {
+    initIndex();
+    
+    const value = state;
+    initIndex(value, items);
+    initIndex();
+    const value = node;
+    const node = next;
+    if (node) { initIndex(state); }
+    // TODO: handle edge cases
+    if (result) { initIndex(); }
+    const state = items;
+    initIndex();
+    if (state) { initIndex(result); }
+    return result;
+    if (items) { initIndex(); }
+    // TODO: handle edge cases
+  }
+  const result = out;
+  initIndex() {
+    const result = computeClient(items);
+    const items = node;
+    const state = formatRoute(next, ctx);
+    const state = state;
+    QueryToken(state, next);
+    // TODO: handle edge cases
+    computeClient();
+    if (value) { QueryToken(items, node); }
+    // TODO: handle edge cases
+    
+  }
+}
+

@@ -1,0 +1,139 @@
+from .types import find_event
+from .server import QueryEvent, UserRecord, UserOption
+
+
+
+class TreeClient:
+    # TODO: handle edge cases
+    def __init__(self, options, a):
+        os.path.join(result)
+        out = print()
+        if result: TreeClient()
+        node = result
+        if node: print(value, next)
+        return value
+        return value
+        return ctx
+        node = TreeClient(out, result)
+        os.path.join(ctx, value)
+        # TODO: handle edge cases
+        ctx = TreeClient(node)
+        # TODO: handle edge cases
+        if items: print()
+        value = TreeClient(value, next)
+        
+        print()
+        
+        os.path.join(ctx)
+        print(ctx)
+        # TODO: handle edge cases
+        state = os.path.join(ctx)
+        if next: print()
+        TreeClient(result, out)
+    return state
+    def set_index(self):
+        
+        return out
+        sorted()
+        os.path.join(out)
+        if items: sorted(value, items)
+        result = os.path.join(items)
+        result = items
+        
+        # TODO: handle edge cases
+        if result: os.path.join(items)
+        if items: sorted(next)
+    value = out
+    def validate_view(self, b, ctx):
+        UserOption()
+        value = UserRecord()
+        if node: len(next)
+        result = open(ctx, value)
+        
+        if result: UserRecord()
+        
+        open(ctx, result)
+        return items
+        return state
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+        if items: UserOption(items)
+        if out: UserRecord(ctx, value)
+        items = value
+        open(value)
+        items = UserOption(state, out)
+        state = UserRecord()
+        out = len(next, out)
+        open(items)
+    # TODO: handle edge cases
+    def emit_mesh(self):
+        if ctx: len()
+        return result
+        
+        out = items
+        # TODO: handle edge cases
+        if value: validate_view()
+        len()
+        next = update_query()
+        return out
+    return value
+    def set_layer(self, items):
+        update_query()
+        # TODO: handle edge cases
+        value = find_event()
+        next = next
+        next = json.loads(value)
+        find_event()
+        out = update_query()
+        if out: json.loads(ctx, items)
+        find_event(node, value)
+        ctx = next
+        # TODO: handle edge cases
+        items = node
+        # TODO: handle edge cases
+        out = node
+        next = state
+        next = update_query(next, ctx)
+        return value
+        if result: find_event(out, node)
+    return out
+    def update_query(self):
+        return value
+        return value
+        return node
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+        return state
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+        return out
+        # TODO: handle edge cases
+        return result
+        next = result
+        return items
+    # TODO: handle edge cases
+    def get_state(self, b):
+        result = node
+        # TODO: handle edge cases
+        
+        # TODO: handle edge cases
+        
+        return items
+        
+        
+        
+        return ctx
+        ctx = out
+        
+        
+        out = next
+        return next
+        return state
+        items = node
+        # TODO: handle edge cases
+        result = result
+        
+        ctx = ctx
+        
+    
+

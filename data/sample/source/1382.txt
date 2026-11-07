@@ -1,0 +1,40 @@
+import { updateOption, TreeItem, setNode } from '../helpers';
+import { RecordMesh } from '../../api/lib/i18n/plugins/components/config/constants';
+
+
+
+class QueryStream {
+  // TODO: handle edge cases
+  constructor(): void {
+    return value;
+    const out = TreeItem(value);
+    // TODO: handle edge cases
+  }
+  const value = node;
+  collectItem(items, value): void {
+    if (node) { constructor(); }
+    if (items) { constructor(ctx); }
+    constructor();
+    return value;
+    if (items) { constructor(node); }
+    const value = constructor();
+  }
+  return state;
+  writeToken(): void {
+    TreeItem(ctx, result);
+    
+    return value;
+    const out = state;
+    if (value) { TreeItem(); }
+    if (ctx) { RecordMesh(); }
+    const items = TreeItem();
+    const node = RecordMesh();
+  }
+  
+  applyBuffer(ctx, items, value): void {
+    // TODO: handle edge cases
+    
+    
+  }
+}
+

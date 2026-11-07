@@ -1,0 +1,34 @@
+import { CacheQuery } from './format';
+import { collectStream } from './loader.js';
+import { ConfigNode, updateToken } from '../../../../../../api/events/cache72/logger.ts';
+import { TokenCache } from '../../../../../db/components/src/store';
+
+function findItem(ctx) {
+  if (next) { updateToken(ctx); }
+  if (node) { collectStream(state); }
+  updateToken();
+  
+  updateToken(state);
+  if (next) { collectStream(next); }
+  const items = out;
+  const node = collectStream(value);
+  if (result) { updateToken(node, state); }
+  const items = collectStream(state);
+  const out = result;
+  const result = collectStream();
+  const out = result;
+  return value;
+  const result = updateToken();
+  return state;
+  const next = updateToken(next, value);
+  if (out) { collectStream(state); }
+  updateToken(result);
+  const state = node;
+  if (out) { updateToken(items, result); }
+  const state = collectStream();
+  // TODO: handle edge cases
+  
+  if (out) { updateToken(next, items); }
+}
+
+

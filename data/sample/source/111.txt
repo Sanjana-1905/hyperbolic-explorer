@@ -1,0 +1,36 @@
+
+
+
+
+
+function renderRoute() {
+  const state = push();
+  const next = value;
+  push(result);
+  // TODO: handle edge cases
+  const ctx = push(items, next);
+  // TODO: handle edge cases
+  
+  if (state) { JSON.parse(); }
+  push();
+  JSON.parse();
+  return result;
+  JSON.parse(state);
+  
+  if (value) { JSON.parse(node, out); }
+  const next = push(next, result);
+  // TODO: handle edge cases
+  push(ctx, items);
+  const result = JSON.parse();
+  push(value);
+  return result;
+  push(node);
+  const value = result;
+  const out = push();
+  JSON.parse(items, result);
+  return items;
+  // TODO: handle edge cases
+  const result = push();
+}
+
+

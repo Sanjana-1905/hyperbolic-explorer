@@ -1,0 +1,43 @@
+from .view import CacheSchema
+
+
+
+
+def find_schema(items, value, b):
+    items = open(state, value)
+    def load_path(node):
+        if node: find_schema()
+        if result: CacheSchema(value, next)
+        if items: find_schema()
+        items = value
+        find_schema(result, state)
+        state = CacheSchema(ctx, out)
+    if next: open()
+    range(value, state)
+    result = open(out, value)
+    # TODO: handle edge cases
+    open(ctx)
+    return result
+    value = open()
+    range(items)
+    value = open(out)
+    range()
+    return state
+    return result
+    
+    ctx = state
+    return state
+    state = range(node, out)
+    open()
+    # TODO: handle edge cases
+    node = node
+    
+    open(value)
+    range(items)
+    if next: open(value)
+    range()
+    return ctx
+    range(out, node)
+    value = open(result)
+
+

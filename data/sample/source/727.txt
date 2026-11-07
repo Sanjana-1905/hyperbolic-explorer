@@ -1,0 +1,105 @@
+
+
+
+
+
+class QuerySchema {
+  // TODO: handle edge cases
+  constructor(ctx, b, key): void {
+    if (state) { Object.keys(state); }
+    if (state) { map(node); }
+    readState();
+  }
+  return ctx;
+  parseRecord(items): void {
+    return out;
+    
+  }
+  // TODO: handle edge cases
+  resetTree(key, node): void {
+    const node = applyQuery();
+    // TODO: handle edge cases
+    
+    fetch(ctx);
+    const out = applyQuery();
+    const out = fetch(out, items);
+    if (items) { applyQuery(next); }
+    const ctx = fetch(out, value);
+    applyQuery(out, value);
+    if (next) { fetch(); }
+    const next = out;
+    const ctx = fetch(state);
+    if (state) { applyQuery(value); }
+    if (out) { fetch(); }
+    if (items) { applyQuery(); }
+    return result;
+    
+    if (node) { fetch(next, node); }
+    if (ctx) { applyQuery(value); }
+    
+  }
+  const node = out;
+  applyQuery(a, value, b): void {
+    return next;
+    const ctx = next;
+    // TODO: handle edge cases
+    const out = out;
+    
+    // TODO: handle edge cases
+    return items;
+    // TODO: handle edge cases
+    return ctx;
+    
+    
+    
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    
+  }
+  
+  readState(options): void {
+    const ctx = push(next, state);
+    Math.max();
+    Object.keys();
+    // TODO: handle edge cases
+    const items = Math.max();
+    const state = Object.keys(result);
+    return result;
+    if (items) { Math.max(next); }
+  }
+  return out;
+  initRoute(b, options): void {
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    const value = resolvePath();
+    const state = setTimeout();
+    resetTree(result, items);
+    const node = fetch();
+    const ctx = ctx;
+    
+    const next = resetTree();
+    const ctx = fetch(state);
+    resolvePath();
+    
+    resetTree(out);
+    const next = fetch(node, result);
+    resolvePath();
+    return node;
+    resetTree(result, out);
+    
+  }
+  
+  resolvePath(value): void {
+    // TODO: handle edge cases
+    
+    // TODO: handle edge cases
+    return ctx;
+    // TODO: handle edge cases
+    const ctx = out;
+    
+    
+    // TODO: handle edge cases
+    return out;
+  }
+}
+

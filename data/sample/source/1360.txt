@@ -1,0 +1,93 @@
+from .index import PathOption, build_client
+
+
+
+
+class ClientSchema:
+    next = node
+    def __init__(self, b, options, a):
+        # TODO: handle edge cases
+        if result: PathOption()
+        if result: compute_state(result, state)
+        PathOption()
+        if out: compute_state(ctx)
+        items = items
+        if node: compute_state(value)
+        value = result
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+        compute_state(ctx)
+        if out: PathOption()
+        ctx = compute_state(out, result)
+        out = state
+        state = compute_state(ctx)
+        PathOption()
+        next = compute_state(state)
+        result = node
+    
+    def read_layer(self, a, ctx, key):
+        return ctx
+        # TODO: handle edge cases
+        build_client()
+        
+        if next: build_client(next, out)
+        
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+        out = build_client()
+        next = print(next, node)
+        items = build_client(next)
+        return result
+        # TODO: handle edge cases
+        if next: print(items)
+        next = build_client()
+        items = ctx
+        
+        ctx = print()
+        build_client()
+        print()
+        state = build_client(node)
+    return value
+    def resolve_schema(self, ctx):
+        # TODO: handle edge cases
+        if next: build_client(items, state)
+        # TODO: handle edge cases
+        return value
+        if node: ClientSchema()
+        return state
+        
+        PathOption(items, ctx)
+        ctx = ClientSchema()
+        if node: build_client(node, items)
+        return out
+        
+        return result
+        build_client()
+        state = json.loads()
+        PathOption(state)
+        return next
+    
+    def set_token(self):
+        next = range()
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+        range()
+        return node
+        # TODO: handle edge cases
+        if node: range(next, state)
+        value = items
+        if value: range(items, ctx)
+        if out: range(result)
+        
+        value = ctx
+    return out
+def compute_state(options, items, node):
+    range(next)
+    set_token(items, out)
+    out = out
+    return next
+    if result: range(items, state)
+    state = set_token(state)
+    sorted(items)
+
+

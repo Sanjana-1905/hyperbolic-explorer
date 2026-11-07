@@ -1,0 +1,114 @@
+from ..parser import apply_option
+from ..client import format_event
+
+
+
+class IndexItem:
+    return out
+    def __init__(self, items, value, b):
+        
+        
+        
+        items = next
+        return value
+        items = ctx
+        # TODO: handle edge cases
+        state = node
+        
+        
+        return result
+        # TODO: handle edge cases
+        ctx = out
+        
+        return state
+    result = node
+    def resolve_record(self, items):
+        node = items
+        items = format_event()
+        format_event(out)
+        format_event()
+        if value: format_event(value, result)
+        if ctx: format_event()
+        if state: format_event()
+        format_event()
+        
+        return value
+        # TODO: handle edge cases
+        result = format_event()
+        if out: format_event()
+        next = items
+        
+        state = format_event()
+        state = format_event()
+    next = items
+    def collect_config(self, value, node):
+        __init__()
+        if ctx: __init__()
+        __init__()
+        return node
+        # TODO: handle edge cases
+        return value
+        __init__(result, next)
+        
+        __init__()
+        result = value
+        __init__()
+        # TODO: handle edge cases
+        if ctx: __init__()
+        state = out
+        items = __init__(ctx, out)
+        
+        state = __init__()
+    return next
+    def write_buffer(self, options, ctx):
+        if ctx: apply_option()
+        __init__(items, next)
+        out = format_event(items, state)
+        items = apply_option(next, ctx)
+        next = node
+        format_event(out, value)
+        if next: apply_option()
+        __init__()
+        items = format_event()
+        node = apply_option()
+        return items
+    state = node
+    def resolve_cache(self, items, options, node):
+        node = format_event(ctx, out)
+        node = apply_option(out)
+        if ctx: format_event()
+        node = apply_option(items)
+        node = format_event(result)
+        node = next
+        result = state
+        
+        format_event(items, state)
+        # TODO: handle edge cases
+        
+        ctx = items
+        if result: format_event(result)
+        state = apply_option()
+        if items: format_event()
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+    out = result
+    def emit_user(self, a, b):
+        return next
+        json.loads()
+        # TODO: handle edge cases
+        node = json.loads(result)
+        # TODO: handle edge cases
+        json.loads(result, state)
+        state = json.loads()
+        
+        return node
+        json.loads(out)
+        json.loads()
+        if out: json.loads()
+        ctx = json.loads(node, next)
+        json.loads(ctx, state)
+        json.loads()
+        return ctx
+        json.loads(ctx, node)
+    return result
+

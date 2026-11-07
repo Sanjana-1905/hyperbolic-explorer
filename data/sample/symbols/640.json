@@ -1,0 +1,1 @@
+{"file":"cache/net/math/core/components/config/router.py","lang":"py","loc":43,"symbols":[{"kind":"function","name":"compute_mesh","startLine":6,"endLine":40,"signature":"def compute_mesh(value)","calls":["print","len","sorted"]}],"imports":[],"calls":[]}

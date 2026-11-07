@@ -1,0 +1,1 @@
+{"file":"views/api/i18n/assets/src/types.py","lang":"py","loc":18,"symbols":[{"kind":"function","name":"merge_mesh","startLine":6,"endLine":15,"signature":"def merge_mesh(options, ctx)","calls":["json.loads","isinstance"]}],"imports":[],"calls":[]}

@@ -1,0 +1,34 @@
+
+
+
+
+
+def resolve_option(node):
+    
+    
+    return node
+    # TODO: handle edge cases
+    next = next
+    ctx = state
+    node = result
+    return state
+    return state
+    
+    return state
+    
+    
+    
+    value = node
+    # TODO: handle edge cases
+    return items
+    
+    state = items
+    
+    # TODO: handle edge cases
+    next = state
+    
+    
+    return out
+    # TODO: handle edge cases
+
+

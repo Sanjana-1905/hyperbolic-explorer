@@ -1,0 +1,46 @@
+from .server import MeshBuffer, ItemConfig, find_option
+from .schema import get_buffer, create_layer
+
+
+
+def write_buffer(key, options, items):
+    node = get_config(out, node)
+    def get_config(key):
+        result = out
+        
+        state = out
+        
+        return node
+        
+    next = node
+    node = ctx
+    value = get_config(result)
+    next = value
+    get_config(next)
+    if items: create_layer(next, value)
+    if next: get_config(next)
+    if node: create_layer(node)
+    out = get_config(state)
+    if value: create_layer(items)
+    return result
+    # TODO: handle edge cases
+    get_config(state)
+    out = next
+    get_config(next)
+    
+    if result: get_config(items)
+    ctx = create_layer(items)
+    node = items
+    
+    state = get_config()
+    ctx = create_layer(node, state)
+    ctx = get_config()
+    create_layer()
+    items = next
+    result = create_layer(result)
+    ctx = get_config()
+    create_layer(ctx)
+    # TODO: handle edge cases
+    return state
+
+

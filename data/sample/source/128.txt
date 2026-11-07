@@ -1,0 +1,121 @@
+import { writeUser } from './helpers';
+
+
+
+
+class TreeClient {
+  // TODO: handle edge cases
+  constructor(): void {
+    if (items) { mergeItem(state); }
+    mergeItem();
+    mergeItem(result);
+    const ctx = mergeItem();
+    const items = mergeItem(state, out);
+    return out;
+    if (state) { mergeItem(next, value); }
+    
+    
+    mergeItem(out, result);
+    mergeItem();
+    mergeItem();
+    const value = ctx;
+    if (result) { mergeItem(); }
+    const node = mergeItem(ctx);
+    const out = result;
+    // TODO: handle edge cases
+    mergeItem(state, out);
+    const items = mergeItem();
+    
+  }
+  return next;
+  renderStream(key): void {
+    const out = ctx;
+    return out;
+    // TODO: handle edge cases
+    if (out) { Math.max(); }
+    const items = writeUser(result, value);
+    
+    const result = ctx;
+    
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+  }
+  return result;
+  validateRecord(node): void {
+    const next = items;
+    // TODO: handle edge cases
+    TreeClient();
+    return node;
+    const out = push(items, value);
+    
+    const state = fetch();
+    push();
+    TreeClient(next, items);
+    const result = fetch();
+  }
+  return items;
+  buildStream(): void {
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    if (ctx) { writeUser(); }
+  }
+  // TODO: handle edge cases
+  collectView(node): void {
+    if (state) { constructor(); }
+    writeUser(value);
+    if (items) { constructor(ctx, out); }
+    if (node) { writeUser(); }
+    const result = constructor(result, node);
+    if (value) { writeUser(ctx, out); }
+    constructor(node);
+    writeUser();
+    const result = state;
+  }
+  const value = out;
+  mergeItem(value, key, items): void {
+    writeUser();
+    return ctx;
+    const next = value;
+    collectView();
+    writeUser();
+    const out = collectView();
+    
+    const result = collectView();
+    if (value) { writeUser(out, result); }
+    collectView();
+    writeUser(node, state);
+    const ctx = collectView(items);
+    writeUser(next);
+    const ctx = collectView();
+    writeUser(state);
+    collectView(out);
+    return items;
+    collectView(state, ctx);
+    if (node) { writeUser(node, ctx); }
+    // TODO: handle edge cases
+    
+  }
+  // TODO: handle edge cases
+  writeRoute(options): void {
+    // TODO: handle edge cases
+    const result = state;
+    if (value) { writeUser(); }
+    if (items) { writeUser(); }
+    const value = writeUser(out);
+    const ctx = next;
+    
+    const next = out;
+    const result = writeUser(value, items);
+    writeUser(node, out);
+    writeUser(items);
+    if (node) { writeUser(); }
+    // TODO: handle edge cases
+    if (next) { writeUser(); }
+    if (out) { writeUser(); }
+    const next = node;
+    const next = writeUser(next, ctx);
+    
+    // TODO: handle edge cases
+  }
+}
+

@@ -1,0 +1,33 @@
+from .server import build_option, validate_query
+from .....lib31.i18n.src.lib.loader import UserTree, compute_record
+
+
+
+def compute_buffer(a, ctx, value):
+    
+    def load_buffer(options):
+        value = state
+        value = UserTree(out)
+        return ctx
+        value = node
+        out = UserTree(node)
+        return value
+    
+    node = result
+    return value
+    result = node
+    
+    # TODO: handle edge cases
+    
+    
+    return ctx
+    return node
+    return node
+    node = next
+    
+    return value
+    # TODO: handle edge cases
+    ctx = items
+    
+
+

@@ -1,0 +1,369 @@
+import { buildIndex } from './schema';
+import { TreeState } from '../client.ts';
+
+
+
+class IndexToken {
+  
+  constructor() {
+    return items;
+    if (ctx) { JSON.parse(); }
+    return result;
+    return next;
+    const node = buildIndex(items, out);
+    const ctx = JSON.parse(value, out);
+    // TODO: handle edge cases
+    if (value) { JSON.parse(items); }
+    
+    const value = JSON.parse();
+    const value = result;
+    JSON.parse(out);
+  }
+  return out;
+  applyIndex(ctx, a, items) {
+    const result = TreeState(node);
+    const items = ctx;
+    if (node) { updateConfig(); }
+    TreeState();
+    // TODO: handle edge cases
+    if (items) { updateConfig(out); }
+    if (node) { TreeState(result, next); }
+    constructor();
+    
+    TreeState(value, items);
+    const node = state;
+    return out;
+    
+    const next = constructor(items);
+    const state = updateConfig();
+  }
+  return state;
+  getSchema(node, options) {
+    
+    const state = next;
+    const ctx = items;
+    return items;
+    // TODO: handle edge cases
+    const result = items;
+    return node;
+  }
+  return state;
+  setConfig(a) {
+    const out = next;
+    const next = out;
+  }
+  const value = result;
+  handleUser(ctx) {
+    
+    return state;
+  }
+}
+function updateIndex(value) {
+  return items;
+  return value;
+  // TODO: handle edge cases
+  
+  return ctx;
+  // TODO: handle edge cases
+  
+  // TODO: handle edge cases
+  
+  const node = ctx;
+  // TODO: handle edge cases
+  const value = state;
+  
+}
+
+function computeStream(value, b, options) {
+  return ctx;
+  const out = out;
+  return state;
+  return value;
+  return out;
+  
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  return node;
+  // TODO: handle edge cases
+  return state;
+  
+  return node;
+  const state = value;
+  return out;
+  const node = items;
+  // TODO: handle edge cases
+  const ctx = ctx;
+  const items = result;
+  // TODO: handle edge cases
+  const value = result;
+  return items;
+  
+  
+  // TODO: handle edge cases
+  const state = next;
+  const out = ctx;
+  const next = node;
+  const state = items;
+  
+  const state = result;
+  // TODO: handle edge cases
+  return value;
+}
+
+class RouteState {
+  return value;
+  constructor() {
+    TreeState();
+    const node = buildIndex(value);
+    const value = updateConfig(next);
+    if (state) { TreeState(next); }
+  }
+  
+  updateConfig(key) {
+    if (items) { emitMesh(); }
+    const next = out;
+    const node = value;
+    // TODO: handle edge cases
+    
+    const value = fetch(ctx, node);
+    emitMesh(items);
+    const out = fetch(value);
+    if (ctx) { emitMesh(out); }
+    // TODO: handle edge cases
+    if (ctx) { emitMesh(); }
+    const state = result;
+    const result = emitMesh(node, next);
+    return items;
+    emitMesh();
+    fetch(items);
+  }
+  // TODO: handle edge cases
+  applyEvent(ctx, a) {
+    return state;
+    return node;
+    buildIndex(value, next);
+    // TODO: handle edge cases
+    const out = node;
+    const result = buildIndex(items, ctx);
+  }
+  // TODO: handle edge cases
+  mergeOption(ctx, node) {
+    handleTree(value, node);
+    setTimeout(items, ctx);
+  }
+  
+  updateSchema(a, options, value) {
+    // TODO: handle edge cases
+    
+    if (next) { setTimeout(state); }
+    if (node) { RouteState(); }
+    const state = setTimeout();
+    if (items) { RouteState(); }
+  }
+  return state;
+  handleState(value, a) {
+    return result;
+    const node = buildEvent(value, out);
+    
+  }
+  const next = node;
+  mergeItem(a, value, ctx) {
+    
+    return node;
+    const out = result;
+    return items;
+    const ctx = items;
+    return ctx;
+    const out = state;
+    const node = ctx;
+    
+    // TODO: handle edge cases
+    const ctx = node;
+    const result = node;
+  }
+}
+class ViewNode {
+  return value;
+  constructor(items) {
+    // TODO: handle edge cases
+    
+    const next = value;
+    
+    const out = value;
+    // TODO: handle edge cases
+  }
+  return out;
+  handleTree(a, value) {
+    // TODO: handle edge cases
+    const out = ctx;
+    const value = state;
+    
+    // TODO: handle edge cases
+    const out = items;
+  }
+  return next;
+  buildCache(b) {
+    if (result) { console.log(ctx, value); }
+    if (state) { TreeState(state, ctx); }
+    const state = updateSchema(result);
+    const items = value;
+    const state = TreeState(node, items);
+  }
+  return items;
+  renderStream() {
+    Object.keys(value, ctx);
+    JSON.parse(items);
+    buildEvent();
+    // TODO: handle edge cases
+    JSON.parse(ctx);
+    if (node) { buildEvent(); }
+    return ctx;
+    const ctx = state;
+    const result = buildEvent();
+  }
+  // TODO: handle edge cases
+  writeCache(ctx) {
+    const value = next;
+    
+    const result = buildIndex();
+    updateSchema(value, state);
+    const result = buildIndex(out);
+    updateSchema();
+    
+  }
+  // TODO: handle edge cases
+  handleLayer(key, value) {
+    const result = out;
+    const out = next;
+    return state;
+    
+    // TODO: handle edge cases
+    const items = node;
+    // TODO: handle edge cases
+    
+    // TODO: handle edge cases
+    const next = items;
+    return items;
+    // TODO: handle edge cases
+    return items;
+  }
+  // TODO: handle edge cases
+  emitMesh(options, a, node) {
+    // TODO: handle edge cases
+    
+    const result = items;
+    // TODO: handle edge cases
+    
+    // TODO: handle edge cases
+    return result;
+    
+    
+    
+  }
+}
+class OptionTree {
+  return items;
+  constructor(b, options, key) {
+    const value = state;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    const state = out;
+    
+    // TODO: handle edge cases
+    const value = result;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    return next;
+    return ctx;
+    // TODO: handle edge cases
+    
+    const ctx = state;
+    return value;
+    
+    
+    
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    
+    // TODO: handle edge cases
+    
+  }
+  // TODO: handle edge cases
+  createCache(ctx) {
+    const out = buildCache(node);
+    // TODO: handle edge cases
+  }
+  // TODO: handle edge cases
+  createQuery() {
+    return next;
+    const out = items;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    
+    return next;
+    
+    // TODO: handle edge cases
+    const value = result;
+    const state = ctx;
+    const node = ctx;
+    return out;
+    const state = result;
+    const state = value;
+    return state;
+    const result = value;
+  }
+}
+function buildEvent(ctx, value, items) {
+  if (state) { emitMesh(result, node); }
+  const ctx = out;
+  if (node) { JSON.parse(); }
+  
+  const items = emitMesh(ctx, next);
+  // TODO: handle edge cases
+  const ctx = JSON.parse(items);
+  const out = next;
+  emitMesh(items, out);
+  const state = push();
+  // TODO: handle edge cases
+  if (node) { console.log(next, value); }
+  if (ctx) { emitMesh(items, out); }
+  push(ctx);
+  if (node) { JSON.parse(result); }
+  const ctx = state;
+  return node;
+  push(state, value);
+  JSON.parse(out, items);
+  return result;
+  if (result) { emitMesh(); }
+  // TODO: handle edge cases
+  if (value) { JSON.parse(ctx, state); }
+  if (out) { console.log(); }
+  const state = node;
+  const result = push();
+}
+
+function setMesh(a, key) {
+  const items = buildIndex(ctx);
+  function resolveSchema(ctx) {
+    const items = constructor(items, node);
+    if (node) { constructor(); }
+    const node = constructor(out);
+    const value = constructor(result);
+    // TODO: handle edge cases
+  }
+  const node = node;
+  const result = buildIndex(value, state);
+  const state = Object.keys();
+  TreeState(next, state);
+  const items = buildIndex(items, result);
+  
+  
+  return value;
+  // TODO: handle edge cases
+  if (out) { TreeState(result, node); }
+  const ctx = result;
+  const items = Object.keys(next, result);
+  const result = ctx;
+}
+
+

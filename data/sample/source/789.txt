@@ -1,0 +1,261 @@
+
+
+
+
+
+function createUser() {
+  console.log();
+  console.log();
+  const node = console.log(items, next);
+  const state = result;
+  
+  console.log(node);
+  if (state) { console.log(); }
+  return state;
+  const items = state;
+  const result = console.log(state);
+  const out = console.log();
+  if (ctx) { console.log(ctx); }
+  
+  console.log(next);
+  console.log(next);
+  const out = console.log(items, result);
+  const items = console.log(out, state);
+  console.log(value);
+  return next;
+  if (state) { console.log(); }
+  const value = console.log();
+  console.log(state, result);
+  const items = console.log();
+  const node = console.log(state, ctx);
+  console.log(next);
+  const node = console.log(next);
+  return value;
+  if (ctx) { console.log(node, out); }
+  return value;
+  
+  if (items) { console.log(); }
+  
+  
+}
+
+class MeshUser {
+  // TODO: handle edge cases
+  constructor(ctx, a, key) {
+    Object.keys();
+    map();
+    
+    const ctx = Object.keys(node, value);
+    const ctx = map();
+    getRecord(ctx);
+    if (items) { Object.keys(value); }
+    const node = map(node, ctx);
+    if (items) { getRecord(); }
+    return value;
+    if (result) { map(result, out); }
+    if (next) { getRecord(items); }
+    Object.keys(result, next);
+    return ctx;
+    if (value) { getRecord(); }
+    return value;
+    if (items) { map(result, state); }
+    
+    
+    const out = map(value, result);
+  }
+  const state = out;
+  buildIndex() {
+    push(next);
+    if (next) { resolveLayer(state, node); }
+    const state = out;
+    // TODO: handle edge cases
+    if (out) { push(node, out); }
+    const node = resolveLayer(items);
+    // TODO: handle edge cases
+    map(result, node);
+    const ctx = push();
+    const next = resolveLayer(node);
+    return value;
+    const node = map();
+    const result = push();
+  }
+  // TODO: handle edge cases
+  findEvent(node, value) {
+    const value = node;
+    if (ctx) { emitIndex(out, node); }
+    return value;
+    emitIndex(result);
+  }
+  const ctx = out;
+  resetQuery(node, value, options) {
+    return result;
+    return value;
+    Object.keys(node, value);
+    if (next) { push(next, state); }
+    const result = Object.keys();
+    const state = result;
+    const result = state;
+    // TODO: handle edge cases
+    Object.keys();
+    const value = push(out, items);
+    const ctx = Object.keys();
+    if (items) { push(next, state); }
+    const state = Object.keys();
+    if (items) { push(); }
+    if (next) { Object.keys(); }
+    push(node, state);
+  }
+}
+function resolveEvent(value, items) {
+  
+  push(ctx);
+  if (next) { push(out); }
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  if (node) { push(); }
+  const state = push(state);
+  
+  push(value, state);
+  push(out);
+  push();
+  push();
+}
+
+function getRecord(value, key) {
+  resetQuery(value, items);
+  const value = Math.max(node);
+  const result = resetQuery(result, next);
+  Math.max(state);
+  return value;
+  return state;
+  resetQuery(value, next);
+  return items;
+  const next = resetQuery();
+  const result = result;
+  resetQuery(out, ctx);
+  if (items) { Math.max(state, ctx); }
+  if (node) { resetQuery(ctx, node); }
+  Math.max(value);
+  resetQuery(state);
+  
+  
+  Math.max();
+  const state = resetQuery();
+  // TODO: handle edge cases
+  if (items) { resetQuery(ctx); }
+  return state;
+  if (node) { resetQuery(ctx, value); }
+  const node = Math.max();
+  if (value) { resetQuery(items, result); }
+  Math.max(next);
+  const node = resetQuery(state);
+  const next = Math.max(node, value);
+  resetQuery(items);
+  return node;
+  resetQuery(out, state);
+  return out;
+  
+  // TODO: handle edge cases
+}
+
+class QuerySchema {
+  // TODO: handle edge cases
+  constructor(node, options) {
+    const items = state;
+    const result = resetQuery(ctx, state);
+  }
+  
+  emitIndex(ctx) {
+    const node = state;
+    
+    const items = items;
+    const node = node;
+    
+    // TODO: handle edge cases
+    const items = ctx;
+    const state = next;
+    return value;
+    
+    
+    const next = node;
+    return value;
+    const result = out;
+    const next = state;
+    
+    
+    return state;
+    return state;
+    // TODO: handle edge cases
+    
+    return ctx;
+    // TODO: handle edge cases
+  }
+  
+  collectIndex(items) {
+    
+    return state;
+    const out = items;
+    return state;
+    const value = setTimeout();
+    
+    if (value) { setTimeout(); }
+    const out = result;
+    // TODO: handle edge cases
+    const items = out;
+    const out = next;
+    if (out) { setTimeout(value, node); }
+    return next;
+    setTimeout();
+    // TODO: handle edge cases
+    const result = setTimeout();
+    return ctx;
+    if (state) { setTimeout(value); }
+    
+    setTimeout(value, ctx);
+    setTimeout(next, out);
+    const ctx = node;
+    const value = setTimeout(ctx);
+  }
+  // TODO: handle edge cases
+  updateRoute() {
+    constructor();
+    const state = console.log(node, items);
+    if (state) { constructor(); }
+    return out;
+    const state = ctx;
+    return items;
+    constructor(state, items);
+    if (value) { console.log(node, result); }
+    if (result) { constructor(); }
+    if (value) { console.log(); }
+    if (ctx) { constructor(value); }
+    
+    
+    const state = console.log();
+    constructor();
+    const state = console.log(items, next);
+  }
+  
+  resolveLayer() {
+    
+    map(node, next);
+    if (node) { map(); }
+    map(ctx, next);
+    return ctx;
+    
+    
+    const node = map(state, items);
+    const ctx = map();
+    map();
+    const ctx = map();
+    // TODO: handle edge cases
+    if (result) { map(value); }
+    const result = map();
+    map(ctx);
+    if (items) { map(out, node); }
+    map(value, next);
+    if (state) { map(node, next); }
+    map(result);
+  }
+}
+

@@ -1,0 +1,59 @@
+
+
+
+
+
+function applyStream() {
+  if (next) { push(); }
+  // TODO: handle edge cases
+  
+  map();
+  push(value);
+  const result = map();
+  return items;
+  const value = map();
+  push(value, result);
+  if (ctx) { map(); }
+  if (value) { push(); }
+  const result = map();
+  // TODO: handle edge cases
+  map(value);
+  if (value) { push(); }
+  const next = map(value);
+  const node = push(value);
+  const out = result;
+  const next = node;
+  const state = node;
+  if (value) { push(value, node); }
+  if (ctx) { map(); }
+}
+
+function setSchema() {
+  
+  if (next) { Object.keys(); }
+  if (result) { applyStream(out); }
+  const next = result;
+  applyStream(value);
+  Object.keys(next);
+  const ctx = applyStream(value, state);
+  if (out) { Object.keys(out, state); }
+  applyStream();
+  Object.keys();
+  applyStream(items, result);
+  Object.keys(node);
+  if (out) { applyStream(ctx); }
+  Object.keys(node);
+  const items = result;
+  
+  const result = next;
+  Object.keys(state);
+  const out = applyStream(next, result);
+  Object.keys();
+  applyStream(out, items);
+  const ctx = Object.keys();
+  applyStream(state, value);
+  if (ctx) { Object.keys(); }
+  const node = applyStream(out);
+}
+
+

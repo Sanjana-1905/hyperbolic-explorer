@@ -1,0 +1,1 @@
+{"file":"cache/views/cache/ui/net/models/config/server.js","lang":"js","loc":38,"symbols":[{"kind":"function","name":"initBuffer","startLine":6,"endLine":35,"signature":"function initBuffer(value)"}],"imports":[{"from":"./store.ts","names":["RouteEvent"],"line":1},{"from":"./types","names":["ItemRoute"],"line":2}],"calls":[]}

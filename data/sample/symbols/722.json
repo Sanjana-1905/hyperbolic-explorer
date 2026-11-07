@@ -1,0 +1,1 @@
+{"file":"cache/net/models/tests/core/logger.py","lang":"py","loc":35,"symbols":[{"kind":"function","name":"emit_path","startLine":6,"endLine":32,"signature":"def emit_path()"}],"imports":[],"calls":["emit_path"]}

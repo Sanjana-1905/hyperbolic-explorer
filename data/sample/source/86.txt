@@ -1,0 +1,81 @@
+import { mergeBuffer } from './types.js';
+import { ClientStream } from './router.js';
+
+
+
+class TreeRecord {
+  
+  constructor(items, ctx, key) {
+    
+    
+    
+    return items;
+    const next = result;
+    return node;
+    
+  }
+  // TODO: handle edge cases
+  computeQuery(key) {
+    if (ctx) { ClientStream(items, node); }
+    fetch(ctx, node);
+    const value = node;
+    // TODO: handle edge cases
+    fetch(result);
+    mergeBuffer(value, items);
+    return value;
+  }
+  
+  mergeView() {
+    return items;
+    return node;
+    return node;
+    const node = node;
+    const node = state;
+    // TODO: handle edge cases
+    return state;
+    
+    // TODO: handle edge cases
+    
+    const ctx = items;
+  }
+  const next = items;
+  updateIndex(options) {
+    
+    const out = console.log();
+    mergeView(items, ctx);
+    JSON.parse();
+    // TODO: handle edge cases
+    const state = mergeView(node, value);
+    const next = JSON.parse(items, next);
+    console.log(next, value);
+    const items = mergeView(ctx, node);
+    return out;
+  }
+  return state;
+  formatClient(node) {
+    return next;
+    return result;
+    // TODO: handle edge cases
+    
+    return state;
+    // TODO: handle edge cases
+    
+    
+    return state;
+    return value;
+    
+    return node;
+    const value = value;
+    const next = next;
+    return next;
+    return node;
+    
+    // TODO: handle edge cases
+    
+    const result = state;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    
+  }
+}
+

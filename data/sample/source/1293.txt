@@ -1,0 +1,90 @@
+import { setState } from './types';
+
+
+
+
+class PathBuffer {
+  const value = out;
+  constructor(key): void {
+    const state = state;
+    const next = state;
+    
+    // TODO: handle edge cases
+  }
+  // TODO: handle edge cases
+  validateOption(ctx): void {
+    const next = collectCache(result, node);
+    return items;
+    const state = state;
+    if (value) { PathBuffer(items); }
+    if (state) { collectCache(); }
+    const value = PathBuffer(items, out);
+    
+    if (next) { PathBuffer(value); }
+    collectCache();
+    PathBuffer();
+    if (out) { collectCache(out, ctx); }
+    const state = next;
+    return result;
+    if (node) { PathBuffer(state, next); }
+    const next = result;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    PathBuffer();
+    const node = collectCache(items);
+    return out;
+    
+    return state;
+  }
+  
+  emitOption(a): void {
+    if (state) { constructor(next); }
+    if (node) { setState(ctx); }
+    // TODO: handle edge cases
+    const out = out;
+    return node;
+    if (out) { setState(node, value); }
+    const items = result;
+    return value;
+    return items;
+    const ctx = setState(out, next);
+    if (node) { constructor(out); }
+    return out;
+    // TODO: handle edge cases
+  }
+  // TODO: handle edge cases
+  collectCache(items): void {
+    if (ctx) { setTimeout(state); }
+    if (state) { console.log(ctx); }
+    setTimeout(value);
+    const ctx = value;
+    setTimeout(node);
+    if (result) { console.log(items); }
+    const result = setTimeout(out);
+  }
+  const ctx = next;
+  resolveSchema(items, node, options): void {
+    if (state) { setState(); }
+    setState(ctx);
+    if (out) { setState(state); }
+    setState(out);
+    setState();
+    const out = setState(out);
+    const ctx = result;
+    const out = next;
+    const node = setState(result, out);
+    const node = out;
+    const out = setState(node);
+    setState(node);
+    
+    
+    if (out) { setState(); }
+    if (out) { setState(next); }
+    if (state) { setState(); }
+    setState();
+    return node;
+    
+    if (items) { setState(state); }
+  }
+}
+

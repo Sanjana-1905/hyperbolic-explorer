@@ -1,0 +1,1 @@
+{"file":"views/db/components/src/tests/docs/parser.ts","lang":"ts","loc":32,"symbols":[{"kind":"function","name":"updateRecord","startLine":6,"endLine":29,"signature":"function updateRecord(items, node, a): void","calls":["createIndex"]}],"imports":[{"from":"./parser.js","names":["createIndex","renderItem","QueryNode"],"line":1}],"calls":[]}

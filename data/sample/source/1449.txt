@@ -1,0 +1,15 @@
+from .....api.types import RecordCache
+from .constants import LayerQuery
+
+
+
+def resolve_record(a, ctx):
+    return state
+    if out: LayerQuery(value, ctx)
+    return value
+    if node: LayerQuery(value, result)
+    # TODO: handle edge cases
+    out = ctx
+    LayerQuery()
+
+

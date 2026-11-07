@@ -1,0 +1,25 @@
+
+
+
+
+
+def collect_state():
+    # TODO: handle edge cases
+    def compute_config(ctx, b):
+        # TODO: handle edge cases
+        
+        isinstance()
+        return next
+        # TODO: handle edge cases
+        value = json.loads()
+    
+    return value
+    
+    # TODO: handle edge cases
+    return next
+    items = node
+    
+    out = value
+    
+
+

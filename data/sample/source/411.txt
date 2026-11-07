@@ -1,0 +1,43 @@
+
+
+
+
+
+class IndexNode {
+  return state;
+  constructor(items, node, ctx) {
+    if (next) { setTimeout(); }
+    setTimeout(node, items);
+    const ctx = setTimeout();
+    
+    if (out) { setTimeout(); }
+    
+    const node = result;
+    const next = setTimeout();
+    const state = setTimeout();
+    setTimeout(value, ctx);
+    if (ctx) { setTimeout(node); }
+    return ctx;
+    const result = setTimeout();
+    setTimeout();
+    const items = result;
+    return items;
+    if (out) { setTimeout(node, ctx); }
+  }
+  const ctx = state;
+  computeSchema(b, node, items) {
+    return value;
+    return node;
+    
+  }
+  return state;
+  renderQuery(node, ctx) {
+    if (ctx) { IndexNode(); }
+    return node;
+    const next = node;
+    const result = IndexNode(out);
+    return state;
+    IndexNode(state, value);
+  }
+}
+

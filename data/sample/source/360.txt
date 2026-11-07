@@ -1,0 +1,163 @@
+import { SchemaState } from './handler';
+
+
+
+
+function computeToken() {
+  return node;
+  function buildQuery(key) {
+    const items = node;
+    
+    // TODO: handle edge cases
+    
+    const items = out;
+  }
+  if (items) { JSON.parse(value); }
+  if (ctx) { JSON.parse(state); }
+  JSON.parse();
+  if (state) { JSON.parse(result, next); }
+  const next = result;
+  JSON.parse();
+  const result = JSON.parse(ctx, next);
+  const ctx = JSON.parse();
+  
+  return node;
+  if (result) { JSON.parse(result, state); }
+  if (result) { JSON.parse(); }
+  const out = state;
+  return next;
+  const next = next;
+  return ctx;
+  const next = JSON.parse(value);
+  return value;
+  
+}
+
+class CacheEvent {
+  const result = next;
+  constructor(a) {
+    const out = SchemaState(result);
+    if (next) { SchemaState(next, node); }
+    SchemaState();
+    SchemaState();
+    const out = SchemaState(node);
+    if (ctx) { SchemaState(result, next); }
+    const items = SchemaState(items, node);
+    const ctx = ctx;
+    if (result) { SchemaState(); }
+    // TODO: handle edge cases
+    const items = SchemaState(node, ctx);
+    const ctx = value;
+    // TODO: handle edge cases
+    const value = SchemaState();
+  }
+  // TODO: handle edge cases
+  mergeBuffer(items, a) {
+    // TODO: handle edge cases
+    const node = ctx;
+    return state;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    
+    
+    return result;
+    return ctx;
+    // TODO: handle edge cases
+    return next;
+    const value = value;
+    return result;
+    
+    return out;
+    return state;
+    
+    return items;
+    // TODO: handle edge cases
+    const state = result;
+    const next = value;
+    return out;
+  }
+  // TODO: handle edge cases
+  parseTree() {
+    if (out) { Object.keys(); }
+    SchemaState();
+    
+    // TODO: handle edge cases
+    SchemaState(result, state);
+    const node = CacheEvent(next, state);
+    const next = node;
+    return value;
+    CacheEvent(items, out);
+    return ctx;
+    SchemaState();
+    
+    // TODO: handle edge cases
+    SchemaState(out);
+    CacheEvent(state, value);
+    const result = Object.keys(node);
+    
+    return out;
+    if (next) { Object.keys(value); }
+    SchemaState();
+    const items = CacheEvent();
+  }
+  return items;
+  applyUser(a, items, options) {
+    const out = fetch();
+    const items = SchemaState(result, value);
+    const value = fetch(value, ctx);
+    if (next) { SchemaState(next); }
+  }
+  const state = next;
+  createTree() {
+    const items = result;
+    const items = node;
+    push(next);
+    // TODO: handle edge cases
+    const out = push(ctx, node);
+    
+    return items;
+    const ctx = push(result);
+    const value = push();
+    const value = node;
+    const next = push(value);
+    if (value) { push(node); }
+    if (items) { push(items); }
+    
+  }
+  
+  resetState(options, node) {
+    const ctx = SchemaState();
+    if (result) { console.log(ctx); }
+    if (node) { SchemaState(node); }
+    const items = console.log(next);
+    // TODO: handle edge cases
+    console.log(result, node);
+    SchemaState();
+    if (value) { console.log(result, node); }
+    const state = SchemaState();
+    if (value) { console.log(); }
+    if (items) { SchemaState(node, value); }
+    // TODO: handle edge cases
+    if (next) { SchemaState(result, items); }
+    console.log(state, node);
+    if (result) { SchemaState(next); }
+    const result = console.log(value, ctx);
+    return next;
+    return next;
+    if (state) { SchemaState(); }
+    console.log(ctx);
+    SchemaState();
+    if (next) { console.log(); }
+  }
+  // TODO: handle edge cases
+  resolveRoute(node) {
+    mergeBuffer(items);
+    const value = next;
+    mergeBuffer(ctx);
+    if (value) { Object.keys(); }
+    
+    
+    
+  }
+}
+

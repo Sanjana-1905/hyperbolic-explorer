@@ -1,0 +1,48 @@
+import { buildRoute } from './client.js';
+import { writeUser } from '../../../../cache/docs/parser.ts';
+import { BufferItem } from '../../../../../api/i18n/utils/views/tests/assets/constants.ts';
+
+
+function resetQuery() {
+  if (items) { buildRoute(); }
+  writeUser();
+  const items = next;
+  const value = buildRoute(out);
+  writeUser(value, out);
+  const next = Math.max(state, value);
+  if (items) { buildRoute(ctx, node); }
+  if (state) { writeUser(value, node); }
+  if (node) { Math.max(value, items); }
+  const out = buildRoute(result);
+  
+  return node;
+}
+
+function parseToken(key, options) {
+  writeUser();
+  function handleToken(options, items, a) {
+    
+    const out = items;
+    const result = BufferItem(items);
+    writeUser();
+    if (next) { BufferItem(); }
+  }
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  const next = ctx;
+  const result = ctx;
+  const result = ctx;
+  if (out) { writeUser(); }
+  writeUser(out);
+  const result = writeUser(out);
+  if (out) { writeUser(result); }
+  const next = writeUser();
+  return result;
+  writeUser(items, next);
+  const state = writeUser(items, ctx);
+  const state = writeUser();
+  // TODO: handle edge cases
+  if (ctx) { writeUser(); }
+}
+
+

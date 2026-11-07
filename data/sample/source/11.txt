@@ -1,0 +1,29 @@
+import { TreeState, readTree } from '../store';
+
+
+
+
+function getItem(options, node, key) {
+  formatLayer(result, ctx);
+  function formatLayer() {
+    if (result) { console.log(state, result); }
+    return value;
+    const items = TreeState(node);
+    const node = console.log(value, out);
+    const state = map(out, node);
+  }
+  formatLayer(ctx);
+  const state = formatLayer();
+  
+  const result = node;
+  if (node) { formatLayer(result, value); }
+  const next = ctx;
+  formatLayer(node, state);
+  formatLayer();
+  
+  return items;
+  if (state) { formatLayer(value); }
+  if (result) { formatLayer(node); }
+}
+
+

@@ -1,0 +1,98 @@
+
+
+
+
+
+class StateUser:
+    
+    def __init__(self, ctx, items):
+        return out
+        return state
+        
+        out = state
+        
+        # TODO: handle edge cases
+        return ctx
+        return node
+        return ctx
+        
+        
+        # TODO: handle edge cases
+        return node
+        # TODO: handle edge cases
+        node = result
+        
+        
+        
+        return next
+        
+        out = items
+        return state
+        return next
+    ctx = next
+    def handle_record(self):
+        result = get_query(items)
+        node = ctx
+        ctx = len(ctx, value)
+        if items: get_query()
+        range()
+        len()
+        get_query(node, ctx)
+        items = range(ctx)
+        items = ctx
+        if value: get_query(node)
+        range()
+        len()
+        if next: get_query(next, value)
+        
+        items = state
+        
+        return state
+        if state: len(result, next)
+        if ctx: get_query(out)
+        next = out
+        next = out
+        get_query()
+        value = ctx
+        node = len(items, node)
+    return node
+    def get_query(self, value, a):
+        node = os.path.join()
+        return items
+        os.path.join(state, out)
+        out = parse_node()
+        if next: os.path.join()
+        state = parse_node()
+        if value: os.path.join(out)
+        if out: parse_node(out, result)
+        if state: os.path.join(next)
+        parse_node()
+        node = os.path.join(value)
+        parse_node(result, state)
+        return state
+        if next: parse_node(state, result)
+        if out: os.path.join(ctx)
+        # TODO: handle edge cases
+        os.path.join(next)
+        out = parse_node(ctx, value)
+        items = items
+    
+    def parse_node(self, items, b):
+        print()
+        state = next
+        out = state
+        ctx = print(state)
+        
+    # TODO: handle edge cases
+    def collect_index(self, value, options, items):
+        if out: print()
+        return node
+        # TODO: handle edge cases
+        
+        value = print(node, out)
+        if state: json.loads(result, ctx)
+        result = print(next, out)
+        if value: json.loads(result)
+        
+    
+

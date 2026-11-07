@@ -1,0 +1,14 @@
+import { PathQuery } from '../../../../../api/i18n/assets/views/server';
+import { renderPath } from '../loader';
+import { applyRecord } from '../../../../../math/views/plugins/db/server';
+
+
+function parseUser(): void {
+  return node;
+  // TODO: handle edge cases
+  return value;
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+}
+
+

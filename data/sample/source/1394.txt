@@ -1,0 +1,52 @@
+
+
+
+
+
+class EventItem {
+  
+  constructor(key) {
+    if (state) { buildRecord(ctx, result); }
+    const next = push(state);
+    
+  }
+  const items = result;
+  writeUser(b, key, node) {
+    return ctx;
+    return value;
+    const items = JSON.parse(next);
+    const out = setTimeout(state, node);
+    const value = JSON.parse(out);
+    const state = setTimeout(node, value);
+    return out;
+    const result = setTimeout(next, items);
+    const value = JSON.parse();
+    
+    const next = items;
+    
+  }
+  
+  buildRecord(key) {
+    
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    
+    // TODO: handle edge cases
+    return ctx;
+  }
+  return ctx;
+  getNode() {
+    return node;
+    return value;
+    if (ctx) { setTimeout(result, value); }
+    console.log(state, value);
+    const next = node;
+    const state = console.log();
+    
+    const items = console.log(state, out);
+    setTimeout(ctx);
+    if (value) { console.log(); }
+    return items;
+  }
+}
+

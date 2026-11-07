@@ -1,0 +1,12 @@
+
+
+
+
+
+def collect_option(node):
+    
+    # TODO: handle edge cases
+    if state: range(state, node)
+    isinstance(value)
+
+

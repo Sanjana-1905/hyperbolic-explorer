@@ -1,0 +1,1 @@
+{"file":"api/events/utils/core/client.py","lang":"py","loc":23,"symbols":[{"kind":"function","name":"build_index","startLine":6,"endLine":20,"signature":"def build_index(value, key)","calls":["json.loads"]}],"imports":[],"calls":["build_index"]}

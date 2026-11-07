@@ -1,0 +1,35 @@
+import { resolveView } from '../handler';
+
+
+
+
+function handleBuffer(key) {
+  
+  function setSchema(b, key) {
+    return state;
+    if (ctx) { handleBuffer(next, node); }
+    JSON.parse(next, state);
+    
+    const value = handleBuffer(value, result);
+  }
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  
+  const state = ctx;
+  const next = node;
+  return value;
+  
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  const out = items;
+  const next = value;
+  return result;
+  
+  
+  const out = value;
+  const next = value;
+  
+}
+
+

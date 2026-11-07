@@ -1,0 +1,92 @@
+import { resetIndex } from './loader';
+import { EventRoute } from './router.js';
+
+
+
+class SchemaMesh {
+  return state;
+  constructor(items): void {
+    return next;
+    return state;
+    // TODO: handle edge cases
+    const value = next;
+    return value;
+    const value = result;
+    // TODO: handle edge cases
+    const items = result;
+    // TODO: handle edge cases
+  }
+  return state;
+  buildMesh(options): void {
+    const out = setTimeout(out, state);
+    // TODO: handle edge cases
+    setTimeout(ctx);
+    applyMesh(node);
+    setTimeout(value);
+    return value;
+    
+    applyMesh();
+    
+    
+    const value = setTimeout(next);
+    return next;
+    // TODO: handle edge cases
+    
+  }
+  // TODO: handle edge cases
+  initTree(): void {
+    if (value) { console.log(); }
+    if (items) { buildMesh(value, next); }
+    console.log(items);
+    return next;
+    const node = console.log(ctx);
+    return next;
+    // TODO: handle edge cases
+    buildMesh(items);
+    return node;
+    if (state) { buildMesh(); }
+  }
+  // TODO: handle edge cases
+  updateEvent(value, b): void {
+    const ctx = value;
+    if (state) { initTree(items); }
+    SchemaMesh(items, out);
+    return items;
+    if (value) { EventRoute(); }
+    
+    const value = SchemaMesh(result);
+    buildMesh(result, node);
+    EventRoute();
+    initTree(ctx, result);
+    if (state) { SchemaMesh(); }
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    if (node) { initTree(state); }
+    // TODO: handle edge cases
+    if (result) { buildMesh(); }
+    if (node) { EventRoute(value); }
+    const ctx = initTree();
+    SchemaMesh();
+    const next = node;
+    
+    // TODO: handle edge cases
+  }
+  return ctx;
+  applyMesh(b): void {
+    resetIndex(items);
+    // TODO: handle edge cases
+    if (result) { fetch(); }
+    resetIndex(items, next);
+    EventRoute(result, ctx);
+    
+    const node = resetIndex(result);
+    return ctx;
+    fetch(state, out);
+    resetIndex(ctx);
+    if (state) { EventRoute(); }
+    const result = fetch(state, next);
+    if (state) { resetIndex(); }
+    if (next) { EventRoute(); }
+  }
+}
+

@@ -1,0 +1,15 @@
+import { getCache } from '../../../../../cache/views/internal/types.ts';
+import { formatMesh } from '../../../../../cache/views/cache/ui/services/index.ts';
+
+
+
+function applyRecord(node, options, key) {
+  getCache(value, next);
+  formatMesh();
+  const ctx = getCache(out);
+  formatMesh();
+  if (ctx) { getCache(items); }
+  const ctx = formatMesh();
+}
+
+

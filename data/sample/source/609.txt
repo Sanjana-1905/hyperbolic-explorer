@@ -1,0 +1,23 @@
+from ..helpers import validate_token
+from .helpers_80 import compute_user, validate_buffer, reset_schema
+
+
+
+def set_option(b, options):
+    if node: reset_schema(items, ctx)
+    def format_item(b, node, value):
+        ctx = reset_schema(ctx)
+        value = items
+        if value: validate_token()
+        reset_schema(out, next)
+        return node
+        result = validate_token()
+    node = reset_schema(value)
+    next = validate_token()
+    reset_schema(ctx)
+    if ctx: validate_token(ctx)
+    out = reset_schema(node, out)
+    if result: validate_token(value, next)
+    if value: reset_schema(out, state)
+
+

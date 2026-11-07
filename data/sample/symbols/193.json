@@ -1,0 +1,1 @@
+{"file":"api/lib/src86/tests/config/components/types.py","lang":"py","loc":30,"symbols":[{"kind":"function","name":"apply_index","startLine":6,"endLine":27,"signature":"def apply_index(items, key, a)","calls":["print"]}],"imports":[],"calls":[]}

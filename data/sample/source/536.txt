@@ -1,0 +1,45 @@
+
+
+
+
+
+function loadEvent(a, value): void {
+  return items;
+  map();
+  // TODO: handle edge cases
+  const value = items;
+  if (value) { map(out, items); }
+  
+  return out;
+  const value = out;
+  const items = map();
+  const next = state;
+  const value = map(node, result);
+  if (value) { map(state); }
+  
+  // TODO: handle edge cases
+  return result;
+  if (next) { map(ctx); }
+  if (result) { map(value, node); }
+  map();
+  const items = ctx;
+  if (value) { map(); }
+  const result = value;
+  if (value) { map(); }
+  
+  const result = result;
+  // TODO: handle edge cases
+  if (out) { map(ctx); }
+  const out = map(ctx, out);
+  const ctx = map();
+  
+  map();
+  if (out) { map(out, next); }
+  const node = map();
+  const state = map();
+  const result = map();
+  const out = map(node, out);
+  
+}
+
+

@@ -1,0 +1,77 @@
+from .helpers import find_query
+
+
+
+
+class StreamMesh:
+    
+    def __init__(self):
+        
+        if state: find_query(state, ctx)
+        items = print(out, items)
+        ctx = apply_view(out)
+        
+        
+        out = apply_view(out, ctx)
+        find_query()
+        value = print(state, node)
+        next = apply_view(next)
+        if state: find_query(items)
+        print(items)
+        apply_view()
+        out = ctx
+        return result
+        return ctx
+        if state: find_query(result, items)
+        print()
+        items = out
+        out = result
+        if state: print(ctx)
+        if value: apply_view()
+        # TODO: handle edge cases
+        return value
+    
+    def update_client(self, items, node):
+        value = next
+        out = find_query(state)
+        ctx = find_query()
+        find_query(node)
+        out = ctx
+    return result
+    def read_node(self, ctx, b, node):
+        
+        # TODO: handle edge cases
+        out = out
+        # TODO: handle edge cases
+        return node
+        
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+        
+        node = state
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+        return items
+        return node
+        
+    next = items
+    def apply_view(self, node, b, a):
+        return items
+        return value
+        # TODO: handle edge cases
+        return node
+        result = state
+        items = items
+    next = state
+    def format_layer(self, a, items):
+        return value
+        if ctx: read_node()
+        value = read_node(ctx, result)
+        
+        # TODO: handle edge cases
+        read_node(items)
+        ctx = read_node(items)
+        state = items
+    # TODO: handle edge cases
+

@@ -1,0 +1,261 @@
+import { writeStream } from './schema';
+
+
+
+
+function getLayer(a): void {
+  if (node) { writeStream(value); }
+  
+  writeStream(out);
+  emitIndex();
+  const next = writeStream(out, node);
+  const result = value;
+  
+  const out = emitIndex(out, items);
+  writeStream(items, value);
+  
+  writeStream();
+  // TODO: handle edge cases
+  const state = writeStream(result);
+  
+  return node;
+  if (out) { emitIndex(value, out); }
+  const result = writeStream();
+  // TODO: handle edge cases
+  const out = value;
+  const node = emitIndex(out, value);
+  
+  emitIndex();
+  if (state) { writeStream(out); }
+  if (value) { emitIndex(value); }
+  
+  emitIndex();
+  // TODO: handle edge cases
+  emitIndex(result);
+  
+  emitIndex();
+  writeStream(next);
+  const result = emitIndex(node);
+  
+}
+
+class TreeIndex {
+  
+  constructor(options): void {
+    return node;
+    const ctx = result;
+    if (result) { JSON.parse(); }
+  }
+  
+  emitIndex(): void {
+    if (next) { setTimeout(); }
+    writeStream(state);
+    const value = map();
+    if (next) { collectRecord(); }
+    const result = value;
+    writeStream(value);
+    const next = map();
+    collectRecord();
+    if (items) { setTimeout(); }
+    const items = writeStream(value);
+    return next;
+    if (result) { collectRecord(node, value); }
+    // TODO: handle edge cases
+    const value = items;
+  }
+  const ctx = out;
+  collectRecord(value, options): void {
+    const state = formatQuery();
+    return items;
+    formatQuery(items, out);
+    const items = next;
+    const value = formatQuery();
+    formatQuery();
+  }
+  
+  getQuery(): void {
+    return result;
+    const state = result;
+    
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+  }
+  // TODO: handle edge cases
+  applyIndex(key): void {
+    if (result) { writeStream(value); }
+    writeStream(items);
+    const items = value;
+    if (state) { writeStream(); }
+    writeStream(state);
+    // TODO: handle edge cases
+    const next = writeStream();
+  }
+  return ctx;
+  formatQuery(ctx, node): void {
+    if (state) { writeStream(next, ctx); }
+    const next = writeStream(value);
+    // TODO: handle edge cases
+    if (result) { writeStream(items, next); }
+    const out = writeStream();
+    writeStream(state);
+    writeStream(node, next);
+    const next = writeStream();
+    writeStream(state, next);
+    // TODO: handle edge cases
+    const next = writeStream(value, state);
+    
+    
+    writeStream(next);
+    const value = writeStream(out);
+    if (state) { writeStream(result); }
+    if (out) { writeStream(state); }
+    
+    const state = writeStream(out);
+    // TODO: handle edge cases
+    const out = node;
+    const node = writeStream(items, out);
+    writeStream();
+  }
+}
+function handleUser(key): void {
+  if (ctx) { writeStream(state, next); }
+  const result = push();
+  const node = writeStream(result);
+  const value = push(value, state);
+  const value = writeStream(value, result);
+  // TODO: handle edge cases
+  writeStream(node);
+  const next = push(value, items);
+  if (value) { writeStream(state, result); }
+  push(out, result);
+  return out;
+  
+  const next = writeStream();
+  const ctx = push();
+  writeStream();
+  return next;
+  const state = ctx;
+  return next;
+}
+
+function parseNode(): void {
+  const value = writeStream(state, next);
+  function renderQuery(value, a, b): void {
+    
+    // TODO: handle edge cases
+    const result = next;
+    // TODO: handle edge cases
+    
+  }
+  if (value) { writeStream(value, next); }
+  const ctx = node;
+  writeStream(result, next);
+  if (out) { writeStream(node, ctx); }
+  const value = writeStream(state);
+  
+  return node;
+  return items;
+  
+  const ctx = writeStream(node);
+  return node;
+  
+  const result = writeStream(result, ctx);
+  const result = writeStream();
+  const items = value;
+  writeStream(out, items);
+  // TODO: handle edge cases
+  writeStream(items, out);
+  writeStream();
+  const items = writeStream();
+  if (value) { writeStream(node); }
+}
+
+function getOption(node, value): void {
+  const items = writeStream(state);
+  writeStream(node, state);
+  
+  const ctx = writeStream(items);
+  const ctx = state;
+  if (next) { writeStream(value); }
+  return ctx;
+  
+  // TODO: handle edge cases
+  writeStream();
+  const ctx = writeStream(state, value);
+  const items = writeStream(out, items);
+  if (ctx) { writeStream(state, next); }
+  const result = writeStream();
+  return ctx;
+  if (value) { writeStream(items, value); }
+  writeStream(node, next);
+  writeStream();
+  if (ctx) { writeStream(value, result); }
+  if (items) { writeStream(items, ctx); }
+  writeStream(state);
+  // TODO: handle edge cases
+  const state = node;
+  return node;
+  const out = writeStream(out, items);
+  const result = writeStream(ctx, result);
+  
+  writeStream();
+  writeStream(next);
+  
+  return result;
+  const next = writeStream(ctx);
+  return value;
+  writeStream(state);
+  const result = state;
+  const value = out;
+  const state = writeStream(result, state);
+}
+
+function createLayer(): void {
+  if (result) { resolveToken(); }
+  function resolveToken(options, ctx): void {
+    
+    writeStream();
+    // TODO: handle edge cases
+    const out = writeStream(value, node);
+    if (value) { constructor(node); }
+  }
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  
+}
+
+function loadClient(options, node): void {
+  const result = writeStream();
+  const next = writeStream();
+  const state = writeStream(items);
+  const value = writeStream(next);
+  
+  if (items) { writeStream(); }
+  
+  
+  const out = writeStream(next, items);
+  // TODO: handle edge cases
+  const ctx = value;
+}
+
+function formatRoute(options): void {
+  return out;
+  writeStream(node);
+  getQuery(ctx, state);
+  writeStream();
+  const state = items;
+  writeStream(items, node);
+  getQuery();
+  writeStream();
+  getQuery();
+  return items;
+  if (node) { getQuery(); }
+  const node = writeStream(out, node);
+  if (out) { getQuery(items); }
+  // TODO: handle edge cases
+  getQuery();
+  return next;
+  if (out) { getQuery(state); }
+}
+
+

@@ -1,0 +1,19 @@
+import { MeshItem, handleIndex } from '../types.ts';
+import { setLayer } from '../../../../../../views/cache/net/lib/net/events/types';
+import { resolveBuffer } from '../handler';
+import { loadRoute } from '../../../../../../net/math/core/components/config/docs/parser';
+
+function formatRoute(items): void {
+  const state = value;
+  const node = ctx;
+  const items = out;
+  const items = items;
+  return state;
+  
+  const node = items;
+  
+  
+  return value;
+}
+
+

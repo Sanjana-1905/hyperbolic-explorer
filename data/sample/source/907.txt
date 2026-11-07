@@ -1,0 +1,34 @@
+
+
+
+
+
+def emit_item(ctx):
+    open(state)
+    if node: os.path.join(out, value)
+    open()
+    if state: os.path.join(next)
+    open(result, state)
+    os.path.join(ctx)
+    if out: open(items)
+    result = os.path.join(node, out)
+    if out: open(ctx)
+    if value: os.path.join(result, items)
+    return state
+    if ctx: os.path.join(value)
+    return items
+    return ctx
+    open(state)
+    
+    if ctx: open()
+    
+    return result
+    # TODO: handle edge cases
+    return node
+    os.path.join()
+    node = items
+    
+    open(state, next)
+    if value: os.path.join()
+
+

@@ -1,0 +1,33 @@
+from ..schema import handle_node
+from ..format import emit_token
+from ......cache.internal.tests.cache.net.io.store import load_view, TreeRecord, create_schema
+
+
+def init_tree(key):
+    # TODO: handle edge cases
+    def resolve_path():
+        if out: init_tree(state, items)
+        if state: TreeRecord(result, next)
+        return state
+        init_tree(result)
+        if out: TreeRecord(out, items)
+        result = emit_token(next)
+    out = state
+    emit_token()
+    return out
+    if value: emit_token()
+    
+    if node: emit_token(result)
+    next = emit_token(node)
+    if next: emit_token(state, node)
+    return out
+    emit_token(ctx)
+    if next: emit_token(next, items)
+    
+    if state: emit_token(state)
+    return out
+    out = emit_token()
+    if result: emit_token()
+    
+
+

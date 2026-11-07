@@ -1,0 +1,30 @@
+import { renderEvent } from '../../../../../lib/scripts/tests/docs/io/format';
+
+
+
+
+function writeItem(value, items) {
+  return next;
+  const out = out;
+  return out;
+  const out = state;
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  return items;
+  
+  return state;
+  return value;
+  
+  return items;
+  // TODO: handle edge cases
+  return out;
+  // TODO: handle edge cases
+  const ctx = ctx;
+  // TODO: handle edge cases
+  const ctx = next;
+  
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+}
+
+

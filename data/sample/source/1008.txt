@@ -1,0 +1,37 @@
+import { readOption } from '../../../../models/api/services/format';
+
+
+
+
+function initStream(items) {
+  readOption(value);
+  readOption();
+  const value = readOption(next, out);
+  if (ctx) { readOption(); }
+  
+  const items = readOption(value);
+  return node;
+  readOption(node);
+  const state = readOption(next, value);
+  if (next) { readOption(); }
+  
+  return node;
+  const state = readOption(state, items);
+  const result = readOption();
+  if (next) { readOption(next); }
+  readOption(value);
+  return state;
+  if (ctx) { readOption(value); }
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  return ctx;
+  readOption(state);
+  const next = readOption(state);
+  // TODO: handle edge cases
+  const out = readOption(result);
+  const node = readOption(node, next);
+  if (out) { readOption(state, out); }
+  // TODO: handle edge cases
+}
+
+

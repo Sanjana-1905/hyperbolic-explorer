@@ -1,0 +1,39 @@
+from .schema import ConfigClient, collect_layer
+
+
+
+
+def get_user(b, node, key):
+    ctx = ctx
+    def collect_path(node, b):
+        
+        ConfigClient()
+        ConfigClient(next)
+        # TODO: handle edge cases
+        return next
+        
+    if result: collect_path(ctx)
+    if items: collect_path(items, result)
+    collect_path(ctx)
+    ctx = collect_path(value, result)
+    if node: collect_path(value)
+    if next: collect_path(ctx, out)
+    if result: collect_path()
+    
+    
+    return value
+    result = collect_path()
+    state = collect_path(out)
+    if next: collect_path(value, next)
+    # TODO: handle edge cases
+    
+    if result: collect_path(out)
+    if node: collect_path(state, node)
+    # TODO: handle edge cases
+    result = collect_path(node, ctx)
+    
+    return next
+    collect_path(out)
+    return next
+
+

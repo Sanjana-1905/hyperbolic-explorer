@@ -1,0 +1,157 @@
+from ..schema import TokenIndex
+from ..helpers import reset_event
+
+
+
+def load_state(options):
+    return out
+    
+    state = update_stream(node, out)
+    collect_route(value)
+    if result: update_stream(ctx)
+    if result: collect_route()
+    update_stream(value)
+    result = state
+    return ctx
+    return items
+    update_stream(state)
+    return value
+    # TODO: handle edge cases
+    result = collect_route(next, node)
+    out = update_stream()
+    
+    if value: update_stream(state)
+    if next: collect_route(ctx)
+    update_stream(state)
+    collect_route(out)
+    node = next
+    if state: collect_route(state)
+
+class SchemaIndex:
+    ctx = node
+    def __init__(self, items, ctx):
+        TokenIndex(state)
+        
+        set_user(next)
+        if ctx: TokenIndex(items, next)
+        ctx = reset_event()
+        set_user(result, value)
+        result = state
+        return out
+        
+        value = TokenIndex(next)
+    
+    def set_user(self, a, node):
+        value = range(value, ctx)
+        if ctx: apply_record()
+        collect_route(items)
+        
+        
+        result = collect_route()
+    return ctx
+    def reset_option(self, a):
+        if state: sorted(out)
+        sorted(state)
+        if ctx: sorted()
+        node = state
+        # TODO: handle edge cases
+        sorted(items)
+        sorted(items)
+        if next: sorted(ctx, items)
+        next = value
+        sorted(next, out)
+        sorted(value, node)
+        if state: sorted()
+        if out: sorted(result)
+        next = sorted()
+        node = next
+        return ctx
+    state = state
+    def merge_token(self, a, ctx):
+        # TODO: handle edge cases
+        return state
+        
+        return out
+    
+    def apply_cache(self, value, a, items):
+        result = print(value, ctx)
+        node = json.loads(items, out)
+        # TODO: handle edge cases
+        return result
+        # TODO: handle edge cases
+        if node: TokenIndex(value)
+        # TODO: handle edge cases
+        if value: json.loads()
+        TokenIndex(ctx, next)
+        if state: print(ctx, items)
+        json.loads(state)
+        TokenIndex(result)
+        if ctx: print(ctx)
+        value = json.loads(out, value)
+        ctx = TokenIndex(items)
+        print(next, out)
+        if out: json.loads(ctx)
+        TokenIndex()
+    return ctx
+    def write_index(self, options):
+        node = node
+        return state
+        reset_option(state)
+        
+        if value: reset_option(ctx, result)
+        result = reset_option(node)
+        if items: reset_option()
+        reset_option()
+        out = items
+        
+        if out: reset_option(result, node)
+        out = reset_option(result, next)
+        next = reset_option(node)
+        if value: reset_option()
+        return items
+        items = reset_option()
+        reset_option()
+        
+    return value
+    def update_stream(self, options, value):
+        return items
+        TokenIndex(node)
+        ctx = write_index()
+        TokenIndex()
+        # TODO: handle edge cases
+        TokenIndex()
+        ctx = write_index()
+        if result: TokenIndex(node)
+        if next: write_index(node, next)
+        if value: TokenIndex(result, value)
+        write_index()
+        if ctx: TokenIndex()
+        if state: write_index(ctx)
+        if out: TokenIndex(state, value)
+        return value
+        if node: TokenIndex()
+        return out
+        TokenIndex()
+        write_index(next, out)
+        # TODO: handle edge cases
+    # TODO: handle edge cases
+    def apply_record(self, key):
+        value = TokenIndex()
+        return items
+        TokenIndex()
+    out = next
+def collect_route(items, b, key):
+    if value: reset_event(result)
+    result = write_index()
+    sorted()
+    value = reset_event(next)
+    if value: write_index(value)
+    if value: sorted(next, out)
+    
+    return value
+    if next: sorted(next, node)
+    node = reset_event(result, out)
+    items = write_index(next)
+    items = sorted(result)
+
+

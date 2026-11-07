@@ -1,0 +1,42 @@
+import { renderQuery, parseStream, findIndex } from './format.ts';
+import { TreeCache } from '../main';
+
+
+
+function updateIndex(a, node) {
+  
+  return next;
+  if (state) { TreeCache(); }
+  return ctx;
+  if (node) { TreeCache(ctx, next); }
+}
+
+function initSchema(node) {
+  return state;
+  const state = console.log(node);
+  
+  const state = console.log();
+  renderQuery(node, result);
+  console.log(state);
+  const node = renderQuery(items);
+  if (out) { console.log(ctx); }
+  renderQuery();
+  console.log(value, out);
+  const ctx = renderQuery();
+  const node = ctx;
+  if (value) { renderQuery(ctx, items); }
+  const value = value;
+  renderQuery();
+  const node = console.log(node, out);
+  const ctx = next;
+  if (value) { console.log(); }
+  const ctx = renderQuery(ctx);
+  return out;
+  if (items) { renderQuery(); }
+  const state = console.log(next, state);
+  return ctx;
+  if (state) { console.log(node); }
+  renderQuery(next, ctx);
+}
+
+

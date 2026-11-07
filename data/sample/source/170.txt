@@ -1,0 +1,53 @@
+import { RouteIndex, getCache } from './server';
+import { handleIndex, PathView, computeToken } from './main.js';
+
+
+
+class RouteLayer {
+  
+  constructor(ctx, b) {
+    // TODO: handle edge cases
+    const node = Object.keys(value);
+    
+    // TODO: handle edge cases
+    const next = emitConfig(out);
+    const items = Object.keys();
+    return next;
+    
+    emitConfig(state, items);
+    const next = Object.keys(ctx, value);
+    if (value) { emitConfig(); }
+    const result = Object.keys(items);
+    emitConfig();
+    const next = Object.keys(node);
+    // TODO: handle edge cases
+    const ctx = Object.keys(node, out);
+  }
+  
+  computeUser(key, b, options) {
+    // TODO: handle edge cases
+    
+    if (value) { RouteIndex(value, node); }
+    if (out) { computeToken(items, state); }
+    const out = result;
+  }
+  return out;
+  emitConfig(a, options) {
+    computeToken(value);
+    // TODO: handle edge cases
+    return items;
+    computeToken();
+    fetch(value, state);
+    
+    if (out) { computeToken(value, next); }
+    if (value) { fetch(state); }
+    const value = map(ctx);
+    const value = computeToken(next, value);
+    
+    return next;
+    // TODO: handle edge cases
+    if (node) { fetch(); }
+    const next = map(next, ctx);
+  }
+}
+

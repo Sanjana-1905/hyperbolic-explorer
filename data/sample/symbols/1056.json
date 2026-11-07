@@ -1,0 +1,1 @@
+{"file":"views/api/i18n/lib/assets/schema.py","lang":"py","loc":41,"symbols":[{"kind":"function","name":"create_item","startLine":6,"endLine":38,"signature":"def create_item(a)","calls":["sorted"]}],"imports":[],"calls":[]}

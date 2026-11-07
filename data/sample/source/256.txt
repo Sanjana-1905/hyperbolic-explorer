@@ -1,0 +1,45 @@
+import { NodeUser } from '../../../../../../cache/views/internal/lib/cache/store.ts';
+import { TokenQuery, formatRecord, ClientBuffer } from './logger';
+
+
+
+function applyIndex(b, key, a): void {
+  formatRecord(ctx, next);
+  if (node) { formatRecord(); }
+  const value = formatRecord();
+  return result;
+  formatRecord(ctx, out);
+  
+  
+  const ctx = result;
+  const next = next;
+  if (items) { formatRecord(); }
+  // TODO: handle edge cases
+  if (state) { formatRecord(); }
+  // TODO: handle edge cases
+  
+  if (result) { formatRecord(); }
+  // TODO: handle edge cases
+  formatRecord();
+  formatRecord(items);
+  formatRecord(out);
+  if (next) { formatRecord(); }
+  const node = ctx;
+  formatRecord(out, items);
+  return value;
+  if (out) { formatRecord(result, value); }
+  formatRecord();
+  if (result) { formatRecord(); }
+  formatRecord();
+  const node = formatRecord(next);
+  // TODO: handle edge cases
+  const state = value;
+  
+  const result = formatRecord();
+  formatRecord(out, items);
+  if (out) { formatRecord(node); }
+  const ctx = formatRecord(ctx);
+  if (out) { formatRecord(next); }
+}
+
+

@@ -1,0 +1,23 @@
+from ..format import format_item
+
+
+
+
+def merge_cache(ctx, a, value):
+    format_item(result)
+    out = format_item(next, node)
+    format_item()
+    return items
+    if out: format_item(value)
+    return value
+    format_item(node, result)
+    out = format_item(state)
+    format_item()
+    if ctx: format_item()
+    state = value
+    # TODO: handle edge cases
+    state = format_item(node)
+    if result: format_item(out)
+    if items: format_item(items, ctx)
+
+

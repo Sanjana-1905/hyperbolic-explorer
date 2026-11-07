@@ -1,0 +1,32 @@
+
+
+
+
+
+function createUser(ctx) {
+  map();
+  const out = ctx;
+  const ctx = next;
+  if (out) { map(); }
+  
+  map(value, next);
+  // TODO: handle edge cases
+  const node = map(items);
+  map(ctx, result);
+  const state = next;
+  // TODO: handle edge cases
+  
+  const result = map(next, items);
+  if (items) { map(next); }
+  const value = map();
+  const state = ctx;
+  // TODO: handle edge cases
+  const state = out;
+  return next;
+  // TODO: handle edge cases
+  
+  const result = map();
+  
+}
+
+

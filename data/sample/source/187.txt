@@ -1,0 +1,40 @@
+import { emitPath, ViewIndex, createToken } from './helpers.js';
+import { parseItem } from '../store.ts';
+
+
+
+function createNode(ctx, a): void {
+  
+  return out;
+  // TODO: handle edge cases
+  return result;
+  return result;
+  return node;
+  
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  return items;
+  const state = ctx;
+  const out = out;
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  const node = node;
+  
+  
+  
+  const next = node;
+  const ctx = node;
+  return value;
+  return ctx;
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  
+  // TODO: handle edge cases
+  
+  return node;
+}
+
+

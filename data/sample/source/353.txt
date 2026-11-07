@@ -1,0 +1,15 @@
+
+
+
+
+
+function validateCache(ctx, node) {
+  
+  if (next) { console.log(); }
+  const result = node;
+  const value = console.log();
+  const result = setTimeout();
+  // TODO: handle edge cases
+}
+
+

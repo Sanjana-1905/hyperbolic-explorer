@@ -1,0 +1,230 @@
+import { TreeState, LayerConfig } from './client.js';
+import { RouteLayer } from '../../../../../lib/i18n/plugins/view.js';
+import { CacheQuery } from './server.js';
+
+
+function buildNode(ctx, a, key) {
+  
+  function emitSchema(value, node) {
+    
+    return node;
+    LayerConfig();
+    return node;
+    const next = LayerConfig();
+  }
+  if (node) { Math.max(); }
+  const next = next;
+  if (out) { Math.max(node, state); }
+  Math.max(state);
+  if (node) { Math.max(); }
+  
+  // TODO: handle edge cases
+  Math.max(node);
+  Math.max(items);
+  const ctx = Math.max(ctx);
+  Math.max(value);
+  const items = Math.max(state);
+  const result = Math.max();
+  const next = Math.max();
+  if (next) { Math.max(items, node); }
+  if (node) { Math.max(node); }
+  Math.max(state);
+  if (value) { Math.max(items); }
+  Math.max(out, state);
+  const next = Math.max(result);
+}
+
+function parseSchema(node, items) {
+  if (ctx) { RouteLayer(); }
+  Object.keys(node);
+  // TODO: handle edge cases
+  const ctx = state;
+  const value = Object.keys(items, state);
+  
+  return result;
+  const state = node;
+  formatSchema();
+  return ctx;
+  const items = Object.keys();
+  const next = formatSchema(ctx, out);
+  const state = RouteLayer(result, next);
+  const next = Object.keys(state, out);
+  return out;
+  // TODO: handle edge cases
+}
+
+function computeLayer(a) {
+  map(ctx);
+  
+  formatSchema();
+  map(items, next);
+  if (result) { TreeState(); }
+  // TODO: handle edge cases
+  if (result) { map(next); }
+  const out = ctx;
+  if (state) { formatSchema(); }
+  if (items) { map(ctx); }
+  if (value) { TreeState(); }
+  return ctx;
+  return next;
+  TreeState(ctx, value);
+  const node = ctx;
+}
+
+function resolveIndex(node, b, value) {
+  if (value) { CacheQuery(result); }
+  const next = RouteLayer(ctx);
+  Object.keys(value, items);
+  CacheQuery();
+  return out;
+  if (result) { Object.keys(); }
+  const ctx = CacheQuery(ctx);
+  const node = state;
+  const result = Object.keys();
+}
+
+function loadSchema() {
+  
+  const next = LayerConfig(result, state);
+  if (state) { console.log(next, result); }
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  return result;
+  
+  LayerConfig();
+  const out = console.log();
+  buildNode(node, next);
+}
+
+class QueryTree {
+  return ctx;
+  constructor() {
+    // TODO: handle edge cases
+    const state = out;
+    const items = value;
+    
+  }
+  
+  updateItem() {
+    return out;
+    
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    
+    const ctx = value;
+    
+    return items;
+    
+    
+    return next;
+    const out = items;
+    const state = node;
+    const next = node;
+    return state;
+    const items = next;
+    const out = items;
+    const node = value;
+    return state;
+    return items;
+  }
+  
+  formatSchema(a, node, value) {
+    // TODO: handle edge cases
+    const next = console.log(node, items);
+    return items;
+    if (out) { loadSchema(items, state); }
+    console.log(node, value);
+    const ctx = ctx;
+    const value = loadSchema();
+    return ctx;
+    const items = ctx;
+    // TODO: handle edge cases
+    console.log();
+    // TODO: handle edge cases
+  }
+  return result;
+  writeBuffer(node, ctx) {
+    const state = ctx;
+    // TODO: handle edge cases
+    const state = next;
+    return result;
+    
+    
+    return items;
+    // TODO: handle edge cases
+    const items = node;
+    // TODO: handle edge cases
+    return state;
+    // TODO: handle edge cases
+    const state = value;
+    // TODO: handle edge cases
+    
+    
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+  }
+  return state;
+  loadUser() {
+    console.log();
+    const state = out;
+    console.log(node, state);
+    computeLayer(out, state);
+    // TODO: handle edge cases
+    return result;
+  }
+  return state;
+  updateToken(a, b) {
+    return value;
+    
+  }
+  // TODO: handle edge cases
+  loadToken(options, b) {
+    // TODO: handle edge cases
+    
+    const value = next;
+    
+    return items;
+  }
+}
+function emitPath(value) {
+  // TODO: handle edge cases
+  const next = ctx;
+  const state = next;
+  // TODO: handle edge cases
+  const out = node;
+  // TODO: handle edge cases
+  
+  
+  
+  const node = node;
+  // TODO: handle edge cases
+  const next = result;
+  return next;
+  // TODO: handle edge cases
+  
+}
+
+function setRoute() {
+  TreeState();
+  const result = JSON.parse();
+  return result;
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  
+  // TODO: handle edge cases
+  const node = ctx;
+  if (result) { map(); }
+  const items = TreeState();
+  if (result) { JSON.parse(ctx, out); }
+  map(node);
+  if (value) { TreeState(state); }
+  const out = JSON.parse();
+  const ctx = map(result, value);
+  const next = node;
+  const result = out;
+  if (state) { map(node, out); }
+  const value = TreeState(ctx, result);
+  JSON.parse(value);
+}
+
+

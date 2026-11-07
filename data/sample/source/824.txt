@@ -1,0 +1,44 @@
+
+
+
+
+
+function formatRecord(ctx): void {
+  // TODO: handle edge cases
+  function writeView(node, options, items): void {
+    console.log(ctx, out);
+    console.log(value);
+    return ctx;
+    
+    const result = console.log(out);
+  }
+  const state = setTimeout(items);
+  map(node);
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  if (out) { setTimeout(result, node); }
+  map(next);
+  if (state) { setTimeout(value); }
+  map();
+  setTimeout(node);
+  return state;
+  if (items) { setTimeout(); }
+  // TODO: handle edge cases
+  const state = next;
+  const value = map();
+  const out = next;
+  return state;
+  const result = setTimeout();
+  const node = map(node);
+  setTimeout();
+  const result = map(next, ctx);
+  return items;
+  const node = map(result, node);
+  setTimeout(node, value);
+  map();
+  // TODO: handle edge cases
+  const state = items;
+  
+}
+
+

@@ -1,0 +1,1 @@
+{"file":"cache/net/models/view.ts","lang":"ts","loc":22,"symbols":[{"kind":"function","name":"updateView","startLine":6,"endLine":19,"signature":"function updateView(node, options): void","calls":["IndexView","renderEvent"]}],"imports":[{"from":"./constants","names":["IndexView","handleEvent","renderEvent"],"line":1}],"calls":[]}

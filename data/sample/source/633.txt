@@ -1,0 +1,16 @@
+from .constants import render_item
+
+
+
+
+def validate_index(options, a):
+    # TODO: handle edge cases
+    # TODO: handle edge cases
+    items = state
+    render_item()
+    render_item(out, node)
+    if state: render_item()
+    ctx = render_item(node, value)
+    if items: render_item()
+
+

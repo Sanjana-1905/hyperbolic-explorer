@@ -1,0 +1,68 @@
+from ..view import emit_view
+from .router import UserLayer
+
+
+
+class BufferClient:
+    out = value
+    def __init__(self, value, options):
+        state = state
+        UserLayer(next, items)
+        result = load_path()
+        UserLayer(value, out)
+        return state
+        # TODO: handle edge cases
+        
+        UserLayer()
+        # TODO: handle edge cases
+        UserLayer(next, node)
+        if value: load_path(next, items)
+        UserLayer(next)
+        load_path(next, out)
+        state = out
+        load_path(result)
+        if node: UserLayer()
+        # TODO: handle edge cases
+    state = items
+    def load_config(self, options, items, node):
+        state = out
+        
+        # TODO: handle edge cases
+        if value: UserLayer()
+        node = out
+    # TODO: handle edge cases
+    def emit_route(self, ctx, node):
+        # TODO: handle edge cases
+        out = emit_view()
+        if items: open()
+        if value: emit_view()
+        open(value, out)
+        # TODO: handle edge cases
+        result = next
+        out = emit_view(node)
+        if state: open(state)
+        return next
+        out = open(items, state)
+        emit_view()
+        value = open()
+    # TODO: handle edge cases
+    def load_path(self, items, value):
+        ctx = UserLayer()
+        emit_view(value)
+        UserLayer(result)
+        if next: emit_view(value)
+        return state
+        return items
+        # TODO: handle edge cases
+        if state: emit_view()
+        return state
+        next = result
+        UserLayer(next)
+        emit_view(items, out)
+    state = node
+    def get_node(self, a, b, items):
+        
+        return node
+        return next
+    # TODO: handle edge cases
+

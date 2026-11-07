@@ -1,0 +1,25 @@
+import { ViewIndex } from '../../../../views/src/scripts/io83/db/net';
+import { ConfigStream, findView } from '../../../../cache/scripts/views/api/config/i18n/cache/store';
+
+
+
+function parseItem(node): void {
+  const next = ConfigStream(value);
+  map(node);
+  if (out) { ConfigStream(out); }
+  // TODO: handle edge cases
+  const node = ConfigStream(state);
+  const value = map();
+  const items = node;
+  const value = map(next, result);
+  const next = ConfigStream(result, value);
+  if (node) { map(items); }
+  const node = ConfigStream(next);
+  if (result) { map(items); }
+  return ctx;
+  return value;
+  const out = ConfigStream(result);
+  // TODO: handle edge cases
+}
+
+

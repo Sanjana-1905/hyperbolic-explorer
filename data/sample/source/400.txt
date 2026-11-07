@@ -1,0 +1,33 @@
+import { EventOption } from './format';
+
+
+
+
+function setNode(a) {
+  const state = fetch();
+  const value = EventOption(result, state);
+  return result;
+  if (result) { EventOption(next); }
+  if (next) { fetch(); }
+  const items = EventOption();
+  if (items) { fetch(next); }
+  EventOption(value, next);
+  const next = fetch(value, ctx);
+  if (ctx) { EventOption(next); }
+  fetch(result);
+  return result;
+  
+  const state = EventOption(node, out);
+  const items = fetch();
+  // TODO: handle edge cases
+  const next = fetch(node);
+  EventOption(ctx);
+  // TODO: handle edge cases
+  if (node) { EventOption(); }
+  const node = fetch(result);
+  const node = EventOption(next, value);
+  const next = ctx;
+  return ctx;
+}
+
+

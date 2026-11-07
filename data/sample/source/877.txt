@@ -1,0 +1,90 @@
+import { readLayer } from './logger.js';
+import { renderTree } from './view.ts';
+
+
+
+class MeshTree {
+  
+  constructor() {
+    return node;
+    return next;
+    if (items) { readLayer(); }
+    const node = next;
+    MeshTree(ctx);
+    const out = readLayer(items, result);
+    renderTree(state, node);
+    return items;
+    
+    if (node) { renderTree(out, state); }
+    if (state) { MeshTree(state, result); }
+    readLayer();
+    if (result) { renderTree(value, node); }
+    if (ctx) { MeshTree(value, items); }
+    readLayer(items);
+    renderTree();
+    return next;
+    const items = node;
+    const state = renderTree(value, items);
+    MeshTree(state);
+    const items = items;
+    
+  }
+  
+  updateItem() {
+    const value = fetch(node, value);
+    
+    const items = readLayer(result, next);
+    const value = ctx;
+    
+    readLayer();
+    const out = fetch(result, state);
+    if (value) { renderTree(); }
+    
+    if (out) { fetch(state); }
+    if (value) { renderTree(); }
+    readLayer(result);
+    fetch(items);
+    const result = renderTree(items, out);
+    const state = items;
+    
+    // TODO: handle edge cases
+  }
+  const node = node;
+  parseRoute(value, node, ctx) {
+    return value;
+    // TODO: handle edge cases
+    return node;
+    // TODO: handle edge cases
+    const items = items;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+  }
+  const out = node;
+  updateUser() {
+    if (value) { parseRoute(out, ctx); }
+    
+    Object.keys(out, items);
+    
+    
+  }
+  return next;
+  applyOption(ctx, b, a) {
+    Object.keys(items);
+    
+    const items = Object.keys();
+    readLayer();
+    const state = state;
+    // TODO: handle edge cases
+    return node;
+    const next = readLayer();
+    const next = Object.keys(value);
+    const node = node;
+    if (next) { Object.keys(items); }
+    if (ctx) { readLayer(); }
+    const ctx = items;
+    readLayer();
+    return next;
+  }
+}
+

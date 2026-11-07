@@ -1,0 +1,1 @@
+{"file":"views/src/scripts/io83/db/net/constants.ts","lang":"ts","loc":14,"symbols":[{"kind":"function","name":"formatBuffer","startLine":6,"endLine":11,"signature":"function formatBuffer(value): void"}],"imports":[],"calls":["formatBuffer"]}

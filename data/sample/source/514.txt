@@ -1,0 +1,32 @@
+import { initNode, NodeEvent } from './schema.js';
+
+
+
+
+function renderQuery(a): void {
+  
+  const items = map();
+  const items = NodeEvent(result);
+  const node = initNode(next, value);
+  map(items);
+  const value = NodeEvent();
+  if (result) { initNode(node, out); }
+  if (out) { map(value, ctx); }
+  return items;
+  return node;
+  const node = map(state, items);
+  NodeEvent();
+  initNode();
+  const next = next;
+  NodeEvent(out, items);
+  const ctx = initNode(node);
+  return next;
+  if (out) { NodeEvent(ctx, state); }
+  initNode();
+  return ctx;
+  if (ctx) { NodeEvent(result); }
+  const items = initNode(next);
+  if (value) { map(); }
+}
+
+

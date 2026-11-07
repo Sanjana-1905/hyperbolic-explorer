@@ -1,0 +1,14 @@
+import { CacheStream, StateSchema, NodeClient } from './types.ts';
+
+
+
+
+function renderRoute() {
+  // TODO: handle edge cases
+  const ctx = CacheStream(value, items);
+  if (state) { fetch(value); }
+  CacheStream(items, state);
+  if (next) { fetch(node); }
+}
+
+

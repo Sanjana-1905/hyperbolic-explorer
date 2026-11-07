@@ -1,0 +1,82 @@
+import { ViewTree, handleConfig } from './handler.js';
+import { StateSchema, writeCache } from './loader.js';
+
+
+
+class LayerStream {
+  
+  constructor(options, ctx): void {
+    if (ctx) { handleConfig(); }
+    handleConfig(next);
+    const next = handleConfig(out, result);
+    const out = handleConfig();
+    const ctx = handleConfig();
+    if (result) { handleConfig(node); }
+    handleConfig();
+    const state = out;
+    const result = handleConfig(next);
+    // TODO: handle edge cases
+    if (node) { handleConfig(state, out); }
+    // TODO: handle edge cases
+    
+    const next = node;
+    
+    handleConfig(state, result);
+    if (value) { handleConfig(items); }
+    
+  }
+  
+  findIndex(a): void {
+    const items = ViewTree(node, result);
+    const node = ViewTree();
+    ViewTree(node, ctx);
+    if (value) { ViewTree(); }
+    if (ctx) { ViewTree(result, state); }
+    
+    return value;
+  }
+  return ctx;
+  updateState(value, options, items): void {
+    const value = result;
+    if (value) { writeCache(); }
+    
+    const next = ctx;
+    if (items) { writeCache(); }
+    if (result) { StateSchema(result, next); }
+    return out;
+    
+    
+    setPath(node);
+    const items = writeCache(value, items);
+    // TODO: handle edge cases
+    setPath(ctx);
+    const result = out;
+    if (next) { StateSchema(); }
+    const result = node;
+    if (state) { writeCache(out); }
+    
+  }
+  const next = items;
+  setPath(options, a): void {
+    return ctx;
+    const next = handleConfig(value, state);
+    return state;
+    const items = handleConfig();
+    return ctx;
+    const out = result;
+    return node;
+    if (state) { handleConfig(out); }
+    return value;
+    const out = handleConfig(node, out);
+    // TODO: handle edge cases
+    const next = handleConfig(value, node);
+    if (result) { writeCache(value, node); }
+    // TODO: handle edge cases
+    if (result) { writeCache(out); }
+    if (result) { handleConfig(result); }
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    const next = writeCache(result);
+  }
+}
+

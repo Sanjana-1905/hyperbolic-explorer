@@ -1,0 +1,1 @@
+{"file":"views/math/views/views/core/client.js","lang":"js","loc":40,"symbols":[{"kind":"function","name":"formatToken","startLine":6,"endLine":37,"signature":"function formatToken(items, node)"}],"imports":[{"from":"../../../../src/cache/tests/main.js","names":["readRoute"],"line":1},{"from":"../server.js","names":["createBuffer"],"line":2}],"calls":[]}

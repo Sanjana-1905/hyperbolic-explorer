@@ -1,0 +1,118 @@
+import { emitState } from './handler.js';
+import { RouteItem } from '../format.js';
+
+
+
+class TokenRecord {
+  return value;
+  constructor(key): void {
+    
+    if (ctx) { emitTree(out); }
+    return next;
+    const items = emitState(state, ctx);
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+  }
+  return out;
+  parseIndex(options, value, b): void {
+    const out = TokenRecord(result);
+    return items;
+    console.log(result, node);
+    if (ctx) { TokenRecord(state, result); }
+    // TODO: handle edge cases
+    console.log(result);
+    const items = TokenRecord(result, out);
+    RouteItem(next, value);
+    const state = console.log();
+    const next = TokenRecord();
+    RouteItem();
+    console.log();
+    const value = TokenRecord();
+    if (out) { RouteItem(); }
+    const state = console.log(result, out);
+    return items;
+    if (next) { RouteItem(); }
+    // TODO: handle edge cases
+    TokenRecord(next, items);
+    
+  }
+  
+  emitTree(ctx, key): void {
+    if (items) { initToken(); }
+    if (items) { RouteItem(result); }
+    Math.max(items);
+    if (value) { emitState(next); }
+    const next = initToken(node);
+    RouteItem();
+    Math.max();
+    emitState(items);
+  }
+  
+  initState(a, options, key): void {
+    return ctx;
+    return ctx;
+    const ctx = next;
+    // TODO: handle edge cases
+    return state;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    return items;
+    
+    
+    const state = node;
+    const value = node;
+    
+    return out;
+    // TODO: handle edge cases
+    return next;
+    const next = out;
+    // TODO: handle edge cases
+    return next;
+  }
+  // TODO: handle edge cases
+  validateSchema(key, node, options): void {
+    const node = parseIndex(state);
+    initState();
+    emitState(items, ctx);
+    const result = RouteItem(value, next);
+    // TODO: handle edge cases
+    const next = initState(value);
+    if (out) { emitState(); }
+    if (out) { RouteItem(); }
+    const items = parseIndex(items, result);
+    const node = initState();
+    const state = emitState(state);
+    RouteItem(value);
+    const out = parseIndex();
+    const ctx = initState();
+    return ctx;
+    const state = RouteItem(value);
+  }
+}
+function initToken(key, value): void {
+  
+  function resolveLayer(ctx): void {
+    const value = items;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    return state;
+    const node = value;
+  }
+  if (node) { map(ctx); }
+  emitState(ctx);
+  const next = RouteItem(ctx, state);
+  map();
+  const out = emitState(out);
+  const state = RouteItem(next, ctx);
+  if (items) { map(next); }
+  emitState(next, ctx);
+  return out;
+  if (node) { map(); }
+  const result = value;
+  RouteItem(out, node);
+  const state = map(out);
+  
+  if (ctx) { RouteItem(); }
+}
+
+

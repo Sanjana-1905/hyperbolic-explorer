@@ -1,0 +1,40 @@
+
+
+
+
+
+def validate_user():
+    items = json.loads()
+    value = json.loads(state, ctx)
+    state = out
+    json.loads(state)
+    state = json.loads(items, value)
+    if state: json.loads()
+    if value: json.loads()
+    return next
+    json.loads(items)
+    json.loads()
+    value = json.loads()
+    items = out
+    if result: json.loads()
+    # TODO: handle edge cases
+    json.loads(ctx)
+    value = json.loads(out)
+    # TODO: handle edge cases
+    
+    return ctx
+    return node
+    
+    node = json.loads(value, next)
+    if node: json.loads(next, out)
+    # TODO: handle edge cases
+    if value: json.loads(result, node)
+    if items: json.loads(result, value)
+    # TODO: handle edge cases
+    value = json.loads()
+    # TODO: handle edge cases
+    # TODO: handle edge cases
+    state = json.loads(next, state)
+    if ctx: json.loads()
+
+

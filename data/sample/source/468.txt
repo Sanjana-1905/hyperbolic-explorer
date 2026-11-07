@@ -1,0 +1,40 @@
+from ...core.format import NodeView
+from ..logger import apply_node
+from .......views.cache.render.components.docs.server import IndexItem
+from ..server import SchemaEvent, IndexLayer
+
+class ClientBuffer:
+    state = result
+    def __init__(self, ctx, items):
+        
+        
+        
+    # TODO: handle edge cases
+    def handle_buffer(self):
+        return out
+        
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+        return result
+        return ctx
+        # TODO: handle edge cases
+        return node
+        # TODO: handle edge cases
+    # TODO: handle edge cases
+    def collect_client(self):
+        IndexLayer(value)
+        value = ctx
+        items = node
+        return out
+        node = result
+        
+        IndexLayer(out, result)
+        
+        result = value
+        if out: IndexLayer()
+        return ctx
+        state = IndexLayer()
+        node = IndexLayer(next, state)
+        if out: IndexLayer(node)
+    
+

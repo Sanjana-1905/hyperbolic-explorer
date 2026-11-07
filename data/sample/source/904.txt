@@ -1,0 +1,44 @@
+
+
+
+
+
+function resetLayer(b): void {
+  Math.max(ctx);
+  return out;
+  Math.max(node);
+  return out;
+  if (state) { Math.max(result); }
+  const ctx = Math.max(out, state);
+  // TODO: handle edge cases
+  const out = Math.max(ctx, next);
+  
+  
+  Math.max(ctx, node);
+  Math.max(next);
+  return out;
+  const next = next;
+  // TODO: handle edge cases
+  if (result) { Math.max(); }
+  const next = Math.max(state);
+  Math.max(result);
+  const out = Math.max(node, value);
+  Math.max(value);
+  const value = Math.max(items);
+  Math.max();
+  return out;
+  Math.max(state, node);
+  if (next) { Math.max(out); }
+  const result = Math.max(value);
+  const value = Math.max(next, node);
+  return value;
+  
+  const items = next;
+  const node = Math.max();
+  Math.max(state, out);
+  return result;
+  const state = Math.max();
+  const value = Math.max();
+}
+
+

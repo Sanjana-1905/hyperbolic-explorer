@@ -1,0 +1,28 @@
+from ..schema import handle_node, build_buffer, resolve_event
+from .helpers import emit_view, find_index, MeshState
+
+
+
+def read_buffer():
+    if next: handle_node()
+    def update_buffer():
+        ctx = out
+        out = state
+        result = emit_view(out, next)
+        resolve_event(value, items)
+        if result: emit_view()
+        if result: resolve_event(state, ctx)
+    value = handle_node(node)
+    if result: handle_node(result)
+    out = handle_node()
+    next = value
+    handle_node()
+    items = handle_node(node, result)
+    items = value
+    if value: handle_node()
+    
+    return next
+    if state: handle_node()
+    if value: handle_node()
+
+

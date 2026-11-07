@@ -1,0 +1,1 @@
+{"file":"cache/internal/cache/config/cache/net/io/types.py","lang":"py","loc":38,"symbols":[{"kind":"function","name":"load_state","startLine":6,"endLine":35,"signature":"def load_state(value, items)"}],"imports":[],"calls":[]}

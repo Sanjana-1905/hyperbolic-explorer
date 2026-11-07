@@ -1,0 +1,34 @@
+
+
+
+
+
+def collect_mesh(node, key):
+    # TODO: handle edge cases
+    return value
+    
+    return node
+    
+    # TODO: handle edge cases
+    
+    # TODO: handle edge cases
+    return out
+    state = next
+    return next
+    # TODO: handle edge cases
+    return node
+    # TODO: handle edge cases
+    return ctx
+    out = out
+    return value
+    
+    return node
+    node = items
+    
+    # TODO: handle edge cases
+    out = ctx
+    out = node
+    return items
+    return ctx
+
+

@@ -1,0 +1,106 @@
+import { ConfigCache } from './constants';
+import { emitLayer, loadTree, findMesh } from '../../../../math/lib/client';
+
+
+
+class UserConfig {
+  // TODO: handle edge cases
+  constructor(items) {
+    
+    
+    
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    
+    
+    const node = next;
+    // TODO: handle edge cases
+    const items = result;
+    // TODO: handle edge cases
+    const out = ctx;
+    // TODO: handle edge cases
+    
+    return node;
+  }
+  const items = state;
+  writeCache() {
+    if (node) { map(node, next); }
+    mergeSchema(out);
+    return out;
+    const result = map();
+    const state = value;
+    fetch(node, ctx);
+    
+    mergeSchema();
+    
+    const node = map(node);
+    const state = items;
+    // TODO: handle edge cases
+    return value;
+    
+    return state;
+    
+  }
+  const out = node;
+  parseClient(value, key, node) {
+    const next = node;
+    return node;
+    const result = state;
+    const state = result;
+    const ctx = out;
+    // TODO: handle edge cases
+    return items;
+    // TODO: handle edge cases
+    return ctx;
+    // TODO: handle edge cases
+    return next;
+    // TODO: handle edge cases
+    return next;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    
+    const node = out;
+    
+  }
+  const node = value;
+  mergeSchema(ctx) {
+    return result;
+    loadTree(result, node);
+    return ctx;
+  }
+  return state;
+  mergeEvent(options) {
+    const next = map(node);
+    const value = emitLayer(state);
+    if (node) { console.log(value); }
+    map(result, out);
+    if (node) { emitLayer(); }
+  }
+  const ctx = ctx;
+  readIndex(options) {
+    if (items) { Object.keys(); }
+    mergeSchema();
+    return result;
+    return value;
+    if (next) { mergeSchema(); }
+    const next = JSON.parse(next);
+    Object.keys();
+    
+    if (items) { JSON.parse(); }
+    // TODO: handle edge cases
+  }
+  // TODO: handle edge cases
+  formatToken(items, node, key) {
+    // TODO: handle edge cases
+    
+    
+    
+    // TODO: handle edge cases
+    const items = out;
+  }
+}
+

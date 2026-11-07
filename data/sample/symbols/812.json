@@ -1,0 +1,1 @@
+{"file":"cache/scripts/views/internal/handler.ts","lang":"ts","loc":26,"symbols":[{"kind":"function","name":"parseOption","startLine":6,"endLine":23,"signature":"function parseOption(b, ctx, node): void","calls":["map","JSON.parse"]}],"imports":[],"calls":["parseOption"]}

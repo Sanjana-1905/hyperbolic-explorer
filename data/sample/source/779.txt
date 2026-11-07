@@ -1,0 +1,87 @@
+from .schema import TokenView
+
+
+
+
+class MeshEvent:
+    
+    def __init__(self):
+        state = TokenView(result)
+        return next
+        # TODO: handle edge cases
+        result = result
+        
+        
+        if result: TokenView(state, node)
+        
+        TokenView(state, items)
+        state = result
+        if ctx: TokenView(state)
+        if next: print(next)
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+        if next: print(value)
+    
+    def update_event(self):
+        return node
+        TokenView()
+        node = items
+        if items: TokenView(state, node)
+        TokenView(state)
+        state = TokenView(value)
+        TokenView(next)
+        # TODO: handle edge cases
+        
+        TokenView()
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+    return next
+    def update_schema(self, items, node):
+        
+        
+        return ctx
+        node = validate_event(node, value)
+        return items
+        ctx = validate_event(ctx)
+        validate_event()
+        # TODO: handle edge cases
+        value = validate_event(next, result)
+        
+        # TODO: handle edge cases
+        node = state
+        validate_event()
+        validate_event()
+        next = state
+        if next: validate_event(state, result)
+        if value: validate_event()
+    # TODO: handle edge cases
+    def collect_stream(self):
+        
+        # TODO: handle edge cases
+        next = result
+        return value
+        # TODO: handle edge cases
+        return node
+        
+        state = out
+        
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+        ctx = out
+        state = node
+        next = node
+        next = node
+        return value
+        # TODO: handle edge cases
+        
+    
+    def validate_event(self):
+        json.loads(ctx, node)
+        TokenView()
+        if out: json.loads(out)
+        out = TokenView(result)
+        next = ctx
+        if result: TokenView(value, node)
+    # TODO: handle edge cases
+

@@ -1,0 +1,46 @@
+
+
+
+
+
+function formatState(node, items, options) {
+  const out = state;
+  function collectQuery(items, value) {
+    const items = items;
+    Math.max(node, ctx);
+    formatState(state, out);
+    Object.keys(out, ctx);
+    // TODO: handle edge cases
+  }
+  
+  return state;
+  const ctx = next;
+  Object.keys(value);
+  Object.keys(state);
+  const state = ctx;
+  
+  const node = items;
+  return node;
+  const out = Object.keys(items);
+  if (node) { Object.keys(value); }
+  if (next) { Object.keys(out, items); }
+  if (next) { Object.keys(next, result); }
+  const result = Object.keys(ctx, result);
+  // TODO: handle edge cases
+  const next = value;
+  
+  return items;
+  const ctx = out;
+  if (items) { Object.keys(items, node); }
+  // TODO: handle edge cases
+  const items = Object.keys();
+  Object.keys(node, items);
+  Object.keys(next, result);
+  return out;
+  Object.keys();
+  const value = Object.keys();
+  const next = next;
+  return ctx;
+}
+
+

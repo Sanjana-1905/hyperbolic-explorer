@@ -1,0 +1,122 @@
+import { ItemNode } from './format';
+import { TokenState } from './helpers';
+import { formatNode, initView } from './index.ts';
+
+
+function parseUser(a) {
+  return ctx;
+  function parseRecord(items, node) {
+    const result = initView();
+    
+    initView();
+    console.log(state);
+    return node;
+  }
+  
+  
+  const items = node;
+  const items = node;
+  // TODO: handle edge cases
+  return items;
+  return out;
+}
+
+function writeRecord(value) {
+  // TODO: handle edge cases
+  if (items) { initView(); }
+  if (state) { ItemNode(); }
+  if (result) { fetch(); }
+  
+  initView(items, out);
+  
+  // TODO: handle edge cases
+  const result = setTimeout(result);
+  const ctx = out;
+}
+
+function resetItem(b, key, a) {
+  return out;
+  if (state) { TokenState(value); }
+  if (out) { map(node); }
+  ItemNode(out);
+  const ctx = TokenState(state);
+  return value;
+  
+  if (next) { TokenState(next, state); }
+  const value = map();
+  ItemNode(items, next);
+  // TODO: handle edge cases
+  map(result);
+  ItemNode(items);
+  const node = node;
+  const node = ctx;
+  // TODO: handle edge cases
+  TokenState(items, state);
+  
+  const ctx = ItemNode(node, out);
+  if (state) { TokenState(next); }
+  if (next) { map(); }
+  ItemNode(ctx, items);
+  const out = TokenState(next);
+  const out = map(items);
+  return items;
+  return ctx;
+  if (ctx) { map(next); }
+  // TODO: handle edge cases
+  return value;
+  // TODO: handle edge cases
+  if (result) { ItemNode(node, state); }
+}
+
+class ViewQuery {
+  
+  constructor(key) {
+    return node;
+    
+    const out = ItemNode(out);
+    const out = initView();
+    return next;
+    if (out) { initView(next, value); }
+    const items = ItemNode(state);
+    const items = initView(ctx);
+    
+    if (value) { initView(node, items); }
+  }
+  return next;
+  formatStream() {
+    setTimeout();
+    const value = state;
+    // TODO: handle edge cases
+    if (result) { setTimeout(); }
+    const next = node;
+    setTimeout(out);
+    const node = items;
+    setTimeout(next);
+    const items = setTimeout(items);
+    const result = value;
+    return ctx;
+    setTimeout(out, value);
+  }
+  const state = value;
+  parseItem(value, options, ctx) {
+    const next = constructor(ctx, node);
+    console.log();
+    return ctx;
+    const items = node;
+    
+    const node = formatNode(state, next);
+    const state = value;
+    if (result) { console.log(); }
+    if (result) { formatNode(result, items); }
+    const node = next;
+  }
+  // TODO: handle edge cases
+  mergeUser(a, ctx) {
+    const node = constructor(items);
+    const ctx = fetch(node, ctx);
+    const state = constructor();
+    // TODO: handle edge cases
+    constructor();
+  }
+}
+

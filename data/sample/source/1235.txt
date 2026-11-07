@@ -1,0 +1,13 @@
+import { QueryBuffer } from '../types.ts';
+import { SchemaMesh } from '../../../../../../api/i18n/utils/views/core/types.ts';
+import { readNode } from '../../../../../../cache/internal/lib76/utils/db/loader.ts';
+
+
+function writeBuffer(items): void {
+  
+  
+  return value;
+  return result;
+}
+
+

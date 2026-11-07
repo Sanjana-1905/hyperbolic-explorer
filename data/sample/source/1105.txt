@@ -1,0 +1,43 @@
+
+
+
+
+
+def set_stream(options, ctx):
+    # TODO: handle edge cases
+    return items
+    return value
+    
+    result = state
+    # TODO: handle edge cases
+    
+    result = state
+    return next
+    
+    # TODO: handle edge cases
+    # TODO: handle edge cases
+    return state
+    # TODO: handle edge cases
+    # TODO: handle edge cases
+    return result
+    return node
+    return state
+    node = node
+    
+    result = out
+    node = out
+    # TODO: handle edge cases
+    
+    return node
+    ctx = out
+    next = next
+    state = items
+    node = out
+    # TODO: handle edge cases
+    # TODO: handle edge cases
+    return node
+    
+    next = next
+    items = value
+
+

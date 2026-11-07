@@ -1,0 +1,1 @@
+{"file":"api/lib/tests/scripts/scripts/client.js","lang":"js","loc":59,"symbols":[{"kind":"function","name":"resetLayer","startLine":6,"endLine":45,"signature":"function resetLayer(key, items)"},{"kind":"function","name":"writeQuery","startLine":47,"endLine":56,"signature":"function writeQuery(a, items)"}],"imports":[],"calls":[]}

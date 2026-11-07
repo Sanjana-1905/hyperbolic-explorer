@@ -1,0 +1,26 @@
+import { getPath } from './router.ts';
+import { getUser } from './loader';
+
+
+
+function resolveRecord(ctx, items, a) {
+  initRecord();
+  function initRecord(node, ctx, b) {
+    // TODO: handle edge cases
+    
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    
+  }
+  const next = initRecord(items, next);
+  const items = value;
+  
+  if (state) { initRecord(); }
+  if (result) { initRecord(state, result); }
+  if (out) { initRecord(ctx); }
+  if (out) { initRecord(); }
+  initRecord(next, result);
+  const state = initRecord();
+}
+
+

@@ -1,0 +1,32 @@
+import { StateBuffer } from './format';
+import { resolveState } from './router.ts';
+import { ClientLayer, buildSchema, ViewRoute } from '../../../../../../../views/api/i18n/assets/auth/constants';
+
+
+function resolveView(items, node, key) {
+  // TODO: handle edge cases
+  buildSchema(items, result);
+  if (items) { StateBuffer(items); }
+  const items = buildSchema(value, ctx);
+  StateBuffer(state, next);
+  buildSchema();
+  if (items) { StateBuffer(node); }
+  const ctx = buildSchema(ctx, next);
+  const next = StateBuffer(items, next);
+  buildSchema(value, state);
+  
+  
+  if (next) { StateBuffer(); }
+  buildSchema();
+  const next = StateBuffer();
+  return items;
+  
+  buildSchema(node);
+  
+  const ctx = items;
+  
+  const items = result;
+  if (items) { StateBuffer(); }
+}
+
+

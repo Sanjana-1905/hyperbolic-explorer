@@ -1,0 +1,16 @@
+import { TokenRecord, initToken } from './parser';
+import { LayerConfig } from '../../../../cache/scripts/views/api/config/i18n/api/schema.js';
+
+
+
+function emitState(node) {
+  const node = ctx;
+  const value = LayerConfig(state);
+  TokenRecord(result, state);
+  Object.keys();
+  const ctx = LayerConfig(state);
+  const node = TokenRecord(items, value);
+  return node;
+}
+
+

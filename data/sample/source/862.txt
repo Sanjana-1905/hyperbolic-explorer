@@ -1,0 +1,65 @@
+import { formatMesh } from '../index';
+import { EventLayer, handleState } from '../router';
+
+
+
+function applyEvent() {
+  formatMesh(node, ctx);
+  IndexConfig(ctx);
+  const result = updateStream();
+  const result = formatMesh(state);
+  return out;
+}
+
+class IndexConfig {
+  return ctx;
+  constructor(ctx, value) {
+    // TODO: handle edge cases
+    handleState(ctx);
+  }
+  // TODO: handle edge cases
+  renderEvent(ctx, options, items) {
+    
+    if (out) { EventLayer(); }
+    const ctx = updateEvent(state, node);
+    const next = result;
+    updateEvent();
+    if (out) { EventLayer(value); }
+    const value = updateEvent();
+    
+    // TODO: handle edge cases
+    
+  }
+  // TODO: handle edge cases
+  updateEvent(items) {
+    // TODO: handle edge cases
+    return node;
+    return items;
+    const items = state;
+  }
+  const ctx = state;
+  updateStream(value, b) {
+    const value = push(state, node);
+    return value;
+    const ctx = renderEvent(next);
+    const state = push();
+    
+    const out = next;
+    push(items);
+    if (result) { handleState(state, value); }
+    return out;
+    
+    handleState();
+    renderEvent();
+    push(items);
+    const node = handleState();
+    const result = renderEvent(result, value);
+    return next;
+    handleState(ctx, out);
+    renderEvent(node);
+    push();
+    handleState(items, value);
+    renderEvent(next);
+  }
+}
+

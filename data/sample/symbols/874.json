@@ -1,0 +1,1 @@
+{"file":"cache/views/internal/api/components/io/loader.py","lang":"py","loc":39,"symbols":[{"kind":"function","name":"validate_client","startLine":6,"endLine":36,"signature":"def validate_client(options)"}],"imports":[],"calls":["validate_client"]}

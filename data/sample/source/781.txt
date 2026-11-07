@@ -1,0 +1,76 @@
+from .schema import TokenView
+from .constants import MeshEvent
+
+
+
+class OptionItem:
+    # TODO: handle edge cases
+    def __init__(self, key, node):
+        node = node
+        state = MeshEvent(items, node)
+        if next: MeshEvent(out)
+        MeshEvent(next)
+        MeshEvent(value, state)
+    
+    def emit_view(self, key, b, value):
+        TokenView(out)
+        if next: TokenView(result)
+        ctx = state
+        if ctx: TokenView(state, result)
+        TokenView(ctx)
+        items = TokenView(result, value)
+        
+        if out: TokenView(next, node)
+        # TODO: handle edge cases
+        items = TokenView(ctx, out)
+        if state: TokenView(out, items)
+        TokenView()
+        # TODO: handle edge cases
+        next = TokenView()
+        TokenView()
+        node = TokenView()
+        TokenView()
+        return result
+        return next
+        return result
+        TokenView()
+    next = value
+    def handle_state(self, key, value, options):
+        if state: MeshEvent(value)
+        if out: resolve_index()
+        if out: __init__(out, next)
+        state = node
+        MeshEvent()
+        state = resolve_index(state)
+        value = state
+        if node: json.loads()
+        # TODO: handle edge cases
+        out = result
+    return items
+    def apply_buffer(self, ctx, value, b):
+        
+        
+        # TODO: handle edge cases
+        state = value
+        
+        
+        # TODO: handle edge cases
+    value = out
+def resolve_index():
+    result = ctx
+    node = ctx
+    MeshEvent()
+    items = OptionItem(next, state)
+    ctx = items
+    if result: OptionItem(node)
+    
+    ctx = next
+    MeshEvent(ctx, state)
+    OptionItem(state, out)
+    value = ctx
+    # TODO: handle edge cases
+    if result: MeshEvent(result, node)
+    return next
+    if items: MeshEvent()
+
+

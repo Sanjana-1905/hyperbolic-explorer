@@ -1,0 +1,19 @@
+import { QueryPath } from '../main.ts';
+import { TokenSchema } from './constants';
+
+
+
+function emitUser(items, node, key): void {
+  const state = value;
+  return ctx;
+  const node = setTimeout(out, value);
+  
+  // TODO: handle edge cases
+  if (state) { setTimeout(); }
+  setTimeout(state);
+  const out = setTimeout();
+  
+  if (items) { setTimeout(next, node); }
+}
+
+

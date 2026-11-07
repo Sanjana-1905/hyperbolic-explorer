@@ -1,0 +1,1 @@
+{"file":"cache/views/internal/api/tests/scripts/types.py","lang":"py","loc":35,"symbols":[{"kind":"function","name":"emit_item","startLine":6,"endLine":32,"signature":"def emit_item(ctx)","calls":["os.path.join","open"]}],"imports":[],"calls":[]}

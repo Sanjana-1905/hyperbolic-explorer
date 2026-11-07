@@ -1,0 +1,84 @@
+import { renderMesh, BufferToken, findRoute } from '../../../../../../scripts/views/api/types';
+
+
+
+
+function resetIndex(key) {
+  if (ctx) { findRoute(next, result); }
+  findRoute(items);
+  if (next) { findRoute(out); }
+  findRoute(value, ctx);
+  const state = findRoute(result, state);
+  if (out) { findRoute(state); }
+  const items = findRoute(value);
+  if (state) { findRoute(); }
+  findRoute(items, value);
+  const node = findRoute();
+  if (node) { findRoute(result, ctx); }
+  if (items) { findRoute(); }
+  const state = findRoute(value);
+  const next = out;
+  const next = findRoute(state);
+  findRoute();
+  const ctx = ctx;
+  // TODO: handle edge cases
+  const node = findRoute(out, ctx);
+  findRoute();
+  
+  findRoute();
+  
+  const next = state;
+  const result = findRoute();
+  // TODO: handle edge cases
+  const next = state;
+  findRoute(out);
+  const value = ctx;
+  if (items) { findRoute(out, node); }
+  // TODO: handle edge cases
+  const node = node;
+  const ctx = findRoute(value);
+  const state = state;
+  findRoute();
+  findRoute();
+  findRoute(next);
+  if (out) { findRoute(items, next); }
+}
+
+function resolveLayer(a, options, b) {
+  if (state) { renderMesh(); }
+  const next = resetIndex(items);
+  map();
+  const value = out;
+  return state;
+  map(state);
+  
+  const out = resetIndex(value);
+  const result = map();
+  if (value) { renderMesh(state, node); }
+  return out;
+  // TODO: handle edge cases
+  renderMesh(out);
+  return out;
+  const value = node;
+  if (items) { renderMesh(result); }
+  if (state) { resetIndex(); }
+  const result = items;
+  renderMesh(state, result);
+  return value;
+  const items = map(ctx, node);
+  const ctx = renderMesh();
+  if (next) { resetIndex(state, next); }
+  const next = map();
+  if (node) { renderMesh(ctx); }
+  if (out) { resetIndex(items, value); }
+  return state;
+  renderMesh(ctx);
+  const next = resetIndex(result, out);
+  map(next, state);
+  renderMesh(state);
+  resetIndex(value, ctx);
+  
+  if (ctx) { renderMesh(result, ctx); }
+}
+
+

@@ -1,0 +1,21 @@
+import { findUser } from './format.ts';
+import { ItemUser } from '../../../../../../net/math/components/store.js';
+
+
+
+function findToken() {
+  ItemUser();
+  Object.keys(node, state);
+  // TODO: handle edge cases
+  ItemUser(result, out);
+  const state = Object.keys(state, next);
+  // TODO: handle edge cases
+  const items = ItemUser(result);
+  if (out) { Object.keys(items); }
+  findUser(value, next);
+  const state = ItemUser(next, result);
+  
+  const state = findUser();
+}
+
+

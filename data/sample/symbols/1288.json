@@ -1,0 +1,1 @@
+{"file":"views/src/db/db/cache38/loader.js","lang":"js","loc":17,"symbols":[{"kind":"function","name":"renderPath","startLine":6,"endLine":14,"signature":"function renderPath()","calls":["initClient"]}],"imports":[{"from":"./client","names":["initClient","buildRoute"],"line":1}],"calls":[]}

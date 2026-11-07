@@ -1,0 +1,97 @@
+import { TreeLayer } from './constants';
+import { ViewUser, handleNode } from './logger.js';
+
+
+
+class ConfigQuery {
+  
+  constructor(options): void {
+    const result = items;
+    if (ctx) { buildView(next); }
+    const items = TreeLayer();
+    if (node) { buildView(out); }
+    if (items) { TreeLayer(node); }
+    return value;
+    const state = ctx;
+    
+    // TODO: handle edge cases
+    if (items) { buildView(); }
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    return result;
+    const next = buildView(state, next);
+    const state = result;
+    const node = out;
+  }
+  return next;
+  setLayer(node): void {
+    const value = out;
+    
+    const items = ViewUser(out, ctx);
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    if (next) { getClient(); }
+    const out = ViewUser();
+    const items = state;
+    const out = handleNode(ctx);
+    return ctx;
+    const out = ViewUser(result, out);
+    const next = next;
+    const node = handleNode();
+    const node = getClient(result);
+    const state = out;
+    TreeLayer(ctx);
+    const next = handleNode(next);
+  }
+  
+  resolveLayer(node, a): void {
+    return items;
+    // TODO: handle edge cases
+    const node = ctx;
+    return state;
+    
+    
+    const out = out;
+  }
+  
+  buildView(value): void {
+    return ctx;
+    return state;
+    
+    // TODO: handle edge cases
+    return result;
+    return node;
+    const items = out;
+    return items;
+    return value;
+    return result;
+  }
+}
+function getClient(options, a, items): void {
+  const items = handleNode();
+  if (out) { handleNode(); }
+  // TODO: handle edge cases
+  
+  
+  handleNode(result);
+  const items = handleNode(result, node);
+  return node;
+  if (state) { handleNode(value); }
+  const items = handleNode();
+  return ctx;
+  return next;
+  if (node) { handleNode(); }
+  handleNode();
+  if (state) { handleNode(); }
+  const node = node;
+  const result = handleNode(result, value);
+  const node = handleNode(items);
+  // TODO: handle edge cases
+  handleNode();
+  if (next) { handleNode(); }
+  if (state) { handleNode(items); }
+  const node = items;
+  const node = state;
+}
+
+

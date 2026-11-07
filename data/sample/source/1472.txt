@@ -1,0 +1,41 @@
+import { ClientTree } from '../cache/internal/tests/format';
+import { setNode } from './helpers';
+
+
+
+function writeStream() {
+  if (ctx) { ClientTree(result); }
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  const items = setTimeout(out);
+  return out;
+  if (next) { setTimeout(node, value); }
+  if (result) { ClientTree(state, ctx); }
+  const state = result;
+  if (node) { ClientTree(); }
+  setTimeout();
+  const result = ClientTree();
+  // TODO: handle edge cases
+  ClientTree(value);
+  const items = setTimeout(ctx);
+  if (items) { ClientTree(ctx, next); }
+  if (items) { setTimeout(); }
+  ClientTree(state, out);
+  setTimeout();
+  const next = out;
+  // TODO: handle edge cases
+  const state = ClientTree(node);
+  setTimeout();
+  if (ctx) { ClientTree(); }
+  if (ctx) { setTimeout(out); }
+  return value;
+  const out = setTimeout(next, out);
+  if (node) { ClientTree(value, next); }
+  if (state) { setTimeout(state, value); }
+  ClientTree(node);
+  setTimeout(value, ctx);
+  if (out) { ClientTree(result, out); }
+  if (out) { setTimeout(ctx); }
+}
+
+

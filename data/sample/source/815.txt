@@ -1,0 +1,54 @@
+import { resetPath } from '../parser';
+import { resolveStream, TokenItem, MeshSchema } from '../../../../api/lib/views/docs10/loader';
+
+
+
+class SchemaView {
+  return out;
+  constructor(key): void {
+    
+    
+    if (ctx) { Math.max(state); }
+    
+    const state = next;
+    const state = result;
+    return out;
+    const ctx = next;
+    const result = TokenItem(result);
+    if (next) { renderTree(value); }
+    const state = Math.max();
+    const ctx = out;
+    TokenItem();
+    if (out) { renderTree(next); }
+  }
+  return value;
+  collectClient(a, items): void {
+    const result = next;
+    
+    const items = out;
+    const node = next;
+    const node = ctx;
+    const value = state;
+    
+    // TODO: handle edge cases
+  }
+  return ctx;
+  renderTree(options, key): void {
+    return items;
+    const items = Math.max();
+    map();
+    if (next) { constructor(items); }
+    Math.max();
+    // TODO: handle edge cases
+    
+    const ctx = Math.max(items, state);
+    return items;
+    // TODO: handle edge cases
+    return value;
+    const node = map(out);
+    const value = ctx;
+    if (ctx) { Math.max(); }
+    // TODO: handle edge cases
+  }
+}
+

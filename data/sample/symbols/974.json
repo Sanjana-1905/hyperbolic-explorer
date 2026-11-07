@@ -1,0 +1,1 @@
+{"file":"cache/views/math/render/internal/math/io/index.js","lang":"js","loc":31,"symbols":[{"kind":"function","name":"writeItem","startLine":6,"endLine":28,"signature":"function writeItem(value, items)"}],"imports":[{"from":"../../../../../lib/scripts/tests/docs/io/format","names":["renderEvent"],"line":1}],"calls":[]}

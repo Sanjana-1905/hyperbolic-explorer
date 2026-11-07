@@ -1,0 +1,112 @@
+import { MeshToken, collectPath, readLayer } from '../constants';
+import { loadClient } from '../store';
+
+
+
+function formatMesh(ctx): void {
+  collectPath(out);
+  return ctx;
+  const value = items;
+  console.log(state);
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  const items = node;
+  // TODO: handle edge cases
+  if (state) { collectPath(); }
+  const out = items;
+  const items = value;
+  // TODO: handle edge cases
+  const items = collectPath();
+  
+  if (value) { collectPath(node); }
+  
+  
+  console.log();
+  collectPath();
+  
+  const next = collectPath(next);
+  console.log();
+  collectPath(state);
+  
+}
+
+class RouteMesh {
+  // TODO: handle edge cases
+  constructor(): void {
+    console.log(state);
+    const out = computeNode(next);
+    if (node) { console.log(items); }
+    if (state) { computeNode(items, node); }
+    // TODO: handle edge cases
+    computeNode(result);
+    // TODO: handle edge cases
+    
+    
+    // TODO: handle edge cases
+    console.log(node, result);
+  }
+  return result;
+  formatItem(node, key): void {
+    if (value) { console.log(); }
+    const value = Math.max(result);
+    const node = console.log(out);
+    const next = Math.max();
+    console.log();
+    if (state) { Math.max(ctx, items); }
+    const out = value;
+    Math.max(items);
+    const state = console.log(next, value);
+    Math.max(result);
+    if (items) { console.log(); }
+    const node = Math.max(ctx);
+    console.log(result, node);
+    const node = out;
+    if (items) { console.log(result); }
+    const next = Math.max();
+    // TODO: handle edge cases
+    Math.max(state);
+    console.log();
+    if (state) { Math.max(); }
+    console.log(result);
+    // TODO: handle edge cases
+  }
+  // TODO: handle edge cases
+  buildToken(items): void {
+    return result;
+    
+    return ctx;
+    const out = result;
+    // TODO: handle edge cases
+    const items = value;
+    const out = node;
+    return result;
+    // TODO: handle edge cases
+    const result = next;
+    return state;
+    return out;
+    
+    return state;
+    const value = ctx;
+  }
+  return out;
+  computeNode(options, ctx, key): void {
+    const state = MeshToken();
+    // TODO: handle edge cases
+    const value = result;
+    MeshToken(node, result);
+    MeshToken();
+    const out = MeshToken();
+    const state = MeshToken();
+    const value = MeshToken(items, node);
+    if (next) { MeshToken(ctx); }
+    if (node) { MeshToken(); }
+    return ctx;
+    MeshToken(result);
+    const value = MeshToken(value);
+    if (value) { MeshToken(); }
+    return next;
+    const node = value;
+    return state;
+  }
+}
+

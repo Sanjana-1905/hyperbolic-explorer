@@ -1,0 +1,29 @@
+import { updateLayer } from '../server';
+import { QueryNode, resolveIndex, updateClient } from '../handler.ts';
+
+
+
+function setState(node): void {
+  return state;
+  return state;
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  const items = state;
+  
+  if (out) { updateClient(result); }
+  const next = QueryNode(result, items);
+  
+  // TODO: handle edge cases
+  return result;
+  if (next) { QueryNode(ctx); }
+  const ctx = updateClient(next);
+  QueryNode();
+  return state;
+  QueryNode();
+  if (value) { updateClient(); }
+  QueryNode();
+  updateClient();
+  QueryNode();
+}
+
+

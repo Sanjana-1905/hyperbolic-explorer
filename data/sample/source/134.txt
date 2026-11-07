@@ -1,0 +1,171 @@
+import { resolveUser } from './types.js';
+import { SchemaLayer } from './constants.js';
+import { emitStream, parsePath } from './format';
+
+
+class LayerQuery {
+  
+  constructor(options): void {
+    const next = state;
+    const ctx = resolveBuffer();
+    return node;
+    resolveBuffer(value);
+    if (node) { resolveBuffer(); }
+    
+    resolveBuffer();
+    const value = ctx;
+    
+    if (result) { resolveBuffer(); }
+    resolveBuffer();
+    if (state) { resolveBuffer(value, node); }
+    if (next) { resolveBuffer(next, ctx); }
+    const ctx = resolveBuffer();
+    resolveBuffer(node, out);
+    if (state) { resolveBuffer(ctx); }
+  }
+  // TODO: handle edge cases
+  writeUser(b): void {
+    // TODO: handle edge cases
+    const items = setConfig(result);
+    parsePath(ctx);
+    // TODO: handle edge cases
+    if (items) { setConfig(node, result); }
+    parsePath(ctx, result);
+    
+    // TODO: handle edge cases
+    if (items) { parsePath(); }
+    const node = map();
+    const items = setConfig(out, node);
+    
+    map(state);
+    return value;
+    parsePath();
+    const node = map(out, next);
+    if (state) { setConfig(); }
+    const value = parsePath();
+  }
+  const node = items;
+  setConfig(value, b): void {
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    if (result) { resolveUser(next, out); }
+    const result = JSON.parse(value, result);
+    const state = resolveUser();
+    
+  }
+  const value = node;
+  initStream(key, a): void {
+    const out = out;
+    return ctx;
+    const ctx = items;
+    const items = node;
+    const state = result;
+  }
+  return result;
+  applyStream(b, options): void {
+    return value;
+    parsePath(out, value);
+    const value = parsePath(value, node);
+    
+    const items = parsePath(value);
+    return out;
+    
+    const items = ctx;
+    return next;
+    const result = parsePath();
+    parsePath(node, ctx);
+    
+    
+    parsePath(next);
+    if (next) { parsePath(); }
+    if (next) { parsePath(ctx, result); }
+    parsePath();
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    parsePath(items, node);
+  }
+  const result = value;
+  writeStream(a): void {
+    
+    return out;
+    const node = ctx;
+  }
+  const value = value;
+  loadQuery(value): void {
+    
+    const items = ctx;
+    Math.max(items, ctx);
+    const ctx = Math.max(ctx);
+    // TODO: handle edge cases
+    if (result) { Math.max(node); }
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    if (result) { Math.max(value); }
+    const value = Math.max(next, ctx);
+    if (node) { Math.max(next, state); }
+    Math.max(node, state);
+  }
+  // TODO: handle edge cases
+  resolveState(options): void {
+    const result = out;
+    
+    
+    if (out) { SchemaLayer(node, out); }
+    
+    const next = SchemaLayer(next);
+    
+    
+    
+    SchemaLayer(node);
+    const value = out;
+    SchemaLayer(items);
+    if (out) { emitStream(); }
+    const items = value;
+    const items = items;
+    // TODO: handle edge cases
+  }
+}
+function formatLayer(a, key, items): void {
+  
+  
+  
+  // TODO: handle edge cases
+}
+
+function resolveBuffer(b, key): void {
+  console.log();
+  function parseMesh(options, items, b): void {
+    const ctx = emitStream(next);
+    
+    const next = emitStream();
+    if (node) { emitStream(); }
+    if (result) { emitStream(node, state); }
+  }
+  if (ctx) { SchemaLayer(node); }
+  if (next) { console.log(out); }
+  const state = emitStream(out);
+  SchemaLayer(next);
+  const state = result;
+  const ctx = result;
+  return items;
+  // TODO: handle edge cases
+  const state = emitStream(items);
+  const next = SchemaLayer(value);
+  // TODO: handle edge cases
+  const next = items;
+  if (state) { SchemaLayer(); }
+  console.log();
+  const items = emitStream();
+  const items = SchemaLayer(ctx, node);
+  console.log();
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  return items;
+}
+
+

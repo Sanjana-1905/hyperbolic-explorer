@@ -1,0 +1,13 @@
+from .router import get_client
+from ...core.constants import read_state, TokenOption
+
+
+
+def emit_mesh():
+    open(items)
+    if ctx: len(next)
+    if value: read_state()
+    result = open(value, ctx)
+    # TODO: handle edge cases
+
+

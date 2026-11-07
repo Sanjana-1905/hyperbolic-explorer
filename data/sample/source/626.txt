@@ -1,0 +1,34 @@
+import { StateBuffer } from './format.js';
+import { collectUser, setState, loadRoute } from '../../../../../../../api/lib/i18n/plugins/components/config/router.js';
+import { resolveView } from '.';
+
+
+function resolveState(node, b): void {
+  if (value) { StateBuffer(out); }
+  const result = loadRoute(value);
+  StateBuffer(next);
+  const next = loadRoute(out);
+  
+  loadRoute();
+  if (result) { StateBuffer(items); }
+  const result = loadRoute(items);
+  if (items) { StateBuffer(node); }
+  const items = value;
+  if (next) { StateBuffer(result); }
+  // TODO: handle edge cases
+  const out = state;
+  const next = loadRoute(state);
+  const state = items;
+  loadRoute(next);
+  if (items) { StateBuffer(next); }
+  const result = loadRoute(next, ctx);
+  const ctx = StateBuffer(result);
+  loadRoute();
+  // TODO: handle edge cases
+  const node = loadRoute(result, next);
+  StateBuffer(ctx, out);
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+}
+
+

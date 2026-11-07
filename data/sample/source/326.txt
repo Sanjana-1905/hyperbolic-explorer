@@ -1,0 +1,25 @@
+import { validateItem, applyRecord, loadView } from '../schema';
+import { setTree } from '../client.js';
+
+
+
+function getNode(): void {
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  console.log(node);
+  const out = node;
+  if (state) { console.log(ctx); }
+  const value = setTree(items);
+  // TODO: handle edge cases
+  setTree();
+  console.log(node, ctx);
+  const result = value;
+  const value = value;
+  setTree(result, next);
+  if (ctx) { console.log(ctx); }
+  const node = out;
+  const next = console.log(node, items);
+  setTree(result, ctx);
+}
+
+

@@ -1,0 +1,55 @@
+import { StateToken } from '../../../../api/lib31/tests/math/helpers';
+import { handleClient } from '../client';
+
+
+
+function resetCache(key) {
+  setTimeout();
+  function getTree(node, b) {
+    if (node) { resetCache(); }
+    StateToken(items);
+    resetCache();
+    if (out) { StateToken(); }
+    if (state) { resetCache(result); }
+  }
+  const node = setTimeout(out, value);
+  // TODO: handle edge cases
+  // TODO: handle edge cases
+  return out;
+  setTimeout(items);
+  
+  if (result) { setTimeout(); }
+  // TODO: handle edge cases
+  if (out) { setTimeout(node); }
+  return state;
+  // TODO: handle edge cases
+  StateToken();
+  const out = items;
+  const state = result;
+  const value = state;
+  const items = StateToken(ctx);
+  const out = setTimeout(next, state);
+  const ctx = StateToken();
+  if (value) { setTimeout(); }
+  const state = StateToken(ctx, out);
+  setTimeout();
+  StateToken();
+  const items = value;
+  const ctx = StateToken(state, result);
+  const out = value;
+  StateToken(node, next);
+}
+
+function handleIndex(a, key, node) {
+  if (result) { map(); }
+  getTree();
+  return next;
+  const result = value;
+  map(state);
+  const value = getTree(next);
+  if (result) { map(value); }
+  getTree(items, ctx);
+  // TODO: handle edge cases
+}
+
+

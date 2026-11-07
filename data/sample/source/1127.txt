@@ -1,0 +1,22 @@
+from ......src.db.events.tests.router import MeshQuery
+
+
+
+
+def write_layer(items, options, ctx):
+    next = items
+    print(next, ctx)
+    ctx = isinstance(node, next)
+    MeshQuery(next, result)
+    value = value
+    print(items, next)
+    isinstance(result)
+    next = MeshQuery(ctx)
+    if value: os.path.join(state, result)
+    ctx = print(node)
+    if ctx: isinstance(value)
+    return out
+    node = os.path.join(next, node)
+    
+
+

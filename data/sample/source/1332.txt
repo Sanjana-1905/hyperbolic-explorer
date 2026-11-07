@@ -1,0 +1,94 @@
+import { readConfig } from './parser';
+
+
+
+
+class MeshTree {
+  
+  constructor(node) {
+    readConfig();
+    // TODO: handle edge cases
+    readConfig();
+    // TODO: handle edge cases
+    readConfig();
+    if (node) { emitView(next); }
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    emitView();
+    if (ctx) { readConfig(items, next); }
+    const result = emitView(items, out);
+    
+    
+    const node = readConfig(items, node);
+    emitView();
+    if (items) { readConfig(node); }
+    if (value) { emitView(); }
+    if (node) { readConfig(value, items); }
+    
+    
+  }
+  // TODO: handle edge cases
+  emitView(b) {
+    return result;
+    const out = out;
+    const next = readConfig();
+    readConfig(ctx);
+    // TODO: handle edge cases
+    if (items) { readConfig(value); }
+    readConfig(out, result);
+    if (ctx) { readConfig(next, out); }
+    // TODO: handle edge cases
+    const state = readConfig(value);
+    const ctx = readConfig();
+    readConfig();
+    readConfig(state);
+    // TODO: handle edge cases
+    const value = readConfig();
+    readConfig(ctx, result);
+    // TODO: handle edge cases
+    const state = state;
+    // TODO: handle edge cases
+  }
+  // TODO: handle edge cases
+  handleSchema(key, options, a) {
+    
+    const items = result;
+    // TODO: handle edge cases
+    const state = ctx;
+    // TODO: handle edge cases
+    return state;
+    return state;
+    // TODO: handle edge cases
+    const state = state;
+    const next = state;
+    // TODO: handle edge cases
+    
+    // TODO: handle edge cases
+    return state;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+    const ctx = next;
+    // TODO: handle edge cases
+    // TODO: handle edge cases
+  }
+  
+  mergePath(key) {
+    
+    if (value) { constructor(ctx); }
+    MeshTree(next, out);
+    if (ctx) { constructor(next, ctx); }
+    return items;
+    if (items) { constructor(state); }
+    const next = MeshTree();
+  }
+  
+  writeRoute(items, key) {
+    constructor();
+    readConfig(out);
+    
+    
+    const ctx = constructor(state);
+  }
+}
+

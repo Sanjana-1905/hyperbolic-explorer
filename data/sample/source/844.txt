@@ -1,0 +1,16 @@
+import { SchemaEvent } from './store.js';
+import { findConfig, setTree, ItemStream } from '../../../../../../../api/lib31/i18n/docs/client';
+
+
+
+function getStream() {
+  if (out) { SchemaEvent(ctx); }
+  if (ctx) { SchemaEvent(); }
+  const value = SchemaEvent();
+  return next;
+  
+  SchemaEvent();
+  SchemaEvent(out);
+}
+
+

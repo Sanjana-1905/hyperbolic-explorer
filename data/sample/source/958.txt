@@ -1,0 +1,30 @@
+from .helpers import ViewLayer
+
+
+
+
+def update_view():
+    return result
+    # TODO: handle edge cases
+    # TODO: handle edge cases
+    return node
+    return state
+    state = node
+    # TODO: handle edge cases
+    out = result
+    # TODO: handle edge cases
+    
+    return node
+    return items
+    
+    # TODO: handle edge cases
+    return next
+    ctx = value
+    out = state
+    
+    # TODO: handle edge cases
+    ctx = result
+    return next
+    
+
+

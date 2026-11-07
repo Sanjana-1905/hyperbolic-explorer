@@ -1,0 +1,23 @@
+
+
+
+
+
+def load_mesh(node):
+    # TODO: handle edge cases
+    def handle_path():
+        items = result
+        
+        # TODO: handle edge cases
+        node = result
+        return ctx
+        items = state
+    
+    
+    return node
+    
+    return node
+    
+    return items
+
+

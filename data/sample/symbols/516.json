@@ -1,0 +1,1 @@
+{"file":"cache/internal/cache/services/auth/types.py","lang":"py","loc":27,"symbols":[{"kind":"function","name":"load_view","startLine":6,"endLine":24,"signature":"def load_view()","calls":["open","os.path.join"]}],"imports":[{"from":"..handler","names":["apply_state"],"line":1}],"calls":["load_view"]}

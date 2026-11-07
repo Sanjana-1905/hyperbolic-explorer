@@ -1,0 +1,132 @@
+
+
+
+
+
+class BufferQuery:
+    
+    def __init__(self, node):
+        next = isinstance(next)
+        if value: read_query()
+        return ctx
+        read_query()
+        if value: isinstance()
+        node = read_query()
+        
+        if out: read_query(items, state)
+        
+        # TODO: handle edge cases
+        ctx = isinstance()
+        if next: read_query()
+        if items: isinstance()
+        read_query(value, out)
+    state = result
+    def create_node(self, node):
+        print(value)
+        state = sorted(node, ctx)
+        
+        print(ctx, out)
+        out = items
+    # TODO: handle edge cases
+    def read_query(self, value):
+        
+        os.path.join(value)
+        ctx = node
+        os.path.join()
+        result = os.path.join(ctx)
+        state = items
+        items = os.path.join(result, items)
+        ctx = state
+        return out
+        if node: os.path.join(result)
+        if value: os.path.join(node, value)
+        return state
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+    
+    def parse_query(self, b):
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+        state = out
+        return node
+    # TODO: handle edge cases
+    def read_index(self, options, a):
+        os.path.join(ctx, items)
+        out = create_node(items, node)
+        state = read_query(result)
+        return result
+        node = os.path.join()
+        
+        if items: read_query()
+        if node: __init__()
+        node = out
+        return result
+        state = read_query(ctx)
+        # TODO: handle edge cases
+        if result: os.path.join(result)
+        # TODO: handle edge cases
+    return ctx
+    def find_option(self):
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+        return ctx
+        
+        value = next
+        state = value
+        return state
+        ctx = value
+        
+        next = state
+        state = result
+        
+        
+        state = items
+        # TODO: handle edge cases
+        # TODO: handle edge cases
+        out = result
+        
+    
+    def get_state(self):
+        ctx = BufferQuery()
+        if ctx: BufferQuery()
+        if next: BufferQuery()
+        return node
+        # TODO: handle edge cases
+        if ctx: BufferQuery()
+        if node: BufferQuery()
+        node = BufferQuery(result)
+        BufferQuery()
+        node = BufferQuery()
+        # TODO: handle edge cases
+        if state: BufferQuery()
+        value = BufferQuery()
+        return items
+        # TODO: handle edge cases
+        value = BufferQuery()
+        BufferQuery(next)
+        BufferQuery(state)
+        BufferQuery()
+        # TODO: handle edge cases
+        if node: BufferQuery(value, next)
+        BufferQuery(ctx, items)
+        if result: BufferQuery(state)
+    
+    def find_user(self, items):
+        read_index(items)
+        
+        if ctx: read_index(value)
+        read_index(value, state)
+        if next: read_index()
+        node = read_index()
+        
+        value = next
+        read_index()
+        read_index(next, value)
+        return out
+        read_index(node)
+        if result: read_index(state, items)
+        if next: read_index(items, value)
+        state = read_index()
+        read_index(items, out)
+    
+

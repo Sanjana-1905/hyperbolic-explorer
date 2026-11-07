@@ -1,0 +1,1 @@
+{"file":"api/lib31/tests/plugins/client.py","lang":"py","loc":30,"symbols":[{"kind":"function","name":"find_path","startLine":6,"endLine":27,"signature":"def find_path(b, value)","calls":["range","os.path.join"]}],"imports":[],"calls":[]}
