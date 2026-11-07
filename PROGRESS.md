@@ -104,9 +104,27 @@ Interim in 3a: edges are still the CPU polylines from Phase 2 (faint additive bl
   vsync fps 60 idle and animating. Uncapped: ≈ 540 idle, ≈ 500 animating (was ≈ 200 animating in 3a: the per-frame
   CPU edge rebuild is gone). Low quality is not measurably faster on the M4 (noisy 400–550): the phone is the test
 
-### 3b — Ambience (next; edges and GPU geodesics already done above)
-- Still to do: travelling light pulse along edges (random phase per edge; `vT` and `vSeed` are already passed to the
-  fragment shader), slow dust drift, optional desktop-only ambient rotation, fps report
+### Theme refactor  ✅ done
+- [x] `src/theme.js`: ONE flat table of every look constant (130), each with a comment: arm hues, palette, sizes, fog
+      distances, node/sun/edge/nebula/haze/dust strengths, tone gain. `THEME_DEFINES` turns it into GLSL `#define`s that
+      every material receives; shaders contain no tuning numbers, the CPU (picking, hue assignment) reads the same table.
+      (The old shell no longer exists; its opacity became `HAZE_STRENGTH`.)
+- [x] Verified byte-identical screenshots (high and low quality, start and refocused) before vs after, using the new
+      `?time=12.5` debug parameter that freezes the shader clock
+- [x] `tests/theme.test.js` (in `npm test`): values valid, no dead constants, no colour literals creeping back into glsl.js
+- [x] RULE (also in CLAUDE.md): every later visual constant goes in theme.js, so the final restyle is one-file work
+
+### 3b — Ambience  ✅ done (waiting for phone/laptop check)
+- [x] Travelling light pulse along every edge: comet from parent to child, random phase per edge (`aSeed`), one lap =
+      2.2 edge lengths so each edge rests between pulses, tail e^(−9·distance behind head), tinted toward white,
+      strength 0.9 of the edge's own brightness (subtle). Constants `EDGE_PULSE_*` in theme.js
+- [x] Dust drifts: each speck wanders ±0.03 around its home on three sine waves (`DUST_DRIFT*`); still refocused by `_Focus`
+- [x] Optional ambient rotation: `?spin=1` or R key (OrbitControls auto-rotate, `AMBIENT_SPIN_SPEED`). Desktop only
+      (`pointer: fine`), off by default; `ambientSpinAllowed` must stay false in VR (Phase 4)
+- [x] Geodesic edges in the vertex shader (10 segments, 6 in low), tint, fog and width were already done in 3a-tweaks
+- Numbers (M4 laptop, headless, 5,000 nodes): 7 draw calls, 112 k triangles (71 k low). vsync: 60 fps idle and animating.
+  Uncapped high: ≈ 555 idle, ≈ 480 animating. Uncapped low: ≈ 700 idle, ≈ 590 animating. The phone is the real test.
+
 ### 3c — Labels, semantic zoom, breadcrumb
 
 ### Known limitations (3a)

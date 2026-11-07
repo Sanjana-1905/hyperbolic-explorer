@@ -49,7 +49,7 @@ const QUALITY = {
 };
 
 document.getElementById('help').textContent =
-  'Drag to look around · scroll to move in/out · click a node to focus it · Backspace = parent · F = fps';
+  'Drag to look around · scroll to move in/out · click a node to focus it · Backspace = parent · F = fps · R = slow spin (desktop)';
 const fps = createFpsCounter();
 
 // ---------------------------------------------------------------------------
@@ -78,6 +78,19 @@ controls.enablePan = false;
 controls.enableDamping = true;   // smooth glide after letting go
 controls.minDistance = 0.15;     // can go inside the ball, close to the focus
 controls.maxDistance = 4;
+
+// Optional slow ambient rotation of the view. Desktop (mouse) only, OFF by default:
+// turn it on with ?spin=1 or the R key. It is never active on touch devices, and the VR
+// phase must keep `ambientSpinAllowed` false (no automatic camera motion in a headset).
+let ambientSpinAllowed = window.matchMedia('(pointer: fine)').matches;
+function setSpin(on) {
+  controls.autoRotate = ambientSpinAllowed && on;
+  controls.autoRotateSpeed = THEME.AMBIENT_SPIN_SPEED;
+}
+setSpin(new URLSearchParams(location.search).get('spin') === '1');
+window.addEventListener('keydown', (e) => {
+  if (e.key === 'r' || e.key === 'R') setSpin(!controls.autoRotate);
+});
 
 // Shared by every shader: the time in seconds (breathing, twinkling, drifting clouds).
 const uTime = { value: 0 };
@@ -148,7 +161,7 @@ let dustMesh = null;            // faint background specks (1 draw call)
 
 // The two shader uniforms that change on refocus. _Focus is the whole GPU refocus.
 const focusUniforms = { _Focus: { value: new THREE.Vector3() }, uFocusId: { value: -1 }, uTime };
-const edgeUniforms = { _Focus: focusUniforms._Focus, uResolution: { value: new THREE.Vector2(1, 1) }, uLineWidth: { value: 1.8 } };
+const edgeUniforms = { _Focus: focusUniforms._Focus, uTime, uResolution: { value: new THREE.Vector2(1, 1) }, uLineWidth: { value: 1.8 } };
 const sunUniforms = { _Focus: focusUniforms._Focus, uFocusPos: { value: new THREE.Vector3() }, uTime };
 
 // ---------------------------------------------------------------------------
@@ -533,6 +546,8 @@ window.__explorer = {
   focusId: () => focusNode.id,
   get fps() { return fps.value; },
   get animating() { return anim !== null; },
+  get spinning() { return controls.autoRotate; },
+  setSpin,
   get drawCalls() { return renderer.info.render.calls; },
   get triangles() { return renderer.info.render.triangles; },
   quality: LOW ? 'low' : 'high',

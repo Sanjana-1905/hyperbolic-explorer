@@ -18,6 +18,7 @@
 
 export const THEME = {
   // ---- Scene -------------------------------------------------------------------
+  AMBIENT_SPIN_SPEED: 0.3,     // optional slow auto-rotation of the view (OrbitControls units; 2 = one turn per 30 s). Desktop only, off by default
   CLEAR_COLOR: 0x03040c,       // colour behind everything (deep navy-black); hex, JS only
 
   // ---- Arm palette (each top-level folder is an "arm" with its own hue) ----------
@@ -122,6 +123,11 @@ export const THEME = {
   EDGE_FOG_RATE: 0.45,         // edge fog = e^(-d * rate): bigger = edges fade out sooner
   EDGE_BRIGHT_FLOOR: 0.05,     // edges never fade below this brightness
   EDGE_BRIGHT_NEAR: 0.75,      // extra brightness of edges next to the focus
+  EDGE_PULSE_SPEED: 0.35,      // light pulses travelling along edges: laps per second (0.35 = one every ~2.9 s)
+  EDGE_PULSE_GAP: 2.2,         // lap length in edge lengths: > 1 leaves a rest between pulses (2.2 -> pulse visible ~45 % of the time)
+  EDGE_PULSE_TAIL: 9.0,        // comet tail: bigger = shorter tail (tail brightness = e^(-tail * distance behind the head))
+  EDGE_PULSE_GAIN: 0.9,        // pulse strength relative to the edge's own brightness (keep below ~1.2 so it stays subtle)
+  EDGE_PULSE_WHITE: 0.5,       // how much the pulse is blended toward white (0 = arm colour, 1 = white)
 
   // ---- Nebula background and starfield ---------------------------------------------
   SPACE_COLOR: [0.004, 0.006, 0.020],   // deep navy-black base of the sky
@@ -162,6 +168,8 @@ export const THEME = {
   DUST_TWINKLE: 0.7,           // twinkle depth: brightness swings between (1 - depth) and 1
   DUST_FOG_RATE: 0.3,          // dust fades with distance as e^(-d * rate)
   DUST_FOG_FLOOR: 0.35,        // dust never fades below this fraction
+  DUST_DRIFT: 0.03,            // how far each speck wanders from its home (ball units; 0 = still)
+  DUST_DRIFT_SPEED: 0.15,      // wander speed (radians per second; each speck differs by up to x1.6)
   DUST_TINT_A: [0.55, 0.75, 1.0],  // pale blue ...
   DUST_TINT_B: [0.85, 0.65, 1.0],  // ... to pale violet
 };

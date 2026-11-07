@@ -477,6 +477,7 @@ void main() {
 }
 `;
 export const EDGE_FRAG = /* glsl */ `
+uniform float uTime;
 varying float vAcross;
 varying float vT;
 varying float vSeed;
@@ -485,7 +486,22 @@ varying vec3 vColor;
 void main() {
   // Soft cross-section: 1 - x^2 is 1 along the middle of the line, 0.75 at x = 0.5, 0 at the sides.
   float soft = 1.0 - vAcross * vAcross;
-  vec3 col = vColor * vBright * soft;
+
+  // Travelling light pulse (a small comet from parent to child).
+  //   head = where the comet's head is along the edge (0 = parent end, 1 = child end).
+  //          It moves at EDGE_PULSE_SPEED laps per second, and a lap is EDGE_PULSE_GAP edge
+  //          lengths long, so after reaching the child it rests before starting again.
+  //   vSeed shifts every edge's start by a random amount, so they never pulse in unison.
+  //   behind = how far this pixel is behind the head; the comet is bright at the head and
+  //          fades as e^(-TAIL * behind). Nothing is lit ahead of the head.
+  // Example (SPEED 0.35, GAP 2.2, seed 0) at t = 1 s: fract(0.35) * 2.2 = 0.77. At vT = 0.7 we are
+  // 0.07 behind the head -> e^(-9 * 0.07) = 0.53; at vT = 0.3, 0.47 behind -> 0.015 (nearly dark).
+  float head = fract(uTime * EDGE_PULSE_SPEED + vSeed) * EDGE_PULSE_GAP;
+  float behind = head - vT;
+  float comet = behind > 0.0 ? exp(-EDGE_PULSE_TAIL * behind) : 0.0;
+  vec3 pulseColor = mix(vColor, vec3(1.0), EDGE_PULSE_WHITE);
+
+  vec3 col = (vColor + pulseColor * comet * EDGE_PULSE_GAIN) * vBright * soft;
   gl_FragColor = vec4(1.0 - exp(-col * TONE_GAIN), 1.0);
 }
 `;
@@ -494,7 +510,8 @@ void main() {
 // 7. Background dust: faint points inside the ball that fill the empty space
 // ---------------------------------------------------------------------------
 // They live at fixed home positions in the ball and are moved by the same _Focus
-// refocus as everything else, so they slide past with correct parallax when you refocus.
+// refocus as everything else, so they slide past with correct parallax when you refocus,
+// and each one wanders slowly around its home (see `wander`).
 export const DUST_VERT = /* glsl */ `
 uniform vec3 _Focus;
 uniform float uTime;
@@ -506,7 +523,14 @@ varying vec3 vColor;
 varying float vBright;
 ${MOBIUS_GLSL}
 void main() {
-  vec3 p = mobiusAdd3(-_Focus, aPos);
+  // Slow wander: each speck drifts around its home along three sine waves of different
+  // phase and speed (aSeed makes every speck different). The offset is at most
+  // DUST_DRIFT in each axis, e.g. 0.03 of the ball's radius.
+  float spd = DUST_DRIFT_SPEED * (0.6 + aSeed);
+  vec3 wander = vec3(sin(uTime * spd + aSeed * 17.0),
+                     sin(uTime * spd * 1.3 + aSeed * 31.0 + 2.0),
+                     sin(uTime * spd * 0.8 + aSeed * 47.0 + 4.0)) * DUST_DRIFT;
+  vec3 p = mobiusAdd3(-_Focus, aPos + wander);
   float r2 = dot(p, p);
   float d = 2.0 * atanh(sqrt(r2));
   float size = max(DUST_SIZE * (1.0 - r2) * 0.5, MIN_R);
