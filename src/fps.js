@@ -4,7 +4,8 @@
 // frames by the time that passed, e.g. 30 frames in 0.5 s -> 60 fps.
 // Press F to show/hide it; add ?fps=1 to the URL to show it from the start.
 
-export function createFpsCounter() {
+// `extra` (optional) is a function returning more text for the overlay, e.g. label count.
+export function createFpsCounter(extra = null) {
   const el = document.createElement('div');
   el.id = 'fps';
   el.hidden = new URLSearchParams(location.search).get('fps') !== '1';
@@ -24,7 +25,7 @@ export function createFpsCounter() {
       const elapsed = now - windowStart;
       if (elapsed >= 500) {
         value = (frames * 1000) / elapsed;
-        el.textContent = `${value.toFixed(0)} fps`;
+        el.textContent = `${value.toFixed(0)} fps` + (extra ? ` · ${extra()}` : '');
         frames = 0;
         windowStart = now;
       }

@@ -11,7 +11,8 @@
     "test": "node tests/mobius.test.js && node tests/mobius3d.test.js && node tests/layout.test.js && node tests/layout3d.test.js && node tests/theme.test.js"
   },
   "dependencies": {
-    "three": "^0.187.0"
+    "three": "^0.187.0",
+    "troika-three-text": "^0.53.1"
   },
   "devDependencies": {
     "gh-pages": "^6.3.0",

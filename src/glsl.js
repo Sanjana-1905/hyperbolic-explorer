@@ -83,6 +83,8 @@ vec3 armColor(float hue0, float fog) {
 //   aKind     1 = folder, 0 = file
 //   aSeed     random 0..1 per node, makes twinkles and breathing out of step
 //   aId       node index, so the shader can tell which node is the focus
+//   aState    semantic zoom (set on the CPU): 0 = normal, 1 = hidden (inside a collapsed folder),
+//             2 = collapsed "+N" orb (a folder drawn bigger and brighter with a ring)
 // Compiled twice: the normal version, and with HALO defined for the soft glow
 // quads that sit behind the focus and its children (our "fake bloom").
 // Every look constant (FOLDER_R, ARM_SATURATION, TONE_GAIN, ...) lives in theme.js and is
@@ -101,6 +103,7 @@ attribute float aFlag;
 attribute float aKind;
 attribute float aSeed;
 attribute float aId;
+attribute float aState;
 
 varying vec2 vUv;        // where in the quad this pixel is: -1..1 in x and y
 varying vec3 vColor;
@@ -108,11 +111,14 @@ varying float vBright;
 varying float vFocus;
 varying float vKind;
 varying float vFlag;
+varying float vOrb;      // 1 for a collapsed orb
 
 ${MOBIUS_GLSL}
 ${COLOR_GLSL}
 
 void main() {
+  float orb = step(1.5, aState);                     // state 2
+  float hidden = step(0.5, aState) * step(aState, 1.5); // state 1
   // --- 1. REFOCUS ON THE GPU: bring the focus point to the centre ----------
   // Same as the CPU did before: p = (-focus) (+) home position.
   vec3 p = mobiusAdd3(-_Focus, aPos);
@@ -133,6 +139,7 @@ void main() {
   float hero = step(HERO_AT, aSeed) * aKind;
   float rho = mix(FILE_R, FOLDER_R * (1.0 + SIZE_SPREAD * aEnergy) * (1.0 + (HERO_SIZE - 1.0) * hero), aKind);
   rho = mix(rho, FOCUS_R, isFocus);                 // the focus has one fixed, large size
+  rho *= mix(1.0, COLLAPSED_SIZE, orb);             // a collapsed orb is drawn bigger
   // Then the Poincare size factor (1 - r^2)/2 shrinks things toward the surface.
   // Example: at |p| = 0.9 the factor is (1 - 0.81)/2 = 0.095, so a 0.08 folder is
   // drawn 0.0076 across, but never below MIN_R.
@@ -159,11 +166,13 @@ void main() {
   // The focus is a warm gold-white sun, always at full brightness.
   col = mix(col, FOCUS_COLOR, isFocus);
   vBright = mix(vBright, FOCUS_BRIGHT, isFocus);
+  vBright *= mix(1.0, COLLAPSED_BRIGHT, orb);
   vColor = col;
 
   vFocus = isFocus;
   vKind = aKind;
   vFlag = aFlag;
+  vOrb = orb;
   vUv = corner;
 
   // --- 4. BILLBOARD: a quad that always faces the camera ---------------------
@@ -177,6 +186,8 @@ void main() {
   vec4 mv = viewMatrix * vec4(p, 1.0);
   mv.xy += corner * quad;
   gl_Position = projectionMatrix * mv;
+  // Hidden nodes (inside a collapsed folder) are sent outside the screen: clipped, never drawn.
+  if (hidden > 0.5) gl_Position = vec4(0.0, 0.0, 2.0, 1.0);
 }
 `;
 
@@ -192,6 +203,7 @@ varying float vBright;
 varying float vFocus;
 varying float vKind;
 varying float vFlag;
+varying float vOrb;
 
 void main() {
   float q = length(vUv);
@@ -243,6 +255,8 @@ void main() {
   }
 
   // Reserved status marker (aFlag): a thin magenta ring. Phase 6 only changes the number.
+  // Collapsed orb: a faint ring around the star says "there is more inside".
+  col += vOrb * vColor * COLLAPSED_RING_GAIN * smoothstep(COLLAPSED_RING_WIDTH, 0.0, abs(q - COLLAPSED_RING_AT));
   col += vFlag * FLAG_COLOR * smoothstep(FLAG_RING_WIDTH, 0.0, abs(q - FLAG_RING_AT));
 
   col *= vBright;
@@ -435,6 +449,7 @@ attribute vec3 aB;
 attribute float aHue;
 attribute float aEnergy;
 attribute float aSeed;
+attribute float aHide;        // 1 = the child end is inside a collapsed folder: do not draw
 
 varying float vAcross;        // -1 at one side of the line, +1 at the other
 varying float vT;
@@ -474,6 +489,7 @@ void main() {
   // One pixel is 2/uResolution in normalised screen units (the screen is 2 units wide).
   gl_Position = cp;
   gl_Position.xy += perp * aSide * (width * 0.5) * (2.0 / uResolution) * cp.w;
+  if (aHide > 0.5) gl_Position = vec4(0.0, 0.0, 2.0, 1.0);   // outside the screen: clipped
 }
 `;
 export const EDGE_FRAG = /* glsl */ `

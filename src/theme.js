@@ -152,6 +152,35 @@ export const THEME = {
   STAR_LAYER2_GAIN: 0.7,       // brightness of the second layer
   STAR_TWINKLE: 0.3,           // star twinkle depth
 
+  // ---- Semantic zoom (far folders collapse into one "+N" orb) ------------------------
+  COLLAPSE_DIST: 2.4,          // a folder further than this (hyperbolic distance from the focus) collapses into an orb
+  COLLAPSE_HYST: 0.3,          // hysteresis: collapses beyond DIST + this, re-expands inside DIST - this (stops flicker)
+  COLLAPSED_SIZE: 1.5,         // a collapsed orb is this much bigger than the folder it replaces
+  COLLAPSED_BRIGHT: 1.25,      // ... and this much brighter
+  COLLAPSED_RING_AT: 0.62,     // radius of the faint ring that marks an orb as "contains more" (0..1 across the quad)
+  COLLAPSED_RING_WIDTH: 0.05,  // ring thickness
+  COLLAPSED_RING_GAIN: 0.6,    // ring brightness
+
+  // ---- Labels (SDF text drawn in a screen-space pass) ----------------------------------
+  LABEL_FONT_PX: 14,           // size of a label next to a child of the focus (CSS pixels)
+  LABEL_FOCUS_PX: 20,          // the focus's label
+  LABEL_HOVER_PX: 16,          // the label of the node under the pointer
+  LABEL_ORB_PX: 13,            // the "+N" label of a collapsed orb
+  LABEL_COLOR: [1.0, 1.0, 1.0],            // text fill: white for contrast
+  LABEL_ORB_COLOR: [0.80, 0.90, 1.0],      // "+N" text fill: slightly cool
+  LABEL_OUTLINE_COLOR: [0.01, 0.015, 0.05],// dark outline that keeps text readable on any glow
+  LABEL_OUTLINE_WIDTH: 0.16,   // outline thickness as a fraction of the font size
+  LABEL_GAP_PX: 6,             // gap between a node and its label
+  LABEL_PAD_PX: 4,             // empty margin kept around every label so neighbours never touch
+
+  // ---- Breadcrumb (HTML line at the bottom of the screen) -------------------------------
+  CRUMB_FONT_PX: 13,           // text size
+  CRUMB_COLOR: [0.72, 0.80, 1.0],      // ancestors
+  CRUMB_LAST_COLOR: [1.0, 1.0, 1.0],   // the current folder (last segment)
+  CRUMB_SEP_COLOR: [0.42, 0.48, 0.70], // the "/" separators
+  CRUMB_BG: [0.02, 0.03, 0.08],        // background pill colour
+  CRUMB_BG_ALPHA: 0.55,        // background pill opacity
+
   // ---- Haze (replaces the old shell: fades to nothing at the ball's boundary) --------
   HAZE_R: 1.0,                 // world radius where the haze reaches zero (= the ball's boundary)
   HAZE_STRENGTH: 0.45,         // haze brightness at the centre
@@ -191,6 +220,11 @@ export function glslDefines(obj) {
   const out = {};
   for (const [k, v] of Object.entries(obj)) out[k] = glslValue(v);
   return out;
+}
+
+// CSS colour string from an [r, g, b] theme colour (for the HTML parts: breadcrumb).
+export function cssRgb(c, alpha = 1) {
+  return `rgba(${c.map((x) => Math.round(x * 255)).join(', ')}, ${alpha})`;
 }
 
 // Every theme value as a #define. Handed to every material, so any shader can use any name.

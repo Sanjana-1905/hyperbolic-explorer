@@ -17,7 +17,7 @@
 
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-import { vec3, vNeg, vLength, mobiusAdd3, geodesicLerp3, conformalFactor3 } from './mobius3d.js';
+import { vec3, vNeg, vLength, mobiusAdd3, geodesicLerp3, conformalFactor3, hyperbolicDistance3 } from './mobius3d.js';
 import { buildTree, computeLayout3d, nodePath } from './layout3d.js';
 import { createFpsCounter } from './fps.js';
 import {
@@ -25,7 +25,8 @@ import {
   SUN_VERT, SUN_FRAG, EDGE_VERT, EDGE_FRAG, DUST_VERT, DUST_FRAG,
 } from './glsl.js';
 import { gpuCheck } from './gpucheck.js';
-import { THEME, THEME_DEFINES } from './theme.js';
+import { THEME, THEME_DEFINES, cssRgb } from './theme.js';
+import { createLabels } from './labels.js';
 
 // ---------------------------------------------------------------------------
 // Settings
@@ -50,13 +51,17 @@ const QUALITY = {
 
 document.getElementById('help').textContent =
   'Drag to look around · scroll to move in/out · click a node to focus it · Backspace = parent · F = fps · R = slow spin (desktop)';
-const fps = createFpsCounter();
+const COLLAPSE_MIN_NODES = 4;   // folders with fewer nodes inside than this are never collapsed (a "+2" orb is pointless)
+const fps = createFpsCounter(() => `${labels ? labels.count : 0} labels · ${visibleCount} nodes`);
 
 // ---------------------------------------------------------------------------
 // three.js scene: a perspective camera orbiting the centre of the unit ball
 // ---------------------------------------------------------------------------
 // No MSAA: nodes are soft additive glows (no hard edges to smooth), and MSAA is expensive on phones.
 const renderer = new THREE.WebGLRenderer({ antialias: false });
+// Two passes per frame (3D scene, then the label overlay), so we clear by hand and count draw calls ourselves.
+renderer.autoClear = false;
+renderer.info.autoReset = false;
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, QUALITY.pixelRatio));
 renderer.setClearColor(THEME.CLEAR_COLOR); // deep navy-black (theme.js)
 document.body.appendChild(renderer.domElement);
@@ -135,6 +140,7 @@ function resize() {
   edgeUniforms.uLineWidth.value = THEME.EDGE_WIDTH_PX * renderer.getPixelRatio();
   camera.aspect = w / h;
   camera.updateProjectionMatrix();
+  if (labels) labels.resize(w, h);
   // At distance D from the camera the screen is 2·D·tan(fov/2) units tall.
   pixelsPerUnitAt1 = h / (2 * Math.tan(THREE.MathUtils.degToRad(camera.fov) / 2));
 }
@@ -147,6 +153,11 @@ let root = null;
 let focusNode = null;
 let focusPoint = vec3(0, 0, 0); // the ball point currently shown at the centre
 let anim = null;                // { from, to, start } while animating
+let labels = null;              // screen-space SDF labels (labels.js)
+let hoverNode = null;           // node under the pointer (desktop), gets a label
+let visibleCount = 0;           // nodes currently drawn (not hidden inside a collapsed folder)
+let collapsedNodes = [];        // folders currently shown as "+N" orbs
+let pathNodes = [];             // focus and its ancestors (never collapsed)
 let dirty = true;               // focus point changed: upload the _Focus uniform on the next frame
 
 let shown = [];                 // per node: transformed position {x, y, z} (CPU copy, ONLY for picking)
@@ -221,6 +232,7 @@ function makeQuadGeometry(capacity, only = null) {
   g.arrays = {
     aPos: add('aPos', 3), aHue: add('aHue', 1), aEnergy: add('aEnergy', 1),
     aFlag: add('aFlag', 1), aKind: add('aKind', 1), aSeed: add('aSeed', 1), aId: add('aId', 1),
+    aState: add('aState', 1),
   };
   g.instanceCount = capacity;
   return g;
@@ -236,6 +248,7 @@ function writeInstance(g, slot, node) {
   a.aKind[slot] = node.type === 'folder' ? 1 : 0;
   a.aSeed[slot] = node.seed;
   a.aId[slot] = node.id;
+  a.aState[slot] = node.state;
 }
 
 function makeNodeMaterial(isHalo) {
@@ -257,7 +270,7 @@ function buildDrawables() {
   // A fixed random number per node (the same every run, so screenshots are repeatable).
   let seed = 2024;
   const rand = () => ((seed = (seed * 1664525 + 1013904223) >>> 0) / 4294967296);
-  for (const node of nodes) node.seed = rand();
+  for (const node of nodes) { node.seed = rand(); node.state = 0; node.collapsed = false; }
 
   assignVisuals();
 
@@ -289,12 +302,14 @@ function buildDrawables() {
   eg.setAttribute('aT', new THREE.BufferAttribute(aT, 1));
   eg.setAttribute('aSide', new THREE.BufferAttribute(aSide, 1));
   const edgeNodes = nodes.filter((nd) => nd.parent);
+  edgeNodes.forEach((nd, i) => { nd.edgeIndex = i; });
   const ea = (name, size) => {
     const attr = new THREE.InstancedBufferAttribute(new Float32Array(edgeNodes.length * size), size);
     eg.setAttribute(name, attr);
     return attr.array;
   };
   const eA = ea('aA', 3), eB = ea('aB', 3), eHue = ea('aHue', 1), eEnergy = ea('aEnergy', 1), eSeed = ea('aSeed', 1);
+  ea('aHide', 1);
   edgeNodes.forEach((nd, i) => {
     eA.set([nd.parent.pos.x, nd.parent.pos.y, nd.parent.pos.z], i * 3);
     eB.set([nd.pos.x, nd.pos.y, nd.pos.z], i * 3);
@@ -357,6 +372,7 @@ function coreRadius(node, p) {
   else if (node.type === 'folder') {
     const hero = node.seed >= THEME.HERO_AT ? THEME.HERO_SIZE : 1;
     rho = THEME.FOLDER_R * (1 + THEME.SIZE_SPREAD * node.energy) * hero;
+    if (node.state === 2) rho *= THEME.COLLAPSED_SIZE;
   } else rho = THEME.FILE_R;
   return Math.max(rho * conformalFactor3(p), THEME.MIN_R);
 }
@@ -377,6 +393,62 @@ function ensureShown() {
 }
 
 // ---------------------------------------------------------------------------
+// Semantic zoom: far folders collapse into one "+N" orb, near ones expand
+// ---------------------------------------------------------------------------
+// Walk the tree from the root. A folder whose hyperbolic distance from the focus point
+// is larger than COLLAPSE_DIST becomes an ORB (state 2): it is drawn, but everything below
+// it is HIDDEN (state 1: not drawn, not pickable, its edges not drawn). The focus and its
+// ancestors are never collapsed, or the focus itself could vanish.
+// Hysteresis: a folder collapses only beyond DIST + HYST and expands again only inside
+// DIST - HYST, so a folder hovering near the limit does not flicker while you glide.
+// Example (DIST 2.4, HYST 0.3): a folder 2.6 away stays expanded; at 3.0 it collapses; it
+// re-expands only when the focus comes within 2.1.
+// The decision is made on the CPU; the result goes to the shaders as the aState / aHide
+// attributes (so the GPU still draws everything in one call each).
+function updateSemanticZoom() {
+  for (const n of pathNodes) n.onPath = false;
+  pathNodes = [];
+  for (let n = focusNode; n; n = n.parent) { n.onPath = true; pathNodes.push(n); }
+
+  const stateArr = nodeMesh.geometry.arrays.aState;
+  const hideArr = edgeMesh.geometry.attributes.aHide.array;
+  let changed = false;
+  visibleCount = 0;
+  collapsedNodes = [];
+
+  const visit = (node, hidden) => {
+    let state;
+    if (hidden) state = 1;
+    else if (node.type === 'folder' && node.weight - 1 >= COLLAPSE_MIN_NODES && !node.onPath) {
+      const d = hyperbolicDistance3(focusPoint, node.pos);
+      const limit = node.collapsed ? THEME.COLLAPSE_DIST - THEME.COLLAPSE_HYST : THEME.COLLAPSE_DIST + THEME.COLLAPSE_HYST;
+      node.collapsed = d > limit;
+      state = node.collapsed ? 2 : 0;
+    } else {
+      node.collapsed = false;
+      state = 0;
+    }
+    if (state !== node.state) {
+      node.state = state;
+      stateArr[node.id] = state;
+      if (node.edgeIndex !== undefined) hideArr[node.edgeIndex] = state === 1 ? 1 : 0;
+      changed = true;
+    }
+    if (state !== 1) visibleCount++;
+    if (state === 2) collapsedNodes.push(node);
+    const childrenHidden = hidden || node.collapsed;
+    for (const child of node.children) visit(child, childrenHidden);
+  };
+  visit(root, false);
+
+  if (changed) {
+    nodeMesh.geometry.attributes.aState.needsUpdate = true;
+    edgeMesh.geometry.attributes.aHide.needsUpdate = true;
+    shownStale = true;                       // sizes of orbs changed: rebuild the pick radii
+  }
+}
+
+// ---------------------------------------------------------------------------
 // Focusing
 // ---------------------------------------------------------------------------
 
@@ -392,7 +464,6 @@ function focusOn(node, animate = true) {
   focusNode = node;
   focusUniforms.uFocusId.value = node.id;
   sunUniforms.uFocusPos.value.set(node.pos.x, node.pos.y, node.pos.z);
-  updateHalos();
   updateInfo();
   if (animate) {
     // If a previous animation is still running, start from where the view is now.
@@ -425,10 +496,46 @@ const infoPath = document.querySelector('#info .path');
 function updateInfo() {
   const n = focusNode;
   infoName.textContent = n.name + (n.type === 'folder' ? '/' : '');
-  const extra = n.type === 'folder'
-    ? `  ·  ${n.children.length} items, ${n.weight - 1} nodes inside`
-    : '';
-  infoPath.textContent = nodePath(n) + extra;
+  infoPath.textContent = n.type === 'folder' ? `${n.children.length} items, ${n.weight - 1} nodes inside` : '';
+  updateBreadcrumb();
+}
+
+// Breadcrumb: "repo / src / components" at a fixed place (bottom centre). Each segment is
+// clickable and focuses that ancestor. Very long paths keep the first segment and the last
+// four, with "…" in between.
+const crumbs = document.createElement('div');
+crumbs.id = 'crumbs';
+Object.assign(crumbs.style, {
+  position: 'fixed', left: '50%', bottom: '34px', transform: 'translateX(-50%)',
+  maxWidth: 'calc(100vw - 24px)', padding: '4px 12px', borderRadius: '14px',
+  font: `600 ${THEME.CRUMB_FONT_PX}px system-ui, sans-serif`,
+  background: cssRgb(THEME.CRUMB_BG, THEME.CRUMB_BG_ALPHA), color: cssRgb(THEME.CRUMB_COLOR),
+  whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', textShadow: '0 0 4px #000',
+});
+document.body.appendChild(crumbs);
+
+function updateBreadcrumb() {
+  const chain = [];
+  for (let n = focusNode; n; n = n.parent) chain.unshift(n);
+  let shownChain = chain;
+  if (chain.length > 6) shownChain = [chain[0], null, ...chain.slice(-4)]; // null = "…"
+  crumbs.textContent = '';
+  shownChain.forEach((n, i) => {
+    if (i > 0) {
+      const sep = document.createElement('span');
+      sep.textContent = ' / ';
+      sep.style.color = cssRgb(THEME.CRUMB_SEP_COLOR);
+      crumbs.appendChild(sep);
+    }
+    const span = document.createElement('span');
+    span.textContent = n ? n.name : '…';
+    if (n === focusNode) span.style.color = cssRgb(THEME.CRUMB_LAST_COLOR);
+    if (n && n !== focusNode) {
+      span.style.cursor = 'pointer';
+      span.addEventListener('click', () => focusOn(n));
+    }
+    crumbs.appendChild(span);
+  });
 }
 
 // ---------------------------------------------------------------------------
@@ -466,6 +573,7 @@ function pickNode(clientX, clientY) {
   let inside = null, insideDepth = Infinity;
   let near = null, nearScore = Infinity;
   for (const node of nodes) {
+    if (node.state === 1) continue; // hidden inside a collapsed folder: not pickable
     const s = projectNode(node.id, rect);
     if (!s) continue;
     const d = Math.hypot(s.x - clientX, s.y - clientY);
@@ -478,6 +586,65 @@ function pickNode(clientX, clientY) {
   }
   return inside || near;
 }
+
+// ---------------------------------------------------------------------------
+// Label candidates: the focus, the node under the pointer, the focus's children,
+// and the "+N" orbs. labels.js decides which ones fit without overlapping.
+// ---------------------------------------------------------------------------
+// Project one node to CSS pixels using its CURRENT position (computed on the spot: only a
+// few dozen nodes need it, so we do not rebuild the pick table every animation frame).
+function projectForLabel(node) {
+  const p = mobiusAdd3(vNeg(focusPoint), node.pos);
+  tmp.set(p.x, p.y, p.z).applyMatrix4(camera.matrixWorldInverse);
+  const depth = -tmp.z;
+  if (depth <= camera.near) return null;
+  tmp.applyMatrix4(camera.projectionMatrix);
+  return {
+    x: ((tmp.x + 1) / 2) * window.innerWidth,
+    y: ((1 - tmp.y) / 2) * window.innerHeight,
+    r: (coreRadius(node, p) * pixelsPerUnitAt1) / depth,
+  };
+}
+
+function collectLabelCandidates() {
+  const out = [];
+  const seen = new Set();
+  const add = (node, priority, px, color, text) => {
+    if (seen.has(node.id) || node.state === 1) return;
+    const s = projectForLabel(node);
+    if (!s) return;
+    seen.add(node.id);
+    out.push({ key: node.id, text, x: s.x, y: s.y, r: s.r, priority, px, color });
+  };
+  const orbText = (node) => `+${node.weight - 1}`;
+
+  add(focusNode, 1000, THEME.LABEL_FOCUS_PX, THEME.LABEL_COLOR, focusNode.name);
+  if (hoverNode) {
+    const text = hoverNode.state === 2 ? `${hoverNode.name}  ${orbText(hoverNode)}` : hoverNode.name;
+    add(hoverNode, 900, THEME.LABEL_HOVER_PX, THEME.LABEL_COLOR, text);
+  }
+  // Children: bigger subtrees first (folders before files, since a file has weight 1).
+  for (const child of focusNode.children) {
+    const orb = child.state === 2;
+    add(child, 500 + 10 * Math.log2(child.weight), THEME.LABEL_FONT_PX,
+      orb ? THEME.LABEL_ORB_COLOR : THEME.LABEL_COLOR, orb ? orbText(child) : child.name);
+  }
+  // Collapsed orbs anywhere: the bigger on screen, the more important.
+  for (const node of collapsedNodes) {
+    if (seen.has(node.id)) continue;
+    const s = projectForLabel(node);
+    if (s) add(node, 100 + Math.min(s.r, 50), THEME.LABEL_ORB_PX, THEME.LABEL_ORB_COLOR, orbText(node));
+  }
+  return out;
+}
+
+// Pointer hover (mouse only): the node under the pointer gets a label.
+let hoverPending = null;
+renderer.domElement.addEventListener('pointermove', (e) => {
+  if (e.pointerType !== 'mouse' || e.buttons !== 0) { hoverPending = null; hoverNode = null; return; }
+  hoverPending = { x: e.clientX, y: e.clientY };
+});
+renderer.domElement.addEventListener('pointerleave', () => { hoverPending = null; hoverNode = null; });
 
 // Tell a click apart from a drag (a drag rotates the view instead).
 let downX = 0, downY = 0;
@@ -508,10 +675,17 @@ function frame(now) {
   if (dirty) {
     focusUniforms._Focus.value.set(focusPoint.x, focusPoint.y, focusPoint.z); // the whole GPU refocus
     shownStale = true;                                                         // CPU copy is rebuilt only if a pick needs it
+    updateSemanticZoom();                                                      // collapse / expand folders by distance
+    updateHalos();                                                             // halos copy each node's state, so refresh them too
     dirty = false;
   }
   nebula.position.copy(camera.position); // the sky follows the camera, so it never shows parallax
-  renderer.render(scene, camera);
+  if (hoverPending) { hoverNode = pickNode(hoverPending.x, hoverPending.y); hoverPending = null; } // at most once per frame
+  renderer.info.reset();                  // we count draw calls of BOTH passes below
+  renderer.clear();
+  renderer.render(scene, camera);         // pass 1: the 3D galaxy
+  labels.update(collectLabelCandidates());
+  labels.render();                        // pass 2: labels on top (one batched draw call)
   requestAnimationFrame(frame);
 }
 
@@ -527,6 +701,7 @@ async function start() {
   nodes = tree.nodes;
   computeLayout3d(root);
 
+  labels = createLabels(renderer);
   buildDrawables();
   resize();
   focusOn(root, false);
@@ -546,6 +721,14 @@ window.__explorer = {
   focusId: () => focusNode.id,
   get fps() { return fps.value; },
   get animating() { return anim !== null; },
+  get labelCount() { return labels.count; },
+  labelDebug: () => labels.debug(),
+  get visibleCount() { return visibleCount; },
+  get collapsedCount() { return collapsedNodes.length; },
+  nodeState: (id) => nodes[id].state,
+  pick: (x, y) => { const n = pickNode(x, y); return n ? n.id : null; },
+  orbIds: () => collapsedNodes.map((n) => n.id),
+  setHover: (id) => { hoverNode = id === null ? null : nodes[id]; },
   get spinning() { return controls.autoRotate; },
   setSpin,
   get drawCalls() { return renderer.info.render.calls; },

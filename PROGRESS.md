@@ -125,7 +125,35 @@ Interim in 3a: edges are still the CPU polylines from Phase 2 (faint additive bl
 - Numbers (M4 laptop, headless, 5,000 nodes): 7 draw calls, 112 k triangles (71 k low). vsync: 60 fps idle and animating.
   Uncapped high: ≈ 555 idle, ≈ 480 animating. Uncapped low: ≈ 700 idle, ≈ 590 animating. The phone is the real test.
 
-### 3c — Labels, semantic zoom, breadcrumb
+### 3c — Labels, semantic zoom, breadcrumb  ✅ done (waiting for phone/laptop check)
+- [x] Labels: `troika-three-text` (free, npm) SDF text with a bundled local font (`public/fonts/Inter-SemiBold.woff`, OFL
+      licence included), so it works offline except for rare non-Latin fallback glyphs. `src/labels.js` draws them in a
+      flat screen-space pass (1 unit = 1 CSS pixel): always facing the viewer and a constant readable size, white with a dark
+      outline. `BatchedText` packs every label into ONE draw call (two passes: fill + outline)
+- [x] Which labels: the focus, its children (bigger subtrees first), the node under the pointer (mouse only), and the
+      "+N" orbs. At most 25 (`MAX_LABELS`); only the best 40 candidates are even tried per frame
+- [x] Never overlapping: candidates are sorted by priority; each tries 12 spots around its node (right, left, rows up/down,
+      above, below), preferring the spot it had last frame; the first free spot wins, otherwise the label is dropped
+- [x] Semantic zoom: a folder further than `COLLAPSE_DIST` (2.4) hyperbolic distance from the focus becomes a "+N" orb (bigger,
+      brighter, with a ring); everything below it is hidden (not drawn, not pickable, edges not drawn). Hysteresis ±0.3 stops
+      flicker; the focus and its ancestors never collapse; folders with fewer than 4 nodes inside are never collapsed.
+      Decided on the CPU (only when the focus moves), passed to the shaders as `aState` / `aHide`. Folders expand live as
+      the refocus animation approaches them
+- [x] Clicking a "+N" orb focuses that folder (then it expands). Hover over an orb shows "name +N"
+- [x] Breadcrumb "sample-repo / api / events / …" at the bottom centre (each segment clickable; long paths keep the first
+      segment and the last four). Info line now shows item counts only (the path moved to the breadcrumb)
+- [x] fps overlay (F or `?fps=1`) also shows label count and drawn-node count
+- [x] All new look constants (label sizes/colours/outline, orb size/ring, breadcrumb colours, collapse distances) are in theme.js
+- Checked in headless Chrome: hidden nodes never picked (300 tested, 0 hits); orb click focuses the folder; Backspace
+  walks up and the breadcrumb follows; hover label "io +49" on an orb; no console errors; CPU/GPU check still passes
+- Numbers (M4 laptop, headless, 5,000 nodes, root focus): 9 draw calls (7 scene + 2 text passes, limit 30), 25 labels,
+  1,356 of 4,999 nodes drawn (201 orbs). vsync: 60 fps idle and animating, high and low. Uncapped high: ≈ 520 idle,
+  ≈ 370 animating; low: ≈ 630 idle, ≈ 300–500 animating (noisy). The phone is the real test
+- Known quirk: right after page load the batch is repacked while the first texts are typeset and strings could draw on top
+  of each other for a moment, so labels stay hidden for the first ~2.5 s (`WARMUP_FRAMES`) or until all tried labels are
+  typeset. If it ever shows on the phone, tell me.
+
+## Phase 3 complete (3a, 3a-tweaks, theme, 3b, 3c). Next: Phase 4, VR Cardboard (waiting for "go")
 
 ### Known limitations (3a)
 - Nodes use no depth test (pure additive glow), so nothing occludes anything: intended for this look.
