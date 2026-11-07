@@ -62,8 +62,8 @@ Solo student project for a Computer Graphics and AR/VR course. **Zero budget**: 
 2. 3D Poincaré ball layout + geodesic animation  ✅
 3. Visual polish (impostor shaders, geodesic edge shader, fog, starfield, labels)  ✅
 4. **Code expansion**: files open into their own galaxy of classes/functions (4a scanner v2, 4b expansion + code panel, 4c links)
-5. Cross-file links (imports/calls as bundled geodesic arcs; the first part is already built in 4c)
-6. Search, info panel, git heat, second dataset
+5. Cross-file links  ✅ (delivered inside 4c: scanner link resolution, bundled geodesic arcs, back stack, panel lists)
+6. Usability for the user study: 6a search, 6b info card + git heat, 6c minimap + second dataset, 6d study mode (logging, export, collapsible-tree baseline)
 7. AR tabletop mode
 8. User study support + report
 9. **VR Cardboard** (gaze/dwell, free flight, Lorentz camera) + final visual theme pass

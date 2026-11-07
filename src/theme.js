@@ -244,6 +244,28 @@ export const THEME = {
   UI_ACTIVE_ALPHA: 0.92,       // ... and its opacity
   INTRO_CARD_WIDTH_PX: 380,    // width of the "How to explore" card
 
+  // ---- Search result: the path from the root to the chosen node lights up for a few seconds ---------
+  PATH_COLOR: [1.0, 0.92, 0.55],   // colour of the highlighted path: warm light gold
+  PATH_TINT: 0.8,              // how far path nodes/edges lean toward PATH_COLOR (0 = own colour, 1 = fully gold)
+  PATH_NODE_SIZE: 0.45,        // path nodes swell by this fraction (0.7 = 1.7x)
+  PATH_NODE_BRIGHT: 1.2,       // path nodes get this much extra brightness (x (1 + this))
+  PATH_EDGE_BRIGHT: 4.0,       // path edges: extra brightness (edges are faint, so this is large)
+  PATH_EDGE_WIDTH: 1.6,        // path edges are this much wider (1.6 = 2.6x)
+  PATH_RING_AT: 0.72,          // radius of the ring around path nodes (0..1 across the quad)
+  PATH_RING_WIDTH: 0.05,       // ring thickness
+  PATH_RING_GAIN: 1.0,         // ring brightness
+  PATH_HOLD_SECONDS: 4.0,      // the highlight stays at full strength this long ...
+  PATH_FADE_SECONDS: 1.5,      // ... then fades out over this long
+
+  // ---- Search box ---------------------------------------------------------------------------
+  SEARCH_ROW_PX: 48,           // height of one result row (48 px = comfortable thumb target)
+  SEARCH_WIDTH_PX: 560,        // widest the search box gets (it is full width on a phone)
+  SEARCH_ICON_FOLDER: [0.55, 0.80, 1.0],   // result icon colours by kind ...
+  SEARCH_ICON_FILE: [0.88, 0.92, 1.0],
+  SEARCH_ICON_CLASS: [1.0, 0.76, 0.46],
+  SEARCH_ICON_FUNCTION: [0.55, 0.90, 0.70],
+  SEARCH_ICON_METHOD: [0.78, 0.62, 1.0],
+
   // ---- Compact layout (phone held sideways: very little height) ----------------------------------
   COMPACT_HEIGHT_PX: 520,      // a window at most this tall uses the compact layout: icon-only toolbar down the left side,
                                // smaller title/breadcrumb/code, labels scaled by COMPACT_LABEL_SCALE

@@ -359,5 +359,29 @@ Known limitations / decisions to review
   (`COMPACT_HEIGHT_PX`) get a compact layout: icon-only toolbar in a column down the left, smaller title / breadcrumb / code text, 3D labels
   scaled by 0.75, panel uses the full height with a slimmer header. The title no longer runs under the panel
 
+## Phase 5 — Cross-file links: delivered inside 4c (see above)
+
+## Phase 6 — Usability for the user study  (in progress)
+Sub-steps 6a search · 6b info card + git heat · 6c minimap + second dataset · 6d study mode. One at a time, stop after each.
+
+### 6a — Search  ✅ done (waiting for your phone check)
+- [x] `src/search.js` (no DOM): name index in parallel arrays; every folder and file at once, symbol names added in the background
+      (`indexSymbolsInBackground`: 4 files at a time, a pause every 25 files, started 0.6 s after load, `getDoc(file, {cache:false})` so nothing is kept in memory).
+      Results appear for symbols as soon as their file has been read; the box says "Reading function names… 40 %" until then
+- [x] **Fuzzy ranking** (`scoreName`): exact 1000 > starts with 900 > starts a word (camelCase / `_` `-` `.`) 700 > inside 500 > letters in order with gaps ≤ 300;
+      minus position and half the unused letters. Example: "node" in `getNode` = 700 − 3 − 1.5 = 695.5. A 32-bit letter fingerprint rejects most names in one
+      operation. Several words: the first matches the name, the others must appear in the name or the path ("api client"). Ties: files/classes before folders/methods
+- [x] **Search box** (`src/searchui.js`): magnifier button first on the toolbar, `/` on a desktop keyboard, Esc closes, ↑↓ Enter on the keyboard. Top 10 results, each
+      with a kind icon (shapes echo the 3D ones), name and path. At the TOP of the screen so the phone keyboard cannot cover it; the list is shortened to
+      `visualViewport` height; Enter picks the first result; touching/scrolling the list hides the keyboard. Rows 48 px (40 px compact); typing never triggers I/K/D/C/F/R
+- [x] **Choosing a result** glides there along the geodesic (pushes the back stack: ‹ Back returns), fills the breadcrumb, and **lights the path root → result** for
+      4 s then fades 1.5 s: path nodes swell, get a gold ring and brighter; path edges get thick and gold (new `aMark` attribute on nodes and edges, one `uMark`
+      uniform, `PATH_*` constants in theme.js). A symbol in a closed file is lit up to the file at once and the last step when it opens
+- [x] Landscape compact toolbar now wraps into a second column so the extra button fits
+- Numbers (headless, M4): sample 21,412 entries (4,999 tree in 1.9 ms; 16,413 symbols from 1,475 files in 0.58 s, in the background); **0.4–0.8 ms per search**.
+  three.js: 22,744 entries (1,573 files in 0.52 s), **1.4 ms average, 2.6 ms worst** over 8 queries. Checked: `/` opens, Enter picks, a symbol result of a closed
+  file lands on its file with the path lit, marks clear after fade, Backspace returns; phone portrait (rows 48 px) and landscape (rows 40 px) tap-select works
+- Not measured: index time on the phone itself (on a real network the 1,475 small requests take longer than on localhost)
+
 ## Later
 5 Cross-file links (done early, in 4c) · 6 Search/info/git heat/2nd dataset · 7 AR tabletop · 8 User study + report · 9 VR Cardboard + final visual polish

@@ -98,6 +98,7 @@ uniform vec3 _Focus;     // the ball point currently shown at the centre of the 
 uniform float uFocusId;  // id of the node we are focusing on (gets the "sun" look)
 uniform float uTime;     // seconds, drives breathing and twinkling
 uniform float uBloom;    // real-time clock for the bloom-in animation (not frozen by ?time=)
+uniform float uMark;     // 0..1 strength of the search-result path highlight (fades out over a few seconds)
 
 attribute vec2 corner;   // quad corner: (-1,-1) (1,-1) (1,1) (-1,1)
 attribute vec3 aPos;
@@ -110,6 +111,7 @@ attribute float aId;
 attribute float aState;
 attribute vec3 aOrigin;
 attribute float aBorn;
+attribute float aMark;   // 1 = this node is on the highlighted path (root -> search result)
 
 varying vec2 vUv;        // where in the quad this pixel is: -1..1 in x and y
 varying vec3 vColor;
@@ -118,6 +120,7 @@ varying float vFocus;
 varying float vKind;
 varying float vFlag;
 varying float vOrb;      // 1 for a collapsed orb
+varying float vMark;     // path highlight strength for this node (aMark * uMark)
 
 ${MOBIUS_GLSL}
 ${COLOR_GLSL}
@@ -166,7 +169,9 @@ void main() {
   // drawn 0.0076 across, but never below MIN_R.
   // Slow breathing, +-6 % for folders only (aSeed makes each one out of step).
   float breathe = 1.0 + BREATHE_AMOUNT * notFile * sin(uTime * BREATHE_SPEED + aSeed * 6.2831);
-  float size = max(rho * (1.0 - r2) * 0.5 * breathe, MIN_R) * grow;
+  float mark = aMark * uMark;
+  // Path highlight: nodes on the path swell by (1 + PATH_NODE_SIZE * mark). Example: PATH_NODE_SIZE 0.6, mark 1 -> 1.6x.
+  float size = max(rho * (1.0 - r2) * 0.5 * breathe, MIN_R) * grow * (1.0 + PATH_NODE_SIZE * mark);
 
   // --- 3. BRIGHTNESS and COLOUR by hyperbolic distance ----------------------
   // fog = e^(-d/2): 1 at the focus, 0.37 at d = 2, 0.08 at d = 5.
@@ -191,6 +196,9 @@ void main() {
   col = mix(col, FOCUS_COLOR, isFocus);
   vBright = mix(vBright, FOCUS_BRIGHT, isFocus);
   vBright *= mix(1.0, COLLAPSED_BRIGHT, orb);
+  vBright *= 1.0 + PATH_NODE_BRIGHT * mark;
+  col = mix(col, PATH_COLOR, mark * PATH_TINT);   // and lean toward the path colour
+  vMark = mark;
   vColor = col;
 
   vFocus = isFocus;
@@ -228,6 +236,7 @@ varying float vFocus;
 varying float vKind;
 varying float vFlag;
 varying float vOrb;
+varying float vMark;
 
 void main() {
   float q = length(vUv);
@@ -286,6 +295,8 @@ void main() {
   col += vOrb * vColor * COLLAPSED_RING_GAIN * smoothstep(COLLAPSED_RING_WIDTH, 0.0, abs(q - COLLAPSED_RING_AT));
   // Class: a permanent thin ring (a "planet" with a ring).
   col += step(1.5, vKind) * step(vKind, 2.5) * vColor * CLASS_RING_GAIN * smoothstep(CLASS_RING_WIDTH, 0.0, abs(q - CLASS_RING_AT));
+  // Search path: a bright ring in the path colour that fades with the highlight.
+  col += vMark * PATH_COLOR * PATH_RING_GAIN * smoothstep(PATH_RING_WIDTH, 0.0, abs(q - PATH_RING_AT));
   col += vFlag * FLAG_COLOR * smoothstep(FLAG_RING_WIDTH, 0.0, abs(q - FLAG_RING_AT));
 
   col *= vBright;
@@ -469,6 +480,7 @@ void main() {
 export const EDGE_VERT = /* glsl */ `
 uniform vec3 _Focus;
 uniform float uBloom;         // bloom clock (see NODE_VERT)
+uniform float uMark;          // path highlight strength 0..1 (see NODE_VERT)
 uniform vec2 uResolution;     // drawing-buffer size in pixels
 uniform float uLineWidth;     // base width in drawing-buffer pixels
 
@@ -481,6 +493,7 @@ attribute float aEnergy;
 attribute float aSeed;
 attribute float aHide;        // 1 = the child end is inside a collapsed folder: do not draw
 attribute float aBorn;        // bloom start time (-100 = always there): the child end grows out of the parent end
+attribute float aMark;        // 1 = this edge is on the highlighted path
 
 varying float vAcross;        // -1 at one side of the line, +1 at the other
 varying float vT;
@@ -507,7 +520,9 @@ void main() {
   float d = 2.0 * atanh(length(P));
   float fog = exp(-d * EDGE_FOG_RATE);              // 1 at the focus, 0.4 at d = 2, 0.1 at d = 5
   vBright = EDGE_BRIGHT_FLOOR + EDGE_BRIGHT_NEAR * fog;                      // never invisible, brightest near the focus
-  vColor = armColor(aHue, fog);
+  float mark = aMark * uMark;
+  vBright *= 1.0 + PATH_EDGE_BRIGHT * mark;                 // path edges glow brighter ...
+  vColor = mix(armColor(aHue, fog), PATH_COLOR, mark * PATH_TINT);   // ... and lean toward the path colour
   vT = aT; vSeed = aSeed; vAcross = aSide;
 
   vec4 cp = projectionMatrix * viewMatrix * vec4(P, 1.0);
@@ -518,7 +533,8 @@ void main() {
   vec2 perp = vec2(-dirPx.y, dirPx.x);
 
   // Width: 0.55x far away to 1.45x near the focus, a bit more for big subtrees.
-  float width = uLineWidth * (EDGE_WIDTH_FAR + EDGE_WIDTH_NEAR * fog) * (EDGE_WIDTH_ENERGY_BASE + EDGE_WIDTH_PER_ENERGY * aEnergy);
+  float width = uLineWidth * (EDGE_WIDTH_FAR + EDGE_WIDTH_NEAR * fog) * (EDGE_WIDTH_ENERGY_BASE + EDGE_WIDTH_PER_ENERGY * aEnergy)
+              * (1.0 + PATH_EDGE_WIDTH * mark);
   // One pixel is 2/uResolution in normalised screen units (the screen is 2 units wide).
   gl_Position = cp;
   gl_Position.xy += perp * aSide * (width * 0.5) * (2.0 / uResolution) * cp.w;

@@ -116,8 +116,10 @@ export function createSymbolStore(baseUrl, symbolsDir, sourceDir) {
     return cache.get(key);
   };
   return {
-    getDoc(file) {
+    // { cache: false } = read it without keeping it in memory (the search index reads every file once this way).
+    getDoc(file, { cache = true } = {}) {
       if (!file.hasSymbols || symbolsDir == null) return Promise.resolve(null);
+      if (!cache) return fetch(`${baseUrl}${symbolsDir}/${file.fileId}.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null);
       return fetchOnce(docs, file.fileId, `${baseUrl}${symbolsDir}/${file.fileId}.json`, (r) => r.json());
     },
     getLines(file) {

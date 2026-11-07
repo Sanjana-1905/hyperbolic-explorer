@@ -35,6 +35,8 @@ import {
   confidenceDots, liftEnd, MAX_VISIBLE_LINKS, CONTROL_POINTS,
 } from './links.js';
 import { createToolbar } from './toolbar.js';
+import { createIndex } from './search.js';
+import { createSearchUI } from './searchui.js';
 import { createCodePanel } from './codepanel.js';
 import { createFpsCounter } from './fps.js';
 import {
@@ -113,6 +115,8 @@ const controls = nav.controls;
 const uTime = { value: 0 };
 // Real-time clock (seconds) for the bloom-in of new symbols. Not frozen by ?time=, or new nodes would never grow.
 const uBloom = { value: 0 };
+// Strength 0..1 of the search-result path highlight (set every frame from the time since the highlight started).
+const uMark = { value: 0 };
 
 // Procedural nebula + stars: one big inward-facing sphere that follows the
 // camera (so it behaves like the sky: no parallax), drawn first, ignoring depth.
@@ -206,8 +210,8 @@ let sunMesh = null;             // the focus sun billboard (1 draw call)
 let dustMesh = null;            // faint background specks (1 draw call)
 
 // The two shader uniforms that change on refocus. _Focus is the whole GPU refocus.
-const focusUniforms = { _Focus: { value: new THREE.Vector3() }, uFocusId: { value: -1 }, uTime, uBloom };
-const edgeUniforms = { _Focus: focusUniforms._Focus, uTime, uBloom, uResolution: { value: new THREE.Vector2(1, 1) }, uLineWidth: { value: 1.8 } };
+const focusUniforms = { _Focus: { value: new THREE.Vector3() }, uFocusId: { value: -1 }, uTime, uBloom, uMark };
+const edgeUniforms = { _Focus: focusUniforms._Focus, uTime, uBloom, uMark, uResolution: { value: new THREE.Vector2(1, 1) }, uLineWidth: { value: 1.8 } };
 const sunUniforms = { _Focus: focusUniforms._Focus, uFocusPos: { value: new THREE.Vector3() }, uTime };
 const linkUniforms = { _Focus: focusUniforms._Focus, uTime, uBloom, uResolution: { value: new THREE.Vector2(1, 1) }, uLineWidth: { value: 2.2 }, uGain: { value: 1 } };
 
@@ -268,7 +272,7 @@ function makeQuadGeometry(capacity, only = null) {
   g.arrays = {
     aPos: add('aPos', 3), aHue: add('aHue', 1), aEnergy: add('aEnergy', 1),
     aFlag: add('aFlag', 1), aKind: add('aKind', 1), aSeed: add('aSeed', 1), aId: add('aId', 1),
-    aState: add('aState', 1), aOrigin: add('aOrigin', 3), aBorn: add('aBorn', 1),
+    aState: add('aState', 1), aOrigin: add('aOrigin', 3), aBorn: add('aBorn', 1), aMark: add('aMark', 1),
   };
   g.instanceCount = capacity;
   return g;
@@ -286,6 +290,7 @@ function writeInstance(g, slot, node) {
   const from = node.parent ? node.parent.pos : node.pos;
   a.aOrigin[slot * 3] = from.x; a.aOrigin[slot * 3 + 1] = from.y; a.aOrigin[slot * 3 + 2] = from.z;
   a.aBorn[slot] = node.born ?? -100;
+  a.aMark[slot] = node.mark ?? 0;     // 1 while on the highlighted search path
   a.aSeed[slot] = node.seed;
   a.aId[slot] = node.id;
   a.aState[slot] = node.state;
@@ -345,7 +350,8 @@ function buildDrawables() {
   const eA = ea('aA', 3), eB = ea('aB', 3), eHue = ea('aHue', 1), eEnergy = ea('aEnergy', 1), eSeed = ea('aSeed', 1);
   const eHide = ea('aHide', 1);
   const eBorn = ea('aBorn', 1);
-  edgeArr = { eA, eB, eHue, eEnergy, eSeed, eHide, eBorn };
+  const eMark = ea('aMark', 1);
+  edgeArr = { eA, eB, eHue, eEnergy, eSeed, eHide, eBorn, eMark };
   edgeNodes.forEach((nd, i) => {
     eA.set([nd.parent.pos.x, nd.parent.pos.y, nd.parent.pos.z], i * 3);
     eB.set([nd.pos.x, nd.pos.y, nd.pos.z], i * 3);
@@ -568,7 +574,7 @@ function addSymbolNodes(file, made) {
     edgeArr.eA.set([node.parent.pos.x, node.parent.pos.y, node.parent.pos.z], e * 3);
     edgeArr.eB.set([node.pos.x, node.pos.y, node.pos.z], e * 3);
     edgeArr.eHue[e] = node.hue; edgeArr.eEnergy[e] = node.energy; edgeArr.eSeed[e] = node.seed;
-    edgeArr.eHide[e] = 0; edgeArr.eBorn[e] = bornAt;
+    edgeArr.eHide[e] = 0; edgeArr.eBorn[e] = bornAt; edgeArr.eMark[e] = 0;
     dynamicCount++;
     allNodes.push(node);
   }
@@ -579,7 +585,7 @@ function addSymbolNodes(file, made) {
 
 function uploadBuffers() {
   for (const name of Object.keys(nodeMesh.geometry.arrays)) nodeMesh.geometry.attributes[name].needsUpdate = true;
-  for (const name of ['aA', 'aB', 'aHue', 'aEnergy', 'aSeed', 'aHide', 'aBorn']) edgeMesh.geometry.attributes[name].needsUpdate = true;
+  for (const name of ['aA', 'aB', 'aHue', 'aEnergy', 'aSeed', 'aHide', 'aBorn', 'aMark']) edgeMesh.geometry.attributes[name].needsUpdate = true;
   shownStale = true;
 }
 
@@ -666,6 +672,8 @@ function focusOn(node, animate = true) {
   dirty = true;
   linksDirty = true;
   refreshToolbar();
+  // The search result was a symbol of a file that was closed: now that it exists, light the last step of the path too.
+  if (markTarget && node.type === 'symbol' && node.file.fileId === markTarget.fileId && node.symIndex === markTarget.sym) markPath(node, false);
 }
 
 // Fill the code panel for the focus: a symbol shows its own lines, a file with source shows the file.
@@ -818,6 +826,7 @@ function updatePanelLinks() {
 
 // On-screen navigation (toolbar.js): Home, Up, Back and the link chips. Touch screens have no Backspace/I/K keys.
 const toolbar = createToolbar({
+  onSearch: () => { if (searchUI) searchUI.open(); },
   onHome: () => { if (root && focusNode !== root) focusOn(root); },
   onUp: () => { if (focusNode && focusNode.parent) focusOn(focusNode.parent); },
   onBack: () => goBack(),
@@ -835,6 +844,95 @@ function refreshToolbar() {
 }
 function updateBackButton() { refreshToolbar(); }
 updateHelp();
+
+
+// ---------------------------------------------------------------------------
+// Search (Phase 6a)
+// ---------------------------------------------------------------------------
+// The index (search.js) holds every folder and file name at once; function/class names are added in the background:
+// the symbol files are read 4 at a time, 25 files per slice, with a pause between slices so the page stays smooth.
+let searchIndex = null;
+let searchUI = null;
+let indexStats = { treeMs: 0, symbolsMs: 0, files: 0, done: false };   // reported by __explorer.searchStats()
+let markTarget = null;          // { fileId, sym } while a symbol result is highlighted (see markPath)
+let markNodes = [];             // nodes currently carrying the path highlight
+let markStart = 0;              // when the highlight started (performance.now)
+
+function buildSearch() {
+  searchIndex = createIndex();
+  const t0 = performance.now();
+  searchIndex.addTree(nodes, nodePath);
+  indexStats.treeMs = performance.now() - t0;
+  searchUI = createSearchUI({ index: searchIndex, onSelect: goToResult });
+  indexStats.files = symbolFiles.length;
+  setTimeout(indexSymbolsInBackground, 600);   // let the first frames and the first interaction go first
+}
+
+async function indexSymbolsInBackground() {
+  const t0 = performance.now();
+  const queue = symbolFiles.slice();
+  let done = 0;
+  const worker = async () => {
+    while (queue.length) {
+      const file = queue.shift();
+      const doc = await store.getDoc(file, { cache: false });
+      if (doc) searchIndex.addFileSymbols(file, nodePath(file), doc);
+      if (++done % 25 === 0) {
+        searchUI.setProgress(done / symbolFiles.length);
+        await new Promise((resolve) => setTimeout(resolve, 0));   // give the page a turn
+      }
+    }
+  };
+  await Promise.all([worker(), worker(), worker(), worker()]);
+  indexStats.symbolsMs = performance.now() - t0;
+  indexStats.done = true;
+  searchUI.setProgress(1);
+}
+
+// The user chose a search result: glide there (the previous place goes on the back stack, so ‹ Back returns),
+// and light up the path from the root to it for a few seconds. The breadcrumb follows the focus by itself.
+function goToResult(r) {
+  const place = r.baseId >= 0 ? { baseId: r.baseId } : { fileId: r.fileId, sym: r.sym };
+  goToPlace(place, true);
+  markTarget = r.baseId >= 0 ? null : place;
+  const file = fileById.get(r.fileId);
+  // A symbol of a closed file has no node yet: light the path as far as the file now, the last step when it opens.
+  const target = r.baseId >= 0 ? nodeById[r.baseId] : ((file && file.symByIndex && file.symByIndex.get(r.sym)) || file);
+  if (target) markPath(target, true);
+}
+
+// Highlight root -> node: every node on the way and every edge between them gets aMark = 1; the shaders scale it
+// by uMark, which stepMark() fades from 1 to 0 (PATH_HOLD_SECONDS at full strength, then PATH_FADE_SECONDS).
+function markPath(node, restart) {
+  setMarks(markNodes, 0);
+  markNodes = [];
+  for (let n = node; n; n = n.parent) markNodes.push(n);
+  setMarks(markNodes, 1);
+  if (restart || !markStart) markStart = performance.now();
+}
+
+function setMarks(list, value) {
+  for (const n of list) {
+    if (nodeById[n.id] !== n) continue;                          // freed slot: nothing to write
+    nodeMesh.geometry.arrays.aMark[n.id] = value;
+    if (n.edgeIndex !== undefined) edgeArr.eMark[n.edgeIndex] = value;
+  }
+  nodeMesh.geometry.attributes.aMark.needsUpdate = true;
+  edgeMesh.geometry.attributes.aMark.needsUpdate = true;
+}
+
+// Fade: full strength for PATH_HOLD_SECONDS, then linear to 0 over PATH_FADE_SECONDS. Example (4 s, 1.5 s): at 4.75 s
+// the strength is 1 - 0.75/1.5 = 0.5; at 5.5 s it is 0 and the marks are cleared.
+function stepMark(now) {
+  if (!markNodes.length) return;
+  const t = (now - markStart) / 1000;
+  const fade = t < THEME.PATH_HOLD_SECONDS ? 1 : Math.max(0, 1 - (t - THEME.PATH_HOLD_SECONDS) / THEME.PATH_FADE_SECONDS);
+  uMark.value = fade;
+  if (fade === 0) {
+    setMarks(markNodes, 0);
+    markNodes = []; markTarget = null; markStart = 0;
+  }
+}
 
 // ---------------------------------------------------------------------------
 // Text overlay
@@ -1085,6 +1183,7 @@ function frame(now) {
   fps.tick(now);
   uTime.value = FROZEN_TIME ?? now / 1000; // ?time=12.5 freezes the shader clock (repeatable screenshots)
   uBloom.value = performance.now() / 1000;  // bloom clock: always real time
+  stepMark(now);                            // fade of the search-path highlight
   if (nav.update(now)) dirty = true;        // camera damping + the refocus glide (navigation.js)
   if (dirty) {
     const f = nav.focusPoint;
@@ -1128,6 +1227,7 @@ async function start() {
   store = createSymbolStore(baseUrl, json.symbolsDir, json.sourceDir);
   symbolFiles = nodes.filter((n) => n.hasSymbols);
   for (const n of symbolFiles) fileById.set(n.fileId, n);
+  buildSearch();
   codePanel = createCodePanel({ onInset: nav.setInset });
   // Links (Phase 4c) load in the background: the galaxy is usable before they arrive.
   if (json.linksFile) {
@@ -1181,6 +1281,12 @@ window.__explorer = {
   arcs: () => linkArcs.map((a) => ({ a: a.a.id, b: a.b.id, type: a.type, conf: a.conf, count: a.count, role: a.role, far: a.far ? a.far.id : null })),
   get backDepth() { return nav.backDepth; },
   goBack,
+  searchStats: () => ({ ...indexStats, entries: searchIndex.size, indexed: searchIndex.symbolFilesIndexed, lastSearchMs: searchUI.lastMs }),
+  search: (text, n = 10) => { const t0 = performance.now(); const r = searchIndex.search(text, n); return { ms: performance.now() - t0, results: r }; },
+  searchUI: () => searchUI,
+  goToResult,
+  get markCount() { return markNodes.length; },
+  get markStrength() { return uMark.value; },
   followArc: (i) => followArc(linkArcs[i]),
   goToPlace: (fileId, sym) => goToPlace({ fileId, sym }, true),
   setLinkFilter: (imports, calls) => { showImports = imports; showCalls = calls; linksDirty = true; updateHelp(); },
