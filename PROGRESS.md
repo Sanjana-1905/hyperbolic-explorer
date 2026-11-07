@@ -468,7 +468,7 @@ Other options: `&tree=wordnet_tree.json` (other dataset; tasks come from `study/
 - [x] **Developer text hidden** in study mode (fps counter, key-help line); the 3D intro card is skipped (the study briefs people itself); the viewer's panels, search box and
       info card move down by the height of the study bar (`--study-h`); on a sideways phone the bar is one slim row
 - [x] **Collapsible-tree baseline** (`src/maintree.js`, `?mode=tree`): a plain file-explorer list from the same JSON and the same `buildTree` (identical paths): click a folder
-      to open/close, click a file to select, arrow keys, a filter box, 44 px rows on touch. No map, heat, links or 3D
+      to open/close, click a file to select (mouse/touch only, no arrow keys, like the other conditions), a filter box, 44 px rows on touch. No map, heat, links or 3D
 - [x] **Tasks** (`tools/make_study_tasks.py`): "Find the file "X" inside the folder "Y"", only (folder, file) pairs that occur exactly once, seeded, same list for everyone;
       `public/study/tasks_sample.json` and `tasks_wordnet.json` are committed (tests check every target exists once, is a leaf, and the pair is unique)
 - Caveats for the analysis: the sample's folder names repeat a lot (e.g. several folders called `io`), so the tasks are harder than "find main.css"; the 3D viewer also has

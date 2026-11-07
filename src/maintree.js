@@ -8,7 +8,7 @@
 // It exposes the same small debugging interface as the other viewers (window.__explorer: nodes, focusId(), focusOn(), focusNode)
 // so study mode logs it exactly like the others: "focus" here means "the selected row".
 //
-// Rows are TREE_ROW_PX tall (TREE_ROW_TOUCH_PX on touch screens: 44 px thumb targets). Look constants: TREE_* and CODE_* in theme.js.
+// Mouse/touch only (no arrow keys), like the other conditions. Rows are TREE_ROW_PX tall (TREE_ROW_TOUCH_PX on touch screens: 44 px thumb targets). Look constants: TREE_* and CODE_* in theme.js.
 
 import { buildTree, nodePath } from './layout.js';
 import { THEME, cssRgb } from './theme.js';
@@ -111,20 +111,8 @@ box.addEventListener('click', (e) => {
   render();
 });
 
-window.addEventListener('keydown', (e) => {
-  if (!selected || /^(input|textarea)$/i.test(e.target.tagName)) return;
-  const list = visibleNodes();
-  const i = list.indexOf(selected);
-  if (e.key === 'ArrowDown' && i < list.length - 1) select(list[i + 1]);
-  else if (e.key === 'ArrowUp' && i > 0) select(list[i - 1]);
-  else if (e.key === 'ArrowRight' && selected.children.length) expanded.add(selected.id);
-  else if (e.key === 'ArrowLeft') { if (expanded.has(selected.id)) expanded.delete(selected.id); else if (selected.parent) select(selected.parent); }
-  else return;
-  e.preventDefault();
-  render();
-  const row = box.querySelector('.row.sel');
-  if (row) row.scrollIntoView({ block: 'nearest' });
-});
+// No keyboard navigation on purpose: the hyperbolic viewers are mouse/touch only, so the baseline is too (a fair comparison,
+// and the study also runs on phones).
 
 async function start() {
   const file = params.get('tree') || 'sample_tree.json';
