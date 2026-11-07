@@ -7,6 +7,11 @@
 // element, so scrolling code never rotates the view). On the keyboard: C toggles it.
 // Every colour and size is a theme constant (CODE_* in theme.js).
 //
+// Links (Phase 4c): a row of tabs under the header, "Code · Imports n · Imported by n · Calls n · Called by n" (only the
+// non-empty ones). A link tab replaces the code with a list; every entry is a 48 px tap target showing the name, its
+// file and the confidence as 1-3 dots, in the link type's colour. Tapping an entry calls `onPick(entry)` (the viewer
+// glides there and remembers where it came from). Lists show 30 entries, then a "show more" button.
+//
 // Syntax colouring is deliberately simple: one regular expression finds comments, strings, numbers and
 // keywords in the shown snippet. It starts "cold" at the first shown line, so a snippet that begins inside
 // a block comment is coloured wrongly for a moment. That is fine for a reading aid.
@@ -14,6 +19,7 @@
 import { THEME, cssRgb } from './theme.js';
 
 const MAX_LINES = 400; // longer snippets are cut (a whole big file would make a phone sluggish)
+const LIST_PAGE = 30;  // link list entries shown at first (and added by each "show more")
 
 const JS_KEYWORDS = 'abstract async await break case catch class const constructor continue debugger declare default delete do else enum export extends false finally for from function get if implements import in instanceof interface let namespace new null of private protected public readonly return set static super switch this throw true try type typeof undefined var void while with yield';
 const PY_KEYWORDS = 'False None True and as assert async await break class continue def del elif else except finally for from global if import in is lambda nonlocal not or pass raise return try while with yield self';
@@ -92,6 +98,27 @@ export function createCodePanel({ onInset } = {}) {
     #code .cp-n { color: ${cssRgb(THEME.CODE_NUMBER)}; }
     #code .cp-k { color: ${cssRgb(THEME.CODE_KEYWORD)}; }
     #code .cp-note { padding: 8px 12px; opacity: 0.65; font-family: system-ui, sans-serif; white-space: normal; }
+    #code .cp-tabs { display: flex; flex: none; overflow-x: auto; gap: 2px; padding: 0 6px; scrollbar-width: none;
+      border-bottom: 1px solid ${cssRgb(THEME.CODE_LINENO, 0.3)}; font-family: system-ui, sans-serif; }
+    #code .cp-tabs:empty { display: none; }
+    #code .cp-tabs button { width: auto; height: 44px; padding: 0 10px; font-size: 13px; white-space: nowrap;
+      color: ${cssRgb(THEME.CODE_LINENO)}; border-bottom: 2px solid transparent; }
+    #code .cp-tabs button.on { color: ${cssRgb(THEME.CODE_HEADER)}; border-bottom-color: ${cssRgb(THEME.CODE_EDGE)}; }
+    #code .cp-list { flex: 1; overflow: auto; overscroll-behavior: contain; display: none; padding: 4px 0 12px;
+      font-family: system-ui, sans-serif; }
+    #code.listing .cp-list { display: block; }
+    #code.listing .cp-body { display: none; }
+    #code.folded .cp-list, #code.folded .cp-tabs { display: none; }
+    #code .cp-list button { display: flex; align-items: center; gap: 10px; width: 100%; height: auto; min-height: 48px;
+      padding: 4px 12px; text-align: left; font-size: 13px; color: ${cssRgb(THEME.CODE_TEXT)};
+      border-left: 3px solid var(--link-color); }
+    #code .cp-list button:hover { background: ${cssRgb(THEME.CODE_LINENO, 0.15)}; }
+    #code .cp-ent { flex: 1; min-width: 0; }
+    #code .cp-ent b { display: block; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    #code .cp-ent i { display: block; font-style: normal; font-size: 11px; opacity: 0.6; white-space: nowrap;
+      overflow: hidden; text-overflow: ellipsis; }
+    #code .cp-dots { flex: none; letter-spacing: 1px; color: var(--link-color); font-size: 11px; }
+    #code .cp-more { justify-content: center; color: ${cssRgb(THEME.CODE_HEADER)}; }
     /* Narrow screens (phones): a bottom sheet instead of a side panel. */
     @media ${NARROW} {
       #code { top: auto; left: 0; right: 0; bottom: 0; width: auto; height: ${THEME.CODE_SHEET_HEIGHT_VH}vh;
@@ -106,15 +133,69 @@ export function createCodePanel({ onInset } = {}) {
   el.id = 'code';
   el.innerHTML = `<div class="cp-head"><div class="cp-title"><div class="cp-name"></div><div class="cp-sub"></div></div>
     <button class="cp-fold" aria-label="Fold or unfold the code panel">–</button>
-    <button class="cp-close" aria-label="Close the code panel">×</button></div><div class="cp-body"></div>`;
+    <button class="cp-close" aria-label="Close the code panel">×</button></div><div class="cp-tabs"></div>
+    <div class="cp-body"></div><div class="cp-list"></div>`;
   document.body.appendChild(el);
   const nameEl = el.querySelector('.cp-name');
   const subEl = el.querySelector('.cp-sub');
   const bodyEl = el.querySelector('.cp-body');
+  const tabsEl = el.querySelector('.cp-tabs');
+  const listEl = el.querySelector('.cp-list');
 
   let hasContent = false;   // something to show for the current focus
   let closedByUser = false; // the user pressed ×: stay hidden until the focus changes
   let folded = false;
+  let groups = [];          // link lists: [{ title, color: [r, g, b], entries: [{ name, sub, dots, ... }] }]
+  let onPick = null;
+  let active = -1;          // -1 = code, else the index of the open link group
+
+  // Tabs: "Code" plus one per non-empty link group.
+  function renderTabs() {
+    tabsEl.textContent = '';
+    if (!groups.some((g) => g.entries.length)) { active = -1; el.classList.remove('listing'); return; }
+    const tab = (label, index) => {
+      const b = document.createElement('button');
+      b.textContent = label;
+      b.className = index === active ? 'on' : '';
+      b.addEventListener('click', () => { active = index; renderTabs(); renderList(); });
+      tabsEl.appendChild(b);
+    };
+    tab('Code', -1);
+    groups.forEach((g, i) => { if (g.entries.length) tab(`${g.title} ${g.entries.length}`, i); });
+    el.classList.toggle('listing', active >= 0);
+  }
+
+  // The open group's entries, LIST_PAGE at a time.
+  function renderList(limit = LIST_PAGE) {
+    listEl.textContent = '';
+    if (active < 0) return;
+    const g = groups[active];
+    listEl.style.setProperty('--link-color', cssRgb(g.color));
+    for (const entry of g.entries.slice(0, limit)) {
+      const b = document.createElement('button');
+      const ent = document.createElement('span');
+      ent.className = 'cp-ent';
+      const name = document.createElement('b');
+      name.textContent = entry.name + (entry.count > 1 ? `  ×${entry.count}` : '');
+      const sub = document.createElement('i');
+      sub.textContent = entry.sub;
+      ent.append(name, sub);
+      const dots = document.createElement('span');
+      dots.className = 'cp-dots';
+      dots.textContent = '●'.repeat(entry.dots) + '○'.repeat(3 - entry.dots);
+      dots.title = `confidence ${Math.round(entry.conf * 100)} %`;
+      b.append(ent, dots);
+      b.addEventListener('click', () => { if (onPick) onPick(entry); });
+      listEl.appendChild(b);
+    }
+    if (g.entries.length > limit) {
+      const more = document.createElement('button');
+      more.className = 'cp-more';
+      more.textContent = `Show more (${g.entries.length - limit} left)`;
+      more.addEventListener('click', () => { const top = listEl.scrollTop; renderList(limit + LIST_PAGE); listEl.scrollTop = top; });
+      listEl.appendChild(more);
+    }
+  }
 
   function applyVisibility() {
     const open = hasContent && !closedByUser;
@@ -175,6 +256,18 @@ export function createCodePanel({ onInset } = {}) {
       bodyEl.scrollTop = 0;
       applyVisibility();
     },
+
+    // Link lists for the focus (Phase 4c). `list` = [{ title, color, entries }]; `pick(entry)` is called on a tap.
+    // Opens on the code tab again (a new focus starts with its code).
+    setLinks(list, pick) {
+      groups = list || [];
+      onPick = pick;
+      active = -1;
+      renderTabs();
+      renderList();
+    },
+    get linkTabs() { return [...tabsEl.querySelectorAll('button')].map((b) => b.textContent); },
+    openTab(index) { active = index; renderTabs(); renderList(); },
 
     // The focus has nothing to show (a folder): hide.
     hide() {

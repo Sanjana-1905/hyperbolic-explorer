@@ -4,6 +4,7 @@ import assert from 'node:assert/strict';
 import {
   vec3, vLength, vNeg, mobiusAdd3, hyperbolicDistance3, distanceToRadius,
   mobiusScale3, geodesicLerp3, geodesicLerp3Free, mobiusAdd3Free, clampToBall, conformalFactor3, coneAngleForTerritory,
+  geodesicBezier3, straightenToward,
 } from '../src/mobius3d.js';
 import { complex, mobiusAdd } from '../src/mobius.js';
 
@@ -126,6 +127,34 @@ assert.ok(Math.abs(beta / deg - 39.0) < 0.1, `β should be about 39°, got ${bet
   closeVec(geodesicLerp3Free(o, p, 1), p, 'free geodesic reaches a point at 0.9966');
   const mid = geodesicLerp3Free(o, p, 0.5);
   close(hyperbolicDistance3(o, mid) * 2, hyperbolicDistance3(o, p), 'midpoint is half way');
+}
+
+// --- Link curves (Phase 4c) ------------------------------------------------------
+{
+  // The worked example in mobius3d.js: 3 control points, t = 0.5 -> (0, 0.2087, 0).
+  const b = geodesicBezier3([vec3(-0.5, 0, 0), vec3(0, 0.5, 0), vec3(0.5, 0, 0)], 0.5);
+  close(b.x, 0, 'bezier example x'); assert.ok(Math.abs(b.y - 0.20871) < 1e-5, `bezier example y ${b.y}`);
+  // Ends: t = 0 and t = 1 are the first and last control points.
+  const pts = [vec3(0.1, 0.2, 0.3), vec3(-0.4, 0.5, 0.1), vec3(0.6, -0.2, 0.2), vec3(0.2, 0.7, -0.3), vec3(-0.5, -0.5, 0.4)];
+  closeVec(geodesicBezier3(pts, 0), pts[0], 'bezier starts at p0');
+  closeVec(geodesicBezier3(pts, 1), pts[4], 'bezier ends at p4');
+  // Points on one geodesic give that geodesic: every curve point is on the geodesic a -> b.
+  const a = vec3(-0.3, 0.1, 0.2), c = vec3(0.5, 0.4, -0.3);
+  const onLine = [0, 0.2, 0.5, 0.7, 1].map((t) => geodesicLerp3(a, c, t));
+  const q = geodesicBezier3(onLine, 0.37);
+  close(hyperbolicDistance3(a, q) + hyperbolicDistance3(q, c), hyperbolicDistance3(a, c), 'collinear control points: curve on the geodesic');
+  // Refocus first, curve after == curve first, refocus after (a Möbius move is an isometry). This is what the GPU relies on.
+  const f = vec3(0.4, -0.3, 0.5);
+  for (const t of [0.1, 0.37, 0.8]) {
+    const moved = geodesicBezier3(pts.map((p) => mobiusAdd3(vNeg(f), p)), t);
+    closeVec(moved, mobiusAdd3(vNeg(f), geodesicBezier3(pts, t)), `bezier commutes with refocus, t = ${t}`);
+  }
+  // Tension step: the worked example (0.207, 0.432, 0); tension 0 = on the chord, 1 = the tree point itself.
+  const A = vec3(), B = vec3(0.6), P = vec3(0.2, 0.5, 0);
+  const s = straightenToward(A, B, P, 0.5, 0.85);
+  assert.ok(Math.abs(s.x - 0.20726) < 1e-5 && Math.abs(s.y - 0.43237) < 1e-5, `tension example ${JSON.stringify(s)}`);
+  closeVec(straightenToward(A, B, P, 0.5, 0), vec3(1 / 3), 'tension 0: on the chord, halfway = 1/3');
+  closeVec(straightenToward(A, B, P, 0.5, 1), P, 'tension 1: the tree point');
 }
 
 // --- Conformal factor ----------------------------------------------------------

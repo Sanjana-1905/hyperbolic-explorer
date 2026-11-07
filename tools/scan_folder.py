@@ -18,7 +18,8 @@ TREE JSON (backward compatible: the old fields are unchanged, new ones are only 
     }
     The root also gets "symbolsDir": the folder holding the symbol files, relative to the folder of the tree file,
     and "sourceDir": the folder holding a verbatim copy of every parsed file as <id>.txt (the viewer's code panel
-    reads the lines of the focused symbol from it; --no-source leaves it out).
+    reads the lines of the focused symbol from it; --no-source leaves it out), and "linksFile": links.json (Phase 4c),
+    the imports and calls resolved to files and symbols, with a confidence each (format: see tools/links.py).
 
 SYMBOLS FILE  <symbols dir>/<id>.json   (loaded lazily by the viewer, only when a file is opened)
     {
@@ -70,6 +71,8 @@ MAX_SIGNATURE = 140          # signatures are cut to this many characters
 BINARY_SNIFF = 8000          # a NUL byte in the first 8000 bytes = binary file
 
 TOOLS_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, TOOLS_DIR)  # explicit, so `import links` also works under `python3 -I`
+import links  # noqa: E402  (Phase 4c: imports/calls -> links)
 
 
 def is_ignored(name):
@@ -325,10 +328,11 @@ def looks_minified(text, loc):
 
 # ----------------------------------------------------------------------------- main pipeline
 
-def extract_symbols(tree, symbols_dir, source_dir=None):
+def extract_symbols(tree, symbols_dir, source_dir=None, collect=None):
     """
     Parse every supported file, write <symbols_dir>/<id>.json (and, if source_dir is given, a copy of the
     file's text as <source_dir>/<id>.txt) and mark the tree nodes (hasSymbols + id). Returns (number of files with symbols, number of symbols, number of failures).
+    If `collect` is a list, (id, relative path, symbols doc) is appended for every file (the link resolver needs them).
     """
     py_jobs, js_jobs, texts = [], [], {}
     for node, rel in walk_files(tree):
@@ -382,6 +386,8 @@ def extract_symbols(tree, symbols_dir, source_dir=None):
                "symbols": symbols, "imports": imports, "calls": calls}
         with open(os.path.join(symbols_dir, f"{next_id}.json"), "w", encoding="utf-8") as f:
             json.dump(doc, f, separators=(",", ":"), ensure_ascii=False)
+        if collect is not None:
+            collect.append((next_id, rel, doc))
         if source_dir is not None:
             with open(os.path.join(source_dir, f"{next_id}.txt"), "w", encoding="utf-8", newline="\n") as f:
                 f.write(texts[node["_abs"]].replace("\r\n", "\n"))
@@ -438,11 +444,18 @@ def main():
         message += f", git info for {add_git(tree, args.path)} files"
     if symbols_dir:
         source_dir = None if args.no_source else os.path.join(os.path.dirname(os.path.normpath(symbols_dir)), "source")
-        n_files, n_symbols, failures = extract_symbols(tree, symbols_dir, source_dir)
+        docs = []
+        n_files, n_symbols, failures = extract_symbols(tree, symbols_dir, source_dir, collect=docs)
         message += f", {n_symbols} symbols in {n_files} files ({failures} unparseable)"
         # Path from the tree file's folder to the symbols folder, so the viewer can find it.
         tree_dir = os.path.dirname(os.path.abspath(output))
         tree["symbolsDir"] = os.path.relpath(symbols_dir, tree_dir).replace(os.sep, "/")
+        # Phase 4c: resolve imports and calls into links.json, next to the symbols folder.
+        link_data = links.build_links(docs, [rel for _, rel in walk_files(tree)])
+        links_path = os.path.join(os.path.dirname(os.path.normpath(symbols_dir)), "links.json")
+        links.write_links(link_data, links_path)
+        tree["linksFile"] = os.path.relpath(links_path, tree_dir).replace(os.sep, "/")
+        print(f"links: {links.summary(link_data['stats'])}", file=sys.stderr)
         if source_dir:
             tree["sourceDir"] = os.path.relpath(source_dir, tree_dir).replace(os.sep, "/")
     strip_private(tree)

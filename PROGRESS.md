@@ -166,7 +166,7 @@ New order: **4** code expansion · **5** cross-file links · **6** search / info
 Rule: camera/navigation code lives in ONE module so the Phase 9 Lorentz-matrix VR camera can replace it. Every new look
 constant goes into theme.js first.
 
-## Phase 4 — Code expansion  (in progress)
+## Phase 4 — Code expansion  (4a, 4b, 4c done; waiting for your check)
 Goal: clicking a file opens its own space (classes/functions bloom as a local galaxy); imports/calls drawn as glowing arcs.
 
 ### 4a — Scanner v2 (symbols, imports, calls, git)  ✅ done (waiting for your check)
@@ -241,5 +241,108 @@ Goal: clicking a file opens its own space (classes/functions bloom as a local ga
   readable only after you glide in; syntax colouring starts "cold" at the first shown line; the `block` kind exists only as the
   top-level-code node; clicking where several nodes overlap picks the front-most
 
+### 4c — Links: imports and calls as bundled arcs  ✅ done (waiting for your check)
+- [x] **Resolution in the scanner** (`tools/links.py`, shared by `scan_folder.py` and `make_sample_tree.py`; also
+      `python3 tools/links.py OUT_DIR` for an existing scan). Writes `links.json` next to `symbols/`, the tree root gets
+      `linksFile`. One row per link `[fromFile, fromSym, toFile, toSym, type, conf%]`; symbol index = position in a
+      depth-first **pre-order** walk of the file's nested symbols (-1 = the file itself); `symbols.js` now gives every node
+      the same number (`symIndex`), independent of its breadth-first build order and the 400-symbol cut (tested on all
+      15 k sample symbols). Also a names table (methods as `Class.method`) so lists can name symbols of closed files
+- [x] **Imports → files**: relative paths, extension guessing (`.js .jsx .mjs .cjs .ts .tsx .mts .cts`), `dir/index.*`, `./x.js`
+      meaning `x.ts`, "prefer the candidate that defines the imported names" when `x.js` and `x.ts` both exist; Python
+      `.mod`, `..pkg.mod`, `from . import mod` (submodules), absolute dotted modules that match exactly one file of the repo
+      by path suffix. Bare package names (`three`, `react`, `os`) are external: no link
+- [x] **Calls → symbols**, first rule that applies wins:
+      | how the call was matched | confidence |
+      |---|---|
+      | name bound by an import (`import {f}` / alias / default import), followed through re-exports up to 3 hops; `ns.f()` with `import * as ns` | 80 % |
+      | `C.m()` where C is an imported or local class → its member m | 70 % |
+      | `this.m()` / `self.m()` / plain `m()` that is a member of the caller's own class; unique top-level name in the same file | 70 % |
+      | unique name elsewhere in the same file | 60 % |
+      | **guess**: receiver unknown (`obj.f()`, `this.a.f()`), unique name in this file or a file it imports | 40 % |
+      | **guess**: top-level class/function anywhere in the repo, 1 or 2 candidates | 25 % / 12 % each |
+      | more candidates, or a standard-library name (`map`, `push`, `join`, `len`, …: list `BUILTIN_NAMES`) | no link |
+      Import links: 100 % (relative found on disk), 95 % re-export, 90 % dynamic import / Python absolute (70 % one-segment)
+- [x] **Drawing** (`src/links.js` + `LINK_VERT/LINK_FRAG` in `glsl.js`): ONE instanced mesh (1 draw call → **10 in total**).
+      Hierarchical edge bundling: tree path a → LCA → b, 5 control points (ends, LCA, half way up each side), each pulled
+      toward the straight geodesic by `LINK_TENSION` = 0.8 (`straightenToward` in `mobius3d.js`), then the vertex shader
+      refocuses them with `_Focus` and evaluates a **hyperbolic Bézier curve** (de Casteljau with geodesic steps,
+      `geodesicBezier3` / GLSL `geodesicBezier5`; 16 segments, 10 in low quality). Cyan = import, coral = call; confidence
+      → brightness and width; brighter toward the target + a comet running source → target; fog by hyperbolic distance;
+      merged arcs wider; fade-in 0.35 s; exposure `sqrt(LINK_CROWD / arcs)` so dense bundles do not burn white. All 23
+      new look constants are `LINK_*` in theme.js. `gpuCheck()` now also compares the GLSL Bézier with the CPU: max error 1.4e-6
+- [x] **Which links**: the focus's links in and out (= the links to its direct neighbours), then the hovered node's
+      (desktop), sorted by confidence, at most **300** arcs (`MAX_VISIBLE_LINKS`). A focused file shows its imports and all
+      its symbols' calls; a symbol its own calls/callers; the "(top level)" block the file's imports and module-level calls.
+      A focused **folder** shows only the file→file imports that cross between its parts, merged per sub-folder two levels
+      down (one thicker arc per pair), drawn dimmer (`LINK_FOLDER_BRIGHT`); calls are left out there (tens of thousands).
+      Link ends: a symbol of a closed file attaches to the file node; anything hidden in a collapsed folder/class attaches
+      to the "+N" orb; links that end up inside one orb are dropped; arcs between the same two nodes are merged.
+      Recomputed only when focus, hover, open files, orbs or filters change. **I** = imports on/off, **K** = calls on/off
+      (shown in the help line); `?links=0` starts with both off. R, F, C, Backspace unchanged
+- [x] **Following links**: clicking an arc (its far half, CPU copy of the curve, 10 px) or the node at its far end, or an
+      entry of the panel lists, glides there and pushes the old place on a **back stack** (in `navigation.js`). A symbol of
+      a closed file: glide to the file, it opens first in line, and the glide continues to the symbol as soon as it exists
+      (reads as one ≈ 0.5–0.55 s movement). **Backspace = back** while the stack is not empty, otherwise parent;
+      **Shift+Backspace = parent** always; the breadcrumb works as before (no push). A "‹ Back (n)" button (44 px) appears
+      for touch screens
+- [x] **Panel lists**: tabs under the header "Code · Imports n · Imported by n · Calls n · Called by n" (empty ones hidden),
+      48 px rows with name ×count, path and 1–3 confidence dots in the type colour, 30 at a time + "Show more". A file's
+      lists leave out calls inside the file (each symbol lists those). The far ends of the focus's arcs get labels
+- [x] Tests: `tests/links.test.js` (data/index, pre-order numbering of every sample file, subjects, selection order /
+      filters / cap, merging, orb ends, tree path + LCA, tension 0 = chord / 1 = tree, curve ends, panel lists),
+      `mobius3d.test.js` (Bézier worked example, ends, collinear = geodesic, **curve commutes with refocusing**, tension
+      example), `scanner_test.py` (resolver unit cases: extensions, index, `.js`→`.ts`, external, non-code, every call rule,
+      ambiguity cap, built-ins, Python relative/absolute/re-export; sample links up to date; precision on the sample)
+
+Numbers
+| | sample (committed) | three.js `dev` (scratchpad only) |
+|---|---|---|
+| links | 16,144 (1,802 import, 14,342 call) | 27,755 (4,623 import, 23,132 call) |
+| imports resolved | 1,802 / 1,802 | 4,624 / 5,827 (791 external, 403 non-code e.g. `.css`/`.glsl`, 9 missing) |
+| calls: total / unresolved / ambiguous | 25,710 / 11,196 (built-ins) / 172 | 66,572 / 38,890 / 2,846 (+1,265 recursive, dropped) |
+| resolved calls by rule | import 6,497 · same file 5,605 · own class 2,240 | same file 7,015 · repo-wide guess 6,096 · own class 3,965 · import 3,402 · nearby guess 3,337 · class member 83 · namespace 50 |
+| links.json | 684 KB (132 KB gzipped) | 956 KB (183 KB gzipped) |
+- Sample precision (the generator draws every call from same-file names, imported names or built-ins, so the true targets
+  are known): **precision 100 % (14,342 / 14,342), recall 98.8 %** (misses = the 172 ambiguous calls, e.g. `constructor`
+  of another class in the same file). Naive name-only matching would be right only **11 %** of the time (a name is
+  unique in the repo for just 71 of 14,514 calls) — that is why name-only links are low confidence and capped
+- three.js has no ground truth. My manual spot check of 25 random links per group: same-file (60–70 %) ≈ 24/25 right;
+  nearby guess (40 %) ≈ 20/25; repo-wide guess (12–25 %) ≈ 16/25 (wrong ones: TSL methods like `sub`/`select` matched to
+  an unrelated function, the `build/three.module.js` bundle duplicating `src/`)
+- Visible arcs: sample root 449 crossing imports → 124 merged arcs; `format.ts` 25 links → 18 arcs; three.js root 607 → 27;
+  `WebGLRenderer.js` 220 → 174; `initGLContext` 25 → 25. Never more than 300
+- Headless Chrome, M4 laptop (ANGLE/Metal), 1000×800: **10 draw calls** with links (9 without); vsync 60 fps idle and
+  animating in every scene. Uncapped (idle / animating): sample root 447 / 323 (links off: 506 / 431), `format.ts` 553 / 469,
+  three.js `WebGLRenderer.js` 504 / 354 (links off 512 / 398), low quality 539 / 496. The animating drop at the root is the CPU
+  rebuilding arcs when folders collapse/expand during the glide. Phone not measured (please check)
+- Checked: no console errors; `?mode=2d` loads; with `?links=0` the base-scene screenshots (high + low, root + refocused
+  folder, `?time=12.5`) are **byte-identical** to before 4c; I/K/F/C/R keys; Backspace back / parent / Shift+Backspace; breadcrumb;
+  arc click away from nodes; following into a closed three.js file opens it and lands on the symbol; phone 412×915 touch:
+  tabs 44 px, rows 48 px, tapping a "Called by" entry glides there, "‹ Back" returns
+
+**Where call resolution is approximate (honest list)**
+- Calls are only names: `this.a.f()` / `a.b.f()` keep only `f`, `obj.f()` keeps `obj.f` with no idea of obj's type.
+  Those go to the 40 % / 25 % guesses, which can be wrong (e.g. `v.sub()` linked to some other `sub` function), and are
+  dropped when ambiguous: a correct link may be missing just as a wrong one may be shown
+- No type inference, no scopes: a local variable or parameter that shadows a function name still links to the function;
+  a function passed as a value (callbacks) is not a call
+- Default imports guess the target symbol (same name, `default`, or the file's only top-level class/function)
+- Bare package imports are always external — even three.js importing itself as `three` (so examples → `src/` calls only
+  appear as repo-wide guesses). No `tsconfig` paths/aliases, no `package.json` exports map, no CommonJS destructuring
+  (`const {a} = require('./x')` gives a file link; calls of `a` become guesses)
+- Python: relative imports and dotted modules matching exactly one file; no `sys.path` tricks; `from m import *` passes
+  names through but is not checked
+- Generated/bundled copies (`build/`) attract repo-wide guesses; no folders are excluded
+- The sample's 100 % precision only shows the deterministic rules work; the sample has no guessed calls by construction
+
+Known limitations / decisions to review
+- "Direct neighbours" = links in and out of the focus (one hop); the neighbours' own links to third nodes are not shown
+- A folder shows imports only, merged per sub-folder; calls appear when you focus a file or symbol
+- Symbols beyond the 400-per-file cut can be linked but not opened: following such a link stops at the file
+- Arcs disappear instantly (only appearing fades); arcs attach to a symbol's final place while it is still blooming out
+- Strong bundling makes links to siblings in one folder share one line until near the end (that is the point of HEB, but
+  in three.js the 25 calls of `initGLContext` look like one beam until they fan out at the `webgl/` folder)
+
 ## Later
-5 Cross-file links (started in 4c) · 6 Search/info/git heat/2nd dataset · 7 AR tabletop · 8 User study + report · 9 VR Cardboard + final visual polish
+5 Cross-file links (done early, in 4c) · 6 Search/info/git heat/2nd dataset · 7 AR tabletop · 8 User study + report · 9 VR Cardboard + final visual polish

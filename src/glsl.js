@@ -556,6 +556,127 @@ void main() {
 `;
 
 // ---------------------------------------------------------------------------
+// 6b. Links (Phase 4c): imports and calls as bundled arcs (hierarchical edge bundling)
+// ---------------------------------------------------------------------------
+// Hyperbolic Bézier curve of 5 control points by de Casteljau's construction (the same as geodesicBezier3 in
+// mobius3d.js): replace each pair of neighbours by the point the fraction t of the way along the geodesic between
+// them (4 points -> 3 -> 2 -> 1). 4 + 3 + 2 + 1 = 10 geodesic steps per evaluated point.
+// Example (3 points, t = 0.5): (-0.5,0,0), (0,0.5,0), (0.5,0,0) -> (-0.219,0.219,0), (0.219,0.219,0) -> (0,0.209,0).
+export const BEZIER_GLSL = /* glsl */ `
+vec3 geodesicBezier5(vec3 p0, vec3 p1, vec3 p2, vec3 p3, vec3 p4, float t) {
+  vec3 a0 = geodesicLerp3(p0, p1, t);
+  vec3 a1 = geodesicLerp3(p1, p2, t);
+  vec3 a2 = geodesicLerp3(p2, p3, t);
+  vec3 a3 = geodesicLerp3(p3, p4, t);
+  vec3 b0 = geodesicLerp3(a0, a1, t);
+  vec3 b1 = geodesicLerp3(a1, a2, t);
+  vec3 b2 = geodesicLerp3(a2, a3, t);
+  vec3 c0 = geodesicLerp3(b0, b1, t);
+  vec3 c1 = geodesicLerp3(b1, b2, t);
+  return geodesicLerp3(c0, c1, t);
+}
+`;
+
+// Each visible link is ONE instance: its 5 control points aP0..aP4 (home coordinates, already pulled toward the
+// straight line by the bundling tension on the CPU, see links.js), its type, confidence and how many links it stands
+// for. The strip geometry is the same as for edges (aT along, aSide across). For every vertex the shader:
+//   1. refocuses the 5 control points with _Focus (a Möbius move is an isometry, so refocusing the control points
+//      and then building the curve gives the same curve as building it and then refocusing it),
+//   2. evaluates the hyperbolic Bézier curve at aT (and a little further on, for the direction),
+//   3. pushes the vertex sideways in screen space for the width, like the edges.
+export const LINK_VERT = /* glsl */ `
+uniform vec3 _Focus;
+uniform float uBloom;
+uniform vec2 uResolution;
+uniform float uLineWidth;
+uniform float uGain;         // exposure: 1, or sqrt(LINK_CROWD / number of arcs) when there are many (set on the CPU)
+
+attribute float aT;
+attribute float aSide;
+attribute vec3 aP0;
+attribute vec3 aP1;
+attribute vec3 aP2;
+attribute vec3 aP3;
+attribute vec3 aP4;
+attribute float aType;       // 0 import, 1 call
+attribute float aConf;       // confidence 0..1
+attribute float aCount;      // number of links merged into this arc (1 = a single link)
+attribute float aRole;       // 0 = a link of the focus, 1 = a link of the hovered node, 2 = a focused folder's overview arc
+attribute float aSeed;
+attribute float aBorn;       // bloom-clock time the arc appeared (it fades in)
+
+varying float vAcross;
+varying float vT;
+varying float vSeed;
+varying float vBright;
+varying vec3 vColor;
+
+${MOBIUS_GLSL}
+${GEODESIC_GLSL}
+${BEZIER_GLSL}
+
+void main() {
+  vec3 c0 = mobiusAdd3(-_Focus, aP0);
+  vec3 c1 = mobiusAdd3(-_Focus, aP1);
+  vec3 c2 = mobiusAdd3(-_Focus, aP2);
+  vec3 c3 = mobiusAdd3(-_Focus, aP3);
+  vec3 c4 = mobiusAdd3(-_Focus, aP4);
+  vec3 P = geodesicBezier5(c0, c1, c2, c3, c4, aT);
+  float dir = aT < 0.5 ? 1.0 : -1.0;
+  vec3 Q = geodesicBezier5(c0, c1, c2, c3, c4, aT + dir * 0.02);
+
+  // Fog by hyperbolic distance from the focus (the focus is at the centre: d = 2 artanh |P|).
+  float d = 2.0 * atanh(length(P));
+  float fog = exp(-d * LINK_FOG_RATE);
+  // Brightness: near/far fog, times confidence (a guess is faint), times the fade-in, the role (hover / folder
+  // overview arcs dimmer) and the exposure uGain.
+  // Example: fog 0.5, conf 0.25: (0.12 + 0.7 * 0.5) * (0.3 + 0.7 * 0.25) = 0.47 * 0.475 = 0.22 (before fade, role, uGain).
+  float fade = clamp((uBloom - aBorn) / LINK_FADE_SECONDS, 0.0, 1.0);
+  vBright = (LINK_BRIGHT_FLOOR + LINK_BRIGHT_NEAR * fog) * (LINK_CONF_FLOOR + (1.0 - LINK_CONF_FLOOR) * aConf)
+          * fade * (aRole > 1.5 ? LINK_FOLDER_BRIGHT : (aRole > 0.5 ? LINK_HOVER_BRIGHT : 1.0)) * uGain;
+  vColor = mix(LINK_IMPORT_COLOR, LINK_CALL_COLOR, aType);
+  vT = aT; vSeed = aSeed; vAcross = aSide;
+
+  vec4 cp = projectionMatrix * viewMatrix * vec4(P, 1.0);
+  vec4 cq = projectionMatrix * viewMatrix * vec4(Q, 1.0);
+  vec2 dirPx = (cq.xy / cq.w - cp.xy / cp.w) * uResolution * 0.5 * dir;
+  dirPx = length(dirPx) > 1e-4 ? normalize(dirPx) : vec2(1.0, 0.0);
+  vec2 perp = vec2(-dirPx.y, dirPx.x);
+
+  // Width: fog (thin far away), confidence (thin guesses), merged count (thicker bundles, capped).
+  // Example: fog 1, conf 1, count 1 -> base * 1.3; conf 0 -> half of that; count 5 -> x (1 + 0.15 * ln 5) = x 1.24.
+  float width = uLineWidth * (LINK_WIDTH_FAR + LINK_WIDTH_NEAR * fog)
+              * (LINK_WIDTH_LOW_CONF + (1.0 - LINK_WIDTH_LOW_CONF) * aConf)
+              * min(1.0 + LINK_COUNT_WIDTH * log(max(aCount, 1.0)), LINK_COUNT_MAX);
+  gl_Position = cp;
+  gl_Position.xy += perp * aSide * (width * 0.5) * (2.0 / uResolution) * cp.w;
+}
+`;
+
+// Arc pixels: soft cross-section like an edge, brighter toward the TARGET end (vT = 1) so the direction reads even in a
+// still picture, plus a comet that runs from the source (vT = 0) to the target (vT = 1).
+// Direction ramp: LINK_SOURCE_DIM at the source, 1 at the target. Example (0.55): halfway = 0.55 + 0.45 * 0.5 = 0.775.
+// Comet: same formula as the edge pulse (see EDGE_FRAG), with the LINK_PULSE_* constants.
+export const LINK_FRAG = /* glsl */ `
+uniform float uTime;
+varying float vAcross;
+varying float vT;
+varying float vSeed;
+varying float vBright;
+varying vec3 vColor;
+void main() {
+  float soft = 1.0 - vAcross * vAcross;
+  float ramp = LINK_SOURCE_DIM + (1.0 - LINK_SOURCE_DIM) * vT;
+  float head = fract(uTime * LINK_PULSE_SPEED + vSeed) * LINK_PULSE_GAP;
+  float behind = head - vT;
+  float comet = behind > 0.0 ? exp(-LINK_PULSE_TAIL * behind) : 0.0;
+  vec3 pulseColor = mix(vColor, vec3(1.0), LINK_PULSE_WHITE);
+  vec3 col = (vColor * ramp + pulseColor * comet * LINK_PULSE_GAIN) * vBright * soft;
+  gl_FragColor = vec4(1.0 - exp(-col * TONE_GAIN), 1.0);
+}
+`;
+
+// ---------------------------------------------------------------------------
 // 7. Background dust: faint points inside the ball that fill the empty space
 // ---------------------------------------------------------------------------
 // They live at fixed home positions in the ball and are moved by the same _Focus

@@ -14,7 +14,8 @@ random generator (seed + 1), so the folder/file structure is identical to the on
 Usage:
     python3 tools/make_sample_tree.py [-n 5000] [--seed 42] [-o public/data/sample_tree.json]
 Symbols go to <folder of -o>/<name of -o without "_tree">/symbols, e.g. public/data/sample/symbols, and a fake
-source file for every code file (so the viewer's code panel has something to show) to .../sample/source/<id>.txt.
+source file for every code file (so the viewer's code panel has something to show) to .../sample/source/<id>.txt,
+and (Phase 4c) the resolved imports/calls to .../sample/links.json (tools/links.py).
 """
 
 import argparse
@@ -22,6 +23,10 @@ import json
 import os
 import random
 import datetime
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import links  # noqa: E402  (Phase 4c: the link resolver shared with scan_folder.py)
 
 FOLDER_WORDS = [
     "src", "lib", "core", "utils", "components", "services", "models", "views",
@@ -369,6 +374,14 @@ def add_fake_code(root, seed, symbols_dir, tree_dir):
             with open(os.path.join(source_dir, f"{node['id']}.txt"), "w", encoding="utf-8") as f:
                 f.write("\n".join(fake_source(src_rng, doc)))
     root["sourceDir"] = os.path.relpath(source_dir, tree_dir).replace(os.sep, "/")
+
+    # 6) Phase 4c: resolve the fake imports and calls into links (the same resolver as the real scanner).
+    link_data = links.build_links([(node["id"], rel, docs[rel]) for node, rel in files if rel in docs],
+                                  [rel for _, rel in files])
+    links_path = os.path.join(os.path.dirname(os.path.normpath(symbols_dir)), "links.json")
+    links.write_links(link_data, links_path)
+    root["linksFile"] = os.path.relpath(links_path, tree_dir).replace(os.sep, "/")
+    print("links:", links.summary(link_data["stats"]))
     return next_id, n_symbols
 
 

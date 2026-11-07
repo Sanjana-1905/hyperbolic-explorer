@@ -4,7 +4,7 @@
 //
 // A symbol node looks like a folder/file node (same fields the layout and viewer use), plus:
 //   type 'symbol', kind 'class' | 'function' | 'method' | 'block', startLine, endLine, signature,
-//   calls (names it calls, kept for the link phase), file (the file node it belongs to).
+//   calls (names it calls), file (the file node it belongs to), symIndex (its number in links.json, Phase 4c).
 // `kindCode` is the number the shader reads from the aKind attribute.
 
 import { THEME } from './theme.js';
@@ -46,6 +46,13 @@ export function buildSymbolNodes(file, doc) {
   const hue = extHue(file.ext);
   const all = [];
 
+  // Symbol index (Phase 4c): the position of each symbol in a depth-first PRE-ORDER walk of the nested list
+  // (class A = 0, its methods 1, 2, then the next top-level symbol 3 ...). The scanner's links.json names symbols by
+  // this index, so it must not depend on the breadth-first order below or on the 400-symbol cut.
+  const preIndex = new Map();
+  const number = (list) => { for (const s of list || []) { preIndex.set(s, preIndex.size); number(s.children); } };
+  number(doc.symbols);
+
   // Breadth-first so that when we hit the limit, the dropped nodes are the deepest ones.
   const queue = (doc.symbols || []).map((s) => ({ raw: s, parent: file }));
   if ((doc.calls || []).length) {
@@ -64,6 +71,7 @@ export function buildSymbolNodes(file, doc) {
       size: Math.max(1, raw.endLine - raw.startLine + 1), // lines (a folder's `size` is bytes; unused for symbols)
       startLine: raw.startLine, endLine: raw.endLine, signature: raw.signature || raw.name,
       calls: raw.calls || [],
+      symIndex: preIndex.has(raw) ? preIndex.get(raw) : -1, // -1 = the "(top level)" block: stands for the file's own code
       parent, children: [], depth: parent.depth + 1, weight: 1,
       file, hue, flag: 0, state: 0, collapsed: false, onPath: false,
       seed: hash01((file.fileId ?? file.id) * 7919 + all.length),

@@ -197,6 +197,32 @@ export const THEME = {
   SYMBOL_COLLAPSE_DIST: 1.0,   // a class/function with children further than this from the focus collapses into a "+N" orb
   BLOOM_SECONDS: 0.45,         // new symbols grow out of their parent over this long (effect speed; comfort rule: under 0.6 s)
 
+  // ---- Links (Phase 4c): imports and calls as bundled glowing arcs ------------------------------
+  LINK_IMPORT_COLOR: [0.35, 0.80, 1.0],   // import arcs (file -> file): cyan
+  LINK_CALL_COLOR: [1.0, 0.48, 0.62],     // call arcs (symbol -> symbol): coral pink
+  LINK_TENSION: 0.8,          // bundling strength (Holten's beta): 0 = straight geodesic, 1 = follow the tree path exactly
+  LINK_WIDTH_PX: 2.4,          // base arc width in CSS pixels (JS: scaled by the pixel ratio)
+  LINK_WIDTH_FAR: 0.5,         // width factor far from the focus (x base) ...
+  LINK_WIDTH_NEAR: 0.8,        // ... plus this much more near the focus
+  LINK_WIDTH_LOW_CONF: 0.5,    // width of a confidence-0 arc relative to a sure one (confidence 1)
+  LINK_COUNT_WIDTH: 0.15,       // an arc standing for n merged links is wider: x (1 + this * ln n), at most x LINK_COUNT_MAX
+  LINK_COUNT_MAX: 1.6,
+  LINK_FOG_RATE: 0.25,         // link fog = e^(-d * rate) with d = hyperbolic distance from the focus
+  LINK_BRIGHT_FLOOR: 0.12,     // far parts of an arc never fade below this brightness ...
+  LINK_BRIGHT_NEAR: 0.7,      // ... plus this much more next to the focus
+  LINK_CONF_FLOOR: 0.3,        // brightness of a confidence-0 arc relative to a sure one (guessed calls are faint)
+  LINK_SOURCE_DIM: 0.55,        // direction cue: the source end is drawn at this fraction of the target end's brightness
+  LINK_PULSE_SPEED: 0.45,      // light pulses running source -> target: laps per second
+  LINK_PULSE_GAP: 1.7,         // lap length in arc lengths (> 1 leaves a rest between pulses)
+  LINK_PULSE_TAIL: 7.0,        // comet tail: bigger = shorter (brightness e^(-tail * distance behind the head))
+  LINK_PULSE_GAIN: 1.3,        // pulse strength relative to the arc's own brightness
+  LINK_PULSE_WHITE: 0.55,      // how much the pulse is blended toward white
+  LINK_FADE_SECONDS: 0.35,     // new arcs fade in over this long (effect speed; comfort rule: under 0.6 s)
+  LINK_HOVER_BRIGHT: 0.7,      // arcs of the hovered node (not the focus) are drawn at this brightness
+  LINK_CROWD: 20,              // exposure: with more arcs than this on screen each one is dimmed by sqrt(LINK_CROWD / count), so
+                               // a dense bundle does not burn out to white (80 arcs -> x 0.5, 320 arcs -> x 0.25)
+  LINK_FOLDER_BRIGHT: 0.6,     // a focused FOLDER's overview arcs (imports between its parts) are drawn at this brightness
+
   // ---- Code panel (HTML overlay with the source of the focused symbol) --------------------------
   CODE_FONT_PX: 13,            // monospace text size (CSS pixels)
   CODE_PANEL_WIDTH_PX: 480,    // panel width on a wide screen (it docks to the right edge)

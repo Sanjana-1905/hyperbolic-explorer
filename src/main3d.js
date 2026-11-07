@@ -19,17 +19,26 @@
 //      and methods are loaded lazily (symbols.js), laid out inside the file's own territory
 //      (layoutSymbols) and written into spare slots of the same instance buffers. Far files close
 //      again and free their slots. The code panel (codepanel.js) shows the focused symbol's source.
+//   6. (Phase 4c) Imports and calls (links.json, resolved by the scanner) are drawn as bundled glowing arcs: only the
+//      links of the focus and of the hovered node, at most 300, routed through the tree (hierarchical edge bundling,
+//      links.js) and drawn by ONE instanced mesh whose vertex shader builds a hyperbolic Bézier curve (glsl.js).
+//      Clicking an arc (or its far end, or an entry of the panel's link lists) follows it and remembers where you came
+//      from; Backspace goes back.
 
 import * as THREE from 'three';
-import { vNeg, vLength, mobiusAdd3, conformalFactor3, hyperbolicDistance3 } from './mobius3d.js';
+import { vNeg, vLength, mobiusAdd3, conformalFactor3, hyperbolicDistance3, geodesicBezier3 } from './mobius3d.js';
 import { buildTree, computeLayout3d, layoutSymbols, nodePath } from './layout3d.js';
 import { createNavigation } from './navigation.js';
-import { createSymbolStore, buildSymbolNodes } from './symbols.js';
+import { createSymbolStore, buildSymbolNodes, hash01 } from './symbols.js';
+import {
+  createLinkData, subjectOf, selectLinks, buildArcs, arcTarget, bundledControlPoints, linkLists, symbolName,
+  confidenceDots, liftEnd, MAX_VISIBLE_LINKS, CONTROL_POINTS,
+} from './links.js';
 import { createCodePanel } from './codepanel.js';
 import { createFpsCounter } from './fps.js';
 import {
   NODE_VERT, NODE_FRAG, NEBULA_VERT, NEBULA_FRAG, HAZE_VERT, HAZE_FRAG,
-  SUN_VERT, SUN_FRAG, EDGE_VERT, EDGE_FRAG, DUST_VERT, DUST_FRAG,
+  SUN_VERT, SUN_FRAG, EDGE_VERT, EDGE_FRAG, DUST_VERT, DUST_FRAG, LINK_VERT, LINK_FRAG,
 } from './glsl.js';
 import { gpuCheck } from './gpucheck.js';
 import { THEME, THEME_DEFINES, cssRgb } from './theme.js';
@@ -46,6 +55,7 @@ const EXPAND_DIST = 0.45;       // a file with symbols opens when the focus is w
 const EXPAND_HYST = 0.25;       // ... and closes again only beyond EXPAND_DIST + this (no flicker)
 const MAX_OPEN_FILES = 6;       // at most this many files open at once (nearest first)
 const MAX_SYMBOL_NODES = 3000;  // spare buffer slots for symbol nodes (CLAUDE.md: ~3,000 visible nodes)
+const ARC_PICK_PX = 10;         // a click this close to a link arc (and no node under it) follows the arc
 
 // Debug: ?time=12.5 freezes the clock the shaders animate with, so screenshots are repeatable.
 const FROZEN_TIME = new URLSearchParams(location.search).has('time')
@@ -60,12 +70,22 @@ const QUALITY = {
   pixelRatio: LOW ? 1 : 2,     // cap on render resolution (device pixels per CSS pixel)
   dustCount: LOW ? 200 : 450,  // faint background specks inside the ball
   edgeSegments: LOW ? 6 : 10,  // pieces per curved edge
+  linkSegments: LOW ? 10 : 16, // pieces per link arc (longer and more curved than an edge)
 };
 
-document.getElementById('help').textContent =
-  'Drag to look around · scroll to move in/out · click a node to focus it (click a file to open its code) · Backspace = parent · C = code panel · F = fps · R = slow spin (desktop)';
+// Link filters (Phase 4c): I toggles import arcs, K toggles call arcs. ?links=0 starts with both off.
+let showImports = new URLSearchParams(location.search).get('links') !== '0';
+let showCalls = showImports;
+function updateHelp() {
+  const on = (b) => (b ? 'on' : 'off');
+  document.getElementById('help').textContent =
+    'Drag to look around · scroll to move in/out · click a node to focus it (click a file to open its code) · ' +
+    'click an arc to follow it · Backspace = back (Shift+Backspace = parent) · ' +
+    `I = imports ${on(showImports)} · K = calls ${on(showCalls)} · C = code panel · F = fps · R = slow spin (desktop)`;
+}
+updateHelp();
 const COLLAPSE_MIN_NODES = 4;   // folders with fewer nodes inside than this are never collapsed (a "+2" orb is pointless)
-const fps = createFpsCounter(() => `${labels ? labels.count : 0} labels · ${visibleCount} nodes · ${dynamicCount} symbols`);
+const fps = createFpsCounter(() => `${labels ? labels.count : 0} labels · ${visibleCount} nodes · ${dynamicCount} symbols · ${linkArcs.length} links`);
 
 // ---------------------------------------------------------------------------
 // three.js scene: a perspective camera orbiting the centre of the unit ball
@@ -130,6 +150,8 @@ function resize() {
   const buf = renderer.getDrawingBufferSize(new THREE.Vector2());
   edgeUniforms.uResolution.value.copy(buf);
   edgeUniforms.uLineWidth.value = THEME.EDGE_WIDTH_PX * renderer.getPixelRatio();
+  linkUniforms.uResolution.value.copy(buf);
+  linkUniforms.uLineWidth.value = THEME.LINK_WIDTH_PX * renderer.getPixelRatio();
   nav.resize(w, h);
   if (labels) labels.resize(w, h);
   // At distance D from the camera the screen is 2·D·tan(fov/2) units tall.
@@ -161,6 +183,16 @@ let collapsedNodes = [];        // folders currently shown as "+N" orbs
 let pathNodes = [];             // focus and its ancestors (never collapsed)
 let dirty = true;               // focus point changed: upload the _Focus uniform on the next frame
 
+// Links (Phase 4c)
+let linkData = null;            // links.json in typed arrays (links.js), null until loaded / if the dataset has none
+let linkArcs = [];              // the arcs drawn right now (buildArcs in links.js), at most MAX_VISIBLE_LINKS
+let linkSelected = 0;           // links selected for the focus + hover before merging and capping
+let linksDirty = true;          // focus, hover, open files, collapsed folders or filters changed: rebuild the arcs
+let linkBornAt = new Map();     // arc key -> time it appeared (so an arc that stays does not fade in again)
+const fileById = new Map();     // file id (symbols-file number) -> base tree file node
+let pendingSymbol = null;       // { fileId, sym }: glide to this symbol as soon as its file has opened
+let linkMesh = null;            // every visible link as an instanced thick curved strip (1 draw call)
+
 let shown = [];                 // per node: transformed position {x, y, z} (CPU copy, ONLY for picking)
 let shownStale = true;          // is `shown` out of date? (it is rebuilt lazily when a pick needs it)
 let shownRadius = null;         // per node: drawn core radius (world units), for picking
@@ -175,6 +207,7 @@ let dustMesh = null;            // faint background specks (1 draw call)
 const focusUniforms = { _Focus: { value: new THREE.Vector3() }, uFocusId: { value: -1 }, uTime, uBloom };
 const edgeUniforms = { _Focus: focusUniforms._Focus, uTime, uBloom, uResolution: { value: new THREE.Vector2(1, 1) }, uLineWidth: { value: 1.8 } };
 const sunUniforms = { _Focus: focusUniforms._Focus, uFocusPos: { value: new THREE.Vector3() }, uTime };
+const linkUniforms = { _Focus: focusUniforms._Focus, uTime, uBloom, uResolution: { value: new THREE.Vector2(1, 1) }, uLineWidth: { value: 2.2 }, uGain: { value: 1 } };
 
 // ---------------------------------------------------------------------------
 // Arm colours and energy (the "data hooks": Phase 6 only has to change these numbers)
@@ -297,20 +330,7 @@ function buildDrawables() {
   scene.add(haloMesh);
 
   // Edges: ONE instance per parent->child edge; the vertex shader builds the curve (glsl.js).
-  const SEG = QUALITY.edgeSegments;
-  const eg = new THREE.InstancedBufferGeometry();
-  const verts = (SEG + 1) * 2;                       // a pair (left, right) at each of SEG+1 stops
-  const aT = new Float32Array(verts), aSide = new Float32Array(verts);
-  for (let i = 0; i <= SEG; i++) {
-    aT[2 * i] = aT[2 * i + 1] = i / SEG;
-    aSide[2 * i] = -1; aSide[2 * i + 1] = 1;
-  }
-  const idx = [];
-  for (let i = 0; i < SEG; i++) idx.push(2 * i, 2 * i + 1, 2 * i + 2, 2 * i + 1, 2 * i + 3, 2 * i + 2);
-  eg.setIndex(idx);
-  eg.setAttribute('position', new THREE.BufferAttribute(new Float32Array(verts * 3), 3)); // unused, three.js wants one
-  eg.setAttribute('aT', new THREE.BufferAttribute(aT, 1));
-  eg.setAttribute('aSide', new THREE.BufferAttribute(aSide, 1));
+  const eg = makeStripGeometry(QUALITY.edgeSegments);
   const edgeNodes = nodes.filter((nd) => nd.parent);
   edgeNodes.forEach((nd, i) => { nd.edgeIndex = i; });
   baseEdgeCount = edgeNodes.length;
@@ -368,6 +388,50 @@ function buildDrawables() {
   sunMesh.frustumCulled = false;
   sunMesh.renderOrder = 2;
   scene.add(sunMesh);
+
+  buildLinkMesh();
+}
+
+// A thin strip of SEG pieces: a pair of vertices (left, right) at each of SEG+1 stops along a curve. aT = 0..1 is how far
+// along the pair is, aSide = -1 / +1 which side. Edges and links both use it; their vertex shaders bend it into a curve.
+function makeStripGeometry(SEG) {
+  const g = new THREE.InstancedBufferGeometry();
+  const verts = (SEG + 1) * 2;
+  const aT = new Float32Array(verts), aSide = new Float32Array(verts);
+  for (let i = 0; i <= SEG; i++) {
+    aT[2 * i] = aT[2 * i + 1] = i / SEG;
+    aSide[2 * i] = -1; aSide[2 * i + 1] = 1;
+  }
+  const idx = [];
+  for (let i = 0; i < SEG; i++) idx.push(2 * i, 2 * i + 1, 2 * i + 2, 2 * i + 1, 2 * i + 3, 2 * i + 2);
+  g.setIndex(idx);
+  g.setAttribute('position', new THREE.BufferAttribute(new Float32Array(verts * 3), 3)); // unused, three.js wants one
+  g.setAttribute('aT', new THREE.BufferAttribute(aT, 1));
+  g.setAttribute('aSide', new THREE.BufferAttribute(aSide, 1));
+  return g;
+}
+
+// Links: ONE instance per visible arc (at most MAX_VISIBLE_LINKS), 5 control points each (glsl.js LINK_VERT).
+function buildLinkMesh() {
+  const g = makeStripGeometry(QUALITY.linkSegments);
+  g.arrays = {};
+  const add = (name, size) => {
+    const attr = new THREE.InstancedBufferAttribute(new Float32Array(MAX_VISIBLE_LINKS * size), size);
+    g.setAttribute(name, attr);
+    g.arrays[name] = attr.array;
+  };
+  for (let k = 0; k < CONTROL_POINTS; k++) add(`aP${k}`, 3);
+  for (const name of ['aType', 'aConf', 'aCount', 'aRole', 'aSeed', 'aBorn']) add(name, 1);
+  g.instanceCount = 0;
+  linkMesh = new THREE.Mesh(g, new THREE.ShaderMaterial({
+    uniforms: linkUniforms, vertexShader: LINK_VERT, fragmentShader: LINK_FRAG, defines: THEME_DEFINES,
+    transparent: true, blending: THREE.AdditiveBlending, depthTest: false, depthWrite: false,
+    side: THREE.DoubleSide,
+  }));
+  linkMesh.frustumCulled = false;
+  linkMesh.renderOrder = 0;
+  linkMesh.visible = false;
+  scene.add(linkMesh);
 }
 
 // Halos go behind the focus's heaviest children (the focus itself has the sun billboard) (fake bloom, no post-processing).
@@ -466,6 +530,7 @@ function updateSemanticZoom() {
     nodeMesh.geometry.attributes.aState.needsUpdate = true;
     edgeMesh.geometry.attributes.aHide.needsUpdate = true;
     shownStale = true;                       // sizes of orbs changed: rebuild the pick radii
+    linksDirty = true;                       // link ends may now land on (or leave) an orb
   }
 }
 
@@ -527,10 +592,19 @@ async function openFile(file) {
   file.children = made.filter((n) => n.parent === file);
   layoutSymbols(file);
   addSymbolNodes(file, made);
+  // Symbol index -> node, so link ends (file id, symbol index) find their node (Phase 4c).
+  file.symByIndex = new Map(made.filter((n) => n.symIndex >= 0).map((n) => [n.symIndex, n]));
   file.symState = 'open';
   openFiles.add(file);
   dirty = true; // semantic zoom, halos and the info line must see the new children
+  linksDirty = true;
   if (focusNode === file) updateInfo();
+  // A link led to a symbol of this file while it was closed: continue the glide to that symbol now.
+  if (pendingSymbol && pendingSymbol.fileId === file.fileId) {
+    const target = file.symByIndex.get(pendingSymbol.sym);
+    pendingSymbol = null;
+    if (target && focusNode === file) focusOn(target);
+  }
 }
 
 function closeFile(file) {
@@ -548,10 +622,12 @@ function closeFile(file) {
   const gone = new Set(doomed);
   allNodes = allNodes.filter((n) => !gone.has(n));
   file.children = [];
+  file.symByIndex = null;
   file.symState = undefined;
   openFiles.delete(file);
   uploadBuffers();
   dirty = true;
+  linksDirty = true;
 }
 
 function updateExpansion() {
@@ -564,7 +640,8 @@ function updateExpansion() {
     if (d < EXPAND_DIST || file === focusFile) near.push({ file, d });
     else if (file.symState === 'open' && d > EXPAND_DIST + EXPAND_HYST) closeFile(file);
   }
-  near.sort((a, b) => a.d - b.d);
+  // Nearest first, but the file we are gliding to (or are inside) always first: a followed link must open it.
+  near.sort((a, b) => (b.file === focusFile) - (a.file === focusFile) || a.d - b.d);
   near.slice(0, MAX_OPEN_FILES).forEach(({ file }) => { openFile(file); });
 }
 
@@ -575,13 +652,17 @@ function updateExpansion() {
 // Start moving the view so that `node` ends up at the centre.
 function focusOn(node, animate = true) {
   if (!node) return;
+  // A link glide waiting for a file to open is cancelled when the user focuses anything else.
+  if (pendingSymbol && node !== fileById.get(pendingSymbol.fileId)) pendingSymbol = null;
   focusNode = node;
   focusUniforms.uFocusId.value = node.id;
   sunUniforms.uFocusPos.value.set(node.pos.x, node.pos.y, node.pos.z);
   nav.flyTo(node.pos, animate);
   updateInfo();
   showCode(node);
+  updatePanelLinks();
   dirty = true;
+  linksDirty = true;
 }
 
 // Fill the code panel for the focus: a symbol shows its own lines, a file with source shows the file.
@@ -597,6 +678,155 @@ async function showCode(node) {
     subtitle: `${nodePath(file)} · lines ${from}–${to}`,
     lines, from, to, lang: file.ext === 'py' ? 'py' : 'js',
   });
+}
+
+// ---------------------------------------------------------------------------
+// Links (Phase 4c): which arcs to draw, the panel lists, following a link, going back
+// ---------------------------------------------------------------------------
+
+// The node that stands for a link end right now: the symbol node if its file is open, else the file; if that node
+// is hidden inside a collapsed folder or class, its nearest visible ancestor (the "+N" orb). null if unknown.
+function resolveEnd(fileId, sym) {
+  const file = fileById.get(fileId);
+  if (!file) return null;
+  let node = (sym >= 0 && file.symByIndex && file.symByIndex.get(sym)) || file;
+  while (node && node.state === 1) node = node.parent;
+  return node;
+}
+
+// Rebuild the visible arcs (only when something changed: focus, hover, opened/closed files, orbs, filters).
+// Each arc gets its 5 bundled control points (links.js) and its look attributes; the GPU does the rest every frame.
+function updateLinks() {
+  linksDirty = false;
+  const g = linkMesh.geometry;
+  if (!linkData) return;
+  const selected = selectLinks(linkData, {
+    focus: subjectOf(focusNode),
+    hover: hoverNode && hoverNode !== focusNode ? subjectOf(hoverNode) : null,
+    showImports, showCalls, fileNode: (id) => fileById.get(id),
+  });
+  linkSelected = selected.length;
+  // A focused folder shows the imports between its parts merged per sub-folder (liftEnd), not file by file.
+  const folder = focusNode.type === 'folder' ? focusNode : null;
+  const endOf = folder ? (fileId, sym) => liftEnd(resolveEnd(fileId, sym), folder) : resolveEnd;
+  linkArcs = buildArcs(linkData, selected, endOf, MAX_VISIBLE_LINKS);
+  const focusSubject = subjectOf(focusNode);
+  const a = g.arrays;
+  const now = performance.now() / 1000;
+  const born = new Map();
+  linkArcs.forEach((arc, i) => {
+    arc.points = bundledControlPoints(arc.a, arc.b, THEME.LINK_TENSION);
+    arc.points.forEach((p, k) => a[`aP${k}`].set([p.x, p.y, p.z], i * 3));
+    arc.target = arcTarget(linkData, arc, focusSubject);
+    arc.far = arc.target.drawn || arc.target.node;
+    a.aType[i] = arc.type;
+    a.aConf[i] = arc.conf;
+    a.aCount[i] = arc.count;
+    a.aRole[i] = arc.role === 'hover' ? 1 : folder ? 2 : 0;
+    a.aSeed[i] = hash01(arc.links[0]);
+    const t = linkBornAt.get(arc.key) ?? now;    // arcs that were already there do not fade in again
+    born.set(arc.key, t);
+    a.aBorn[i] = t;
+  });
+  linkBornAt = born;
+  g.instanceCount = linkArcs.length;
+  // Exposure: many arcs share the glow, so a dense bundle does not burn out to white.
+  // Example (LINK_CROWD 20): 20 arcs or fewer -> 1; 80 arcs -> sqrt(20/80) = 0.5; 320 -> 0.25.
+  linkUniforms.uGain.value = Math.min(1, Math.sqrt(THEME.LINK_CROWD / Math.max(linkArcs.length, 1)));
+  for (const name of Object.keys(a)) g.attributes[name].needsUpdate = true;
+  linkMesh.visible = linkArcs.length > 0;
+}
+
+// Where we are, in a form that can be found again later (symbol nodes are rebuilt when a file reopens, so a
+// symbol is remembered by file id + symbol index, everything else by its base tree id, which never changes).
+function placeOf(node) {
+  if (node.type === 'symbol') return { fileId: node.file.fileId, sym: node.symIndex };
+  return { baseId: node.id };
+}
+
+// Glide to a place. `remember` = push the current focus on the back stack (following a link does; going back does not).
+// A symbol of a CLOSED file: glide to the file; the file opens on the way (it is always first in line to open), and
+// as soon as its symbols exist openFile() continues the glide to the symbol (a second short glide starting from
+// wherever the first one is, so it reads as one movement).
+function goToPlace(place, remember) {
+  let target;
+  if (place.baseId !== undefined) target = nodeById[place.baseId];
+  else {
+    const file = fileById.get(place.fileId);
+    if (!file) return;
+    target = (place.sym >= 0 && file.symByIndex && file.symByIndex.get(place.sym)) || file;
+    pendingSymbol = target === file && place.sym >= 0 && file.symState !== 'open' ? place : null;
+  }
+  if (!target || (target === focusNode && !pendingSymbol)) return;
+  if (remember) nav.pushBack(placeOf(focusNode));
+  focusOn(target);
+  updateBackButton();
+}
+
+function goBack() {
+  const place = nav.popBack();
+  if (place) goToPlace(place, false);
+  updateBackButton();
+}
+
+// Follow an arc: to the exact symbol/file at its far end (or the drawn node if it merges several targets).
+function followArc(arc) {
+  const t = arc.target;
+  goToPlace(t.node ? placeOf(t.node) : { fileId: t.fileId, sym: t.sym }, true);
+}
+
+// The arc under the pointer (only used when no node is under it). CPU copy of the GPU curve: refocus the control
+// points, sample the hyperbolic Bézier curve, project, and take the arc that passes closest (within ARC_PICK_PX).
+// Only the far half of each arc counts, so a click right next to the focus still means the focus.
+function pickArc(clientX, clientY) {
+  const shift = vNeg(nav.focusPoint);
+  let best = null, bestD = ARC_PICK_PX;
+  for (const arc of linkArcs) {
+    const pts = arc.points.map((p) => mobiusAdd3(shift, p));
+    for (let t = 0.5; t <= 1.0001; t += 0.05) {
+      const s = projectPoint(geodesicBezier3(pts, t));
+      if (!s) continue;
+      const d = Math.hypot(s.x - clientX, s.y - clientY);
+      if (d < bestD) { bestD = d; best = arc; }
+    }
+  }
+  return best;
+}
+
+// The panel's "Imports / Imported by / Calls / Called by" lists for the focus.
+function updatePanelLinks() {
+  if (!codePanel) return;
+  const subject = subjectOf(focusNode);
+  if (!linkData || !subject || subject.folder) { codePanel.setLinks([], null); return; }
+  const lists = linkLists(linkData, subject);
+  const entry = (e) => {
+    const file = fileById.get(e.fileId);
+    const path = file ? nodePath(file).split('/').slice(1).join('/') : '';
+    const name = symbolName(linkData, e.fileId, e.sym) ?? (file ? file.name : '?');
+    return { ...e, name, sub: path, dots: confidenceDots(e.conf) };
+  };
+  codePanel.setLinks([
+    { title: 'Imports', color: THEME.LINK_IMPORT_COLOR, entries: lists.imports.map(entry) },
+    { title: 'Imported by', color: THEME.LINK_IMPORT_COLOR, entries: lists.importedBy.map(entry) },
+    { title: 'Calls', color: THEME.LINK_CALL_COLOR, entries: lists.calls.map(entry) },
+    { title: 'Called by', color: THEME.LINK_CALL_COLOR, entries: lists.calledBy.map(entry) },
+  ], (e) => goToPlace({ fileId: e.fileId, sym: e.sym }, true));
+}
+
+// "‹ Back" button (touch screens have no Backspace): shown while the back stack is not empty. 44 px tap target.
+const backBtn = document.createElement('button');
+backBtn.id = 'back';
+Object.assign(backBtn.style, {
+  position: 'fixed', left: '12px', bottom: 'calc(64px + var(--sheet-h, 0px))', zIndex: 6, display: 'none',
+  height: '44px', minWidth: '44px', padding: '0 16px', borderRadius: '22px', cursor: 'pointer',
+  font: `600 ${THEME.CRUMB_FONT_PX}px system-ui, sans-serif`, color: cssRgb(THEME.CRUMB_COLOR),
+  background: cssRgb(THEME.CRUMB_BG, THEME.CRUMB_BG_ALPHA), border: `1px solid ${cssRgb(THEME.CRUMB_SEP_COLOR)}`,
+});
+backBtn.addEventListener('click', goBack);
+document.body.appendChild(backBtn);
+function updateBackButton() {
+  backBtn.style.display = nav.backDepth > 0 ? 'block' : 'none';
+  backBtn.textContent = `‹ Back (${nav.backDepth})`;
 }
 
 // ---------------------------------------------------------------------------
@@ -691,6 +921,14 @@ function projectNode(id, rect) {
   };
 }
 
+// Project a ball point (already refocused) to CSS pixels, or null if it is behind the camera.
+function projectPoint(p) {
+  tmp.set(p.x, p.y, p.z).applyMatrix4(camera.matrixWorldInverse);
+  if (-tmp.z <= camera.near) return null;
+  tmp.applyMatrix4(camera.projectionMatrix);
+  return { x: ((tmp.x + 1) / 2) * window.innerWidth, y: ((1 - tmp.y) / 2) * window.innerHeight };
+}
+
 // Find the node under a mouse/touch position.
 //  - If the pointer is inside one or more drawn spheres, take the one nearest
 //    the camera (the one you can actually see in front).
@@ -765,6 +1003,12 @@ function collectLabelCandidates() {
     add(child, 500 + 10 * Math.log2(child.weight), THEME.LABEL_FONT_PX,
       orb ? THEME.LABEL_ORB_COLOR : THEME.LABEL_COLOR, orb ? orbText(child) : child.name);
   }
+  // The far ends of the focus's link arcs (where the arcs lead), surest links first.
+  for (const arc of linkArcs.slice(0, 12)) {
+    if (arc.role === 'focus' && arc.far && arc.far.state !== 2) {
+      add(arc.far, 300 + 100 * arc.conf, THEME.LABEL_FONT_PX, THEME.LABEL_COLOR, arc.far.name);
+    }
+  }
   // Collapsed orbs anywhere: the bigger on screen, the more important.
   for (const node of collapsedNodes) {
     if (seen.has(node.id)) continue;
@@ -777,10 +1021,17 @@ function collectLabelCandidates() {
 // Pointer hover (mouse only): the node under the pointer gets a label.
 let hoverPending = null;
 renderer.domElement.addEventListener('pointermove', (e) => {
-  if (e.pointerType !== 'mouse' || e.buttons !== 0) { hoverPending = null; hoverNode = null; return; }
+  if (e.pointerType !== 'mouse' || e.buttons !== 0) {
+    hoverPending = null;
+    if (hoverNode) { hoverNode = null; linksDirty = true; }
+    return;
+  }
   hoverPending = { x: e.clientX, y: e.clientY };
 });
-renderer.domElement.addEventListener('pointerleave', () => { hoverPending = null; hoverNode = null; });
+renderer.domElement.addEventListener('pointerleave', () => {
+  hoverPending = null;
+  if (hoverNode) { hoverNode = null; linksDirty = true; }
+});
 
 // Tell a click apart from a drag (a drag rotates the view instead).
 let downX = 0, downY = 0;
@@ -788,13 +1039,27 @@ renderer.domElement.addEventListener('pointerdown', (e) => { downX = e.clientX; 
 renderer.domElement.addEventListener('pointerup', (e) => {
   if (Math.hypot(e.clientX - downX, e.clientY - downY) > 5) return;
   const hit = pickNode(e.clientX, e.clientY);
-  if (hit && hit !== focusNode) focusOn(hit);
+  if (hit && hit !== focusNode) {
+    // The far end of one of the focus's arcs: that is following a link (remembered for Backspace).
+    const arc = linkArcs.find((a) => a.role === 'focus' && a.far === hit);
+    if (arc) followArc(arc);
+    else focusOn(hit);
+  } else if (!hit) {
+    const arc = pickArc(e.clientX, e.clientY);
+    if (arc) followArc(arc);
+  }
 });
 
 window.addEventListener('keydown', (e) => {
   if (e.key === 'Backspace') {
     e.preventDefault(); // stop the browser from navigating "back"
-    if (focusNode && focusNode.parent) focusOn(focusNode.parent);
+    // Backspace = back to where the last followed link started; with nothing to go back to (or with Shift) = parent.
+    if (!e.shiftKey && nav.backDepth > 0) goBack();
+    else if (focusNode && focusNode.parent) focusOn(focusNode.parent);
+  } else if ((e.key === 'i' || e.key === 'I') && !e.ctrlKey && !e.metaKey) {
+    showImports = !showImports; linksDirty = true; updateHelp();
+  } else if ((e.key === 'k' || e.key === 'K') && !e.ctrlKey && !e.metaKey) {
+    showCalls = !showCalls; linksDirty = true; updateHelp();
   }
 });
 
@@ -818,7 +1083,13 @@ function frame(now) {
     dirty = false;
   }
   nebula.position.copy(camera.position); // the sky follows the camera, so it never shows parallax
-  if (hoverPending) { hoverNode = pickNode(hoverPending.x, hoverPending.y); hoverPending = null; } // at most once per frame
+  if (hoverPending) {                     // at most once per frame
+    const before = hoverNode;
+    hoverNode = pickNode(hoverPending.x, hoverPending.y);
+    hoverPending = null;
+    if (hoverNode !== before) linksDirty = true; // the hovered node's links are shown too
+  }
+  if (linksDirty) updateLinks();          // only when something changed, never every frame
   renderer.info.reset();                  // we count draw calls of BOTH passes below
   renderer.clear();
   renderer.render(scene, camera);         // pass 1: the 3D galaxy
@@ -843,7 +1114,15 @@ async function start() {
   const baseUrl = url.slice(0, url.lastIndexOf('/') + 1);
   store = createSymbolStore(baseUrl, json.symbolsDir, json.sourceDir);
   symbolFiles = nodes.filter((n) => n.hasSymbols);
+  for (const n of symbolFiles) fileById.set(n.fileId, n);
   codePanel = createCodePanel({ onInset: nav.setInset });
+  // Links (Phase 4c) load in the background: the galaxy is usable before they arrive.
+  if (json.linksFile) {
+    fetch(`${baseUrl}${json.linksFile}`)
+      .then((r) => (r.ok ? r.json() : null))
+      .then((lj) => { if (lj) { linkData = createLinkData(lj); linksDirty = true; updatePanelLinks(); } })
+      .catch((err) => console.warn('links not loaded', err));
+  }
 
   labels = createLabels(renderer);
   buildDrawables();
@@ -880,7 +1159,22 @@ window.__explorer = {
   nodeState: (id) => nodeById[id].state,
   pick: (x, y) => { const n = pickNode(x, y); return n ? n.id : null; },
   orbIds: () => collapsedNodes.map((n) => n.id),
-  setHover: (id) => { hoverNode = id === null ? null : nodeById[id]; },
+  setHover: (id) => { hoverNode = id === null ? null : nodeById[id]; linksDirty = true; },
+  // Links (Phase 4c)
+  get linkCount() { return linkData ? linkData.count : 0; },
+  get linkStats() { return linkData ? linkData.stats : null; },
+  get visibleLinks() { return linkArcs.length; },
+  get selectedLinks() { return linkSelected; },
+  arcs: () => linkArcs.map((a) => ({ a: a.a.id, b: a.b.id, type: a.type, conf: a.conf, count: a.count, role: a.role, far: a.far ? a.far.id : null })),
+  get backDepth() { return nav.backDepth; },
+  goBack,
+  followArc: (i) => followArc(linkArcs[i]),
+  goToPlace: (fileId, sym) => goToPlace({ fileId, sym }, true),
+  setLinkFilter: (imports, calls) => { showImports = imports; showCalls = calls; linksDirty = true; updateHelp(); },
+  get linkTabs() { return codePanel.linkTabs; },
+  openLinkTab: (i) => codePanel.openTab(i),
+  // Screen position of the point at fraction t along a visible arc (CPU copy of the shader's curve).
+  arcScreenPos: (i, t) => projectPoint(geodesicBezier3(linkArcs[i].points.map((p) => mobiusAdd3(vNeg(nav.focusPoint), p)), t)),
   get spinning() { return nav.spinning; },
   setSpin: nav.setSpin,
   get drawCalls() { return renderer.info.render.calls; },

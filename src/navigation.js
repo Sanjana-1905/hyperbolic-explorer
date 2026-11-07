@@ -20,6 +20,9 @@
 //   nav.resize(w, h)           keep the camera's aspect ratio right
 //   nav.setSpin(on)            optional slow ambient rotation (desktop only; must stay off in VR)
 //   nav.setInset(right, bottom) keep the focus centred in the part of the screen NOT covered by the code panel
+//   nav.pushBack(place)        remember where we were before following a link (Phase 4c back stack)
+//   nav.popBack()              the last remembered place (or null), removed from the stack
+//   nav.backDepth              how many places are remembered
 
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
@@ -27,6 +30,7 @@ import { vec3, geodesicLerp3Free } from './mobius3d.js';
 import { THEME } from './theme.js';
 
 const ANIM_SECONDS = 0.5;       // refocus animation length (comfort rule: transitions under 0.6 s)
+const MAX_BACK = 50;            // the back stack forgets the oldest places beyond this many
 
 // Ease-in-out: slow start, fast middle, slow end. smoothstep(t) = 3t² − 2t³.
 // Example: t = 0.25 -> 0.156, t = 0.5 -> 0.5, t = 0.75 -> 0.844.
@@ -63,6 +67,11 @@ export function createNavigation(renderer) {
   });
 
   let focusPoint = vec3(0, 0, 0); // the ball point currently shown at the centre
+
+  // Back stack (Phase 4c): following a link (clicking an arc's far end or a "Calls / Called by" entry) pushes the
+  // place we came from; Backspace pops it, like a browser's Back button. A "place" is whatever the caller can find
+  // again later (main3d.js stores { baseId } or { fileId, sym }, because symbol nodes are rebuilt when files reopen).
+  const backStack = [];
   let anim = null;                // { from, to, start } while animating
 
   // View inset: when the code panel covers the right (or bottom) part of the screen, the picture is slid so
@@ -126,6 +135,13 @@ export function createNavigation(renderer) {
       camera.updateProjectionMatrix();
       applyInset();
     },
+
+    pushBack(place) {
+      backStack.push(place);
+      if (backStack.length > MAX_BACK) backStack.shift();
+    },
+    popBack() { return backStack.pop() ?? null; },
+    get backDepth() { return backStack.length; },
 
     // Pixels currently covered by the code panel (eased value), so labels can stay out of that area.
     get inset() { return inset; },

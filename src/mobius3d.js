@@ -172,6 +172,49 @@ export function geodesicLerp3Free(a, b, t) {
   return mobiusAdd3Free(a, scaled);
 }
 
+// ---------------------------------------------------------------------------
+// Curves for the links (Phase 4c)
+// ---------------------------------------------------------------------------
+
+// Hyperbolic Bézier curve through a list of control points, by de Casteljau's construction with geodesics.
+// The ordinary (flat) de Casteljau recipe: for a fraction t, replace every pair of neighbouring control points by
+// the point the fraction t of the way between them, and repeat until one point is left; that point is on the curve.
+// In hyperbolic space "the fraction t of the way between" means along the GEODESIC (geodesicLerp3), so the curve
+// is built only from hyperbolic straight lines and does not depend on where the focus is: moving everything with
+// a Möbius translation first and building the curve afterwards gives the same curve (tested), which is why the
+// GPU can refocus the control points and then evaluate the curve.
+// Properties: it starts at the first point (t = 0) and ends at the last (t = 1); it only bends TOWARD the middle
+// points without passing through them; if all points lie on one geodesic the curve is that geodesic.
+// Example with 3 points, t = 0.5: p0 = (-0.5, 0, 0), p1 = (0, 0.5, 0), p2 = (0.5, 0, 0):
+//   halfway p0 -> p1 = (-0.219, 0.219, 0), halfway p1 -> p2 = (0.219, 0.219, 0), halfway between those = (0, 0.209, 0).
+//   (The flat version would give (0, 0.25, 0): the hyperbolic one sags a bit toward the centre.)
+// The 0.995 clamp applies (these are displayed positions), exactly like the GLSL copy in glsl.js.
+export function geodesicBezier3(points, t) {
+  let pts = points;
+  while (pts.length > 1) {
+    const next = [];
+    for (let i = 0; i + 1 < pts.length; i++) next.push(geodesicLerp3(pts[i], pts[i + 1], t));
+    pts = next;
+  }
+  return pts[0];
+}
+
+// Hierarchical edge bundling, the "tension" step (Holten 2006), in hyperbolic form.
+// A link from A to B gets control points from the tree path A -> ... -> common ancestor -> ... -> B. Following the path
+// exactly (tension 1) bundles links strongly; tension 0 would ignore the tree and draw the straight geodesic A -> B.
+// For the control point p that is the fraction s of the way along the path:
+//   1. c = the point the fraction s of the way along the straight geodesic from A to B;
+//   2. the new control point = the point the fraction `tension` of the way from c to p (again along a geodesic).
+// Flat Holten writes this as  p' = β·p + (1 − β)·(A + s·(B − A)); here both "+" become geodesic steps.
+// Uses the UNCLAMPED geodesic: these are home positions, and symbols may sit beyond radius 0.995.
+// Example: A = (0, 0, 0), B = (0.6, 0, 0), p = (0.2, 0.5, 0), s = 0.5, tension 0.85:
+//   c = halfway A -> B = (tanh(0.5 · artanh 0.6), 0, 0) = (0.333, 0, 0);
+//   85 % of the way from c to p = (0.207, 0.432, 0): close to p, pulled a little toward the straight line.
+export function straightenToward(a, b, p, s, tension) {
+  const onChord = geodesicLerp3Free(a, b, s);
+  return geodesicLerp3Free(onChord, p, tension);
+}
+
 // How wide a cone must be, seen from a child, to fill a given angle seen from
 // its parent "all the way out to infinity":
 //
