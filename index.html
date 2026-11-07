@@ -10,7 +10,7 @@
       canvas { display: block; }
       /* Info overlay showing the focused node's name and path */
       #info {
-        position: fixed; top: 12px; left: 12px; right: 12px;
+        position: fixed; top: 12px; left: 12px; right: calc(12px + var(--panel-w, 0px));
         pointer-events: none;
         text-shadow: 0 0 4px #000;
       }
@@ -19,6 +19,12 @@
       #help {
         position: fixed; bottom: 10px; left: 12px;
         font-size: 12px; opacity: 0.55; pointer-events: none;
+      }
+      @media (max-height: 520px) { /* phone held sideways: slimmer text so the picture keeps the room */
+        #info { top: 6px; left: 12px; }
+        #info .name { font-size: 15px; }
+        #info .path { font-size: 11px; word-break: normal; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        #crumbs { bottom: 6px !important; font-size: 11px !important; max-width: calc(100vw - var(--panel-w, 0px) - 120px) !important; }
       }
       @media (pointer: coarse) { #help { display: none; } } /* touch screens: the keys line is useless, the toolbar replaces it */
       #fps {

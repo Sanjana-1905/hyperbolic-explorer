@@ -31,6 +31,15 @@ export function createToolbar(actions) {
     #tools button.on { background: ${cssRgb(THEME.UI_ACTIVE_BG, THEME.UI_ACTIVE_ALPHA)}; color: ${cssRgb(THEME.CRUMB_LAST_COLOR)};
       border-color: ${cssRgb(THEME.CRUMB_COLOR)}; }
     #tools button:disabled { opacity: 0.35; cursor: default; }
+    /* Compact layout (phone held sideways): a slim column of icon-only buttons down the left side. */
+    @media (max-height: ${THEME.COMPACT_HEIGHT_PX}px) {
+      #tools { left: 6px; top: 58px; bottom: auto; flex-direction: column; flex-wrap: nowrap; gap: 5px; }
+      #tools button { height: 40px; min-width: 40px; padding: 0 10px; justify-content: center; font-size: 16px; }
+      #tools .lbl { display: none; }
+      #tools .dot { width: 14px; height: 14px; }
+      #intro { font-size: 12.5px; padding: 12px 14px 10px; } #intro h2 { font-size: 15px; margin-bottom: 4px; }
+      #intro li { margin-bottom: 4px; } #intro button { height: 38px; }
+    }
     #tools .dot { width: 10px; height: 10px; border-radius: 50%; flex: none; }
     #tools .off .dot { opacity: 0.35; }
     #intro { position: fixed; z-index: 8; left: 50%; top: 50%; transform: translate(-50%, -50%); box-sizing: border-box;
@@ -57,13 +66,14 @@ export function createToolbar(actions) {
     bar.appendChild(b);
     return b;
   };
+  const lbl = (t) => `<span class="lbl">${t}</span>`;
   const dot = (color) => `<span class="dot" style="background:${cssRgb(color)}"></span>`;
-  const home = make('⌂ Home', 'Go to the top of the tree', actions.onHome);
-  const up = make('↑ Up', 'Go to the parent folder (Shift+Backspace)', actions.onUp);
-  const back = make('‹ Back', 'Return to where you were before following a link (Backspace)', actions.onBack);
-  const imports = make(`${dot(THEME.LINK_IMPORT_COLOR)}Imports`, 'Show or hide import arcs (I)', actions.onImports);
-  const calls = make(`${dot(THEME.LINK_CALL_COLOR)}Calls`, 'Show or hide call arcs (K)', actions.onCalls);
-  const deps = make(`${dot(THEME.LINK_IMPORT_COLOR)}Dependencies`, 'Show which parts of this folder import each other (D)', actions.onFolderDeps);
+  const home = make(`⌂${lbl(' Home')}`, 'Go to the top of the tree', actions.onHome);
+  const up = make(`↑${lbl(' Up')}`, 'Go to the parent folder (Shift+Backspace)', actions.onUp);
+  const back = make('‹', 'Return to where you were before following a link (Backspace)', actions.onBack);
+  const imports = make(`${dot(THEME.LINK_IMPORT_COLOR)}${lbl('Imports')}`, 'Show or hide import arcs (I)', actions.onImports);
+  const calls = make(`${dot(THEME.LINK_CALL_COLOR)}${lbl('Calls')}`, 'Show or hide call arcs (K)', actions.onCalls);
+  const deps = make(`${dot(THEME.LINK_IMPORT_COLOR)}${lbl('Dependencies')}`, 'Show which parts of this folder import each other (D)', actions.onFolderDeps);
   const helpBtn = make('?', 'How to explore', () => showIntro());
   document.body.appendChild(bar);
 
@@ -94,7 +104,7 @@ export function createToolbar(actions) {
       up.disabled = s.isRoot;
       home.disabled = s.isRoot;
       back.style.display = s.backDepth > 0 ? '' : 'none';
-      back.innerHTML = `‹ Back (${s.backDepth})`;
+      back.innerHTML = `‹${lbl(' Back')} (${s.backDepth})`;
       const folder = s.focusKind === 'folder';
       deps.style.display = folder ? '' : 'none';
       imports.style.display = calls.style.display = folder ? 'none' : '';

@@ -987,7 +987,11 @@ function visibleOnScreen(x, y) {
   return x < window.innerWidth - right - 20 && y < window.innerHeight - bottom - 10;
 }
 
+// Label sizes shrink in the compact layout (a phone held sideways has very little height).
+const labelScale = () => (window.innerHeight <= THEME.COMPACT_HEIGHT_PX ? THEME.COMPACT_LABEL_SCALE : 1);
+
 function collectLabelCandidates() {
+  const k = labelScale();
   const out = [];
   const seen = new Set();
   const add = (node, priority, px, color, text) => {
@@ -999,28 +1003,28 @@ function collectLabelCandidates() {
   };
   const orbText = (node) => `+${node.weight - 1}`;
 
-  add(focusNode, 1000, THEME.LABEL_FOCUS_PX, THEME.LABEL_COLOR, focusNode.name);
+  add(focusNode, 1000, THEME.LABEL_FOCUS_PX * k, THEME.LABEL_COLOR, focusNode.name);
   if (hoverNode) {
     const text = hoverNode.state === 2 ? `${hoverNode.name}  ${orbText(hoverNode)}` : hoverNode.name;
-    add(hoverNode, 900, THEME.LABEL_HOVER_PX, THEME.LABEL_COLOR, text);
+    add(hoverNode, 900, THEME.LABEL_HOVER_PX * k, THEME.LABEL_COLOR, text);
   }
   // Children: bigger subtrees first (folders before files, since a file has weight 1).
   for (const child of focusNode.children) {
     const orb = child.state === 2;
-    add(child, 500 + 10 * Math.log2(child.weight), THEME.LABEL_FONT_PX,
+    add(child, 500 + 10 * Math.log2(child.weight), THEME.LABEL_FONT_PX * k,
       orb ? THEME.LABEL_ORB_COLOR : THEME.LABEL_COLOR, orb ? orbText(child) : child.name);
   }
   // The far ends of the focus's link arcs (where the arcs lead), surest links first.
   for (const arc of linkArcs.slice(0, 12)) {
     if (arc.role === 'focus' && arc.far && arc.far.state !== 2) {
-      add(arc.far, 300 + 100 * arc.conf, THEME.LABEL_FONT_PX, THEME.LABEL_COLOR, arc.far.name);
+      add(arc.far, 300 + 100 * arc.conf, THEME.LABEL_FONT_PX * k, THEME.LABEL_COLOR, arc.far.name);
     }
   }
   // Collapsed orbs anywhere: the bigger on screen, the more important.
   for (const node of collapsedNodes) {
     if (seen.has(node.id)) continue;
     const s = projectForLabel(node);
-    if (s && visibleOnScreen(s.x, s.y)) add(node, 100 + Math.min(s.r, 50), THEME.LABEL_ORB_PX, THEME.LABEL_ORB_COLOR, orbText(node));
+    if (s && visibleOnScreen(s.x, s.y)) add(node, 100 + Math.min(s.r, 50), THEME.LABEL_ORB_PX * k, THEME.LABEL_ORB_COLOR, orbText(node));
   }
   return out;
 }

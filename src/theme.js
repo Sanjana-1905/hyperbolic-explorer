@@ -244,6 +244,11 @@ export const THEME = {
   UI_ACTIVE_ALPHA: 0.92,       // ... and its opacity
   INTRO_CARD_WIDTH_PX: 380,    // width of the "How to explore" card
 
+  // ---- Compact layout (phone held sideways: very little height) ----------------------------------
+  COMPACT_HEIGHT_PX: 520,      // a window at most this tall uses the compact layout: icon-only toolbar down the left side,
+                               // smaller title/breadcrumb/code, labels scaled by COMPACT_LABEL_SCALE
+  COMPACT_LABEL_SCALE: 0.75,   // 3D label sizes are multiplied by this in the compact layout
+
   // ---- Breadcrumb (HTML line at the bottom of the screen) -------------------------------
   CRUMB_FONT_PX: 13,           // text size
   CRUMB_COLOR: [0.72, 0.80, 1.0],      // ancestors

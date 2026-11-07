@@ -354,6 +354,10 @@ Known limitations / decisions to review
       Four plain-language steps: what the picture is, click to fly in / +N, Up/Home, arcs and Back
 - [x] Shorter key line (hidden on touch screens); folder info line says "click one to fly in"
 - Screenshot tests and my headless scripts must now pass `?intro=0`
+- **Phone held sideways (your S26 screenshots):** the layout is now chosen by orientation, not width. Portrait = bottom sheet; landscape
+  (laptop or sideways phone) = code panel docked on the RIGHT, scrolling, at most 50 % of the width. Windows ≤ 520 px tall
+  (`COMPACT_HEIGHT_PX`) get a compact layout: icon-only toolbar in a column down the left, smaller title / breadcrumb / code text, 3D labels
+  scaled by 0.75, panel uses the full height with a slimmer header. The title no longer runs under the panel
 
 ## Later
 5 Cross-file links (done early, in 4c) · 6 Search/info/git heat/2nd dataset · 7 AR tabletop · 8 User study + report · 9 VR Cardboard + final visual polish

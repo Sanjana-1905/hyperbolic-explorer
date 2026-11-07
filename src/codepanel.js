@@ -64,7 +64,11 @@ export function highlightLines(text, lang) {
   return lines;
 }
 
-const NARROW = '(max-width: 700px), (max-aspect-ratio: 1/1)';
+// Portrait (a phone held upright): a bottom sheet. Landscape (laptop, or a phone held sideways): docked to the right, scrolling.
+const NARROW = '(orientation: portrait)';
+const COMPACT = `(max-height: ${THEME.COMPACT_HEIGHT_PX}px)`;
+// Width of the docked panel: at most CODE_PANEL_WIDTH_PX and at most 50 % of the screen, so the picture keeps room.
+const panelWidth = () => Math.min(THEME.CODE_PANEL_WIDTH_PX, 0.5 * window.innerWidth);
 
 // `onInset(rightPx, bottomPx)` is told how much of the screen the panel covers, so the 3D view can slide
 // the focus into the visible part (navigation.js).
@@ -72,7 +76,7 @@ export function createCodePanel({ onInset } = {}) {
   const css = document.createElement('style');
   css.textContent = `
     #code { position: fixed; z-index: 5; display: none; flex-direction: column; box-sizing: border-box;
-      top: 56px; right: 0; bottom: 56px; width: min(${THEME.CODE_PANEL_WIDTH_PX}px, 92vw);
+      top: 56px; right: 0; bottom: 56px; width: min(${THEME.CODE_PANEL_WIDTH_PX}px, 50vw);
       background: ${cssRgb(THEME.CODE_BG, THEME.CODE_BG_ALPHA)}; color: ${cssRgb(THEME.CODE_TEXT)};
       border-left: 2px solid ${cssRgb(THEME.CODE_EDGE, 0.7)}; border-radius: 10px 0 0 10px;
       box-shadow: -8px 0 24px rgba(0, 0, 0, 0.6);
@@ -119,7 +123,15 @@ export function createCodePanel({ onInset } = {}) {
       overflow: hidden; text-overflow: ellipsis; }
     #code .cp-dots { flex: none; letter-spacing: 1px; color: var(--link-color); font-size: 11px; }
     #code .cp-more { justify-content: center; color: ${cssRgb(THEME.CODE_HEADER)}; }
-    /* Narrow screens (phones): a bottom sheet instead of a side panel. */
+    /* Short windows (phone held sideways): the panel uses the whole height, with a slimmer header and smaller text. */
+    @media ${COMPACT} {
+      #code { top: 6px; bottom: 6px; font-size: 12px; }
+      #code .cp-head { min-height: 40px; }
+      #code button { width: 40px; height: 40px; }
+      #code .cp-tabs button { height: 36px; }
+      #code .cp-name { font-size: 13px; }
+    }
+    /* Portrait: a bottom sheet instead of a side panel. */
     @media ${NARROW} {
       #code { top: auto; left: 0; right: 0; bottom: 0; width: auto; height: ${THEME.CODE_SHEET_HEIGHT_VH}vh;
         border-left: 0; border-top: 2px solid ${cssRgb(THEME.CODE_EDGE, 0.7)}; border-radius: 12px 12px 0 0;
@@ -206,11 +218,11 @@ export function createCodePanel({ onInset } = {}) {
     const narrow = window.matchMedia(NARROW).matches;
     const sheet = open && narrow ? (folded ? '48px' : `${THEME.CODE_SHEET_HEIGHT_VH}vh`) : '0px';
     document.documentElement.style.setProperty('--sheet-h', sheet);
-    document.documentElement.style.setProperty('--panel-w', open && !narrow ? `${Math.min(THEME.CODE_PANEL_WIDTH_PX, 0.92 * window.innerWidth)}px` : '0px');
+    document.documentElement.style.setProperty('--panel-w', open && !narrow ? `${panelWidth()}px` : '0px');
     if (onInset) {
       if (!open) onInset(0, 0);
       else if (narrow) onInset(0, folded ? 48 : (THEME.CODE_SHEET_HEIGHT_VH / 100) * window.innerHeight);
-      else onInset(Math.min(THEME.CODE_PANEL_WIDTH_PX, 0.92 * window.innerWidth), 0);
+      else onInset(panelWidth(), 0);
     }
   }
 
