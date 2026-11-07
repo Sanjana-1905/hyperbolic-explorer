@@ -1,0 +1,54 @@
+{
+ "dataset": "sample_tree.json",
+ "tasks": [
+  {
+   "id": "p0",
+   "practice": true,
+   "depth": 3,
+   "target": "sample-repo/cache/internal/main.css",
+   "text": "Find the file \"main.css\" inside the folder \"internal\"."
+  },
+  {
+   "id": "t1",
+   "practice": false,
+   "depth": 3,
+   "target": "sample-repo/api/lib/server.css",
+   "text": "Find the file \"server.css\" inside the folder \"lib\"."
+  },
+  {
+   "id": "t2",
+   "practice": false,
+   "depth": 4,
+   "target": "sample-repo/cache/net/io/handler.json",
+   "text": "Find the file \"handler.json\" inside the folder \"io\"."
+  },
+  {
+   "id": "t3",
+   "practice": false,
+   "depth": 5,
+   "target": "sample-repo/api/lib/tests/views/handler.glsl",
+   "text": "Find the file \"handler.glsl\" inside the folder \"views\"."
+  },
+  {
+   "id": "t4",
+   "practice": false,
+   "depth": 6,
+   "target": "sample-repo/api/lib/tests/views/utils/parser.glsl",
+   "text": "Find the file \"parser.glsl\" inside the folder \"utils\"."
+  },
+  {
+   "id": "t5",
+   "practice": false,
+   "depth": 7,
+   "target": "sample-repo/views/src/cache/render/events/docs/client.html",
+   "text": "Find the file \"client.html\" inside the folder \"docs\"."
+  },
+  {
+   "id": "t6",
+   "practice": false,
+   "depth": 8,
+   "target": "sample-repo/cache/views/internal/api/services/core/assets/helpers.ts",
+   "text": "Find the file \"helpers.ts\" inside the folder \"assets\"."
+  }
+ ]
+}
