@@ -22,7 +22,7 @@ export function createToolbar(actions) {
   const px = THEME.TOOLBAR_BTN_PX;
   const css = document.createElement('style');
   css.textContent = `
-    #tools { position: fixed; left: calc(12px + var(--sai-l)); bottom: calc(76px + max(var(--sheet-h, 0px), var(--sai-b))); z-index: 6; display: flex; flex-wrap: wrap;
+    #tools { position: fixed; left: calc(12px + var(--sai-l)); bottom: calc(76px + max(var(--sheet-h, 0px), var(--sai-b))); z-index: 6; display: flex; flex-wrap: nowrap;
       gap: 6px; max-width: calc(100vw - var(--panel-w, 0px) - 24px - var(--sai-l) - var(--sai-r)); font-family: system-ui, sans-serif; }
     #tools button { height: ${px}px; min-width: ${px}px; padding: 0 14px; border-radius: ${px / 2}px; cursor: pointer;
       font: 600 ${THEME.CRUMB_FONT_PX}px system-ui, sans-serif; color: ${cssRgb(THEME.CRUMB_COLOR)};
@@ -31,9 +31,21 @@ export function createToolbar(actions) {
     #tools button.on { background: ${cssRgb(THEME.UI_ACTIVE_BG, THEME.UI_ACTIVE_ALPHA)}; color: ${cssRgb(THEME.CRUMB_LAST_COLOR)};
       border-color: ${cssRgb(THEME.CRUMB_COLOR)}; }
     #tools button:disabled { opacity: 0.35; cursor: default; }
+    #tools button { flex: none; }
+    /* Not enough room for words (a panel is open, or a narrow window): icons only, so the toolbar stays ONE row. Set by fit(). */
+    #tools.icons { gap: 4px; }
+    #tools.icons button { padding: 0 10px; justify-content: center; }
+    #tools.icons .lbl { display: none; }
+    /* Back is always in the row (last), just invisible when there is nothing to go back to: showing it must never change the row. */
+    #tools button.hidden { visibility: hidden; pointer-events: none; }
     /* Narrow screens (a phone held upright): icon-only buttons, so all of them fit in one row. */
     @media (max-width: 520px) {
-      #tools { gap: 4px; }
+      /* Ten icon buttons are wider than a phone held upright: the ONE row scrolls sideways (never wraps), and Back comes FIRST
+         (and takes no room at all while there is nothing to go back to) so it is always in reach. */
+      #tools { gap: 4px; overflow-x: auto; scrollbar-width: none; overscroll-behavior-x: contain; }
+      #tools::-webkit-scrollbar { display: none; }
+      #tools button.back { order: -1; }
+      #tools button.back.hidden { display: none; }
       #tools button { padding: 0 10px; justify-content: center; }
       #tools .lbl { display: none; }
     }
@@ -98,7 +110,18 @@ export function createToolbar(actions) {
     document.addEventListener('fullscreenchange', sync);
     queueMicrotask(sync);
   }
+  back.classList.add('back');
+  bar.appendChild(back);   // Back is the LAST button: its (invisible) slot at the end never moves the others
   document.body.appendChild(bar);
+  // Keep the toolbar to ONE row: if the buttons do not fit in the width available (the screen minus an open side panel),
+  // drop the words and keep the icons. Called whenever something that changes the width may have changed.
+  function fit() {
+    bar.classList.remove('icons');
+    if (bar.scrollWidth > bar.clientWidth + 1) bar.classList.add('icons');
+  }
+  window.addEventListener('resize', fit);
+  // The code panel sets --panel-w on <html> when it opens or closes; that changes the bar's max-width, so re-fit.
+  new MutationObserver(fit).observe(document.documentElement, { attributes: true, attributeFilter: ['style'] });
   const setOn = (btn, on) => { btn.classList.toggle('on', on); btn.classList.toggle('off', !on); btn.setAttribute('aria-pressed', String(on)); };
 
   // Intro card -----------------------------------------------------------------------------------
@@ -131,14 +154,15 @@ export function createToolbar(actions) {
       setOn(heatBtn, s.heatMode > 0);
       up.disabled = s.isRoot;
       home.disabled = s.isRoot;
-      back.style.display = s.backDepth > 0 ? '' : 'none';
-      back.innerHTML = `‹${lbl(' Back')} (${s.backDepth})`;
+      back.classList.toggle('hidden', s.backDepth === 0);
+      back.innerHTML = `‹${lbl(` Back (${s.backDepth})`)}`;
       const folder = s.focusKind === 'folder';
       // Link chips only make sense for a code dataset (one that has symbols); heat only if the data has git history.
       deps.style.display = folder && s.hasCode ? '' : 'none';
       imports.style.display = calls.style.display = folder || !s.hasCode ? 'none' : '';
       heatBtn.style.display = s.hasGit ? '' : 'none';
       setOn(imports, s.showImports); setOn(calls, s.showCalls); setOn(deps, s.showFolderDeps);
+      fit();
     },
     // Wording of the intro card for the dataset (a code repository by default, or e.g. WordNet).
     setDataset({ about, words, hasCode }) {

@@ -68,9 +68,17 @@ export async function launch() {
   const touch = (type, pts) => send('Input.dispatchTouchEvent', { type, touchPoints: pts.map((p, i) => ({ x: p.x, y: p.y, id: i })) });
   const tap = async (x, y) => { await touch('touchStart', [{ x, y }]); await sleep(40); await touch('touchEnd', []); };
   const mouseMove = (x, y) => send('Input.dispatchMouseEvent', { type: 'mouseMoved', x, y, button: 'none', buttons: 0 });
+  // A real mouse click: move there first (so the page sees the hover, like a person), then press and release.
+  const click = async (x, y) => {
+    await send('Input.dispatchMouseEvent', { type: 'mouseMoved', x, y, button: 'none', buttons: 0 });
+    await sleep(250);
+    await send('Input.dispatchMouseEvent', { type: 'mousePressed', x, y, button: 'left', buttons: 1, clickCount: 1 });
+    await sleep(60);
+    await send('Input.dispatchMouseEvent', { type: 'mouseReleased', x, y, button: 'left', buttons: 0, clickCount: 1 });
+  };
   const key = async (k, code) => { await send('Input.dispatchKeyEvent', { type: 'keyDown', key: k, code: code || k, windowsVirtualKeyCode: k === 'Backspace' ? 8 : 0 }); await send('Input.dispatchKeyEvent', { type: 'keyUp', key: k, code: code || k }); };
   const shot = async (file) => { const r = await send('Page.captureScreenshot', { format: 'png' }); writeFileSync(file, Buffer.from(r.data, 'base64')); };
   const goto = async (url, wait = 5500) => { await send('Page.navigate', { url }); await sleep(wait); };
   const close = () => { try { ws.close(); } catch { /* ignore */ } proc.kill(); try { rmSync(dir, { recursive: true, force: true }); } catch { /* ignore */ } };
-  return { send, ev, phone, desktop, touch, tap, mouseMove, key, shot, goto, sleep, logs, close };
+  return { send, ev, phone, desktop, touch, tap, mouseMove, click, key, shot, goto, sleep, logs, close };
 }

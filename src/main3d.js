@@ -64,6 +64,10 @@ const EXPAND_HYST = 0.25;       // ... and closes again only beyond EXPAND_DIST 
 const MAX_OPEN_FILES = 6;       // at most this many files open at once (nearest first)
 const MAX_SYMBOL_NODES = 3000;  // spare buffer slots for symbol nodes (CLAUDE.md: ~3,000 visible nodes)
 const ARC_PICK_PX = 10;         // a click this close to a link arc (and no node under it) follows the arc
+const ARC_WINS_PX = 5;          // ... and a click THIS close to an arc line follows it even if a node is under the pointer (mouse)
+const ARC_WINS_TOUCH_PX = 9;    // same for a finger (less precise)
+const ARC_FOCUS_GUARD_PX = 14;  // ... except right around the focus itself (all its arcs start there): that click means the focus
+const ARC_PICK_STEPS = 40;      // an arc is measured as a polyline of this many pieces
 
 // Debug: ?time=12.5 freezes the clock the shaders animate with, so screenshots are repeatable.
 const FROZEN_TIME = new URLSearchParams(location.search).has('time')
@@ -827,22 +831,43 @@ function arcRoute(arc) {
 // The arc under the pointer (only used when no node is under it). CPU copy of the GPU curve: refocus the control
 // points, sample the hyperbolic Bézier curve, project, and take the arc that passes closest (within ARC_PICK_PX).
 // Only the far half of each arc counts, so a click right next to the focus still means the focus.
-function pickArc(clientX, clientY) {
+function pickArc(clientX, clientY, maxPx = ARC_PICK_PX, focusOnly = false) {
   const shift = vNeg(nav.focusPoint);
-  let best = null, bestD = ARC_PICK_PX;
+  // Right around the focus every arc of the focus starts: a click there means the focus, not "some arc".
+  const rect = renderer.domElement.getBoundingClientRect();
+  const fs = focusNode ? projectNode(focusNode.id, rect) : null;
+  const guard = fs ? fs.r + ARC_FOCUS_GUARD_PX : 0;
+  let best = null, bestD = maxPx;
   for (const arc of linkArcs) {
+    // focusOnly: the faint hover previews (the arcs of the node under the mouse) must not steal a click that is aimed at that node.
+    if (focusOnly && arc.role !== 'focus') continue;
     const pts = arc.points.map((p) => mobiusAdd3(shift, p));
-    // The far half is the one next to the far end: t in [0.5, 1] when the far end is the arc's end b, t in [0, 0.5] when it is a
-    // (an arc that ARRIVES at the focus has its far end at t = 0).
-    const lo = arc.far === arc.b ? 0.5 : 0;
-    for (let t = lo; t <= lo + 0.5001; t += 0.05) {
-      const s = projectPoint(geodesicBezier3(pts, t));
-      if (!s) continue;
-      const d = Math.hypot(s.x - clientX, s.y - clientY);
-      if (d < bestD) { bestD = d; best = arc; }
+    // The WHOLE arc counts: project it as a polyline and measure the distance from the click to each piece (a piece, not just
+    // its corners, so a click between two samples is still close to the line).
+    let prev = null;
+    for (let k = 0; k <= ARC_PICK_STEPS; k++) {
+      const s = projectPoint(geodesicBezier3(pts, k / ARC_PICK_STEPS));
+      if (s && prev) {
+        const mx = (s.x + prev.x) / 2, my = (s.y + prev.y) / 2;
+        if (!fs || Math.hypot(mx - fs.x, my - fs.y) > guard) {
+          const d = distToSegment(clientX, clientY, prev.x, prev.y, s.x, s.y);
+          if (d < bestD) { bestD = d; best = arc; }
+        }
+      }
+      prev = s;
     }
   }
   return best;
+}
+
+// Distance from the point (px, py) to the segment (ax, ay)-(bx, by): project the point onto the segment's line, clamp the
+// position to the segment (0..1), and measure to that spot.  Example: segment (0,0)-(10,0), point (4,3) -> t = 0.4, nearest
+// spot (4,0), distance 3.  Point (15,0) -> t clamps to 1, nearest spot (10,0), distance 5.
+function distToSegment(px, py, ax, ay, bx, by) {
+  const dx = bx - ax, dy = by - ay;
+  const len2 = dx * dx + dy * dy;
+  const t = len2 === 0 ? 0 : Math.max(0, Math.min(1, ((px - ax) * dx + (py - ay) * dy) / len2));
+  return Math.hypot(px - (ax + t * dx), py - (ay + t * dy));
 }
 
 // The panel's "Imports / Imported by / Calls / Called by" lists for the focus.
@@ -1288,7 +1313,7 @@ renderer.domElement.addEventListener('pointerleave', () => {
 //   touch DOUBLE-tap = go up to the parent. The first tap of the pair already focused something, so "up" is taken from where
 //   we were BEFORE that tap (otherwise double-tapping a node would fly into it and then out to its own parent).
 let focusBeforeTap = null;
-nav.onTap(({ x, y, double }) => {
+nav.onTap(({ x, y, double, pointerType }) => {
   if (double) {
     const from = focusBeforeTap || focusNode;
     focusBeforeTap = null;
@@ -1297,6 +1322,9 @@ nav.onTap(({ x, y, double }) => {
     return;
   }
   focusBeforeTap = focusNode;
+  // A click right on an arc line follows the arc, even over a node (arcs run through crowds of nodes; otherwise they could not be hit).
+  const onArc = pickArc(x, y, pointerType === 'mouse' ? ARC_WINS_PX : ARC_WINS_TOUCH_PX, true);
+  if (onArc) { followArc(onArc); return; }
   const picked = pickNode(x, y);
   // The "(top level)" block stands for the whole file's loose code: clicking it focuses the FILE (its code panel shows everything).
   const hit = picked && picked.kind === 'block' ? picked.file : picked;
@@ -1405,7 +1433,12 @@ async function start() {
   updateHelp();
   minimap = createMinimap({ nodes, onPick: (n) => goToPlace({ baseId: n.id }, true) });
   refreshToolbar();
-  codePanel = createCodePanel({ onInset: nav.setInset });
+  // The code panel reports how much of the screen it covers. The one-row toolbar always covers a strip at the bottom,
+  // so the picture is centred above it too (only when the toolbar IS at the bottom, i.e. not in the compact landscape layout).
+  codePanel = createCodePanel({ onInset: (right, bottom) => {
+    const toolbarAtBottom = window.innerHeight > THEME.COMPACT_HEIGHT_PX;
+    nav.setInset(right, bottom + (toolbarAtBottom ? THEME.TOOLBAR_BAND_PX : 0));
+  } });
   // Links (Phase 4c) load in the background: the galaxy is usable before they arrive.
   if (json.linksFile) {
     fetch(`${baseUrl}${json.linksFile}`)

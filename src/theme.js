@@ -240,6 +240,8 @@ export const THEME = {
 
   // ---- Toolbar and intro card (on-screen navigation for first-time users) ------------------------
   TOOLBAR_BTN_PX: 44,          // height / minimum width of toolbar buttons (44 px = comfortable thumb target)
+  TOOLBAR_BAND_PX: 130,        // height of the strip at the bottom that the one-row toolbar occupies (76 px gap + one 44 px button + margin):
+                               // the picture is slid up by half of it so the rim of the galaxy, where link arcs end, stays clear of the buttons
   UI_ACTIVE_BG: [0.10, 0.22, 0.50],   // background of a switched-on chip (Imports, Calls, Dependencies)
   UI_ACTIVE_ALPHA: 0.92,       // ... and its opacity
   INTRO_CARD_WIDTH_PX: 380,    // width of the "How to explore" card

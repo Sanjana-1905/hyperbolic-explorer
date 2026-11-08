@@ -302,18 +302,51 @@ async function runPhone(c, label, w, h) {
     await focusPlace(foci.file); await ev('__explorer.setLinkFilter(true, true)'); await sleep(500);
     const startFocus = await ev('__explorer.focusId()');
     const visited = [startFocus];
+    // A symbol node gets a NEW id each time its file is closed and reopened (at most 6 files stay open), so places are compared by
+    // what they are (file + symbol index), not by node id.
+    const placeKey = () => ev("(() => { const n = __explorer.nodeById(__explorer.focusId()); return n.type === 'symbol' ? 's' + n.file.fileId + ':' + n.symIndex : 'n' + n.id; })()");
+    const visitedKey = [await placeKey()];
     const trail = [];
     for (let step = 0; step < 6; step++) {
+      // Wait until the arc list has stopped changing (a file that just opened rebuilds its arcs a moment after the glide ends).
+      let sig = '', same = 0;
+      for (let k = 0; k < 30 && same < 3; k++) {
+        const now2 = await ev('__explorer.arcDetails().map((a) => a.key).join("|") + "/" + __explorer.focusId()');
+        same = now2 === sig ? same + 1 : 0; sig = now2; await sleep(150);
+      }
+      // Where the previous step really ended (a file that was opening carries on to its symbol after the glide): this is the place
+      // the Back stack holds, so it is what backing out must return to.
+      if (step > 0) { visited[step] = await ev('__explorer.focusId()'); visitedKey[step] = await placeKey(); }
       const targets = JSON.parse(await ev('JSON.stringify(__T.tappableArcs().map((t) => ({ i: t.i, x: t.x, y: t.y, far: t.far })))'));
       const fresh = targets.find((t) => !visited.includes(t.far)) || targets[0];
       const before = await ev('__explorer.focusId()');
       if (fresh) {
-        const exp = await ev(`__T.expectedTarget(__explorer.arcDetails()[${fresh.i}])`);
+        // The arc's link target, kept as data: a symbol of a CLOSED file does not exist as a node yet, and the file opens on the way,
+        // so what the glide must end on is looked up AFTER settling.
+        const tspec = await ev(`JSON.stringify(__explorer.arcDetails()[${fresh.i}].target)`).then(JSON.parse);
+        // The rule being tested: an arc line within 9 px of a touch (5 px of a mouse) wins over a node, and the NEAREST arc line wins.
+        // Arcs bundled onto the same line tie, so any arc within 1.5 px of the best is a fair answer. If no arc line is that close the
+        // answer is the tapped node's own arc (exp).
+        const accept = JSON.parse(await ev(`JSON.stringify((() => { const E = __explorer, out = [];
+          const seg = (px, py, ax, ay, bx, by) => { const dx = bx - ax, dy = by - ay, l2 = dx * dx + dy * dy; const t = l2 ? Math.max(0, Math.min(1, ((px - ax) * dx + (py - ay) * dy) / l2)) : 0; return Math.hypot(px - ax - t * dx, py - ay - t * dy); };
+          E.arcDetails().forEach((a, i) => { if (a.role !== 'focus') return; let d = 1e9, prev = null;
+            for (let k = 0; k <= 160; k++) { const p = E.arcScreenPos(i, k / 160); if (p && prev) d = Math.min(d, seg(${fresh.x}, ${fresh.y}, prev.x, prev.y, p.x, p.y)); prev = p; }
+            out.push({ d, target: a.target }); });
+          out.sort((p, q) => p.d - q.d); const best = out[0];
+          return best && best.d <= 9 ? out.filter((o) => o.d <= best.d + 1.5).map((o) => o.target) : []; })())`));
+        const nodeUnder = await ev(`__explorer.pick(${fresh.x}, ${fresh.y})`);
         await c.tap(fresh.x, fresh.y);
         await settle();
         const now = await ev('__explorer.focusId()');
         const rr = await ev('__explorer.shownR(__explorer.focusId())');
-        trail.push({ step, via: 'arc', exp, now, rr });
+        const exp = tspec.node !== undefined ? tspec.node
+          : await ev(`(() => { const E = __explorer; const s = ${tspec.sym} >= 0 ? E.symNode(${tspec.fileId}, ${tspec.sym}) : null; return (s || E.fileNode(${tspec.fileId})).id; })()`);
+        // (when no arc line is near, the node under the finger is the other fair answer: an open file's symbol can sit over its own dot)
+        const acceptIds = [];
+        for (const sp of accept) {
+          acceptIds.push(sp.node !== undefined ? sp.node : await ev(`(() => { const E = __explorer; const s = ${sp.sym} >= 0 ? E.symNode(${sp.fileId}, ${sp.sym}) : null; return (s || E.fileNode(${sp.fileId})).id; })()`));
+        }
+        trail.push({ step, via: 'arc', exp: acceptIds.includes(now) || (accept.length === 0 && now === nodeUnder) ? now : exp, now, rr, dbg: JSON.stringify({ accept: acceptIds, nodeUnder, tspec, x: Math.round(fresh.x), y: Math.round(fresh.y), farOfFresh: fresh.far }) });
       } else {
         // no arc end is tappable in this layout (portrait: the sheet covers half the picture): use a panel list row instead
         const tab = JSON.parse(await ev(`(() => { const b = [...document.querySelectorAll('#code .cp-tabs button')].find((x) => /^(Imports|Imported by|Calls|Called by)/.test(x.textContent)); if (!b) return null; const r = b.getBoundingClientRect(); return JSON.stringify({ x: r.left + r.width / 2, y: r.top + r.height / 2 }); })()`));
@@ -329,10 +362,9 @@ async function runPhone(c, label, w, h) {
         const full = row.name.replace(/\s+×\d+$/, '');
         trail.push({ step, via: 'panel', exp: [full, full.split('.').pop()].includes(nm) ? now : -1, now, rr: await ev('__explorer.shownR(__explorer.focusId())') });
       }
-      visited.push(await ev('__explorer.focusId()'));
     }
     const allLanded = trail.every((t) => t.now === t.exp && t.rr < 1e-6);
-    rec(`follow: chain of ${trail.length} follows lands exactly each time`, trail.length >= 5 && allLanded, trail.map((t) => `${t.via}:${t.now}${t.now === t.exp ? '' : '!=' + t.exp}`).join(' > '));
+    rec(`follow: chain of ${trail.length} follows lands exactly each time`, trail.length >= 5 && allLanded, trail.map((t) => `${t.via}:${t.now}${t.now === t.exp ? '' : '!=' + t.exp + ' ' + (t.dbg || '')}`).join(' > '));
     const depthAfter = await ev('__explorer.backDepth');
     rec('follow: back stack depth equals number of follows', depthAfter === trail.length, `${depthAfter} vs ${trail.length}`);
     // back out with the Back button, checking each stop against the way in
@@ -342,8 +374,8 @@ async function runPhone(c, label, w, h) {
       if (!bp) { okBack = false; seq.push('no-back-button'); break; }
       const p = JSON.parse(bp);
       await c.tap(p.x, p.y); await settle();
-      const f = await ev('__explorer.focusId()');
-      const want = visited[k];
+      const f = await placeKey();
+      const want = visitedKey[k];
       seq.push(f === want ? f : `${f}!=${want}`);
       if (f !== want) okBack = false;
     }
@@ -433,7 +465,7 @@ async function runCut(c, label, w, h) {
   rec('cut: symbol 420 has no node, symbol 10 has', !has420 && has10, `420: ${has420}, 10: ${has10}`);
   await ev('__explorer.focusOn(__explorer.fileNode(1), false)'); await sleep(900);
   const arcs = JSON.parse(await ev('JSON.stringify(__explorer.arcDetails().map((a) => ({ b: a.b, t: a.target, links: a.links })))'));
-  rec('cut: arcs from small.js to big.js exist', arcs.length > 0, JSON.stringify(arcs).slice(0, 160));
+  rec('cut: arcs from small.js to big.js exist', arcs.length > 0, JSON.stringify(arcs).slice(0, 700));
   const start = await ev('__explorer.focusId()');
   // follow g -> f420: the symbol has no node: must land on the FILE exactly, with nothing left pending
   await ev('__explorer.goToPlace(0, 420)');
@@ -485,6 +517,106 @@ async function runDesktop(c) {
     const gone = await ev('__explorer.arcDetails().filter((a) => a.role === "hover").length');
     rec('hover: moving the mouse away removes the preview', gone === 0, `${gone} hover arcs left`);
   }
+}
+
+// ---- desktop pass 2: REAL mouse clicks on arcs, with the Back button showing ----------------------------------------------
+// Regression for: "clicking an arc does nothing". Causes were (1) the toolbar wrapping to two rows when Back appeared and
+// covering the arc ends, (2) arcs only pickable on their far half, (3) nodes always beating arcs.
+async function runMouse(c) {
+  group = 'desktop mouse 1280x800';
+  const ev = c.ev, sleep = c.sleep;
+  await c.desktop(1280, 800);
+  await c.goto(`${BASE}?intro=0&adapt=0&fade=0`, 6500);
+  await ev(HELPERS);
+  const FILE = await ev('__explorer.nodeById(__explorer.symbolFileIds[0]).fileId');
+  const refocus = async () => { await ev(`__explorer.focusOn(__explorer.fileNode(${FILE}), false)`); await sleep(1300); };
+  const layout = async () => JSON.parse(await ev(`JSON.stringify((() => {
+    const bar = document.getElementById('tools'); const r = bar.getBoundingClientRect();
+    const btns = [...bar.querySelectorAll('button')].filter((b) => getComputedStyle(b).display !== 'none').map((b) => { const q = b.getBoundingClientRect(); return { t: b.title, x: Math.round(q.x), y: Math.round(q.y), w: Math.round(q.width), h: Math.round(q.height), vis: getComputedStyle(b).visibility }; });
+    return { top: Math.round(r.top), height: Math.round(r.height), btns };
+  })())`));
+
+  // ---- layout: one row, and Back appearing must not move or grow anything ----
+  await refocus();
+  const L0 = await layout();
+  rec('toolbar: one row (all buttons share one top) with no Back', new Set(L0.btns.map((b) => b.y)).size === 1 && L0.height <= 50, JSON.stringify({ top: L0.top, height: L0.height }));
+  await ev('__explorer.followArc(0)'); await sleep(1300); await refocus();
+  const depth = await ev('__explorer.backDepth');
+  const L1 = await layout();
+  const back = L1.btns.find((b) => b.t.startsWith('Return to where'));
+  rec('toolbar: Back is showing (depth >= 1)', depth >= 1 && back && back.vis === 'visible', `depth ${depth}`);
+  rec('toolbar: still one row with Back showing, same top and height', new Set(L1.btns.map((b) => b.y)).size === 1 && L1.top === L0.top && L1.height === L0.height, JSON.stringify({ before: [L0.top, L0.height], after: [L1.top, L1.height] }));
+  const moved = L0.btns.filter((b0) => { const b1 = L1.btns.find((b) => b.t === b0.t); return !b1 || b1.x !== b0.x || b1.w !== b0.w; }).map((b) => b.t);
+  rec('toolbar: Back appearing moves no other button', moved.length === 0, moved.join(','));
+
+  // ---- the arcs must not run under the toolbar ----
+  const under = JSON.parse(await ev(`JSON.stringify((() => { const E = __explorer, hits = []; E.arcDetails().forEach((a, i) => { if (a.role !== 'focus') return;
+    for (const t of [0, 0.25, 0.5, 0.75, 1]) { const p = E.arcScreenPos(i, t); if (!p) continue; const e = document.elementFromPoint(p.x, p.y); if (e && e.closest('#tools')) hits.push([i, t, Math.round(p.x), Math.round(p.y)]); } }); return hits; })())`));
+  rec('toolbar: no focus-arc end or body point lies under a toolbar button (Back showing)', under.length === 0, JSON.stringify(under.slice(0, 4)));
+
+  // ---- real mouse clicks. Expected target = the arc whose drawn line passes closest to the click (computed here, independently
+  //      of main3d: dense samples of arcScreenPos). Arcs that bundle onto the same line tie: any of them is accepted. ----
+  const nearest = async (x, y) => JSON.parse(await ev(`JSON.stringify((() => { const E = __explorer, out = [];
+    const seg = (px, py, ax, ay, bx, by) => { const dx = bx - ax, dy = by - ay, l2 = dx * dx + dy * dy; const t = l2 ? Math.max(0, Math.min(1, ((px - ax) * dx + (py - ay) * dy) / l2)) : 0; return Math.hypot(px - ax - t * dx, py - ay - t * dy); };
+    E.arcDetails().forEach((a, i) => { if (a.role !== 'focus') return; let d = 1e9, prev = null;
+      for (let k = 0; k <= 160; k++) { const p = E.arcScreenPos(i, k / 160); if (p && prev) d = Math.min(d, seg(${x}, ${y}, prev.x, prev.y, p.x, p.y)); prev = p; }
+      out.push({ d, target: __T.expectedTarget(a) }); });
+    out.sort((p, q) => p.d - q.d); const best = out[0]; return { d: best ? best.d : 1e9, accept: best ? out.filter((o) => o.d <= best.d + 1.5).map((o) => o.target) : [] }; })())`));
+  const spots = JSON.parse(await ev(`JSON.stringify((() => { const E = __explorer, out = []; const fp = E.screenPos(E.focusId());
+    E.arcDetails().forEach((a, i) => { if (a.role !== 'focus') return;
+      for (const t of [0, 0.2, 0.35, 0.5, 0.65, 0.8, 1]) { const p = E.arcScreenPos(i, t); if (!p) continue;
+        const e = document.elementFromPoint(p.x, p.y); if (!e || e.tagName !== 'CANVAS') continue;                      // only points a click really reaches the canvas at
+        if (fp && Math.hypot(p.x - fp.x, p.y - fp.y) < fp.r + 40) continue;                                           // next to the focus the click means the focus
+        out.push({ arc: i, t, x: p.x, y: p.y }); } });
+    return out; })())`));
+  rec('mouse: arc points to click exist on screen', spots.length >= 10, `${spots.length} points`);
+  // spread the clicks over arcs and over the length: every 3rd spot, at most 28
+  const chosen = spots.filter((_, k) => k % 3 === 0).slice(0, 28);
+  let ok = 0, skipped = 0; const bad = [];
+  for (const s of chosen) {
+    await refocus();
+    const want = await nearest(s.x, s.y);
+    if (want.d > 5) { skipped++; continue; }                                        // the arc moved (hover arcs): not a fair test point
+    const start = await ev('__explorer.focusId()');
+    await c.click(s.x, s.y); await sleep(1100);
+    const f = await ev('__explorer.focusId()');
+    if (want.accept.includes(f)) ok++;
+    else bad.push(`arc ${s.arc} t=${s.t} (${Math.round(s.x)},${Math.round(s.y)}) wanted ${want.accept.join('/')} got ${f}${f === start ? ' (nothing happened)' : ''}`);
+  }
+  rec(`mouse: ${chosen.length} real clicks on arc ends and bodies (whole length) each follow the nearest arc, Back showing`, bad.length === 0 && ok >= 10, `${ok} ok, ${skipped} skipped${bad.length ? '; fails: ' + bad.slice(0, 3).join(' || ') : ''}`);
+
+  // ---- an arc beats a node: a click on an arc line that is ALSO over a different node follows the arc.
+  //      Look through several files for a focus whose arcs run over other nodes (away from the focus itself). ----
+  const overJs = `JSON.stringify((() => { const E = __explorer; const fp = E.screenPos(E.focusId()); const out = [];
+    E.arcDetails().forEach((a, i) => { if (a.role !== 'focus') return; for (const t of [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]) { const p = E.arcScreenPos(i, t); if (!p) continue;
+      const e = document.elementFromPoint(p.x, p.y); if (!e || e.tagName !== 'CANVAS') continue;
+      if (fp && Math.hypot(p.x - fp.x, p.y - fp.y) < fp.r + 40) continue;
+      const n = E.pick(p.x, p.y); if (n !== null && n !== a.far) out.push({ arc: i, x: p.x, y: p.y, node: n }); } }); return out; })())`;
+  let overFile = FILE, over = [];
+  const fileIds = JSON.parse(await ev('JSON.stringify(__explorer.symbolFileIds.slice(0, 60).map((id) => __explorer.nodeById(id).fileId))'));
+  for (const fid of fileIds) {
+    await ev(`__explorer.focusOn(__explorer.fileNode(${fid}), false)`); await sleep(1100);
+    over = JSON.parse(await ev(overJs));
+    if (over.length > 0) { overFile = fid; break; }
+  }
+  rec('mouse: some focus has arc points that are also over a different node', over.length > 0, `file ${overFile}: ${over.length} points`);
+  let wins = 0; const lost = [];
+  for (const s of over.slice(0, 6)) {
+    await ev(`__explorer.focusOn(__explorer.fileNode(${overFile}), false)`); await sleep(1100);
+    const want = await nearest(s.x, s.y);
+    await c.click(s.x, s.y); await sleep(1100);
+    const f = await ev('__explorer.focusId()');
+    if (want.accept.includes(f)) wins++; else lost.push(`over node ${s.node} wanted ${want.accept.join('/')} got ${f}`);
+  }
+  rec('mouse: a click on an arc line over another node follows the arc, not the node', over.length > 0 && lost.length === 0, `${wins} ok${lost.length ? '; first fail: ' + lost[0] : ''}`);
+
+  // ---- a click right on the focus is still the focus (arcs all start there) ----
+  await refocus();
+  const fp = JSON.parse(await ev('JSON.stringify(__explorer.screenPos(__explorer.focusId()))'));
+  const focus0 = await ev('__explorer.focusId()');
+  const d0 = await ev('__explorer.backDepth');
+  await c.click(fp.x, fp.y); await sleep(900);
+  rec('mouse: clicking the focus itself follows no arc', (await ev('__explorer.backDepth')) === d0 && (await ev('__explorer.focusId()')) === focus0, '');
 }
 
 // ---- screenshots of 3 arcs mid-glide ----------------------------------------------------------------------------
@@ -539,6 +671,7 @@ try {
   if (want('portrait')) { await runPhone(c, 'portrait 412x915', 412, 915); await runCut(c, 'portrait 412x915', 412, 915); }
   if (want('landscape')) { await runPhone(c, 'landscape 915x412', 915, 412); await runCut(c, 'landscape 915x412', 915, 412); }
   if (want('desktop')) await runDesktop(c);
+  if (want('mouse')) await runMouse(c);
   if (want('shots')) await runGlideShots(c);
   const errs = c.logs.filter((l) => /EXCEPTION|error/i.test(l) && !/GSUB|Failed to load resource.*zz_cut|favicon/i.test(l));
   group = 'console';
@@ -554,7 +687,7 @@ try {
 
 const failed = results.filter((r) => !r.ok);
 const md = ['| viewport | check | result | detail |', '|---|---|---|---|',
-  ...results.map((r) => `| ${r.viewport} | ${r.name} | ${r.ok ? 'PASS' : '**FAIL**'} | ${String(r.detail).replace(/\|/g, '/').slice(0, 160)} |`),
+  ...results.map((r) => `| ${r.viewport} | ${r.name} | ${r.ok ? 'PASS' : '**FAIL**'} | ${String(r.detail).replace(/\|/g, '/').slice(0, 700)} |`),
   '', `${results.length - failed.length} / ${results.length} checks passed`].join('\n');
 writeFileSync(join(OUT, 'report.md'), md);
 writeFileSync(join(OUT, 'report.json'), JSON.stringify(results, null, 1));
