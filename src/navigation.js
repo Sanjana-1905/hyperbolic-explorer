@@ -23,6 +23,13 @@
 //   nav.pushBack(place)        remember where we were before following a link (Phase 4c back stack)
 //   nav.popBack()              the last remembered place (or null), removed from the stack
 //   nav.backDepth              how many places are remembered
+//   nav.onTap(cb)              cb({ x, y, pointerType, double }) for every tap (a press that did not drag); `double` is true for the
+//                              second tap of a touch double-tap (two taps within DOUBLE_TAP_MS, DOUBLE_TAP_PX apart)
+//   nav.haptic()               light vibration (where the browser allows it); flyTo(animate) calls it itself
+//
+// Touch (phones): one finger orbits with inertia (OrbitControls damping, ORBIT_DAMPING), two fingers pinch to zoom (pan is off,
+// so the focus stays centred), a short press that did not move is a tap. The canvas has touch-action: none, so the browser
+// never scrolls, zooms or pulls-to-refresh from a gesture that starts on it.
 
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
@@ -53,6 +60,60 @@ export function createNavigation(renderer) {
   controls.enableDamping = true;   // smooth glide after letting go
   controls.minDistance = 0.15;     // can go inside the ball, close to the focus
   controls.maxDistance = 4;
+  controls.dampingFactor = THEME.ORBIT_DAMPING;     // inertia: after letting go the view keeps turning and eases to a stop
+  controls.rotateSpeed = THEME.TOUCH_ROTATE_SPEED;
+  // One finger = orbit, two fingers = pinch zoom only (panning is disabled above, so DOLLY_PAN is a pure dolly).
+  controls.touches = { ONE: THREE.TOUCH.ROTATE, TWO: THREE.TOUCH.DOLLY_PAN };
+  // No browser gestures on the canvas: no scrolling, pull-to-refresh, page bounce or double-tap zoom.
+  const el = renderer.domElement;
+  el.style.touchAction = 'none';
+  el.style.userSelect = 'none';
+  el.style.webkitTapHighlightColor = 'transparent';
+  el.addEventListener('contextmenu', (e) => e.preventDefault()); // a long press must not open a menu on the canvas
+
+  // ---- Tap and double-tap detection --------------------------------------------------------------------------
+  // A tap = one pointer, pressed and released without dragging. Touch/pen: moved < TAP_MAX_MOVE_PX and shorter than
+  // TAP_MAX_MS (a long press is not a tap). Mouse: moved <= 5 px (as before). If a second finger touched during the
+  // gesture (a pinch) it is not a tap. A double-tap = a touch tap shortly after, and near, the previous one.
+  // Both are only REPORTED here; main3d.js decides what they mean (focus a node, go up).
+  const tapListeners = [];
+  const active = new Map();         // pointerId -> { x, y, t } of the press
+  let maxPointers = 0;              // most fingers down at once during this gesture
+  let lastTap = null;               // { x, y, t } of the previous touch tap
+  el.addEventListener('pointerdown', (e) => {
+    if (active.size === 0) maxPointers = 0;
+    active.set(e.pointerId, { x: e.clientX, y: e.clientY, t: performance.now() });
+    maxPointers = Math.max(maxPointers, active.size);
+  });
+  el.addEventListener('pointercancel', (e) => { active.delete(e.pointerId); });
+  el.addEventListener('pointerup', (e) => {
+    const start = active.get(e.pointerId);
+    active.delete(e.pointerId);
+    if (!start || maxPointers !== 1) return;
+    const now = performance.now();
+    const moved = Math.hypot(e.clientX - start.x, e.clientY - start.y);
+    const touch = e.pointerType !== 'mouse';
+    if (touch ? (moved >= THEME.TAP_MAX_MOVE_PX || now - start.t > THEME.TAP_MAX_MS) : moved > 5) return;
+    let isDouble = false;
+    if (touch) {
+      isDouble = !!lastTap && now - lastTap.t <= THEME.DOUBLE_TAP_MS &&
+        Math.hypot(e.clientX - lastTap.x, e.clientY - lastTap.y) <= THEME.DOUBLE_TAP_PX;
+      lastTap = isDouble ? null : { x: e.clientX, y: e.clientY, t: now };   // a third tap starts a new pair
+    }
+    for (const cb of tapListeners) cb({ x: e.clientX, y: e.clientY, pointerType: e.pointerType, double: isDouble });
+  });
+
+  // ---- Haptics: a very light tick when the focus changes (Android Chrome; silently ignored elsewhere) ----------
+  // Chrome ignores vibrate() until the page has had a touch/click (and logs a warning if we try), so we check first.
+  let lastBuzz = 0;
+  function haptic() {
+    const now = performance.now();
+    if (now - lastBuzz < THEME.HAPTIC_MIN_GAP_MS) return;
+    if (typeof navigator.vibrate !== 'function') return;
+    if (navigator.userActivation && !navigator.userActivation.hasBeenActive) return;
+    lastBuzz = now;
+    try { navigator.vibrate(THEME.HAPTIC_MS); } catch { /* not allowed: fine */ }
+  }
 
   // Optional slow ambient rotation of the view. Desktop (mouse) only, OFF by default:
   // turn it on with ?spin=1 or the R key. It is never active on touch devices, and the VR
@@ -97,6 +158,8 @@ export function createNavigation(renderer) {
     get animating() { return anim !== null; },
     get spinning() { return controls.autoRotate; },
     setSpin,
+    onTap(cb) { tapListeners.push(cb); },
+    haptic,
 
     // How far the camera is from the centre relative to its default distance (1 = default, 0.5 = twice as close).
     get zoomRatio() { return camera.position.distanceTo(controls.target) / DEFAULT_CAMERA_DISTANCE; },
@@ -106,6 +169,7 @@ export function createNavigation(renderer) {
     // The route is [where we are, ...via, to] joined by geodesics and travelled at even speed (see update).
     flyTo(to, animate = true, via = null) {
       if (animate) {
+        haptic();
         // If a previous animation is still running, start from where the view is now.
         const path = [focusPoint, ...(via || []), to];
         const cum = [0];                                    // cum[k] = hyperbolic length of the route up to path[k]

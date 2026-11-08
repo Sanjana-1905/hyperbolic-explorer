@@ -43,7 +43,7 @@ const BIG_TREE = 8000;   // above this many nodes only folders (and the focused 
 export function createMinimap({ nodes, onPick }) {
   const css = document.createElement('style');
   css.textContent = `
-    #map { position: fixed; z-index: 4; right: calc(12px + var(--panel-w, 0px)); bottom: calc(72px + var(--sheet-h, 0px));
+    #map { position: fixed; z-index: 4; right: calc(12px + var(--sai-r) + var(--panel-w, 0px)); bottom: calc(72px + max(var(--sheet-h, 0px), var(--sai-b)));
       font: 11px system-ui, sans-serif; color: ${cssRgb(THEME.CRUMB_COLOR)}; }
     #map .m-box { border-radius: 12px; overflow: hidden; background: ${cssRgb(THEME.MINIMAP_BG, THEME.MINIMAP_BG_ALPHA)};
       border: 1px solid ${cssRgb(THEME.CRUMB_SEP_COLOR)}; }
@@ -53,9 +53,9 @@ export function createMinimap({ nodes, onPick }) {
     #map .m-open { display: none; border-radius: 22px; border: 1px solid ${cssRgb(THEME.CRUMB_SEP_COLOR)};
       background: ${cssRgb(THEME.CRUMB_BG, THEME.CRUMB_BG_ALPHA)}; }
     #map.collapsed .m-box { display: none; } #map.collapsed .m-open { display: block; }
-    @media (max-width: 520px) { #map { bottom: calc(130px + var(--sheet-h, 0px)); } }
+    @media (max-width: 520px) { #map { bottom: calc(130px + max(var(--sheet-h, 0px), var(--sai-b))); } }
     @media (max-height: ${THEME.COMPACT_HEIGHT_PX}px) {
-      #map { bottom: 40px; } #map .m-head { height: 36px; } #map button { width: 40px; height: 36px; } #map .m-open { height: 40px; width: 40px; }
+      #map { bottom: calc(40px + var(--sai-b)); } #map .m-head { height: 36px; } #map button { width: 40px; height: 36px; } #map .m-open { height: 40px; width: 40px; }
     }`;
   document.head.appendChild(css);
 

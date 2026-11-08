@@ -49,6 +49,7 @@ export function createLabels(renderer) {
   let frameNo = 0;
   let stableFrames = 0;      // consecutive frames in which every tried label was already typeset
   let placedCount = 0;
+  let fade = 1;              // 0..1: the interface fade (idlefade.js); labels are one of the things that fade away while you only look
   let lastPlaced = [];
 
   const rgb = (c) => new THREE.Color(c[0], c[1], c[2]);
@@ -159,7 +160,7 @@ export function createLabels(renderer) {
     // (or, at the latest, after WARMUP_FRAMES frames).
     const allReady = cands.slice(0, TRIAL_LIMIT).every((c) => slots.get(c.key)?.text.textRenderInfo);
     stableFrames = allReady ? stableFrames + 1 : 0;
-    batch.visible = stableFrames > 20 || frameNo > WARMUP_FRAMES;
+    batch.visible = (stableFrames > 20 || frameNo > WARMUP_FRAMES) && fade > 0.01;
     placedCount = placed.length;
     lastPlaced = placed.map((r, i) => ({ ...r, key: [...shownKeys][i] }));
   }
@@ -183,5 +184,7 @@ export function createLabels(renderer) {
              sample: list[0] ? { text: list[0].text.text, info: !!list[0].text.textRenderInfo, scale: list[0].text.scale.x } : null };
   }
 
-  return { update, resize, render, debug, get count() { return placedCount; } };
+  function setOpacity(v) { fade = v; batch.material.opacity = v; }
+
+  return { update, resize, render, debug, setOpacity, get count() { return placedCount; } };
 }

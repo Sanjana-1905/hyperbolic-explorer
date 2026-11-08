@@ -22,8 +22,8 @@ export function createToolbar(actions) {
   const px = THEME.TOOLBAR_BTN_PX;
   const css = document.createElement('style');
   css.textContent = `
-    #tools { position: fixed; left: 12px; bottom: calc(76px + var(--sheet-h, 0px)); z-index: 6; display: flex; flex-wrap: wrap;
-      gap: 6px; max-width: calc(100vw - var(--panel-w, 0px) - 24px); font-family: system-ui, sans-serif; }
+    #tools { position: fixed; left: calc(12px + var(--sai-l)); bottom: calc(76px + max(var(--sheet-h, 0px), var(--sai-b))); z-index: 6; display: flex; flex-wrap: wrap;
+      gap: 6px; max-width: calc(100vw - var(--panel-w, 0px) - 24px - var(--sai-l) - var(--sai-r)); font-family: system-ui, sans-serif; }
     #tools button { height: ${px}px; min-width: ${px}px; padding: 0 14px; border-radius: ${px / 2}px; cursor: pointer;
       font: 600 ${THEME.CRUMB_FONT_PX}px system-ui, sans-serif; color: ${cssRgb(THEME.CRUMB_COLOR)};
       background: ${cssRgb(THEME.CRUMB_BG, THEME.CRUMB_BG_ALPHA)}; border: 1px solid ${cssRgb(THEME.CRUMB_SEP_COLOR)};
@@ -39,8 +39,8 @@ export function createToolbar(actions) {
     }
     /* Compact layout (phone held sideways): a slim column of icon-only buttons down the left side. */
     @media (max-height: ${THEME.COMPACT_HEIGHT_PX}px) {
-      #tools { left: 6px; top: calc(58px + var(--study-h, 0px)); bottom: auto; flex-direction: column; flex-wrap: wrap; align-content: flex-start; gap: 5px;
-        max-height: calc(100vh - 66px - var(--study-h, 0px)); }
+      #tools { left: calc(6px + var(--sai-l)); top: calc(58px + max(var(--study-h, 0px), var(--sai-t))); bottom: auto; flex-direction: column; flex-wrap: wrap; align-content: flex-start; gap: 5px;
+        max-height: calc(100vh - 66px - max(var(--study-h, 0px), var(--sai-t))); }
       #tools button { height: 40px; min-width: 40px; padding: 0 10px; justify-content: center; font-size: 16px; }
       #tools .lbl { display: none; }
       #tools .dot { width: 14px; height: 14px; }
@@ -87,7 +87,19 @@ export function createToolbar(actions) {
   const infoBtn = make(`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg>${lbl('Info')}`, 'Show or hide the info card', actions.onInfo);
   const heatBtn = make('', 'Git heat: colour files by commits or by recency (H)', actions.onHeat);
   const helpBtn = make('?', 'How to explore', () => showIntro());
+  // Fullscreen (hides the browser's address bar and buttons) where the browser allows it (Android Chrome, desktop; not iPhone Safari).
+  // The icon shows "expand" or "shrink" and follows the real state (the user can also leave with the system back gesture).
+  if (document.fullscreenEnabled && actions.onFullscreen) {
+    const expand = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>';
+    const shrink = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5"/></svg>';
+    const fsBtn = make(expand, 'Fullscreen', actions.onFullscreen);
+    fsBtn.id = 'fsbtn';
+    const sync = () => { const on = !!document.fullscreenElement; fsBtn.innerHTML = on ? shrink : expand; fsBtn.title = on ? 'Leave fullscreen' : 'Fullscreen'; fsBtn.setAttribute('aria-label', fsBtn.title); setOn(fsBtn, on); };
+    document.addEventListener('fullscreenchange', sync);
+    queueMicrotask(sync);
+  }
   document.body.appendChild(bar);
+  const setOn = (btn, on) => { btn.classList.toggle('on', on); btn.classList.toggle('off', !on); btn.setAttribute('aria-pressed', String(on)); };
 
   // Intro card -----------------------------------------------------------------------------------
   const card = document.createElement('div');
@@ -109,8 +121,6 @@ export function createToolbar(actions) {
   // In study mode the intro card stays away: the study gives its own briefing.
   const studying = new URLSearchParams(location.search).get('study') === '1';
   if (mode === '1' || (mode !== '0' && !studying && !remembered())) showIntro();
-
-  const setOn = (btn, on) => { btn.classList.toggle('on', on); btn.classList.toggle('off', !on); btn.setAttribute('aria-pressed', String(on)); };
 
   return {
     // state: { backDepth, isRoot, focusKind: 'folder'|'file'|'symbol', showImports, showCalls, showFolderDeps }

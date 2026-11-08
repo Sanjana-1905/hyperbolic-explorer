@@ -42,6 +42,8 @@ import { createMinimap } from './minimap.js';
 import { computeHeat, encodeHeat, HEAT, HEAT_NAMES } from './heat.js';
 import { createCodePanel } from './codepanel.js';
 import { createFpsCounter } from './fps.js';
+import { detectTier, settingsFor, createAdaptive } from './quality.js';
+import { createIdleFade } from './idlefade.js';
 import {
   NODE_VERT, NODE_FRAG, NEBULA_VERT, NEBULA_FRAG, HAZE_VERT, HAZE_FRAG,
   SUN_VERT, SUN_FRAG, EDGE_VERT, EDGE_FRAG, DUST_VERT, DUST_FRAG, LINK_VERT, LINK_FRAG,
@@ -67,17 +69,12 @@ const ARC_PICK_PX = 10;         // a click this close to a link arc (and no node
 const FROZEN_TIME = new URLSearchParams(location.search).has('time')
   ? Number(new URLSearchParams(location.search).get('time')) : null;
 
-// ?quality=low trades looks for speed on weak GPUs.
-const LOW = new URLSearchParams(location.search).get('quality') === 'low';
-const QUALITY = {
-  maxHalos: LOW ? 16 : 64,     // halo quads (focus + this many children - 1)
-  octaves: LOW ? 2 : 5,        // nebula noise layers
-  starLayers: LOW ? 1 : 2,     // starfield layers
-  pixelRatio: LOW ? 1 : 2,     // cap on render resolution (device pixels per CSS pixel)
-  dustCount: LOW ? 200 : 450,  // faint background specks inside the ball
-  edgeSegments: LOW ? 6 : 10,  // pieces per curved edge
-  linkSegments: LOW ? 10 : 16, // pieces per link arc (longer and more curved than an edge)
-};
+// Quality tier (quality.js): 'high' on desktop, 'phone' on a phone (automatic), 'low' with ?quality=low; ?quality=high|phone|low overrides.
+//   maxHalos: halo quads (focus + this many children - 1) · octaves: nebula noise layers · starLayers: starfield layers
+//   pixelRatio: cap on render resolution (device pixels per CSS pixel) · dustCount: faint background specks inside the ball
+//   edgeSegments: pieces per curved edge · linkSegments: pieces per link arc
+const TIER = detectTier();
+const QUALITY = settingsFor(TIER);
 
 // Link filters (Phase 4c): I toggles import arcs, K toggles call arcs. ?links=0 starts with both off.
 let showImports = new URLSearchParams(location.search).get('links') !== '0';
@@ -107,6 +104,15 @@ const renderer = new THREE.WebGLRenderer({ antialias: false });
 renderer.autoClear = false;
 renderer.info.autoReset = false;
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, QUALITY.pixelRatio));
+// Adaptive step: lower the resolution if the frame rate stays under ~50 for 2 s (phones by default; ?adapt=1 / ?adapt=0 forces it).
+const adaptParam = new URLSearchParams(location.search).get('adapt');
+const adaptive = createAdaptive({
+  pixelRatio: renderer.getPixelRatio(),
+  enabled: adaptParam === '1' || (adaptParam !== '0' && TIER === 'phone'),
+  onLower: (ratio) => { renderer.setPixelRatio(ratio); resize(); },
+});
+// The interface fades while you only look (touch screens; idlefade.js). Labels are drawn by WebGL, so they get the level by callback.
+const idleFade = createIdleFade({ onLevel: (v) => { if (labels) labels.setOpacity(v); } });
 renderer.setClearColor(THEME.CLEAR_COLOR); // deep navy-black (theme.js)
 document.body.appendChild(renderer.domElement);
 
@@ -685,6 +691,7 @@ function focusOn(node, animate = true, via = null) {
   uFocusScale.value = node.type === 'folder' ? 1 : THEME.SYMBOL_FOCUS_SCALE;
   if (minimap) minimap.setFocus(node.type === 'symbol' ? node.file : node);
   nav.flyTo(node.pos, animate, via);
+  idleFade.poke();                  // a focus change (even one made by search or a link) wakes the interface
   updateInfo();
   showCode(node);
   updatePanelLinks();
@@ -866,6 +873,10 @@ const toolbar = createToolbar({
   onInfo: () => { if (infoCard) { infoCard.toggle(); refreshToolbar(); } },
   onHeat: () => cycleHeat(),
   onFolderDeps: () => { showFolderDeps = !showFolderDeps; linksDirty = true; updateHelp(); },
+  onFullscreen: () => {
+    if (document.fullscreenElement) document.exitFullscreen();
+    else document.documentElement.requestFullscreen({ navigationUI: 'hide' }).catch(() => {});   // refused (e.g. not from a tap): ignore
+  },
 });
 function refreshToolbar() {
   if (!focusNode) return;
@@ -1091,8 +1102,8 @@ function updateInfo() {
 const crumbs = document.createElement('div');
 crumbs.id = 'crumbs';
 Object.assign(crumbs.style, {
-  position: 'fixed', left: 'calc((100vw - var(--panel-w, 0px)) / 2)', bottom: 'calc(34px + var(--sheet-h, 0px))', transform: 'translateX(-50%)',
-  maxWidth: 'calc(100vw - var(--panel-w, 0px) - 24px)', padding: '4px 12px', borderRadius: '14px',
+  position: 'fixed', left: 'calc((100vw + var(--sai-l) - var(--sai-r) - var(--panel-w, 0px)) / 2)', bottom: 'calc(34px + max(var(--sheet-h, 0px), var(--sai-b)))', transform: 'translateX(-50%)',
+  maxWidth: 'calc(100vw - var(--panel-w, 0px) - 24px - var(--sai-l) - var(--sai-r))', padding: '4px 12px', borderRadius: '14px',
   font: `600 ${THEME.CRUMB_FONT_PX}px system-ui, sans-serif`,
   background: cssRgb(THEME.CRUMB_BG, THEME.CRUMB_BG_ALPHA), color: cssRgb(THEME.CRUMB_COLOR),
   whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', textShadow: '0 0 4px #000',
@@ -1269,12 +1280,21 @@ renderer.domElement.addEventListener('pointerleave', () => {
   if (hoverNode) { hoverNode = null; linksDirty = true; }
 });
 
-// Tell a click apart from a drag (a drag rotates the view instead).
-let downX = 0, downY = 0;
-renderer.domElement.addEventListener('pointerdown', (e) => { downX = e.clientX; downY = e.clientY; });
-renderer.domElement.addEventListener('pointerup', (e) => {
-  if (Math.hypot(e.clientX - downX, e.clientY - downY) > 5) return;
-  const picked = pickNode(e.clientX, e.clientY);
+// Taps (navigation.js tells a tap from a drag, a pinch and a long press; a drag rotates the view instead).
+//   tap on a node = fly to it (or follow the arc whose far end it is) · tap on an arc = follow it
+//   touch DOUBLE-tap = go up to the parent. The first tap of the pair already focused something, so "up" is taken from where
+//   we were BEFORE that tap (otherwise double-tapping a node would fly into it and then out to its own parent).
+let focusBeforeTap = null;
+nav.onTap(({ x, y, double }) => {
+  if (double) {
+    const from = focusBeforeTap || focusNode;
+    focusBeforeTap = null;
+    if (from && from.parent) focusOn(from.parent);
+    else if (from && from !== focusNode) focusOn(from);
+    return;
+  }
+  focusBeforeTap = focusNode;
+  const picked = pickNode(x, y);
   // The "(top level)" block stands for the whole file's loose code: clicking it focuses the FILE (its code panel shows everything).
   const hit = picked && picked.kind === 'block' ? picked.file : picked;
   if (hit && hit !== focusNode) {
@@ -1283,7 +1303,7 @@ renderer.domElement.addEventListener('pointerup', (e) => {
     if (arc) followArc(arc);
     else focusOn(hit);
   } else if (!hit) {
-    const arc = pickArc(e.clientX, e.clientY);
+    const arc = pickArc(x, y);
     if (arc) followArc(arc);
   }
 });
@@ -1321,6 +1341,8 @@ function updateZoomSize() {
 
 function frame(now) {
   fps.tick(now);
+  adaptive.tick(now, fps.value);
+  idleFade.update(now);
   uTime.value = FROZEN_TIME ?? now / 1000; // ?time=12.5 freezes the shader clock (repeatable screenshots)
   uBloom.value = performance.now() / 1000;  // bloom clock: always real time
   stepMark(now);                            // fade of the search-path highlight
@@ -1459,7 +1481,12 @@ window.__explorer = {
   setSpin: nav.setSpin,
   get drawCalls() { return renderer.info.render.calls; },
   get triangles() { return renderer.info.render.triangles; },
-  quality: LOW ? 'low' : 'high',
+  quality: TIER,
+  get pixelRatio() { return renderer.getPixelRatio(); },
+  get adaptiveSteps() { return adaptive.steps; },
+  get uiFade() { return idleFade.level; },
+  get camPosition() { return camera.position.toArray(); },
+  idleFade,
   // Compare the GPU's Möbius maths with the CPU's (see gpucheck.js).
   gpuCheck: (count, maxRadius) => gpuCheck(renderer, count, maxRadius),
   // Where the GPU says it drew a node, read back from the uniform + CPU formula.

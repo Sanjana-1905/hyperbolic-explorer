@@ -336,6 +336,40 @@ export const THEME = {
   DUST_DRIFT_SPEED: 0.15,      // wander speed (radians per second; each speck differs by up to x1.6)
   DUST_TINT_A: [0.55, 0.75, 1.0],  // pale blue ...
   DUST_TINT_B: [0.85, 0.65, 1.0],  // ... to pale violet
+
+  // --- Phone mode (Phase 7-prep step 1). A phone (coarse pointer, short side <= PHONE_MAX_SHORT_SIDE_PX) starts with these
+  //     instead of the desktop settings; ?quality=high / low / phone overrides. JS only. ---
+  PHONE_MAX_SHORT_SIDE_PX: 600,    // screens whose shorter side is at most this many CSS pixels count as a phone
+  PHONE_PIXEL_RATIO: 1.5,          // cap on device pixels per CSS pixel on a phone (an S26 has ~3: full resolution would cost 4x the fill)
+  PHONE_DUST: 200,                 // floating specks on a phone (desktop 450)
+  PHONE_HALOS: 24,                 // halo quads on a phone (desktop 64)
+  PHONE_OCTAVES: 3,                // nebula noise layers on a phone (desktop 5, low 2)
+  PHONE_STAR_LAYERS: 1,            // starfield layers on a phone (desktop 2)
+  PHONE_EDGE_SEGMENTS: 8,          // pieces per curved tree edge on a phone (desktop 10)
+  PHONE_LINK_SEGMENTS: 12,         // pieces per link arc on a phone (desktop 16)
+  // Adaptive quality: if the frame rate stays under ADAPT_FPS for ADAPT_SECONDS, the pixel ratio is multiplied by ADAPT_STEP
+  // (never below ADAPT_MIN_PIXEL_RATIO), then we wait ADAPT_COOLDOWN_S before judging again. It never goes back up (no flip-flop).
+  ADAPT_FPS: 50,                   // "too slow" threshold (frames per second)
+  ADAPT_SECONDS: 2,                // how long it must stay too slow
+  ADAPT_STEP: 0.8,                 // pixel ratio multiplier per step (1.5 -> 1.2 -> 0.96 -> 0.77)
+  ADAPT_MIN_PIXEL_RATIO: 0.75,     // lowest render resolution the adaptive step will go to
+  ADAPT_COOLDOWN_S: 3,             // pause after a step (the new setting needs a moment to show its effect)
+  ADAPT_WARMUP_S: 5,               // no judging in the first seconds after page load (shader compile and data loading are slow on purpose)
+
+  // --- Touch gestures (navigation.js) ---
+  ORBIT_DAMPING: 0.07,             // inertia of one-finger orbit: each frame keeps (1 - this) of the speed; smaller = longer glide
+  TOUCH_ROTATE_SPEED: 0.9,         // finger-drag rotation speed relative to OrbitControls' default (1 = full-screen drag turns the view once)
+  TAP_MAX_MOVE_PX: 10,             // a touch that moves less than this is a tap, not a drag
+  TAP_MAX_MS: 350,                 // ... and must be shorter than this
+  DOUBLE_TAP_MS: 300,              // two taps within this long (and DOUBLE_TAP_PX of each other) are a double-tap = go up
+  DOUBLE_TAP_PX: 40,               // max distance between the two taps of a double-tap
+  HAPTIC_MS: 8,                    // length of the light vibration when the focus changes (where the browser allows it)
+  HAPTIC_MIN_GAP_MS: 120,          // never buzz more often than this
+
+  // --- Immersion: interface fades away while you only look (touch screens) ---
+  UI_FADE_AFTER_S: 4,              // seconds without a touch before buttons, title and labels fade
+  UI_FADE_SECONDS: 0.6,            // length of the fade (both ways)
+  UI_FADE_BACK_SECONDS: 0.2,       // fading back in is quicker than fading out
 };
 
 // ---------------------------------------------------------------------------

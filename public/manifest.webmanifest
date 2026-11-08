@@ -1,0 +1,12 @@
+{
+  "name": "Hyperbolic Data Explorer",
+  "short_name": "HyperExplorer",
+  "description": "Explore a whole hierarchy at once in a hyperbolic (Poincaré ball) view.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "fullscreen",
+  "display_override": ["fullscreen", "standalone"],
+  "background_color": "#03040c",
+  "theme_color": "#03040c",
+  "icons": [{ "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }]
+}

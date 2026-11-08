@@ -478,5 +478,34 @@ Other options: `&tree=wordnet_tree.json` (other dataset; tasks come from `study/
   the right events (`click`, `focus:canvas`, `key`, `focus:key:Backspace`; a search selection logged `source: search, query: main`), seven tasks finished and the three
   files downloaded, phone portrait and landscape run without errors
 
+## Phone polish (before AR): 4 steps
+1 look and immersion · 2 test navigation and links · 3 code panel interconnections · 4 smooth scrolling. Stop after each step for the S26 test.
+
+### Step 1: Phone look and immersion  ✅ done (waiting for your S26 check)
+- [x] **Full-bleed.** `viewport-fit=cover`, `interactive-widget=resizes-content`, `100dvh` fixed body, `overscroll-behavior: none`, canvas `touch-action: none` (index.html and navigation.js),
+      no tap highlight or long-press menu on the canvas, `theme-color` #03040c. Safe-area insets are CSS variables `--sai-t/r/b/l` (index.html); toolbar, breadcrumb, title, legend,
+      info card, minimap, search box and the code panel/sheet all add them (top edges use `max(--study-h, --sai-t)` because the study bar already covers the notch)
+- [x] **Fullscreen.** Toolbar button (expand/shrink icon, only where `document.fullscreenEnabled`, follows `fullscreenchange`, `navigationUI: 'hide'`). Chrome cannot hide the address bar of a
+      non-scrolling page any other way. `public/manifest.webmanifest` (display fullscreen) + `icon.svg` make "Add to Home screen" open with no bar at all (not tested: needs HTTPS / the phone)
+- [x] **Phone tier** (`src/quality.js`, numbers `PHONE_*` in theme.js): automatic when the pointer is coarse AND the short side is <= 600 px; `?quality=high|phone|low` overrides. Pixel ratio cap 1.5
+      (the S26 has ~3, full resolution would be 4x the pixels), dust 200, halos 24, nebula 3 octaves, 1 star layer, 8 / 12 segments per edge / arc. The old inline QUALITY table moved here; `?quality=low` is unchanged
+- [x] **Adaptive step**: on phones, if fps stays under 50 for 2 s the pixel ratio is multiplied by 0.8 (floor 0.75), then a 3 s pause; it never goes back up; ignored for the first 5 s after load and while the tab is hidden.
+      Only the pixel ratio changes live (the other settings are baked into geometry and shader defines at start). `?adapt=0/1` forces it off/on; `__explorer.adaptiveSteps` reports it.
+      It was seen working by accident on software GL (2 fps): 1.5 -> 1.2 -> 0.96
+- [x] **Touch in navigation.js**: one-finger orbit with inertia (`ORBIT_DAMPING` 0.07), two-finger pinch zoom only (pan stays off, the focus stays centred), tap detection (`nav.onTap`: under 10 px and 350 ms,
+      a pinch never counts), touch **double-tap = go up** (300 ms, 40 px). The first tap of a pair already focused something, so main3d takes "up" from where you were BEFORE the pair.
+      Mouse behaviour is as before (click = tap, no double-click). Light haptic (`navigator.vibrate(8)`, rate-limited, only after a first touch) on every animated focus change, called from `nav.flyTo`
+- [x] **Auto-fade** (`src/idlefade.js`, `UI_FADE_*`): after 4 s without touch, key or focus change the toolbar, title, breadcrumb, map, info card, legend and the 3D labels fade out over 0.6 s; any touch brings them
+      back in 0.2 s. Faded things get `pointer-events: none` (the touch goes to the picture). Not faded: code panel, search box, intro and study cards; nothing fades while search, intro or the study card is open.
+      Touch screens only; **off in study mode** (so the three conditions look alike); `?fade=1/0` forces it
+- Study mode: nothing in this step changes focus by scrolling. The `scroll` event source (logged, not counted as a user action) is still to do in Step 4
+- Tests: `tests/quality.test.js` (tier choice, adaptive step incl. warm-up, cool-down, floor and dips, fade maths; part of `npm test`). Headless Chrome with touch emulation (CDP, Intel Iris Xe, 2.625 dpr,
+      Galaxy-like user agent), both viewports, 17 of 17 checks pass in each: phone tier, ratio, canvas size, touch-action, buttons >= 44 px (40 compact), tap focuses, double-tap goes up (also when it lands on a node),
+      orbit, inertia, stop, pinch, pinch is not a tap, fade out, fade back. Screenshots in `screenshots/step1/`
+- Numbers (412x915 and 915x412, sample tree, refocusing every 0.35 s for 4 s): 60 fps in landscape (worst frame 25 ms), 57 fps in portrait (one 169 ms hitch when the first labels/orbs changed),
+  **9 draw calls** (7 scene + 2 text, limit 30), no adaptive step triggered, console clean. This is a laptop GPU, NOT the S26: please read the real fps on the phone (`?fps=1`)
+- Not verified here: real vibration, real address-bar hiding, real notch insets (headless reports 0), installed-app mode
+- Dev note: `python3` is not on this PC's PATH, so `npm test` stops at the last command (`scanner_test.py`); all JS tests pass
+
 ## Later
 5 Cross-file links (done early, in 4c) · 6 Search/info/git heat/2nd dataset · 7 AR tabletop · 8 User study + report · 9 VR Cardboard + final visual polish

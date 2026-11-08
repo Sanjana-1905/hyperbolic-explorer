@@ -44,8 +44,8 @@ export function createSearchUI({ index, onSelect }) {
   const row = THEME.SEARCH_ROW_PX;
   const css = document.createElement('style');
   css.textContent = `
-    #search { position: fixed; z-index: 9; left: 50%; top: 8px; transform: translateX(-50%); box-sizing: border-box;
-      width: min(${THEME.SEARCH_WIDTH_PX}px, calc(100vw - 16px)); display: none; flex-direction: column;
+    #search { position: fixed; z-index: 9; left: 50%; top: calc(8px + var(--sai-t)); transform: translateX(-50%); box-sizing: border-box;
+      width: min(${THEME.SEARCH_WIDTH_PX}px, calc(100vw - 16px - var(--sai-l) - var(--sai-r))); display: none; flex-direction: column;
       border-radius: 14px; overflow: hidden; background: ${cssRgb(THEME.CODE_BG)}; color: ${cssRgb(THEME.CODE_TEXT)};
       border: 2px solid ${cssRgb(THEME.CODE_EDGE, 0.7)}; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
       font-family: system-ui, sans-serif; }
