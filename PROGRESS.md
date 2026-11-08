@@ -507,5 +507,39 @@ Other options: `&tree=wordnet_tree.json` (other dataset; tasks come from `study/
 - Not verified here: real vibration, real address-bar hiding, real notch insets (headless reports 0), installed-app mode
 - Dev note: `python3` is not on this PC's PATH, so `npm test` stops at the last command (`scanner_test.py`); all JS tests pass
 
+### Step 2: Test navigation and links, especially edges  ✅ done (waiting for your S26 check)
+**How to run:** `npm run test:phone` (starts its own Vite server and a headless Chrome/Edge with the GPU on; ~4 min; writes `screenshots/step2/report.md` + `report.json`; exit code 1 on any failure).
+`AUDIT_ONLY=portrait|landscape|desktop|shots` runs one part. Files: `tests/phone/cdp.mjs` (tiny DevTools-protocol driver, no packages), `page-helpers.js` (injected into the page), `audit.mjs`.
+Input is real touch (CDP `Input.dispatchTouchEvent`) at 412x915 and 915x412 (2.625 dpr, Galaxy-like user agent); hover uses a real mouse on a 1000x800 desktop window.
+- [x] **Edges: drawn vs predicted.** The edge layer is drawn ALONE (nodes, halos, sun, dust, nebula, haze, links hidden), the pixels are read back, and compared with the CPU prediction of every
+      visible edge (same Möbius/geodesic maths as the vertex shader, via `__explorer.edgePolylines()`). *Stray* = lit pixels farther than 7 px from any predicted edge; *missing* = a predicted edge
+      near the focus (< 1.4 hyperbolic distance) whose interior pixels are not lit. Scenarios: root, folder, file with its galaxy open, a focused symbol, mid-glide, two files open, after 20 files opened and
+      closed, and the 400-symbol galaxy. Result: **0 stray pixels, 0 missing edges in every scenario** (e.g. 1,355 edges at the root = 47,001 lit pixels, 0 stray); no galaxy left open after leaving
+- [x] **Arcs.** On every audited focus (file, class, method, function, root folder and a depth-2 folder with Dependencies on) each arc is checked against the raw `links.json` rows with an independent
+      re-implementation of "which node stands for this end" (symbol node if its file is open, else the file, else the +N orb; folder focus lifts ends two levels): every link of an arc resolves to the arc's
+      source -> target, the GPU buffers (`aP0`, `aP4`) hold the source and target node positions, the drawn curve starts/ends within 1.5 px of those nodes on screen, arc count <= 300, no self arc (both
+      ends on one node), no duplicate arc (merged), counts add up. Pulse direction: the comet moves toward vT = 1 (the target end) and the source end is dimmer (checked from the shader maths + `LINK_PULSE_SPEED > 0`,
+      `LINK_SOURCE_DIM < 1`; not a pixel-level motion test). Hover preview with a real mouse: 6 extra arcs appear on a hovered file, total <= 300, audit clean, gone when the mouse leaves
+- [x] **Following links, by touch.** Tap an arc's far-end node; tap the arc ITSELF near its far end (both for arcs that leave the focus and arcs that arrive at it); tap a panel list row (>= 44 px);
+      tap a search result (rows >= 40 px); tap the minimap. Each: lands exactly on the target (`focusId` is the expected node, focus radius = 0), pushes the back stack by 1, and the toolbar's Back button returns
+      to the exact start. Chain of 6 follows (arc taps, panel rows where the sheet covers the arcs) backs out step by step through the same 6 places to an empty stack; Backspace then goes to the parent
+- [x] **Edge cases.** Links into closed files (4 cases: file opens during the glide, lands on the symbol, nothing left pending); into a collapsed +N orb (2 cases: lands on the target file, which expands);
+      a symbol past the 400-symbol cut (synthetic dataset written and removed by the test: 450 functions; symbol 420 has no node -> lands exactly on the FILE, nothing pending, Back returns; symbol 10 -> lands on it);
+      self links and duplicates (checked on every focus above)
+- **Result: 162 / 162 checks pass** (portrait 77, landscape 77, desktop 3, shots 4, console 1; the first run had 15 failures: 3 from the pickArc bug below, 12 test mistakes: panel names with dots, orbs searched at the wrong
+  focus, glide screenshots timed too late, a chain that gave up when the sheet hid the arcs, and tap targets that depend on the layout)
+- **Bugs found and fixed:**
+  1. `pickArc` only tested the second half (t >= 0.5) of every arc. For an arc that ARRIVES at the focus ("Called by", far end at t = 0) tapping near the far end did nothing, or followed a different arc.
+     Fixed in main3d.js: the far half is t in [0.5, 1] when the far end is b, [0, 0.5] when it is a. Proven: with the old line the audit fails 3 checks in portrait, with the fix it passes
+  2. Tap timing used `performance.now()` when our handler ran. A page stall (symbols loading) between touch-down and touch-up made a quick tap look like a long press (> 350 ms) and it was ignored: seen once in the
+     test (an arc-end tap did nothing). navigation.js now uses the events' own `timeStamp` for tap length and double-tap interval
+- **Not bugs, but worth knowing:** while gliding along an arc the arcs are those of the NEW focus (the followed arc stays, because it is also the new focus's link); other arcs of the old focus vanish at once.
+  A symbol of a file past the 400 cut cannot be reached: following such a link ends on the file (by design, tested). In portrait the code sheet hides the lower half of the picture, so fewer arc ends are tappable there
+  (the panel list is the way in)
+- Test hooks added to `__explorer` (debug only): `arcDetails`, `edgePolylines`, `setLayers`, `readFrame`, `fileNode`, `symNode`, `setFolderDeps`, `setGlideScale`, `pendingSymbol`; `minimap.pointOf`; `nav.setGlideScale`
+  (makes glides k times slower, used for the screenshots; 1 = normal)
+- Screenshots of 3 arcs mid-glide: `screenshots/step2/glide-1.png .. glide-3.png` (portrait, glide slowed 20x, shots at 30 %, 50 % and 70 % of the way along three call arcs of one file)
+- Left: the pulse direction is verified from the shader maths, not by watching the comet move; the headless GPU is a laptop Intel Iris Xe, not the S26; no check of arcs under motion (orbit damping) while a glide runs
+
 ## Later
 5 Cross-file links (done early, in 4c) · 6 Search/info/git heat/2nd dataset · 7 AR tabletop · 8 User study + report · 9 VR Cardboard + final visual polish

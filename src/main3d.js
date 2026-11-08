@@ -26,7 +26,7 @@
 //      from; Backspace goes back.
 
 import * as THREE from 'three';
-import { vNeg, vLength, mobiusAdd3, conformalFactor3, hyperbolicDistance3, geodesicBezier3 } from './mobius3d.js';
+import { vNeg, vLength, mobiusAdd3, conformalFactor3, hyperbolicDistance3, geodesicBezier3, geodesicLerp3 } from './mobius3d.js';
 import { buildTree, computeLayout3d, layoutSymbols, assignFitAll, nodePath } from './layout3d.js';
 import { createNavigation } from './navigation.js';
 import { createSymbolStore, buildSymbolNodes, hash01 } from './symbols.js';
@@ -832,7 +832,10 @@ function pickArc(clientX, clientY) {
   let best = null, bestD = ARC_PICK_PX;
   for (const arc of linkArcs) {
     const pts = arc.points.map((p) => mobiusAdd3(shift, p));
-    for (let t = 0.5; t <= 1.0001; t += 0.05) {
+    // The far half is the one next to the far end: t in [0.5, 1] when the far end is the arc's end b, t in [0, 0.5] when it is a
+    // (an arc that ARRIVES at the focus has its far end at t = 0).
+    const lo = arc.far === arc.b ? 0.5 : 0;
+    for (let t = lo; t <= lo + 0.5001; t += 0.05) {
       const s = projectPoint(geodesicBezier3(pts, t));
       if (!s) continue;
       const d = Math.hypot(s.x - clientX, s.y - clientY);
@@ -1453,6 +1456,54 @@ window.__explorer = {
   get visibleLinks() { return linkArcs.length; },
   get selectedLinks() { return linkSelected; },
   arcs: () => linkArcs.map((a) => ({ a: a.a.id, b: a.b.id, type: a.type, conf: a.conf, count: a.count, role: a.role, far: a.far ? a.far.id : null })),
+  // ---- Test hooks for the navigation / link audit (tests/phone/*.mjs) ----
+  // Every arc with its raw links [fromFile, fromSym, toFile, toSym], its chosen target, and the end points as the GPU got them.
+  arcDetails: () => linkArcs.map((a, i) => {
+    const g = linkMesh.geometry.arrays;
+    return {
+      a: a.a.id, b: a.b.id, type: a.type, conf: a.conf, count: a.count, role: a.role, far: a.far ? a.far.id : null, key: a.key,
+      links: a.links.map((k) => [linkData.fromFile[k], linkData.fromSym[k], linkData.toFile[k], linkData.toSym[k]]),
+      target: a.target.node ? { node: a.target.node.id } : { fileId: a.target.fileId, sym: a.target.sym },
+      gpuP0: [...g.aP0.slice(i * 3, i * 3 + 3)], gpuP4: [...g.aP4.slice(i * 3, i * 3 + 3)],
+      posA: [a.a.pos.x, a.a.pos.y, a.a.pos.z], posB: [a.b.pos.x, a.b.pos.y, a.b.pos.z],
+    };
+  }),
+  get folderLinks() { return showFolderDeps; },
+  setFolderDeps: (on) => { showFolderDeps = on; linksDirty = true; updateHelp(); },
+  fileNode: (fileId) => fileById.get(fileId) || null,
+  symNode: (fileId, sym) => { const f = fileById.get(fileId); return (f && f.symByIndex && f.symByIndex.get(sym)) || null; },
+  get pendingSymbol() { return pendingSymbol; },
+  // Screen polylines (CSS px) of every edge that is drawn right now, computed on the CPU exactly like the edge shader does.
+  edgePolylines: () => {
+    const shift = vNeg(nav.focusPoint);
+    const out = [];
+    for (const n of allNodes) {
+      if (!n.parent || n.state === 1 || n.edgeIndex === undefined || edgeArr.eHide[n.edgeIndex] === 1) continue;
+      const A = mobiusAdd3(shift, n.parent.pos), B = mobiusAdd3(shift, n.pos);
+      const pts = [];
+      for (let k = 0; k <= 12; k++) pts.push(projectPoint(geodesicLerp3(A, B, k / 12)));
+      out.push({ child: n.id, parent: n.parent.id, d: hyperbolicDistance3(nav.focusPoint, n.pos), pts });
+    }
+    return out;
+  },
+  // Show / hide the drawing layers (to look at edges alone). Anything not mentioned keeps its state.
+  setLayers: (l) => {
+    const map = { nodes: nodeMesh, halos: haloMesh, sun: sunMesh, edges: edgeMesh, dust: dustMesh, links: linkMesh, nebula, haze };
+    for (const [k, v] of Object.entries(l)) if (map[k]) map[k].visible = v && (k !== 'links' || linkArcs.length > 0);
+  },
+  // Render the scene now (no labels) and read the pixels back: { w, h, data } (rows bottom-up, RGBA bytes).
+  readFrame: () => {
+    renderer.clear();
+    renderer.render(scene, camera);
+    const gl = renderer.getContext();
+    const w = gl.drawingBufferWidth, h = gl.drawingBufferHeight;
+    const data = new Uint8Array(w * h * 4);
+    gl.readPixels(0, 0, w, h, gl.RGBA, gl.UNSIGNED_BYTE, data);
+    return { w, h, data };
+  },
+  get pixelScale() { return renderer.getPixelRatio(); },
+  get backStackDepth() { return nav.backDepth; },
+  setGlideScale: (k) => nav.setGlideScale(k),
   get backDepth() { return nav.backDepth; },
   goBack,
   cycleHeat,

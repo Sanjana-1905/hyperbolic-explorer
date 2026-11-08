@@ -75,6 +75,8 @@ export function createNavigation(renderer) {
   // A tap = one pointer, pressed and released without dragging. Touch/pen: moved < TAP_MAX_MOVE_PX and shorter than
   // TAP_MAX_MS (a long press is not a tap). Mouse: moved <= 5 px (as before). If a second finger touched during the
   // gesture (a pinch) it is not a tap. A double-tap = a touch tap shortly after, and near, the previous one.
+  // Times come from the events' own timeStamp, NOT from performance.now() when our handler runs: if the page stalls for a moment
+  // (a file's symbols loading) between touch-down and touch-up, a quick tap must not be mistaken for a long press.
   // Both are only REPORTED here; main3d.js decides what they mean (focus a node, go up).
   const tapListeners = [];
   const active = new Map();         // pointerId -> { x, y, t } of the press
@@ -82,7 +84,7 @@ export function createNavigation(renderer) {
   let lastTap = null;               // { x, y, t } of the previous touch tap
   el.addEventListener('pointerdown', (e) => {
     if (active.size === 0) maxPointers = 0;
-    active.set(e.pointerId, { x: e.clientX, y: e.clientY, t: performance.now() });
+    active.set(e.pointerId, { x: e.clientX, y: e.clientY, t: e.timeStamp });
     maxPointers = Math.max(maxPointers, active.size);
   });
   el.addEventListener('pointercancel', (e) => { active.delete(e.pointerId); });
@@ -90,7 +92,7 @@ export function createNavigation(renderer) {
     const start = active.get(e.pointerId);
     active.delete(e.pointerId);
     if (!start || maxPointers !== 1) return;
-    const now = performance.now();
+    const now = e.timeStamp;
     const moved = Math.hypot(e.clientX - start.x, e.clientY - start.y);
     const touch = e.pointerType !== 'mouse';
     if (touch ? (moved >= THEME.TAP_MAX_MOVE_PX || now - start.t > THEME.TAP_MAX_MS) : moved > 5) return;
@@ -129,6 +131,8 @@ export function createNavigation(renderer) {
   });
 
   let focusPoint = vec3(0, 0, 0); // the ball point currently shown at the centre
+  // Test hook only (nav.setGlideScale): makes every glide k times slower so screenshots can be taken mid-glide. 1 = normal.
+  let glideScale = 1;
 
   // Back stack (Phase 4c): following a link (clicking an arc's far end or a "Calls / Called by" entry) pushes the
   // place we came from; Backspace pops it, like a browser's Back button. A "place" is whatever the caller can find
@@ -159,6 +163,7 @@ export function createNavigation(renderer) {
     get spinning() { return controls.autoRotate; },
     setSpin,
     onTap(cb) { tapListeners.push(cb); },
+    setGlideScale(k) { glideScale = Math.max(1, k); },
     haptic,
 
     // How far the camera is from the centre relative to its default distance (1 = default, 0.5 = twice as close).
@@ -192,7 +197,7 @@ export function createNavigation(renderer) {
         applyInset();
       }
       if (!anim) return false;
-      const t = Math.min((now - anim.start) / (ANIM_SECONDS * 1000), 1);
+      const t = Math.min((now - anim.start) / (ANIM_SECONDS * 1000 * glideScale), 1);
       // Slide the focus point along the route. s = how much of the route's total length is done (ease-in-out);
       // find the piece of the route s falls in, and move along its geodesic. With no `via` the route is one piece:
       // exactly the old straight glide. Example: pieces of length 1 and 3 (total 4), t = 0.5 -> s = 2: the piece

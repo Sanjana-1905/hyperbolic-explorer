@@ -188,5 +188,8 @@ export function createMinimap({ nodes, onPick }) {
     // Node the map would pick for a tap at (x, y) in canvas pixels (tests).
     pickAt(x, y) { return pickNearest(nodes, pts, x, y, THEME.MINIMAP_HIT_PX, () => true); },
     get size() { return size; },
+    // Where the map draws node `id`, in canvas CSS pixels (tests tap there).
+    pointOf(id) { return pts[id] ? { x: pts[id].x, y: pts[id].y } : null; },
+    get canvas() { return canvas; },
   };
 }

@@ -1,0 +1,974 @@
+[
+ {
+  "viewport": "portrait 412x915",
+  "name": "edges: root: no stray edges",
+  "ok": true,
+  "detail": "1355 edges, 0/85435 stray px (0.00 %)"
+ },
+ {
+  "viewport": "portrait 412x915",
+  "name": "edges: root: no missing edges",
+  "ok": true,
+  "detail": "46 near edges checked"
+ },
+ {
+  "viewport": "portrait 412x915",
+  "name": "edges: a folder: no stray edges",
+  "ok": true,
+  "detail": "832 edges, 0/63615 stray px (0.00 %)"
+ },
+ {
+  "viewport": "portrait 412x915",
+  "name": "edges: a folder: no missing edges",
+  "ok": true,
+  "detail": "48 near edges checked"
+ },
+ {
+  "viewport": "portrait 412x915",
+  "name": "edges: file opened its galaxy (setup)",
+  "ok": true,
+  "detail": "15 symbol nodes"
+ },
+ {
+  "viewport": "portrait 412x915",
+  "name": "edges: file open (symbols): no stray edges",
+  "ok": true,
+  "detail": "630 edges, 0/62016 stray px (0.00 %)"
+ },
+ {
+  "viewport": "portrait 412x915",
+  "name": "edges: file open (symbols): no missing edges",
+  "ok": true,
+  "detail": "48 near edges checked"
+ },
+ {
+  "viewport": "portrait 412x915",
+  "name": "edges: a symbol focused: no stray edges",
+  "ok": true,
+  "detail": "284 edges, 0/24373 stray px (0.00 %)"
+ },
+ {
+  "viewport": "portrait 412x915",
+  "name": "edges: a symbol focused: no missing edges",
+  "ok": true,
+  "detail": "28 near edges checked"
+ },
+ {
+  "viewport": "portrait 412x915",
+  "name": "edges: mid-glide (was animating: true)",
+  "ok": true,
+  "detail": "0.00 % stray, 0 missing"
+ },
+ {
+  "viewport": "portrait 412x915",
+  "name": "edges: after the glide, two files open: no stray edges",
+  "ok": true,
+  "detail": "382 edges, 0/43315 stray px (0.00 %)"
+ },
+ {
+  "viewport": "portrait 412x915",
+  "name": "edges: after the glide, two files open: no missing edges",
+  "ok": true,
+  "detail": "38 near edges checked"
+ },
+ {
+  "viewport": "portrait 412x915",
+  "name": "edges: files closed again after leaving (no leftover galaxies)",
+  "ok": true,
+  "detail": "{\"open\":0,\"dyn\":0}"
+ },
+ {
+  "viewport": "portrait 412x915",
+  "name": "edges: after 20 files opened and closed, back at root: no stray edges",
+  "ok": true,
+  "detail": "966 edges, 0/74418 stray px (0.00 %)"
+ },
+ {
+  "viewport": "portrait 412x915",
+  "name": "edges: after 20 files opened and closed, back at root: no missing edges",
+  "ok": true,
+  "detail": "46 near edges checked"
+ },
+ {
+  "viewport": "portrait 412x915",
+  "name": "arcs: found sample foci (file, class, method, function)",
+  "ok": true,
+  "detail": "{\"file\":[0,-2],\"func\":[0,0],\"cls\":[2,0],\"method\":[2,2]}"
+ },
+ {
+  "viewport": "portrait 412x915",
+  "name": "arcs: focus = file",
+  "ok": true,
+  "detail": "7 arcs for 25/25 links, 2 merged"
+ },
+ {
+  "viewport": "portrait 412x915",
+  "name": "arcs: focus = func",
+  "ok": true,
+  "detail": "3 arcs for 21/21 links, 2 merged"
+ },
+ {
+  "viewport": "portrait 412x915",
+  "name": "arcs: focus = cls",
+  "ok": true,
+  "detail": "2 arcs for 3/3 links, 1 merged"
+ },
+ {
+  "viewport": "portrait 412x915",
+  "name": "arcs: focus = method",
+  "ok": true,
+  "detail": "2 arcs for 2/2 links"
+ },
+ {
+  "viewport": "portrait 412x915",
+  "name": "arcs: focus = root folder, Dependencies on",
+  "ok": true,
+  "detail": "124 arcs for 449/449 links, 91 merged"
+ },
+ {
+  "viewport": "portrait 412x915",
+  "name": "arcs: root folder merges many imports into thicker arcs",
+  "ok": true,
+  "detail": "91 merged arcs, 124 total"
+ },
+ {
+  "viewport": "portrait 412x915",
+  "name": "arcs: focus = a depth-2 folder, Dependencies on",
+  "ok": true,
+  "detail": "68 arcs for 72/72 links, 4 merged"
+ },
+ {
+  "viewport": "portrait 412x915",
+  "name": "arcs: pulse runs source -> target (comet speed > 0 toward vT=1, source end dimmer)",
+  "ok": true,
+  "detail": "{\"speed\":0.45,\"dim\":0.55}"
+ },
+ {
+  "viewport": "portrait 412x915",
+  "name": "follow: arc end taps available on screen",
+  "ok": true,
+  "detail": "1 tappable arcs"
+ },
+ {
+  "viewport": "portrait 412x915",
+  "name": "follow: tap the end of an arc: lands on the target",
+  "ok": true,
+  "detail": "focus 5015 expected 5015, radius 0.0e+0"
+ },
+ {
+  "viewport": "portrait 412x915",
+  "name": "follow: tap the end of an arc: pushes the back stack",
+  "ok": true,
+  "detail": "depth 0 -> 1"
+ },
+ {
+  "viewport": "portrait 412x915",
+  "name": "follow: tap the end of an arc: Back returns to the start",
+  "ok": true,
+  "detail": "focus 8 expected 8, depth 0"
+ },
+ {
+  "viewport": "portrait 412x915",
+  "name": "follow: a focus with a tappable arc body that leaves the focus exists",
+  "ok": true,
+  "detail": "{\"leaves\":1,\"arrives\":3}"
+ },
+ {
+  "viewport": "portrait 412x915",
+  "name": "follow: tap the body of an arc that leaves the focus: lands on the target",
+  "ok": true,
+  "detail": "focus 5035 expected 5035, radius 0.0e+0"
+ },
+ {
+  "viewport": "portrait 412x915",
+  "name": "follow: tap the body of an arc that leaves the focus: pushes the back stack",
+  "ok": true,
+  "detail": "depth 0 -> 1"
+ },
+ {
+  "viewport": "portrait 412x915",
+  "name": "follow: arc body (leaves the focus): Back returns to the start",
+  "ok": true,
+  "detail": "focus 12 expected 12, depth 0"
+ },
+ {
+  "viewport": "portrait 412x915",
+  "name": "follow: a focus with a tappable arc body that arrives at the focus exists",
+  "ok": true,
+  "detail": "{\"leaves\":1,\"arrives\":3}"
+ },
+ {
+  "viewport": "portrait 412x915",
+  "name": "follow: tap the body of an arc that arrives at the focus: lands on the target",
+  "ok": true,
+  "detail": "focus 8 expected 8, radius 0.0e+0"
+ },
+ {
+  "viewport": "portrait 412x915",
+  "name": "follow: tap the body of an arc that arrives at the focus: pushes the back stack",
+  "ok": true,
+  "detail": "depth 0 -> 1"
+ },
+ {
+  "viewport": "portrait 412x915",
+  "name": "follow: arc body (arrives at the focus): Back returns to the start",
+  "ok": true,
+  "detail": "focus 19 expected 19, depth 0"
+ },
+ {
+  "viewport": "portrait 412x915",
+  "name": "follow: panel has link tabs",
+  "ok": true,
+  "detail": "Code | Imports 2 | Imported by 2 | Called by 20"
+ },
+ {
+  "viewport": "portrait 412x915",
+  "name": "follow: panel list rows are >= 44 px tall",
+  "ok": true,
+  "detail": "48 px"
+ },
+ {
+  "viewport": "portrait 412x915",
+  "name": "follow: panel list entry lands on the entry",
+  "ok": true,
+  "detail": "focus \"server.js\" expected \"server.js\", radius 0.0e+0"
+ },
+ {
+  "viewport": "portrait 412x915",
+  "name": "follow: panel list entry pushes the back stack",
+  "ok": true,
+  "detail": "depth 0 -> 1"
+ },
+ {
+  "viewport": "portrait 412x915",
+  "name": "follow: panel list entry: Back returns to the start",
+  "ok": true,
+  "detail": "focus 8 expected 8, depth 0"
+ },
+ {
+  "viewport": "portrait 412x915",
+  "name": "follow: search rows are >= 40 px tall",
+  "ok": true,
+  "detail": "48 px"
+ },
+ {
+  "viewport": "portrait 412x915",
+  "name": "follow: search result lands on the result",
+  "ok": true,
+  "detail": "focus 4998 expected 4998 (client.py), radius 0.0e+0"
+ },
+ {
+  "viewport": "portrait 412x915",
+  "name": "follow: search result pushes the back stack",
+  "ok": true,
+  "detail": "depth 0 -> 1"
+ },
+ {
+  "viewport": "portrait 412x915",
+  "name": "follow: search result: Back returns to the start",
+  "ok": true,
+  "detail": "focus 0 expected 0, depth 0"
+ },
+ {
+  "viewport": "portrait 412x915",
+  "name": "follow: minimap tap: lands on the target",
+  "ok": true,
+  "detail": "focus 3 expected 3, radius 0.0e+0"
+ },
+ {
+  "viewport": "portrait 412x915",
+  "name": "follow: minimap tap: pushes the back stack",
+  "ok": true,
+  "detail": "depth 0 -> 1"
+ },
+ {
+  "viewport": "portrait 412x915",
+  "name": "follow: minimap tap: Back returns to the start",
+  "ok": true,
+  "detail": "focus 0 expected 0, depth 0"
+ },
+ {
+  "viewport": "portrait 412x915",
+  "name": "follow: chain of 6 follows lands exactly each time",
+  "ok": true,
+  "detail": "panel:19 > arc:5016 > arc:5030 > arc:5017 > arc:5011 > arc:5017"
+ },
+ {
+  "viewport": "portrait 412x915",
+  "name": "follow: back stack depth equals number of follows",
+  "ok": true,
+  "detail": "6 vs 6"
+ },
+ {
+  "viewport": "portrait 412x915",
+  "name": "follow: backing out retraces the chain and ends at the start with an empty stack",
+  "ok": true,
+  "detail": "5011 < 5017 < 5030 < 5016 < 19 < 8; end {\"focus\":8,\"depth\":0,\"r\":0}"
+ },
+ {
+  "viewport": "portrait 412x915",
+  "name": "follow: Backspace on an empty stack goes to the parent",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "viewport": "portrait 412x915",
+  "name": "cases: found links into closed files",
+  "ok": true,
+  "detail": "4 cases"
+ },
+ {
+  "viewport": "portrait 412x915",
+  "name": "cases: closed file 4 (was closed: true) -> symbol 3: lands exactly on the symbol",
+  "ok": true,
+  "detail": "{\"focus\":5042,\"want\":5042,\"r\":0,\"depth\":1,\"pend\":false}"
+ },
+ {
+  "viewport": "portrait 412x915",
+  "name": "follow: closed file 4: Back returns to the start",
+  "ok": true,
+  "detail": "focus 19 expected 19, depth 0"
+ },
+ {
+  "viewport": "portrait 412x915",
+  "name": "cases: closed file 3 (was closed: true) -> symbol 3: lands exactly on the symbol",
+  "ok": true,
+  "detail": "{\"focus\":5049,\"want\":5049,\"r\":0,\"depth\":1,\"pend\":false}"
+ },
+ {
+  "viewport": "portrait 412x915",
+  "name": "follow: closed file 3: Back returns to the start",
+  "ok": true,
+  "detail": "focus 20 expected 20, depth 0"
+ },
+ {
+  "viewport": "portrait 412x915",
+  "name": "cases: closed file 3 (was closed: true) -> symbol 3: lands exactly on the symbol",
+  "ok": true,
+  "detail": "{\"focus\":5031,\"want\":5031,\"r\":0,\"depth\":1,\"pend\":false}"
+ },
+ {
+  "viewport": "portrait 412x915",
+  "name": "follow: closed file 3: Back returns to the start",
+  "ok": true,
+  "detail": "focus 22 expected 22, depth 0"
+ },
+ {
+  "viewport": "portrait 412x915",
+  "name": "cases: closed file 7 (was closed: true) -> symbol 0: lands exactly on the symbol",
+  "ok": true,
+  "detail": "{\"focus\":5015,\"want\":5015,\"r\":0,\"depth\":1,\"pend\":false}"
+ },
+ {
+  "viewport": "portrait 412x915",
+  "name": "follow: closed file 7: Back returns to the start",
+  "ok": true,
+  "detail": "focus 26 expected 26, depth 0"
+ },
+ {
+  "viewport": "portrait 412x915",
+  "name": "cases: arcs ending at a collapsed +N orb exist (from a focused file)",
+  "ok": true,
+  "detail": "2 found"
+ },
+ {
+  "viewport": "portrait 412x915",
+  "name": "cases: follow an arc into orb 1476 (merges 1 links)",
+  "ok": true,
+  "detail": "{\"focus\":3109,\"r\":0,\"depth\":1,\"state\":0,\"expected\":3109}"
+ },
+ {
+  "viewport": "portrait 412x915",
+  "name": "cases: orb follow pushes the back stack",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "viewport": "portrait 412x915",
+  "name": "follow: orb 1476: Back returns to the start",
+  "ok": true,
+  "detail": "focus 8 expected 8, depth 0"
+ },
+ {
+  "viewport": "portrait 412x915",
+  "name": "cases: follow an arc into orb 3249 (merges 1 links)",
+  "ok": true,
+  "detail": "{\"focus\":4754,\"r\":0,\"depth\":1,\"state\":0,\"expected\":4754}"
+ },
+ {
+  "viewport": "portrait 412x915",
+  "name": "cases: orb follow pushes the back stack",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "viewport": "portrait 412x915",
+  "name": "follow: orb 3249: Back returns to the start",
+  "ok": true,
+  "detail": "focus 12 expected 12, depth 0"
+ },
+ {
+  "viewport": "portrait 412x915",
+  "name": "cases: self links dropped and duplicates merged (checked on every focus above)",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "viewport": "portrait 412x915 (400-symbol cut)",
+  "name": "cut: big file opens with at most 400 symbols (+ top-level block)",
+  "ok": true,
+  "detail": "400 symbol nodes"
+ },
+ {
+  "viewport": "portrait 412x915 (400-symbol cut)",
+  "name": "cut: symbol 420 has no node, symbol 10 has",
+  "ok": true,
+  "detail": "420: false, 10: true"
+ },
+ {
+  "viewport": "portrait 412x915 (400-symbol cut)",
+  "name": "cut: arcs from small.js to big.js exist",
+  "ok": true,
+  "detail": "[{\"b\":2,\"t\":{\"node\":2},\"links\":[[1,0,0,420],[1,0,0,10]]},{\"b\":403,\"t\":{\"fileId\":0,\"sym\":5},\"links\":[[0,5,1,0]]}]"
+ },
+ {
+  "viewport": "portrait 412x915 (400-symbol cut)",
+  "name": "cut: following a link to symbol 420 (past the cut) lands exactly on the file, nothing pending",
+  "ok": true,
+  "detail": "{\"focus\":2,\"file\":2,\"r\":0,\"pend\":false,\"depth\":1}"
+ },
+ {
+  "viewport": "portrait 412x915 (400-symbol cut)",
+  "name": "cut: Back returns to small.js",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "viewport": "portrait 412x915 (400-symbol cut)",
+  "name": "cut: a link to symbol 10 (inside the cut) lands exactly on it",
+  "ok": true,
+  "detail": "{\"focus\":13,\"want\":13,\"r\":0}"
+ },
+ {
+  "viewport": "portrait 412x915 (400-symbol cut)",
+  "name": "cut: arc audit on the big file is clean",
+  "ok": true,
+  "detail": "3 arcs "
+ },
+ {
+  "viewport": "portrait 412x915 (400-symbol cut)",
+  "name": "cut: edges of the 400-symbol galaxy match the prediction",
+  "ok": true,
+  "detail": "403 edges, 0.00 % stray, 0 missing"
+ },
+ {
+  "viewport": "landscape 915x412",
+  "name": "edges: root: no stray edges",
+  "ok": true,
+  "detail": "1355 edges, 0/47003 stray px (0.00 %)"
+ },
+ {
+  "viewport": "landscape 915x412",
+  "name": "edges: root: no missing edges",
+  "ok": true,
+  "detail": "46 near edges checked"
+ },
+ {
+  "viewport": "landscape 915x412",
+  "name": "edges: a folder: no stray edges",
+  "ok": true,
+  "detail": "832 edges, 0/35615 stray px (0.00 %)"
+ },
+ {
+  "viewport": "landscape 915x412",
+  "name": "edges: a folder: no missing edges",
+  "ok": true,
+  "detail": "49 near edges checked"
+ },
+ {
+  "viewport": "landscape 915x412",
+  "name": "edges: file opened its galaxy (setup)",
+  "ok": true,
+  "detail": "15 symbol nodes"
+ },
+ {
+  "viewport": "landscape 915x412",
+  "name": "edges: file open (symbols): no stray edges",
+  "ok": true,
+  "detail": "630 edges, 0/30286 stray px (0.00 %)"
+ },
+ {
+  "viewport": "landscape 915x412",
+  "name": "edges: file open (symbols): no missing edges",
+  "ok": true,
+  "detail": "48 near edges checked"
+ },
+ {
+  "viewport": "landscape 915x412",
+  "name": "edges: a symbol focused: no stray edges",
+  "ok": true,
+  "detail": "284 edges, 0/16816 stray px (0.00 %)"
+ },
+ {
+  "viewport": "landscape 915x412",
+  "name": "edges: a symbol focused: no missing edges",
+  "ok": true,
+  "detail": "30 near edges checked"
+ },
+ {
+  "viewport": "landscape 915x412",
+  "name": "edges: mid-glide (was animating: true)",
+  "ok": true,
+  "detail": "0.00 % stray, 0 missing"
+ },
+ {
+  "viewport": "landscape 915x412",
+  "name": "edges: after the glide, two files open: no stray edges",
+  "ok": true,
+  "detail": "382 edges, 0/18496 stray px (0.00 %)"
+ },
+ {
+  "viewport": "landscape 915x412",
+  "name": "edges: after the glide, two files open: no missing edges",
+  "ok": true,
+  "detail": "38 near edges checked"
+ },
+ {
+  "viewport": "landscape 915x412",
+  "name": "edges: files closed again after leaving (no leftover galaxies)",
+  "ok": true,
+  "detail": "{\"open\":0,\"dyn\":0}"
+ },
+ {
+  "viewport": "landscape 915x412",
+  "name": "edges: after 20 files opened and closed, back at root: no stray edges",
+  "ok": true,
+  "detail": "966 edges, 0/39762 stray px (0.00 %)"
+ },
+ {
+  "viewport": "landscape 915x412",
+  "name": "edges: after 20 files opened and closed, back at root: no missing edges",
+  "ok": true,
+  "detail": "46 near edges checked"
+ },
+ {
+  "viewport": "landscape 915x412",
+  "name": "arcs: found sample foci (file, class, method, function)",
+  "ok": true,
+  "detail": "{\"file\":[0,-2],\"func\":[0,0],\"cls\":[2,0],\"method\":[2,2]}"
+ },
+ {
+  "viewport": "landscape 915x412",
+  "name": "arcs: focus = file",
+  "ok": true,
+  "detail": "7 arcs for 25/25 links, 2 merged"
+ },
+ {
+  "viewport": "landscape 915x412",
+  "name": "arcs: focus = func",
+  "ok": true,
+  "detail": "3 arcs for 21/21 links, 2 merged"
+ },
+ {
+  "viewport": "landscape 915x412",
+  "name": "arcs: focus = cls",
+  "ok": true,
+  "detail": "2 arcs for 3/3 links, 1 merged"
+ },
+ {
+  "viewport": "landscape 915x412",
+  "name": "arcs: focus = method",
+  "ok": true,
+  "detail": "2 arcs for 2/2 links"
+ },
+ {
+  "viewport": "landscape 915x412",
+  "name": "arcs: focus = root folder, Dependencies on",
+  "ok": true,
+  "detail": "124 arcs for 449/449 links, 91 merged"
+ },
+ {
+  "viewport": "landscape 915x412",
+  "name": "arcs: root folder merges many imports into thicker arcs",
+  "ok": true,
+  "detail": "91 merged arcs, 124 total"
+ },
+ {
+  "viewport": "landscape 915x412",
+  "name": "arcs: focus = a depth-2 folder, Dependencies on",
+  "ok": true,
+  "detail": "68 arcs for 72/72 links, 4 merged"
+ },
+ {
+  "viewport": "landscape 915x412",
+  "name": "arcs: pulse runs source -> target (comet speed > 0 toward vT=1, source end dimmer)",
+  "ok": true,
+  "detail": "{\"speed\":0.45,\"dim\":0.55}"
+ },
+ {
+  "viewport": "landscape 915x412",
+  "name": "follow: arc end taps available on screen",
+  "ok": true,
+  "detail": "7 tappable arcs"
+ },
+ {
+  "viewport": "landscape 915x412",
+  "name": "follow: tap the end of an arc: lands on the target",
+  "ok": true,
+  "detail": "focus 19 expected 19, radius 0.0e+0"
+ },
+ {
+  "viewport": "landscape 915x412",
+  "name": "follow: tap the end of an arc: pushes the back stack",
+  "ok": true,
+  "detail": "depth 0 -> 1"
+ },
+ {
+  "viewport": "landscape 915x412",
+  "name": "follow: tap the end of an arc: Back returns to the start",
+  "ok": true,
+  "detail": "focus 8 expected 8, depth 0"
+ },
+ {
+  "viewport": "landscape 915x412",
+  "name": "follow: a focus with a tappable arc body that leaves the focus exists",
+  "ok": true,
+  "detail": "{\"leaves\":2,\"arrives\":3}"
+ },
+ {
+  "viewport": "landscape 915x412",
+  "name": "follow: tap the body of an arc that leaves the focus: lands on the target",
+  "ok": true,
+  "detail": "focus 5001 expected 5001, radius 0.0e+0"
+ },
+ {
+  "viewport": "landscape 915x412",
+  "name": "follow: tap the body of an arc that leaves the focus: pushes the back stack",
+  "ok": true,
+  "detail": "depth 0 -> 1"
+ },
+ {
+  "viewport": "landscape 915x412",
+  "name": "follow: arc body (leaves the focus): Back returns to the start",
+  "ok": true,
+  "detail": "focus 14 expected 14, depth 0"
+ },
+ {
+  "viewport": "landscape 915x412",
+  "name": "follow: a focus with a tappable arc body that arrives at the focus exists",
+  "ok": true,
+  "detail": "{\"leaves\":2,\"arrives\":3}"
+ },
+ {
+  "viewport": "landscape 915x412",
+  "name": "follow: tap the body of an arc that arrives at the focus: lands on the target",
+  "ok": true,
+  "detail": "focus 20 expected 20, radius 0.0e+0"
+ },
+ {
+  "viewport": "landscape 915x412",
+  "name": "follow: tap the body of an arc that arrives at the focus: pushes the back stack",
+  "ok": true,
+  "detail": "depth 0 -> 1"
+ },
+ {
+  "viewport": "landscape 915x412",
+  "name": "follow: arc body (arrives at the focus): Back returns to the start",
+  "ok": true,
+  "detail": "focus 19 expected 19, depth 0"
+ },
+ {
+  "viewport": "landscape 915x412",
+  "name": "follow: panel has link tabs",
+  "ok": true,
+  "detail": "Code | Imports 2 | Imported by 2 | Called by 20"
+ },
+ {
+  "viewport": "landscape 915x412",
+  "name": "follow: panel list rows are >= 44 px tall",
+  "ok": true,
+  "detail": "48 px"
+ },
+ {
+  "viewport": "landscape 915x412",
+  "name": "follow: panel list entry lands on the entry",
+  "ok": true,
+  "detail": "focus \"server.js\" expected \"server.js\", radius 0.0e+0"
+ },
+ {
+  "viewport": "landscape 915x412",
+  "name": "follow: panel list entry pushes the back stack",
+  "ok": true,
+  "detail": "depth 0 -> 1"
+ },
+ {
+  "viewport": "landscape 915x412",
+  "name": "follow: panel list entry: Back returns to the start",
+  "ok": true,
+  "detail": "focus 8 expected 8, depth 0"
+ },
+ {
+  "viewport": "landscape 915x412",
+  "name": "follow: search rows are >= 40 px tall",
+  "ok": true,
+  "detail": "40 px"
+ },
+ {
+  "viewport": "landscape 915x412",
+  "name": "follow: search result lands on the result",
+  "ok": true,
+  "detail": "focus 4998 expected 4998 (client.py), radius 0.0e+0"
+ },
+ {
+  "viewport": "landscape 915x412",
+  "name": "follow: search result pushes the back stack",
+  "ok": true,
+  "detail": "depth 0 -> 1"
+ },
+ {
+  "viewport": "landscape 915x412",
+  "name": "follow: search result: Back returns to the start",
+  "ok": true,
+  "detail": "focus 0 expected 0, depth 0"
+ },
+ {
+  "viewport": "landscape 915x412",
+  "name": "follow: minimap tap: lands on the target",
+  "ok": true,
+  "detail": "focus 3 expected 3, radius 0.0e+0"
+ },
+ {
+  "viewport": "landscape 915x412",
+  "name": "follow: minimap tap: pushes the back stack",
+  "ok": true,
+  "detail": "depth 0 -> 1"
+ },
+ {
+  "viewport": "landscape 915x412",
+  "name": "follow: minimap tap: Back returns to the start",
+  "ok": true,
+  "detail": "focus 0 expected 0, depth 0"
+ },
+ {
+  "viewport": "landscape 915x412",
+  "name": "follow: chain of 6 follows lands exactly each time",
+  "ok": true,
+  "detail": "arc:19 > arc:14 > arc:20 > arc:524 > arc:518 > arc:519"
+ },
+ {
+  "viewport": "landscape 915x412",
+  "name": "follow: back stack depth equals number of follows",
+  "ok": true,
+  "detail": "6 vs 6"
+ },
+ {
+  "viewport": "landscape 915x412",
+  "name": "follow: backing out retraces the chain and ends at the start with an empty stack",
+  "ok": true,
+  "detail": "518 < 524 < 20 < 14 < 19 < 8; end {\"focus\":8,\"depth\":0,\"r\":0}"
+ },
+ {
+  "viewport": "landscape 915x412",
+  "name": "follow: Backspace on an empty stack goes to the parent",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "viewport": "landscape 915x412",
+  "name": "cases: found links into closed files",
+  "ok": true,
+  "detail": "4 cases"
+ },
+ {
+  "viewport": "landscape 915x412",
+  "name": "cases: closed file 4 (was closed: true) -> symbol 3: lands exactly on the symbol",
+  "ok": true,
+  "detail": "{\"focus\":5009,\"want\":5009,\"r\":0,\"depth\":1,\"pend\":false}"
+ },
+ {
+  "viewport": "landscape 915x412",
+  "name": "follow: closed file 4: Back returns to the start",
+  "ok": true,
+  "detail": "focus 19 expected 19, depth 0"
+ },
+ {
+  "viewport": "landscape 915x412",
+  "name": "cases: closed file 3 (was closed: true) -> symbol 3: lands exactly on the symbol",
+  "ok": true,
+  "detail": "{\"focus\":5019,\"want\":5019,\"r\":0,\"depth\":1,\"pend\":false}"
+ },
+ {
+  "viewport": "landscape 915x412",
+  "name": "follow: closed file 3: Back returns to the start",
+  "ok": true,
+  "detail": "focus 20 expected 20, depth 0"
+ },
+ {
+  "viewport": "landscape 915x412",
+  "name": "cases: closed file 3 (was closed: true) -> symbol 3: lands exactly on the symbol",
+  "ok": true,
+  "detail": "{\"focus\":5050,\"want\":5050,\"r\":0,\"depth\":1,\"pend\":false}"
+ },
+ {
+  "viewport": "landscape 915x412",
+  "name": "follow: closed file 3: Back returns to the start",
+  "ok": true,
+  "detail": "focus 22 expected 22, depth 0"
+ },
+ {
+  "viewport": "landscape 915x412",
+  "name": "cases: closed file 7 (was closed: true) -> symbol 0: lands exactly on the symbol",
+  "ok": true,
+  "detail": "{\"focus\":5031,\"want\":5031,\"r\":0,\"depth\":1,\"pend\":false}"
+ },
+ {
+  "viewport": "landscape 915x412",
+  "name": "follow: closed file 7: Back returns to the start",
+  "ok": true,
+  "detail": "focus 26 expected 26, depth 0"
+ },
+ {
+  "viewport": "landscape 915x412",
+  "name": "cases: arcs ending at a collapsed +N orb exist (from a focused file)",
+  "ok": true,
+  "detail": "2 found"
+ },
+ {
+  "viewport": "landscape 915x412",
+  "name": "cases: follow an arc into orb 1476 (merges 1 links)",
+  "ok": true,
+  "detail": "{\"focus\":3109,\"r\":0,\"depth\":1,\"state\":0,\"expected\":3109}"
+ },
+ {
+  "viewport": "landscape 915x412",
+  "name": "cases: orb follow pushes the back stack",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "viewport": "landscape 915x412",
+  "name": "follow: orb 1476: Back returns to the start",
+  "ok": true,
+  "detail": "focus 8 expected 8, depth 0"
+ },
+ {
+  "viewport": "landscape 915x412",
+  "name": "cases: follow an arc into orb 3249 (merges 1 links)",
+  "ok": true,
+  "detail": "{\"focus\":4754,\"r\":0,\"depth\":1,\"state\":0,\"expected\":4754}"
+ },
+ {
+  "viewport": "landscape 915x412",
+  "name": "cases: orb follow pushes the back stack",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "viewport": "landscape 915x412",
+  "name": "follow: orb 3249: Back returns to the start",
+  "ok": true,
+  "detail": "focus 12 expected 12, depth 0"
+ },
+ {
+  "viewport": "landscape 915x412",
+  "name": "cases: self links dropped and duplicates merged (checked on every focus above)",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "viewport": "landscape 915x412 (400-symbol cut)",
+  "name": "cut: big file opens with at most 400 symbols (+ top-level block)",
+  "ok": true,
+  "detail": "400 symbol nodes"
+ },
+ {
+  "viewport": "landscape 915x412 (400-symbol cut)",
+  "name": "cut: symbol 420 has no node, symbol 10 has",
+  "ok": true,
+  "detail": "420: false, 10: true"
+ },
+ {
+  "viewport": "landscape 915x412 (400-symbol cut)",
+  "name": "cut: arcs from small.js to big.js exist",
+  "ok": true,
+  "detail": "[{\"b\":2,\"t\":{\"node\":2},\"links\":[[1,0,0,420],[1,0,0,10]]},{\"b\":403,\"t\":{\"fileId\":0,\"sym\":5},\"links\":[[0,5,1,0]]}]"
+ },
+ {
+  "viewport": "landscape 915x412 (400-symbol cut)",
+  "name": "cut: following a link to symbol 420 (past the cut) lands exactly on the file, nothing pending",
+  "ok": true,
+  "detail": "{\"focus\":2,\"file\":2,\"r\":0,\"pend\":false,\"depth\":1}"
+ },
+ {
+  "viewport": "landscape 915x412 (400-symbol cut)",
+  "name": "cut: Back returns to small.js",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "viewport": "landscape 915x412 (400-symbol cut)",
+  "name": "cut: a link to symbol 10 (inside the cut) lands exactly on it",
+  "ok": true,
+  "detail": "{\"focus\":13,\"want\":13,\"r\":0}"
+ },
+ {
+  "viewport": "landscape 915x412 (400-symbol cut)",
+  "name": "cut: arc audit on the big file is clean",
+  "ok": true,
+  "detail": "3 arcs "
+ },
+ {
+  "viewport": "landscape 915x412 (400-symbol cut)",
+  "name": "cut: edges of the 400-symbol galaxy match the prediction",
+  "ok": true,
+  "detail": "403 edges, 0.00 % stray, 0 missing"
+ },
+ {
+  "viewport": "desktop 1000x800",
+  "name": "hover: a hoverable file with links is on screen",
+  "ok": true,
+  "detail": "{\"id\":8,\"x\":545.9566284825546,\"y\":325.2973272678097,\"n\":6}"
+ },
+ {
+  "viewport": "desktop 1000x800",
+  "name": "hover: real mouse hover previews the file's arcs (<= 300 total, audit clean)",
+  "ok": true,
+  "detail": "6 hover arcs of 6"
+ },
+ {
+  "viewport": "desktop 1000x800",
+  "name": "hover: moving the mouse away removes the preview",
+  "ok": true,
+  "detail": "0 hover arcs left"
+ },
+ {
+  "viewport": "shots",
+  "name": "shots: found a file with three followable arcs on screen",
+  "ok": true,
+  "detail": "{\"fileId\":2,\"idx\":[22,16,23]}"
+ },
+ {
+  "viewport": "shots",
+  "name": "shots: arc 1 captured mid-glide",
+  "ok": true,
+  "detail": "file 2 arc 22 (call, conf 0.6000000238418579) at ~3000 ms of a 10 s slowed glide"
+ },
+ {
+  "viewport": "shots",
+  "name": "shots: arc 2 captured mid-glide",
+  "ok": true,
+  "detail": "file 2 arc 16 (call, conf 0.699999988079071) at ~5000 ms of a 10 s slowed glide"
+ },
+ {
+  "viewport": "shots",
+  "name": "shots: arc 3 captured mid-glide",
+  "ok": true,
+  "detail": "file 2 arc 23 (call, conf 0.6000000238418579) at ~7000 ms of a 10 s slowed glide"
+ },
+ {
+  "viewport": "console",
+  "name": "no console errors or exceptions during the whole run",
+  "ok": true,
+  "detail": ""
+ }
+]
