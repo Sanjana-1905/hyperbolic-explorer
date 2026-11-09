@@ -2,13 +2,24 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- viewport-fit=cover: draw under the notch / camera cut-out (the interface keeps clear of it with the --sai-* safe-area variables below).
+         interactive-widget=resizes-content: the on-screen keyboard shrinks the page (the search box relies on that). -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, interactive-widget=resizes-content" />
+    <!-- Browser bar colour on Android: the scene's background colour (THEME.CLEAR_COLOR is 0x03040c; the body is #05060a) -->
+    <meta name="theme-color" content="#03040c" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <!-- Installed to the home screen ("Add to Home screen") it opens fullscreen with no address bar -->
+    <link rel="manifest" href="/hyperbolic-explorer/manifest.webmanifest" />
+    <link rel="icon" href="/hyperbolic-explorer/icon.svg" type="image/svg+xml" />
     <title>Hyperbolic Data Explorer</title>
-    <style>html,body{background:#05060a;height:100%;margin:0;overflow:hidden}body{color:#e8ecf5;font-family:system-ui,sans-serif}canvas{display:block}#info{top:calc(12px + var(--study-h,0px));left:12px;right:calc(12px + var(--panel-w,0px) + var(--legend-w,0px));pointer-events:none;text-shadow:0 0 4px #000;position:fixed}#info .name{font-size:20px;font-weight:600}#info .path{opacity:.75;white-space:nowrap;text-overflow:ellipsis;font-size:13px;overflow:hidden}#help{opacity:.55;pointer-events:none;font-size:12px;position:fixed;bottom:10px;left:12px}@media (height<=520px){#info{top:calc(6px + var(--study-h,0px));left:12px}#info .name{font-size:15px}#info .path{word-break:normal;white-space:nowrap;text-overflow:ellipsis;font-size:11px;overflow:hidden}#crumbs{max-width:calc(100vw - var(--panel-w,0px) - 120px)!important;font-size:11px!important;bottom:6px!important}}@media (pointer:coarse){#help{display:none}}#fps{color:#9fe870;pointer-events:none;background:#00000080;padding:2px 6px;font:12px ui-monospace,monospace;position:fixed;top:12px;right:12px}</style>
-    <script type="module" crossorigin src="/hyperbolic-explorer/assets/index-C9kv1ALD.js"></script>
+    <style>:root{--sai-t:env(safe-area-inset-top,0px);--sai-r:env(safe-area-inset-right,0px);--sai-b:env(safe-area-inset-bottom,0px);--sai-l:env(safe-area-inset-left,0px);--ui-o:1}html,body{overscroll-behavior:none;-webkit-tap-highlight-color:transparent;background:#05060a;height:100dvh;margin:0;overflow:hidden}body{-webkit-text-size-adjust:100%;width:100%;position:fixed;inset:0}#tools,#info,#crumbs,#map,#card,#legend{opacity:var(--ui-o)}.ui-hidden #tools,.ui-hidden #info,.ui-hidden #crumbs,.ui-hidden #map,.ui-hidden #card,.ui-hidden #legend{pointer-events:none!important}@media (prefers-reduced-motion:reduce){#tools,#info,#crumbs,#map,#card,#legend{transition:none}}body{color:#e8ecf5;font-family:system-ui,sans-serif}canvas{touch-action:none;width:100%;height:100%;display:block}#info{top:calc(12px + max(var(--study-h,0px), var(--sai-t)));left:calc(12px + var(--sai-l));right:calc(12px + var(--sai-r) + var(--panel-w,0px) + var(--legend-w,0px));pointer-events:none;text-shadow:0 0 4px #000;position:fixed}#info .name{font-size:20px;font-weight:600}#info .path{opacity:.75;white-space:nowrap;text-overflow:ellipsis;font-size:13px;overflow:hidden}#help{bottom:calc(10px + var(--sai-b));left:calc(12px + var(--sai-l));opacity:.55;pointer-events:none;font-size:12px;position:fixed}@media (height<=520px){#info{top:calc(6px + max(var(--study-h,0px), var(--sai-t)));left:calc(12px + var(--sai-l))}#info .name{font-size:15px}#info .path{word-break:normal;white-space:nowrap;text-overflow:ellipsis;font-size:11px;overflow:hidden}#crumbs{bottom:calc(6px + var(--sai-b))!important;max-width:calc(100vw - var(--panel-w,0px) - 120px)!important;font-size:11px!important}}@media (pointer:coarse){#help{display:none}}#fps{top:calc(12px + var(--sai-t));right:calc(12px + var(--sai-r));color:#9fe870;pointer-events:none;background:#00000080;padding:2px 6px;font:12px ui-monospace,monospace;position:fixed}</style>
+    <script type="module" crossorigin src="/hyperbolic-explorer/assets/index-DIKPUWgs.js"></script>
   </head>
   <body>
     <div id="info"><div class="name">Loading…</div><div class="path"></div></div>
-    <div id="help"></div>
+    <div id="help"></div>
   </body>
 </html>
