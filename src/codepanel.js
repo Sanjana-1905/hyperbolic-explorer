@@ -1,31 +1,13 @@
-// codepanel.js - the code panel: an HTML overlay showing the source lines of the focused symbol.
-//
-// Look: dark, monospace, line numbers, light syntax colouring (keywords, strings, comments, numbers).
-// Layout: on a wide screen it docks to the right edge; on a narrow screen (a phone) it is a bottom sheet.
-// Phone use: the header is a big tap target; tapping it (or "–") folds the sheet down to just its header,
-// "×" closes it until the next focus change; the body scrolls with one finger (the 3D canvas is a separate
-// element, so scrolling code never rotates the view). On the keyboard: C toggles it.
-// Every colour and size is a theme constant (CODE_* in theme.js).
-//
-// Links (Phase 4c): a row of tabs under the header, "Code · Imports n · Imported by n · Calls n · Called by n" (only the
-// non-empty ones). A link tab replaces the code with a list; every entry is a 48 px tap target showing the name, its
-// file and the confidence as 1-3 dots, in the link type's colour. Tapping an entry calls `onPick(entry)` (the viewer
-// glides there and remembers where it came from). Lists show 30 entries, then a "show more" button.
-//
-// Syntax colouring is deliberately simple: one regular expression finds comments, strings, numbers and
-// keywords in the shown snippet. It starts "cold" at the first shown line, so a snippet that begins inside
-// a block comment is coloured wrongly for a moment. That is fine for a reading aid.
-
+// src/codepanel.js
 import { THEME, cssRgb } from './theme.js';
+import { contextRange } from './codecontext.js';
 
-const MAX_LINES = 400; // longer snippets are cut (a whole big file would make a phone sluggish)
-const LIST_PAGE = 30;  // link list entries shown at first (and added by each "show more")
+const MAX_LINES = 500;
+const LIST_PAGE = 30;
 
-const JS_KEYWORDS = 'abstract async await break case catch class const constructor continue debugger declare default delete do else enum export extends false finally for from function get if implements import in instanceof interface let namespace new null of private protected public readonly return set static super switch this throw true try type typeof undefined var void while with yield';
+const JS_KEYWORDS = 'abstract async await break case catch class const constructor continue debugger declare default delete do else enum export extends false finally for from function get if implements import in instanceof interface let namespace new null of private protected public readonly return set static super switch this throw try type typeof undefined var void while with yield';
 const PY_KEYWORDS = 'False None True and as assert async await break class continue def del elif else except finally for from global if import in is lambda nonlocal not or pass raise return try while with yield self';
 
-// One regex per language. Alternatives are tried in order at each position; the named groups tell which matched:
-// c = comment, s = string, n = number, k = keyword.
 function makeTokenizer(lang) {
   const words = (lang === 'py' ? PY_KEYWORDS : JS_KEYWORDS).split(' ').join('|');
   const comment = lang === 'py' ? '#[^\\n]*' : '\\/\\/[^\\n]*|\\/\\*[\\s\\S]*?(?:\\*\\/|$)';
@@ -37,13 +19,22 @@ function makeTokenizer(lang) {
 const TOKENIZERS = { js: makeTokenizer('js'), py: makeTokenizer('py') };
 
 const escapeHtml = (t) => t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+const CALL_RE = /[A-Za-z_$][\w$]*(?=\s*\()/g;
 
-// Turn source text into one HTML string per line, with <span class="cp-.."> around coloured tokens.
-// A token that spans several lines (a block comment) is cut at the line breaks so every line stays balanced.
-export function highlightLines(text, lang) {
+function markCalls(text, calls) {
+  let html = '', last = 0;
+  for (const m of text.matchAll(CALL_RE)) {
+    if (!calls.has(m[0])) continue;
+    html += escapeHtml(text.slice(last, m.index)) + `<span class="cp-call" data-call="${m[0]}">${m[0]}</span>`;
+    last = m.index + m[0].length;
+  }
+  return html + escapeHtml(text.slice(last));
+}
+
+export function highlightLines(text, lang, opts = {}) {
   const re = TOKENIZERS[lang === 'py' ? 'py' : 'js'];
   re.lastIndex = 0;
-  const pieces = []; // { text, cls }
+  const pieces = [];
   let last = 0, m;
   while ((m = re.exec(text)) !== null) {
     if (m[0] === '') { re.lastIndex++; continue; }
@@ -54,24 +45,34 @@ export function highlightLines(text, lang) {
   }
   if (last < text.length) pieces.push({ text: text.slice(last), cls: '' });
 
-  const lines = [''];
+  const perLine = [[]];
   for (const { text: t, cls } of pieces) {
     t.split('\n').forEach((part, i) => {
-      if (i > 0) lines.push('');
-      if (part) lines[lines.length - 1] += cls ? `<span class="${cls}">${escapeHtml(part)}</span>` : escapeHtml(part);
+      if (i > 0) perLine.push([]);
+      if (part) perLine[perLine.length - 1].push({ text: part, cls });
     });
   }
-  return lines;
+
+  const { calls, firstLine = 1, skipLines } = opts;
+  return perLine.map((segments, i) => {
+    const tappable = calls && calls.size > 0 && !(skipLines && skipLines.has(firstLine + i));
+    return segments.map(({ text: t, cls }) => {
+      if (cls) return `<span class="${cls}">${escapeHtml(t)}</span>`;
+      return tappable ? markCalls(t, calls) : escapeHtml(t);
+    }).join('');
+  });
 }
 
-// Portrait (a phone held upright): a bottom sheet. Landscape (laptop, or a phone held sideways): docked to the right, scrolling.
 const NARROW = '(orientation: portrait)';
 const COMPACT = `(max-height: ${THEME.COMPACT_HEIGHT_PX}px)`;
-// Width of the docked panel: at most CODE_PANEL_WIDTH_PX and at most 50 % of the screen, so the picture keeps room.
 const panelWidth = () => Math.min(THEME.CODE_PANEL_WIDTH_PX, 0.5 * window.innerWidth);
 
-// `onInset(rightPx, bottomPx)` is told how much of the screen the panel covers, so the 3D view can slide
-// the focus into the visible part (navigation.js).
+export function trimBlankSourceEdges(lines, first, end) {
+  while (first <= end && lines[first - 1].trim() === '') first++;
+  while (end >= first && lines[end - 1].trim() === '') end--;
+  return { first, end };
+}
+
 export function createCodePanel({ onInset } = {}) {
   const css = document.createElement('style');
   css.textContent = `
@@ -82,7 +83,8 @@ export function createCodePanel({ onInset } = {}) {
       box-shadow: -8px 0 24px rgba(0, 0, 0, 0.6);
       font: ${THEME.CODE_FONT_PX}px/1.45 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
     #code.open { display: flex; }
-    body.code-open #help { display: none; } /* the help line would show through the sheet */
+    #code.folded { bottom: auto; height: 48px; }
+    body.code-open #help { display: none; }
     #code .cp-head { display: flex; align-items: center; gap: 8px; padding: 0 0 0 12px; min-height: 48px;
       box-sizing: border-box; border-bottom: 1px solid ${cssRgb(THEME.CODE_LINENO, 0.3)}; color: ${cssRgb(THEME.CODE_HEADER)};
       font-family: system-ui, sans-serif; cursor: pointer; user-select: none; }
@@ -123,7 +125,23 @@ export function createCodePanel({ onInset } = {}) {
       overflow: hidden; text-overflow: ellipsis; }
     #code .cp-dots { flex: none; letter-spacing: 1px; color: var(--link-color); font-size: 11px; }
     #code .cp-more { justify-content: center; color: ${cssRgb(THEME.CODE_HEADER)}; }
-    /* Short windows (phone held sideways): the panel uses the whole height, with a slimmer header and smaller text. */
+    #code .cp-dim { opacity: ${THEME.CODE_CONTEXT_DIM || 0.42}; }
+    #code .cp-nb { display: flex; align-items: center; box-sizing: border-box; min-height: 40px; padding: 0 12px;
+      position: sticky; left: 0; background: ${cssRgb(THEME.CODE_BG)}; cursor: pointer; user-select: none;
+      font: 12px system-ui, sans-serif; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      color: ${cssRgb(THEME.CODE_HEADER)}; opacity: ${THEME.CODE_NEIGHBOUR_DIM || 0.55}; }
+    #code .cp-nb:hover, #code .cp-nb:focus-visible { opacity: 1; outline: none; }
+    #code .cp-nb::before { margin-right: 8px; font-size: 9px; }
+    #code .cp-nb.prev::before { content: '▲'; }
+    #code .cp-nb.next::before { content: '▼'; }
+    #code .cp-call, #code .cp-imp { cursor: pointer; -webkit-tap-highlight-color: transparent; }
+    #code .cp-call { padding: 5px 2px; margin: 0 -2px; border-radius: 3px; }
+    #code .cp-call:hover, #code .cp-call:active { background: ${cssRgb(THEME.LINK_CALL_COLOR, 0.22)}; }
+    #code .cp-imp:hover, #code .cp-imp:active { background: ${cssRgb(THEME.LINK_IMPORT_COLOR, 0.16)}; }
+    #code .cp-call::after, #code .cp-imp > span:last-child::after { content: ''; display: inline-block; vertical-align: 0.4em;
+      width: ${THEME.CODE_LINK_DOT_PX || 6}px; height: ${THEME.CODE_LINK_DOT_PX || 6}px; border-radius: 50%; margin-left: 3px; }
+    #code .cp-call::after { background: ${cssRgb(THEME.LINK_CALL_COLOR)}; }
+    #code .cp-imp > span:last-child::after { background: ${cssRgb(THEME.LINK_IMPORT_COLOR)}; margin-left: 10px; }
     @media ${COMPACT} {
       #code { top: calc(6px + max(var(--study-h, 0px), var(--sai-t))); bottom: calc(6px + var(--sai-b)); font-size: 12px; }
       #code .cp-head { min-height: 40px; }
@@ -131,13 +149,12 @@ export function createCodePanel({ onInset } = {}) {
       #code .cp-tabs button { height: 36px; }
       #code .cp-name { font-size: 13px; }
     }
-    /* Portrait: a bottom sheet instead of a side panel. */
     @media ${NARROW} {
       #code { top: auto; left: 0; right: 0; bottom: 0; width: auto; height: ${THEME.CODE_SHEET_HEIGHT_VH}vh;
         border-left: 0; border-top: 2px solid ${cssRgb(THEME.CODE_EDGE, 0.7)}; border-radius: 12px 12px 0 0;
         box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.6);
         padding: 0 var(--sai-r) var(--sai-b) var(--sai-l); }
-      #code.folded { height: auto; }
+      #code.folded { bottom: 0; height: auto; }
     }`;
   document.head.appendChild(css);
 
@@ -154,14 +171,16 @@ export function createCodePanel({ onInset } = {}) {
   const tabsEl = el.querySelector('.cp-tabs');
   const listEl = el.querySelector('.cp-list');
 
-  let hasContent = false;   // something to show for the current focus
-  let closedByUser = false; // the user pressed ×: stay hidden until the focus changes
+  let hasContent = false;
+  let closedByUser = false;
   let folded = false;
-  let groups = [];          // link lists: [{ title, color: [r, g, b], entries: [{ name, sub, dots, ... }] }]
+  let groups = [];
   let onPick = null;
-  let active = -1;          // -1 = code, else the index of the open link group
+  let active = -1;
+  let neighbourTaps = null;
+  let tokens = null;
+  let onToken = null;
 
-  // Tabs: "Code" plus one per non-empty link group.
   function renderTabs() {
     tabsEl.textContent = '';
     if (!groups.some((g) => g.entries.length)) { active = -1; el.classList.remove('listing'); return; }
@@ -177,7 +196,6 @@ export function createCodePanel({ onInset } = {}) {
     el.classList.toggle('listing', active >= 0);
   }
 
-  // The open group's entries, LIST_PAGE at a time.
   function renderList(limit = LIST_PAGE) {
     listEl.textContent = '';
     if (active < 0) return;
@@ -188,7 +206,7 @@ export function createCodePanel({ onInset } = {}) {
       const ent = document.createElement('span');
       ent.className = 'cp-ent';
       const name = document.createElement('b');
-      name.textContent = entry.name + (entry.count > 1 ? `  ×${entry.count}` : '');
+      name.textContent = entry.name + (entry.count > 1 ? ` ×${entry.count}` : '');
       const sub = document.createElement('i');
       sub.textContent = entry.sub;
       ent.append(name, sub);
@@ -214,21 +232,20 @@ export function createCodePanel({ onInset } = {}) {
     el.classList.toggle('open', open);
     el.classList.toggle('folded', folded);
     document.body.classList.toggle('code-open', open);
-    // Tell the page how much of the bottom the sheet covers, so the breadcrumb can sit above it.
     const narrow = window.matchMedia(NARROW).matches;
     const sheet = open && narrow ? (folded ? '48px' : `${THEME.CODE_SHEET_HEIGHT_VH}vh`) : '0px';
     document.documentElement.style.setProperty('--sheet-h', sheet);
-    document.documentElement.style.setProperty('--panel-w', open && !narrow ? `${panelWidth()}px` : '0px');
+    document.documentElement.style.setProperty('--panel-w', open && !folded && !narrow ? `${panelWidth()}px` : '0px');
     if (onInset) {
       if (!open) onInset(0, 0);
       else if (narrow) onInset(0, folded ? 48 : (THEME.CODE_SHEET_HEIGHT_VH / 100) * window.innerHeight);
-      else onInset(panelWidth(), 0);
+      else onInset(folded ? 0 : panelWidth(), 0);
     }
   }
 
   el.querySelector('.cp-head').addEventListener('click', (e) => {
     if (e.target.closest('.cp-close')) closedByUser = true;
-    else folded = !folded; // tapping the header (or –) folds/unfolds
+    else folded = !folded;
     applyVisibility();
   });
   window.addEventListener('keydown', (e) => {
@@ -239,18 +256,33 @@ export function createCodePanel({ onInset } = {}) {
   });
   window.addEventListener('resize', applyVisibility);
 
+  const activateNeighbour = (nb) => { const n = neighbourTaps && neighbourTaps[nb.dataset.nb]; if (n && n.tap) n.tap(); };
+  bodyEl.addEventListener('click', (e) => {
+    const call = e.target.closest('.cp-call');
+    if (call) { const entry = tokens && tokens.calls.get(call.dataset.call); if (entry && onToken) onToken('call', entry); return; }
+    const imp = e.target.closest('.cp-imp');
+    if (imp) { const entry = tokens && tokens.imports.get(Number(imp.dataset.imp)); if (entry && onToken) onToken('import', entry); return; }
+    const nb = e.target.closest('.cp-nb');
+    if (nb) activateNeighbour(nb);
+  });
+  bodyEl.addEventListener('keydown', (e) => {
+    const nb = e.target.closest && e.target.closest('.cp-nb');
+    if (nb && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); activateNeighbour(nb); }
+  });
+
   return {
     get visible() { return el.classList.contains('open'); },
     get element() { return el; },
 
-    // Show a snippet. `lines` = array of source lines for the whole file (or null if there is no source);
-    // `from`..`to` are 1-based and inclusive.
-    show({ title, subtitle, lines, from, to, lang }) {
+    show({ title, subtitle, lines, from, to, lang, context = null, tokens: tok = null, onToken: pick = null }) {
       closedByUser = false;
       hasContent = true;
       nameEl.textContent = title;
       subEl.textContent = subtitle;
       bodyEl.textContent = '';
+      neighbourTaps = context ? { prev: context.prev || null, next: context.next || null } : null;
+      tokens = tok;
+      onToken = pick;
       if (!lines) {
         const note = document.createElement('div');
         note.className = 'cp-note';
@@ -258,19 +290,44 @@ export function createCodePanel({ onInset } = {}) {
         bodyEl.appendChild(note);
       } else {
         const last = Math.min(to, lines.length, from + MAX_LINES - 1);
-        const html = highlightLines(lines.slice(from - 1, last).join('\n'), lang);
-        const width = String(last).length; // gutter wide enough for the biggest number
-        const rows = html.map((h, i) =>
-          `<div class="cp-row"><span class="cp-ln" style="min-width:${width}ch">${from + i}</span><span>${h || ' '}</span></div>`);
-        if (last < to) rows.push(`<div class="cp-note">… ${to - last} more lines not shown</div>`);
+        const cut = last < to;
+        const n = context ? context.lines : 0;
+        const range = contextRange(from, to, lines.length, n, lines);
+        const { first, end } = trimBlankSourceEdges(lines, range.beforeFrom, cut ? last : Math.max(last, range.afterTo));
+        const skip = new Set(tok ? tok.skipLines : []);
+        for (let k = first; k < from; k++) skip.add(k);
+        for (let k = last + 1; k <= end; k++) skip.add(k);
+        const html = first <= end
+          ? highlightLines(lines.slice(first - 1, end).join('\n'), lang,
+            { calls: tok ? new Set(tok.calls.keys()) : null, firstLine: first, skipLines: skip })
+          : [];
+        const lastDisplayLine = first + html.length - 1;
+        const width = String(lastDisplayLine).length;
+        const rows = [];
+        const prev = neighbourTaps && neighbourTaps.prev;
+        if (prev) rows.push(`<div class="cp-nb prev" role="button" tabindex="0" data-nb="prev">prev: ${escapeHtml(prev.name)}</div>`);
+        html.forEach((h, i) => {
+          const line = first + i;
+          const displayLine = line;
+          const dim = line < from || line > last;
+          const imp = !dim && tok && tok.imports.has(line);
+          rows.push(`<div class="cp-row${dim ? ' cp-dim' : ''}${imp ? ' cp-imp' : ''}"${imp ? ` data-imp="${line}"` : ''}>` +
+            `<span class="cp-ln" style="min-width:${width}ch">${displayLine}</span><span>${h || ' '}</span></div>`);
+        });
+        if (cut) rows.push(`<div class="cp-note">… ${to - last} more lines not shown</div>`);
+        const next = neighbourTaps && neighbourTaps.next;
+        if (next) rows.push(`<div class="cp-nb next" role="button" tabindex="0" data-nb="next">next: ${escapeHtml(next.name)}</div>`);
         bodyEl.innerHTML = rows.join('');
       }
       bodyEl.scrollTop = 0;
       applyVisibility();
     },
 
-    // Link lists for the focus (Phase 4c). `list` = [{ title, color, entries }]; `pick(entry)` is called on a tap.
-    // Opens on the code tab again (a new focus starts with its code).
+    get tappable() {
+      return { calls: bodyEl.querySelectorAll('.cp-call').length, imports: bodyEl.querySelectorAll('.cp-imp').length,
+        neighbours: bodyEl.querySelectorAll('.cp-nb').length, dimmed: bodyEl.querySelectorAll('.cp-dim').length };
+    },
+
     setLinks(list, pick) {
       groups = list || [];
       onPick = pick;
@@ -281,10 +338,9 @@ export function createCodePanel({ onInset } = {}) {
     get linkTabs() { return [...tabsEl.querySelectorAll('button')].map((b) => b.textContent); },
     openTab(index) { active = index; renderTabs(); renderList(); },
 
-    // The focus has nothing to show (a folder): hide.
     hide() {
       hasContent = false;
       applyVisibility();
-    },
+    }
   };
 }

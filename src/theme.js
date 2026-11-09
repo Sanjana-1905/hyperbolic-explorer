@@ -24,8 +24,8 @@ export const THEME = {
   // ---- Arm palette (each top-level folder is an "arm" with its own hue) ----------
   // Hues are positions on the colour wheel: 0 red, 0.17 yellow, 0.33 green, 0.5 cyan,
   // 0.67 blue, 0.83 purple, 1 red again.
-  ARM_HUE_FIRST: 0.47,         // first folder arm: teal
-  ARM_HUE_LAST: 0.87,          // last folder arm: magenta (arms in between are spread evenly)
+  ARM_HUE_FIRST: 0.55,         // first folder arm: teal
+  ARM_HUE_LAST: 0.90,          // last folder arm: magenta (arms in between are spread evenly)
   ROOT_HUE: 0.6,               // the root folder when it is not the focus
   LOOSE_FILE_HUE: 0.77,        // files sitting directly in the root (not an arm): violet
   ARM_SATURATION: 0.78,        // colour richness of arms, 0 = grey .. 1 = fully saturated
@@ -44,7 +44,7 @@ export const THEME = {
   MIN_R: 0.0025,               // no core is ever drawn smaller than this (keeps far nodes visible)
   GLOW_SCALE: 3.0,             // node quad = this many core radii wide (room for the glow)
   CHILD_HALO: 5.0,             // halo quad size behind children of the focus (x core radius)
-  FOCUS_HALO: 9.0,             // halo quad size behind the focus (x core radius)
+  FOCUS_HALO: 2.0,             // halo quad size behind the focus (x core radius)
   BREATHE_AMOUNT: 0.06,        // folders swell and shrink by this fraction (0.06 = +-6 %)
   BREATHE_SPEED: 0.8,          // breathing speed (radians per second)
 
@@ -62,14 +62,14 @@ export const THEME = {
   FOLDER_PULSE: 0.15,          // folders pulse by +-this (0.15 = +-15 %)
   FOLDER_BRIGHT_BASE: 0.7,     // folder brightness = BASE + PER_ENERGY * energy
   FOLDER_BRIGHT_PER_ENERGY: 0.6,
-  FOCUS_BRIGHT: 1.2,           // brightness of the focus node's own ball
+  FOCUS_BRIGHT: 0.7,           // brightness of the focus node's own ball
   FILE_PALE: 0.6,              // files are this much blended toward FILE_TINT (pale)
   TONE_GAIN: 1.5,              // soft limiter 1 - e^(-gain * x) used by every shader; bigger = brighter, more clipping
 
   // ---- Node colours --------------------------------------------------------------
   WARM_TINT: [1.0, 0.85, 0.55],    // warm light near the focus
   FILE_TINT: [0.88, 0.92, 1.0],    // pale colour files lean toward
-  FOCUS_COLOR: [1.0, 0.78, 0.38],  // the focus: gold
+  FOCUS_COLOR: [1.0, 0.8, 0.42],  // the focus: gold
   FLAG_COLOR: [1.0, 0.2, 0.8],     // status-marker ring (aFlag = 1)
 
   // ---- Node shading (the fake star / sphere) -----------------------------------------
@@ -83,27 +83,27 @@ export const THEME = {
   SPHERE_BASE: 0.40,           // ball brightness at its edge ...
   SPHERE_CENTRE: 0.45,         // ... plus this much more at its centre
   CORE_WHITE_FOLDER: 0.4,      // folder centre blends this far toward white (hot core)
-  CORE_WHITE_FOCUS: 0.95,      // the focus centre blends this far toward white
+  CORE_WHITE_FOCUS: 0.55,      // the focus centre blends this far toward white
   GLOW_POWER: 2.5,             // folder halo falloff (1 - q)^power: bigger = tighter glow
-  GLOW_GAIN: 0.6,              // folder halo strength
+  GLOW_GAIN: 0.5,              // folder halo strength
   FILE_POINT_POWER: 4.0,       // file point falloff: bigger = smaller point
   FILE_CORE_GAIN: 0.8,         // brightness of a file's tiny core
   HALO_CHILD_STRENGTH: 0.30,   // halo glow strength behind children of the focus
-  HALO_FOCUS_STRENGTH: 0.55,   // halo glow strength behind the focus
+  HALO_FOCUS_STRENGTH: 0.10,   // halo glow strength behind the focus
   FLAG_RING_AT: 0.85,          // radius of the status ring (0..1 across the quad)
   FLAG_RING_WIDTH: 0.06,       // thickness of the status ring
 
   // ---- Sun (billboard at the focus) ------------------------------------------------
   SUN_SCALE: 14.0,             // sun billboard = this many core radii wide (corona and rays)
-  SUN_PULSE: 0.08,             // sun pulses +-this (0.08 = +-8 %)
+  SUN_PULSE: 0.03,             // sun pulses +-this (0.03 = +-3 %)
   SUN_PULSE_SPEED: 1.3,        // pulse speed (radians per second)
   SUN_CORE_W: 0.055,           // white core width (0..1 across the billboard)
   SUN_INNER_W: 0.15,           // gold inner glow width
   SUN_CORONA_POWER: 4.0,       // corona falloff: bigger = tighter
   SUN_CORE_GAIN: 1.2,          // white core strength
-  SUN_INNER_GAIN: 0.9,         // gold glow strength
+  SUN_INNER_GAIN: 0.8,         // gold glow strength
   SUN_CORONA_GAIN: 0.30,       // corona strength
-  SUN_RAY_GAIN: 0.9,           // rays strength
+  SUN_RAY_GAIN: 0.08,          // rays strength
   SUN_RAY_SHARP_A: 30.0,       // long (6) rays: bigger = thinner
   SUN_RAY_SHARP_B: 40.0,       // short (4) rays: bigger = thinner
   SUN_RAY_B_GAIN: 0.5,         // strength of the short rays relative to the long ones
@@ -198,8 +198,8 @@ export const THEME = {
   BLOOM_SECONDS: 0.45,         // new symbols grow out of their parent over this long (effect speed; comfort rule: under 0.6 s)
 
   // ---- Links (Phase 4c): imports and calls as bundled glowing arcs ------------------------------
-  LINK_IMPORT_COLOR: [0.35, 0.80, 1.0],   // import arcs (file -> file): cyan
-  LINK_CALL_COLOR: [1.0, 0.48, 0.62],     // call arcs (symbol -> symbol): coral pink
+  LINK_IMPORT_COLOR: [0.4, 0.65, 0.9],   // import arcs (file -> file): ice blue
+  LINK_CALL_COLOR: [1.0, 0.62, 0.25],     // call arcs (symbol -> symbol): warm amber
   LINK_TENSION: 0.8,          // bundling strength (Holten's beta): 0 = straight geodesic, 1 = follow the tree path exactly
   LINK_WIDTH_PX: 2.4,          // base arc width in CSS pixels (JS: scaled by the pixel ratio)
   LINK_WIDTH_FAR: 0.5,         // width factor far from the focus (x base) ...
@@ -209,8 +209,8 @@ export const THEME = {
   LINK_COUNT_MAX: 1.6,
   LINK_FOG_RATE: 0.25,         // link fog = e^(-d * rate) with d = hyperbolic distance from the focus
   LINK_BRIGHT_FLOOR: 0.12,     // far parts of an arc never fade below this brightness ...
-  LINK_BRIGHT_NEAR: 0.7,      // ... plus this much more next to the focus
-  LINK_CONF_FLOOR: 0.3,        // brightness of a confidence-0 arc relative to a sure one (guessed calls are faint)
+  LINK_BRIGHT_NEAR: 0.5,      // ... plus this much more next to the focus
+  LINK_CONF_FLOOR: 0.08,        // brightness of a confidence-0 arc relative to a sure one (guessed calls are faint)
   LINK_SOURCE_DIM: 0.55,        // direction cue: the source end is drawn at this fraction of the target end's brightness
   LINK_PULSE_SPEED: 0.45,      // light pulses running source -> target: laps per second
   LINK_PULSE_GAP: 1.7,         // lap length in arc lengths (> 1 leaves a rest between pulses)
@@ -232,12 +232,15 @@ export const THEME = {
   CODE_EDGE: [0.45, 0.55, 1.0],// bright thin line along the panel's edge, separating it from the 3D view
   CODE_TEXT: [0.86, 0.90, 1.0],        // ordinary code
   CODE_LINENO: [0.40, 0.46, 0.66],     // line numbers
-  CODE_KEYWORD: [0.78, 0.62, 1.0],     // keywords (function, class, def, return ...)
+  CODE_KEYWORD: [0.68, 0.58, 0.95],     // keywords (function, class, def, return ...)
   CODE_STRING: [0.55, 0.90, 0.70],     // string literals
   CODE_COMMENT: [0.46, 0.53, 0.68],    // comments
   CODE_NUMBER: [1.0, 0.76, 0.46],      // numbers
   CODE_HEADER: [0.72, 0.80, 1.0],      // title bar text
-
+  CODE_CONTEXT_LINES: 3,       // lines shown before and after the focused symbol's own lines (dimmed, not tappable)
+  CODE_CONTEXT_DIM: 0.42,      // opacity of those context lines
+  CODE_NEIGHBOUR_DIM: 0.55,    // opacity of the faint "prev: ..." / "next: ..." header rows
+  CODE_LINK_DOT_PX: 6,         // diameter of the coloured dot on tappable call names and import lines
   // ---- Toolbar and intro card (on-screen navigation for first-time users) ------------------------
   TOOLBAR_BTN_PX: 44,          // height / minimum width of toolbar buttons (44 px = comfortable thumb target)
   TOOLBAR_BAND_PX: 130,        // height of the strip at the bottom that the one-row toolbar occupies (76 px gap + one 44 px button + margin):
@@ -352,6 +355,8 @@ export const THEME = {
   // Adaptive quality: if the frame rate stays under ADAPT_FPS for ADAPT_SECONDS, the pixel ratio is multiplied by ADAPT_STEP
   // (never below ADAPT_MIN_PIXEL_RATIO), then we wait ADAPT_COOLDOWN_S before judging again. It never goes back up (no flip-flop).
   ADAPT_FPS: 50,                   // "too slow" threshold (frames per second)
+  DESKTOP_ADAPT_FPS: 30,           // on a desktop/laptop the step only reacts below this (phones use ADAPT_FPS)
+  DESKTOP_ADAPT_SECONDS: 3,        // ...and only if it stays that slow this long
   ADAPT_SECONDS: 2,                // how long it must stay too slow
   ADAPT_STEP: 0.8,                 // pixel ratio multiplier per step (1.5 -> 1.2 -> 0.96 -> 0.77)
   ADAPT_MIN_PIXEL_RATIO: 0.75,     // lowest render resolution the adaptive step will go to

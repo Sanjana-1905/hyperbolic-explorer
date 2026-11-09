@@ -550,5 +550,15 @@ Reported: clicking an arc end or body did not focus the other node, though the I
 - **Still ambiguous (fix 2, not done):** arcs that end on the same 1-3 px blob (20 "Called by" arcs into collapsed folders) cannot be told apart by a click; the nearest wins. Arc ends are also small; no hover highlight yet (fix 4, not done).
 - Not tested: the real S26 (finger reach, the sideways-scrolling toolbar, Back first); landscape still has the toolbar as a left column with no inset.
 
+### Step 3 — code panel interconnections and visual tuning (headless verified)
+- [x] Code context resolves JS/TS and Python import specs, maps matching imports, builds call targets from link data, and includes nested symbol descendants and definition lines. `tests/codecontext.test.js` passes without weakened import assertions.
+- [x] The panel retains actual source line numbers after trimming leading blank lines. A regression test verifies a file with two leading blank lines still displays the first visible source row as line 3.
+- [x] If `links.json` finishes loading after a file is already focused, the panel rebuilds its code tokens so calls become tappable without refocusing.
+- [x] Focus flare softened: sun ray gain 0.08, pulse variation 3%, focus halo size 2.0 and lower halo strength; the core remains visible. Generated `public/data/zz_scroll` is ignored and absent from both `public` and `dist`; the phone audit removes its temporary fixture.
+- Verification: `npm test` passes, including 46,670 scanner checks; `npm run build` succeeds; `npm run test:phone` passes **172 / 172** checks with no console errors.
+
+### Step 4 — smooth code scrolling (pending in current working tree)
+- Native panel overflow remains, but eased focus-line scrolling and its dedicated scroll-performance audit are not currently present. Do not report those interactions as complete until reimplemented and checked on the target phone.
+
 ## Later
 5 Cross-file links (done early, in 4c) · 6 Search/info/git heat/2nd dataset · 7 AR tabletop · 8 User study + report · 9 VR Cardboard + final visual polish

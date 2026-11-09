@@ -1,19 +1,19 @@
 | viewport | check | result | detail |
 |---|---|---|---|
-| portrait 412x915 | edges: root: no stray edges | PASS | 1355 edges, 0/85350 stray px (0.00 %) |
+| portrait 412x915 | edges: root: no stray edges | PASS | 1355 edges, 0/85371 stray px (0.00 %) |
 | portrait 412x915 | edges: root: no missing edges | PASS | 46 near edges checked |
-| portrait 412x915 | edges: a folder: no stray edges | PASS | 832 edges, 0/63558 stray px (0.00 %) |
+| portrait 412x915 | edges: a folder: no stray edges | PASS | 832 edges, 0/63567 stray px (0.00 %) |
 | portrait 412x915 | edges: a folder: no missing edges | PASS | 48 near edges checked |
 | portrait 412x915 | edges: file opened its galaxy (setup) | PASS | 15 symbol nodes |
-| portrait 412x915 | edges: file open (symbols): no stray edges | PASS | 630 edges, 0/56787 stray px (0.00 %) |
+| portrait 412x915 | edges: file open (symbols): no stray edges | PASS | 630 edges, 0/56838 stray px (0.00 %) |
 | portrait 412x915 | edges: file open (symbols): no missing edges | PASS | 48 near edges checked |
-| portrait 412x915 | edges: a symbol focused: no stray edges | PASS | 284 edges, 0/21045 stray px (0.00 %) |
+| portrait 412x915 | edges: a symbol focused: no stray edges | PASS | 284 edges, 0/21037 stray px (0.00 %) |
 | portrait 412x915 | edges: a symbol focused: no missing edges | PASS | 28 near edges checked |
 | portrait 412x915 | edges: mid-glide (was animating: true) | PASS | 0.00 % stray, 0 missing |
-| portrait 412x915 | edges: after the glide, two files open: no stray edges | PASS | 382 edges, 0/41160 stray px (0.00 %) |
+| portrait 412x915 | edges: after the glide, two files open: no stray edges | PASS | 382 edges, 0/41161 stray px (0.00 %) |
 | portrait 412x915 | edges: after the glide, two files open: no missing edges | PASS | 38 near edges checked |
 | portrait 412x915 | edges: files closed again after leaving (no leftover galaxies) | PASS | {"open":0,"dyn":0} |
-| portrait 412x915 | edges: after 20 files opened and closed, back at root: no stray edges | PASS | 966 edges, 0/74477 stray px (0.00 %) |
+| portrait 412x915 | edges: after 20 files opened and closed, back at root: no stray edges | PASS | 966 edges, 0/74470 stray px (0.00 %) |
 | portrait 412x915 | edges: after 20 files opened and closed, back at root: no missing edges | PASS | 46 near edges checked |
 | portrait 412x915 | arcs: found sample foci (file, class, method, function) | PASS | {"file":[0,-2],"func":[0,0],"cls":[2,0],"method":[2,2]} |
 | portrait 412x915 | arcs: focus = file | PASS | 7 arcs for 25/25 links, 2 merged |
@@ -57,9 +57,9 @@
 | portrait 412x915 | follow: closed file 4: Back returns to the start | PASS | focus 19 expected 19, depth 0 |
 | portrait 412x915 | cases: closed file 3 (was closed: true) -> symbol 3: lands exactly on the symbol | PASS | {"focus":5027,"want":5027,"r":0,"depth":1,"pend":false} |
 | portrait 412x915 | follow: closed file 3: Back returns to the start | PASS | focus 20 expected 20, depth 0 |
-| portrait 412x915 | cases: closed file 3 (was closed: true) -> symbol 3: lands exactly on the symbol | PASS | {"focus":5022,"want":5022,"r":0,"depth":1,"pend":false} |
+| portrait 412x915 | cases: closed file 3 (was closed: true) -> symbol 3: lands exactly on the symbol | PASS | {"focus":5015,"want":5015,"r":0,"depth":1,"pend":false} |
 | portrait 412x915 | follow: closed file 3: Back returns to the start | PASS | focus 22 expected 22, depth 0 |
-| portrait 412x915 | cases: closed file 7 (was closed: true) -> symbol 0: lands exactly on the symbol | PASS | {"focus":5020,"want":5020,"r":0,"depth":1,"pend":false} |
+| portrait 412x915 | cases: closed file 7 (was closed: true) -> symbol 0: lands exactly on the symbol | PASS | {"focus":5028,"want":5028,"r":0,"depth":1,"pend":false} |
 | portrait 412x915 | follow: closed file 7: Back returns to the start | PASS | focus 26 expected 26, depth 0 |
 | portrait 412x915 | cases: arcs ending at a collapsed +N orb exist (from a focused file) | PASS | 2 found |
 | portrait 412x915 | cases: follow an arc into orb 1476 (merges 1 links) | PASS | {"focus":3109,"r":0,"depth":1,"state":0,"expected":3109} |
@@ -77,20 +77,20 @@
 | portrait 412x915 (400-symbol cut) | cut: a link to symbol 10 (inside the cut) lands exactly on it | PASS | {"focus":13,"want":13,"r":0} |
 | portrait 412x915 (400-symbol cut) | cut: arc audit on the big file is clean | PASS | 3 arcs  |
 | portrait 412x915 (400-symbol cut) | cut: edges of the 400-symbol galaxy match the prediction | PASS | 403 edges, 0.00 % stray, 0 missing |
-| landscape 915x412 | edges: root: no stray edges | PASS | 1355 edges, 0/47003 stray px (0.00 %) |
+| landscape 915x412 | edges: root: no stray edges | PASS | 1355 edges, 0/47001 stray px (0.00 %) |
 | landscape 915x412 | edges: root: no missing edges | PASS | 46 near edges checked |
-| landscape 915x412 | edges: a folder: no stray edges | PASS | 832 edges, 0/35612 stray px (0.00 %) |
+| landscape 915x412 | edges: a folder: no stray edges | PASS | 832 edges, 0/35609 stray px (0.00 %) |
 | landscape 915x412 | edges: a folder: no missing edges | PASS | 49 near edges checked |
 | landscape 915x412 | edges: file opened its galaxy (setup) | PASS | 15 symbol nodes |
-| landscape 915x412 | edges: file open (symbols): no stray edges | PASS | 630 edges, 0/30287 stray px (0.00 %) |
+| landscape 915x412 | edges: file open (symbols): no stray edges | PASS | 630 edges, 0/30284 stray px (0.00 %) |
 | landscape 915x412 | edges: file open (symbols): no missing edges | PASS | 48 near edges checked |
-| landscape 915x412 | edges: a symbol focused: no stray edges | PASS | 284 edges, 0/16814 stray px (0.00 %) |
+| landscape 915x412 | edges: a symbol focused: no stray edges | PASS | 284 edges, 0/16815 stray px (0.00 %) |
 | landscape 915x412 | edges: a symbol focused: no missing edges | PASS | 30 near edges checked |
 | landscape 915x412 | edges: mid-glide (was animating: true) | PASS | 0.00 % stray, 0 missing |
-| landscape 915x412 | edges: after the glide, two files open: no stray edges | PASS | 382 edges, 0/18494 stray px (0.00 %) |
+| landscape 915x412 | edges: after the glide, two files open: no stray edges | PASS | 382 edges, 0/18498 stray px (0.00 %) |
 | landscape 915x412 | edges: after the glide, two files open: no missing edges | PASS | 38 near edges checked |
 | landscape 915x412 | edges: files closed again after leaving (no leftover galaxies) | PASS | {"open":0,"dyn":0} |
-| landscape 915x412 | edges: after 20 files opened and closed, back at root: no stray edges | PASS | 966 edges, 0/39757 stray px (0.00 %) |
+| landscape 915x412 | edges: after 20 files opened and closed, back at root: no stray edges | PASS | 966 edges, 0/39758 stray px (0.00 %) |
 | landscape 915x412 | edges: after 20 files opened and closed, back at root: no missing edges | PASS | 46 near edges checked |
 | landscape 915x412 | arcs: found sample foci (file, class, method, function) | PASS | {"file":[0,-2],"func":[0,0],"cls":[2,0],"method":[2,2]} |
 | landscape 915x412 | arcs: focus = file | PASS | 7 arcs for 25/25 links, 2 merged |
@@ -125,18 +125,18 @@
 | landscape 915x412 | follow: minimap tap: lands on the target | PASS | focus 3 expected 3, radius 0.0e+0 |
 | landscape 915x412 | follow: minimap tap: pushes the back stack | PASS | depth 0 -> 1 |
 | landscape 915x412 | follow: minimap tap: Back returns to the start | PASS | focus 0 expected 0, depth 0 |
-| landscape 915x412 | follow: chain of 6 follows lands exactly each time | PASS | arc:19 > arc:14 > arc:20 > arc:524 > arc:518 > arc:5039 |
+| landscape 915x412 | follow: chain of 6 follows lands exactly each time | PASS | arc:19 > arc:14 > arc:20 > arc:524 > arc:518 > arc:5031 |
 | landscape 915x412 | follow: back stack depth equals number of follows | PASS | 6 vs 6 |
 | landscape 915x412 | follow: backing out retraces the chain and ends at the start with an empty stack | PASS | n518 < n524 < n20 < n14 < n19 < n8; end {"focus":8,"depth":0,"r":0} |
 | landscape 915x412 | follow: Backspace on an empty stack goes to the parent | PASS |  |
 | landscape 915x412 | cases: found links into closed files | PASS | 4 cases |
-| landscape 915x412 | cases: closed file 4 (was closed: true) -> symbol 3: lands exactly on the symbol | PASS | {"focus":5043,"want":5043,"r":0,"depth":1,"pend":false} |
+| landscape 915x412 | cases: closed file 4 (was closed: true) -> symbol 3: lands exactly on the symbol | PASS | {"focus":5034,"want":5034,"r":0,"depth":1,"pend":false} |
 | landscape 915x412 | follow: closed file 4: Back returns to the start | PASS | focus 19 expected 19, depth 0 |
 | landscape 915x412 | cases: closed file 3 (was closed: true) -> symbol 3: lands exactly on the symbol | PASS | {"focus":5027,"want":5027,"r":0,"depth":1,"pend":false} |
 | landscape 915x412 | follow: closed file 3: Back returns to the start | PASS | focus 20 expected 20, depth 0 |
 | landscape 915x412 | cases: closed file 3 (was closed: true) -> symbol 3: lands exactly on the symbol | PASS | {"focus":5019,"want":5019,"r":0,"depth":1,"pend":false} |
 | landscape 915x412 | follow: closed file 3: Back returns to the start | PASS | focus 22 expected 22, depth 0 |
-| landscape 915x412 | cases: closed file 7 (was closed: true) -> symbol 0: lands exactly on the symbol | PASS | {"focus":5031,"want":5031,"r":0,"depth":1,"pend":false} |
+| landscape 915x412 | cases: closed file 7 (was closed: true) -> symbol 0: lands exactly on the symbol | PASS | {"focus":5012,"want":5012,"r":0,"depth":1,"pend":false} |
 | landscape 915x412 | follow: closed file 7: Back returns to the start | PASS | focus 26 expected 26, depth 0 |
 | landscape 915x412 | cases: arcs ending at a collapsed +N orb exist (from a focused file) | PASS | 2 found |
 | landscape 915x412 | cases: follow an arc into orb 1476 (merges 1 links) | PASS | {"focus":3109,"r":0,"depth":1,"state":0,"expected":3109} |

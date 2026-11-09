@@ -16,7 +16,7 @@
 // (`symIndex`, see symbols.js), files carry `fileId`.
 
 import { straightenToward } from './mobius3d.js';
-
+import { neighbours, callTargets, importTargets, definitionLines, subtreeIndexes } from './codecontext.js';
 export const LINK_IMPORT = 0;
 export const LINK_CALL = 1;
 export const MAX_VISIBLE_LINKS = 300;   // CLAUDE.md-style cap: never more arcs than this on screen

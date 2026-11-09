@@ -45,6 +45,7 @@ export function createToolbar(actions) {
       #tools { gap: 4px; overflow-x: auto; scrollbar-width: none; overscroll-behavior-x: contain; }
       #tools::-webkit-scrollbar { display: none; }
       #tools button.back { order: -1; }
+      #tools #fsbtn { order: -2; }
       #tools button.back.hidden { display: none; }
       #tools button { padding: 0 10px; justify-content: center; }
       #tools .lbl { display: none; }

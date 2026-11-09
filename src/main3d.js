@@ -112,9 +112,12 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, QUALITY.pixelRatio));
 const adaptParam = new URLSearchParams(location.search).get('adapt');
 const adaptive = createAdaptive({
   pixelRatio: renderer.getPixelRatio(),
-  enabled: adaptParam === '1' || (adaptParam !== '0' && TIER === 'phone'),
+  enabled: adaptParam !== '0',   // on for every tier now; ?adapt=0 switches it off
+  fps: TIER === 'phone' ? THEME.ADAPT_FPS : THEME.DESKTOP_ADAPT_FPS,
+  seconds: TIER === 'phone' ? THEME.ADAPT_SECONDS : THEME.DESKTOP_ADAPT_SECONDS,
   onLower: (ratio) => { renderer.setPixelRatio(ratio); resize(); },
 });
+
 // The interface fades while you only look (touch screens; idlefade.js). Labels are drawn by WebGL, so they get the level by callback.
 const idleFade = createIdleFade({ onLevel: (v) => { if (labels) labels.setOpacity(v); } });
 renderer.setClearColor(THEME.CLEAR_COLOR); // deep navy-black (theme.js)
@@ -705,20 +708,46 @@ function focusOn(node, animate = true, via = null) {
   // The search result was a symbol of a file that was closed: now that it exists, light the last step of the path too.
   if (markTarget && node.type === 'symbol' && node.file.fileId === markTarget.fileId && node.symIndex === markTarget.sym) markPath(node, false);
 }
+import { neighbours, callTargets, importTargets, definitionLines, subtreeIndexes } from './codecontext.js';
 
-// Fill the code panel for the focus: a symbol shows its own lines, a file with source shows the file.
 async function showCode(node) {
   const file = node.type === 'symbol' ? node.file : node;
   if (!file || !file.hasSymbols || node.type === 'folder') { codePanel.hide(); return; }
-  const lines = await store.getLines(file);
-  if (focusNode !== node) return; // the user moved on while the file was loading
+  const [lines, doc] = await Promise.all([store.getLines(file), store.getDoc(file)]);
+  if (focusNode !== node) return;
   const from = node.type === 'symbol' ? node.startLine : 1;
   const to = node.type === 'symbol' ? node.endLine : (file.loc || (lines ? lines.length : 1));
+  const nb = neighbours(node);
+  const neighbour = (n) => (n ? { name: n.name, tap: () => goToPlace(placeOf(n), true) } : null);
+
   codePanel.show({
     title: node.name,
     subtitle: `${nodePath(file)} · lines ${from}–${to}`,
     lines, from, to, lang: file.ext === 'py' ? 'py' : 'js',
+    context: node.type === 'symbol' && node.kind !== 'block'
+      ? { lines: THEME.CODE_CONTEXT_LINES, prev: neighbour(nb.prev), next: neighbour(nb.next) } : null,
+    tokens: lines ? codeTokens(node, file, doc) : null,
+    onToken: followToken,
   });
+}
+
+const relPath = (file) => (file ? nodePath(file).split('/').slice(1).join('/') : '');
+
+function codeTokens(node, file, doc) {
+  if (!linkData || !doc) return null;
+  const isSymbol = node.type === 'symbol';
+  const symSet = !isSymbol ? null : node.symIndex >= 0 ? subtreeIndexes(doc, node.symIndex) : new Set([-1]);
+  const calls = callTargets(linkData, file.fileId, symSet, isSymbol ? node.symIndex : null);
+  const candidates = linkLists(linkData, { fileId: file.fileId, sym: null }).imports
+    .map((e) => ({ fileId: e.fileId, path: relPath(fileById.get(e.fileId)) }));
+  const imports = importTargets(doc.imports, relPath(file), candidates);
+  return { calls, imports, skipLines: definitionLines(doc) };
+}
+
+function followToken(kind, entry) {
+  const type = kind === 'import' ? LINK_IMPORT : LINK_CALL;
+  const arc = linkArcs.find((a) => a.type === type && !a.target.node && a.target.fileId === entry.fileId && a.target.sym === entry.sym);
+  if (arc) followArc(arc); else goToPlace({ fileId: entry.fileId, sym: entry.sym }, true);
 }
 
 // ---------------------------------------------------------------------------
@@ -1443,7 +1472,7 @@ async function start() {
   if (json.linksFile) {
     fetch(`${baseUrl}${json.linksFile}`)
       .then((r) => (r.ok ? r.json() : null))
-      .then((lj) => { if (lj) { linkData = createLinkData(lj); linksDirty = true; updatePanelLinks(); updateInfoCard(); } })
+      .then((lj) => { if (lj) { linkData = createLinkData(lj); linksDirty = true; updatePanelLinks(); if (focusNode) showCode(focusNode); updateInfoCard(); } })
       .catch((err) => console.warn('links not loaded', err));
   }
 

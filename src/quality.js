@@ -35,7 +35,7 @@ export function settingsFor(tier) {
 
 // The adaptive step. `tick(now_ms, fps)` once per measured fps value; it calls onLower(newPixelRatio) when it lowers.
 // `enabled` is false on desktop by default (?adapt=1 forces it on, ?adapt=0 off).
-export function createAdaptive({ pixelRatio, onLower, enabled }) {
+export function createAdaptive({ pixelRatio, onLower, enabled, fps: slowFps = THEME.ADAPT_FPS, seconds: slowSeconds = THEME.ADAPT_SECONDS }) {
   let ratio = pixelRatio;
   let slowSince = null;
   let waitUntil = THEME.ADAPT_WARMUP_S * 1000;   // `now` is the page clock (requestAnimationFrame time), so this is "5 s after load"
@@ -43,9 +43,9 @@ export function createAdaptive({ pixelRatio, onLower, enabled }) {
   return {
     tick(now, fps) {
       if (!enabled || fps <= 0 || document.hidden || now < waitUntil) { slowSince = null; return; }
-      if (fps >= THEME.ADAPT_FPS) { slowSince = null; return; }
+      if (fps >= slowFps) { slowSince = null; return; }
       if (slowSince === null) slowSince = now;
-      if (now - slowSince >= THEME.ADAPT_SECONDS * 1000 && ratio > THEME.ADAPT_MIN_PIXEL_RATIO + 1e-6) {
+      if (now - slowSince >= slowSeconds * 1000 && ratio > THEME.ADAPT_MIN_PIXEL_RATIO + 1e-6) {
         ratio = Math.max(THEME.ADAPT_MIN_PIXEL_RATIO, ratio * THEME.ADAPT_STEP);
         steps++;
         slowSince = null;

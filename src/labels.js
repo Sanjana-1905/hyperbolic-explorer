@@ -27,8 +27,8 @@ import { THEME } from './theme.js';
 const MAX_LABELS = 25;        // hard cap on visible labels (CLAUDE.md: about 25)
 const TRIAL_LIMIT = 40;       // only the best this-many candidates are even tried each frame (more would churn text objects)
 const POOL_LIMIT = 64;        // Text objects kept around (re-typesetting text is slow, so we reuse them)
-const WARMUP_FRAMES = 150;    // right after load the batch is repacked many times while the first texts are typeset, and
-                              // for a moment strings can be drawn over each other; labels stay hidden until it has settled
+const WARMUP_MS = 1000;      // labels stay hidden at least this long after the first frame (lets the first texts be typeset)...
+const WARMUP_MAX_MS = 2000;  // ...and are shown at the latest after this, ready or not (a slow laptop must not wait 150 frames)
 const KEEP_FRAMES = 90;       // an unused label's text object is kept this many frames before it can be recycled
 
 export function createLabels(renderer) {
@@ -48,6 +48,7 @@ export function createLabels(renderer) {
   const slots = new Map();   // node key -> { text, lastIdx, lastUsed }
   let frameNo = 0;
   let stableFrames = 0;      // consecutive frames in which every tried label was already typeset
+  let startMs = null;        // time of the first update(): the warm-up is measured in milliseconds, not frames
   let placedCount = 0;
   let fade = 1;              // 0..1: the interface fade (idlefade.js); labels are one of the things that fade away while you only look
   let lastPlaced = [];
@@ -97,6 +98,9 @@ export function createLabels(renderer) {
   // Candidate: { key, text, x, y, r, priority, px, color }   (x, y, r in CSS pixels, y down)
   function update(cands) {
     frameNo++;
+    const nowMs = performance.now();
+    if (startMs === null) startMs = nowMs;
+    const elapsedMs = nowMs - startMs;
     cands.sort((a, b) => b.priority - a.priority);
     const placed = [];
     const gap = THEME.LABEL_GAP_PX, pad = THEME.LABEL_PAD_PX;
@@ -160,7 +164,8 @@ export function createLabels(renderer) {
     // (or, at the latest, after WARMUP_FRAMES frames).
     const allReady = cands.slice(0, TRIAL_LIMIT).every((c) => slots.get(c.key)?.text.textRenderInfo);
     stableFrames = allReady ? stableFrames + 1 : 0;
-    batch.visible = (stableFrames > 20 || frameNo > WARMUP_FRAMES) && fade > 0.01;
+    // Show once everything tried is typeset (for a few frames) AND the minimum time has passed, or at the latest after WARMUP_MAX_MS.
+    batch.visible = ((allReady && stableFrames > 3 && elapsedMs > WARMUP_MS) || elapsedMs > WARMUP_MAX_MS) && fade > 0.01;
     placedCount = placed.length;
     lastPlaced = placed.map((r, i) => ({ ...r, key: [...shownKeys][i] }));
   }
