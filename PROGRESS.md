@@ -26,7 +26,7 @@ Disease Ontology in the Poincaré ball. Principles are in CLAUDE.md. One phase a
 | Step | Title | Depends on | Main risk |
 |---|---|---|---|
 | 2.1 | **Disease data layer**: `diseaseData.js` lazy-loads `disease_terms.json` + `disease_edges.json`, indexes by DOID / name / synonym / xref, parents and children in the full DAG, primary and DAG counts | none | 5 MB terms file on a phone: load on first panel open or first search |
-| 2.2 | **Disease information panel**: ontology facts vs external identifiers; primary-tree count vs full-DAG descendant count vs additional parents, with the counting explanation; bottom sheet on phones | 2.1 | missing data must read "not in the ontology", never blank or invented |
+| 2.2 | **Disease information panel**: DONE (see below): ontology facts vs external identifiers; primary vs full-DAG counts and parents explained; bottom sheet on phones; member list inside the panel | 2.1 | done |
 | 2.3a | **2D layout correction and validation**: DONE (S5 adopted and implemented, see below) | none (pure maths) | done |
 | 2.3b | **2D viewer on the shared core + 2D/3D parity**: labels, picking, back stack, breadcrumbs, Up / Home / Back, panel hook, drag-to-pan as Möbius translation, 2D minimap, capabilities; 3D keeps working and adopts the same core | 2.3a, 2.2 | largest hidden item (`main2d.js` is a 359-line viewer with none of these); `navigation.js` and `minimap.js` are 3D-specific |
 | 2.4 | **Family overview + progressive expansion**: `atlasState.js` (overview / explore), `lod.js` (pure representation policy with a node budget), named folded groups; **2D becomes the normal default at the end of this step**, `mode=3d` explicit | 2.3a, 2.3b, 2.1 | tuning on the S26; budget (~800 drawn nodes) |
@@ -124,6 +124,50 @@ Source labels for identifiers (ICD-10-CM, ICD-9-CM, ICD-11, ICD-O, MeSH, OMIM, U
 3. `dagCount` / `ancestors` are computed on demand by traversal (memoised); fast enough for one record at a time, not tuned for computing all counts at once in the viewer.
 4. Only what the ontology file contains is exposed: no gene, protein, anatomical or other associations exist or were invented. Any future one needs its own source and version in the same way.
 5. The carried-forward limitations above (2D labels / toolbar, Up through groups, phone member list, per-list caps, no physical-device test) are unchanged.
+
+## Step 2.2 — Disease information panel  (complete; waiting for the user's approval before step 2.3b)
+
+### What was built
+| File | Change |
+|---|---|
+| `src/panelmodel.js` (new) | WHAT the panel says, as plain data: `diseaseModel`, `groupModel`, `loadingModel`, `provenanceModel`, and the fixed wording (`MESSAGES`). Pure, so every word is tested |
+| `src/diseasepanel.js` (new) | the DOM panel, shared by 2D and 3D (textContent only, no HTML injection): header (name, DOID chip, badges), path chips, definition, synonyms, place in the ontology, size, external identifiers, provenance footer; docked column or bottom sheet; reports `--panel-w` / `--sheet-h` and the view inset; `select(node)` with a request counter (fast switching cannot show a stale disease); loading and error states with "Try again"; the 5 MB ontology file is not fetched while a phone sheet is folded |
+| `src/memberlist.js` | `host` option: the member list of a list-only node now sits inside the panel (answers limitation 3: nothing floats over the picture) |
+| `src/main3d.js` | the panel replaces the info card for the Disease Ontology (toolbar Info toggles it), owns the inset; the breadcrumb leaves navigation groups out; `?panel=0` = old card + floating list; hooks `__explorer.panel` |
+| `src/main2d.js` | the same panel (+ a round info button when it is closed), a view inset so the disk is fitted into the free part of the screen, the selected disease drawn 1.5x bigger with a white ring |
+| `src/codepanel.js` | `ownsLayout` option: the code panel no longer fights the disease panel for the layout variables |
+| `src/theme.js` | panel constants (width, sheet heights, near-black palette, the two relationship colours, list length) |
+| tests | `tests/panelmodel.test.js` (new, in `npm test`), `tests/phone/panel_audit.mjs` (new, `npm run test:panel`); `disease_audit`, `groups_audit` and `data_audit` run with `?panel=0` (they need the whole canvas) |
+
+### Behaviour
+- **Selection**: any focus change (click or tap on the picture, search, a link in the panel, the path chips, Up) shows that disease. The 3D focus keeps its bright centre and name label; in 2D it is larger with a ring.
+- **Primary vs additional**: the primary parent has a solid teal border, additional parents a dashed violet one with their own note; subtypes of the primary hierarchy and "also listed below it" (listed under it in the ontology but placed under another primary parent) are separate groups. Clicking any of them focuses it.
+- **Counts**: "Primary hierarchy: 57 diseases (itself included)" and "Full ontology: 904 diseases (itself included)" for metabolism, each with its explanation (primary counts add up to all 12,419; full-ontology counts overlap and must not be added).
+- **Context**: path chips (disease > ... > parent > disease), badges ("no subtypes", "6 parents"), the canvas breadcrumb without navigation groups.
+- **Missing information**: "No definition in the ontology.", "No synonyms listed in the ontology.", "No cross-references listed in the ontology.", "Top of the ontology: it has no parent.", "No subtypes: nothing is below it in the ontology." Nothing is invented; no gene, protein, anatomy or clinical information appears anywhere.
+- **Provenance**: Human Disease Ontology 2026-10-29, release v2026-10-29, file date, download date, CC0 1.0, SHA-256 prefix, source URL, "not a diagnostic or medical-advice system".
+
+### Results (all executed)
+- `npm test`: all 21 steps pass. New `panelmodel.test.js`: models for all 12,419 diseases (0.6 s): every definition, synonym (by its own scope), identifier (by source, ICD then MeSH first), parent (primary + additional = all parents, the primary never also listed as additional), child (subtypes + "also listed" = all DAG children), count (primary / full-ontology texts) and path step (each step is the primary parent of the next) equals the data layer; the 2,270 / 3,822 / 687 missing cases use exactly the fixed messages; no "undefined" / NaN; provenance and version on every model; the root, metabolism (57 / 904) and "cystic echinococcosis" (6 parents: 1 primary + 5 additional) as named examples; 165 navigation-group models (no DOID, "not an ontology category"); the loading and error states.
+- `npm run test:panel` (new, real headless Chrome, **140 checks, all pass**; 3D and 2D, desktop and a phone emulation): panel docked (392 px) / bottom sheet (66 px folded) and the old card gone; the ontology data fetched once, and not at all while the phone sheet is folded; the definition equals the ontology's text; primary and additional parents shown apart and drawn differently (computed styles solid vs dashed, different colours); identifiers marked as other resources; provenance and version visible; metabolism 57 / 904; the three kinds of missing data, a disease missing all three, and the top; a real click / tap on a disease in the picture selects it; 14 random diseases in a row and two selections in a row always end on the focused one; primary parent, an additional parent and a path step each focus their target; subtypes vs "also listed below it"; a navigation group shown as a group and its member focusable; a list-only node's members as a searchable list INSIDE the panel; the picture stays visible (desktop: the selected disease is left of the panel, 69 % of the width is picture and no toolbar / breadcrumb / map overlaps it; phone: above the sheet both folded and open); the selected disease prominent (label in 3D, ring in 2D); the path and breadcrumb leave groups out; close, toolbar Info / round button reopen; **2D and 3D show exactly the same panel text for 8 diseases**; a failed load shows "could not be loaded (...)", keeps the name and "Try again" works; the sample and WordNet keep their info card and have no panel; `?panel=0` restores the old card; no console errors.
+- Regression: `npm run build` succeeds; `test:phone` 172 / 172 (sample); `test:disease` 19; `test:groups` 109; `test:data` 34; the 13 launch URLs load the right data without errors.
+- Screenshots inspected: `screenshots/panel-3D-desktop.png`, `panel-2D-desktop.png`, `panel-2D-lower.png` (counts, identifiers, provenance), `panel-3D-phone-sheet.png`.
+
+### Carried-forward limitations: status after this step
+1. **2D labels and toolbar: still open.** 2D now has the panel (and a round info button) but still no labels and no toolbar. -> step 2.3b.
+2. **Up through the display group: still open (decision pending).** The path chips in the panel and the breadcrumb now go straight to real ancestors, which is the alternative to Up; the Up button and Backspace still pass through the group. -> decide with the user in 2.3b / 2.4.
+3. **Phone member list: partly resolved.** It no longer floats over the picture (it is inside the panel / sheet, which unfolds for a list-only node) and the sheet keeps the picture visible. A real responsive redesign and physical-device testing are still owed.
+4. **Display caps per list: still open.** -> step 2.4.
+5. **Phone testing is emulation only: still open.**
+
+### New limitations (this step)
+1. The visual theme of the panel is calm and near-black but the rest (galaxy look, 2D colours, toolbar, wording of the intro card) is unchanged until step 2.6.
+2. The panel does not hide behind the idle-fade and has no keyboard shortcut; the toolbar Info button (3D) or the round button (2D) reopen it.
+3. Definition sources are shown as the ontology writes them (`url:http://...`), not as links: nothing external is opened from the atlas.
+4. Additional relationships are listed in the panel but not drawn in the picture yet (dashed arcs: step 2.5; the colours are already fixed).
+5. On a desktop the 5.3 MB terms file is fetched at start-up now (the panel is open); on a phone it waits for the sheet. Not measured over a real network.
+6. Synonyms are one line per scope (long lists collapse to 12 with "Show all"), not individual chips; identifiers show the first 4 sources ("Show all N sources").
+7. The panel has been checked at 1280 x 800 desktop and 412 x 915 phone emulation only; very narrow landscape phones and tablets were not tried.
 
 ## Known limitations carried forward (recorded by the user after the S5 milestone; each must be resolved in the step named)
 1. **2D viewer lacks labels and a toolbar.** 2D / 3D feature parity is NOT complete until the 2D viewer has labels, a toolbar (Home / Up / Back, search, info) and the other shared pieces. -> step 2.3b.

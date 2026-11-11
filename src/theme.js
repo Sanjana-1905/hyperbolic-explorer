@@ -248,6 +248,19 @@ export const THEME = {
   UI_ACTIVE_BG: [0.10, 0.22, 0.50],   // background of a switched-on chip (Imports, Calls, Dependencies)
   UI_ACTIVE_ALPHA: 0.92,       // ... and its opacity
   INTRO_CARD_WIDTH_PX: 380,    // width of the "How to explore" card
+  // ---- Disease panel (diseasepanel.js): calm near-black scientific look, used for the Disease Ontology (the rest of the restyle is step 2.6) ----
+  PANEL_WIDTH_PX: 392,            // width of the disease panel docked on the right (desktop / landscape)
+  PANEL_SHEET_HEIGHT_VH: 54,      // on a portrait phone the panel is a bottom sheet this tall when expanded (% of the screen height)
+  PANEL_PEEK_PX: 66,              // ... and this tall when folded (name, DOID and a fold handle stay visible)
+  PANEL_BG: [0.030, 0.036, 0.050],       // panel background (near-black, slightly blue)
+  PANEL_BORDER: [0.17, 0.21, 0.30],      // thin line separating the panel from the picture and between sections
+  PANEL_TEXT: [0.88, 0.90, 0.94],        // main text
+  PANEL_MUTED: [0.56, 0.61, 0.72],       // labels, notes, provenance
+  PANEL_HEADING: [0.66, 0.74, 0.92],     // section headings and the disease name's DOID chip
+  PANEL_CHIP_BG: [0.075, 0.095, 0.140],  // background of chips, buttons and the current path segment
+  REL_PRIMARY_COLOR: [0.34, 0.74, 0.84], // the PRIMARY parent / primary hierarchy (teal, solid): reused by the arcs in step 2.5
+  REL_EXTRA_COLOR: [0.74, 0.64, 0.96],   // ADDITIONAL is_a parents / relationships (violet, dashed): also reused by step 2.5
+  PANEL_LIST_SHOWN: 12,           // a long list (subtypes, additional children, identifiers) shows this many entries until "Show all" is pressed
   MEMBERLIST_WIDTH_PX: 300,    // width of the member list shown for a list-only node (diseases too close together to draw one by one)
   MEMBERLIST_MAX_HEIGHT_VH: 46,// ... and its tallest size, as a percentage of the window height (it scrolls beyond that)
 

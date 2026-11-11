@@ -18,6 +18,7 @@ import { makeDisplayTree, CAP_DESKTOP, CAP_PHONE } from './displaytree.js';
 import { disclosureStates } from './disclosure.js';
 import { createMemberList } from './memberlist.js';
 import { dataLayerFor } from './diseasedata.js';
+import { createDiseasePanel } from './diseasepanel.js';
 import { detectTier } from './quality.js';
 import { createFpsCounter } from './fps.js';
 
@@ -31,6 +32,7 @@ const fps = createFpsCounter();
 const ANIM_SECONDS = 0.5;       // refocus animation length
 const FOLDER_RADIUS = 0.16;     // hyperbolic radius of a folder circle
 const FILE_RADIUS = 0.06;       // hyperbolic radius of a file circle
+const FOCUS_SCALE = 1.5;        // the selected node is drawn this much bigger, with a ring around it
 const AGGREGATE_SCALE = 1.5;    // an aggregate (closed group / list-only node) is drawn this much bigger than a folder
 const MIN_PIXELS = 1.2;         // never draw a circle smaller than this radius
 const CLICK_TOLERANCE_PX = 8;   // how far from a circle a click still hits it
@@ -40,6 +42,7 @@ const COLORS = {
   file: new THREE.Color('#8d99ae'),
   focus: new THREE.Color('#ffb703'),
   parent: new THREE.Color('#fb8500'),
+  ring: new THREE.Color('#ffffff'),        // the ring drawn around the selected node
   aggregate: new THREE.Color('#c77dff'),   // a navigation group or list-only node drawn as one aggregate ("+N")
   edge: new THREE.Color('#2b3a55'),
   rim: new THREE.Color('#1d2a44'),
@@ -62,21 +65,21 @@ camera.position.z = 5;
 const VIEW = 1.04;
 let pixelsPerUnit = 1; // screen pixels per disk unit, updated on resize
 
+// A panel (the disease panel) can cover the right side or the bottom of the screen: the disk is fitted into, and centred in, the part that is left.
+let insetRight = 0, insetBottom = 0;
 function resize() {
   const w = window.innerWidth, h = window.innerHeight;
   renderer.setSize(w, h);
-  const aspect = w / h;
-  if (aspect >= 1) {
-    camera.left = -VIEW * aspect; camera.right = VIEW * aspect;
-    camera.top = VIEW; camera.bottom = -VIEW;
-  } else {
-    camera.left = -VIEW; camera.right = VIEW;
-    camera.top = VIEW / aspect; camera.bottom = -VIEW / aspect;
-  }
+  const rw = Math.max(80, w - insetRight), rh = Math.max(80, h - insetBottom);   // the free region, in pixels
+  const s = (2 * VIEW) / Math.min(rw, rh);                                        // disk units per pixel
+  const cx = rw / 2, cy = rh / 2;                                                  // its centre, from the top-left corner
+  camera.left = -cx * s; camera.right = (w - cx) * s;
+  camera.top = cy * s; camera.bottom = -(h - cy) * s;
   camera.updateProjectionMatrix();
-  pixelsPerUnit = h / (camera.top - camera.bottom);
+  pixelsPerUnit = 1 / s;
   dirty = true;
 }
+function applyInset(right, bottom) { insetRight = right; insetBottom = bottom; resize(); }
 
 // The unit circle (the "edge of the universe"), drawn as a faint ring.
 const rimPoints = [];
@@ -89,6 +92,12 @@ scene.add(new THREE.Line(
   new THREE.LineBasicMaterial({ color: COLORS.rim }),
 ));
 
+// A white ring around the selected node (positioned in updateGeometry).
+const focusRing = new THREE.Mesh(new THREE.RingGeometry(0.88, 1, 48), new THREE.MeshBasicMaterial({ color: COLORS.ring }));
+focusRing.position.z = 0.6;
+focusRing.visible = false;
+scene.add(focusRing);
+
 // ---------------------------------------------------------------------------
 // State
 // ---------------------------------------------------------------------------
@@ -96,6 +105,7 @@ let nodes = [];          // all nodes of the display tree (real tree + navigatio
 let states = new Uint8Array(0); // per node: 0 drawn, 1 hidden inside a closed group / list-only node, 2 aggregate (disclosure.js)
 let memberList = null;   // member list of a list-only node (memberlist.js)
 let displayInfo = null;
+let diseasePanel = null; // the disease panel (diseasepanel.js); null for other datasets or with ?panel=0
 let diseaseData = null;  // the disease data layer (diseasedata.js): null for datasets without one; loads its files lazily
 let root = null;
 let focusNode = null;    // node we are focused on (or animating toward)
@@ -168,7 +178,7 @@ function updateGeometry() {
     // A hyperbolic circle of radius ρ drawn at Euclidean distance r from the
     // centre of the disk has Euclidean radius about ρ·(1 - r²)/2: the factor
     // (1 - r²) is the Poincaré disk's squeeze, so things shrink toward the rim.
-    const rho = (node.type === 'folder' ? FOLDER_RADIUS : FILE_RADIUS) * (states[node.id] === 2 ? AGGREGATE_SCALE : 1);
+    const rho = (node.type === 'folder' ? FOLDER_RADIUS : FILE_RADIUS) * (states[node.id] === 2 ? AGGREGATE_SCALE : 1) * (node === focusNode ? FOCUS_SCALE : 1);
     // A node hidden inside a closed navigation group (or below a list-only node) is not drawn: scale 0, no edge, not pickable.
     const size = states[node.id] === 1 ? 0 : Math.max(rho * (1 - r * r) / 2, minRadius);
 
@@ -185,6 +195,12 @@ function updateGeometry() {
     m[o + 12] = p.x; m[o + 13] = p.y; m[o + 14] = -r * 0.5; m[o + 15] = 1;
   }
   nodeMesh.instanceMatrix.needsUpdate = true;
+  if (focusNode) {                                           // the ring follows the selected node
+    const k = screenR[focusNode.id] * 1.28;
+    focusRing.position.set(screenX[focusNode.id], screenY[focusNode.id], 0.6);
+    focusRing.scale.set(k, k, 1);
+    focusRing.visible = true;
+  }
 
   // 2. Edges: a geodesic arc from each parent to its child, drawn as a short
   // polyline. Tiny edges are drawn straight (a curve would be invisible anyway).
@@ -234,7 +250,7 @@ function focusOn(node, animate = true) {
   if (!node) return;
   focusNode = node;
   states = disclosureStates(nodes, root, node);     // which groups are open follows the focus path
-  if (memberList) memberList.update(node);
+  if (diseasePanel) diseasePanel.select(node); else if (memberList) memberList.update(node);
   updateColors();
   updateInfo();
   if (animate) {
@@ -351,7 +367,10 @@ async function start() {
   root = tree.root;
   nodes = tree.nodes;
   if (diseaseData) diseaseData.attachTree(nodes);
-  memberList = createMemberList({ onPick: (n) => focusOn(n) });
+  if (diseaseData && new URLSearchParams(location.search).get('panel') !== '0') {
+    diseasePanel = createDiseasePanel({ data: diseaseData, nodeById: (id) => nodes[id], onNavigate: (n) => focusOn(n), onLayout: applyInset, launcher: true });
+    memberList = diseasePanel.memberList;
+  } else memberList = createMemberList({ onPick: (n) => focusOn(n) });
 
   buildDrawables();
   resize();
@@ -374,6 +393,9 @@ window.__explorer = {
   // Screen (CSS pixel) position of a node's centre, for automated tests.
   get displayInfo() { return displayInfo; },
   get data() { return diseaseData; },
+  get panel() { return diseasePanel; },
+  get ringVisible() { return focusRing.visible; },
+  get ringAt() { return { x: focusRing.position.x, y: focusRing.position.y, scale: focusRing.scale.x }; },
   get focusNode() { return focusNode; },
   get memberList() { return memberList; },
   state: (id) => states[id],

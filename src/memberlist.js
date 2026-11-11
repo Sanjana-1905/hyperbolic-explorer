@@ -7,7 +7,9 @@ import { THEME, cssRgb } from './theme.js';
 import { realMembers } from './displaytree.js';
 import { listFor } from './disclosure.js';
 
-export function createMemberList({ onPick }) {
+// host (optional): an element to put the list INTO (the disease panel does this: the list then sits inside the panel and covers nothing);
+// without it the list is a floating card at the top right.
+export function createMemberList({ onPick, host = null }) {
   const css = document.createElement('style');
   css.textContent = `
     #members { position: fixed; z-index: 7; right: calc(12px + var(--sai-r, 0px)); top: calc(64px + var(--sai-t, 0px)); box-sizing: border-box;
@@ -15,6 +17,9 @@ export function createMemberList({ onPick }) {
       padding: 10px 10px 8px; border-radius: 12px; background: ${cssRgb(THEME.CODE_BG)}; color: ${cssRgb(THEME.CODE_TEXT)};
       border: 1px solid ${cssRgb(THEME.CODE_EDGE, 0.7)}; font: 13px/1.35 system-ui, sans-serif; }
     #members.open { display: flex; }
+    #members.inline { position: static; width: auto; max-height: none; padding: 0; border: 0; border-radius: 0; background: transparent; }
+    #members.inline h3, #members.inline p { display: none; }
+    #members.inline ul { max-height: 240px; }
     #members h3 { margin: 0 0 4px; font-size: 14px; color: ${cssRgb(THEME.CRUMB_LAST_COLOR)}; }
     #members p { margin: 0 0 6px; opacity: 0.8; font-size: 12px; }
     #members input { width: 100%; box-sizing: border-box; height: 34px; margin-bottom: 6px; padding: 0 10px; border-radius: 8px; font: 14px system-ui, sans-serif;
@@ -30,7 +35,7 @@ export function createMemberList({ onPick }) {
   const box = document.createElement('div');
   box.id = 'members';
   box.innerHTML = '<h3></h3><p></p><input type="search" placeholder="Filter this list" aria-label="Filter members"><ul></ul>';
-  document.body.appendChild(box);
+  if (host) { box.classList.add('inline'); host.appendChild(box); } else document.body.appendChild(box);
   const title = box.querySelector('h3'), note = box.querySelector('p'), input = box.querySelector('input'), list = box.querySelector('ul');
 
   let owner = null, members = [], current = null;

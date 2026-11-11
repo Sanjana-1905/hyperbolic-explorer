@@ -45,7 +45,7 @@ const settle2d = async () => { await sleep(900); };
 async function modeAudit(label, { mode3d, phone }) {
   const tapOrClick = (x, y) => (phone ? b.tap(x, y) : b.click(x, y));
   const settle = mode3d ? settle3d : settle2d;
-  const url = `${BASE}?${mode3d ? '' : 'mode=2d&'}tree=disease_tree.json&intro=0&time=3${phone ? '&adapt=0' : ''}`;
+  const url = `${BASE}?${mode3d ? '' : 'mode=2d&'}tree=disease_tree.json&intro=0&time=3&panel=0${phone ? '&adapt=0' : ''}`;
   if (phone) await b.phone(412, 915); else await b.desktop(1280, 800);
   b.logs.length = 0;
   await b.goto(url, 6000);
@@ -153,7 +153,7 @@ try {
   await modeAudit('2D phone', { mode3d: false, phone: true });
   // ?cap=N override
   await b.desktop(1280, 800);
-  await b.goto(`${BASE}?tree=disease_tree.json&intro=0&cap=24`, 5000);
+  await b.goto(`${BASE}?tree=disease_tree.json&intro=0&cap=24&panel=0`, 5000);
   rec('?cap=24 overrides the desktop cap', (await ev('__explorer.displayInfo.cap')) === 24 && (await ev('Math.max(...__explorer.nodes.map((n) => n.children.length))')) <= 24);
 } finally {
   await b.close(); vite.kill();

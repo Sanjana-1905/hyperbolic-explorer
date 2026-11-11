@@ -28,7 +28,7 @@ try {
   await b.desktop(1280, 800);
 
   // =============================== 3D ===============================================================
-  await b.goto(`${BASE}?tree=disease_tree.json&intro=0&time=3`, 5000);
+  await b.goto(`${BASE}?tree=disease_tree.json&intro=0&time=3&panel=0`, 5000);
   await ev(HELPERS);
   rec('3D: disease tree loaded (12,419 diseases + navigation groups), no code capabilities', await ev('__explorer.displayInfo.realCount') === 12419 && await ev('__explorer.nodes.length') === 12419 + await ev('__explorer.displayInfo.groups') && await ev('Object.values(__explorer.capabilities).slice(0, 4).every((v) => v === false)'), `${await ev('__explorer.nodes.length')} display nodes`);
   const lay = await ev(`(() => { const E = __explorer;
@@ -90,7 +90,7 @@ try {
 
   // =============================== 2D ===============================================================
   b.logs.length = 0;
-  await b.goto(`${BASE}?mode=2d&tree=disease_tree.json`, 5000);
+  await b.goto(`${BASE}?mode=2d&tree=disease_tree.json&panel=0`, 5000);
   const lay2 = await ev(`(() => { const E = __explorer;
     const d = (a, c) => { const n = (a.x - c.x) ** 2 + (a.y - c.y) ** 2; return Math.acosh(1 + 2 * n / ((1 - (a.x ** 2 + a.y ** 2)) * (1 - (c.x ** 2 + c.y ** 2)))); };
     let maxR = 0, bad = 0, maxD = 0;

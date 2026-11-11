@@ -30,7 +30,7 @@ const DIGEST = `(async () => {
 
 const digests = {};
 try {
-  for (const [label, url, phone] of [['3D desktop', '?tree=disease_tree.json&intro=0', false], ['2D desktop', '?mode=2d&tree=disease_tree.json', false], ['3D phone', '?tree=disease_tree.json&intro=0&adapt=0', true], ['2D phone', '?mode=2d&tree=disease_tree.json', true]]) {
+  for (const [label, url, phone] of [['3D desktop', '?tree=disease_tree.json&intro=0&panel=0', false], ['2D desktop', '?mode=2d&tree=disease_tree.json&panel=0', false], ['3D phone', '?tree=disease_tree.json&intro=0&adapt=0&panel=0', true], ['2D phone', '?mode=2d&tree=disease_tree.json&panel=0', true]]) {
     if (phone) await b.phone(412, 915); else await b.desktop(1280, 800);
     b.logs.length = 0;
     await b.goto(BASE + url, 6000);

@@ -73,7 +73,8 @@ export function trimBlankSourceEdges(lines, first, end) {
   return { first, end };
 }
 
-export function createCodePanel({ onInset } = {}) {
+// ownsLayout = false when another panel (the disease panel) owns the CSS variables --panel-w / --sheet-h and the view inset.
+export function createCodePanel({ onInset, ownsLayout = true } = {}) {
   const css = document.createElement('style');
   css.textContent = `
     #code { position: fixed; z-index: 5; display: none; flex-direction: column; box-sizing: border-box;
@@ -232,6 +233,7 @@ export function createCodePanel({ onInset } = {}) {
     el.classList.toggle('open', open);
     el.classList.toggle('folded', folded);
     document.body.classList.toggle('code-open', open);
+    if (!ownsLayout) return;
     const narrow = window.matchMedia(NARROW).matches;
     const sheet = open && narrow ? (folded ? '48px' : `${THEME.CODE_SHEET_HEIGHT_VH}vh`) : '0px';
     document.documentElement.style.setProperty('--sheet-h', sheet);

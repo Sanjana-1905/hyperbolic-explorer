@@ -44,6 +44,7 @@ import { makeDisplayTree, groupLabel, CAP_DESKTOP, CAP_PHONE } from './displaytr
 import { aggregateRule, childAllowed } from './disclosure.js';
 import { createMemberList } from './memberlist.js';
 import { dataLayerFor } from './diseasedata.js';
+import { createDiseasePanel } from './diseasepanel.js';
 import { deriveCapabilities, NO_CAPABILITIES } from './capabilities.js';
 import { computeHeat, encodeHeat, HEAT, HEAT_NAMES } from './heat.js';
 import { createCodePanel } from './codepanel.js';
@@ -226,6 +227,7 @@ let dirty = true;               // focus point changed: upload the _Focus unifor
 // Links (Phase 4c)
 let displayInfo = null;         // displaytree.js statistics: cap, groups, list-only nodes
 let memberList = null;          // the member list of a list-only node (memberlist.js)
+let diseasePanel = null;        // the disease panel (diseasepanel.js): replaces the info card for the Disease Ontology; null elsewhere (or with ?panel=0)
 let diseaseData = null;         // the disease data layer (diseasedata.js): null for datasets without one; loads its files lazily
 let linkData = null;            // links.json in typed arrays (links.js), null until loaded / if the dataset has none
 let linkArcs = [];              // the arcs drawn right now (buildArcs in links.js), at most MAX_VISIBLE_LINKS
@@ -713,7 +715,7 @@ function focusOn(node, animate = true, via = null) {
   if (minimap) minimap.setFocus(node.type === 'symbol' ? node.file : node);
   nav.flyTo(node.pos, animate, via);
   idleFade.poke();                  // a focus change (even one made by search or a link) wakes the interface
-  if (memberList) memberList.update(node);
+  if (diseasePanel) diseasePanel.select(node); else if (memberList) memberList.update(node);
   updateInfo();
   showCode(node);
   updatePanelLinks();
@@ -942,7 +944,7 @@ const toolbar = createToolbar({
   onBack: () => goBack(),
   onImports: () => { showImports = !showImports; linksDirty = true; updateHelp(); },
   onCalls: () => { showCalls = !showCalls; linksDirty = true; updateHelp(); },
-  onInfo: () => { if (infoCard) { infoCard.toggle(); refreshToolbar(); } },
+  onInfo: () => { const ui = diseasePanel || infoCard; if (ui) { ui.toggle(); refreshToolbar(); } },
   onHeat: () => cycleHeat(),
   onFolderDeps: () => { showFolderDeps = !showFolderDeps; linksDirty = true; updateHelp(); },
   onFullscreen: () => {
@@ -950,13 +952,19 @@ const toolbar = createToolbar({
     else document.documentElement.requestFullscreen({ navigationUI: 'hide' }).catch(() => {});   // refused (e.g. not from a tap): ignore
   },
 });
+// The part of the screen covered by a panel (code panel or disease panel): the picture is centred in what is left. The toolbar strip at the bottom
+// also covers something (unless the compact landscape layout puts it at the left).
+function applyInset(right, bottom) {
+  const toolbarAtBottom = window.innerHeight > THEME.COMPACT_HEIGHT_PX;
+  nav.setInset(right, bottom + (toolbarAtBottom ? THEME.TOOLBAR_BAND_PX : 0));
+}
 function refreshToolbar() {
   if (!focusNode) return;
   toolbar.update({
     backDepth: nav.backDepth, isRoot: !focusNode.parent,
     focusKind: focusNode.type === 'symbol' ? 'symbol' : focusNode.type === 'folder' ? 'folder' : 'file',
     showImports, showCalls, showFolderDeps,
-    infoOpen: infoCard ? infoCard.open : false, heatMode,
+    infoOpen: diseasePanel ? diseasePanel.open : infoCard ? infoCard.open : false, heatMode,
     hasGit: caps.gitHeat && !!(heatData && heatData.files), hasLinks: caps.dependencies,
   });
 }
@@ -1087,6 +1095,7 @@ function cycleHeat() {
 
 const fmtDate = (ms) => new Date(ms).toISOString().slice(0, 10);
 function updateLegend() {
+  if (!infoCard) return;                                   // (the disease panel has no heat legend)
   if (heatMode === HEAT.OFF || !heatData || !heatData.files) { infoCard.setLegend(null); return; }
   // Short title (the legend sits next to the node title); the tooltip says what grey means.
   const fake = fakeGit ? ' (FAKE data)' : '';
@@ -1195,7 +1204,8 @@ document.body.appendChild(crumbs);
 
 function updateBreadcrumb() {
   const chain = [];
-  for (let n = focusNode; n; n = n.parent) chain.unshift(n);
+  // navigation groups are not part of the path of a disease (they are display aids): leave them out unless one IS the focus
+  for (let n = focusNode; n; n = n.parent) if (!n.isGroup || n === focusNode) chain.unshift(n);
   let shownChain = chain;
   if (chain.length > 6) shownChain = [chain[0], null, ...chain.slice(-4)]; // null = "…"
   crumbs.textContent = '';
@@ -1492,8 +1502,15 @@ async function start() {
   buildSearch();
   heatData = caps.gitHeat ? computeHeat(nodes) : null;
   fakeGit = !!json.fakeGit;
-  infoCard = createInfoCard();
-  memberList = createMemberList({ onPick: (n) => focusOn(n) });
+  // The Disease Ontology gets the disease panel (it owns the right-hand column / bottom sheet and the view inset); other datasets keep the info
+  // card. ?panel=0 gives the old card + floating member list back (used by tests that need the whole canvas).
+  if (diseaseData && new URLSearchParams(location.search).get('panel') !== '0') {
+    diseasePanel = createDiseasePanel({ data: diseaseData, nodeById: (id) => nodeById[id], onNavigate: (n) => focusOn(n), onLayout: applyInset });
+    memberList = diseasePanel.memberList;
+  } else {
+    infoCard = createInfoCard();
+    memberList = createMemberList({ onPick: (n) => focusOn(n) });
+  }
   if (json.words) datasetWords = json.words;
   toolbar.setDataset({ about: json.about, words: json.words, hasLinks: caps.dependencies });
   updateHelp();
@@ -1501,10 +1518,7 @@ async function start() {
   refreshToolbar();
   // The code panel reports how much of the screen it covers. The one-row toolbar always covers a strip at the bottom,
   // so the picture is centred above it too (only when the toolbar IS at the bottom, i.e. not in the compact landscape layout).
-  codePanel = createCodePanel({ onInset: (right, bottom) => {
-    const toolbarAtBottom = window.innerHeight > THEME.COMPACT_HEIGHT_PX;
-    nav.setInset(right, bottom + (toolbarAtBottom ? THEME.TOOLBAR_BAND_PX : 0));
-  } });
+  codePanel = createCodePanel({ onInset: applyInset, ownsLayout: !diseasePanel });
   // Links (Phase 4c) load in the background: the galaxy is usable before they arrive.
   if (caps.dependencies && json.linksFile) {
     fetch(`${baseUrl}${json.linksFile}`)
@@ -1609,6 +1623,7 @@ window.__explorer = {
   get capabilities() { return caps; },
   get displayInfo() { return displayInfo; },
   get data() { return diseaseData; },
+  get panel() { return diseasePanel; },
   get memberList() { return memberList; },
   get orbCount() { return collapsedNodes.length; },
   get heatMode() { return heatMode; },
