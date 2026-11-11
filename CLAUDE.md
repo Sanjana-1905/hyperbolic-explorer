@@ -22,6 +22,22 @@ Solo student project for a Computer Graphics and AR/VR course. **Zero budget**: 
 8. Preserve the existing hyperbolic engine wherever possible.
 9. Load the complete active ontology. Use progressive expansion and level-of-detail rendering instead of arbitrarily deleting diseases.
 
+## Approved design decisions (Nov 2026: redesign of the experience)
+The first look at the Disease Ontology in the inherited code-explorer viewer was a dense glowing graph, not an atlas. Decisions, in force until changed by the user:
+1. **Default surface = the 2D Poincaré disk.** The 3D Poincaré ball stays fully functional as an alternative mode. 2D and 3D show the SAME hierarchy and support equivalent navigation; every implementation step delivers both, through a shared (renderer-independent) core.
+   The normal default switches to 2D at the end of step 2.4. From then on `mode=3d` must be explicit.
+2. **Study links never depend on the default.** Every study URL names its condition explicitly: `mode=tree`, `mode=2d` or `mode=3d` (and `tree=` for the dataset, see `dataset.js`).
+3. **Initial screen = a disease-family overview**, a distinct navigation state (not the graph zoomed out). The 12,419 diseases are NOT all drawn at start; categories are shown with names and counts, and expansion is progressive. Expansion never moves anything: positions come from the one fixed hyperbolic layout, only the representation changes.
+4. **Two counting methods, never mixed.**
+   - *Primary-tree count* (overview and category sizes): every disease is counted once, under its primary parent (rule below), so categories are mutually exclusive and sum to the active term count (12,418 + the root = 12,419). Example: "disease of metabolism" shows 57.
+   - *Full DAG descendant count* (information panel only, where calculated): counts every disease reachable through any `is_a` path; it can overlap between categories (metabolism: 904). Additional parent relationships are listed separately (5,217 extra `is_a` edges, 4,880 diseases with more than one parent).
+   - The interface must say which count it shows and explain that DAG counts overlap. The deterministic primary-parent rule (shortest path to DOID:4, ties to the smaller DOID) is kept unchanged.
+5. **Information panel** separates ontology facts (name, DOID, definition and its source references, synonyms with scope, parents, children, counts, alternative IDs) from external references (ICD, MeSH, OMIM, UMLS... shown as identifiers only, nothing fetched, nothing inferred). Missing data is shown as missing. Nothing anatomical, genetic or clinical is ever invented.
+6. **Visual theme = calm, near-black scientific interface**, applied to ALL datasets (Disease Ontology, sample, WordNet). The galaxy look is removed, not kept as an option. See "Visual goals".
+7. **Search** reaches any disease directly (name, synonym, DOID, ICD / MeSH code) and lights the path to it.
+8. **Shared core.** Pure, renderer-independent modules (state machine for overview / explore, level-of-detail policy, disease data and indexes, disease panel) are used by the 2D and the 3D view. 3D code is not weakened.
+9. **2D layout correction comes before the overview.** The 2D layout currently crowds wide parents (minimum sibling distance 0.0007 on the Disease Ontology, 486 children under "syndrome"). Strategies are prototyped in pure Node scripts against the real data and chosen with the user BEFORE production layout code changes (see PROGRESS.md). Targets: minimum sibling distance >= 0.04, zero clamped edges, no parent with siblings closer than 0.02, maximum radius <= 0.994, no subtree overlap. No target may be met by compromising the geometry.
+
 ## Dataset capabilities (engine vs. dataset)
 - The engine (Möbius maths, layout, rendering, search, minimap, "+N" groups, study logging) is dataset-independent. **Do not
   hardcode dataset-specific assumptions (code, disease, ...) into it.**
@@ -38,7 +54,7 @@ The engine shows huge hierarchies using hyperbolic geometry so the **whole tree 
 
 **Users:** a new developer exploring an unfamiliar repo, or an analyst browsing a large taxonomy or org chart. Flat collapsible trees need endless scrolling and lose context.
 
-**Evaluation:** a small user study comparing (a) a normal collapsible tree, (b) the 2D hyperbolic view, and (c) the VR/AR view, on tasks like "find file X".
+**Evaluation:** a small user study comparing (a) a normal collapsible tree, (b) the 2D hyperbolic view, and (c) the 3D hyperbolic view (VR/AR remain optional), on tasks like "find disease X" and "which family does X belong to". Research question: does hyperbolic geometry improve exploration of large hierarchical biomedical ontologies?
 
 ## Tech stack
 - **three.js + Vite**, vanilla JavaScript (**no React**), custom GLSL shaders.
@@ -54,6 +70,7 @@ The engine shows huge hierarchies using hyperbolic geometry so the **whole tree 
 - Display uses the **Poincaré ball/disk model**.
 - **All hyperbolic math lives in `mobius.js`.** Every formula gets a comment above it explaining it in plain English.
 - **Layout:** root at the origin. Children sit at a fixed hyperbolic distance from their parent. (A tree too deep for the ball gets shorter edges on its deepest levels: `edgeLengthSchedule` in `layout.js`, from depth only. Trees that already fit keep the uniform length.) Each child gets angular space proportional to its subtree size.
+  - **Fixed edge length assumption under review (2D).** A ring of n children at one fixed distance cannot give wide parents (hundreds of children) enough room: circumference 2π·sinh(L). Two relaxations are being prototyped (an adaptive edge length per wide parent, or staggered concentric rings); neither is in production. If one is adopted, this rule will be amended here with its exact formula, and the radius budget (`edgeLengthSchedule`, all paths <= 2·atanh(0.994)) must still hold. Until then the assumption above stands.
 - Use double-precision JS numbers. **Clamp the Euclidean radius below 0.995.**
 - **Refocusing:** apply a Möbius translation to all nodes, animated along the geodesic over ~0.5 s with ease-in-out.
 - **Later phases:**
@@ -64,15 +81,17 @@ The engine shows huge hierarchies using hyperbolic geometry so the **whole tree 
 - **Every visual constant** (colour, size, brightness, glow/fog distance, effect speed, edge width...) lives in `src/theme.js` with a comment, and shaders read it through `#define`s (`THEME_DEFINES`). Do not put tuning numbers in shaders or `main3d.js`. `npm test` fails if theme.js has dead constants or glsl.js grows colour literals.
 - Debug: `?time=12.5` freezes the shader clock for repeatable screenshots.
 
-## Visual goals (VR must look excellent)
-- Dark "data galaxy" look: near-black background, glowing orbs for folders, small particles for files, light pulses along edges, a procedural starfield, and floating dust for parallax.
-- Nodes are **camera-facing impostor quads** with a fake-sphere fragment shader (rim glow, highlight), drawn with **instancing**.
-- Edges are **curved geodesics**.
-- **Fog** fades by hyperbolic distance. Colors are warm near the focus and cool and dim far away.
-- **No heavy post-processing.** Fake bloom uses additive halo quads, only on the focus node and its children.
-- **Labels:** SDF text, about 25 visible at most, high contrast, no overlaps.
+## Visual goals (calm scientific theme: approved, implemented in step 2.6)
+- **Near-black, calm, professional.** No starfield, nebula, dust, bloom, twinkle, light pulses, random "hero" nodes or decorative particles. This replaces the old "data galaxy" look for every dataset.
+- **Every visual encoding means something** (principle 4). Hue = top-level family (restrained purple / blue / teal and other muted, colour-blind-safe hues, fixed by the ontology branch, never by index order or randomness). Lightness = depth. Size = log of the primary-tree count. Ring = "has subtypes", filled dot = leaf. Brightness is never random.
+- Nodes are flat discs with a thin outline, drawn as **camera-facing instanced quads** with a simple fragment shader (no fake sphere, no halos).
+- Edges are **thin curved geodesics**: primary hierarchy edges solid and family-tinted; additional `is_a` relationships dashed and neutral, shown for the selected or hovered disease only.
+- **Labels:** SDF text, contextual (focus, its children, the hovered node, the largest visible groups), about 25 at most, high contrast, no overlaps. Leaves never label themselves in the overview. Folded groups are named ("syndrome · 486 more").
+- All look constants stay in `src/theme.js` (theme rule below). Fog by hyperbolic distance may stay, subtle.
+- Until step 2.6 lands, the viewer still renders the inherited galaxy look. That is known and intended to go.
 
 ## Interaction goals
+- **Overview state:** a distinct, camera-locked state showing the families; an always-visible Overview button returns to it. Opening a family enters the explore state (same 0.5 s geodesic glide).
 - Zoom in means gliding toward a node. Zoom out goes to the parent. Free flight means holding to drift where you look.
 - **Semantic zoom:** far folders collapse into one orb with a "+N" count. Near folders expand into their children.
 - **VR:** gaze reticle with **1.2 s dwell** to select, and tap as a shortcut.
@@ -87,7 +106,7 @@ The engine shows huge hierarchies using hyperbolic geometry so the **whole tree 
 - On-screen **fps counter** that can be toggled.
 
 ## Phases
-The Disease Atlas roadmap (Phase 0-8) is in **PROGRESS.md** and supersedes the list below, which is the history of the original engine.
+The Disease Atlas roadmap (Phase 0-8, with the redesign steps 2.1-2.8 and their dependencies) is in **PROGRESS.md** and supersedes the list below, which is the history of the original engine.
 Work one phase at a time, and only when the user says "go".
 
 ### Engine history (Hyperbolic Code Explorer phases)

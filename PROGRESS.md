@@ -3,16 +3,16 @@
 Project pivoted (Nov 2026, branch `atlas`) from Hyperbolic Code Explorer to the **Hyperbolic Disease Atlas**: exploring the
 Disease Ontology in the Poincaré ball. Principles are in CLAUDE.md. One phase at a time, only when the user says "go".
 
-## Roadmap
+## Roadmap  (revised Nov 2026 after the experience review; decisions are listed in CLAUDE.md "Approved design decisions")
 
 **Core deliverables**
 | Phase | Title | Status |
 |---|---|---|
 | 0 | Freeze and prepare existing engine | done (commit 1e52269) |
-| 1 | Disease Ontology data ingestion (full DAG, provenance, primary hierarchy for layout) | **data done; radius clamp fixed (depth-tapered edges); node-count LOD issue still open** |
-| 2 | Meaningful disease visualization (every encoding carries information) | not started |
-| 3 | Interactive exploration lenses | not started |
-| 4 | Comparative navigation study (collapsible tree vs 2D vs 3D hyperbolic) | not started |
+| 1 | Disease Ontology data ingestion (full DAG, provenance, primary hierarchy) + radius-clamp fix + default dataset | done (data, taper fix, default launch) |
+| 2 | **Atlas redesign: from "glowing graph" to a disease atlas** (steps 2.1-2.8 below) | **planning approved; step 2.3a prototypes reported, waiting for the layout decision; nothing built yet** |
+| 3 | Interactive exploration lenses | folded into Phase 2 (steps 2.4-2.7) |
+| 4 | Comparative navigation study (tree vs 2D vs 3D), run and report | instruments built in step 2.8; the study itself later |
 
 **Optional extensions** (only if time allows; none is needed for the course deliverable)
 | Phase | Title | Status |
@@ -21,6 +21,73 @@ Disease Ontology in the Poincaré ball. Principles are in CLAUDE.md. One phase a
 | 6 | Gene and protein integration (every association with source provenance) | optional, not started |
 | 7 | Biological pathway animation | optional, not started |
 | 8 | AR / VR (tabletop AR, Cardboard VR, Lorentz camera) | optional, not started |
+
+### Phase 2 steps (each waits for the user's "go"; every step delivers BOTH 2D and 3D through the shared core)
+| Step | Title | Depends on | Main risk |
+|---|---|---|---|
+| 2.1 | **Disease data layer**: `diseaseData.js` lazy-loads `disease_terms.json` + `disease_edges.json`, indexes by DOID / name / synonym / xref, parents and children in the full DAG, primary and DAG counts | none | 5 MB terms file on a phone: load on first panel open or first search |
+| 2.2 | **Disease information panel**: ontology facts vs external identifiers; primary-tree count vs full-DAG descendant count vs additional parents, with the counting explanation; bottom sheet on phones | 2.1 | missing data must read "not in the ontology", never blank or invented |
+| 2.3a | **2D layout correction and validation**: prototype strategies A and B in pure Node scripts against the real tree, report, user chooses, then implement + tests + CLAUDE.md amendment | none (pure maths) | may change a core layout; the user decides if no strategy meets every target |
+| 2.3b | **2D viewer on the shared core + 2D/3D parity**: labels, picking, back stack, breadcrumbs, Up / Home / Back, panel hook, drag-to-pan as Möbius translation, 2D minimap, capabilities; 3D keeps working and adopts the same core | 2.3a, 2.2 | largest hidden item (`main2d.js` is a 359-line viewer with none of these); `navigation.js` and `minimap.js` are 3D-specific |
+| 2.4 | **Family overview + progressive expansion**: `atlasState.js` (overview / explore), `lod.js` (pure representation policy with a node budget), named folded groups; **2D becomes the normal default at the end of this step**, `mode=3d` explicit | 2.3a, 2.3b, 2.1 | tuning on the S26; budget (~800 drawn nodes) |
+| 2.5 | **Primary vs additional relationships**: dashed neutral arcs for the selected / hovered disease, "also a kind of" list, via the existing link-arc machinery | 2.1, 2.4 | arc clutter |
+| 2.6 | **Visual restyle**: calm near-black theme for ALL datasets, flat discs, family hues, no galaxy decorations; all through `theme.js` | 2.4 | shaders, `theme.js` dead-constant test, sample / WordNet regressions |
+| 2.7 | **Search upgrade**: name, synonym, DOID, ICD / MeSH code; jump to deeply nested diseases with the path lit | 2.1 | ranking |
+| 2.8 | **Tree baseline parity + study**: same data, search, panel and logging in the collapsible tree; disease task file; every study URL names `mode=` explicitly | 2.2, 2.4, 2.7 | fairness between the three conditions |
+
+Dependency order: 2.1 -> 2.2 ; 2.3a -> 2.3b ; (2.2, 2.3a, 2.3b, 2.1) -> 2.4 -> 2.5, 2.6 ; 2.1 -> 2.7 ; (2.2, 2.4, 2.7) -> 2.8. Steps 2.1/2.2 and 2.3a are independent and could run in either order.
+Regression rule for every step: `npm test`, `npm run build`, `npm run test:phone` (172), `npm run test:disease`, and the sample and WordNet datasets keep working in all three modes.
+
+### Counting rule (decided)
+Overview and category sizes use PRIMARY-TREE counts (mutually exclusive, sum to 12,419 incl. the root): anatomical entity 5,284 · genetic disease 3,384 · cellular proliferation 1,179 · syndrome 1,058 · physical disorder 521 · mental health 492 · infectious agent 443 · metabolism 57.
+The panel additionally shows the full DAG descendant count (overlapping between categories, e.g. metabolism 904) and the additional parents, each labelled, with an explanation.
+
+## Step 2.3a — 2D layout prototypes  (done: RESULTS REPORTED, WAITING FOR THE USER'S DECISION; production layout NOT changed)
+
+Scripts (pure Node, they import only helpers from `src/`, nothing in `src/` was edited): `tools/proto/layout2d_proto.mjs` (layouts + metrics; `--sweep` = parameter sensitivity; `--dump` = positions),
+`tools/proto/render_svg.mjs` (SVG disks) -> `screenshots/layout2d-prototypes.png`. Run: `node tools/proto/layout2d_proto.mjs`.
+
+**Correction of my earlier diagnosis:** I said "autosomal recessive disease" has 1,048 *descendants*; it has **1,048 direct children** in the primary tree (the widest parent). "syndrome" has 486 children (depth 1). Both are tested explicitly below.
+
+### Strategies (all share the same machinery)
+- **base** = the production 2D layout, unchanged (`computeLayout`: slices proportional to subtree size, each child's fan = 2x its slice, one fixed edge length).
+- **W** (control) = half-equal/half-weight shares like 3D + the exact **wedge rule** (2D twin of the 3D cone rule: a child's whole subtree stays inside its angular territory, so sibling subtrees cannot overlap), fixed edge length. Shows what the wedge rule alone costs.
+- **A** = W + **adaptive edge length**: a wide parent gets the smallest longer edge length (same for all its children) that reaches the target spacing, within the radius budget.
+- **B** = W + **staggered rings**: children keep the scheduled length plus a sawtooth radial offset `(i mod R) * 0.045`, with the smallest ring count R that reaches the target; neighbours differ in radius, same-ring nodes are R slices apart.
+- A and B both keep the radius budget rigorous: every root-to-node path sums to <= 2*atanh(0.994) = 5.806; if a wide parent uses more than its scheduled length, the levels below are scaled by f = (budget − P)/(budget − S), capped so they keep >= 35 % of their schedule. If the cap binds, the target is missed and reported.
+- Target sibling distance used by A and B: 0.045 (requirement: >= 0.04).
+
+### Results on the Disease Ontology (12,419 nodes, 1,520 parents with >= 2 children)
+| | production (base) | W control | A adaptive | **B rings** | target |
+|---|---|---|---|---|---|
+| min sibling distance (any parent) | 0.0007 | 0.0002 | 0.0002 | 0.0002 | >= 0.04 |
+| parents below 0.04 / below 0.02 | 209 / 112 | 1500 / 1470 | 1330 / 1214 | **28 / 26** | none below 0.02 |
+| closest pair of ANY two nodes | 0.0005 | 0.0002 | 0.0002 | 0.0002 | (info) |
+| clamped edges | 0 | 0 | 0 | 0 | 0 |
+| max radius | 0.9894 | 0.9939 | 0.9936 | 0.9939 | <= 0.994 |
+| subtree overlap (sibling pairs / parents) | **17,565 / 192** | 0 | 0 | 0 | none |
+| longest edge used | 0.60 | 0.60 | 3.59 | 2.81 | |
+| **"syndrome" (486 children)**: min nearest-sibling | 0.0007 | 0.0010 | 0.0291 (edge 3.59, cap binds) | **0.0450** (median 0.0452, edges 0.60–2.49, 43 rings, farthest child radius 0.913) | >= 0.04 |
+| "autosomal recessive disease" (1,048 children): min nearest-sibling | 0.0028 | 0.0003 | 0.0015 | 0.0119 (cap binds) | >= 0.04 |
+| min sibling by depth band <=3 / 4-6 / 7-9 / 10-12 | 0.0007 / 0.0016 / 0.018 / 0.153 | 0.0006 / 0.0002 / 0.0002 / 0.0003 | 0.004 / 0.0003 / 0.0002 / 0.0002 | 0.0450 / 0.0009 / 0.0011 / 0.0002 | |
+
+Sample (5,000) and WordNet (3,000), same metrics: **B passes every target on both** (min sibling 0.0450 / 0.0451, 0 parents below 0.04, 0 overlaps, closest pair 0.0135 / 0.0175, max radius 0.990). Production there already overlaps (477 pairs in 126 parents / 710 in 74); A and W fail the spacing target on both.
+
+### What this means
+- **Neither A nor B meets every target on the Disease Ontology. B is far closer; A is not viable** (a uniform longer edge cannot fix a leaf squeezed next to a big sibling, and 3.6 sends all 486 children to the rim).
+- B meets: zero clamped edges, max radius <= 0.994, **zero subtree overlap** (production has 192 overlapping parents), the explicit 486-child test (0.0450), and the whole sample and WordNet.
+- B misses: 28 of 1,520 parents stay below 0.04 (26 below 0.02), and the global minimum is 0.0002. It is **worse than production's 0.0007**, because the strict wedge rule gives a thin angular room to a deep two-child parent (depth 10) whose ancestors have used the radius budget.
+- **Why (the real constraint):** a node's angular room is roughly (its weight share) x e^(path length). The path length is capped by the radius limit, and wide ancestors spend it. The failing parents are wide (10–1,048 children) at depths 3–7 whose ancestors already used 4.7–5.6 of the 5.8 budget (examples: d5, 29 kids, path 4.66; d4–d6 groups of 10–100). Ring tricks cannot create room that the budget does not have.
+- Sensitivity of B (`--sweep`): the failing-parent count moves 44 -> 8 with the parameters (`capF` = share of its schedule the deeper levels must keep, `mix` = weight share), at the price of crushing the deepest levels: default (capF 0.35, mix 0.5): 28 / 26 · (0.2, 0.7): 14 / 7 · (0.1, 0.7): 13 / 7 · (0.05, 0.7): 8 / 3, where the deepest levels keep only 5 % of their schedule. None reaches zero.
+- *Information only* (the 0.995 clamp rule would have to change; not proposed): the same B with radius limit 0.996 / 0.998 / 0.999 leaves 18 / 12 / 8 parents below 0.04. Even a 31 % larger budget does not remove them, so the budget is not the only cause.
+- **Visual coherence** (`screenshots/layout2d-prototypes.png`, rows: whole tree and "syndrome" focused): production is a tangle of overlapping arcs. A gives the cleanest picture (colour wedges per family, no overlap) but crowds nodes along the rim. B keeps the wedges and separates siblings by staggered length, which gives a ragged "bar" outline in wide families (readable, less elegant than A); at depths 7–12 it is tight in both.
+- Not assessed: the 3D layout, the real viewer (no pixels, labels or picking), phone performance. All numbers are hyperbolic distances; a distance of 0.04 is 1-2 px on a 1000 px disk at the centre, so the viewer's zoom and level-of-detail (step 2.4) still matter.
+
+### Decision needed before any production change (nothing has been applied)
+1. **Adopt B** (wedge rule + staggered rings + budget-aware lengths) knowing 28 deep/wide parents (1.8 %) stay below 0.04? The exception list could be shown in the tests rather than hidden. Parameters would be fixed first (default 0.35/0.5, or 0.2/0.7 for 14).
+2. Or **change the targets**: e.g. require 0.04 only for parents above a depth or above a child count, and require 0.02 elsewhere.
+3. Or **explore a hybrid / different rule** (e.g. A+B jointly choosing the base length and ring count per parent, or letting deep leaf-only subtrees relax the wedge). Relaxing the wedge compromises the no-overlap target, so I will not do that without your decision.
+If B is adopted, the 2D layout fixed-edge-length rule in CLAUDE.md will be amended with the exact formula (it currently says the assumption is under review).
 
 ## Phase 0 — Freeze and prepare existing engine  (done)
 
