@@ -1,9 +1,38 @@
-# CLAUDE.md — Hyperbolic Data Explorer
+# CLAUDE.md — Hyperbolic Disease Atlas
+
+**Hyperbolic Disease Atlas — A hyperbolic visualization and navigation system for exploring the Disease Ontology.**
+
+Objective: explore the Disease Ontology through hyperbolic geometry in the Poincaré ball, enabling intuitive navigation of large hierarchical biomedical knowledge structures.
 
 Solo student project for a Computer Graphics and AR/VR course. **Zero budget**: use only free tools, libraries, and hosting.
 
-## Project summary
-"Hyperbolic Data Explorer" shows huge hierarchies using hyperbolic geometry so the **whole tree is visible at once**. The first dataset is the folder tree of a code repository with thousands of files. The focus node sits at the center and is drawn large. Everything else shrinks toward the edge but stays visible (focus + context).
+> **Pivot (Nov 2026, branch `atlas`).** The project started as "Hyperbolic Data Explorer" (first dataset: a code repository). The
+> hyperbolic engine built for it is kept intact and is now the foundation of the Atlas. Everything below that mentions code
+> repositories, symbols, git heat or import/call links describes **existing engine features that stay available for datasets that
+> declare them** (see "Dataset capabilities"). The roadmap is in PROGRESS.md.
+
+## Project principles (Disease Atlas)
+1. The Poincaré ball is the primary navigation environment.
+2. The system must preserve the original ontology's directed acyclic graph (DAG) relationships.
+3. A simplified primary hierarchy (a spanning tree) may be used for layout, but no original ontology relationships may be discarded.
+4. Every visual encoding must communicate meaningful information.
+5. Never invent disease, gene, protein, phenotype or anatomical relationships.
+6. Every biomedical association must have traceable source provenance.
+7. The application is educational and exploratory, not a diagnostic or medical-advice system.
+8. Preserve the existing hyperbolic engine wherever possible.
+9. Load the complete active ontology. Use progressive expansion and level-of-detail rendering instead of arbitrarily deleting diseases.
+
+## Dataset capabilities (engine vs. dataset)
+- The engine (Möbius maths, layout, rendering, search, minimap, "+N" groups, study logging) is dataset-independent. **Do not
+  hardcode dataset-specific assumptions (code, disease, ...) into it.**
+- Optional features are switched on by **capabilities**, decided once per dataset in `src/capabilities.js`
+  (`deriveCapabilities(json)`): `symbols`, `codePanel`, `gitHeat`, `dependencies`. UI and logic ask `caps.<name>`, never "is this a code repo?".
+- A dataset declares them with an optional `"capabilities": [...]` list in its tree JSON (the list is the whole truth; declared
+  features without backing data are switched off with a warning). Datasets without the field (sample repo, WordNet) are inferred
+  from the fields they already have. A new dataset adds a capability by extending `CAPABILITY_NAMES` + its test.
+
+## Project summary (original engine)
+The engine shows huge hierarchies using hyperbolic geometry so the **whole tree is visible at once**. The first dataset was the folder tree of a code repository with thousands of files. The focus node sits at the center and is drawn large. Everything else shrinks toward the edge but stays visible (focus + context).
 
 **Prior work to cite:** Lamping & Rao, Hyperbolic Browser (Xerox PARC); Munzner, H3 viewer; Poincaré embeddings (Nickel & Kiela) in machine learning.
 
@@ -57,7 +86,11 @@ Solo student project for a Computer Graphics and AR/VR course. **Zero budget**: 
 - No post-processing.
 - On-screen **fps counter** that can be toggled.
 
-## Phases (one at a time, and only when the user says "go")
+## Phases
+The Disease Atlas roadmap (Phase 0-8) is in **PROGRESS.md** and supersedes the list below, which is the history of the original engine.
+Work one phase at a time, and only when the user says "go".
+
+### Engine history (Hyperbolic Code Explorer phases)
 1. Python scanner + 2D Poincaré disk viewer with click-to-refocus  ✅
 2. 3D Poincaré ball layout + geodesic animation  ✅
 3. Visual polish (impostor shaders, geodesic edge shader, fog, starfield, labels)  ✅

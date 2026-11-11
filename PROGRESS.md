@@ -1,4 +1,65 @@
-# PROGRESS
+# PROGRESS — Hyperbolic Disease Atlas
+
+Project pivoted (Nov 2026, branch `atlas`) from Hyperbolic Code Explorer to the **Hyperbolic Disease Atlas**: exploring the
+Disease Ontology in the Poincaré ball. Principles are in CLAUDE.md. One phase at a time, only when the user says "go".
+
+## Roadmap
+
+**Core deliverables**
+| Phase | Title | Status |
+|---|---|---|
+| 0 | Freeze and prepare existing engine | **in progress** (acceptance checks below) |
+| 1 | Disease Ontology data ingestion (full DAG, provenance, primary hierarchy for layout) | not started |
+| 2 | Meaningful disease visualization (every encoding carries information) | not started |
+| 3 | Interactive exploration lenses | not started |
+| 4 | Comparative navigation study (collapsible tree vs 2D vs 3D hyperbolic) | not started |
+
+**Optional extensions** (only if time allows; none is needed for the course deliverable)
+| Phase | Title | Status |
+|---|---|---|
+| 5 | Anatomical visualization | optional, not started |
+| 6 | Gene and protein integration (every association with source provenance) | optional, not started |
+| 7 | Biological pathway animation | optional, not started |
+| 8 | AR / VR (tabletop AR, Cardboard VR, Lorentz camera) | optional, not started |
+
+## Phase 0 — Freeze and prepare existing engine  (in progress)
+
+### Inspection (read before changing anything)
+| Engine area | Where |
+|---|---|
+| Möbius maths 2D / 3D | `src/mobius.js`, `src/mobius3d.js` |
+| Layout 2D / 3D (+ symbol galaxies) | `src/layout.js`, `src/layout3d.js` |
+| GPU refocus, impostor nodes, edges, fog | `src/glsl.js` (uniform `_Focus`), built in `src/main3d.js` |
+| Labels, search, minimap, study logging | `src/labels.js`, `src/search.js` + `searchui.js`, `src/minimap.js`, `src/study.js` + `studylog.js` |
+| Camera / navigation, back stack, path highlight | `src/navigation.js`, `markPath` in `main3d.js` |
+| "+N" collapsed groups | semantic-zoom code in `main3d.js` (`collapsedNodes`) |
+| Code-specific | `src/symbols.js`, `codepanel.js`, `codecontext.js`, `links.js`, `heat.js`, info-card code rows, Imports/Calls/Dependencies chips |
+
+Before this phase the code features were gated by `hasCode = symbolFiles.length > 0` (a code-repo guess inside `main3d.js`) and heat
+by whether git data happened to exist; the H/I/K/D keys worked regardless.
+
+### Done
+- [x] CLAUDE.md rewritten for the Atlas (goal, 9 principles, capability rule); all engine rules kept.
+- [x] This roadmap.
+- [x] `src/capabilities.js`: `deriveCapabilities(json)` -> `{ symbols, codePanel, gitHeat, dependencies, source, warnings }`.
+      A tree JSON may declare `"capabilities": [...]`; legacy files (sample repo, WordNet) are inferred from fields they already
+      have, so no data file changed. Declared-but-unbacked capabilities switch off with a warning; unknown names are ignored with a warning.
+- [x] `main3d.js` / `toolbar.js` read `caps` instead of `hasCode`: Imports/Calls/Dependencies chips, arcs help card, link loading and I/K/D keys
+      need `dependencies`; Heat button, heat computation and H key need `gitHeat`; code panel needs `codePanel`; symbol files, search of
+      symbols and code rows in the info card need `symbols`. Nothing deleted; `window.__explorer.capabilities` exposes the result.
+- [x] `tests/capabilities.test.js` (added to `npm test`).
+
+### Acceptance checks (actual results)
+- `npm test`: **passes** (all 16 steps incl. the new capabilities test and 46,670 scanner checks).
+- `npm run test:phone` (real headless Chrome, sample dataset): **172 / 172 passed**, no console errors.
+- Ad-hoc headless Chrome probe (desktop 1200x800, results not saved as a test): WordNet (3,000 nodes) loads, caps all false, toolbar shows no
+  Imports/Calls/Dependencies/Heat buttons, help line has no code keys, pressing H/I/K/D does nothing, no console errors. Sample (5,000 nodes)
+  loads, all four caps true, Dependencies + Heat buttons shown, H works.
+- Not done: the probe is not part of the repo test suite (WordNet is covered in the browser only by that probe); no real-phone check. `npm run build` succeeds.
+
+---
+
+# History: Hyperbolic Code Explorer (engine phases, all before the pivot)
 
 ## Phase 1 — Python scanner + 2D Poincaré disk viewer  ✅ done
 

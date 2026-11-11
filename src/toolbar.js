@@ -158,21 +158,21 @@ export function createToolbar(actions) {
       back.classList.toggle('hidden', s.backDepth === 0);
       back.innerHTML = `‹${lbl(` Back (${s.backDepth})`)}`;
       const folder = s.focusKind === 'folder';
-      // Link chips only make sense for a code dataset (one that has symbols); heat only if the data has git history.
-      deps.style.display = folder && s.hasCode ? '' : 'none';
-      imports.style.display = calls.style.display = folder || !s.hasCode ? 'none' : '';
+      // Link chips only if the dataset has the 'dependencies' capability; heat only with 'gitHeat' (both decided in capabilities.js).
+      deps.style.display = folder && s.hasLinks ? '' : 'none';
+      imports.style.display = calls.style.display = folder || !s.hasLinks ? 'none' : '';
       heatBtn.style.display = s.hasGit ? '' : 'none';
       setOn(imports, s.showImports); setOn(calls, s.showCalls); setOn(deps, s.showFolderDeps);
       fit();
     },
     // Wording of the intro card for the dataset (a code repository by default, or e.g. WordNet).
-    setDataset({ about, words, hasCode }) {
+    setDataset({ about, words, hasLinks }) {
       if (about) card.querySelector('.i-about').textContent = about;
       if (words) {
         card.querySelector('.i-folders').textContent = `${words.folder}s`;
         card.querySelector('.i-files').textContent = `${words.file.toLowerCase()}s`;
       }
-      card.querySelector('.i-arcs').style.display = hasCode ? '' : 'none';
+      card.querySelector('.i-arcs').style.display = hasLinks ? '' : 'none';
     },
     showIntro,
     get introVisible() { return !card.hidden; },

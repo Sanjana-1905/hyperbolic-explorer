@@ -39,6 +39,7 @@ import { createIndex } from './search.js';
 import { createSearchUI } from './searchui.js';
 import { createInfoCard } from './infocard.js';
 import { createMinimap } from './minimap.js';
+import { deriveCapabilities, NO_CAPABILITIES } from './capabilities.js';
 import { computeHeat, encodeHeat, HEAT, HEAT_NAMES } from './heat.js';
 import { createCodePanel } from './codepanel.js';
 import { createFpsCounter } from './fps.js';
@@ -86,11 +87,11 @@ let showCalls = showImports;
 // A whole folder's imports are a hairball for a newcomer, so they are OFF until asked for (D key / Dependencies chip).
 // Hovering a file still previews its own arcs.
 let showFolderDeps = false;
-let hasCode = false;            // the dataset has code symbols (links, imports, lines of code make sense); set once the tree is loaded
+let caps = NO_CAPABILITIES;     // which optional features this dataset supports (capabilities.js); set once the tree is loaded
 // Short help line (the buttons and the "?" card explain the rest); keys for people who like them.
 function updateHelp() {
   document.getElementById('help').textContent =
-    hasCode
+    caps.symbols
       ? 'Drag to look · scroll to zoom · click a node to fly in · keys: Backspace back · I imports · K calls · D folder deps · C code · F fps'
       : 'Drag to look · scroll to zoom · click a node to fly in · keys: Backspace back · / search · F fps';
   if (typeof refreshToolbar === 'function') refreshToolbar();
@@ -712,7 +713,7 @@ import { neighbours, callTargets, importTargets, definitionLines, subtreeIndexes
 
 async function showCode(node) {
   const file = node.type === 'symbol' ? node.file : node;
-  if (!file || !file.hasSymbols || node.type === 'folder') { codePanel.hide(); return; }
+  if (!caps.codePanel || !file || !file.hasSymbols || node.type === 'folder') { codePanel.hide(); return; }
   const [lines, doc] = await Promise.all([store.getLines(file), store.getDoc(file)]);
   if (focusNode !== node) return;
   const from = node.type === 'symbol' ? node.startLine : 1;
@@ -942,7 +943,7 @@ function refreshToolbar() {
     focusKind: focusNode.type === 'symbol' ? 'symbol' : focusNode.type === 'folder' ? 'folder' : 'file',
     showImports, showCalls, showFolderDeps,
     infoOpen: infoCard ? infoCard.open : false, heatMode,
-    hasGit: !!(heatData && heatData.files), hasCode,
+    hasGit: caps.gitHeat && !!(heatData && heatData.files), hasLinks: caps.dependencies,
   });
 }
 function updateBackButton() { refreshToolbar(); }
@@ -1097,11 +1098,11 @@ function updateInfoCard() {
       files++; loc += f.loc || 0;
       if (f.commits) { commits += f.commits; newest = Math.max(newest, Date.parse(f.modified) || 0); }
     }
-    rows.push(['Contains', hasCode ? `${n.children.length} items · ${files} files` : `${n.children.length} direct · ${n.weight - 1} in all`]);
+    rows.push(['Contains', caps.symbols ? `${n.children.length} items · ${files} files` : `${n.children.length} direct · ${n.weight - 1} in all`]);
     if (loc) rows.push(['Lines of code', loc.toLocaleString()]);
     if (commits) rows.push(['Git commits', `${commits.toLocaleString()} (all files)`]);
     if (newest) rows.push(['Last modified', fmtDate(newest)]);
-    if (!hasCode) rows.push(['Depth', `${n.depth} below the top`]);
+    if (!caps.symbols) rows.push(['Depth', `${n.depth} below the top`]);
   } else if (n.type === 'symbol') {
     rows.push(['Signature', n.signature]);
     rows.push(['Lines of code', `${n.endLine - n.startLine + 1} (${n.startLine}–${n.endLine})`]);
@@ -1110,15 +1111,15 @@ function updateInfoCard() {
     if (n.loc) rows.push(['Lines of code', n.loc.toLocaleString()]);
     if (n.hasSymbols) rows.push(['Symbols', n.symState === 'open' ? String(dynamicCountOf(n)) : 'opens when you fly in']);
     if (n.commits) { rows.push(['Git commits', String(n.commits)]); rows.push(['Last modified', n.modified || '—']); }
-    if (!hasCode) rows.push(['Depth', `${n.depth} below the top`]);
+    if (!caps.symbols) rows.push(['Depth', `${n.depth} below the top`]);
   }
-  if (hasCode) {
+  if (caps.dependencies) {
     if (counts) {
       if (n.type !== 'symbol') rows.push(['Imports', `${counts.importsOut} out · ${counts.importsIn} in`]);
       if (n.type !== 'folder') rows.push(['Calls', `${counts.callsOut} out · ${counts.callsIn} in`]);
     } else if (n.type !== 'folder') rows.push(['Imports / calls', '—']);
   }
-  const kind = n.type === 'symbol' ? n.kind : hasCode ? (n.type === 'folder' ? 'Folder' : `File${n.ext ? ` · .${n.ext}` : ''}`) : word(n.type);
+  const kind = n.type === 'symbol' ? n.kind : caps.symbols ? (n.type === 'folder' ? 'Folder' : `File${n.ext ? ` · .${n.ext}` : ''}`) : word(n.type);
   infoCard.setCard(kind, rows, fakeGit && (n.type !== 'symbol') ? 'Sample data: the git numbers are FAKE.' : null);
 }
 
@@ -1375,13 +1376,13 @@ window.addEventListener('keydown', (e) => {
     if (!e.shiftKey && nav.backDepth > 0) goBack();
     else if (focusNode && focusNode.parent) focusOn(focusNode.parent);
   } else if ((e.key === 'i' || e.key === 'I') && !e.ctrlKey && !e.metaKey) {
-    showImports = !showImports; linksDirty = true; updateHelp();
+    if (caps.dependencies) { showImports = !showImports; linksDirty = true; updateHelp(); }
   } else if ((e.key === 'k' || e.key === 'K') && !e.ctrlKey && !e.metaKey) {
-    showCalls = !showCalls; linksDirty = true; updateHelp();
+    if (caps.dependencies) { showCalls = !showCalls; linksDirty = true; updateHelp(); }
   } else if ((e.key === 'h' || e.key === 'H') && !e.ctrlKey && !e.metaKey) {
-    cycleHeat();
+    if (caps.gitHeat) cycleHeat();
   } else if ((e.key === 'd' || e.key === 'D') && !e.ctrlKey && !e.metaKey) {
-    showFolderDeps = !showFolderDeps; linksDirty = true; updateHelp();
+    if (caps.dependencies) { showFolderDeps = !showFolderDeps; linksDirty = true; updateHelp(); }
   }
 });
 
@@ -1450,15 +1451,16 @@ async function start() {
   // Symbol and source files sit in folders named by the tree JSON, relative to the tree file's folder.
   const baseUrl = url.slice(0, url.lastIndexOf('/') + 1);
   store = createSymbolStore(baseUrl, json.symbolsDir, json.sourceDir);
-  symbolFiles = nodes.filter((n) => n.hasSymbols);
+  caps = deriveCapabilities(json);
+  for (const w of caps.warnings) console.warn('dataset capabilities:', w);
+  symbolFiles = caps.symbols ? nodes.filter((n) => n.hasSymbols) : [];
   for (const n of symbolFiles) fileById.set(n.fileId, n);
   buildSearch();
-  heatData = computeHeat(nodes);
+  heatData = caps.gitHeat ? computeHeat(nodes) : null;
   fakeGit = !!json.fakeGit;
   infoCard = createInfoCard();
-  hasCode = symbolFiles.length > 0;
   if (json.words) datasetWords = json.words;
-  toolbar.setDataset({ about: json.about, words: json.words, hasCode });
+  toolbar.setDataset({ about: json.about, words: json.words, hasLinks: caps.dependencies });
   updateHelp();
   minimap = createMinimap({ nodes, onPick: (n) => goToPlace({ baseId: n.id }, true) });
   refreshToolbar();
@@ -1469,7 +1471,7 @@ async function start() {
     nav.setInset(right, bottom + (toolbarAtBottom ? THEME.TOOLBAR_BAND_PX : 0));
   } });
   // Links (Phase 4c) load in the background: the galaxy is usable before they arrive.
-  if (json.linksFile) {
+  if (caps.dependencies && json.linksFile) {
     fetch(`${baseUrl}${json.linksFile}`)
       .then((r) => (r.ok ? r.json() : null))
       .then((lj) => { if (lj) { linkData = createLinkData(lj); linksDirty = true; updatePanelLinks(); if (focusNode) showCode(focusNode); updateInfoCard(); } })
@@ -1569,6 +1571,7 @@ window.__explorer = {
   get backDepth() { return nav.backDepth; },
   goBack,
   cycleHeat,
+  get capabilities() { return caps; },
   get heatMode() { return heatMode; },
   get cardText() { return document.getElementById('card').innerText; },
   get legendText() { return document.getElementById('legend').innerText; },
