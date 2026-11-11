@@ -30,7 +30,7 @@ try {
   // =============================== 3D ===============================================================
   await b.goto(`${BASE}?tree=disease_tree.json&intro=0&time=3`, 5000);
   await ev(HELPERS);
-  rec('3D: disease tree loaded, no code capabilities', await ev('__explorer.nodes.length') === 12419 && await ev('Object.values(__explorer.capabilities).slice(0, 4).every((v) => v === false)'), `${await ev('__explorer.nodes.length')} nodes`);
+  rec('3D: disease tree loaded (12,419 diseases + navigation groups), no code capabilities', await ev('__explorer.displayInfo.realCount') === 12419 && await ev('__explorer.nodes.length') === 12419 + await ev('__explorer.displayInfo.groups') && await ev('Object.values(__explorer.capabilities).slice(0, 4).every((v) => v === false)'), `${await ev('__explorer.nodes.length')} display nodes`);
   const lay = await ev(`(() => { const E = __explorer;
     const dist = (u, v) => { const d2 = (u.x - v.x) ** 2 + (u.y - v.y) ** 2 + (u.z - v.z) ** 2; return Math.acosh(1 + 2 * d2 / ((1 - (u.x ** 2 + u.y ** 2 + u.z ** 2)) * (1 - (v.x ** 2 + v.y ** 2 + v.z ** 2)))); };
     let maxR = 0, bad = 0, maxD = 0, short = 0;
@@ -96,8 +96,8 @@ try {
     let maxR = 0, bad = 0, maxD = 0;
     for (const n of E.nodes) { maxR = Math.max(maxR, Math.hypot(n.z.x, n.z.y)); maxD = Math.max(maxD, n.depth); if (n.parent && Math.abs(d(n.parent.z, n.z) - n.edgeLength) > 1e-6) bad++; }
     const deep = E.nodes.filter((n) => n.depth === 12)[0]; const chain = []; for (let n = deep; n; n = n.parent) chain.push(n.id);
-    return { count: E.nodes.length, maxR, bad, maxD, deep: deep.id, chain }; })()`);
-  rec('2D: same tree loaded', lay2.count === 12419 && lay2.maxD === 12, `${lay2.count} nodes, depth ${lay2.maxD}`);
+    return { count: E.nodes.length, real: E.displayInfo.realCount, groups: E.displayInfo.groups, maxR, bad, maxD, deep: deep.id, chain }; })()`);
+  rec('2D: same display tree loaded (12,419 diseases + the same groups as 3D)', lay2.real === 12419 && lay2.count === 12419 + lay2.groups && lay2.maxD === 12, `${lay2.count} display nodes, depth ${lay2.maxD}`);
   rec('2D: max radius below 0.995 and no clamped edge', lay2.maxR < 0.995 && lay2.bad === 0, `max ${lay2.maxR.toFixed(5)}, ${lay2.bad} bad`);
   let hits = 0, tried = 0; const missed = [];
   for (const id of [lay2.chain[4], lay2.chain[2], lay2.chain[1], lay2.deep]) {          // refocus near the deep end, click children / the node itself

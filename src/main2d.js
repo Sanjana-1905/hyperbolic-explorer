@@ -12,8 +12,12 @@
 
 import * as THREE from 'three';
 import { complex, cNeg, cAbs, mobiusAdd, geodesicLerp } from './mobius.js';
-import { buildTree, computeLayout, nodePath } from './layout.js';
+import { nodePath } from './layout.js';
 import { treeFileFromUrl } from './dataset.js';
+import { makeDisplayTree, CAP_DESKTOP, CAP_PHONE } from './displaytree.js';
+import { disclosureStates } from './disclosure.js';
+import { createMemberList } from './memberlist.js';
+import { detectTier } from './quality.js';
 import { createFpsCounter } from './fps.js';
 
 document.getElementById('help').textContent =
@@ -26,6 +30,7 @@ const fps = createFpsCounter();
 const ANIM_SECONDS = 0.5;       // refocus animation length
 const FOLDER_RADIUS = 0.16;     // hyperbolic radius of a folder circle
 const FILE_RADIUS = 0.06;       // hyperbolic radius of a file circle
+const AGGREGATE_SCALE = 1.5;    // an aggregate (closed group / list-only node) is drawn this much bigger than a folder
 const MIN_PIXELS = 1.2;         // never draw a circle smaller than this radius
 const CLICK_TOLERANCE_PX = 8;   // how far from a circle a click still hits it
 const EDGE_SEGMENTS = 8;        // line pieces per curved edge
@@ -34,6 +39,7 @@ const COLORS = {
   file: new THREE.Color('#8d99ae'),
   focus: new THREE.Color('#ffb703'),
   parent: new THREE.Color('#fb8500'),
+  aggregate: new THREE.Color('#c77dff'),   // a navigation group or list-only node drawn as one aggregate ("+N")
   edge: new THREE.Color('#2b3a55'),
   rim: new THREE.Color('#1d2a44'),
 };
@@ -85,7 +91,10 @@ scene.add(new THREE.Line(
 // ---------------------------------------------------------------------------
 // State
 // ---------------------------------------------------------------------------
-let nodes = [];          // all nodes (from buildTree)
+let nodes = [];          // all nodes of the display tree (real tree + navigation groups, displaytree.js)
+let states = new Uint8Array(0); // per node: 0 drawn, 1 hidden inside a closed group / list-only node, 2 aggregate (disclosure.js)
+let memberList = null;   // member list of a list-only node (memberlist.js)
+let displayInfo = null;
 let root = null;
 let focusNode = null;    // node we are focused on (or animating toward)
 let focusPoint = complex(0, 0); // the disk point currently at the screen centre
@@ -132,6 +141,7 @@ function buildDrawables() {
 function updateColors() {
   for (const node of nodes) {
     let color = node.type === 'folder' ? COLORS.folder : COLORS.file;
+    if (states[node.id] === 2) color = COLORS.aggregate;
     if (node === focusNode) color = COLORS.focus;
     else if (focusNode && node === focusNode.parent) color = COLORS.parent;
     nodeMesh.setColorAt(node.id, color);
@@ -156,8 +166,9 @@ function updateGeometry() {
     // A hyperbolic circle of radius ρ drawn at Euclidean distance r from the
     // centre of the disk has Euclidean radius about ρ·(1 - r²)/2: the factor
     // (1 - r²) is the Poincaré disk's squeeze, so things shrink toward the rim.
-    const rho = node.type === 'folder' ? FOLDER_RADIUS : FILE_RADIUS;
-    const size = Math.max(rho * (1 - r * r) / 2, minRadius);
+    const rho = (node.type === 'folder' ? FOLDER_RADIUS : FILE_RADIUS) * (states[node.id] === 2 ? AGGREGATE_SCALE : 1);
+    // A node hidden inside a closed navigation group (or below a list-only node) is not drawn: scale 0, no edge, not pickable.
+    const size = states[node.id] === 1 ? 0 : Math.max(rho * (1 - r * r) / 2, minRadius);
 
     screenX[node.id] = p.x;
     screenY[node.id] = p.y;
@@ -177,7 +188,7 @@ function updateGeometry() {
   // polyline. Tiny edges are drawn straight (a curve would be invisible anyway).
   let v = 0; // number of floats written
   for (const node of nodes) {
-    if (!node.parent) continue;
+    if (!node.parent || states[node.id] === 1) continue;
     const ax = screenX[node.parent.id], ay = screenY[node.parent.id];
     const bx = screenX[node.id], by = screenY[node.id];
     const chord = Math.hypot(bx - ax, by - ay);
@@ -220,6 +231,8 @@ function easeInOut(t) {
 function focusOn(node, animate = true) {
   if (!node) return;
   focusNode = node;
+  states = disclosureStates(nodes, root, node);     // which groups are open follows the focus path
+  if (memberList) memberList.update(node);
   updateColors();
   updateInfo();
   if (animate) {
@@ -252,9 +265,9 @@ const infoPath = document.querySelector('#info .path');
 
 function updateInfo() {
   const n = focusNode;
-  infoName.textContent = n.name + (n.type === 'folder' ? '/' : '');
-  const extra = n.type === 'folder'
-    ? `  ·  ${n.children.length} items, ${n.weight - 1} nodes inside`
+  infoName.textContent = n.isGroup ? `${n.name} · ${n.members} ${n.kind}` : n.name + (n.type === 'folder' ? '/' : '');
+  const extra = n.isGroup ? `  ·  navigation group (alphabetical, not a category): ${n.firstName} … ${n.lastName}`
+    : n.type === 'folder' ? `  ·  ${n.children.length} items, ${(n.realWeight ?? n.weight) - 1} nodes inside${n.listOnly ? '  ·  list-only (see the member list)' : ''}`
     : '';
   infoPath.textContent = nodePath(n) + extra;
 }
@@ -277,6 +290,7 @@ function pickNode(clientX, clientY) {
   const tol = CLICK_TOLERANCE_PX / pixelsPerUnit;
   let best = null, bestScore = Infinity;
   for (const node of nodes) {
+    if (states[node.id] === 1) continue;            // hidden: not pickable
     const d = Math.hypot(screenX[node.id] - wx, screenY[node.id] - wy);
     const reach = screenR[node.id] + tol;
     if (d > reach) continue;
@@ -325,10 +339,13 @@ async function start() {
   const response = await fetch(url);
   if (!response.ok) throw new Error(`Could not load ${url} (${response.status})`);
 
-  const tree = buildTree(await response.json());
+  // The display tree (displaytree.js) is already laid out in 2D (positions `z`); the 3D viewer lays out the SAME tree in its own way.
+  const capParam = Number(new URLSearchParams(location.search).get('cap'));
+  const tree = makeDisplayTree(await response.json(), { cap: capParam > 0 ? capParam : detectTier() === 'phone' ? CAP_PHONE : CAP_DESKTOP });
+  displayInfo = tree.info;
   root = tree.root;
   nodes = tree.nodes;
-  computeLayout(root);
+  memberList = createMemberList({ onPick: (n) => focusOn(n) });
 
   buildDrawables();
   resize();
@@ -349,6 +366,13 @@ window.__explorer = {
   focusId: () => focusNode.id,
   get fps() { return fps.value; },
   // Screen (CSS pixel) position of a node's centre, for automated tests.
+  get displayInfo() { return displayInfo; },
+  get focusNode() { return focusNode; },
+  get memberList() { return memberList; },
+  state: (id) => states[id],
+  get visibleCount() { let c = 0; for (const n of nodes) if (states[n.id] !== 1) c++; return c; },
+  orbIds: () => nodes.filter((n) => states[n.id] === 2).map((n) => n.id),
+  pick: (x, y) => { const n = pickNode(x, y); return n ? n.id : null; },
   screenPos: (id) => {
     const w = camera.right - camera.left, h = camera.top - camera.bottom;
     return {

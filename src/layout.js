@@ -1,17 +1,21 @@
-// layout.js - place every tree node on the Poincaré disk.
+// layout.js - place every tree node on the Poincaré disk ("S5": wedge territories + staggered rings + radius budget).
 //
 // THE IDEA
 // - The root sits at the centre of the disk.
-// - Every child sits at the same fixed hyperbolic distance (EDGE_LENGTH) from
-//   its parent.
-// - A parent hands out its available angle ("fan") to its children in slices
-//   proportional to each child's subtree size, so big subtrees get more room.
+// - A parent hands out its available angle ("fan") to its children in slices: part equal, part proportional to subtree size (S5.MIX).
+// - Each child sits at its own hyperbolic distance from the parent: normally the length scheduled for its depth (EDGE_LENGTH, shrinking
+//   at great depth, see edgeLengthSchedule), but a parent with MANY children staggers them on RINGS (a sawtooth of longer lengths), because
+//   one circle is too small: its circumference is only 2π·sinh(L). The exact rule is in CLAUDE.md ("Fixed edge length is relaxed...").
+// - The WEDGE RULE keeps every subtree inside the angular territory of its own slice, so sibling subtrees never overlap.
+// - The RADIUS BUDGET keeps every root-to-node path at most 2·atanh(0.994), so nothing can reach the 0.995 clamp.
+// - A node's position depends only on its ancestors and siblings (and the tree's global depth M), never on what is shown or hidden.
 //
-// This file has no drawing code, so it can be tested from the command line.
+// This file has no drawing code, so it can be tested from the command line. displaytree.js uses its `refine` hook to insert the
+// alphabetical navigation groups.
 
-import { complex, mobiusAdd, cNeg, distanceToRadius } from './mobius.js';
+import { complex, mobiusAddFree, cNeg, distanceToRadius, coshDistancePolar, wedgeAngleForTerritory } from './mobius.js';
 
-// Hyperbolic length of every parent->child edge. Smaller values keep deep
+// Normal hyperbolic length of a parent->child edge (before rings and the depth taper). Smaller values keep deep
 // levels away from the rim (where points get clamped at radius 0.995).
 export const EDGE_LENGTH = 0.6;
 
@@ -53,16 +57,18 @@ export function treeDepth(root) {
   return max;
 }
 
-// A non-root folder spreads its children over a fan of this many radians,
-// chosen between MIN_FAN and MAX_FAN. MAX_FAN < 2π leaves a gap that points
-// back at the parent, so children never fall on top of their own parent.
-export const MIN_FAN = 0.35 * Math.PI;
+// A non-root node spreads its children over a fan of at most this many radians. MAX_FAN < 2π leaves a gap that points back at the
+// parent, so children never fall on top of their own parent.
 export const MAX_FAN = 1.8 * Math.PI;
 
-// How much wider than its own slice a folder's fan is. A folder that got a
-// slice of s radians at its parent lays out its children over s * FAN_SPREAD
-// radians (then clamped to the range above).
-export const FAN_SPREAD = 2.0;
+// The S5 parameters (decided by the user after prototyping, see PROGRESS.md "Step 2.3a").
+export const S5 = {
+  MIX: 0.7,        // share of a child's angle that follows its subtree size (the rest is equal): s_i = (1-MIX)/n + MIX*w_i/sum(w)
+  CAP_F: 0.2,      // a wide parent may spend radius budget on rings, but the levels below keep at least this fraction of their schedule
+  PACKING: 0.9,    // a child's territory is 90 % of its slice, leaving a gap to the neighbours
+  TARGET: 0.045,   // spacing the rings aim for (also the radial step between rings)
+  ACCEPT: 0.04,    // a level counts as well spaced if its siblings are at least this far apart
+};
 
 // ---------------------------------------------------------------------------
 // Turning the JSON into a tree of node objects
@@ -81,6 +87,7 @@ export function buildTree(json) {
     const node = {
       id: nodes.length,
       name: raw.name,
+      doid: raw.doid,                 // Disease Ontology id (disease_tree.json), undefined for other datasets
       type: raw.type,
       size: raw.size,
       // scanner-v2 fields (all optional): extension, lines of code, symbols-file id, git info
@@ -107,9 +114,10 @@ export function buildTree(json) {
 
 // Path of a node as text, e.g. "sample-repo/src/utils". Built by walking up
 // to the root and reversing.
+// Navigation groups (displaytree.js) are skipped: a path is made of real names only.
 export function nodePath(node) {
   const names = [];
-  for (let n = node; n; n = n.parent) names.push(n.name);
+  for (let n = node; n; n = n.parent) if (!n.isGroup) names.push(n.name);
   return names.reverse().join('/');
 }
 
@@ -117,50 +125,102 @@ export function nodePath(node) {
 // The layout itself
 // ---------------------------------------------------------------------------
 
-// Fill in `node.z` (a point on the disk) for every node under `root`.
-// `lengths` (optional, used by tests to compare layouts) overrides the per-depth schedule.
-export function computeLayout(root, edgeLength = EDGE_LENGTH, lengths = edgeLengthSchedule(treeDepth(root), edgeLength)) {
-  // Euclidean radius on the disk that corresponds to one edge length,
-  // measured from the centre of a node's own frame: r = tanh(d / 2).
-  // (Every edge has `edgeLength`, except in a tree too deep for the disk: then the deep levels are shorter, see edgeLengthSchedule.)
+// A node's weight for sharing out angle: the number of REAL diseases below it (`w`), which a navigation group sets to the sum of its
+// members', or else the subtree size.
+const weightOf = (c) => c.w ?? c.weight;
 
-  root.z = complex(0, 0);
-  // The root has no parent, so it may use the whole circle.
-  placeChildren(root, 0, 2 * Math.PI, lengths);
-}
+const TWO_PI = 2 * Math.PI;
+const EDGE_BUDGET = 2 * Math.atanh(EDGE_RADIUS_LIMIT);   // every path from the root sums to at most this: 5.81
 
-// Place the children of `node`, then recurse into each child.
-//   centerAngle - direction (radians) at the middle of the fan, measured in
-//                 the node's own frame.
-//   fanWidth    - total angle available for the children.
-//
-// A node's "own frame" is the disk after a Möbius move that brings the node to
-// the centre. In that frame a child at angle θ is at local = r·(cos θ, sin θ),
-// and we get its real position by moving back: child.z = node.z ⊕ local.
-function placeChildren(node, centerAngle, fanWidth, lengths) {
-  if (node.children.length === 0) return;
+// Fill in `node.z` (a point on the disk) and `node.edgeLength` (the hyperbolic length of the edge from its parent) for every node under
+// `root`. Options (all optional): edgeLength (base length), mix, packing, target, capF (see S5), M (the depth that fixes the schedule; default
+// = the tree's own depth, tests pass the full depth when laying out a pruned copy), refine(node, api) (called before a node's children are
+// placed; may return another children list: displaytree.js inserts navigation groups there; api = { plan, spawn, ... } lets it TRY a list).
+// Returns { M }.
+export function computeLayout(root, edgeLength = EDGE_LENGTH, opts = {}) {
+  const P = { mix: S5.MIX, packing: S5.PACKING, target: S5.TARGET, capF: S5.CAP_F, ...opts };
+  const M = P.M ?? treeDepth(root);
+  const sched = edgeLengthSchedule(M, edgeLength);      // sched[d] = length scheduled for an edge into depth d
 
-  const totalWeight = node.weight - 1; // everything below the node
-  let cursor = centerAngle - fanWidth / 2; // left edge of the next slice
+  // Per-node state: pathLen = length of the path from the root so far, schedLen = what the schedule alone would have used,
+  // shrink = (BUDGET − pathLen) / (BUDGET − schedLen): 1 while nothing was widened, smaller when rings used extra budget.
+  root.depth = 0;
+  root.z = complex(0, 0); root.edgeLength = 0; root.pathLen = 0; root.schedLen = 0; root.shrink = 1; root.rings = 1;
+  place(root, 0, TWO_PI);
+  return { M };
 
-  for (const child of node.children) {
-    // This child's slice is proportional to its subtree size.
-    const slice = (fanWidth * child.weight) / totalWeight;
-    const angle = cursor + slice / 2; // aim at the middle of the slice
-    cursor += slice;
+  // Decide, for a list of children, their angles, lengths and ring count (no side effects on the children).
+  function plan(node, kids, centerAngle, fan) {
+    const n = kids.length;
+    const d = node.depth + 1;
+    const total = kids.reduce((sum, c) => sum + weightOf(c), 0);
+    // Share of the fan for child i:  (1 − mix)/n + mix · w_i / total.  Example: mix 0.7, 4 children with w = 1, 1, 1, 7:
+    // the big one gets 0.075 + 0.7·0.7 = 0.565 of the fan, each small one 0.075 + 0.07 = 0.145.
+    const slice = kids.map((c) => fan * ((1 - P.mix) / n + (P.mix * weightOf(c)) / total));
+    const ang = [];
+    let cursor = centerAngle - fan / 2;
+    for (let i = 0; i < n; i++) { ang.push(cursor + slice[i] / 2); cursor += slice[i]; }
 
-    child.edgeLength = lengths[child.depth];                 // hyperbolic length of the edge parent -> child
-    const localRadius = distanceToRadius(child.edgeLength);
-    const local = complex(localRadius * Math.cos(angle), localRadius * Math.sin(angle));
-    child.z = mobiusAdd(node.z, local);
+    // Base length of this level, and the longest length the radius budget lets us use here (the levels below keep capF of their schedule).
+    const L0 = node.shrink * sched[d];
+    const Lmax = Math.max(L0, EDGE_BUDGET - node.pathLen - P.capF * (EDGE_BUDGET - (node.schedLen + sched[d])));
+    let L = new Array(n).fill(L0), rings = 1;
+    if (n > 1) {
+      // Staggered rings: child i sits at L0 + (i mod R) · step. Find the smallest R at which every pair of nearby siblings is >= target apart.
+      const step = P.target;
+      const Rmax = Math.max(1, Math.floor((Lmax - L0) / step) + 1);
+      const cyclic = fan >= TWO_PI - 1e-9;              // the root's children go all the way round
+      const lens = (r) => kids.map((_, i) => L0 + (i % r) * step);
+      const wellSpaced = (r) => {
+        const Li = lens(r), reach = Math.min(n - 1, 3 * r + 3);   // same-ring neighbours are r apart, so 3r+3 neighbours is plenty
+        for (let i = 0; i < n; i++) {
+          for (let k = 1; k <= reach; k++) {
+            const j = i + k;
+            let dTheta;
+            if (j < n) dTheta = ang[j] - ang[i];
+            else if (cyclic) dTheta = ang[j - n] + TWO_PI - ang[i];
+            else break;
+            if (dTheta > Math.PI) dTheta = TWO_PI - dTheta;
+            if (Math.acosh(Math.max(1, coshDistancePolar(Li[i], Li[j % n], dTheta))) < P.target) return false;
+          }
+        }
+        return true;
+      };
+      rings = Rmax;                                      // if nothing reaches the target, use the most rings the budget allows
+      for (let r = 1; r <= Rmax; r++) if (wellSpaced(r)) { rings = r; break; }
+      L = lens(rings);
+    }
+    return { kids, slice, ang, L, rings, d };
+  }
 
-    // Which way is the parent, as seen from the child's own frame? Move the
-    // child to the centre and see where the parent lands. The child's fan is
-    // centred on the OPPOSITE direction (+π), so it points away from the parent.
-    const parentSeenFromChild = mobiusAdd(cNeg(child.z), node.z);
-    const awayAngle = Math.atan2(parentSeenFromChild.y, parentSeenFromChild.x) + Math.PI;
+  // Put child i of `node` in place and say where ITS children fan out (centre direction and width).
+  function spawn(node, pl, i) {
+    const c = pl.kids[i], d = pl.d;
+    c.depth = d;
+    c.parent = node;
+    c.edgeLength = pl.L[i];
+    // Position: from the parent walk edgeLength along angle ang[i], i.e. parent ⊕ (tanh(L/2) · direction).
+    const r = distanceToRadius(c.edgeLength);
+    c.z = mobiusAddFree(node.z, { x: r * Math.cos(pl.ang[i]), y: r * Math.sin(pl.ang[i]) });
+    c.pathLen = node.pathLen + c.edgeLength;
+    c.schedLen = node.schedLen + sched[d];
+    c.shrink = EDGE_BUDGET - c.schedLen > 1e-9 ? (EDGE_BUDGET - c.pathLen) / (EDGE_BUDGET - c.schedLen) : 1;
+    // Which way is the parent, seen from the child? Its fan points the opposite way (away from the parent).
+    const parentSeen = mobiusAddFree(cNeg(c.z), node.z);
+    const away = Math.atan2(parentSeen.y, parentSeen.x) + Math.PI;
+    // Territory seen from the parent: half-angle 0.9 · slice / 2; the child may fan out over twice its wedge half-angle.
+    const theta = (pl.slice[i] * P.packing) / 2;
+    c.slice = pl.slice[i]; c.territory = theta;
+    const beta = wedgeAngleForTerritory(theta, c.edgeLength);
+    return { away, fan: Math.min(MAX_FAN, 2 * beta) };
+  }
 
-    const childFan = Math.min(MAX_FAN, Math.max(MIN_FAN, slice * FAN_SPREAD));
-    placeChildren(child, awayAngle, childFan, lengths);
+  function place(node, centerAngle, fan) {
+    if (P.refine && node.children.length) node.children = P.refine(node, { plan, spawn, centerAngle, fan });
+    const kids = node.children;
+    if (!kids.length) return;
+    const pl = plan(node, kids, centerAngle, fan);
+    node.rings = pl.rings;
+    for (let i = 0; i < kids.length; i++) { const sp = spawn(node, pl, i); place(kids[i], sp.away, sp.fan); }
   }
 }

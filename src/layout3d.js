@@ -170,12 +170,14 @@ function placeChildren(node, axis, alpha, opts) {
   // Heaviest children first. The spiral starts at the middle of the cap and
   // winds outward, so big subtrees get the central spots, and the territory
   // sizes change gradually along the spiral (which keeps the spacing even).
-  const kids = [...node.children].sort((a, b) => b.weight - a.weight);
+  // (w = real diseases below a node, set by displaytree.js; plain trees have no w and use the subtree size)
+  const wt = (c) => c.w ?? c.weight;
+  const kids = [...node.children].sort((a, b) => wt(b) - wt(a));
   // Sum of the children's weights (= number of nodes below this node, for a folder).
-  const totalWeight = kids.reduce((sum, child) => sum + child.weight, 0);
+  const totalWeight = kids.reduce((sum, child) => sum + wt(child), 0);
   const add = opts.add || mobiusAdd3;
   const shares = kids.map((child) =>
-    (1 - opts.weightMix) / n + opts.weightMix * (child.weight / totalWeight));
+    (1 - opts.weightMix) / n + opts.weightMix * (wt(child) / totalWeight));
 
   const dirs = fibonacciCap(shares, axis, alpha);
   const myArea = capArea(alpha);

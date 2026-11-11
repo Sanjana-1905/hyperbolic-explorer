@@ -4,15 +4,13 @@
 //  A. the schedule itself (pure numbers): full 0.7 on the upper levels, shrinking below, total always inside the radius budget,
 //     and trees that already fit (the sample repo and WordNet, depth 8) get EXACTLY the old uniform lengths
 //  B. 3D layout of the 12,419-node disease tree: zero edges shortened by the clamp, every edge = its scheduled length, radius < 0.995
-//  C. 2D layout of the same tree: same checks
-//  D. 2D and 3D describe the same hierarchy with the same per-depth lengths
 //  E. comparison with the old uniform 0.7 and uniform 0.5: min sibling distance (overall and by depth band) and closest pair of nodes
+// (The 2D layout is now "S5" with rings, groups and list-only nodes: it is checked in tests/displaytree.test.js, also against the 3D layout.)
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { buildTree, computeLayout3d, radiusOf, EDGE_LENGTH, edgeLengthSchedule, treeDepth } from '../src/layout3d.js';
-import { computeLayout, EDGE_LENGTH as EDGE_LENGTH_2D, EDGE_RADIUS_LIMIT } from '../src/layout.js';
+import { EDGE_LENGTH as EDGE_LENGTH_2D, EDGE_RADIUS_LIMIT } from '../src/layout.js';
 import { hyperbolicDistance3, MAX_RADIUS } from '../src/mobius3d.js';
-import { hyperbolicDistance } from '../src/mobius.js';
 
 const data = (f) => JSON.parse(readFileSync(new URL(`../public/data/${f}`, import.meta.url), 'utf8'));
 const sum = (a) => a.slice(1).reduce((x, y) => x + y, 0);
@@ -87,35 +85,4 @@ assert.ok(deepest.length >= 1);
 for (const n of deepest) { assert.ok(radiusOf(n) < MAX_RADIUS); assert.ok(hyperbolicDistance3(n.pos, n.parent.pos) > 0.1); }
 console.log(`  max-depth nodes: ${deepest.length}, radius ${f(Math.max(...deepest.map(radiusOf)))}`);
 
-// ---- C. 2D ---------------------------------------------------------------------------------------------------------------
-function measure2d(lengths) {
-  const { root, nodes } = buildTree(json);
-  computeLayout(root, EDGE_LENGTH_2D, lengths);
-  let maxR = 0, clamped = 0, minSib = Infinity;
-  for (const n of nodes) {
-    maxR = Math.max(maxR, Math.hypot(n.z.x, n.z.y));
-    if (n.parent && Math.abs(hyperbolicDistance(n.parent.z, n.z) - n.edgeLength) > 1e-6) clamped++;
-    for (let i = 0; i < n.children.length; i++) for (let j = i + 1; j < n.children.length; j++) minSib = Math.min(minSib, hyperbolicDistance(n.children[i].z, n.children[j].z));
-  }
-  return { root, nodes, maxR, clamped, minSib };
-}
-const flat2d = measure2d(new Array(M + 1).fill(EDGE_LENGTH_2D));
-const taper2d = measure2d(undefined);
-console.log('2D, same tree:');
-console.log(`  uniform 0.6 (old)   max radius ${f(flat2d.maxR)}  clamped ${flat2d.clamped}  min sibling ${f(flat2d.minSib)}`);
-console.log(`  taper (new)         max radius ${f(taper2d.maxR)}  clamped ${taper2d.clamped}  min sibling ${f(taper2d.minSib)}`);
-assert.ok(flat2d.clamped > 0, 'sanity: the old 2D layout clamped too');
-assert.equal(taper2d.clamped, 0);
-assert.ok(taper2d.maxR < MAX_RADIUS);
-
-// ---- D. 2D and 3D: the same hierarchy and the same per-depth lengths -----------------------------------------------------
-assert.equal(taper2d.nodes.length, taper.nodes.length);
-for (let i = 0; i < taper.nodes.length; i++) {
-  const a = taper.nodes[i], b = taper2d.nodes[i];
-  assert.equal(a.name, b.name); assert.equal(a.depth, b.depth);
-  assert.equal(a.parent ? a.parent.id : -1, b.parent ? b.parent.id : -1, 'same parent in 2D and 3D');
-}
-const L12_2d = edgeLengthSchedule(M, EDGE_LENGTH_2D);
-for (const n of taper2d.nodes) if (n.parent) assert.equal(n.edgeLength, L12_2d[n.depth]);
-assert.deepEqual(L12.map((x, k) => (k === 0 ? 0 : x < EDGE_LENGTH ? 1 : 0)), L12_2d.map((x, k) => (k === 0 ? 0 : x < EDGE_LENGTH_2D ? 1 : 0)), 'taper starts at the same depth in 2D and 3D');
 console.log('disease_layout.test.js: all checks passed');

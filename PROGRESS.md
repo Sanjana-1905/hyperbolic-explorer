@@ -10,7 +10,7 @@ Disease Ontology in the Poincaré ball. Principles are in CLAUDE.md. One phase a
 |---|---|---|
 | 0 | Freeze and prepare existing engine | done (commit 1e52269) |
 | 1 | Disease Ontology data ingestion (full DAG, provenance, primary hierarchy) + radius-clamp fix + default dataset | done (data, taper fix, default launch) |
-| 2 | **Atlas redesign: from "glowing graph" to a disease atlas** (steps 2.1-2.8 below) | **planning approved; step 2.3a: two rounds of prototypes reported (B, then B + aggregated groups), waiting for the layout decision; nothing built yet** |
+| 2 | **Atlas redesign: from "glowing graph" to a disease atlas** (steps 2.1-2.8 below) | **step 2.3a (S5 layout, groups, caps, list-only nodes) implemented and validated; waiting for approval to continue with 2.1** |
 | 3 | Interactive exploration lenses | folded into Phase 2 (steps 2.4-2.7) |
 | 4 | Comparative navigation study (tree vs 2D vs 3D), run and report | instruments built in step 2.8; the study itself later |
 
@@ -27,7 +27,7 @@ Disease Ontology in the Poincaré ball. Principles are in CLAUDE.md. One phase a
 |---|---|---|---|
 | 2.1 | **Disease data layer**: `diseaseData.js` lazy-loads `disease_terms.json` + `disease_edges.json`, indexes by DOID / name / synonym / xref, parents and children in the full DAG, primary and DAG counts | none | 5 MB terms file on a phone: load on first panel open or first search |
 | 2.2 | **Disease information panel**: ontology facts vs external identifiers; primary-tree count vs full-DAG descendant count vs additional parents, with the counting explanation; bottom sheet on phones | 2.1 | missing data must read "not in the ontology", never blank or invented |
-| 2.3a | **2D layout correction and validation**: prototype strategies A and B in pure Node scripts against the real tree, report, user chooses, then implement + tests + CLAUDE.md amendment | none (pure maths) | may change a core layout; the user decides if no strategy meets every target |
+| 2.3a | **2D layout correction and validation**: DONE (S5 adopted and implemented, see below) | none (pure maths) | done |
 | 2.3b | **2D viewer on the shared core + 2D/3D parity**: labels, picking, back stack, breadcrumbs, Up / Home / Back, panel hook, drag-to-pan as Möbius translation, 2D minimap, capabilities; 3D keeps working and adopts the same core | 2.3a, 2.2 | largest hidden item (`main2d.js` is a 359-line viewer with none of these); `navigation.js` and `minimap.js` are 3D-specific |
 | 2.4 | **Family overview + progressive expansion**: `atlasState.js` (overview / explore), `lod.js` (pure representation policy with a node budget), named folded groups; **2D becomes the normal default at the end of this step**, `mode=3d` explicit | 2.3a, 2.3b, 2.1 | tuning on the S26; budget (~800 drawn nodes) |
 | 2.5 | **Primary vs additional relationships**: dashed neutral arcs for the selected / hovered disease, "also a kind of" list, via the existing link-arc machinery | 2.1, 2.4 | arc clutter |
@@ -88,6 +88,50 @@ Sample (5,000) and WordNet (3,000), same metrics: **B passes every target on bot
 2. Or **change the targets**: e.g. require 0.04 only for parents above a depth or above a child count, and require 0.02 elsewhere.
 3. Or **explore a hybrid / different rule** (e.g. A+B jointly choosing the base length and ring count per parent, or letting deep leaf-only subtrees relax the wedge). Relaxing the wedge compromises the no-overlap target, so I will not do that without your decision.
 If B is adopted, the 2D layout fixed-edge-length rule in CLAUDE.md will be amended with the exact formula (it currently says the assumption is under review).
+
+## Step 2.3a — S5 layout IMPLEMENTED in the shared architecture  (complete; waiting for the user's approval before step 2.1)
+
+Decisions applied (user, after the prototypes): S5 with capF 0.2 and mix 0.7; alphabetical groups with transparent labels; display caps 36 desktop / 24 phone (display limits, not access limits; groups never all open by default); the 3 list-only parents as "+N" aggregates with a searchable member list; the global-depth radius schedule kept; exact hyperbolic distances and geodesic edges kept. The exact formula, parameters, grouping rules and known limitations are in CLAUDE.md ("Fixed edge length is relaxed for wide parents", "Navigation groups and display caps", "List-only parents", "Known limitations of S5").
+
+### What was built
+| File | Change |
+|---|---|
+| `src/mobius.js` | new exact helpers with plain-English comments and numeric examples: `mobiusAddFree` (no clamp), `hyperbolicDistanceExact` (acosh form; `hyperbolicDistance` clamps near the rim), `coshDistancePolar`, `wedgeAngleForTerritory` |
+| `src/layout.js` | `computeLayout` is now S5: shares (mix 0.7), staggered rings (target 0.045, ring count by search), wedge rule, radius budget with `capF`; every node gets `edgeLength`; `S5` constants; optional `refine(node, api)` hook and `M` override; `nodePath` skips groups; `buildTree` keeps `doid` |
+| `src/displaytree.js` (new) | shared display tree: adaptive alphabetical groups (`makeDisplayTree`, cap 36 / 24), labels (`runLabel`, `groupLabel`), list-only detection, `realMembers`. The real tree and all data files are never modified |
+| `src/disclosure.js` (new) | the one rule both viewers use: a group is closed unless on the focus path; a list-only node is an aggregate unless on the path (then only the path member is drawn) |
+| `src/memberlist.js` (new) | searchable member list of a list-only node; click = hyperbolic focus (2D and 3D); `theme.js` gets `MEMBERLIST_WIDTH_PX`, `MEMBERLIST_MAX_HEIGHT_VH` |
+| `src/layout3d.js` | only `w ?? weight` for the angle shares (identical for plain trees). The 3D cone rule, schedule, picking and shaders are untouched |
+| `src/main3d.js`, `src/main2d.js` | both load the display tree (`?cap=N` override; phone tier = 24); groups / list-only follow disclosure.js; group and "+N" orb labels (3D), info card for groups ("Navigation group ... not an ontology category"), real counts instead of display counts, groups are never search results; 2D hides nodes inside closed groups (scale 0, no edge, not pickable) and draws aggregates bigger and violet |
+| tests | `tests/displaytree.test.js` (new, strict), `tests/layout.test.js` and `tests/disease_layout.test.js` updated, `tests/mobius.test.js` extended, `tests/phone/groups_audit.mjs` (new, `npm run test:groups`), `tests/phone/disease_audit.mjs` adapted to the display-tree node counts |
+
+### Results (Disease Ontology; all measured by the tests below)
+| | desktop (cap 36) | phone (cap 24) |
+|---|---|---|
+| display nodes | 12,584 = 12,419 diseases + 165 groups in 34 parents | 12,645 = 12,419 + 226 in 55 parents |
+| display depth / max radius / clamped edges / overlapping subtrees | 12 / 0.9937 / 0 / 0 | 12 / 0.9937 / 0 / 0 |
+| widest list of siblings (every node) | 36 | 24 |
+| list-only nodes (children) | 3 (10 + 2 + 5 = 17): testicular yolk sac tumor, extrahepatic bile duct adenocarcinoma, intrahepatic cholangiocarcinoma | 5 (adds retinitis pigmentosa (23), iridocyclitis (5)) |
+| "syndrome" (486) / "autosomal recessive disease" (1,048) | 15 / 30 groups or fewer, siblings >= 0.04 apart, every real child a member | 21 / more groups, same |
+| 3D (same display tree): max radius / clamped / min sibling distance | 0.9911 / 0 / 0.0411 | 0.9911 / 0 / 0.0411 |
+Sample (5,000 nodes): 0 groups at both caps (widest list 16), layout identical in 3D (`test:phone` 172/172 unchanged). WordNet: 4 groups at cap 36, 9 at cap 24; 0 list-only. The collapsible tree (`?mode=tree`) still shows the real, ungrouped tree (the study baseline is unchanged).
+**Difference from the prototype:** 165 groups, not 166, at cap 36 (a mixed run of subtypes and groups is now ordered by where its entries start so that its label is true). The same 3 list-only parents. The "pure alphabetical over everything" variant that would have given the neatest labels was built and rejected: 17 list-only nodes (some groups) and display depth 13.
+
+### Validation (all executed)
+- **`npm test`**: all 19 steps pass, including the new strict `displaytree.test.js`, which checks on the Disease Ontology (both caps), the sample and WordNet: zero clamped edges (exact distance = stored edge length), zero subtree overlap, max radius <= 0.994, ids pre-order and `weight` = display subtree size, every real node present once, under its real parent (looking through groups), with its real data (name, DOID, real subtree size), every sibling set >= 0.04 apart except exactly the flagged list-only nodes, widest list <= cap, group integrity (alphabetical, complete, no DOID, labels true: every member inside the range and each label end the start of that end's name, paths made of real names), all 17,635 `is_a` edges still have both ends, the input JSON never modified, **disclosure** (groups open only on the focus path, never all open, <= cap siblings drawn, list-only members each individually reachable, 400 random nodes reachable), **stability** (see below), the **same display tree in 3D** (4 datasets/caps), and **still hyperbolic** (refocusing preserves pair distances to 2e-12; the siblings of a depth-7 parent look x32 bigger when it is focused than from the root; a radial chart gives x1).
+- **Stability:** in 6 random expand/collapse states the largest displacement of any visible node is 0 in 2D and 0 in 3D when the layout uses the global depth; deriving the depth from what is visible would move nodes by up to 1.11.
+- **`npm run test:groups`** (new, real headless Chrome, **109 checks, all pass**): in 3D and 2D, on desktop and on a phone emulation (touch, 412 x 915, taps instead of clicks): display tree loaded with the right cap (36 / 24) and all 12,419 diseases; at the root no group is open and no member is drawn; "syndrome" shows its groups as aggregate orbs; (3D) orbs carry their label and member count within the 25-label cap; a real click or tap on an orb focuses it and opens exactly that group (<= cap members drawn, the others stay closed); a member can be pointed at and focused (its group stays open, centred to r = 0); Up twice returns to "syndrome" and the group closes again; (3D) searching a disease inside a closed group jumps to it and opens only its group; every list-only node is an aggregate away from it, shows a member list of the right size when focused, the filter narrows and restores it, and **every one of its members can be focused from the list** (member drawn, siblings not, list stays); 150 random nodes reachable in the viewer; at no focus more than cap siblings drawn; `?cap=24` override; no console errors.
+- **`npm run test:disease`** (19 checks) and **`npm run test:phone`** (172 / 172, the sample) pass; `npm run build` succeeds; the 13 launch URLs (default, explicit sample / WordNet / disease, study) still load the right data without errors.
+- Screenshots inspected: `screenshots/groups-3D-desktop-syndrome-closed.png` (labelled orbs "A–I · 36"), `groups-3D-desktop-list-only.png` (member list), `groups-2D-desktop-group-open.png`, `groups-3D-phone-group-open.png`.
+
+### Known limitations (honest)
+1. Only 3 (desktop) / 5 (phone) parents are list-only; their members sit < 0.04 apart in 2D (3D has room: min 0.0411). The member list is a plain overlay; the real disease panel is step 2.2.
+2. Group labels are alphabetical, not semantic. Subtypes and childless diseases are separate lists, hence the "with subtypes" wording, and two orbs can show overlapping ranges.
+3. Display caps are per list. Several lists can be on screen at once (the path to the focus), and distance-based collapsing in 3D is unchanged; a global node budget and the family overview are step 2.4.
+4. The 2D viewer is still the minimal one: no labels, no toolbar or search, orbs described only in the title line; "Up" (Backspace) goes to the DISPLAY parent, so from a member it first goes to its group. 2D / 3D parity is step 2.3b.
+5. The calm visual theme is not applied yet (step 2.6): the galaxy look and the code-explorer wording remain.
+6. The member list on a phone covers part of the picture; the layout of overlays on phones was not tuned. No real-phone check was made (headless Chrome emulation only).
+7. WordNet 2D / 3D now show a few groups (study conditions with `?mode=2d|3d` on WordNet differ from before); `?mode=tree` and the sample are unchanged.
 
 ## Step 2.3a, round 2 — hybrid: B's wedge territories + aggregated groups / progressive disclosure  (RESULTS REPORTED, WAITING FOR THE USER'S DECISION; production code NOT changed)
 

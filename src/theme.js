@@ -248,6 +248,8 @@ export const THEME = {
   UI_ACTIVE_BG: [0.10, 0.22, 0.50],   // background of a switched-on chip (Imports, Calls, Dependencies)
   UI_ACTIVE_ALPHA: 0.92,       // ... and its opacity
   INTRO_CARD_WIDTH_PX: 380,    // width of the "How to explore" card
+  MEMBERLIST_WIDTH_PX: 300,    // width of the member list shown for a list-only node (diseases too close together to draw one by one)
+  MEMBERLIST_MAX_HEIGHT_VH: 46,// ... and its tallest size, as a percentage of the window height (it scrolls beyond that)
 
   SYMBOL_FOCUS_SCALE: 0.4,     // when a FILE or SYMBOL is focused its "sun" (core and billboard) is this fraction of a folder sun's size:
                                // at code level you are zoomed in, and a full-size sun would swallow the small shapes around it

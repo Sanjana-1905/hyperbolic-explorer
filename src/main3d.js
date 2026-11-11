@@ -27,7 +27,7 @@
 
 import * as THREE from 'three';
 import { vNeg, vLength, mobiusAdd3, conformalFactor3, hyperbolicDistance3, geodesicBezier3, geodesicLerp3 } from './mobius3d.js';
-import { buildTree, computeLayout3d, layoutSymbols, assignFitAll, nodePath } from './layout3d.js';
+import { computeLayout3d, layoutSymbols, assignFitAll, nodePath } from './layout3d.js';
 import { createNavigation } from './navigation.js';
 import { createSymbolStore, buildSymbolNodes, hash01 } from './symbols.js';
 import {
@@ -40,6 +40,9 @@ import { createSearchUI } from './searchui.js';
 import { createInfoCard } from './infocard.js';
 import { createMinimap } from './minimap.js';
 import { treeFileFromUrl } from './dataset.js';
+import { makeDisplayTree, groupLabel, CAP_DESKTOP, CAP_PHONE } from './displaytree.js';
+import { aggregateRule, childAllowed } from './disclosure.js';
+import { createMemberList } from './memberlist.js';
 import { deriveCapabilities, NO_CAPABILITIES } from './capabilities.js';
 import { computeHeat, encodeHeat, HEAT, HEAT_NAMES } from './heat.js';
 import { createCodePanel } from './codepanel.js';
@@ -97,6 +100,8 @@ function updateHelp() {
       : 'Drag to look · scroll to zoom · click a node to fly in · keys: Backspace back · / search · F fps';
   if (typeof refreshToolbar === 'function') refreshToolbar();
 }
+// Real nodes below a node: navigation groups are display nodes, not diseases, so they are not counted.
+const realCount = (n) => (n.realWeight ?? n.weight) - 1;
 const MAX_CODE_ORB_LABELS = 4;  // at file/symbol level, label at most this many "+N" orbs (the biggest on screen)
 const COLLAPSE_MIN_NODES = 4;   // folders with fewer nodes inside than this are never collapsed (a "+2" orb is pointless)
 const fps = createFpsCounter(() => `${labels ? labels.count : 0} labels · ${visibleCount} nodes · ${dynamicCount} symbols · ${linkArcs.length} links`);
@@ -218,6 +223,8 @@ let pathNodes = [];             // focus and its ancestors (never collapsed)
 let dirty = true;               // focus point changed: upload the _Focus uniform on the next frame
 
 // Links (Phase 4c)
+let displayInfo = null;         // displaytree.js statistics: cap, groups, list-only nodes
+let memberList = null;          // the member list of a list-only node (memberlist.js)
 let linkData = null;            // links.json in typed arrays (links.js), null until loaded / if the dataset has none
 let linkArcs = [];              // the arcs drawn right now (buildArcs in links.js), at most MAX_VISIBLE_LINKS
 let linkSelected = 0;           // links selected for the focus + hover before merging and capping
@@ -539,7 +546,10 @@ function updateSemanticZoom() {
 
   const visit = (node, hidden) => {
     let state;
+    // Navigation groups and list-only nodes follow disclosure.js (closed unless on the focus path); everything else the distance rule below.
+    const rule = aggregateRule(node);
     if (hidden) state = 1;
+    else if (rule) { node.collapsed = rule.orb; state = rule.orb ? 2 : 0; }
     // Folders and symbols that contain other nodes (a class with methods) can collapse; symbols use their own, shorter distance.
     else if ((node.type === 'folder' || node.type === 'symbol') && node.weight - 1 >= COLLAPSE_MIN_NODES && !node.onPath) {
       const d = hyperbolicDistance3(nav.focusPoint, node.pos);
@@ -560,7 +570,7 @@ function updateSemanticZoom() {
     if (state !== 1) visibleCount++;
     if (state === 2) collapsedNodes.push(node);
     const childrenHidden = hidden || node.collapsed;
-    for (const child of node.children) visit(child, childrenHidden);
+    for (const child of node.children) visit(child, childrenHidden || !childAllowed(rule, child));
   };
   visit(root, false);
 
@@ -701,6 +711,7 @@ function focusOn(node, animate = true, via = null) {
   if (minimap) minimap.setFocus(node.type === 'symbol' ? node.file : node);
   nav.flyTo(node.pos, animate, via);
   idleFade.poke();                  // a focus change (even one made by search or a link) wakes the interface
+  if (memberList) memberList.update(node);
   updateInfo();
   showCode(node);
   updatePanelLinks();
@@ -966,7 +977,7 @@ let markStart = 0;              // when the highlight started (performance.now)
 function buildSearch() {
   searchIndex = createIndex();
   const t0 = performance.now();
-  searchIndex.addTree(nodes, nodePath);
+  searchIndex.addTree(nodes.filter((n) => !n.isGroup), nodePath);   // navigation groups are not diseases: never search results
   indexStats.treeMs = performance.now() - t0;
   searchUI = createSearchUI({ index: searchIndex, onSelect: goToResult });
   indexStats.files = symbolFiles.length;
@@ -1099,7 +1110,7 @@ function updateInfoCard() {
       files++; loc += f.loc || 0;
       if (f.commits) { commits += f.commits; newest = Math.max(newest, Date.parse(f.modified) || 0); }
     }
-    rows.push(['Contains', caps.symbols ? `${n.children.length} items · ${files} files` : `${n.children.length} direct · ${n.weight - 1} in all`]);
+    rows.push(['Contains', caps.symbols ? `${n.children.length} items · ${files} files` : `${n.children.length} direct · ${realCount(n)} in all`]);
     if (loc) rows.push(['Lines of code', loc.toLocaleString()]);
     if (commits) rows.push(['Git commits', `${commits.toLocaleString()} (all files)`]);
     if (newest) rows.push(['Last modified', fmtDate(newest)]);
@@ -1120,6 +1131,16 @@ function updateInfoCard() {
       if (n.type !== 'folder') rows.push(['Calls', `${counts.callsOut} out · ${counts.callsIn} in`]);
     } else if (n.type !== 'folder') rows.push(['Imports / calls', '—']);
   }
+  if (n.isGroup) {                                       // a navigation group is not a disease: say so plainly, show only facts about the list
+    infoCard.setCard('Navigation group', [
+      ['Part of', nodePath(n.parent)],
+      ['Members', n.kind === 'subtypes' ? `${n.members} diseases that have subtypes` : n.kind === 'groups' ? `${n.members} groups` : `${n.members} diseases without subtypes`],
+      ['Names', `${n.firstName} … ${n.lastName}`],
+      ['Diseases inside', String(realCount(n))],
+    ], 'An alphabetical run of names, made only to keep long lists readable. Not an ontology category.');
+    return;
+  }
+  if (n.listOnly) rows.push(['Display', `${n.children.length} members listed, too close to draw one by one`]);
   const kind = n.type === 'symbol' ? n.kind : caps.symbols ? (n.type === 'folder' ? 'Folder' : `File${n.ext ? ` · .${n.ext}` : ''}`) : word(n.type);
   infoCard.setCard(kind, rows, fakeGit && (n.type !== 'symbol') ? 'Sample data: the git numbers are FAKE.' : null);
 }
@@ -1141,7 +1162,8 @@ function dynamicCountOf(file) {
 function updateInfo() {
   const n = focusNode;
   infoName.textContent = n.name + (n.type === 'folder' ? '/' : '');
-  if (n.type === 'folder') infoPath.textContent = `${n.children.length} items, ${n.weight - 1} nodes inside · click one to fly in`;
+  if (n.isGroup) infoPath.textContent = `navigation group: ${n.members} ${n.kind} with names from ${n.firstName} to ${n.lastName}`;
+  else if (n.type === 'folder') infoPath.textContent = `${n.children.length} items, ${realCount(n)} nodes inside · click one to fly in`;
   else if (n.type === 'symbol') infoPath.textContent = `${n.kind} · ${n.signature} · lines ${n.startLine}–${n.endLine}`;
   else {
     // A file: size, git info (if the scanner had it) and how many symbols it holds once opened.
@@ -1291,11 +1313,13 @@ function collectLabelCandidates() {
     out.push({ key: node.id, text, x: s.x, y: s.y, r: s.r, priority, px, color });
   };
   // A folder orb says "+N"; a class/function orb also says WHAT it is ("Parser +12"), or a screen of bare "+N" tells nothing.
-  const orbText = (node) => (node.type === 'symbol' ? `${node.name} +${node.weight - 1}` : `+${node.weight - 1}`);
+  // A navigation group says its alphabetical range and how many members it has ("A–F · 24"); a list-only node says its name too.
+  const orbText = (node) => (node.isGroup ? groupLabel(node) : node.listOnly ? `${node.name} +${realCount(node)}`
+    : node.type === 'symbol' ? `${node.name} +${node.weight - 1}` : `+${realCount(node)}`);
 
   add(focusNode, 1000, THEME.LABEL_FOCUS_PX * k, THEME.LABEL_COLOR, focusNode.name);
   if (hoverNode) {
-    const text = hoverNode.state === 2 ? `${hoverNode.name}  ${orbText(hoverNode)}` : hoverNode.name;
+    const text = hoverNode.state === 2 ? (hoverNode.isGroup ? orbText(hoverNode) : `${hoverNode.name}  ${orbText(hoverNode)}`) : hoverNode.name;
     add(hoverNode, 900, THEME.LABEL_HOVER_PX * k, THEME.LABEL_COLOR, text);
   }
   // Children: bigger subtrees first (folders before files, since a file has weight 1).
@@ -1444,7 +1468,11 @@ async function start() {
   if (!response.ok) throw new Error(`Could not load ${url} (${response.status})`);
 
   const json = await response.json();
-  const tree = buildTree(json);
+  // The display tree = the real tree + alphabetical navigation groups under very wide parents (displaytree.js), the same tree the 2D viewer
+  // draws. ?cap=N overrides how many siblings may show at once (default 36, 24 on a phone).
+  const capParam = Number(new URLSearchParams(location.search).get('cap'));
+  const tree = makeDisplayTree(json, { cap: capParam > 0 ? capParam : TIER === 'phone' ? CAP_PHONE : CAP_DESKTOP });
+  displayInfo = tree.info;
   root = tree.root;
   nodes = tree.nodes;
   computeLayout3d(root);
@@ -1460,6 +1488,7 @@ async function start() {
   heatData = caps.gitHeat ? computeHeat(nodes) : null;
   fakeGit = !!json.fakeGit;
   infoCard = createInfoCard();
+  memberList = createMemberList({ onPick: (n) => focusOn(n) });
   if (json.words) datasetWords = json.words;
   toolbar.setDataset({ about: json.about, words: json.words, hasLinks: caps.dependencies });
   updateHelp();
@@ -1573,6 +1602,9 @@ window.__explorer = {
   goBack,
   cycleHeat,
   get capabilities() { return caps; },
+  get displayInfo() { return displayInfo; },
+  get memberList() { return memberList; },
+  get orbCount() { return collapsedNodes.length; },
   get heatMode() { return heatMode; },
   get cardText() { return document.getElementById('card').innerText; },
   get legendText() { return document.getElementById('legend').innerText; },

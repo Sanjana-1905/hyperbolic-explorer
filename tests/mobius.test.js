@@ -4,6 +4,7 @@ import assert from 'node:assert/strict';
 import {
   complex, cAbs, mobiusAdd, hyperbolicDistance, geodesicLerp,
   clampToDisk, distanceToRadius, mobiusScale, cNeg,
+  mobiusAddFree, hyperbolicDistanceExact, coshDistancePolar, wedgeAngleForTerritory,
 } from '../src/mobius.js';
 
 const close = (a, b, msg) => assert.ok(Math.abs(a - b) < 1e-9, `${msg}: ${a} vs ${b}`);
@@ -50,3 +51,23 @@ close(cAbs(c), 0.995, 'clamp radius'); close(c.x, c.y, 'clamp direction');
 
 console.log('mobius.js: all checks passed');
 console.log('0.5 ⊕ 0.5i =', p, ' 0.5i ⊕ 0.5 =', q);
+
+// ---- exact helpers for the 2D layout ----
+// mobiusAddFree: same as mobiusAdd inside the disk, no clamp near the rim (0.99 ⊕ 0.99 = 1.98 / 1.9801)
+close(mobiusAddFree(complex(0.5), complex(0.5)).x, 0.8, 'free 0.5 ⊕ 0.5');
+close(mobiusAddFree(complex(0.99), complex(0.99)).x, 1.98 / 1.9801, 'free 0.99 ⊕ 0.99');
+assert.equal(mobiusAdd(complex(0.99), complex(0.99)).x, 0.995, 'the clamped version stops at 0.995');
+// hyperbolicDistanceExact: 0 -> 0.5 is 2·artanh(0.5); near the rim it does not saturate like hyperbolicDistance
+close(hyperbolicDistanceExact(complex(0), complex(0.5)), 2 * Math.atanh(0.5), 'exact d(0, 0.5)');
+close(hyperbolicDistanceExact(a, z), hyperbolicDistance(a, z), 'exact = clamped version away from the rim');
+assert.ok(hyperbolicDistanceExact(complex(0.999), complex(-0.999)) > 2 * Math.atanh(0.995) + 1, 'exact distance is not capped at the clamp');
+close(hyperbolicDistanceExact(complex(0.999), complex(-0.999)), 2 * 2 * Math.atanh(0.999), 'opposite points = twice the radius distance');
+// coshDistancePolar: same point -> cosh d = 1; opposite points at L = 1 -> d = 2
+close(coshDistancePolar(1, 1, 0), 1, 'polar same point');
+close(Math.acosh(coshDistancePolar(1, 1, Math.PI)), 2, 'polar opposite points');
+close(Math.acosh(coshDistancePolar(0.7, 0.4, 1.1)), hyperbolicDistanceExact(
+  { x: Math.tanh(0.35), y: 0 }, { x: Math.tanh(0.2) * Math.cos(1.1), y: Math.tanh(0.2) * Math.sin(1.1) }), 'polar law of cosines matches the disk distance');
+// wedgeAngleForTerritory: d = 0.7, theta = 20 degrees -> beta = 39.1 degrees; and tan(theta/2) = e^-d tan(beta/2) holds
+const th = (20 * Math.PI) / 180, be = wedgeAngleForTerritory(th, 0.7);
+assert.ok(Math.abs((be * 180) / Math.PI - 39.0978) < 1e-3, 'wedge angle example: about 39.1 degrees');
+close(Math.tan(th / 2), Math.exp(-0.7) * Math.tan(be / 2), 'wedge angle inverse');
