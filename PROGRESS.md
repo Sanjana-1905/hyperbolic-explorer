@@ -3,6 +3,54 @@
 Project pivoted (Nov 2026, branch `atlas`) from Hyperbolic Code Explorer to the **Hyperbolic Disease Atlas**: exploring the
 Disease Ontology in the Poincaré ball. Principles are in CLAUDE.md. One phase at a time, only when the user says "go".
 
+## CURRENT STATUS (handover snapshot; see HANDOFF.md for the full picture)
+
+| Item | Status |
+|---|---|
+| Phase 0, Phase 1 (+ taper fix, default dataset) | **done, committed** |
+| S5 layout (step 2.3a, implemented) | **done, committed** (`ff4c518`) |
+| Step 2.1 disease data layer | **done, committed** (`ae1c341`) |
+| Step 2.2 disease information panel | **done, committed** (`9a322ab`) |
+| **Step 2.3b 2D parity + Up = real parent** | **IN PROGRESS: implemented in the working tree, NOT committed, NOT fully verified.** Parity audit: 185 checks pass, **6 fail** (landscape phone, cause not found). The other suites have **not been rerun** since these changes |
+| **Visual redesign** (brought forward from 2.6 by the owner) | **NOT STARTED.** No design proposal written yet; the owner requires a proposal and approval before any rendering change |
+| Steps 2.4, 2.5, 2.6 (as originally planned), 2.7, 2.8 | not started |
+| Physical-device (real phone) testing | **never done** (all phone results are browser emulation) |
+| GitHub | `origin/atlas` is still at `5865404`: the 9 atlas commits and all 2.3b work are **local only** |
+| Default mode | still 3D (making 2D the default is planned for the end of step 2.4, not done) |
+
+Last fully green test run: commit `9a322ab` (`npm test` 21 steps, `npm run build`, `test:phone` 172/172, `test:disease` 19, `test:groups` 109, `test:data` 34, `test:panel` 140). Since then only
+`tests/semanticzoom.test.js` (new) has been run and passes; `test:parity` (new) has 6 open failures.
+
+## Step 2.3b — 2D feature parity and Up = real parent  (IN PROGRESS: uncommitted, unfinished, unverified)
+
+Approved scope: equivalent essential interactions in 2D and 3D (selection, contextual labels, search, zoom and navigation, Up / back, panel access, category and group expansion, consistent selection highlighting);
+Up goes to the real ontology parent, never an alphabetical group (groups stay reachable; breadcrumbs consistent); same colours and selection semantics in both modes; improved responsiveness; **no** visual restyle in this step.
+
+**Implemented in the working tree:** 2D zoom (wheel, pinch, + / - buttons), drag-to-pan (Möbius translation of the view), contextual labels with zoom-dependent detail, the shared toolbar (search, Home, Up, zoom, Info, help, fullscreen),
+search, breadcrumb (shared module), category and group expansion by the same rule as 3D (`semanticStates` in `disclosure.js`), hover label, double-tap = Up, family colours shared with 3D (`families.js`), Up / Backspace / double-tap to
+`realParent()` in both viewers, 3D labels the nearest real ancestors, labels confined to the part of the screen not covered by the panel or toolbar strip, the selected disease's label is always placed, the toolbar scrolls instead of
+clipping, Home enabled when only the zoom / view differ, narrower panel on a landscape phone.
+New files: `src/navigation2d.js`, `src/breadcrumb.js`, `src/families.js`, `tests/semanticzoom.test.js`, `tests/phone/parity_audit.mjs`. Modified: `src/main2d.js` (rewritten), `main3d.js`, `disclosure.js`, `labels.js`, `toolbar.js`,
+`diseasepanel.js`, `theme.js`, `package.json` (scripts only), and the audits `tests/phone/{data,disease,groups,panel}_audit.mjs` (2D URLs get `intro=0`; Up expectations changed to the real parent).
+
+**Tests:**
+- `node tests/semanticzoom.test.js`: passes (real parent for every disease, collapse rule + hysteresis, family colours).
+- `npm run test:parity`: **185 pass, 6 FAIL** in the last full run. The six: `3D landscape phone` and `2D landscape phone` (844 x 390): "a real tap selects it", "a double-tap goes up", "tapping a group opens exactly that group".
+  They pass when the landscape modes run alone (43 checks) and fail only after the `2D phone` mode (the only mode with a two-finger pinch): on the next page a touch tap produces **no pointer event at all**.
+  Not resolved: small reproductions work; resetting the touch emulation did not help; the experiment that skips only the pinch was interrupted. Not proven to be a harness-only problem.
+- **Not rerun after these changes:** `npm test` (full, now 22 steps), `npm run build`, `test:phone`, `test:disease`, `test:groups`, `test:data`, `test:panel`.
+
+**Not done for 2.3b:** resolve / explain the six failures; rerun and fix all suites; final report here and in `CLAUDE.md`; a separate commit; the owner's approval. Known limitations of the work so far: toolbar tooltips still say "files, folders and functions";
+colours still follow the old index-based family rule; `main2d.js` still has hard-coded colours; on a portrait phone with the panel sheet open only the top third of the screen is picture; no physical-device test.
+
+## Visual redesign (requested by the owner; NOT STARTED)
+Requested outcome: a calm, near-black scientific look in both 2D and 3D instead of the inherited galaxy style: no nebula, starfield, dust, random particles or decorative gradients; distinct, solid, non-glowing node treatments for major
+categories, subcategories, diseases, aggregated groups, selected and hovered nodes (meaningful size and shape); thin understated primary edges and a distinct dashed style for additional relationships (geodesics kept); fewer, prioritised,
+zoom-dependent labels with consistent typography and informative group labels; a restrained palette whose colours correspond to actual ontology branches; selection shown by an outline rather than a large glow; restyled minimap and toolbar.
+It is a visual redesign only: Poincaré mathematics, the S5 layout and coordinates, picking, progressive disclosure, relationships, data, navigation and the disease panel must not change.
+**Required first:** identify the exact shaders / theme rules / render components responsible for the current look and which effects can go without touching geometry or picking; propose a concrete visual system (colour tokens, node, edge, label and
+selection states); get the owner's approval; only then change rendering code. This supersedes the plan for step 2.6.
+
 ## Roadmap  (revised Nov 2026 after the experience review; decisions are listed in CLAUDE.md "Approved design decisions")
 
 **Core deliverables**
@@ -10,7 +58,7 @@ Disease Ontology in the Poincaré ball. Principles are in CLAUDE.md. One phase a
 |---|---|---|
 | 0 | Freeze and prepare existing engine | done (commit 1e52269) |
 | 1 | Disease Ontology data ingestion (full DAG, provenance, primary hierarchy) + radius-clamp fix + default dataset | done (data, taper fix, default launch) |
-| 2 | **Atlas redesign: from "glowing graph" to a disease atlas** (steps 2.1-2.8 below) | **step 2.3a (S5 layout, groups, caps, list-only nodes) implemented and validated; waiting for approval to continue with 2.1** |
+| 2 | **Atlas redesign: from "glowing graph" to a disease atlas** (steps 2.1-2.8 below) | **in progress.** Done and committed: 2.3a (S5), 2.1, 2.2. **Step 2.3b is in progress and uncommitted (6 open test failures).** The visual redesign (brought forward from 2.6) is not started. 2.4, 2.5, 2.7, 2.8 not started |
 | 3 | Interactive exploration lenses | folded into Phase 2 (steps 2.4-2.7) |
 | 4 | Comparative navigation study (tree vs 2D vs 3D), run and report | instruments built in step 2.8; the study itself later |
 
@@ -28,10 +76,10 @@ Disease Ontology in the Poincaré ball. Principles are in CLAUDE.md. One phase a
 | 2.1 | **Disease data layer**: `diseaseData.js` lazy-loads `disease_terms.json` + `disease_edges.json`, indexes by DOID / name / synonym / xref, parents and children in the full DAG, primary and DAG counts | none | 5 MB terms file on a phone: load on first panel open or first search |
 | 2.2 | **Disease information panel**: DONE (see below): ontology facts vs external identifiers; primary vs full-DAG counts and parents explained; bottom sheet on phones; member list inside the panel | 2.1 | done |
 | 2.3a | **2D layout correction and validation**: DONE (S5 adopted and implemented, see below) | none (pure maths) | done |
-| 2.3b | **2D viewer on the shared core + 2D/3D parity**: labels, picking, back stack, breadcrumbs, Up / Home / Back, panel hook, drag-to-pan as Möbius translation, 2D minimap, capabilities; 3D keeps working and adopts the same core | 2.3a, 2.2 | largest hidden item (`main2d.js` is a 359-line viewer with none of these); `navigation.js` and `minimap.js` are 3D-specific |
+| 2.3b | **2D viewer on the shared core + 2D/3D parity** (labels, toolbar, zoom, drag, search, breadcrumb, expansion, Up = real parent): **IN PROGRESS, uncommitted; parity audit 185 pass / 6 fail; other suites not rerun** (see the 2.3b section at the top) | 2.3a, 2.2 | the six landscape-phone failures are unexplained |
 | 2.4 | **Family overview + progressive expansion**: `atlasState.js` (overview / explore), `lod.js` (pure representation policy with a node budget), named folded groups; **2D becomes the normal default at the end of this step**, `mode=3d` explicit | 2.3a, 2.3b, 2.1 | tuning on the S26; budget (~800 drawn nodes) |
 | 2.5 | **Primary vs additional relationships**: dashed neutral arcs for the selected / hovered disease, "also a kind of" list, via the existing link-arc machinery | 2.1, 2.4 | arc clutter |
-| 2.6 | **Visual restyle**: calm near-black theme for ALL datasets, flat discs, family hues, no galaxy decorations; all through `theme.js` | 2.4 | shaders, `theme.js` dead-constant test, sample / WordNet regressions |
+| 2.6 | **Visual restyle**: calm near-black theme for ALL datasets, flat discs, no galaxy decorations; all through `theme.js`. **Brought forward by the owner and NOT STARTED: it needs a written design proposal and approval first** (section "Visual redesign" at the top) | 2.4 (the owner now wants it earlier) | shaders, `theme.js` dead-constant test, sample / WordNet regressions |
 | 2.7 | **Search upgrade**: name, synonym, DOID, ICD / MeSH code; jump to deeply nested diseases with the path lit | 2.1 | ranking |
 | 2.8 | **Tree baseline parity + study**: same data, search, panel and logging in the collapsible tree; disease task file; every study URL names `mode=` explicitly | 2.2, 2.4, 2.7 | fairness between the three conditions |
 
@@ -42,7 +90,7 @@ Regression rule for every step: `npm test`, `npm run build`, `npm run test:phone
 Overview and category sizes use PRIMARY-TREE counts (mutually exclusive, sum to 12,419 incl. the root): anatomical entity 5,284 · genetic disease 3,384 · cellular proliferation 1,179 · syndrome 1,058 · physical disorder 521 · mental health 492 · infectious agent 443 · metabolism 57.
 The panel additionally shows the full DAG descendant count (overlapping between categories, e.g. metabolism 904) and the additional parents, each labelled, with an explanation.
 
-## Step 2.3a — 2D layout prototypes  (done: RESULTS REPORTED, WAITING FOR THE USER'S DECISION; production layout NOT changed)
+## Step 2.3a — 2D layout prototypes, round 1  (done; the owner did not approve B as it was and asked for round 2; superseded by S5)
 
 Scripts (pure Node, they import only helpers from `src/`, nothing in `src/` was edited): `tools/proto/layout2d_proto.mjs` (layouts + metrics; `--sweep` = parameter sensitivity; `--dump` = positions),
 `tools/proto/render_svg.mjs` (SVG disks) -> `screenshots/layout2d-prototypes.png`. Run: `node tools/proto/layout2d_proto.mjs`.
@@ -89,7 +137,7 @@ Sample (5,000) and WordNet (3,000), same metrics: **B passes every target on bot
 3. Or **explore a hybrid / different rule** (e.g. A+B jointly choosing the base length and ring count per parent, or letting deep leaf-only subtrees relax the wedge). Relaxing the wedge compromises the no-overlap target, so I will not do that without your decision.
 If B is adopted, the 2D layout fixed-edge-length rule in CLAUDE.md will be amended with the exact formula (it currently says the assumption is under review).
 
-## Step 2.1 — Disease data layer  (complete; waiting for the user's approval before step 2.2)
+## Step 2.1 — Disease data layer  (complete, approved, committed `ae1c341`)
 
 ### What was built
 | File | Change |
@@ -125,7 +173,7 @@ Source labels for identifiers (ICD-10-CM, ICD-9-CM, ICD-11, ICD-O, MeSH, OMIM, U
 4. Only what the ontology file contains is exposed: no gene, protein, anatomical or other associations exist or were invented. Any future one needs its own source and version in the same way.
 5. The carried-forward limitations above (2D labels / toolbar, Up through groups, phone member list, per-list caps, no physical-device test) are unchanged.
 
-## Step 2.2 — Disease information panel  (complete; waiting for the user's approval before step 2.3b)
+## Step 2.2 — Disease information panel  (complete, approved, committed `9a322ab`)
 
 ### What was built
 | File | Change |
@@ -170,13 +218,13 @@ Source labels for identifiers (ICD-10-CM, ICD-9-CM, ICD-11, ICD-O, MeSH, OMIM, U
 7. The panel has been checked at 1280 x 800 desktop and 412 x 915 phone emulation only; very narrow landscape phones and tablets were not tried.
 
 ## Known limitations carried forward (recorded by the user after the S5 milestone; each must be resolved in the step named)
-1. **2D viewer lacks labels and a toolbar.** 2D / 3D feature parity is NOT complete until the 2D viewer has labels, a toolbar (Home / Up / Back, search, info) and the other shared pieces. -> step 2.3b.
-2. **Up passes through the intermediate display group.** From a member, Up goes to its navigation group first, then to the real parent. Reassess whether that is the most intuitive interaction (alternative: Up skips groups and goes to the real parent, with the group shown only as a way to open lists). -> decide in step 2.3b / 2.4 with the user.
+1. **2D viewer lacks labels and a toolbar.** 2D / 3D feature parity is NOT complete until the 2D viewer has labels, a toolbar (Home / Up / Back, search, info) and the other shared pieces. -> step 2.3b. **STATUS: implemented in the uncommitted working tree, NOT verified (6 test failures open); NOT resolved until committed and the suites are green.**
+2. **Up passes through the intermediate display group.** From a member, Up goes to its navigation group first, then to the real parent. Reassess whether that is the most intuitive interaction (alternative: Up skips groups and goes to the real parent, with the group shown only as a way to open lists). -> decide in step 2.3b / 2.4 with the user.  **STATUS: the owner decided Up goes to the real parent; implemented in the uncommitted working tree (2D and 3D), NOT verified; NOT resolved until committed and the suites are green.**
 3. **The phone member list overlaps part of the visualization.** Needs a responsive redesign (e.g. a bottom sheet that does not cover the focus) and physical-device testing. -> step 2.2 (disease panel) / 2.4.
 4. **Display caps are per list, not a global visible-node budget.** Several lists can be on screen at once (the path to the focus) and 3D keeps its distance-based collapse. -> family overview and level-of-detail, step 2.4.
 5. **Phone testing so far is browser emulation, not a physical device** (Chrome headless, touch + phone user agent). A real-device pass (Galaxy S26) is still owed for layout, member list, taps, performance. -> before step 2.4 is called done.
 
-## Step 2.3a — S5 layout IMPLEMENTED in the shared architecture  (complete; waiting for the user's approval before step 2.1)
+## Step 2.3a — S5 layout IMPLEMENTED in the shared architecture  (complete, approved, committed `ff4c518`)
 
 Decisions applied (user, after the prototypes): S5 with capF 0.2 and mix 0.7; alphabetical groups with transparent labels; display caps 36 desktop / 24 phone (display limits, not access limits; groups never all open by default); the 3 list-only parents as "+N" aggregates with a searchable member list; the global-depth radius schedule kept; exact hyperbolic distances and geodesic edges kept. The exact formula, parameters, grouping rules and known limitations are in CLAUDE.md ("Fixed edge length is relaxed for wide parents", "Navigation groups and display caps", "List-only parents", "Known limitations of S5").
 
@@ -220,7 +268,7 @@ Sample (5,000 nodes): 0 groups at both caps (widest list 16), layout identical i
 6. The member list on a phone covers part of the picture; the layout of overlays on phones was not tuned. No real-phone check was made (headless Chrome emulation only).
 7. WordNet 2D / 3D now show a few groups (study conditions with `?mode=2d|3d` on WordNet differ from before); `?mode=tree` and the sample are unchanged.
 
-## Step 2.3a, round 2 — hybrid: B's wedge territories + aggregated groups / progressive disclosure  (RESULTS REPORTED, WAITING FOR THE USER'S DECISION; production code NOT changed)
+## Step 2.3a, round 2 — hybrid: B's wedge territories + aggregated groups / progressive disclosure  (prototype results; the owner approved S5 = this hybrid, which is now implemented)
 
 Scripts (pure Node; `src/` untouched): `tools/proto/hybrid.mjs` (display-tree builder, strategies, states, stability, reachability, screen space; `--sweep`, `--export`, `--export-parents`), `tools/proto/layout2d_proto.mjs` (B itself, now factored into plan / spawn so a parent can TRY a candidate list; the earlier numbers are reproduced exactly), `tools/proto/render_hybrid.mjs`.
 Images / coordinates: `screenshots/hybrid-prototypes.png` (rows: the 486- and the 1,048-child parent; columns: all children visible, groups closed, one group open with the focus on it, every group open), `screenshots/hybrid-two-parents.json` (disk coordinates of both parents and everything below them, for B-all and for the hybrid).

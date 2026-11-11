@@ -36,6 +36,7 @@ export function createLabels(renderer) {
   const hudScene = new THREE.Scene();
   const hudCamera = new THREE.OrthographicCamera(0, 1, 1, 0, -1, 1);
   let width = 1, height = 1;
+  const inset = { right: 0, bottom: 0 };   // part of the screen covered by a panel / the toolbar strip: labels are never placed there
 
   const batch = new BatchedText();
   batch.material = new THREE.MeshBasicMaterial({
@@ -137,10 +138,16 @@ export function createLabels(renderer) {
       for (const idx of order) {
         const [sx, sy] = spots[idx];
         const rect = { x: sx, y: sy, w, h };
-        if (rect.x < 0 || rect.y < 0 || rect.x + w > width || rect.y + h > height) continue;
+        if (rect.x < 0 || rect.y < 0 || rect.x + w > width - inset.right || rect.y + h > height - inset.bottom) continue;
         if (placed.some((p) => overlaps(rect, p))) continue;
         chosen = { rect, idx };
         break;
+      }
+      if (!chosen && c.priority >= 900) {
+        // The selected node and the node under the pointer must always be named: if no spot fits in the free part of the screen (a long name on a narrow
+        // screen next to a panel), slide the first spot inside it (it may then touch lower-priority labels, which were not placed yet anyway).
+        const [sx, sy] = spots[0];
+        chosen = { rect: { x: Math.max(0, Math.min(sx, width - inset.right - w)), y: Math.max(0, Math.min(sy, height - inset.bottom - h)), w, h }, idx: 0 };
       }
       if (!chosen) continue;                                  // no free spot: drop this label
 
@@ -191,5 +198,7 @@ export function createLabels(renderer) {
 
   function setOpacity(v) { fade = v; batch.material.opacity = v; }
 
-  return { update, resize, render, debug, setOpacity, get count() { return placedCount; } };
+  function setInset(right, bottom) { inset.right = right; inset.bottom = bottom; }
+
+  return { update, resize, render, debug, setOpacity, setInset, get count() { return placedCount; } };
 }

@@ -186,12 +186,11 @@ async function audit(label, { mode3d, phone }) {
   if (!phone) {
     const x0 = (await ev('__explorer.screenPos(__explorer.focusNode.id)')).x;
     await ev(`document.querySelector('#dpanel .dp-close').click()`); await settle(mode3d);
-    const cl = JSON.parse(await ev(`JSON.stringify({ open: __explorer.panel.open, display: getComputedStyle(document.getElementById('dpanel')).display, pw: getComputedStyle(document.documentElement).getPropertyValue('--panel-w').trim(), x: __explorer.screenPos(__explorer.focusNode.id).x, launcher: ${mode3d ? 'false' : `getComputedStyle(document.getElementById('dpanelOpen')).display !== 'none'`} })`));
-    rec(`${label}: the close button hides the panel, frees the width (--panel-w ${cl.pw}) and re-centres the picture (x ${Math.round(x0)} -> ${Math.round(cl.x)})`, !cl.open && cl.display === 'none' && cl.pw === '0px' && cl.x > x0 + 100 && (mode3d || cl.launcher));
-    if (mode3d) await ev(`[...document.querySelectorAll('#tools button')].find((x) => x.title === 'Show or hide the info card').click()`);
-    else await ev(`document.getElementById('dpanelOpen').click()`);
+    const cl = JSON.parse(await ev(`JSON.stringify({ open: __explorer.panel.open, display: getComputedStyle(document.getElementById('dpanel')).display, pw: getComputedStyle(document.documentElement).getPropertyValue('--panel-w').trim(), x: __explorer.screenPos(__explorer.focusNode.id).x, launcher: true })`));
+    rec(`${label}: the close button hides the panel, frees the width (--panel-w ${cl.pw}) and re-centres the picture (x ${Math.round(x0)} -> ${Math.round(cl.x)})`, !cl.open && cl.display === 'none' && cl.pw === '0px' && cl.x > x0 + 100 && cl.launcher);
+    await ev(`[...document.querySelectorAll('#tools button')].find((x) => x.title === 'Show or hide the info card').click()`);   // the shared toolbar's Info button, 2D and 3D
     await settle(mode3d);
-    rec(`${label}: the ${mode3d ? 'toolbar Info button' : 'round info button'} reopens it, still showing the selected disease`, (await ev('__explorer.panel.open')) && (await ev('__P.title()')) === 'cystic echinococcosis');
+    rec(`${label}: the toolbar Info button reopens it, still showing the selected disease`, (await ev('__explorer.panel.open')) && (await ev('__P.title()')) === 'cystic echinococcosis');
   }
   rec(`${label}: no console errors`, !b.logs.some((l2) => /error|exception/i.test(l2)), b.logs.filter((l2) => /error|exception/i.test(l2)).slice(0, 2).join(' | '));
 
@@ -224,7 +223,7 @@ try {
 
   // ---- the sample and WordNet keep their own info card ---------------------------------------------------------------------------------------------------------------------
   await b.desktop(1280, 800);
-  for (const [label, url, is3d] of [['3D sample', '?tree=sample_tree.json&intro=0', true], ['2D sample', '?mode=2d&tree=sample_tree.json', false], ['3D WordNet', '?tree=wordnet_tree.json&intro=0', true], ['2D WordNet', '?mode=2d&tree=wordnet_tree.json', false]]) {
+  for (const [label, url, is3d] of [['3D sample', '?tree=sample_tree.json&intro=0', true], ['2D sample', '?mode=2d&tree=sample_tree.json&intro=0', false], ['3D WordNet', '?tree=wordnet_tree.json&intro=0', true], ['2D WordNet', '?mode=2d&tree=wordnet_tree.json&intro=0', false]]) {
     b.logs.length = 0;
     await b.goto(BASE + url, 5000);
     const r = JSON.parse(await ev(`JSON.stringify({ panel: __explorer.panel === null, el: !!document.getElementById('dpanel'), card: !!document.getElementById('card'), cardOpen: document.getElementById('card') && document.getElementById('card').classList.contains('open'), pw: getComputedStyle(document.documentElement).getPropertyValue('--panel-w').trim() })`));

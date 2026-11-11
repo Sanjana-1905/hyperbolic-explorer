@@ -5,3 +5,8 @@ public/data/zz_scroll/
 __pycache__/
 *.pyc
 tools/cache/
+.env
+.env.*
+*.log
+.idea/
+.vscode/

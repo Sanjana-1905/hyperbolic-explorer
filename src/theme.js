@@ -383,6 +383,10 @@ export const THEME = {
   TOUCH_ROTATE_SPEED: 0.9,         // finger-drag rotation speed relative to OrbitControls' default (1 = full-screen drag turns the view once)
   TAP_MAX_MOVE_PX: 10,             // a touch that moves less than this is a tap, not a drag
   TAP_MAX_MS: 350,                 // ... and must be shorter than this
+  LABEL2D_MIN_RADIUS_PX: 9,        // in the 2D disk a node whose drawn radius reaches this many pixels is a label candidate (more nodes qualify as you zoom in)
+  ZOOM2D_MAX: 8,                   // the 2D disk can be magnified up to this many times (1 = the whole disk fits)
+  ZOOM2D_STEP: 1.6,                // one press of the + / - button multiplies / divides the zoom by this
+  ZOOM2D_WHEEL: 0.0015,            // wheel zoom speed: zoom *= exp(-deltaY * this)
   DOUBLE_TAP_MS: 300,              // two taps within this long (and DOUBLE_TAP_PX of each other) are a double-tap = go up
   DOUBLE_TAP_PX: 40,               // max distance between the two taps of a double-tap
   HAPTIC_MS: 8,                    // length of the light vibration when the focus changes (where the browser allows it)

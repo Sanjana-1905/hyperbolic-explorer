@@ -1,6 +1,7 @@
-// main2d.js - 2D Poincaré disk viewer (Phase 1). Open with ?mode=2d.
-// Kept unchanged as the baseline for the user study (only the help text and
-// the fps counter were added in Phase 2).
+// main2d.js - 2D Poincaré disk viewer. Open with ?mode=2d.
+// Step 2.3b brought it level with the 3D viewer: zoom and drag (navigation2d.js), contextual labels (labels.js, shared), the toolbar (toolbar.js, shared),
+// search, breadcrumb, category and group expansion (disclosure.js, shared), the disease panel, Up = the real ontology parent, family colours
+// (families.js, shared). The look (colours, sizes) is still the old one: the visual restyle is a separate, approved-first milestone.
 //
 // What happens here:
 //   1. Load the tree JSON and lay it out once (layout.js). Each node keeps a
@@ -11,19 +12,28 @@
 //      new one (0.5 s, ease-in-out). Backspace focuses the parent.
 
 import * as THREE from 'three';
-import { complex, cNeg, cAbs, mobiusAdd, geodesicLerp } from './mobius.js';
+import { complex, cNeg, cAbs, mobiusAdd, geodesicLerp, hyperbolicDistanceExact } from './mobius.js';
 import { nodePath } from './layout.js';
 import { treeFileFromUrl } from './dataset.js';
 import { makeDisplayTree, CAP_DESKTOP, CAP_PHONE } from './displaytree.js';
-import { disclosureStates } from './disclosure.js';
+import { semanticStates, realParent } from './disclosure.js';
 import { createMemberList } from './memberlist.js';
 import { dataLayerFor } from './diseasedata.js';
 import { createDiseasePanel } from './diseasepanel.js';
 import { detectTier } from './quality.js';
 import { createFpsCounter } from './fps.js';
+import { THEME } from './theme.js';
+import { createLabels } from './labels.js';
+import { createToolbar } from './toolbar.js';
+import { createBreadcrumb } from './breadcrumb.js';
+import { createNav2d } from './navigation2d.js';
+import { createIndex } from './search.js';
+import { createSearchUI } from './searchui.js';
+import { assignFamilyHues } from './families.js';
+import { groupLabel } from './displaytree.js';
 
 document.getElementById('help').textContent =
-  'Click a node to focus it · Backspace = go to parent · F = fps';
+  'Drag to move · scroll or pinch to zoom · click a node to select it · keys: Backspace up · / search · F fps';
 const fps = createFpsCounter();
 
 // ---------------------------------------------------------------------------
@@ -34,19 +44,19 @@ const FOLDER_RADIUS = 0.16;     // hyperbolic radius of a folder circle
 const FILE_RADIUS = 0.06;       // hyperbolic radius of a file circle
 const FOCUS_SCALE = 1.5;        // the selected node is drawn this much bigger, with a ring around it
 const AGGREGATE_SCALE = 1.5;    // an aggregate (closed group / list-only node) is drawn this much bigger than a folder
+const COLLAPSE_MIN_NODES = 4;   // folders with fewer nodes inside than this never collapse into a "+N" aggregate (as in the 3D viewer)
 const MIN_PIXELS = 1.2;         // never draw a circle smaller than this radius
 const CLICK_TOLERANCE_PX = 8;   // how far from a circle a click still hits it
 const EDGE_SEGMENTS = 8;        // line pieces per curved edge
 const COLORS = {
-  folder: new THREE.Color('#4cc9f0'),
-  file: new THREE.Color('#8d99ae'),
-  focus: new THREE.Color('#ffb703'),
-  parent: new THREE.Color('#fb8500'),
+  focus: new THREE.Color('#ffb703'),       // the selected node (same meaning as the bright centre in 3D)
   ring: new THREE.Color('#ffffff'),        // the ring drawn around the selected node
-  aggregate: new THREE.Color('#c77dff'),   // a navigation group or list-only node drawn as one aggregate ("+N")
   edge: new THREE.Color('#2b3a55'),
   rim: new THREE.Color('#1d2a44'),
 };
+// A node's colour is its family's hue (families.js, the same hue the 3D viewer uses); lightness / saturation tell a category, a disease and an aggregate apart.
+const SAT_LIGHT = { folder: [0.55, 0.52], file: [0.30, 0.62], aggregate: [0.55, 0.70] };
+const tmpColor = new THREE.Color();
 
 // ---------------------------------------------------------------------------
 // three.js scene: an orthographic camera looking at the unit disk
@@ -54,6 +64,7 @@ const COLORS = {
 const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.setClearColor(0x05060a);
+renderer.autoClear = false;                    // the label pass is drawn on top of the picture (clear once, by hand, per frame)
 document.body.appendChild(renderer.domElement);
 
 const scene = new THREE.Scene();
@@ -65,21 +76,26 @@ camera.position.z = 5;
 const VIEW = 1.04;
 let pixelsPerUnit = 1; // screen pixels per disk unit, updated on resize
 
-// A panel (the disease panel) can cover the right side or the bottom of the screen: the disk is fitted into, and centred in, the part that is left.
-let insetRight = 0, insetBottom = 0;
+// A panel (the disease panel) can cover the right side or the bottom of the screen, and the one-row toolbar always covers a strip at the bottom (unless the
+// compact landscape layout puts it at the left): the disk is fitted into, and centred in, the part that is left, then magnified by the zoom.
+let panelRight = 0, panelBottom = 0, insetRight = 0, insetBottom = 0;
+let nav2d = null;
 function resize() {
   const w = window.innerWidth, h = window.innerHeight;
   renderer.setSize(w, h);
+  insetRight = panelRight;
+  insetBottom = panelBottom + (h > THEME.COMPACT_HEIGHT_PX ? THEME.TOOLBAR_BAND_PX : 0);
   const rw = Math.max(80, w - insetRight), rh = Math.max(80, h - insetBottom);   // the free region, in pixels
-  const s = (2 * VIEW) / Math.min(rw, rh);                                        // disk units per pixel
+  const s = (2 * VIEW) / Math.min(rw, rh) / (nav2d ? nav2d.zoom : 1);              // disk units per pixel
   const cx = rw / 2, cy = rh / 2;                                                  // its centre, from the top-left corner
   camera.left = -cx * s; camera.right = (w - cx) * s;
   camera.top = cy * s; camera.bottom = -(h - cy) * s;
   camera.updateProjectionMatrix();
   pixelsPerUnit = 1 / s;
+  if (labels) { labels.resize(w, h); labels.setInset(insetRight, insetBottom); }   // labels stay out of the panel and the toolbar strip
   dirty = true;
 }
-function applyInset(right, bottom) { insetRight = right; insetBottom = bottom; resize(); }
+function applyInset(right, bottom) { panelRight = right; panelBottom = bottom; resize(); }
 
 // The unit circle (the "edge of the universe"), drawn as a faint ring.
 const rimPoints = [];
@@ -106,6 +122,10 @@ let states = new Uint8Array(0); // per node: 0 drawn, 1 hidden inside a closed g
 let memberList = null;   // member list of a list-only node (memberlist.js)
 let displayInfo = null;
 let diseasePanel = null; // the disease panel (diseasepanel.js); null for other datasets or with ?panel=0
+let labels = null;       // SDF text labels (labels.js, shared with 3D)
+let toolbar = null, searchUI = null, breadcrumb = null;
+let hoverNode = null;    // the node under the mouse (for its label)
+let colorsDirty = false; // node colours must be rewritten (a state or the focus changed)
 let diseaseData = null;  // the disease data layer (diseasedata.js): null for datasets without one; loads its files lazily
 let root = null;
 let focusNode = null;    // node we are focused on (or animating toward)
@@ -148,17 +168,27 @@ function buildDrawables() {
   updateColors();
 }
 
-// Colours depend only on which node is focused (focus orange, parent darker
-// orange, otherwise folder/file colours), so we refresh them on refocus only.
+// Colours: the family hue (the same as in 3D) with lightness telling a category, a disease and an aggregate ("+N" / group) apart; the selected node is gold.
+// They change only when the focus or a node's state changes.
 function updateColors() {
   for (const node of nodes) {
-    let color = node.type === 'folder' ? COLORS.folder : COLORS.file;
-    if (states[node.id] === 2) color = COLORS.aggregate;
-    if (node === focusNode) color = COLORS.focus;
-    else if (focusNode && node === focusNode.parent) color = COLORS.parent;
-    nodeMesh.setColorAt(node.id, color);
+    if (node === focusNode) { nodeMesh.setColorAt(node.id, COLORS.focus); continue; }
+    const [sat, light] = states[node.id] === 2 ? SAT_LIGHT.aggregate : node.type === 'folder' ? SAT_LIGHT.folder : SAT_LIGHT.file;
+    nodeMesh.setColorAt(node.id, tmpColor.setHSL(node.hue ?? THEME.ROOT_HUE, sat, light));
   }
   nodeMesh.instanceColor.needsUpdate = true;
+  colorsDirty = false;
+}
+
+// Which nodes are shown: navigation groups and list-only nodes follow the focus path, and far categories collapse into "+N" aggregates by their hyperbolic
+// distance from the view point: the SAME rule as the 3D viewer (disclosure.js), measured in the 2D disk.
+function updateStates() {
+  const next = semanticStates(nodes, root, focusNode, (n) => hyperbolicDistanceExact(focusPoint, n.z),
+    { collapseDist: THEME.COLLAPSE_DIST, hyst: THEME.COLLAPSE_HYST, minNodes: COLLAPSE_MIN_NODES });
+  let changed = states.length !== next.length;
+  if (!changed) for (let i = 0; i < next.length; i++) if (next[i] !== states[i]) { changed = true; break; }
+  states = next;
+  if (changed) colorsDirty = true;
 }
 
 // ---------------------------------------------------------------------------
@@ -249,10 +279,6 @@ function easeInOut(t) {
 function focusOn(node, animate = true) {
   if (!node) return;
   focusNode = node;
-  states = disclosureStates(nodes, root, node);     // which groups are open follows the focus path
-  if (diseasePanel) diseasePanel.select(node); else if (memberList) memberList.update(node);
-  updateColors();
-  updateInfo();
   if (animate) {
     // If a previous animation is still running, restart from where the view is now.
     anim = { from: focusPoint, to: node.z, start: performance.now() };
@@ -260,8 +286,17 @@ function focusOn(node, animate = true) {
     focusPoint = node.z;
     anim = null;
   }
+  updateStates();                                    // which groups are open follows the focus path; far categories collapse by distance
+  colorsDirty = true;
+  if (diseasePanel) diseasePanel.select(node); else if (memberList) memberList.update(node);
+  updateInfo();
+  if (breadcrumb) breadcrumb.update(node);
+  refreshToolbar();
   dirty = true;
 }
+
+// Up = the REAL ontology parent (never an alphabetical navigation group; those are display aids, not relationships).
+function goUp() { const up = focusNode && realParent(focusNode); if (up) focusOn(up); }
 
 function stepAnimation(now) {
   if (!anim) return;
@@ -318,23 +353,88 @@ function pickNode(clientX, clientY) {
   return best;
 }
 
-// Distinguish a click from a drag/scroll, so later phases can add dragging.
-let downX = 0, downY = 0;
-renderer.domElement.addEventListener('pointerdown', (e) => { downX = e.clientX; downY = e.clientY; });
-renderer.domElement.addEventListener('pointerup', (e) => {
-  if (Math.hypot(e.clientX - downX, e.clientY - downY) > 5) return;
-  const hit = pickNode(e.clientX, e.clientY);
+// A tap selects the node under the finger / mouse; a double-tap (touch) goes up.
+function onTap({ x, y, double }) {
+  if (double) { goUp(); return; }
+  const hit = pickNode(x, y);
   if (hit && hit !== focusNode) focusOn(hit);
-});
+}
+function onHover(x, y) {
+  const n = x < 0 ? null : pickNode(x, y);
+  if (n !== hoverNode) { hoverNode = n; renderer.domElement.style.cursor = n ? 'pointer' : ''; }
+}
 
 window.addEventListener('keydown', (e) => {
   if (e.key === 'Backspace') {
+    if (e.target && /^(input|textarea)$/i.test(e.target.tagName)) return;       // typing in the search box
     e.preventDefault(); // stop the browser from navigating "back"
-    if (focusNode && focusNode.parent) focusOn(focusNode.parent);
+    goUp();
   }
 });
 
 window.addEventListener('resize', resize);
+
+// ---------------------------------------------------------------------------
+// Labels (labels.js does the typesetting and keeps them from overlapping; here we say WHICH nodes want one and how much)
+// ---------------------------------------------------------------------------
+// Priority, high to low: the selected disease, the node under the mouse, its nearest ancestors, its children (bigger subtrees first), the "+N" aggregates,
+// and any other node drawn big enough to read (so zooming in gives more labels). At most about 25 are placed (labels.js).
+const realCount = (n) => (n.realWeight ?? n.weight) - 1;
+const orbText = (n) => (n.isGroup ? groupLabel(n) : n.listOnly ? `${n.name} +${realCount(n)}` : `+${realCount(n)}`);
+const labelScale = () => (window.innerHeight <= THEME.COMPACT_HEIGHT_PX ? THEME.COMPACT_LABEL_SCALE : 1);
+function screenOf(n) {
+  return {
+    x: ((screenX[n.id] - camera.left) / (camera.right - camera.left)) * window.innerWidth,
+    y: ((camera.top - screenY[n.id]) / (camera.top - camera.bottom)) * window.innerHeight,
+    r: screenR[n.id] * pixelsPerUnit,
+  };
+}
+function collectLabelCandidates() {
+  const k = labelScale(), out = [], seen = new Set();
+  const room = (s) => s.x > 10 && s.x < window.innerWidth - insetRight - 20 && s.y > 40 && s.y < window.innerHeight - insetBottom - 10;
+  const add = (n, priority, px, color, text) => {
+    if (seen.has(n.id) || states[n.id] === 1) return;
+    const s = screenOf(n);
+    if (!room(s)) return;
+    seen.add(n.id);
+    out.push({ key: n.id, text, x: s.x, y: s.y, r: s.r, priority, px, color });
+  };
+  const text = (n) => (states[n.id] === 2 ? orbText(n) : n.isGroup ? groupLabel(n) : n.name);
+  add(focusNode, 1000, THEME.LABEL_FOCUS_PX * k, THEME.LABEL_COLOR, text(focusNode));
+  if (hoverNode) add(hoverNode, 900, THEME.LABEL_HOVER_PX * k, THEME.LABEL_COLOR, states[hoverNode.id] === 2 && !hoverNode.isGroup ? `${hoverNode.name}  ${orbText(hoverNode)}` : text(hoverNode));
+  let up = realParent(focusNode);                                       // the nearest few real ancestors say where we are
+  for (let i = 0; up && i < 3; i++, up = realParent(up)) add(up, 700 - i * 10, THEME.LABEL_FONT_PX * k, THEME.LABEL_COLOR, up.name);
+  for (const c of focusNode.children) {
+    const orb = states[c.id] === 2;
+    add(c, 500 + 10 * Math.log2(c.weight), THEME.LABEL_FONT_PX * k, orb ? THEME.LABEL_ORB_COLOR : THEME.LABEL_COLOR, text(c));
+  }
+  const rest = [];                                                      // everything else that is big enough on the screen
+  for (const n of nodes) {
+    if (seen.has(n.id) || states[n.id] === 1) continue;
+    const r = screenR[n.id] * pixelsPerUnit;
+    if (states[n.id] === 2 ? r >= 4 : r >= THEME.LABEL2D_MIN_RADIUS_PX) rest.push([n, r]);
+  }
+  rest.sort((a, b) => b[1] - a[1]);
+  for (const [n, r] of rest.slice(0, 60)) {
+    const orb = states[n.id] === 2;
+    add(n, (orb ? 100 : 200) + Math.min(r, 60), (orb ? THEME.LABEL_ORB_PX : THEME.LABEL_FONT_PX) * k, orb ? THEME.LABEL_ORB_COLOR : THEME.LABEL_COLOR, text(n));
+  }
+  return out;
+}
+
+// ---------------------------------------------------------------------------
+// Toolbar (toolbar.js is shared with 3D; the 2D disk adds zoom buttons and has no Back / link buttons)
+// ---------------------------------------------------------------------------
+function refreshToolbar() {
+  if (!toolbar || !focusNode) return;
+  toolbar.update({
+    backDepth: 0, isRoot: !realParent(focusNode),
+    homeDisabled: !realParent(focusNode) && nav2d.zoom === 1 && Math.hypot(focusPoint.x - focusNode.z.x, focusPoint.y - focusNode.z.y) < 1e-9,   // Home also resets zoom and view
+    focusKind: focusNode.type === 'folder' ? 'folder' : 'file',
+    showImports: false, showCalls: false, showFolderDeps: false, infoOpen: diseasePanel ? diseasePanel.open : false, heatMode: 0, hasGit: false, hasLinks: false,
+    hasInfo: !!diseasePanel, zoomInDisabled: !nav2d.canZoomIn, zoomOutDisabled: !nav2d.canZoomOut,
+  });
+}
 
 // ---------------------------------------------------------------------------
 // Main loop and startup
@@ -343,10 +443,15 @@ function frame(now) {
   fps.tick(now);
   stepAnimation(now);
   if (dirty) {
+    updateStates();                         // collapse / expand categories by distance (also while the view glides or is dragged)
+    if (colorsDirty) updateColors();
     updateGeometry();
     dirty = false;
   }
-  renderer.render(scene, camera);
+  renderer.clear();
+  renderer.render(scene, camera);          // pass 1: the disk
+  labels.update(collectLabelCandidates());
+  labels.render();                         // pass 2: labels on top (one batched draw call)
   requestAnimationFrame(frame);
 }
 
@@ -368,9 +473,34 @@ async function start() {
   nodes = tree.nodes;
   if (diseaseData) diseaseData.attachTree(nodes);
   if (diseaseData && new URLSearchParams(location.search).get('panel') !== '0') {
-    diseasePanel = createDiseasePanel({ data: diseaseData, nodeById: (id) => nodes[id], onNavigate: (n) => focusOn(n), onLayout: applyInset, launcher: true });
+    diseasePanel = createDiseasePanel({ data: diseaseData, nodeById: (id) => nodes[id], onNavigate: (n) => focusOn(n), onLayout: applyInset, launcher: false });
     memberList = diseasePanel.memberList;
   } else memberList = createMemberList({ onPick: (n) => focusOn(n) });
+
+  assignFamilyHues(root);                                  // the same family colours as the 3D viewer
+  nav2d = createNav2d({
+    element: renderer.domElement,
+    getFocusPoint: () => focusPoint, setFocusPoint: (p) => { anim = null; focusPoint = p; dirty = true; },
+    getPixelsPerUnit: () => pixelsPerUnit,
+    onZoom: () => { resize(); refreshToolbar(); }, onMove: () => { dirty = true; refreshToolbar(); }, onTap, onHover,
+  });
+  labels = createLabels(renderer);
+  breadcrumb = createBreadcrumb({ onPick: (n) => focusOn(n) });
+  toolbar = createToolbar({
+    onSearch: () => { if (searchUI) searchUI.open(); },
+    onHome: () => { nav2d.setZoom(1); if (root && (focusNode !== root || anim || Math.hypot(focusPoint.x, focusPoint.y) > 1e-9)) focusOn(root); else refreshToolbar(); },
+    onUp: goUp, onBack: () => {}, onImports: () => {}, onCalls: () => {}, onFolderDeps: () => {}, onHeat: () => {},
+    onInfo: () => { if (diseasePanel) { diseasePanel.toggle(); refreshToolbar(); } },
+    onZoomIn: () => { nav2d.zoomIn(); }, onZoomOut: () => { nav2d.zoomOut(); },
+    onFullscreen: () => {
+      if (document.fullscreenElement) document.exitFullscreen();
+      else document.documentElement.requestFullscreen({ navigationUI: 'hide' }).catch(() => {});   // refused (e.g. not from a tap): ignore
+    },
+  });
+  toolbar.setDataset({ about: json.about, words: json.words, hasLinks: false });
+  const index = createIndex();
+  index.addTree(nodes.filter((n) => !n.isGroup), nodePath);   // navigation groups are not diseases: never search results
+  searchUI = createSearchUI({ index, onSelect: (r) => { const n = nodes[r.baseId]; if (n) focusOn(n); } });
 
   buildDrawables();
   resize();
@@ -407,6 +537,21 @@ window.__explorer = {
     return {
       x: ((screenX[id] - camera.left) / w) * window.innerWidth,
       y: ((camera.top - screenY[id]) / h) * window.innerHeight,
+      r: screenR[id] * pixelsPerUnit,
     };
   },
+  // ---- parity hooks (same names as the 3D viewer where there is an equivalent) ----
+  get animating() { return !!anim; },
+  shownR: (id) => Math.hypot(screenX[id], screenY[id]),
+  get zoom() { return nav2d.zoom; },
+  setZoom: (z) => nav2d.setZoom(z),
+  zoomIn: () => nav2d.zoomIn(), zoomOut: () => nav2d.zoomOut(),
+  get focusPoint() { return { x: focusPoint.x, y: focusPoint.y }; },
+  get labelCount() { return labels.count; },
+  labelDebug: () => labels.debug(),
+  get hoverId() { return hoverNode ? hoverNode.id : null; },
+  nodeById: (id) => nodes[id],
+  get orbCount() { let c = 0; for (const n of nodes) if (states[n.id] === 2) c++; return c; },
+  goUp,
+  get pixelsPerUnit() { return pixelsPerUnit; },
 };

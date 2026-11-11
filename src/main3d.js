@@ -41,7 +41,8 @@ import { createInfoCard } from './infocard.js';
 import { createMinimap } from './minimap.js';
 import { treeFileFromUrl } from './dataset.js';
 import { makeDisplayTree, groupLabel, CAP_DESKTOP, CAP_PHONE } from './displaytree.js';
-import { aggregateRule, childAllowed } from './disclosure.js';
+import { aggregateRule, childAllowed, realParent } from './disclosure.js';
+import { createBreadcrumb } from './breadcrumb.js';
 import { createMemberList } from './memberlist.js';
 import { dataLayerFor } from './diseasedata.js';
 import { createDiseasePanel } from './diseasepanel.js';
@@ -940,7 +941,7 @@ function updatePanelLinks() {
 const toolbar = createToolbar({
   onSearch: () => { if (searchUI) searchUI.open(); },
   onHome: () => { if (root && focusNode !== root) focusOn(root); },
-  onUp: () => { if (focusNode && focusNode.parent) focusOn(focusNode.parent); },
+  onUp: () => { const up = focusNode && realParent(focusNode); if (up) focusOn(up); },   // the real ontology parent, never an alphabetical group
   onBack: () => goBack(),
   onImports: () => { showImports = !showImports; linksDirty = true; updateHelp(); },
   onCalls: () => { showCalls = !showCalls; linksDirty = true; updateHelp(); },
@@ -954,9 +955,12 @@ const toolbar = createToolbar({
 });
 // The part of the screen covered by a panel (code panel or disease panel): the picture is centred in what is left. The toolbar strip at the bottom
 // also covers something (unless the compact landscape layout puts it at the left).
+let labelInset = { right: 0, bottom: 0 };
 function applyInset(right, bottom) {
   const toolbarAtBottom = window.innerHeight > THEME.COMPACT_HEIGHT_PX;
   nav.setInset(right, bottom + (toolbarAtBottom ? THEME.TOOLBAR_BAND_PX : 0));
+  labelInset = { right, bottom: bottom + (toolbarAtBottom ? THEME.TOOLBAR_BAND_PX : 0) };
+  if (labels) labels.setInset(labelInset.right, labelInset.bottom);       // labels stay out of the panel and the toolbar strip
 }
 function refreshToolbar() {
   if (!focusNode) return;
@@ -1188,44 +1192,9 @@ function updateInfo() {
   updateInfoCard();
 }
 
-// Breadcrumb: "repo / src / components" at a fixed place (bottom centre). Each segment is
-// clickable and focuses that ancestor. Very long paths keep the first segment and the last
-// four, with "…" in between.
-const crumbs = document.createElement('div');
-crumbs.id = 'crumbs';
-Object.assign(crumbs.style, {
-  position: 'fixed', left: 'calc((100vw + var(--sai-l) - var(--sai-r) - var(--panel-w, 0px)) / 2)', bottom: 'calc(34px + max(var(--sheet-h, 0px), var(--sai-b)))', transform: 'translateX(-50%)',
-  maxWidth: 'calc(100vw - var(--panel-w, 0px) - 24px - var(--sai-l) - var(--sai-r))', padding: '4px 12px', borderRadius: '14px',
-  font: `600 ${THEME.CRUMB_FONT_PX}px system-ui, sans-serif`,
-  background: cssRgb(THEME.CRUMB_BG, THEME.CRUMB_BG_ALPHA), color: cssRgb(THEME.CRUMB_COLOR),
-  whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', textShadow: '0 0 4px #000',
-});
-document.body.appendChild(crumbs);
-
-function updateBreadcrumb() {
-  const chain = [];
-  // navigation groups are not part of the path of a disease (they are display aids): leave them out unless one IS the focus
-  for (let n = focusNode; n; n = n.parent) if (!n.isGroup || n === focusNode) chain.unshift(n);
-  let shownChain = chain;
-  if (chain.length > 6) shownChain = [chain[0], null, ...chain.slice(-4)]; // null = "…"
-  crumbs.textContent = '';
-  shownChain.forEach((n, i) => {
-    if (i > 0) {
-      const sep = document.createElement('span');
-      sep.textContent = ' / ';
-      sep.style.color = cssRgb(THEME.CRUMB_SEP_COLOR);
-      crumbs.appendChild(sep);
-    }
-    const span = document.createElement('span');
-    span.textContent = n ? n.name : '…';
-    if (n === focusNode) span.style.color = cssRgb(THEME.CRUMB_LAST_COLOR);
-    if (n && n !== focusNode) {
-      span.style.cursor = 'pointer';
-      span.addEventListener('click', () => focusOn(n));
-    }
-    crumbs.appendChild(span);
-  });
-}
+// Breadcrumb at the bottom centre (breadcrumb.js, shared with the 2D viewer): the path of the focus, every ancestor clickable, navigation groups left out.
+const breadcrumb = createBreadcrumb({ onPick: (n) => focusOn(n) });
+function updateBreadcrumb() { breadcrumb.update(focusNode); }
 
 // ---------------------------------------------------------------------------
 // Input
@@ -1334,6 +1303,9 @@ function collectLabelCandidates() {
     const text = hoverNode.state === 2 ? (hoverNode.isGroup ? orbText(hoverNode) : `${hoverNode.name}  ${orbText(hoverNode)}`) : hoverNode.name;
     add(hoverNode, 900, THEME.LABEL_HOVER_PX * k, THEME.LABEL_COLOR, text);
   }
+  // The nearest few REAL ancestors say where we are (same rule as the 2D viewer; navigation groups are skipped).
+  let ancestor = realParent(focusNode);
+  for (let i = 0; ancestor && i < 3; i++, ancestor = realParent(ancestor)) add(ancestor, 700 - i * 10, THEME.LABEL_FONT_PX * k, THEME.LABEL_COLOR, ancestor.name);
   // Children: bigger subtrees first (folders before files, since a file has weight 1).
   for (const child of focusNode.children) {
     const orb = child.state === 2;
@@ -1384,7 +1356,8 @@ nav.onTap(({ x, y, double, pointerType }) => {
   if (double) {
     const from = focusBeforeTap || focusNode;
     focusBeforeTap = null;
-    if (from && from.parent) focusOn(from.parent);
+    const up = from && realParent(from);
+    if (up) focusOn(up);
     else if (from && from !== focusNode) focusOn(from);
     return;
   }
@@ -1411,7 +1384,7 @@ window.addEventListener('keydown', (e) => {
     e.preventDefault(); // stop the browser from navigating "back"
     // Backspace = back to where the last followed link started; with nothing to go back to (or with Shift) = parent.
     if (!e.shiftKey && nav.backDepth > 0) goBack();
-    else if (focusNode && focusNode.parent) focusOn(focusNode.parent);
+    else if (focusNode && realParent(focusNode)) focusOn(realParent(focusNode));
   } else if ((e.key === 'i' || e.key === 'I') && !e.ctrlKey && !e.metaKey) {
     if (caps.dependencies) { showImports = !showImports; linksDirty = true; updateHelp(); }
   } else if ((e.key === 'k' || e.key === 'K') && !e.ctrlKey && !e.metaKey) {
@@ -1528,6 +1501,7 @@ async function start() {
   }
 
   labels = createLabels(renderer);
+  labels.setInset(labelInset.right, labelInset.bottom);
   buildDrawables();
   resize();
   focusOn(root, false);

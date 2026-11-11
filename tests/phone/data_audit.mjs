@@ -30,7 +30,7 @@ const DIGEST = `(async () => {
 
 const digests = {};
 try {
-  for (const [label, url, phone] of [['3D desktop', '?tree=disease_tree.json&intro=0&panel=0', false], ['2D desktop', '?mode=2d&tree=disease_tree.json&panel=0', false], ['3D phone', '?tree=disease_tree.json&intro=0&adapt=0&panel=0', true], ['2D phone', '?mode=2d&tree=disease_tree.json&panel=0', true]]) {
+  for (const [label, url, phone] of [['3D desktop', '?tree=disease_tree.json&intro=0&panel=0', false], ['2D desktop', '?mode=2d&tree=disease_tree.json&panel=0&intro=0', false], ['3D phone', '?tree=disease_tree.json&intro=0&adapt=0&panel=0', true], ['2D phone', '?mode=2d&tree=disease_tree.json&panel=0&intro=0', true]]) {
     if (phone) await b.phone(412, 915); else await b.desktop(1280, 800);
     b.logs.length = 0;
     await b.goto(BASE + url, 6000);
@@ -58,7 +58,7 @@ try {
 
   // other datasets: no layer, nothing fetched
   await b.desktop(1280, 800);
-  for (const [label, url] of [['3D sample', '?tree=sample_tree.json&intro=0'], ['2D sample', '?mode=2d&tree=sample_tree.json'], ['3D WordNet', '?tree=wordnet_tree.json&intro=0'], ['2D WordNet', '?mode=2d&tree=wordnet_tree.json']]) {
+  for (const [label, url] of [['3D sample', '?tree=sample_tree.json&intro=0'], ['2D sample', '?mode=2d&tree=sample_tree.json&intro=0'], ['3D WordNet', '?tree=wordnet_tree.json&intro=0'], ['2D WordNet', '?mode=2d&tree=wordnet_tree.json&intro=0']]) {
     b.logs.length = 0;
     await b.goto(BASE + url, 5000);
     rec(`${label}: no disease data layer, nothing of it fetched, no errors`, (await ev('__explorer.data === null')) && (await fetched()).length === 0 && !b.logs.some((l) => /error|exception/i.test(l)));

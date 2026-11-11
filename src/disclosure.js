@@ -57,3 +57,39 @@ export function listFor(focus) {
   while (p && p.isGroup) p = p.parent;
   return p && p.listOnly ? p : null;
 }
+
+// The REAL parent in the ontology: the nearest ancestor that is not a navigation group (null for the top). Navigation groups are display aids,
+// not ontology relationships, so "Up" goes to this node, never to a group. (Focusing a group, e.g. by clicking its orb, is still possible; Up from a
+// group also goes to its real parent.)
+export function realParent(node) {
+  let p = node.parent;
+  while (p && p.isGroup) p = p.parent;
+  return p || null;
+}
+
+// The full "what is shown" rule shared by the viewers: groups and list-only nodes as above, PLUS the distance rule (semantic zoom): a folder that
+// is further than collapseDist (hyperbolic distance from the focus point) becomes a "+N" aggregate, with hysteresis so a folder near the limit does not
+// flicker (it collapses beyond collapseDist + hyst and expands again inside collapseDist - hyst). The focus path is never collapsed.
+// distanceOf(node) = hyperbolic distance from the focus point to the node (2D and 3D each measure in their own geometry).
+// p = { collapseDist, hyst, minNodes }: folders with fewer than minNodes nodes below them never collapse ("+2" is pointless).
+// Returns states by id: 0 drawn, 1 hidden, 2 aggregate. Sets `onPath` and `collapsed` on the nodes.
+export function semanticStates(nodes, root, focus, distanceOf, p) {
+  markPath(nodes, focus);
+  const out = new Uint8Array(nodes.length);
+  const walk = (n, hidden) => {
+    const rule = aggregateRule(n);
+    let state;
+    if (hidden) state = 1;
+    else if (rule) { n.collapsed = rule.orb; state = rule.orb ? 2 : 0; }
+    else if (n.type === 'folder' && n.weight - 1 >= p.minNodes && !n.onPath) {
+      const limit = n.collapsed ? p.collapseDist - p.hyst : p.collapseDist + p.hyst;
+      n.collapsed = distanceOf(n) > limit;
+      state = n.collapsed ? 2 : 0;
+    } else { n.collapsed = false; state = 0; }
+    out[n.id] = state;
+    const childrenHidden = hidden || n.collapsed;
+    for (const c of n.children) walk(c, childrenHidden || !childAllowed(rule, c));
+  };
+  walk(root, false);
+  return out;
+}

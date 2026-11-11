@@ -31,7 +31,7 @@ function h(tag, cls, text) {
 export function createDiseasePanel({ data, nodeById, onNavigate, onLayout = () => {}, launcher = false }) {
   const css = document.createElement('style');
   css.textContent = `
-    #dpanel { position: fixed; z-index: 5; top: 0; right: 0; bottom: 0; width: min(${THEME.PANEL_WIDTH_PX}px, 100vw); box-sizing: border-box; display: none; flex-direction: column;
+    #dpanel { position: fixed; z-index: 5; top: 0; right: 0; bottom: 0; width: min(${THEME.PANEL_WIDTH_PX}px, 100vw, max(280px, 46vw)); box-sizing: border-box; display: none; flex-direction: column;
       background: ${cssRgb(THEME.PANEL_BG)}; color: ${cssRgb(THEME.PANEL_TEXT)}; border-left: 1px solid ${cssRgb(THEME.PANEL_BORDER)};
       font: 14px/1.45 system-ui, -apple-system, 'Segoe UI', sans-serif; padding-right: var(--sai-r, 0px); }
     #dpanel.open { display: flex; }
@@ -131,9 +131,9 @@ export function createDiseasePanel({ data, nodeById, onNavigate, onLayout = () =
     root.classList.toggle('folded', folded && narrow());
     opener.classList.toggle('show', launcher && !open);
     const isNarrow = narrow();
-    const width = open && !isNarrow ? root.getBoundingClientRect().width || Math.min(THEME.PANEL_WIDTH_PX, window.innerWidth) : 0;
+    const width = open && !isNarrow ? Math.round(root.getBoundingClientRect().width) || Math.min(THEME.PANEL_WIDTH_PX, window.innerWidth) : 0;
     const sheet = open && isNarrow ? (folded ? THEME.PANEL_PEEK_PX : (THEME.PANEL_SHEET_HEIGHT_VH / 100) * window.innerHeight) : 0;
-    document.documentElement.style.setProperty('--panel-w', `${open && !isNarrow ? Math.round(Math.min(THEME.PANEL_WIDTH_PX, window.innerWidth)) : 0}px`);
+    document.documentElement.style.setProperty('--panel-w', `${width}px`);
     document.documentElement.style.setProperty('--sheet-h', `${Math.round(sheet)}px`);
     onLayout(Math.round(width), Math.round(sheet));
     // On a phone the 5 MB ontology file is not fetched while the sheet is folded (only the name is shown): load it when the panel is really shown.

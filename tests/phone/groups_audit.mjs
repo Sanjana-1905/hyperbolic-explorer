@@ -94,9 +94,9 @@ async function modeAudit(label, { mode3d, phone }) {
       rec(`${label}: clicking the member "${mem.name}" focuses it (its group stays open)`, f.focus === mem.id && f.groupOpen === 0 && f.centred < 1e-6);
       // Up twice: member -> group -> syndrome, and the group closes again
       const upBtn = mode3d || true ? await ev(`[...document.querySelectorAll('#tools button')].findIndex((x) => x.title.startsWith('Go to the parent'))`) : -1;
-      for (let k = 0; k < 2; k++) { if (mode3d) await ev(`document.querySelectorAll('#tools button')[${upBtn}].click()`); else await b.key('Backspace'); await settle(); }
+      { if (mode3d) await ev(`document.querySelectorAll('#tools button')[${upBtn}].click()`); else await b.key('Backspace'); await settle(); }   // ONE Up: member -> its real parent (the group is skipped)
       const up = JSON.parse(await ev(`JSON.stringify({ focus: __G.focusId(), groupState: __G.st(__explorer.nodes[${orb.id}]), open: __G.openGroups().length })`));
-      rec(`${label}: going up twice returns to "syndrome" and the group closes again`, up.focus === syn.id && up.groupState === 2 && up.open === 0, `group state ${up.groupState}`);
+      rec(`${label}: one Up from the member goes straight to "syndrome" (the real parent, not the group) and the group closes`, up.focus === syn.id && up.groupState === 2 && up.open === 0, `group state ${up.groupState}`);
     }
   }
 

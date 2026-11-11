@@ -42,7 +42,7 @@ try {
   const gpu = await ev('__explorer.gpuCheck(2048, 0.994)');
   rec('3D: GPU positions match the CPU maths out to radius 0.994', gpu.ok !== false && gpu.maxPosErr < 1e-4, JSON.stringify(gpu).slice(0, 150));
 
-  const deep = JSON.parse(await ev(`(() => { const E = __explorer; const d = E.nodes.filter((n) => n.depth === 12)[0]; const chain = []; for (let n = d; n; n = n.parent) chain.push(n.id);
+  const deep = JSON.parse(await ev(`(() => { const E = __explorer; const d = E.nodes.filter((n) => n.depth === 12)[0]; const chain = []; for (let n = d; n; n = n.parent) if (!n.isGroup) chain.push(n.id);   // Up goes to the REAL parent: groups are not on the way
     const mid = E.nodes.filter((n) => n.depth === 9)[3]; const shallow = E.nodes.filter((n) => n.depth === 2).sort((a, b) => b.weight - a.weight)[0];
     return JSON.stringify({ deep: d.id, chain, mid: mid.id, shallow: shallow.id }); })()`));
   const settle = async () => { for (let i = 0; i < 40; i++) { await sleep(100); if (!(await ev('__explorer.animating'))) break; } await sleep(300); };
@@ -84,13 +84,13 @@ try {
   rec('3D: mouse click on the depth-12 node flies to it and centres it exactly', await ev('__explorer.focusId()') === deep.deep && await ev(`__explorer.shownR(${deep.deep})`) < 1e-6, `focus ${await ev('__explorer.focusId()')} expected ${deep.deep}`);
   const upIdx = await ev(`[...document.querySelectorAll('#tools button')].findIndex((x) => x.title.startsWith('Go to the parent'))`);
   const trail = [];
-  for (let k = 0; k < 12; k++) { await ev(`document.querySelectorAll('#tools button')[${upIdx}].click()`); await settle(); trail.push(await ev('__explorer.focusId()')); }
-  rec('3D: the Up button walks the 12 ancestors in order to the root', JSON.stringify(trail) === JSON.stringify(deep.chain.slice(1)), `reached ${trail[trail.length - 1]}`);
+  for (let k = 0; k < deep.chain.length - 1; k++) { await ev(`document.querySelectorAll('#tools button')[${upIdx}].click()`); await settle(); trail.push(await ev('__explorer.focusId()')); }
+  rec('3D: the Up button walks the real ancestors (never a navigation group) in order to the root', JSON.stringify(trail) === JSON.stringify(deep.chain.slice(1)), `reached ${trail[trail.length - 1]}`);
   rec('3D: no console errors', !b.logs.some((l) => /error|exception/i.test(l)), b.logs.filter((l) => /error|exception/i.test(l)).slice(0, 2).join(' | '));
 
   // =============================== 2D ===============================================================
   b.logs.length = 0;
-  await b.goto(`${BASE}?mode=2d&tree=disease_tree.json&panel=0`, 5000);
+  await b.goto(`${BASE}?mode=2d&tree=disease_tree.json&panel=0&intro=0`, 5000);
   const lay2 = await ev(`(() => { const E = __explorer;
     const d = (a, c) => { const n = (a.x - c.x) ** 2 + (a.y - c.y) ** 2; return Math.acosh(1 + 2 * n / ((1 - (a.x ** 2 + a.y ** 2)) * (1 - (c.x ** 2 + c.y ** 2)))); };
     let maxR = 0, bad = 0, maxD = 0;

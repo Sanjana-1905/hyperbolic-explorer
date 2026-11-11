@@ -32,6 +32,9 @@ export function createToolbar(actions) {
       border-color: ${cssRgb(THEME.CRUMB_COLOR)}; }
     #tools button:disabled { opacity: 0.35; cursor: default; }
     #tools button { flex: none; }
+    /* Wider than the room that is left (a panel is open, or a narrow window): the ONE row scrolls sideways instead of clipping buttons. */
+    #tools { overflow-x: auto; scrollbar-width: none; overscroll-behavior-x: contain; }
+    #tools::-webkit-scrollbar { display: none; }
     /* Not enough room for words (a panel is open, or a narrow window): icons only, so the toolbar stays ONE row. Set by fit(). */
     #tools.icons { gap: 4px; }
     #tools.icons button { padding: 0 10px; justify-content: center; }
@@ -93,6 +96,11 @@ export function createToolbar(actions) {
   if (new URLSearchParams(location.search).get('search') !== '0') make(`${magnifier}${lbl('Search')}`, 'Search files, folders and functions (/)', actions.onSearch);
   const home = make(`⌂${lbl(' Home')}`, 'Go to the top of the tree', actions.onHome);
   const up = make(`↑${lbl(' Up')}`, 'Go to the parent folder (Shift+Backspace)', actions.onUp);
+  // Zoom buttons only where the viewer has no other way to zoom out of the box (the 2D disk: buttons, wheel and pinch all work). The 3D ball zooms with
+  // the wheel / pinch through its orbit controls and does not pass these actions.
+  let zoomIn = null, zoomOut = null;
+  if (actions.onZoomOut) zoomOut = make('−', 'Zoom out (also: scroll down, pinch in)', actions.onZoomOut);
+  if (actions.onZoomIn) zoomIn = make('+', 'Zoom in (also: scroll up, pinch out)', actions.onZoomIn);
   const back = make('‹', 'Return to where you were before following a link (Backspace)', actions.onBack);
   const imports = make(`${dot(THEME.LINK_IMPORT_COLOR)}${lbl('Imports')}`, 'Show or hide import arcs (I)', actions.onImports);
   const calls = make(`${dot(THEME.LINK_CALL_COLOR)}${lbl('Calls')}`, 'Show or hide call arcs (K)', actions.onCalls);
@@ -147,14 +155,16 @@ export function createToolbar(actions) {
   if (mode === '1' || (mode !== '0' && !studying && !remembered())) showIntro();
 
   return {
-    // state: { backDepth, isRoot, focusKind: 'folder'|'file'|'symbol', showImports, showCalls, showFolderDeps }
+    // state: { backDepth, isRoot, focusKind: 'folder'|'file'|'symbol', showImports, showCalls, showFolderDeps, hasInfo, zoomInDisabled, zoomOutDisabled }
     update(s) {
       setOn(infoBtn, s.infoOpen);
+      infoBtn.style.display = s.hasInfo === false ? 'none' : '';     // a viewer with nothing to show in an info panel hides the button
+      if (zoomIn) { zoomIn.disabled = !!s.zoomInDisabled; zoomOut.disabled = !!s.zoomOutDisabled; }
       const names = ['Heat', 'Heat: commits', 'Heat: recency'];
       heatBtn.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c1 4 5 6 5 11a5 5 0 0 1-10 0c0-2 1-3 2-4 0 2 1 3 2 3 0-4-1-6 1-10z"/></svg>${lbl(' ' + names[s.heatMode])}`;
       setOn(heatBtn, s.heatMode > 0);
       up.disabled = s.isRoot;
-      home.disabled = s.isRoot;
+      home.disabled = s.homeDisabled ?? s.isRoot;       // (2D: Home also resets the zoom and re-centres the view, so it is enabled whenever either differs)
       back.classList.toggle('hidden', s.backDepth === 0);
       back.innerHTML = `‹${lbl(` Back (${s.backDepth})`)}`;
       const folder = s.focusKind === 'folder';
