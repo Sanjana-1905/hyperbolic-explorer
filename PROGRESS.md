@@ -10,7 +10,7 @@ Disease Ontology in the Poincaré ball. Principles are in CLAUDE.md. One phase a
 |---|---|---|
 | 0 | Freeze and prepare existing engine | done (commit 1e52269) |
 | 1 | Disease Ontology data ingestion (full DAG, provenance, primary hierarchy) + radius-clamp fix + default dataset | done (data, taper fix, default launch) |
-| 2 | **Atlas redesign: from "glowing graph" to a disease atlas** (steps 2.1-2.8 below) | **planning approved; step 2.3a prototypes reported, waiting for the layout decision; nothing built yet** |
+| 2 | **Atlas redesign: from "glowing graph" to a disease atlas** (steps 2.1-2.8 below) | **planning approved; step 2.3a: two rounds of prototypes reported (B, then B + aggregated groups), waiting for the layout decision; nothing built yet** |
 | 3 | Interactive exploration lenses | folded into Phase 2 (steps 2.4-2.7) |
 | 4 | Comparative navigation study (tree vs 2D vs 3D), run and report | instruments built in step 2.8; the study itself later |
 
@@ -88,6 +88,71 @@ Sample (5,000) and WordNet (3,000), same metrics: **B passes every target on bot
 2. Or **change the targets**: e.g. require 0.04 only for parents above a depth or above a child count, and require 0.02 elsewhere.
 3. Or **explore a hybrid / different rule** (e.g. A+B jointly choosing the base length and ring count per parent, or letting deep leaf-only subtrees relax the wedge). Relaxing the wedge compromises the no-overlap target, so I will not do that without your decision.
 If B is adopted, the 2D layout fixed-edge-length rule in CLAUDE.md will be amended with the exact formula (it currently says the assumption is under review).
+
+## Step 2.3a, round 2 — hybrid: B's wedge territories + aggregated groups / progressive disclosure  (RESULTS REPORTED, WAITING FOR THE USER'S DECISION; production code NOT changed)
+
+Scripts (pure Node; `src/` untouched): `tools/proto/hybrid.mjs` (display-tree builder, strategies, states, stability, reachability, screen space; `--sweep`, `--export`, `--export-parents`), `tools/proto/layout2d_proto.mjs` (B itself, now factored into plan / spawn so a parent can TRY a candidate list; the earlier numbers are reproduced exactly), `tools/proto/render_hybrid.mjs`.
+Images / coordinates: `screenshots/hybrid-prototypes.png` (rows: the 486- and the 1,048-child parent; columns: all children visible, groups closed, one group open with the focus on it, every group open), `screenshots/hybrid-two-parents.json` (disk coordinates of both parents and everything below them, for B-all and for the hybrid).
+
+### What was tested
+- **Groups are display-only.** A group is an index into real names: children WITH subtypes stay individual (or are cut into alphabetical runs of <= G if there are more than G), childless children ("diseases") are cut into alphabetical runs of <= G, a list longer than G is cut again. Label = first and last name of the run + member count. The real tree, `disease_edges.json` and all 12,419 terms are never modified. Checked on every layout: all 12,419 diseases reached, 0 duplicates, the nearest real ancestor of every disease in the display tree is its real primary parent (0 wrong).
+- **S1** B, all children visible. **S2** B + static groups for every parent with more than K children (K = 36 and 24). **S3** = S2/S4 geometry seen through disclosure states (groups closed until opened): positions never depend on what is open. **S4a** hybrid adaptive: a parent tries "no groups" first and groups only as much as needed (largest group size G in {60..8} for which EVERY level it creates reaches the target spacing within the radius budget). **S4b** = S4a + angular shares that also follow the room a subtree needs (its widest level). **S5** = S4a + no parent may show more than `cap` siblings at once (cap 36 / 24), however well spaced.
+- All use B's wedge territories and the rigorous 0.994 radius budget; the extra group level spends budget, so the layout is run again with the true display depth (it converges in 1-2 passes).
+
+### Geometry (every node incl. groups; worst case: everything visible at once) — Disease Ontology
+| | S1 B all | S2 K=36 | S2 K=24 | S4a adaptive | S4b +demand | **S5 cap 36** | S5 cap 24 |
+|---|---|---|---|---|---|---|---|
+| max radius / clamped edges / subtree overlap | 0.9939 / 0 / 0 | same | same | same | same | **0.9939 / 0 / 0** | same |
+| aggregated groups (parents grouped) | 0 | 129 (33) | 223 (55) | 148 (16) | 149 (17) | **220 (40)** | 268 (56) |
+| parents with siblings < 0.04 / < 0.02 | 28 / 26 | **78 / 76** | **76 / 76** | 9 / 9 | 9 / 9 | **9 / 9** | 8 / 8 |
+| real children in those parents | 2,562 | | | | | **50** | |
+| parents where no grouping could reach the target ("unresolved") | n/a | | | 4 (118 children) | 4 (144) | **3 (28)** | 4 (51) |
+| longest edge | 2.81 | 2.14 | 1.64 | 2.49 | 2.45 | 2.14 | 1.64 |
+- **Grouping everything (S2) is worse than B alone** (78 vs 28 parents below 0.04): it adds a level (radius budget) even where B already fit. The adaptive rule is what helps (28 -> 9).
+- **Demand-aware shares (S4b) did not help** (same 9 parents, minimum 0.0001): not worth the complexity.
+- The 9 remaining parents (S5) are all at depth 5-10, small (2-76 children, 50 children in all, 0.4 % of the diseases), and their ancestors have already spent 4-5.6 of the 5.8 budget: the angular room there is simply too thin ("angle starvation": room ~ weight share x e^path-length). Grouping cannot create room the budget does not have. Global minimum and closest pair stay 0.0002.
+- Sensitivity of S5 cap 36 (`node tools/proto/hybrid.mjs --sweep`): `capF` = share of its schedule the deeper levels must keep, `mix` = weight share of the angle.
+  | capF | mix | parents < 0.04 | unresolved (children) | groups | nodes with deeper levels shrunk below 50 % | min edge length |
+  |---|---|---|---|---|---|---|
+  | 0.35 | 0.5 (default) | 9 | 3 (28) | 220 | 3.3 % | 0.106 |
+  | 0.35 | 0.7 | 5 | 2 (20) | 211 | 1.7 % | 0.106 |
+  | **0.2** | **0.7** | **3 (17 children, closest pair 0.0039)** | 1 (10) | 166 | 5.5 % | 0.061 |
+  | 0.1 | 0.7 | 1 | 1 (10) | 133 | 8.4 % | 0.061 |
+  max radius stays 0.9937-0.9939, overlap 0 and clamped 0 in all rows (checked for 0.35/0.5 and 0.2/0.7). No edge is shorter than 0.06.
+- **Sample and WordNet** (same S5 code, both parameter sets): 0 parents below 0.04, 0 overlaps, closest pair 0.0135-0.0204, max radius 0.990 / 0.988; sample gets 0 groups, WordNet 4. Unaffected for practical purposes.
+
+### Disclosure states and the screen (Disease Ontology; nodes visible at once)
+| state | S1 B all visible | S2 K=24 | **S5 cap 36** |
+|---|---|---|---|
+| overview (root + families + their children) | 630 visible, 44 % of nodes >= 6 px apart (min 2.0 px) | 77 visible, 100 % (min 8.5 px) | **68 visible (17 groups), 100 % (min 9.1 px)** |
+| "syndrome" (486) opened | 630, 57 % >= 6 px (min 3.3 px) | 77 | **68, children shown as 17 groups: 100 % (12.9 px)** |
+| ... + largest group opened and focused | same 486 on screen | 101 visible; region min 6.3 px, 100 % | **102; region min 5.8 px, 91 %** |
+| "autosomal recessive disease" (1,048) opened | **1,779 visible**, 15 % >= 6 px, siblings only 0.0119 apart | 119 | **111 (24 groups): 100 % (16.1 px)** |
+| ... + largest group opened and focused | same 1,048 on screen | 140; min 9.6 px, 100 % | **127; min 9.5 px, 100 %** |
+| everything opened | | 1,210 visible, 6 % >= 6 px | 1,217 visible, **7 %** |
+(screen = desktop disk of radius 500 px, zoom 1, focused region = visible descendants of the focus; at zoom 2 every state above reaches 100 % >= 6 px except the 1,048 parent's "everything open"; phone disk of radius 190 px: 11-12 px min at zoom 2 for the group views, 1-6 px at zoom 1.)
+- **Minimum sibling separation among simultaneously visible sibling sets:** S5 cap 36 = 0.0450-0.0510 in every state (0.0450 target 0.045); S1 = 0.0450 (486) and 0.0119 (1,048).
+- **Cross-group caveat:** with everything open, members of neighbouring groups can be closer than siblings: closest visible pair 0.0327 (486) and 0.0198 (1,048), against sibling distance 0.045. Opening all groups at once must be avoided by the level-of-detail rule (it would show 500-1,200 nodes at 1-3 px).
+- **Reachability** (every real disease; visible nodes when only its ancestors are open): S1 mean 295, p99 1,207, max 1,265; **S5 cap 36 mean 66, p99 99, max 110** (S4a without cap: max 537). Deepest disease needs 11 expansions in all variants. Search can jump to any disease and open exactly its ancestors.
+- **Layout stability:** expanding and collapsing never moves anything: in 6 random expand/collapse states per strategy the largest displacement of any visible node is **0** (the layout of a node depends only on its ancestors and siblings). It holds only if the schedule uses the GLOBAL depth; a layout that re-derived the depth from what is visible would move nodes by up to 0.5-1.3 hyperbolic units (median 0). Unrelated branches do not jump.
+
+### Still hyperbolic, not a radial chart?
+Yes. The same sibling pair looks (focus on its parent / focus on the root): x1.3-1.5 at 0.6 from the root, x7-8 at 2.4-2.5, x31-42 at 4.2-4.7, x65 at 5.4; a radial chart gives 1.0 everywhere. 76 % of all nodes lie beyond radius 0.9 when the root is focused (the rim compression of the Poincaré disk), distances are exactly the hyperbolic metric, edges are geodesics, positions come from the same Möbius machinery. What changes is only that a wide parent's children are reached through an intermediate level, like a sub-menu.
+
+### Visual evaluation (`screenshots/hybrid-prototypes.png`)
+All 486 or 1,048 children at once is a solid wedge. With groups closed the same parent is 17-26 or 24 rings with member counts; opening a group and refocusing on it spreads its members as a staggered radial line (readable, but a narrow "list-like" band, not an even fan: the price of keeping subtree territories disjoint).
+
+### Remaining limitations
+1. 3 parents (17 children, S5 with capF 0.2 / mix 0.7; 9 parents / 50 children with the defaults) stay below 0.04 hyperbolic separation (down to 0.0039). They would have to be shown as one list-only aggregate (members reachable by search, panel list and by focusing a member, which stays positioned); this must be reported in the UI, it is not a pass.
+2. The groups are alphabetical runs of real names: they are navigable and honest but not semantic. No semantic grouping is available without outside knowledge, which the project rules forbid inventing.
+3. For grouped parents the angular order is alphabetical (internal subcategories first), not DOID order, so those parents look different from ungrouped ones.
+4. Zoom 1 on a phone (disk radius 190 px) still crowds even the group lists (20-63 % of nodes >= 6 px); zoom 2 or a cap of 16-24 is needed there.
+5. The screen model is a simple scale of the disk (px = Euclidean distance x radius x zoom), not the real camera; labels, node sizes and picking were not simulated.
+6. The aggregation is a layout/representation idea only: the level-of-detail rule, the group UI and the list-only fallback are step 2.4 work.
+
+### Recommendation (for the user to decide)
+**S5: B's wedge territories + adaptive aggregated groups + a cap of 36 simultaneous siblings (24 on phones), progressive disclosure through a pure LOD module, parameters capF 0.2 and mix 0.7.** Evidence: zero clamped edges, max radius 0.9937, zero subtree overlap, the 486 and 1,048 parents resolved (0.045 minimum sibling), overview 68 nodes instead of 630, worst-case disclosure 110 visible nodes instead of 1,265, stable under expansion, still strongly hyperbolic, and only 3 parents / 17 children (0.1 %) unresolved. Not recommended: S2 (worse than B), S4b (no gain), the default parameters (9 parents unresolved for no benefit).
+Decision needed: (1) adopt S5 with capF 0.2 / mix 0.7? (2) alphabetical groups acceptable? (3) cap 36 desktop / 24 phone? (4) how to present the 3 list-only parents (a "+N" aggregate with a member list)? If adopted, the 2D layout rule in CLAUDE.md will be amended with the exact formula, then implemented in `layout.js` with tests (step 2.3a implementation); nothing in production has changed yet.
 
 ## Phase 0 — Freeze and prepare existing engine  (done)
 

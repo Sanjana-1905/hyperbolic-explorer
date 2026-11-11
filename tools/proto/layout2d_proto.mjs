@@ -64,21 +64,30 @@ function scheduleFor(maxDepth, base, budget) {
 }
 
 // ---- the prototype layout ------------------------------------------------------------------------------------------------
+// Works on ANY tree of objects { children, depth, weight | w }. Options (all optional):
+//   mix, packing, sMin, capF  as described above      M       depth to use for the radius schedule (default: the tree's own depth)
+//   limit                     other radius limit (information only)
+//   shareOf(kids)             custom angular shares (sum 1) instead of the equal/weight mix
+//   refine(node, api)         called BEFORE a node's children are placed; may return a different children list (used by the
+//                             hybrid to insert aggregated groups). api = { plan, spawn, P } lets it TRY a candidate list.
 export function layoutProto(root, variant, o = {}) {
   const P = { mix: 0.5, packing: 0.9, sMin: 0.045, capF: 0.35, ...o };
-  const M = treeDepth(root);
-  // P.limit (information only): a different radius limit, to see how much of any failure is the radius budget itself.
+  const wt = (c) => c.w ?? c.weight;
+  const M = P.M ?? treeDepth(root);
   const BUDGET = 2 * Math.atanh(P.limit ?? EDGE_RADIUS_LIMIT);
   const sched = P.limit ? scheduleFor(M, BASE, BUDGET) : edgeLengthSchedule(M, BASE);
+  root.depth = 0;
   root.z = { x: 0, y: 0 }; root.L = 0; root.P = 0; root.S = 0; root.f = 1; root.R = 1;
   place(root, 0, TWO_PI);
+  return { M, BUDGET };
 
-  function place(node, centerAngle, fan) {
-    const kids = node.children, n = kids.length;
-    if (!n) return;
+  // Decide, for a list of children, their angles, lengths and ring count (no side effects on the children).
+  function plan(node, kids, centerAngle, fan) {
+    const n = kids.length;
     const d = node.depth + 1;
-    const total = kids.reduce((s, c) => s + c.weight, 0);
-    const slice = kids.map((c) => fan * ((1 - P.mix) / n + (P.mix * c.weight) / total));
+    const total = kids.reduce((s, c) => s + wt(c), 0);
+    const shares = P.shareOf ? P.shareOf(kids) : kids.map((c) => (1 - P.mix) / n + (P.mix * wt(c)) / total);
+    const slice = shares.map((sh) => fan * sh);
     const ang = []; let cursor = centerAngle - fan / 2;
     for (let i = 0; i < n; i++) { ang.push(cursor + slice[i] / 2); cursor += slice[i]; }
     const L0 = node.f * sched[d];                                     // this level's length after any shrink from wider ancestors
@@ -115,21 +124,33 @@ export function layoutProto(root, variant, o = {}) {
       for (let r = 1; r <= Rmax; r++) if (okR(r)) { R = r; break; }
       L = lens(R);
     }
-    node.R = R;
+    return { kids, slice, ang, L, R, d };
+  }
 
-    for (let i = 0; i < n; i++) {
-      const c = kids[i];
-      c.L = L[i];
-      c.z = addC(node.z, { x: toR(c.L) * Math.cos(ang[i]), y: toR(c.L) * Math.sin(ang[i]) });
-      c.P = node.P + c.L; c.S = node.S + sched[d];
-      c.f = BUDGET - c.S > 1e-9 ? (BUDGET - c.P) / (BUDGET - c.S) : 1;
-      const parentSeen = addC(neg(c.z), node.z);                      // where the parent is, seen from the child
-      const away = Math.atan2(parentSeen.y, parentSeen.x) + Math.PI;
-      const theta = (slice[i] * P.packing) / 2;                       // territory half-angle seen from the parent
-      const beta = 2 * Math.atan(Math.exp(c.L) * Math.tan(theta / 2));
-      c.alpha = ang[i]; c.theta = theta;
-      place(c, away, Math.min(MAX_FAN, 2 * beta));
-    }
+  // Put child i of `node` in place (sets z, lengths, budget state) and say where ITS children fan out.
+  function spawn(node, pl, i) {
+    const c = pl.kids[i], d = pl.d;
+    c.depth = d;
+    c.parent = node;
+    c.L = pl.L[i];
+    c.z = addC(node.z, { x: toR(c.L) * Math.cos(pl.ang[i]), y: toR(c.L) * Math.sin(pl.ang[i]) });
+    c.P = node.P + c.L; c.S = node.S + sched[d];
+    c.f = BUDGET - c.S > 1e-9 ? (BUDGET - c.P) / (BUDGET - c.S) : 1;
+    const parentSeen = addC(neg(c.z), node.z);                        // where the parent is, seen from the child
+    const away = Math.atan2(parentSeen.y, parentSeen.x) + Math.PI;
+    const theta = (pl.slice[i] * P.packing) / 2;                      // territory half-angle seen from the parent
+    const beta = 2 * Math.atan(Math.exp(c.L) * Math.tan(theta / 2));
+    c.alpha = pl.ang[i]; c.theta = theta;
+    return { away, fan: Math.min(MAX_FAN, 2 * beta) };
+  }
+
+  function place(node, centerAngle, fan) {
+    if (P.refine && node.children.length) node.children = P.refine(node, { plan, spawn, P, centerAngle, fan });
+    const kids = node.children;
+    if (!kids.length) return;
+    const pl = plan(node, kids, centerAngle, fan);
+    node.R = pl.R;
+    for (let i = 0; i < kids.length; i++) { const sp = spawn(node, pl, i); place(kids[i], sp.away, sp.fan); }
   }
 }
 
@@ -179,7 +200,7 @@ export function measure(root, nodes, name) {
     const iv = k.map((c) => {
       const a0 = Math.atan2(addC(neg(p.z), c.z).y, addC(neg(p.z), c.z).x);
       let lo = 0, hi = 0;
-      for (let id = c.id; id < c.id + c.weight; id++) {
+      for (let id = c.id; id < c.id + (c.span ?? c.weight); id++) {
         const w = addC(neg(p.z), nodes[id].z);
         const dlt = wrap(Math.atan2(w.y, w.x) - a0);
         if (dlt < lo) lo = dlt; if (dlt > hi) hi = dlt;
