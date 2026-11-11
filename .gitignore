@@ -4,3 +4,4 @@ public/data/zz_scroll/
 .DS_Store
 __pycache__/
 *.pyc
+tools/cache/

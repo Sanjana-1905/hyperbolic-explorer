@@ -8,8 +8,8 @@ Disease Ontology in the Poincaré ball. Principles are in CLAUDE.md. One phase a
 **Core deliverables**
 | Phase | Title | Status |
 |---|---|---|
-| 0 | Freeze and prepare existing engine | **in progress** (acceptance checks below) |
-| 1 | Disease Ontology data ingestion (full DAG, provenance, primary hierarchy for layout) | not started |
+| 0 | Freeze and prepare existing engine | done (commit 1e52269) |
+| 1 | Disease Ontology data ingestion (full DAG, provenance, primary hierarchy for layout) | **data done; one layout issue open (radius clamp, awaiting your decision)** |
 | 2 | Meaningful disease visualization (every encoding carries information) | not started |
 | 3 | Interactive exploration lenses | not started |
 | 4 | Comparative navigation study (collapsible tree vs 2D vs 3D hyperbolic) | not started |
@@ -22,7 +22,7 @@ Disease Ontology in the Poincaré ball. Principles are in CLAUDE.md. One phase a
 | 7 | Biological pathway animation | optional, not started |
 | 8 | AR / VR (tabletop AR, Cardboard VR, Lorentz camera) | optional, not started |
 
-## Phase 0 — Freeze and prepare existing engine  (in progress)
+## Phase 0 — Freeze and prepare existing engine  (done)
 
 ### Inspection (read before changing anything)
 | Engine area | Where |
@@ -56,6 +56,95 @@ by whether git data happened to exist; the H/I/K/D keys worked regardless.
   Imports/Calls/Dependencies/Heat buttons, help line has no code keys, pressing H/I/K/D does nothing, no console errors. Sample (5,000 nodes)
   loads, all four caps true, Dependencies + Heat buttons shown, H works.
 - Not done: the probe is not part of the repo test suite (WordNet is covered in the browser only by that probe); no real-phone check. `npm run build` succeeds.
+
+## Phase 1 — Disease Ontology data ingestion  (data done; depth/clamp issue awaiting decision)
+
+### Source and provenance
+- Human Disease Ontology (DOID), OBO Foundry, release **2026-10-29** (GitHub tag `v2026-10-29`, file date 29:10:2026 18:39).
+  URL: `https://raw.githubusercontent.com/DiseaseOntology/HumanDiseaseOntology/v2026-10-29/src/ontology/doid.obo`
+  (the OBO Foundry PURL `http://purl.obolibrary.org/obo/doid.obo` redirects to the newest file of this repository; the versioned tag is used so the result is reproducible).
+- Downloaded 2026-11-11, 7,313,592 bytes, sha256 `b208a1bc910ba681...` (full hash in `disease_metadata.json`). Licence: **CC0 1.0 Universal**; text saved as `public/data/disease_LICENSE.txt`.
+- The raw OBO is cached in `tools/cache/` (git-ignored, not committed). Re-run: `python3 tools/make_disease_tree.py` (`--tag latest` for the newest release).
+
+### Generated files (`public/data/`)
+| File | Size | Content |
+|---|---|---|
+| `disease_tree.json` | 1.2 MB | primary hierarchy (name, type, size, doid, children), `"capabilities": []`, intro words "Disease group / Disease" |
+| `disease_edges.json` | 0.5 MB | ALL 17,635 `is_a` edges of the active ontology as `[child, parent]` DOID pairs |
+| `disease_terms.json` | 5.3 MB | per disease: name, definition (+ its source refs), synonyms with scope, cross-references, alt ids. Not read by the viewer yet |
+| `disease_metadata.json` | 8 KB | source, version, licence, download date, counts, parsing statistics, validation, obsolete -> replacement map, the primary-parent rule |
+| `disease_LICENSE.txt` | 7 KB | CC0 1.0 legal code + provenance header |
+
+**Primary-parent rule** (deterministic, documented in the script and the metadata): shortest `is_a` distance of each parent to the root DOID:4 (breadth-first search);
+the parent with the smallest distance wins; ties go to the smaller numeric DOID. So a disease's tree depth equals its shortest distance to the root. Every other parent link stays in `disease_edges.json`.
+`size` of a node = distinct diseases below it in the FULL graph + itself. Nothing is invented: a missing definition/synonym/xref stays missing.
+
+### Ontology statistics (actual)
+| | |
+|---|---|
+| `[Term]` stanzas in the file | 14,939 |
+| obsolete terms removed | 2,520 |
+| **active terms (all kept, none dropped)** | **12,419** |
+| obsolete terms that name a `replaced_by` | 35 (all 35 point at an active term: "replacements resolved") |
+| `is_a` edges that pointed at an obsolete term | **0** (so no edge needed redirecting, and none was lost) |
+| `is_a` edges preserved | 17,635 (0 duplicates merged) |
+| diseases with 1 / 2 / 3 / 4+ parents | 7,538 / 4,595 / 247 / 38; **4,880 multi-parent diseases** (up to 7 parents) |
+| maximum depth, primary tree (shortest path) / longest path in the DAG | **12** / 13 |
+| nodes per depth 0..12 | 1, 8, 621, 1089, 2021, 4309, 2513, 1171, 493, 134, 55, 3, 1 |
+| top-level branches (children of `disease`) | 8: anatomical entity 9,295 · genetic disease 5,314 · cellular proliferation 2,857 · syndrome 1,083 · metabolism 903 · mental health 632 · physical disorder 629 · infectious agent 546 (descendant counts, overlapping because of multi-parent terms) |
+| missing definition / synonyms / cross-references | 2,270 / 3,822 / 687 |
+| terms with an ICD xref / MeSH xref / alt ids | 4,430 / 4,014 / 803 |
+
+### Validation (script + independent `tests/disease_data.test.js`, both pass)
+Duplicate ids 0 · missing parent references 0 · cycles 0 · disconnected terms 0 · terms without a parent besides the root 0 · wrong primary parents 0 ·
+tree contains every active term (12,419 = 12,419) · every tree edge is a real `is_a` edge · primary parents re-derived independently in JS · depths equal shortest distances.
+
+### Compatibility with the existing viewer (hyperbolic layout and rendering NOT modified)
+Measured in headless Chrome on the M-series laptop GPU (not the S26), `?tree=disease_tree.json`:
+| | desktop 1280x800 | phone emulation 412x915 |
+|---|---|---|
+| nodes loaded / max depth | 12,419 / 12 | 12,419 / 12 |
+| capabilities | all four **off** (declared `[]`), no Imports/Calls/Deps/Heat buttons, H/I/K/D do nothing | same |
+| visible at the root (nodes drawn) | **8,488** (target ~3,000) | 8,488 |
+| collapsed "+N" orbs at the root | 234 | 234 |
+| draw calls | 7-9 (limit 30) | 7-9 |
+| frame rate | 60 (vsync cap; 120-frame average 60.1-60.3) at root, a branch, depth 9 and depth 12 | 60.2-60.3 |
+| JS heap | 36-57 MB | 36-57 MB |
+| console errors | none | none |
+Visible nodes elsewhere: top branch (anatomical entity) 7,972 / 302 orbs; deep node at depth 9: 85 / 28; at depth 12: 188 / 40. Memory is `performance.memory` (Chrome only, coarse).
+
+### ISSUE 1 (needs your decision): the 0.995 radius clamp IS triggered
+- With edge length 0.7 a depth-12 tree does not fit: radius along a straight line is tanh(12*0.7/2) = 0.9996 > 0.995. Layout result (`tests/disease_layout.test.js`):
+  max radius 0.9950; **93 nodes (0.75 %) sit exactly on the rim, their edges are shortened** (depth 9: 38, depth 10: 51, depth 11: 3, depth 12: 1). Max radius per depth: 0.34, 0.60, 0.78, 0.88, 0.94, 0.967, 0.984, 0.992, 0.995 (depth 9 onwards).
+  Those nodes are pinned at the rim, so some of them overlap/are hard to tell apart. No node is lost; positions stay finite.
+- The shallow-parent rule already minimises depth (the longest DAG path would be 13).
+- Evidence for the fix options (layout run with the existing `edgeLength` option, nothing in the source changed):
+  | edge length | max radius | clamped edges | min sibling distance |
+  |---|---|---|---|
+  | 0.70 (now) | 0.9950 | 93 | 0.0464 |
+  | 0.55 | 0.9950 | 1 | 0.0279 |
+  | 0.50 | 0.9940 | 0 | 0.0219 |
+  | 0.45 | 0.9895 | 0 | 0.0166 |
+- **Proposal** (not implemented): (A) simplest: for this dataset use edge length 0.5 (a per-dataset option read from the tree JSON, default 0.7 so the other datasets are untouched). It fixes the clamp but halves the room between siblings (0.046 -> 0.022), which the existing fit-to-neighbours sizing absorbs but crowds the rim.
+  (B) better: a depth-tapered edge length, e.g. L(d) = 0.7 for the first levels shrinking geometrically so the sum over 12 levels stays under atanh(0.995) = 2.99 (the shallow, crowded levels keep their room; only the thin deep tail gets shorter). This changes `layout3d.js` and the matching CPU/GPU picking assumptions, so it needs your OK.
+  (C) do nothing: 0.75 % of nodes stay on the rim. I recommend B, with A as the quick fallback.
+- The strict check is ready: `STRICT=1 node tests/disease_layout.test.js` fails until the clamp is gone. By default the test only enforces the hard 0.995 limit and prints the known issue.
+
+### ISSUE 2 (measurements, no change made): too many nodes drawn at the root
+8,488 nodes are drawn at the root, 2.8x the ~3,000 target, because the semantic-zoom collapse only folds 234 groups. Frame rate is still a locked 60 with 9 draw calls on a laptop GPU, but that says little about the S26.
+Labels stay capped at 25. Proposal for a later phase (not done, no term is deleted): collapse by hyperbolic distance and importance at the root (e.g. folding depth >= 5 groups beyond a distance threshold into "+N") so ~3,000 are drawn, expand progressively on approach. Needs a measurement on the phone first.
+
+### Other notes
+- The viewer's "Search files, folders and functions" tooltip, "Back", info-card labels etc. still use code wording (UI redesign is not part of this phase). Search only indexes names (no synonyms or DOIDs yet: Phase 2/3).
+- `size` in the tree is the DAG descendant count; the sizing code uses node counts of the primary tree, so multi-parent terms are not double counted in the layout.
+- The Disease Ontology shows in the viewer via `?tree=disease_tree.json` (the default dataset is still the sample, the switch is a later step).
+
+### Tests run (Phase 1)
+- `npm test`: all steps pass, incl. new `disease_data.test.js` (12,419 terms, 17,635 edges, 4,880 multi-parent, depth 12) and `disease_layout.test.js` (reports the clamp, see above), 46,670 scanner checks.
+- `npm run build`: succeeds, the five disease files are copied to `dist/data`.
+- `npm run test:phone` (real headless Chrome, sample dataset): **172 / 172**.
+- Headless Chrome probes (ad hoc, not saved as tests): WordNet 3,000 nodes loads, caps all off, no errors; sample 5,000 nodes loads, all four caps on; Disease Ontology as in the table above.
+- Not done: real phone, search/navigation on the disease tree beyond refocusing through `__explorer.focusOn`, no screenshots reviewed by eye.
 
 ---
 

@@ -1,0 +1,390 @@
+{
+ "dataset": "Disease Ontology (DOID)",
+ "ontology_title": "Human Disease Ontology",
+ "source": {
+  "url": "https://raw.githubusercontent.com/DiseaseOntology/HumanDiseaseOntology/v2026-10-29/src/ontology/doid.obo",
+  "obo_foundry_purl": "http://purl.obolibrary.org/obo/doid.obo",
+  "repository": "https://github.com/DiseaseOntology/HumanDiseaseOntology",
+  "release_tag": "v2026-10-29",
+  "ontology_version": "2026-10-29",
+  "data_version": "releases/2026-10-29/doid.obo",
+  "file_date": "29:10:2026 18:39",
+  "sha256": "b208a1bc910ba681f32c1c602e2a2d8c7ae6029d2f311fc9669f3fae30f09bc6",
+  "bytes": 7313592,
+  "obtained": "downloaded by tools/make_disease_tree.py"
+ },
+ "download_date": "2026-11-11",
+ "license": {
+  "name": "Creative Commons Zero v1.0 Universal (CC0 1.0)",
+  "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "text_file": "disease_LICENSE.txt",
+  "text_source": "https://raw.githubusercontent.com/DiseaseOntology/HumanDiseaseOntology/v2026-10-29/LICENSE"
+ },
+ "primary_parent_rule": "For a disease with several is_a parents the primary parent is the one with the smallest shortest-path distance to the root DOID:4; ties go to the smaller numeric DOID. All other is_a edges are kept in disease_edges.json.",
+ "root": "DOID:4",
+ "counts": {
+  "active_terms": 12419,
+  "obsolete_removed": 2520,
+  "is_a_edges": 17635,
+  "tree_nodes": 12419
+ },
+ "parsing_statistics": {
+  "total_term_stanzas": 14939,
+  "typedef_stanzas": 2,
+  "non_DOID_terms": 0,
+  "obsolete_terms_removed": 2520,
+  "obsolete_with_replaced_by": 35,
+  "replacements_resolved": 35,
+  "edges_redirected_to_replacement": 0,
+  "edges_dropped_obsolete_without_replacement": 0,
+  "edges_to_unknown_terms": 0,
+  "duplicate_is_a_lines_merged": 0,
+  "active_terms": 12419,
+  "active_terms_in_primary_tree": 12419,
+  "is_a_edges_in_source_for_active_terms": 17635,
+  "is_a_edges_preserved": 17635,
+  "multi_parent_diseases": 4880,
+  "parent_count_histogram": {
+   "1": 7538,
+   "2": 4595,
+   "3": 247,
+   "4": 29,
+   "5": 5,
+   "6": 3,
+   "7": 1
+  },
+  "max_hierarchy_depth_primary_tree": 12,
+  "max_hierarchy_depth_longest_path": 13,
+  "nodes_per_depth": {
+   "0": 1,
+   "1": 8,
+   "2": 621,
+   "3": 1089,
+   "4": 2021,
+   "5": 4309,
+   "6": 2513,
+   "7": 1171,
+   "8": 493,
+   "9": 134,
+   "10": 55,
+   "11": 3,
+   "12": 1
+  },
+  "top_level_branches": [
+   {
+    "id": "DOID:7",
+    "name": "disease of anatomical entity",
+    "descendants": 9295
+   },
+   {
+    "id": "DOID:150",
+    "name": "disease of mental health",
+    "descendants": 632
+   },
+   {
+    "id": "DOID:225",
+    "name": "syndrome",
+    "descendants": 1083
+   },
+   {
+    "id": "DOID:630",
+    "name": "genetic disease",
+    "descendants": 5314
+   },
+   {
+    "id": "DOID:14566",
+    "name": "disease of cellular proliferation",
+    "descendants": 2857
+   },
+   {
+    "id": "DOID:0014667",
+    "name": "disease of metabolism",
+    "descendants": 903
+   },
+   {
+    "id": "DOID:0050117",
+    "name": "disease by infectious agent",
+    "descendants": 546
+   },
+   {
+    "id": "DOID:0080015",
+    "name": "physical disorder",
+    "descendants": 629
+   }
+  ],
+  "primary_tree_leaves": 10262,
+  "missing_definition": 2270,
+  "missing_synonyms": 3822,
+  "missing_xrefs": 687,
+  "missing_name": 0,
+  "terms_with_alt_ids": 803,
+  "xref_counts_by_source": {
+   "UMLS_CUI": 7210,
+   "MIM": 6622,
+   "SNOMEDCT_US_2025_09_01": 5293,
+   "NCI": 5065,
+   "MESH": 4090,
+   "ICD10CM": 3691,
+   "ORDO": 2366,
+   "ICD9CM": 2237,
+   "GARD": 2216,
+   "ICDO": 496,
+   "EFO": 110,
+   "KEGG": 42,
+   "MEDDRA": 42,
+   "SNOMEDCT_US_2026_03_01": 34,
+   "SNOMEDCT_US_2021_09_01": 28,
+   "SNOMEDCT_US_2023_03_01": 6,
+   "ICD11": 5,
+   "SNOMEDCT_US_2021_07_31": 1,
+   "SNOMEDCT_US_2020_03_01": 1,
+   "SNOMEDCT_US_2022_07_31": 1
+  },
+  "terms_with_ICD_xref": 4430,
+  "terms_with_MeSH_xref": 4014,
+  "other_relation_lines_ignored": 0
+ },
+ "validation": {
+  "duplicate_ids": 0,
+  "missing_parent_references": 0,
+  "cycles": 0,
+  "disconnected_terms": 0,
+  "terms_without_parent_besides_root": 0,
+  "wrong_primary_parents": 0,
+  "tree_matches_active_terms": true,
+  "problems": []
+ },
+ "obsolete_replacements": {
+  "DOID:625": {
+   "replacedBy": [],
+   "consider": [
+    "DOID:2583",
+    "DOID:2914",
+    "DOID:624"
+   ]
+  },
+  "DOID:955": {
+   "replacedBy": [
+    "DOID:3192"
+   ],
+   "consider": []
+  },
+  "DOID:1231": {
+   "replacedBy": [
+    "DOID:5419"
+   ],
+   "consider": []
+  },
+  "DOID:2751": {
+   "replacedBy": [
+    "DOID:0050594"
+   ],
+   "consider": []
+  },
+  "DOID:2848": {
+   "replacedBy": [
+    "DOID:1595"
+   ],
+   "consider": []
+  },
+  "DOID:4086": {
+   "replacedBy": [
+    "DOID:5345"
+   ],
+   "consider": []
+  },
+  "DOID:5209": {
+   "replacedBy": [
+    "DOID:2640"
+   ],
+   "consider": []
+  },
+  "DOID:5709": {
+   "replacedBy": [
+    "DOID:5363"
+   ],
+   "consider": []
+  },
+  "DOID:7922": {
+   "replacedBy": [
+    "DOID:6175"
+   ],
+   "consider": []
+  },
+  "DOID:11367": {
+   "replacedBy": [
+    "DOID:0080607"
+   ],
+   "consider": []
+  },
+  "DOID:13121": {
+   "replacedBy": [
+    "DOID:2355"
+   ],
+   "consider": []
+  },
+  "DOID:14748": {
+   "replacedBy": [
+    "DOID:0112103"
+   ],
+   "consider": []
+  },
+  "DOID:0050549": {
+   "replacedBy": [
+    "DOID:0110087"
+   ],
+   "consider": []
+  },
+  "DOID:0050786": {
+   "replacedBy": [
+    "DOID:0060648"
+   ],
+   "consider": []
+  },
+  "DOID:0060015": {
+   "replacedBy": [
+    "DOID:0090014"
+   ],
+   "consider": []
+  },
+  "DOID:0060716": {
+   "replacedBy": [
+    "DOID:0080257"
+   ],
+   "consider": []
+  },
+  "DOID:0060963": {
+   "replacedBy": [
+    "DOID:0090043"
+   ],
+   "consider": []
+  },
+  "DOID:0061144": {
+   "replacedBy": [
+    "DOID:0070043"
+   ],
+   "consider": []
+  },
+  "DOID:0080091": {
+   "replacedBy": [
+    "DOID:0080094"
+   ],
+   "consider": []
+  },
+  "DOID:0080100": {
+   "replacedBy": [
+    "DOID:2106"
+   ],
+   "consider": []
+  },
+  "DOID:0080191": {
+   "replacedBy": [
+    "DOID:0050657"
+   ],
+   "consider": []
+  },
+  "DOID:0080546": {
+   "replacedBy": [
+    "DOID:0080208"
+   ],
+   "consider": []
+  },
+  "DOID:0080701": {
+   "replacedBy": [
+    "DOID:0111907"
+   ],
+   "consider": []
+  },
+  "DOID:0080713": {
+   "replacedBy": [
+    "DOID:0060799"
+   ],
+   "consider": []
+  },
+  "DOID:0080783": {
+   "replacedBy": [
+    "DOID:0111737"
+   ],
+   "consider": []
+  },
+  "DOID:0081119": {
+   "replacedBy": [
+    "DOID:0060685"
+   ],
+   "consider": []
+  },
+  "DOID:0081164": {
+   "replacedBy": [
+    "DOID:0110461"
+   ],
+   "consider": []
+  },
+  "DOID:0081376": {
+   "replacedBy": [
+    "DOID:0081427"
+   ],
+   "consider": []
+  },
+  "DOID:0110051": {
+   "replacedBy": [
+    "DOID:10652"
+   ],
+   "consider": []
+  },
+  "DOID:0110578": {
+   "replacedBy": [
+    "DOID:0110546"
+   ],
+   "consider": []
+  },
+  "DOID:0110638": {
+   "replacedBy": [
+    "DOID:0110668"
+   ],
+   "consider": []
+  },
+  "DOID:0110836": {
+   "replacedBy": [
+    "DOID:0110505"
+   ],
+   "consider": []
+  },
+  "DOID:0111201": {
+   "replacedBy": [
+    "DOID:0111199"
+   ],
+   "consider": []
+  },
+  "DOID:0111204": {
+   "replacedBy": [
+    "DOID:0111203"
+   ],
+   "consider": []
+  },
+  "DOID:0111208": {
+   "replacedBy": [
+    "DOID:0111206"
+   ],
+   "consider": []
+  },
+  "DOID:0111612": {
+   "replacedBy": [],
+   "consider": [
+    "DOID:0080786",
+    "DOID:0081433"
+   ]
+  },
+  "DOID:0112104": {
+   "replacedBy": [
+    "DOID:0081218"
+   ],
+   "consider": []
+  }
+ },
+ "files": {
+  "tree": "disease_tree.json",
+  "edges": "disease_edges.json",
+  "terms": "disease_terms.json"
+ },
+ "disclaimer": "Educational and exploratory use only; not a diagnostic or medical-advice system."
+}
