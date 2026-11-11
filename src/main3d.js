@@ -43,6 +43,7 @@ import { treeFileFromUrl } from './dataset.js';
 import { makeDisplayTree, groupLabel, CAP_DESKTOP, CAP_PHONE } from './displaytree.js';
 import { aggregateRule, childAllowed } from './disclosure.js';
 import { createMemberList } from './memberlist.js';
+import { dataLayerFor } from './diseasedata.js';
 import { deriveCapabilities, NO_CAPABILITIES } from './capabilities.js';
 import { computeHeat, encodeHeat, HEAT, HEAT_NAMES } from './heat.js';
 import { createCodePanel } from './codepanel.js';
@@ -225,6 +226,7 @@ let dirty = true;               // focus point changed: upload the _Focus unifor
 // Links (Phase 4c)
 let displayInfo = null;         // displaytree.js statistics: cap, groups, list-only nodes
 let memberList = null;          // the member list of a list-only node (memberlist.js)
+let diseaseData = null;         // the disease data layer (diseasedata.js): null for datasets without one; loads its files lazily
 let linkData = null;            // links.json in typed arrays (links.js), null until loaded / if the dataset has none
 let linkArcs = [];              // the arcs drawn right now (buildArcs in links.js), at most MAX_VISIBLE_LINKS
 let linkSelected = 0;           // links selected for the focus + hover before merging and capping
@@ -1479,6 +1481,9 @@ async function start() {
   assignFitAll(root, THEME.NODE_FIT_FRACTION);   // sizes limited by the neighbours, so crowded nodes never overlap
   // Symbol and source files sit in folders named by the tree JSON, relative to the tree file's folder.
   const baseUrl = url.slice(0, url.lastIndexOf('/') + 1);
+  // The disease data layer (only datasets that declare `dataLayer`): attached to the tree now, its files are fetched only when asked for.
+  diseaseData = dataLayerFor(json, (file) => fetch(`${baseUrl}${file}`).then((r) => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.json(); }));
+  if (diseaseData) diseaseData.attachTree(nodes);
   store = createSymbolStore(baseUrl, json.symbolsDir, json.sourceDir);
   caps = deriveCapabilities(json);
   for (const w of caps.warnings) console.warn('dataset capabilities:', w);
@@ -1603,6 +1608,7 @@ window.__explorer = {
   cycleHeat,
   get capabilities() { return caps; },
   get displayInfo() { return displayInfo; },
+  get data() { return diseaseData; },
   get memberList() { return memberList; },
   get orbCount() { return collapsedNodes.length; },
   get heatMode() { return heatMode; },

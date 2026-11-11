@@ -384,7 +384,9 @@
  "files": {
   "tree": "disease_tree.json",
   "edges": "disease_edges.json",
-  "terms": "disease_terms.json"
+  "terms": "disease_terms.json",
+  "metadata": "disease_metadata.json",
+  "license": "disease_LICENSE.txt"
  },
  "disclaimer": "Educational and exploratory use only; not a diagnostic or medical-advice system."
 }

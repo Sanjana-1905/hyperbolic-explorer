@@ -309,6 +309,9 @@ def main():
     tree["words"] = {"folder": "Disease group", "file": "Disease"}
     tree["license"] = f"Disease Ontology {version_info or version}, CC0 1.0 (see disease_LICENSE.txt)"
     tree["capabilities"] = []
+    # Tells the viewer where the full ontology data lives (src/diseasedata.js loads these lazily, never at start-up): the primary tree in
+    # this file is only the LAYOUT hierarchy; terms = details, edges = every is_a edge (the whole DAG), metadata = provenance.
+    tree["dataLayer"] = {"kind": "disease-ontology", "metadata": "disease_metadata.json", "terms": "disease_terms.json", "edges": "disease_edges.json"}
 
     # ---- 7. per-term details -----------------------------------------------------------------------------
     details = {}
@@ -395,7 +398,7 @@ def main():
         "parsing_statistics": stats,
         "validation": validation,
         "obsolete_replacements": obsolete_map,
-        "files": {"tree": "disease_tree.json", "edges": "disease_edges.json", "terms": "disease_terms.json"},
+        "files": {"tree": "disease_tree.json", "edges": "disease_edges.json", "terms": "disease_terms.json", "metadata": "disease_metadata.json", "license": "disease_LICENSE.txt"},
         "disclaimer": "Educational and exploratory use only; not a diagnostic or medical-advice system.",
     }
     edges_doc = {"source": f"Disease Ontology {version_info} ({tag})", "relation": "is_a", "primaryParentRule": metadata["primary_parent_rule"],

@@ -17,6 +17,7 @@ import { treeFileFromUrl } from './dataset.js';
 import { makeDisplayTree, CAP_DESKTOP, CAP_PHONE } from './displaytree.js';
 import { disclosureStates } from './disclosure.js';
 import { createMemberList } from './memberlist.js';
+import { dataLayerFor } from './diseasedata.js';
 import { detectTier } from './quality.js';
 import { createFpsCounter } from './fps.js';
 
@@ -95,6 +96,7 @@ let nodes = [];          // all nodes of the display tree (real tree + navigatio
 let states = new Uint8Array(0); // per node: 0 drawn, 1 hidden inside a closed group / list-only node, 2 aggregate (disclosure.js)
 let memberList = null;   // member list of a list-only node (memberlist.js)
 let displayInfo = null;
+let diseaseData = null;  // the disease data layer (diseasedata.js): null for datasets without one; loads its files lazily
 let root = null;
 let focusNode = null;    // node we are focused on (or animating toward)
 let focusPoint = complex(0, 0); // the disk point currently at the screen centre
@@ -341,10 +343,14 @@ async function start() {
 
   // The display tree (displaytree.js) is already laid out in 2D (positions `z`); the 3D viewer lays out the SAME tree in its own way.
   const capParam = Number(new URLSearchParams(location.search).get('cap'));
-  const tree = makeDisplayTree(await response.json(), { cap: capParam > 0 ? capParam : detectTier() === 'phone' ? CAP_PHONE : CAP_DESKTOP });
+  const json = await response.json();
+  const tree = makeDisplayTree(json, { cap: capParam > 0 ? capParam : detectTier() === 'phone' ? CAP_PHONE : CAP_DESKTOP });
   displayInfo = tree.info;
+  const baseUrl = url.slice(0, url.lastIndexOf('/') + 1);
+  diseaseData = dataLayerFor(json, (file) => fetch(`${baseUrl}${file}`).then((r) => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.json(); }));
   root = tree.root;
   nodes = tree.nodes;
+  if (diseaseData) diseaseData.attachTree(nodes);
   memberList = createMemberList({ onPick: (n) => focusOn(n) });
 
   buildDrawables();
@@ -367,6 +373,7 @@ window.__explorer = {
   get fps() { return fps.value; },
   // Screen (CSS pixel) position of a node's centre, for automated tests.
   get displayInfo() { return displayInfo; },
+  get data() { return diseaseData; },
   get focusNode() { return focusNode; },
   get memberList() { return memberList; },
   state: (id) => states[id],
