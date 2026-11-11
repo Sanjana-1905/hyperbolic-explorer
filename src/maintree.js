@@ -12,6 +12,7 @@
 
 import { buildTree, nodePath } from './layout.js';
 import { THEME, cssRgb } from './theme.js';
+import { treeFileFromUrl } from './dataset.js';
 
 const params = new URLSearchParams(location.search);
 const withSearch = params.get('search') !== '0';
@@ -115,7 +116,7 @@ box.addEventListener('click', (e) => {
 // and the study also runs on phones).
 
 async function start() {
-  const file = params.get('tree') || 'sample_tree.json';
+  const file = treeFileFromUrl(params);
   const url = `${import.meta.env.BASE_URL}data/${file}`;
   const response = await fetch(url);
   if (!response.ok) throw new Error(`Could not load ${url} (${response.status})`);

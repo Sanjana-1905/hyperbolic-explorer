@@ -76,7 +76,7 @@ async function runPhone(c, label, w, h) {
   const ev = c.ev;
   const sleep = c.sleep;
   await c.phone(w, h);
-  await c.goto(`${BASE}?intro=0&adapt=0&fade=0`, 6500);
+  await c.goto(`${BASE}?intro=0&adapt=0&fade=0&tree=sample_tree.json`, 6500);
   await ev(HELPERS);
   const settle = async (ms = 4500) => {
     const t0 = Date.now();
@@ -491,7 +491,7 @@ async function runDesktop(c) {
   group = 'desktop 1000x800';
   const ev = c.ev, sleep = c.sleep;
   await c.desktop(1000, 800);
-  await c.goto(`${BASE}?intro=0&adapt=0`, 6000);
+  await c.goto(`${BASE}?intro=0&adapt=0&tree=sample_tree.json`, 6000);
   await ev(HELPERS);
   // focus the folder that holds symbol files, so files are nearby; hover a file that is not the focus and has links
   const t = JSON.parse(await ev(`(async () => {
@@ -526,7 +526,7 @@ async function runMouse(c) {
   group = 'desktop mouse 1280x800';
   const ev = c.ev, sleep = c.sleep;
   await c.desktop(1280, 800);
-  await c.goto(`${BASE}?intro=0&adapt=0&fade=0`, 6500);
+  await c.goto(`${BASE}?intro=0&adapt=0&fade=0&tree=sample_tree.json`, 6500);
   await ev(HELPERS);
   const FILE = await ev('__explorer.nodeById(__explorer.symbolFileIds[0]).fileId');
   const refocus = async () => { await ev(`__explorer.focusOn(__explorer.fileNode(${FILE}), false)`); await sleep(1300); };
@@ -624,7 +624,7 @@ async function runGlideShots(c) {
   group = 'shots';
   const ev = c.ev, sleep = c.sleep;
   await c.phone(412, 915);
-  await c.goto(`${BASE}?intro=0&adapt=0&fade=0`, 6500);
+  await c.goto(`${BASE}?intro=0&adapt=0&fade=0&tree=sample_tree.json`, 6500);
   await ev(HELPERS);
   const settle = async () => { const t0 = Date.now(); await sleep(100); while (Date.now() - t0 < 5000) { if (await ev('!__explorer.animating && !__explorer.pendingSymbol')) { await sleep(200); return; } await sleep(60); } };
   // choose a file with three arcs whose far ends are on screen and well away from the centre (so the glide is long enough to see)

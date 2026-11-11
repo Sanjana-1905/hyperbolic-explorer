@@ -18,6 +18,7 @@
 
 import { nodePath } from './layout.js';
 import { THEME, cssRgb } from './theme.js';
+import { treeFileFromUrl } from './dataset.js';
 import {
   newSession, startTask, logEvent, finishTask, toCsvTasks, toCsvEvents, summarizeSession, depthOfPath,
 } from './studylog.js';
@@ -26,7 +27,7 @@ const params = new URLSearchParams(location.search);
 const mode = params.get('mode');
 const condition = mode === 'tree' ? 'tree' : mode === '2d' ? '2d' : '3d';
 const CONDITION_NAMES = { tree: 'Collapsible tree', '2d': '2D hyperbolic disk', '3d': '3D hyperbolic ball' };
-const treeFile = params.get('tree') || 'sample_tree.json';
+const treeFile = treeFileFromUrl(params);
 const SAVE_KEY = 'hyperbolic-explorer-study';
 
 document.body.classList.add('study');

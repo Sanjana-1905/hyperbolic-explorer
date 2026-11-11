@@ -183,6 +183,19 @@ BUDGET = 2·atanh(0.994) = 5.806, no node can reach the 0.995 clamp, for any tre
 - A deeper future ontology would taper more strongly (the budget is fixed); a tree deeper than about 30 levels would get very short edges. Not an issue for DOID (12).
 - ISSUE 2 (8,488 nodes drawn at the root vs ~3,000) is unchanged and still open. No test on the real phone.
 
+## Phase 1 — default launch switched to the Disease Ontology  (done)
+Why: opening the dev server showed the old code explorer, because `'sample_tree.json'` was the hardcoded fallback in four files.
+- New `src/dataset.js`: `treeFileFromUrl(params)`, the ONE place that decides which tree file a page loads, used by `main3d.js`, `main2d.js`, `maintree.js` and `study.js` (so they cannot disagree).
+  - `?tree=name.json` always wins (`sample_tree.json`, `wordnet_tree.json`, `disease_tree.json`, anything in `public/data/`).
+  - No `?tree=` -> **`disease_tree.json`** (3D, 2D `?mode=2d` and collapsible tree `?mode=tree`).
+  - No `?tree=` but `?study=1` -> **`sample_tree.json`**, deliberately: the study tasks are `public/study/tasks_sample.json` / `tasks_wordnet.json` (picked from the tree name) and there is no task file for the disease data, so an existing study link keeps loading exactly the dataset it always did. A study on the disease data needs its own task file and an explicit `&tree=disease_tree.json`.
+- `index.html` title: "Hyperbolic Disease Atlas". (Not changed, not asked: `public/manifest.webmanifest` still says "Hyperbolic Data Explorer" / "HyperExplorer", and the intro card still has the code-repository wording of the first-visit text.)
+- `tests/phone/audit.mjs`: the four page loads that relied on the default now say `&tree=sample_tree.json` explicitly (the fifth already named `zz_cut_tree.json`). No other test or script relied on the default.
+- No change to the layout mathematics, the disease data or any visualization code.
+- Tests: `npm test` pass; `npm run build` ok (title in `dist/index.html` is the new one); `npm run test:phone` **172 / 172**; `npm run test:disease` **all pass**.
+- Browser check (headless Chrome, resource list + `__explorer` node count, 13 URLs, no console errors in any): default 3D / 2D / tree -> `disease_tree.json` (12,419 nodes); explicit `?tree=sample_tree.json` in 3D, 2D and tree -> 5,000 nodes; `?tree=wordnet_tree.json` in all three -> 3,000 nodes; explicit `?tree=disease_tree.json` -> 12,419; `?study=1` (3D and tree, no `tree`) -> sample + `tasks_sample.json`; `?study=1&tree=wordnet_tree.json` -> WordNet + `tasks_wordnet.json`. Page title was the new one in all of them.
+- Open the Atlas: `http://localhost:5173/hyperbolic-explorer/` (the `/hyperbolic-explorer/` base path is required).
+
 ---
 
 # History: Hyperbolic Code Explorer (engine phases, all before the pivot)

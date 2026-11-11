@@ -13,6 +13,7 @@
 import * as THREE from 'three';
 import { complex, cNeg, cAbs, mobiusAdd, geodesicLerp } from './mobius.js';
 import { buildTree, computeLayout, nodePath } from './layout.js';
+import { treeFileFromUrl } from './dataset.js';
 import { createFpsCounter } from './fps.js';
 
 document.getElementById('help').textContent =
@@ -318,8 +319,8 @@ function frame(now) {
 }
 
 async function start() {
-  // ?tree=name.json loads public/data/name.json instead of the sample.
-  const file = new URLSearchParams(location.search).get('tree') || 'sample_tree.json';
+  // ?tree=name.json loads public/data/name.json instead of the default dataset (see dataset.js).
+  const file = treeFileFromUrl();
   const url = `${import.meta.env.BASE_URL}data/${file}`;
   const response = await fetch(url);
   if (!response.ok) throw new Error(`Could not load ${url} (${response.status})`);
