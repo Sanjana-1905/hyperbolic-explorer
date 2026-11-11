@@ -31,7 +31,8 @@ import {
 } from './mobius3d.js';
 
 // Reuse the JSON -> tree code from the 2D layout (it does no geometry).
-export { buildTree, nodePath } from './layout.js';
+export { buildTree, nodePath, edgeLengthSchedule, treeDepth } from './layout.js';
+import { edgeLengthSchedule, treeDepth } from './layout.js';
 
 // Hyperbolic length of every parent->child edge. A bit longer than 2D's 0.6:
 // longer edges give each subtree more room (the cone rule multiplies by
@@ -151,17 +152,18 @@ export function computeLayout3d(root, options = {}) {
   };
   // Euclidean radius, in a node's own frame, of something one edge away:
   // r = tanh(d / 2). With d = 0.7 that is r ≈ 0.336.
-  const localRadius = distanceToRadius(opts.edgeLength);
+  // Edge length per depth: all equal to opts.edgeLength, except in a tree too deep for the ball (see edgeLengthSchedule in layout.js).
+  opts.edgeLengths = opts.edgeLengths || edgeLengthSchedule(treeDepth(root), opts.edgeLength);
 
   root.pos = vec3(0, 0, 0);
   // The root has no parent, so it uses the whole sphere (half-angle π).
   // Any axis works for a full sphere; +z is just a choice.
-  placeChildren(root, vec3(0, 0, 1), Math.PI, localRadius, opts);
+  placeChildren(root, vec3(0, 0, 1), Math.PI, opts);
 }
 
 // Place the children of `node` on the cap (axis, alpha), which is given in the
 // node's own frame, then recurse into each child.
-function placeChildren(node, axis, alpha, localRadius, opts) {
+function placeChildren(node, axis, alpha, opts) {
   const n = node.children.length;
   if (n === 0) return;
 
@@ -179,9 +181,11 @@ function placeChildren(node, axis, alpha, localRadius, opts) {
   const myArea = capArea(alpha);
 
   kids.forEach((child, i) => {
-    // In the node's own frame the child is simply `localRadius` along dirs[i];
+    // In the node's own frame the child is simply distanceToRadius(its edge length) along dirs[i];
     // moving back with ⊕ gives its real position.
-    child.pos = add(node.pos, vScale(dirs[i], localRadius));
+    // This child's own edge length (the same for every child of one depth; symbols have no schedule and use opts.edgeLength).
+    child.edgeLength = opts.edgeLengths ? opts.edgeLengths[child.depth] ?? opts.edgeLength : opts.edgeLength;
+    child.pos = add(node.pos, vScale(dirs[i], distanceToRadius(child.edgeLength)));
 
     // Which way is our node, as seen from the child's own frame? Move the
     // child to the centre and see where the node lands. The child's cap points
@@ -193,13 +197,13 @@ function placeChildren(node, axis, alpha, localRadius, opts) {
     // area (minus the packing gap). Then the widest cone the child can use so
     // its whole subtree stays inside that territory.
     const territory = capAngleFromArea(myArea * shares[i] * opts.packing);
-    const childCap = Math.min(opts.maxCap, coneAngleForTerritory(territory, opts.edgeLength));
+    const childCap = Math.min(opts.maxCap, coneAngleForTerritory(territory, child.edgeLength));
     // Remember where this node's own cap points and how much room it owns, so a FILE can later
     // open into a galaxy of symbols inside exactly that room (layoutSymbols below).
     child.away = away;
     child.territory = territory;
 
-    placeChildren(child, away, childCap, localRadius, opts);
+    placeChildren(child, away, childCap, opts);
   });
 }
 
@@ -229,8 +233,8 @@ export function layoutSymbols(file, options = {}) {
     edgeLength: SYMBOL_EDGE_LENGTH, weightMix: WEIGHT_MIX, packing: PACKING, maxCap: MAX_CAP,
     add: mobiusAdd3Free, ...options,
   };
-  const cap = Math.min(opts.maxCap, coneAngleForTerritory(file.territory * SYMBOL_CAP_FIT, EDGE_LENGTH));
-  placeChildren(file, file.away, cap, distanceToRadius(opts.edgeLength), opts);
+  const cap = Math.min(opts.maxCap, coneAngleForTerritory(file.territory * SYMBOL_CAP_FIT, file.edgeLength ?? EDGE_LENGTH));
+  placeChildren(file, file.away, cap, opts);
 }
 
 // ---------------------------------------------------------------------------

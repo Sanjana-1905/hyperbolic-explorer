@@ -9,7 +9,7 @@ Disease Ontology in the Poincaré ball. Principles are in CLAUDE.md. One phase a
 | Phase | Title | Status |
 |---|---|---|
 | 0 | Freeze and prepare existing engine | done (commit 1e52269) |
-| 1 | Disease Ontology data ingestion (full DAG, provenance, primary hierarchy for layout) | **data done; one layout issue open (radius clamp, awaiting your decision)** |
+| 1 | Disease Ontology data ingestion (full DAG, provenance, primary hierarchy for layout) | **data done; radius clamp fixed (depth-tapered edges); node-count LOD issue still open** |
 | 2 | Meaningful disease visualization (every encoding carries information) | not started |
 | 3 | Interactive exploration lenses | not started |
 | 4 | Comparative navigation study (collapsible tree vs 2D vs 3D hyperbolic) | not started |
@@ -57,7 +57,7 @@ by whether git data happened to exist; the H/I/K/D keys worked regardless.
   loads, all four caps true, Dependencies + Heat buttons shown, H works.
 - Not done: the probe is not part of the repo test suite (WordNet is covered in the browser only by that probe); no real-phone check. `npm run build` succeeds.
 
-## Phase 1 — Disease Ontology data ingestion  (data done; depth/clamp issue awaiting decision)
+## Phase 1 — Disease Ontology data ingestion  (data done; clamp fixed; LOD issue open)
 
 ### Source and provenance
 - Human Disease Ontology (DOID), OBO Foundry, release **2026-10-29** (GitHub tag `v2026-10-29`, file date 29:10:2026 18:39).
@@ -113,7 +113,7 @@ Measured in headless Chrome on the M-series laptop GPU (not the S26), `?tree=dis
 | console errors | none | none |
 Visible nodes elsewhere: top branch (anatomical entity) 7,972 / 302 orbs; deep node at depth 9: 85 / 28; at depth 12: 188 / 40. Memory is `performance.memory` (Chrome only, coarse).
 
-### ISSUE 1 (needs your decision): the 0.995 radius clamp IS triggered
+### ISSUE 1 (FIXED, see "Phase 1 fix" below): the 0.995 radius clamp was triggered
 - With edge length 0.7 a depth-12 tree does not fit: radius along a straight line is tanh(12*0.7/2) = 0.9996 > 0.995. Layout result (`tests/disease_layout.test.js`):
   max radius 0.9950; **93 nodes (0.75 %) sit exactly on the rim, their edges are shortened** (depth 9: 38, depth 10: 51, depth 11: 3, depth 12: 1). Max radius per depth: 0.34, 0.60, 0.78, 0.88, 0.94, 0.967, 0.984, 0.992, 0.995 (depth 9 onwards).
   Those nodes are pinned at the rim, so some of them overlap/are hard to tell apart. No node is lost; positions stay finite.
@@ -128,7 +128,7 @@ Visible nodes elsewhere: top branch (anatomical entity) 7,972 / 302 orbs; deep n
 - **Proposal** (not implemented): (A) simplest: for this dataset use edge length 0.5 (a per-dataset option read from the tree JSON, default 0.7 so the other datasets are untouched). It fixes the clamp but halves the room between siblings (0.046 -> 0.022), which the existing fit-to-neighbours sizing absorbs but crowds the rim.
   (B) better: a depth-tapered edge length, e.g. L(d) = 0.7 for the first levels shrinking geometrically so the sum over 12 levels stays under atanh(0.995) = 2.99 (the shallow, crowded levels keep their room; only the thin deep tail gets shorter). This changes `layout3d.js` and the matching CPU/GPU picking assumptions, so it needs your OK.
   (C) do nothing: 0.75 % of nodes stay on the rim. I recommend B, with A as the quick fallback.
-- The strict check is ready: `STRICT=1 node tests/disease_layout.test.js` fails until the clamp is gone. By default the test only enforces the hard 0.995 limit and prints the known issue.
+- (The strict check mentioned here is now always on, see below.)
 
 ### ISSUE 2 (measurements, no change made): too many nodes drawn at the root
 8,488 nodes are drawn at the root, 2.8x the ~3,000 target, because the semantic-zoom collapse only folds 234 groups. Frame rate is still a locked 60 with 9 draw calls on a laptop GPU, but that says little about the S26.
@@ -145,6 +145,43 @@ Labels stay capped at 25. Proposal for a later phase (not done, no term is delet
 - `npm run test:phone` (real headless Chrome, sample dataset): **172 / 172**.
 - Headless Chrome probes (ad hoc, not saved as tests): WordNet 3,000 nodes loads, caps all off, no errors; sample 5,000 nodes loads, all four caps on; Disease Ontology as in the table above.
 - Not done: real phone, search/navigation on the disease tree beyond refocusing through `__explorer.focusOn`, no screenshots reviewed by eye.
+
+## Phase 1 fix — depth-tapered edge length  (done)
+
+**Rule** (`edgeLengthSchedule` in `src/layout.js`, used by BOTH `computeLayout` (2D, base 0.6) and `computeLayout3d` (3D, base 0.7)):
+a node is never further from the root than the sum of the edge lengths on its path, and a point at hyperbolic distance D has Euclidean radius tanh(D/2). So if the sum over the deepest path stays below
+BUDGET = 2·atanh(0.994) = 5.806, no node can reach the 0.995 clamp, for any tree. The schedule, from depth `k` and the tree's maximum depth `M` only (no per-disease numbers):
+- If `base × M <= BUDGET` every edge keeps `base`. This holds for the sample repo and WordNet (depth 8: 5.6), so **they are laid out exactly as before** (all their existing tests are unchanged and pass).
+- Otherwise edges into depth `k <= K0` keep `base` and deeper edges are `base · ρ^(k−K0)`, with `K0 = min(floor(M/2), floor(BUDGET/base) − 1)` and ρ found by 60-step bisection so that the total is exactly BUDGET (deterministic).
+- Disease Ontology, 3D (M = 12): K0 = 6, ρ = 0.73: edge lengths by depth 1..12 = 0.700 ×6, then 0.511, 0.373, 0.272, 0.199, 0.145, 0.106.
+
+**What changed in the code** (the Möbius/hyperbolic formulas themselves are untouched):
+- `layout.js`: `edgeLengthSchedule`, `treeDepth`, `EDGE_RADIUS_LIMIT`; `computeLayout` uses a per-depth length and stores `node.edgeLength` (new optional 3rd parameter `lengths`, used only by tests to reproduce the old layout).
+- `layout3d.js`: `placeChildren` uses each child's own edge length for its position AND for the cone rule (`coneAngleForTerritory(territory, child.edgeLength)`, which needs the child's real distance from its parent to keep a subtree inside its territory); `layoutSymbols` uses the file's own edge length (code datasets: identical to before).
+- **Nothing else needed changing, by design:** drawing (instance buffers, GPU `mobiusAdd3` refocus, edge shader geodesics), picking (`projectNode`), hit-testing, the minimap, the "fit" sizes and navigation all read the node positions (`node.pos` / `node.z`) and never assumed an edge length (grep: no use of `EDGE_LENGTH` outside the layout files). This is verified, not assumed, by the browser audit below.
+
+**Results on the full tree (12,419 nodes, nothing removed; all 17,635 `is_a` edges untouched in `disease_edges.json`)** — `node tests/disease_layout.test.js`:
+| 3D layout | max radius | clamped edges | min sibling distance | closest pair of any two nodes | min sibling at depth <=6 / 7-9 / 10-12 |
+|---|---|---|---|---|---|
+| uniform 0.7 (old) | 0.9950 | **93** | 0.0464 | 0.0277 | 0.0464 / 0.1242 / 0.3080 |
+| uniform 0.5 | 0.9940 | 0 | 0.0219 | 0.0110 | 0.0219 / 0.0366 / 0.1082 |
+| **taper (new)** | **0.9912** | **0** | **0.0464** | **0.0277** | 0.0464 / 0.0704 / 0.0661 |
+| 2D uniform 0.6 (old) | 0.9950 | 2 | 0.0007 | | |
+| **2D taper (new)** | **0.9894** | **0** | 0.0007 | | |
+- The global minimum sibling distance and closest pair are **identical to the old 0.7** (they sit on the crowded upper levels, which keep 0.7) and about twice as good as uniform 0.5.
+- **Loss of separation:** only at the deep end. Siblings at depths 7-9 are 1.8x closer than before (0.070 vs 0.124) but still 1.9x better than uniform 0.5; at depths 10-12 they are 4.7x closer than uniform 0.7 (0.066 vs 0.308) and slightly closer than uniform 0.5 (0.066 vs 0.108, because those edges are only 0.11-0.27 long). Only 193 of 12,419 nodes (1.6 %) are at depth >= 9, and node sizes already follow the nearest-neighbour distance ("fit"), so cores do not overlap.
+- 2D: its minimum sibling distance of 0.0007 exists with and without the taper (the 2D layout has no cone rule; it is unrelated to depth and unchanged). 2D shares the schedule shape: taper starts at the same depth (K0 = 6) with its own base 0.6.
+
+**Tests added / changed**
+- `tests/disease_layout.test.js` (in `npm test`, now always strict; `STRICT=1 node tests/disease_layout.test.js` passes): schedule properties for bases 0.7/0.6/0.5 and every depth 1-40 (sum <= budget, tanh(sum/2) < 0.995, never grows with depth, full length on the top level, exact budget use, uniform when it fits, deterministic); sample and WordNet keep the uniform lengths; 3D and 2D disease layouts: 0 clamped edges, radius < 0.995, every edge equals its scheduled length, upper levels exactly 0.7, maximum-depth node inside the ball; 2D and 3D have the same parents and the same taper depth; comparison table above. A sanity check asserts the old uniform layout really did clamp (93 / 2 edges).
+- `tests/phone/disease_audit.mjs` (`npm run test:disease`, real headless Chrome, desktop 1280x800, full disease tree): **17 / 17 passed.** 3D: layout numbers read from the live nodes (max radius 0.99125, 0 bad edges, 1,857 edges on tapered levels); GPU-vs-CPU positions out to radius 0.994 (max position error 1.4e-6); picking at the root, a big depth-2 branch, a depth-9 node, the parent of the deepest node and the deepest node (every on-screen neighbour picks itself or the front sphere that truly covers it: 0 wrong picks; the focus is centred to r = 0); drawn edges = predicted edges at the root, depth 9 and depth 12 (0 stray pixels, 0 missing); a real mouse click on the depth-12 node focuses and centres it exactly; 12 clicks on Up walk the 12 ancestors in order to the root. 2D: same layout numbers (max 0.98942, 0 bad), 10 of 10 real mouse clicks on shallow and deep nodes refocus exactly that node. No console errors in either mode.
+  (While writing it I loosened one rule: the "focus node picks itself" check was dropped because at the root a nearer child sphere correctly covers the centre; the focus is instead part of the general "picks itself or the covering front sphere" check, and its exact centring is checked separately.)
+- Also run: `npm test` (all pass), `npm run build`, `npm run test:phone` **172 / 172** on the sample, WordNet (3,000 nodes, caps off) and sample (5,000, caps on) load without errors.
+
+**Remaining limitations**
+- Depth-12 branches are visibly more compact than the upper levels (the taper is geometric); the Disease Ontology's deepest edges are 0.106 long (vs 0.7). A node's label may overlap more there. Judged on one screenshot of the deepest node only (looks fine), not studied.
+- A deeper future ontology would taper more strongly (the budget is fixed); a tree deeper than about 30 levels would get very short edges. Not an issue for DOID (12).
+- ISSUE 2 (8,488 nodes drawn at the root vs ~3,000) is unchanged and still open. No test on the real phone.
 
 ---
 

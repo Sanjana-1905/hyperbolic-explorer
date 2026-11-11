@@ -53,7 +53,7 @@ The engine shows huge hierarchies using hyperbolic geometry so the **whole tree 
 ## Math and architecture rules
 - Display uses the **Poincaré ball/disk model**.
 - **All hyperbolic math lives in `mobius.js`.** Every formula gets a comment above it explaining it in plain English.
-- **Layout:** root at the origin. Children sit at a fixed hyperbolic distance from their parent. Each child gets angular space proportional to its subtree size.
+- **Layout:** root at the origin. Children sit at a fixed hyperbolic distance from their parent. (A tree too deep for the ball gets shorter edges on its deepest levels: `edgeLengthSchedule` in `layout.js`, from depth only. Trees that already fit keep the uniform length.) Each child gets angular space proportional to its subtree size.
 - Use double-precision JS numbers. **Clamp the Euclidean radius below 0.995.**
 - **Refocusing:** apply a Möbius translation to all nodes, animated along the geodesic over ~0.5 s with ease-in-out.
 - **Later phases:**
